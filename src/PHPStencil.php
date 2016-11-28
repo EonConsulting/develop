@@ -32,7 +32,7 @@ class PHPStencil {
 
         // factory - text
         $factory = new TextFactory(new AdapterFactory);
-        $text = $factory->make(TextEnum::JSON);
+        $text = $factory->make(TextEnum::CSV);
 
         $xml = [
             'folders' => [
@@ -60,7 +60,7 @@ class PHPStencil {
 
         $json = ['Author' => ['name' => 'Josh Harington', 'gender' => 'male', 'profession' => 'Professonal Nerd.']];
 
-        return $text->output($json);
+        return $text->output($csv);
     }
 //
 //    /**
