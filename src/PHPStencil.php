@@ -10,6 +10,8 @@ namespace EONConsulting\PHPStencil;
 
 
 use EONConsulting\PHPStencil\src\Factories\AdapterFactory;
+use EONConsulting\PHPStencil\src\Factories\GUI\GUIEnum;
+use EONConsulting\PHPStencil\src\Factories\GUI\GUIFactory;
 use EONConsulting\PHPStencil\src\Factories\Text\TextEnum;
 use EONConsulting\PHPStencil\src\Factories\Text\TextFactory;
 
@@ -32,7 +34,7 @@ class PHPStencil {
 
         // factory - text
         $factory = new TextFactory(new AdapterFactory);
-        $text = $factory->make(TextEnum::CSV);
+        $text = $factory->make(TextEnum::JSON);
 
         $xml = [
             'folders' => [
@@ -60,36 +62,36 @@ class PHPStencil {
 
         $json = ['Author' => ['name' => 'Josh Harington', 'gender' => 'male', 'profession' => 'Professonal Nerd.']];
 
-        return $text->output($csv);
+        return $text->output($json);
     }
-//
-//    /**
-//     * Render the GUI view of choice
-//     * @param $type
-//     * @param $data
-//     * @return mixed|null
-//     */
-//    public function render($type = 'form', $data) {
-//
-//        if(($type != 'form' && $type != 'list') || !$data)
-//            return null;
-//
-//        switch($type) {
-//            case 'form':
-//                $type = GUIEnum::FORM;
-//                break;
-//            case 'list':
-//                $type = GUIEnum::UILIST;
-//                break;
-//        }
-//
-//        // factory - GUI
-//        $factory = new GUIFactory(new AdapterFactory);
-//        $gui = $factory->make(GUIEnum::FORM);
-//
-//        return $gui->render($data);
-//    }
-//
+
+    /**
+     * Render the GUI view of choice
+     * @param $type
+     * @param $data
+     * @return mixed|null
+     */
+    public function render($type = 'form', $data) {
+
+        if(($type != 'form' && $type != 'list') || !$data)
+            return null;
+
+        switch($type) {
+            case 'form':
+                $type = GUIEnum::FORM;
+                break;
+            case 'list':
+                $type = GUIEnum::UILIST;
+                break;
+        }
+
+        // factory - GUI
+        $factory = new GUIFactory(new AdapterFactory);
+        $gui = $factory->make($type);
+
+        return $gui->render($data);
+    }
+
 //    public function service($type = 'test', $data) {
 //
 //        if(($type != 'rest' && $type != 'soap') || !$data)

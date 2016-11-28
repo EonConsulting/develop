@@ -8,6 +8,9 @@
 
 namespace EONConsulting\PHPStencil\src\Factories;
 
+use EONConsulting\PHPStencil\src\Factories\GUI\Adapters\FormAdapter;
+use EONConsulting\PHPStencil\src\Factories\GUI\Adapters\ListAdapter;
+use EONConsulting\PHPStencil\src\Factories\GUI\GUIEnum;
 use EONConsulting\PHPStencil\src\Factories\Text\Adapters\JSONAdapter;
 use EONConsulting\PHPStencil\src\Factories\Text\Adapters\XMLAdapter;
 use EONConsulting\PHPStencil\src\Factories\Text\Adapters\CSVAdapter;
@@ -32,13 +35,13 @@ class AdapterFactory {
                 case 'csv':
                     return new CSVAdapter;
             }
-//            switch ($config->get('gui.default')) {
-//                case 'form':
-//                    return new FormAdapter;
-//                    break;
-//                case 'list':
-//                    return new ListAdapter;
-//            }
+            switch ($config->get('gui.default')) {
+                case 'form':
+                    return new FormAdapter;
+                    break;
+                case 'list':
+                    return new ListAdapter;
+            }
         } else {
             switch ($config) {
                 case TextEnum::JSON:
@@ -49,10 +52,10 @@ class AdapterFactory {
                     break;
                 case TextEnum::CSV:
                     return new CSVAdapter;
-//                case GUIEnum::FORM:
-//                    return new FormAdapter;
-//                case GUIEnum::UILIST:
-//                    return new ListAdapter;
+                case GUIEnum::FORM:
+                    return new FormAdapter;
+                case GUIEnum::UILIST:
+                    return new ListAdapter;
             }
         }
     }

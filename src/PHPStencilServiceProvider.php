@@ -25,7 +25,7 @@ class PHPStencilServiceProvider extends ServiceProvider {
         // Configuring with main route file
         // Loading package view files directly from vendor directory as
 //        require __DIR__ . '/../Http/routes.php';
-//        $this->loadViewsFrom(__DIR__ . '/resources/views', 'boilerplate');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
 
         // Publishing packages views to /views
 //        $this->publishes([
