@@ -24,4 +24,12 @@ return array(
     'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextAdapterInterface' => $baseDir . '/src/Factories/Text/TextAdapterInterface.php',
     'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextEnum' => $baseDir . '/src/Factories/Text/TextEnum.php',
     'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextFactory' => $baseDir . '/src/Factories/Text/TextFactory.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\Adapters\\RestAdapter' => $baseDir . '/src/Factories/WebService/Adapters/RestAdapter.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\REST\\Controllers\\RestBaseController' => $baseDir . '/src/Factories/WebService/REST/Controllers/RestBaseController.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\REST\\Controllers\\RestController' => $baseDir . '/src/Factories/WebService/REST/Controllers/RestController.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebService' => $baseDir . '/src/Factories/WebService/WebService.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceAdapterInterface' => $baseDir . '/src/Factories/WebService/WebServiceAdapterInterface.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceEnum' => $baseDir . '/src/Factories/WebService/WebServiceEnum.php',
+    'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceFactory' => $baseDir . '/src/Factories/WebService/WebServiceFactory.php',
+    'EONConsulting\\PHPStencil\\src\\Models\\DummyTable' => $baseDir . '/src/Models/DummyTable.php',
 );

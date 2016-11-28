@@ -22,10 +22,13 @@ class PHPStencilServiceProvider extends ServiceProvider {
 
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/Factories/WebService/Routes/routes_rest.php');
+
         // Configuring with main route file
         // Loading package view files directly from vendor directory as
 //        require __DIR__ . '/../Http/routes.php';
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
 
         // Publishing packages views to /views
 //        $this->publishes([

@@ -43,6 +43,14 @@ class ComposerStaticInit07cdb5a83b5f0d464dfd4a0cf165a71d
         'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextAdapterInterface' => __DIR__ . '/../..' . '/src/Factories/Text/TextAdapterInterface.php',
         'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextEnum' => __DIR__ . '/../..' . '/src/Factories/Text/TextEnum.php',
         'EONConsulting\\PHPStencil\\src\\Factories\\Text\\TextFactory' => __DIR__ . '/../..' . '/src/Factories/Text/TextFactory.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\Adapters\\RestAdapter' => __DIR__ . '/../..' . '/src/Factories/WebService/Adapters/RestAdapter.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\REST\\Controllers\\RestBaseController' => __DIR__ . '/../..' . '/src/Factories/WebService/REST/Controllers/RestBaseController.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\REST\\Controllers\\RestController' => __DIR__ . '/../..' . '/src/Factories/WebService/REST/Controllers/RestController.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebService' => __DIR__ . '/../..' . '/src/Factories/WebService/WebService.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceAdapterInterface' => __DIR__ . '/../..' . '/src/Factories/WebService/WebServiceAdapterInterface.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceEnum' => __DIR__ . '/../..' . '/src/Factories/WebService/WebServiceEnum.php',
+        'EONConsulting\\PHPStencil\\src\\Factories\\WebService\\WebServiceFactory' => __DIR__ . '/../..' . '/src/Factories/WebService/WebServiceFactory.php',
+        'EONConsulting\\PHPStencil\\src\\Models\\DummyTable' => __DIR__ . '/../..' . '/src/Models/DummyTable.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

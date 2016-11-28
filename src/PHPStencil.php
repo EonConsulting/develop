@@ -92,7 +92,7 @@ class PHPStencil {
         return $gui->render($data);
     }
 
-//    public function service($type = 'test', $data) {
+//    public function service($type = 'rest', $data) {
 //
 //        if(($type != 'rest' && $type != 'soap') || !$data)
 //            return null;
