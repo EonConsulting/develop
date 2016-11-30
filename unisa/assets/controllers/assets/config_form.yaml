@@ -1,0 +1,11 @@
+name: Assets
+modelClass: Unisa\Assets\Models\Assets
+form: $/unisa/assets/models/assets/fields.yaml
+defaultRedirect: unisa/assets/assets
+create:
+    redirect: 'unisa/assets/assets/update/:id'
+    redirectClose: unisa/assets/assets
+update:
+    redirect: unisa/assets/assets
+    redirectClose: unisa/assets/assets
+preview: {  }

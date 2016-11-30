@@ -1,0 +1,33 @@
+fields:
+    asset_name:
+        label: 'unisa.assets::lang.assets.asset_name'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    file_name:
+        label: 'unisa.assets::lang.assets.file_name_wtht_ext'
+        span: auto
+        required: 1
+        preset:
+            field: asset_name
+            type: file
+        type: text
+        comment: 'unisa.assets::lang.assets.ext_note'
+    description:
+        label: 'unisa.assets::lang.assets.description'
+        size: ''
+        oc.commentPosition: ''
+        span: full
+        type: textarea
+    content:
+        label: 'unisa.assets::lang.assets.content'
+        size: ''
+        oc.commentPosition: ''
+        span: full
+        stretch: 1
+        type: richeditor
+    is_published:
+        label: 'unisa.assets::lang.assets.publish'
+        span: auto
+        type: switch
