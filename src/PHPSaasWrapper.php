@@ -11,18 +11,26 @@ namespace EONConsulting\PHPSaasWrapper\src;
 
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthEnum;
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthFactory;
+use EONConsulting\PHPSaasWrapper\OAuth\Service;
 use EONConsulting\PHPSaasWrapper\src\Factories\AdapterFactory;
+use Illuminate\Http\Request;
 
 class PHPSaasWrapper {
 
     public function connect() {
-
         $factory = new OAuthFactory(new AdapterFactory());
         $github = $factory->make(OAuthEnum::GITHUB);
 
-        return $github->authorize();
+        return redirect($github->getAuthorizeUrl());
+    }
 
-        return 'connected';
+    public function callback(Request $request) {
+        $factory = new OAuthFactory(new AdapterFactory());
+        $github = $factory->make(OAuthEnum::GITHUB);
+
+        if(!$github->authorize($request)) {
+
+        }
     }
 
 }

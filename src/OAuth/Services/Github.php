@@ -11,6 +11,7 @@ namespace EONConsulting\PHPSaasWrapper\OAuth\Services;
 
 use EONConsulting\PHPSaasWrapper\OAuth\ServiceAdapter;
 use Guzzle\Http\Client;
+use Illuminate\Http\Request;
 
 class Github extends ServiceAdapter {
 
@@ -19,6 +20,5 @@ class Github extends ServiceAdapter {
     public function __construct() {
         parent::set($this->key);
     }
-
 
 }

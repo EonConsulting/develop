@@ -22,7 +22,8 @@ class Config {
                 'github' => [
                     'client_id' => '634727d7b2b5c8016791',
                     'secret' => '19070a7bbbbb63d56ee4986028081b740df34d99',
-                    'redirect_uri' => 'https://github.com/login/oauth/authorize'
+                    'redirect_uri' => 'https://github.com/login/oauth/authorize',
+                    'access_token_uri' => 'https://github.com/login/oauth/access_token'
                 ]
             ]
         ]

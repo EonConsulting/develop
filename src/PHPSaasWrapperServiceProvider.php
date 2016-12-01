@@ -21,7 +21,7 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
     public function register()
     {
 //        $this->app->register('');
-        $this->app->bind( 'phpsaaswrapper', function () {
+        $this->app->singleton( 'phpsaaswrapper', function () {
             return new PHPSaasWrapper;
         });
 

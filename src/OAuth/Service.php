@@ -10,6 +10,7 @@ namespace EONConsulting\PHPSaasWrapper\OAuth;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use Illuminate\Http\Request;
 
 class Service {
 
@@ -19,6 +20,10 @@ class Service {
     public $redirect_uri;
     protected $adapter;
     public $return_uri;
+    public $access_token_uri;
+    public $auth_url;
+    protected $auth_response;
+    protected $access_token;
 
     /**
      * Service constructor.
@@ -37,18 +42,32 @@ class Service {
         $this->secret = $this->adapter->secret;
         $this->redirect_uri = $this->adapter->redirect_uri;
         $this->return_uri = $this->adapter->return_uri;
+        $this->access_token_uri = $this->adapter->access_token_uri;
+        $this->auth_url = $this->adapter->auth_url;
 
         $this->client = new Client;
     }
 
-    public function authorize() {
+    public function getAuthorizeUrl() {
+        return $this->auth_url;
+    }
+
+    public function authorize(Request $request) {
+
+        $code = '';
+
+        if($request->has("code")) {
+            $code = $request->get('code');
+        }
+
         $secret = $this->secret;
 
-        $response = $this->client->request('GET', $this->redirect_uri, [
+        $response = $this->client->request('GET', $this->access_token_uri, [
             'query' => [
                 'client_id' => $this->client_id,
                 'client_secret' => $secret,
                 'redirect_uri' => $this->return_uri,
+                'code' => $code,
                 'state' => '<changeme>',
             ],
             'headers' => [
@@ -56,7 +75,15 @@ class Service {
             ]
         ])->getBody();
 
-        return json_decode($response)->access_token;
+        $response = json_decode($response);
+        $this->auth_response = $response;
+
+        if(key_exists('access_token', $response)) {
+            $this->access_token = $response->access_token;
+            return true;
+        }
+
+        return false;
 
     }
 
