@@ -13,11 +13,14 @@
       "EONConsulting\\PHPSaasWrapper\\": "src/"
     },
     "files": [
-      "src/Http/helpers.php"
+      "src/Http/helpers.php",
+      "vendor/guzzlehttp/guzzle/src/functions.php",
+      "vendor/guzzlehttp/psr7/src/functions.php"
+      "vendor/guzzlehttp/promises/src/functions.php"
     ]
   },
   "require": {
     "illuminate/support": "~5",
-    "guzzle/guzzle": "^3.9"
+    "guzzlehttp/guzzle": "^6.2"
   }
 }

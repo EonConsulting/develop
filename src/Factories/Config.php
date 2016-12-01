@@ -17,13 +17,13 @@ class Config {
      */
     protected $data = [
         'oauth' => [
+            'return_uri' => 'http://eon.dev/_eon_phpsaaswrapper/auth/callback',
             'allows' => [
-                ''
-            ]
-        ],
-        'oauth2' => [
-            'allows' => [
-
+                'github' => [
+                    'client_id' => '634727d7b2b5c8016791',
+                    'secret' => '19070a7bbbbb63d56ee4986028081b740df34d99',
+                    'redirect_uri' => 'https://github.com/login/oauth/authorize'
+                ]
             ]
         ]
     ];

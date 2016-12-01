@@ -10,4 +10,6 @@ namespace EONConsulting\PHPSaasWrapper\src\Factories;
 
 interface Factory {
 
+    public function make($config);
+
 }

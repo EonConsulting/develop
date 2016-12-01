@@ -9,6 +9,9 @@
 namespace EONConsulting\PHPSaasWrapper\src\Factories;
 
 
+use EONConsulting\PHPSaasWrapper\OAuth\OAuthEnum;
+use EONConsulting\PHPSaasWrapper\OAuth\Services\Github;
+
 class AdapterFactory {
 
     /**
@@ -16,18 +19,9 @@ class AdapterFactory {
      * @return
      */
     public function make($config) {
-
-        if($config instanceof Config) {
-            switch ($config->get('text.default')) {
-
-            }
-            switch ($config->get('gui.default')) {
-
-            }
-        } else {
-            switch ($config) {
-
-            }
+        switch ($config) {
+            case OAuthEnum::GITHUB:
+                return new Github;
         }
     }
 
