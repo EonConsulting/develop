@@ -15,8 +15,11 @@ use Illuminate\Http\Request;
 
 class Github extends ServiceAdapter {
 
-    protected $key = 'github';
+    public $key = 'github';
 
+    /**
+     * Github constructor.
+     */
     public function __construct() {
         parent::set($this->key);
     }

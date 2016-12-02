@@ -8,12 +8,15 @@
 
 namespace EONConsulting\PHPSaasWrapper\OAuth;
 
+use EONConsulting\PHPSaasWrapper\Models\ServiceAvailable;
+use EONConsulting\PHPSaasWrapper\Models\ServiceLinked;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Illuminate\Http\Request;
 
 class Service {
 
+    public $key;
     protected $client;
     public $client_id;
     protected $secret;
@@ -38,6 +41,7 @@ class Service {
      * Set the data
      */
     public function set_data() {
+        $this->key = $this->adapter->key;
         $this->client_id = $this->adapter->client_id;
         $this->secret = $this->adapter->secret;
         $this->redirect_uri = $this->adapter->redirect_uri;
@@ -68,7 +72,7 @@ class Service {
                 'client_secret' => $secret,
                 'redirect_uri' => $this->return_uri,
                 'code' => $code,
-                'state' => '<changeme>',
+                'state' => session('return_url'),
             ],
             'headers' => [
                 'accept' => 'application/json',
@@ -78,9 +82,22 @@ class Service {
         $response = json_decode($response);
         $this->auth_response = $response;
 
+        $service = ServiceAvailable::where('service_key', $this->key)->select('service_id')->first();
+
         if(key_exists('access_token', $response)) {
             $this->access_token = $response->access_token;
+
+            if($service) {
+                ServiceLinked::where('service_id', $service->service_id)->update(['active' => 0]);
+                ServiceLinked::create(['service_id' => $service->service_id, 'active' => 1, 'token' => $response->access_token]);
+            }
+
             return true;
+        }
+
+        $linked = ServiceLinked::where('service_id', $service->service_id)->where('active', 1)->first();
+        if(!$linked) {
+            return $this->getAuthorizeUrl();
         }
 
         return false;

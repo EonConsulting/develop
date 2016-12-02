@@ -12,5 +12,6 @@ namespace EONConsulting\PHPSaasWrapper\OAuth;
 class OAuthEnum {
 
     const GITHUB = 'github';
+    const CS50 = 'cs50';
 
 }

@@ -20,21 +20,19 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-//        $this->app->register('');
         $this->app->singleton( 'phpsaaswrapper', function () {
             return new PHPSaasWrapper;
         });
-
-        /* $this->mergeConfigFrom(
-             __DIR__ . '/config/boilerplate.php', 'boilerplate'
-         );*/
     }
 
-    public function boot()
-    {
-//        $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
-//        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+    public function boot() {
         $this->loadRoutesFrom(__DIR__.'/Routes/routes.php');
+        $this->publishes([
+            __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations'
+        ], 'migrations');
+        $this->publishes([
+            __DIR__ . '/database/seeds' => $this->app->databasePath() . '/seeds'
+        ], 'seeders');
     }
 
 }

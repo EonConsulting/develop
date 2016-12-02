@@ -13,7 +13,7 @@ use EONConsulting\PHPSaasWrapper\src\Factories\Config;
 
 class ServiceAdapter {
 
-//    protected $key = '';
+    public $key = '';
     public $client_id;
     public $secret;
     public $redirect_uri;
@@ -28,13 +28,15 @@ class ServiceAdapter {
     public function set($key) {
         $config = new Config();
 
+        $this->key = $key;
+
         $this->client_id = $config->get('oauth.allows.' . $key . '.client_id');
         $this->secret = $config->get('oauth.allows.' . $key . '.secret');
-        $this->redirect_uri = $config->get('oauth.allows.' . $key . '.redirect_uri');
+        $this->redirect_uri = $config->generate_redirect_uri($key);
         $this->access_token_uri = $config->get('oauth.allows.' . $key . '.access_token_uri');
         $this->return_uri = $config->get('oauth.return_uri');
 
-        $this->auth_url = $config->get('oauth.allows.' . $key . '.redirect_uri') . '?client_id=' . $this->client_id . '&redirect_uri=' . $this->return_uri;
+        $this->auth_url = $config->generate_redirect_uri($key);
     }
 
 }

@@ -6,4 +6,11 @@
  * Time: 1:27 PM
  */
 
-Route::get('/_eon_authenticate', 'EONConsulting\PHPSaasWrapper\src\Controllers\AuthController@auth');
+Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\PHPSaasWrapper\src\Controllers'], function() {
+    Route::get('/_eon_authenticate', 'AuthController@auth');
+    Route::get('/_eon_phpsaaswrapper/auth/callback', function (\Illuminate\Http\Request $request) {
+        return phpsaaswrapper()->callback($request);
+    });
+    Route::get('/cs50', 'TestAPIController@cs50');
+});
+
