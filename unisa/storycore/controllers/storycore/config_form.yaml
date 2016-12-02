@@ -1,0 +1,11 @@
+name: Storycore
+modelClass: Unisa\Storycore\Models\Storycore
+form: $/unisa/storycore/models/storycore/fields.yaml
+defaultRedirect: unisa/storycore/storycore
+create:
+    redirect: 'unisa/storycore/storycore/update/:id'
+    redirectClose: unisa/storycore/storycore
+update:
+    redirect: unisa/storycore/storycore
+    redirectClose: unisa/storycore/storycore
+preview: {  }

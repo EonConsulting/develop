@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table unisa_storycore_storylines'
+    - builder_table_create_unisa_storycore_storylines.php
+1.0.3:
+    - 'Created table unisa_storycore_story_pages'
+    - builder_table_create_unisa_storycore_story_pages.php
+1.0.4:
+    - 'Updated table unisa_storycore_storylines'
+    - builder_table_update_unisa_storycore_storylines.php
