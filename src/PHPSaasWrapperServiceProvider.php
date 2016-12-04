@@ -33,6 +33,9 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . '/database/seeds' => $this->app->databasePath() . '/seeds'
         ], 'seeders');
+        $this->publishes([
+            __DIR__ . '/resources/views' => base_path('resources/views'),
+        ]);
     }
 
 }

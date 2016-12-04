@@ -11,6 +11,8 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\PHPSaasWrap
     Route::get('/_eon_phpsaaswrapper/auth/callback', function (\Illuminate\Http\Request $request) {
         return phpsaaswrapper()->callback($request);
     });
-    Route::get('/cs50', 'TestAPIController@cs50');
+//    Route::get('/cs50', 'TestAPIController@cs50');
+    Route::get('/{key}', 'TestAPIController@base_request');
+    Route::get('/{key}/consume/{use}', 'TestAPIController@consume');
 });
 

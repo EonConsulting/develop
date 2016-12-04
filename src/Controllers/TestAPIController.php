@@ -10,9 +10,21 @@ namespace EONConsulting\PHPSaasWrapper\src\Controllers;
 
 
 use App\Http\Controllers\Controller;
+use EONConsulting\PHPSaasWrapper\src\Factories\Config;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class TestAPIController extends Controller {
+
+    protected $client;
+
+    /**
+     * TestAPIController constructor.
+     */
+    public function __construct() {
+        $this->client = new Client;
+    }
+
 
     private function needs_auth($key) {
         $needs_auth = (phpsaaswrapper()->needs_auth($key) == 'true') ? true : false;
@@ -22,8 +34,7 @@ class TestAPIController extends Controller {
         return false;
     }
 
-    function cs50(Request $request) {
-        $key = 'github';
+    function base_request(Request $request, $key) {
         if($this->needs_auth($key)) {
             echo 'needs auth';
             session(['return_url' => $request->fullUrl()]);
@@ -36,7 +47,82 @@ class TestAPIController extends Controller {
 
             dd(phpsaaswrapper()->authorize($key));
         } else {
-            echo 'does not need auth';
+            // consume service
+
+            return phpsaaswrapper()->display_api_uses($key);
+        }
+    }
+
+    function consume(Request $request, $key, $use) {
+
+        $api_links = phpsaaswrapper()->generate_api_use($key, $use);
+
+        $responses = [];
+
+        $this->client = new Client;
+
+        $config = new Config;
+        $templates = [];
+
+        foreach($api_links as $k => $v) {
+
+            if(!array_key_exists($k, $templates)) {
+                $res = $config->get('oauth.allows.' . $key . '.templates.' . $k);
+                if(gettype($res) == 'string') {
+                    $templates[$k] = $res;
+                } else {
+                    $templates[$k] = null;
+                }
+            }
+
+            $response = $this->client->request('GET', $v, [
+                'headers' => [
+                    'accept' => '*/*',
+                ]
+            ])->getBody();
+
+            if(!array_key_exists($k, $responses)) {
+                $responses[$k] = [];
+            }
+
+            if(!array_key_exists('template', $responses)) {
+                $responses[$k]['template'] = '';
+            }
+
+            if(!array_key_exists('response', $responses)) {
+                $responses[$k]['response'] = '';
+            }
+
+            if(empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
+                $templates[$k] = null;
+            }
+
+            $responses[$k]['key'] = $key;
+            $responses[$k]['template'] = $templates[$k];
+            $responses[$k]['response'] = json_decode($response);
+        }
+
+        return view('consume', ['responses' => $responses]);
+
+    }
+
+    function cs50(Request $request) {
+        $key = 'cs50';
+        if($this->needs_auth($key)) {
+            echo 'needs auth';
+            session(['return_url' => $request->fullUrl()]);
+            session()->save();
+
+            if(phpsaaswrapper()->authorize($key) !== true) {
+                $cookie = cookie('eon_referrer', $request->fullUrl(), 45000);
+                return redirect(phpsaaswrapper()->authorize($key))->withCookie($cookie);
+            }
+
+            dd(phpsaaswrapper()->authorize($key));
+        } else {
+            // consume service
+
+            return phpsaaswrapper()->display_api_uses($key);
         }
 
     }

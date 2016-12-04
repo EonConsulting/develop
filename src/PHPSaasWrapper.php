@@ -62,4 +62,39 @@ class PHPSaasWrapper {
         return $config->needs_auth($key);
     }
 
+    public function get_api_uses($key) {
+        $config = new Config;
+        return $config->get_api_uses($key);
+    }
+
+    public function generate_api_uses($key) {
+        $config = new Config;
+        return $config->generate_api_uses($key);
+    }
+
+    public function generate_api_use($key, $use) {
+        $config = new Config;
+
+        if(gettype($use) == 'string') {
+            $use = explode('+', $use);
+        }
+
+        return $config->generate_api_use($key, $use);
+    }
+
+    public function display_api_uses($key) {
+        $config = new Config;
+        $uses = $config->generate_api_uses($key);
+
+        $links = '<ul>';
+
+        foreach($uses as $use => $link) {
+            $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
+        }
+
+        $links .= '</ul>';
+
+        return $links;
+    }
+
 }
