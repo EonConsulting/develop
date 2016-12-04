@@ -72,7 +72,7 @@ class Config {
                         ]
                     ],
                     'api_links' => [
-                        'courses' => 'http://api.cs50.net/courses/3/courses?key=--user_key--&cat_num=4949&output=--output--',
+                        'courses' => 'http://api.cs50.net/courses/3/courses?key=--user_key--&output=--output--',
                         'faculty' => 'http://api.cs50.net/courses/3/faculty?key=--user_key--&output=--output--',
                         'field' => 'http://api.cs50.net/courses/3/field?key=--user_key--&output=--output--',
                         'recipes' => 'http://api.cs50.net/food/3/recipes?key=--user_key--&output=--output--',
