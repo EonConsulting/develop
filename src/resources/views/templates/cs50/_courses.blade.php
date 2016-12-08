@@ -16,7 +16,8 @@
             $faculty .= ', ';
         }
 
-        $faculty .= $first_name . ' ' . $mid_name . ' ' . $last_name;
+
+        $faculty .= '<a href="' . route('phpsaaswrapper.consume_with_options', ['key' => $key, 'use' => $use, 'options' => 'faculty-' . $id]) . '">' . $first_name . ' ' . $mid_name . ' ' . $last_name . '</a>';
     }
 
     ?>

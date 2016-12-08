@@ -221,6 +221,11 @@ class Config {
         return $data;
     }
 
+    /**
+     * @param $uses
+     * @param $data
+     * @return array
+     */
     private function restrict_uses($uses, $data) {
 
         $temp_data = [];
@@ -291,19 +296,6 @@ class Config {
     public function needs_auth($key) {
         $keys = 'oauth.allows.' . $key . '.requires_auth';
         return $this->get($keys);
-    }
-
-    /**
-     * @param $key
-     * @param $use
-     * @return string
-     */
-    public function parse_template($key, $use) {
-        $html = '';
-
-
-
-        return $html;
     }
 
 }

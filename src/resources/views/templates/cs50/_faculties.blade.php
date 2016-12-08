@@ -13,7 +13,7 @@
 
     ?>
 
-    <a href="#">
+    <a href="{{ route('phpsaaswrapper.consume_with_options', ['key' => $key, 'use' => $use, 'options' => 'faculty-' . $id]) }}">
         <div class="media">
             <div class="media-left">
                 <img class="media-object" src="http://placehold.it/50x50" alt="...">

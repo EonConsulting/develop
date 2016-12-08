@@ -102,29 +102,82 @@ class TestAPIController extends Controller {
             $responses[$k]['response'] = json_decode($response);
         }
 
-        return view('consume', ['responses' => $responses]);
+        return view('consume', ['responses' => $responses, 'key' => $key, 'use' => $use]);
 
     }
 
-    function cs50(Request $request) {
-        $key = 'cs50';
-        if($this->needs_auth($key)) {
-            echo 'needs auth';
-            session(['return_url' => $request->fullUrl()]);
-            session()->save();
+    function consume_with_options(Request $request, $key, $use, $options) {
+        $api_links = phpsaaswrapper()->generate_api_use($key, $use);
 
-            if(phpsaaswrapper()->authorize($key) !== true) {
-                $cookie = cookie('eon_referrer', $request->fullUrl(), 45000);
-                return redirect(phpsaaswrapper()->authorize($key))->withCookie($cookie);
-            }
+        $responses = [];
 
-            dd(phpsaaswrapper()->authorize($key));
-        } else {
-            // consume service
+        $this->client = new Client;
 
-            return phpsaaswrapper()->display_api_uses($key);
+        $config = new Config;
+        $templates = [];
+
+        $options = explode('+', $options);
+        $sorted_options = [];
+        for($i = 0; $i < count($options); $i++) {
+            $option = $options[$i];
+
+            $obj = explode('-', $option);
+
+            $sorted_options[$obj[0]] = $obj[1];
         }
 
+        foreach($api_links as $k => $v) {
+
+            if(!array_key_exists($k, $templates)) {
+                $res = $config->get('oauth.allows.' . $key . '.templates.' . $k);
+                if(gettype($res) == 'string') {
+                    $templates[$k] = $res;
+                } else {
+                    $templates[$k] = null;
+                }
+            }
+
+            $queries = explode('?', $v);
+            if(count($queries) >= 1) {
+                $ops = explode('&', $queries[1]);
+                for($i = 0; $i < count($ops); $i++) {
+                    $o = $ops[$i];
+
+                    $obj = explode('=', $o);
+
+                    $sorted_options[$obj[0]] = $obj[1];
+                }
+            }
+
+            $response = $this->client->request('GET', $v, [
+                'query' => $sorted_options,
+                'headers' => [
+                    'accept' => '*/*',
+                ]
+            ])->getBody();
+
+            if(!array_key_exists($k, $responses)) {
+                $responses[$k] = [];
+            }
+
+            if(!array_key_exists('template', $responses)) {
+                $responses[$k]['template'] = '';
+            }
+
+            if(!array_key_exists('response', $responses)) {
+                $responses[$k]['response'] = '';
+            }
+
+            if(empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
+                $templates[$k] = null;
+            }
+
+            $responses[$k]['key'] = $key;
+            $responses[$k]['template'] = $templates[$k];
+            $responses[$k]['response'] = json_decode($response);
+        }
+
+        return view('consume', ['responses' => $responses, 'key' => $key, 'use' => $use]);
     }
 
 }
