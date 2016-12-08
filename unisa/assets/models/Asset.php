@@ -25,6 +25,7 @@ class Asset extends Model
      * @var string The database table used by the model.
      */
     public $table = 'unisa_assets_assets';
+    protected $fillable = ['asset_name', 'file_name', 'user_id', 'content', 'is_published'];
 
     public $belongsToMany = [
         'pages'=>[

@@ -9,3 +9,6 @@
 1.0.4:
     - 'Updated table unisa_storycore_storylines'
     - builder_table_update_unisa_storycore_storylines.php
+1.0.5:
+    - 'Updated table unisa_storycore_storylines'
+    - builder_table_update_unisa_storycore_storylines_2.php

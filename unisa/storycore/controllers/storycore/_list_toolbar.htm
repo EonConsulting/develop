@@ -1,5 +1,26 @@
 <div data-control="toolbar">
-        <a href="<?= Backend::url('unisa/storycore/storycore/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+    <a href="<?= Backend::url('unisa/storycore/storycore/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+    <a
+        href="<?= Backend::url('unisa/storycore/storycore/import') ?>"
+        class="btn btn-primary oc-icon-list">
+        Import entries
+    </a>
+    <button
+        class="btn btn-default oc-icon-download"
+        disabled="disabled"
+        onclick="$(this).data('request-data', {
+            checked: $('.control-list').listWidget('getChecked')
+        })"
+        data-request="onExport"
+        data-request-success="window.location=data.result"
+        data-request-confirm="Export selected rows?"
+        data-trigger-action="enable"
+        data-trigger=".control-list input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-request-success="$(this).prop('disabled', true)"
+        data-stripe-load-indicator>
+        Export Selected
+    </button>
         <button
         class="btn btn-default oc-icon-trash-o"
         disabled="disabled"

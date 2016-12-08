@@ -3,7 +3,7 @@ modelClass: Unisa\Storycore\Models\Storycore
 list: $/unisa/storycore/models/storycore/columns.yaml
 recordUrl: 'unisa/storycore/storycore/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
-showSetup: true
+showSetup: false
 showCheckboxes: true
 toolbar:
     buttons: list_toolbar

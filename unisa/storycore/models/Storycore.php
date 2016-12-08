@@ -26,6 +26,11 @@ class Storycore extends Model
      */
     public $table = 'unisa_storycore_storylines';
 
+    /**
+     * @var array Fillable fields
+     */
+    protected $fillable = ['id','story_name','description','user_id'];
+
     public $belongsToMany = [
         'pages'=>[
             'Unisa\Pages\Models\Page',

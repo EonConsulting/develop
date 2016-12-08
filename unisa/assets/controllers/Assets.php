@@ -26,28 +26,50 @@ class Assets extends Controller
         
     }
 
+    /**
+     * added user_id to asset 
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
     public function formBeforeCreate($model){
         $model->user_id = BackendAuth::getUser()->id;
     }
 
+    /**
+     * added user_id in selection of assets
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
     public function listExtendQueryBefore($query){
         $user_id = BackendAuth::getUser()->id;
 
         $query->where('user_id', '=', $user_id);
     }
+
+    /**
+     * checking whether asset name is already exist
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
     public function formBeforeSave($model){
-        $attributes = Input::get('Asset');
+        $attributes = Input::get('Assets');
         $rec = Db::table($model->table)->where('asset_name', $attributes['asset_name'])->pluck('asset_name');
         if($rec != ''){
             throw new ApplicationException('Asset Name already exists Please provide different one.');
         }
     }
+
+    /**
+     * Creating and mainting asset files
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
     public function formAfterSave($model =null){
         $attributes = $model->attributes;
         if($attributes['is_published']){
-            $dir = 'assets';
+            $dir = 'assets/'.BackendAuth::getUser()->id;
             if(!is_dir($dir)){
-                mkdir($dir);
+                mkdir($dir, 0777, true);
             }
             $ext = '.htm';
             $file = $dir.'/'.$attributes['file_name'].$ext;
@@ -58,8 +80,12 @@ class Assets extends Controller
                 while(!$flag){
                     $dir_temp = $dir.'/old_assets';
                     if(!is_dir($dir_temp)){
-                        mkdir($dir_temp);
+                        mkdir($dir_temp, 0777, true);
                     }
+
+                    /**
+                     * creating version of old file
+                     */
                     $newfile = $dir_temp.'/'.$pathinfo['filename'].'_v'.$i.'.'.$pathinfo['extension'];
                     if(!file_exists($newfile)){
                         rename($file, $newfile);
@@ -69,6 +95,9 @@ class Assets extends Controller
                     }
                 }
             }
+            /**
+             * writing content to asset file.
+             */
             file_put_contents($file,$attributes['content']);
         }
         

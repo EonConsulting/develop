@@ -31,8 +31,9 @@ class Pages extends Controller
         if(!empty($assets)){
             $files = Asset::find($assets)->lists('file_name');
             foreach ($files as $key => $value) {
-                if(file_exists('assets/'.$value.'.htm')){
-                    $frames .= file_get_contents('assets/'.$value.'.htm');
+                $file = 'assets/'.BackendAuth::getUser()->id.'/'.$value.'.htm';
+                if(file_exists($file)){
+                    $frames .= file_get_contents($file);
                     // '<iframe class="asset-frames" src="'.url('/assets/'.$value.'.htm').'"></iframe>';
 
                 }

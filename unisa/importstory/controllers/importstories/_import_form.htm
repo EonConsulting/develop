@@ -1,0 +1,20 @@
+<?= Form::open(['url'=>Backend::url('unisa\storycore\storycore\doimport'),'class' => 'layout', 'files'=>true]) ?>
+ 
+    <div class="layout-row">
+        <div class="form-group  text-field span-left is-required  " data-field-name="imp_file" id="Form-field-Storycore-imp_file-group">
+        <?= Form::label('imp_file', 'Select zip file') ?>
+        <?= Form::file('imp_file', ['class'=>'form-control', 'required'=>'required']) ?> 
+        </div>       
+    </div>
+ 
+    <div class="form-buttons">
+       <button
+            type="submit"
+            
+            class="btn btn-primary">
+            Export records
+        </button>
+    </div>
+ 
+<?= Form::close() ?>
+

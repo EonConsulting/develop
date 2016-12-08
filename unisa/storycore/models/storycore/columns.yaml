@@ -1,6 +1,17 @@
 columns:
     story_name:
-        label: 'unisa.storycore::lang.Storycore.story_name'
+        label: 'Story Name'
         type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'unisa.storycore::lang.Storycore.description'
+        type: text
+        searchable: true
+        sortable: true
+    pages:
+        label: 'Pages'
+        type: text
+        invisible: true
         searchable: true
         sortable: true

@@ -26,6 +26,8 @@ class Page extends Model
      */
     public $table = 'unisa_pages_pages';
 
+    protected $fillable = ['id','page_name', 'page_title', 'user_id', 'meta_keyword', 'meta_description', 'summary'];
+
     public $belongsToMany = [
         'assets'=>[
             'Unisa\Assets\Models\Asset',
