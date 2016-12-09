@@ -7,5 +7,5 @@ showSetup: true
 showCheckboxes: true
 toolbar:
     buttons: list_toolbar
-    search:
-        prompt: 'backend::lang.list.search_prompt'
+    # search:
+    #     prompt: 'backend::lang.list.search_prompt'

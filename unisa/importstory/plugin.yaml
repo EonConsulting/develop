@@ -1,6 +1,0 @@
-plugin:
-    name: 'unisa.importstory::lang.plugin.name'
-    description: 'unisa.importstory::lang.plugin.description'
-    author: Unisa
-    icon: oc-icon-adjust
-    homepage: ''
