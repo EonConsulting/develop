@@ -1,4 +1,0 @@
-title: Pages
-modelClass: Unisa\Pages\Models\Page
-toolbar:
-    buttons: reorder_toolbar

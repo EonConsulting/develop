@@ -1,4 +1,0 @@
-title: Assets
-modelClass: Unisa\Assets\Models\Asset
-toolbar:
-    buttons: reorder_toolbar
