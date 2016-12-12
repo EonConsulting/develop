@@ -89,7 +89,12 @@ class PHPSaasWrapper {
         $links = '<ul>';
 
         foreach($uses as $use => $link) {
-            $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
+            if(is_array($link) && array_key_exists('uri', $link) && array_key_exists('use', $link)) {
+                $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $link['use'] . '</a></li>';
+            } else {
+                $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
+            }
+
         }
 
         $links .= '</ul>';

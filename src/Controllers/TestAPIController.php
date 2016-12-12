@@ -66,6 +66,10 @@ class TestAPIController extends Controller {
 
         foreach($api_links as $k => $v) {
 
+            if(is_array($v)) {
+                return redirect()->route('phpsaaswrapper.consume.intermediate', ['key' => $key, 'use' => $use]);
+            }
+
             if(!array_key_exists($k, $templates)) {
                 $res = $config->get('oauth.allows.' . $key . '.templates.' . $k);
                 if(gettype($res) == 'string') {
@@ -74,6 +78,7 @@ class TestAPIController extends Controller {
                     $templates[$k] = null;
                 }
             }
+
 
             $response = $this->client->request('GET', $v, [
                 'headers' => [
@@ -104,6 +109,44 @@ class TestAPIController extends Controller {
 
         return view('consume', ['responses' => $responses, 'key' => $key, 'use' => $use]);
 
+    }
+
+    function consume_intermediate(Request $request, $key, $use) {
+        $api_links = phpsaaswrapper()->generate_api_use($key, $use);
+
+        $responses = [];
+
+        $config = new Config;
+        $templates = [];
+
+        foreach($api_links as $k => $v) {
+
+            if(!array_key_exists($k, $templates)) {
+                $res = $config->get('oauth.allows.' . $key . '.templates.' . $k);
+                if(gettype($res) == 'string') {
+                    $templates[$k] = $res;
+                } else {
+                    $templates[$k] = null;
+                }
+            }
+
+            $responses[$k]['key'] = $key;
+            $responses[$k]['template'] = $templates[$k];
+            $responses[$k]['response'] = $v;
+            $responses[$k]['k'] = $k;
+        }
+
+        $links = '<ul>';
+
+        foreach($responses as $k => $v) {
+            if(is_array($v)) {
+                $links .= '<li><a href="' . url($key . '/consume/' . $v['k']) . '">' . $v['k'] . '</a></li>';
+            }
+        }
+
+        $links .= '</ul>';
+
+        return $links;
     }
 
     function consume_with_options(Request $request, $key, $use, $options) {

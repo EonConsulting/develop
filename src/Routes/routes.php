@@ -14,6 +14,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\PHPSaasWrap
 //    Route::get('/cs50', 'TestAPIController@cs50');
     Route::get('/{key}', 'TestAPIController@base_request')->name('phpsaaswrapper.base_request');
     Route::get('/{key}/consume/{use}', 'TestAPIController@consume')->name('phpsaaswrapper.consume');
+    Route::get('/{key}/consume/{use}/intermediate', 'TestAPIController@consume_intermediate')->name('phpsaaswrapper.consume.intermediate');
     Route::get('/{key}/consume/{use}/{options}', 'TestAPIController@consume_with_options')->name('phpsaaswrapper.consume_with_options');
 });
 
