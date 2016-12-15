@@ -1,0 +1,88 @@
+<div style="display: none">
+    <div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+    </div>
+</div>
+
+<?= Form::open(['url'=>Backend::url('unisa\searchpages\searchpages'), 'method'=>'POST']); ?>
+<div id="filters">
+<?php foreach($filters as $filter){ ?>
+    <div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" value="<?php echo $filter; ?>" />
+    </div>
+<?php } ?>
+    <div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="form-group ">
+    <input type="submit" class="btn btn-primary" value="Submit" />
+    <button type="button" 
+        id="add_field"
+        class="btn btn-primary oc-icon-plus"
+    >add another field</button>
+</div>
+<?= Form::close(); ?>
+
+<div data-control="toolbar">
+    <button
+        class="btn btn-primary oc-icon-plus"
+        disabled="disabled"
+        onclick="$('#sctory_page').val($('.control-list').listWidget('getChecked'))"
+        data-toggle="modal" href="#content-confirmation"
+        data-trigger-action="enable"
+        data-trigger=".control-list input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-stripe-load-indicator>
+        Create new storyline
+    </button>
+</div>
+
+<div class="control-popup modal fade" id="content-confirmation" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Are you sure you wanna do that?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="layout-row">
+                        <div class="form-group">
+                            <?= Form::label('story_name', 'Storyline Name') ?>
+                            <?= Form::text('story_name', '', ['class'=>'form-control', 'required'=>'required']) ?>
+                        </div>
+                        <div class="form-group">
+                            <?= Form::label('description', 'Description') ?>
+                            <?= Form::textarea('description', '', ['class'=>'form-control', 'required'=>'required']) ?>
+                            <?= Form::hidden('Storycore[pages][]', '', ['class'=>'form-control', 'required'=>'required', 'id'=>'sctory_page']) ?>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        onclick="$(this).data('request-data', {
+                            pages: $('.control-list').listWidget('getChecked'), 
+                            story_name: $('#story_name').val(), 
+                            description: $('#description').val()
+                        })"
+                        data-request="onCreatestory"
+                        data-request-success="$('#story_name').val(''); $('#description').val('');"
+                        data-dismiss="modal">Create
+                    </button>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).on('render', function(){
+    $("#add_field").click(function(){
+        $("#field").clone().appendTo('#filters');
+    });        
+});
+</script>

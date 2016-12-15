@@ -1,0 +1,35 @@
+<div style="display: none">
+    <div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+    </div>
+</div>
+
+<?= Form::open(['url'=>Backend::url('unisa\searchstories\searchstories'), 'method'=>'POST']); ?>
+<div id="filters">
+<?php foreach($filters as $filter){ ?>
+    <div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" value="<?php echo $filter; ?>" />
+    </div>
+<?php } ?>
+<div class="form-group" id="field">
+        <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+    </div>
+</div>
+
+<div class="form-group ">
+    <input type="submit" class="btn btn-primary" value="Submit" />
+    <button type="button" 
+        id="add_field"
+        class="btn btn-primary oc-icon-plus"
+    >add another field</button>
+</div>
+<?= Form::close(); ?>
+
+<script type="text/javascript">
+$(document).on('render', function(){
+    $("#add_field").click(function(){
+        $("#field").clone().appendTo('#filters');
+    });        
+});
+
+</script>

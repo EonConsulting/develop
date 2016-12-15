@@ -1,0 +1,10 @@
+/*
+ * This is a sample StyleSheet file used by {{ name }}
+ *
+ * You can delete this file if you want
+ */
+
+ .select2-container{
+ 	width: 100% !important;
+ 	display: block;
+ }

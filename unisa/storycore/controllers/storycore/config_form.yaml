@@ -1,0 +1,15 @@
+name: Storycore
+modelClass: Unisa\Storycore\Models\Storycore
+form: $/unisa/storycore/models/storycore/fields.yaml
+defaultRedirect: unisa/storycore/storycore
+create:
+    title: 'unisa.storycore::lang.Storycore.create_story'
+    redirect: 'unisa/storycore/storycore/update/:id'
+    redirectClose: unisa/storycore/storycore
+    flashSave: 'unisa.storycore::lang.Storycore.story_created'
+update:
+    title: 'unisa.storycore::lang.Storycore.upd_story'
+    redirect: unisa/storycore/storycore
+    redirectClose: unisa/storycore/storycore
+    flashSave: 'unisa.storycore::lang.Storycore.suc_story_upd'
+    flashDelete: 'unisa.storycore::lang.Storycore.del_story'

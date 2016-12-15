@@ -1,0 +1,20 @@
+plugin:
+    name: 'unisa.searchstories::lang.plugin.name'
+    description: 'unisa.searchstories::lang.plugin.description'
+    author: Unisa
+    icon: oc-icon-search
+    homepage: ''
+permissions:
+    stories.search_stories:
+        tab: 'unisa.searchstories::lang.searchstories.search_storylines'
+        label: 'unisa.searchstories::lang.searchstories.search_storylines'
+navigation:
+    search_stories:
+        label: 'unisa.searchstories::lang.searchstories.search_storylines'
+        url: unisa/searchstories/searchstories
+        icon: icon-search
+        sideMenu:
+            sub_search_story:
+                label: 'unisa.searchstories::lang.searchstories.search_storylines'
+                url: unisa/searchstories/searchstories
+                icon: icon-sitemap

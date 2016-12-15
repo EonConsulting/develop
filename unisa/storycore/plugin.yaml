@@ -1,0 +1,20 @@
+plugin:
+    name: 'unisa.storycore::lang.plugin.name'
+    description: 'unisa.storycore::lang.plugin.description'
+    author: Unisa
+    icon: oc-icon-adn
+    homepage: ''
+permissions:
+    storycore.manage_story:
+        tab: 'unisa.storycore::lang.Storycore.manage_storycore'
+        label: 'unisa.storycore::lang.Storycore.manage_storycore'
+navigation:
+    storycore:
+        label: 'unisa.storycore::lang.Storycore.storycore'
+        url: unisa/storycore/storycore
+        icon: icon-adn
+        sideMenu:
+            manage_storycore:
+                label: 'unisa.storycore::lang.Storycore.manage_storyline'
+                url: unisa/storycore/storycore
+                icon: icon-sitemap

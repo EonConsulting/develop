@@ -1,0 +1,4 @@
+title: Storycore
+modelClass: Unisa\Storycore\Models\Storycore
+toolbar:
+    buttons: reorder_toolbar
