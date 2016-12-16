@@ -35,6 +35,11 @@ fields:
         label: 'unisa.pages::lang.pages.assets'
         span: left
         type: assetbox
+    ltiobject:
+        label: 'unisa.pages::lang.pages.lti_obj'
+        span: left
+        required: 1
+        type: ltibox
     image:
         label: Image
         span: left

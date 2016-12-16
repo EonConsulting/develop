@@ -1,7 +1,8 @@
 <?php namespace Unisa\Pages\Models;
 
 use Model;
-
+use Db;
+use BackendAuth;
 /**
  * Model
  */
@@ -46,6 +47,11 @@ class Page extends Model
             'Unisa\Storycore\Models\Storycore',
             'table'=>'unisa_storycore_story_pages',
             'order'=>'page_name'
+        ],
+        'ltiobject'=>[
+            'Unisa\ltiobject\Models\Ltiobject',
+            'table'=>'unisa_pages_page_lti',
+            'order'=>'object_name'
         ]
     ];
 
@@ -55,4 +61,8 @@ class Page extends Model
     public $attachOne = [
         'image'=>'System\Models\File'
     ];
+
+    public function getLtiboxOptions($keyValue = ''){
+        return DB::table('unisa_ltiobject_lti')->lists('object_name', 'id');
+    }
 }

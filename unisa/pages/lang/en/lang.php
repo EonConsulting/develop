@@ -17,5 +17,6 @@
         'upd_page' => 'Update Page',
         'suc_upd_page' => 'Page updated successfully.',
         'del_page' => 'Page deleted successfully.',
+        'lti_obj' => 'LTI Object',
     ],
 ];

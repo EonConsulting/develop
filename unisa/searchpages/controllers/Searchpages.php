@@ -3,6 +3,7 @@
 use Backend\Classes\Controller;
 use Unisa\Storycore\Models\Storycore;
 use Unisa\Pages\Models\Page;
+use Unisa\Pages\Controllers\Pages;
 use Backend;
 use BackendMenu;
 use BackendAuth;
@@ -92,12 +93,25 @@ class Searchpages extends Controller
         $rowId = Input::get('page');
         $page = Page::find($rowId);
         $newPage = $page->replicate();
+        $newPage->page_name = $this->versionise_page($newPage->page_name, 1);
         $newPage->save();
 
         $newPage->assets()->sync($page->assets);
-        Event::fire('Pages.formAfterSave', [$newPage]);
         
+        $pageController = new Pages;
+        $pageController->call_ext_func('formAfterSave',$newPage);
+        /*$te = Event::fire('Unisa.Pages.formAfterSave', [$newPage]);
+        echo '<pre>';print_r($te)die;*/
         return Redirect::to(Backend::url("unisa\pages\pages\update", $newPage->id));
+    }
+
+    protected function versionise_page($pageName = '', $version = 1){
+        $newName = $pageName.$version;
+        $page = Page::where('page_name', $newName)->first();
+        if($page){
+            $newName = $this->versionise_page($pageName, $version+1);
+        }
+        return $newName;
     }
 
 }

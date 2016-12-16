@@ -25,6 +25,10 @@ class Plugin extends PluginBase
             'Unisa\Pages\FormWidgets\PreviewBox'=>[
                 'label'=>'Asset Preivew',
                 'code'=>'previewbox'
+            ],
+            'Unisa\Pages\FormWidgets\LtiBox'=>[
+                'label'=>'LTI Object',
+                'code'=>'ltibox'
             ]
     	];
     }

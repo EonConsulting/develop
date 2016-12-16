@@ -2,9 +2,11 @@
 
 use Backend\Classes\Controller;
 use Unisa\Assets\Models\Asset;
+use ApplicationException;
 use BackendMenu;
 use BackendAuth;
 use Input;
+use Db;
 
 class Pages extends Controller
 {
@@ -64,6 +66,35 @@ class Pages extends Controller
 
         /*$user_id = BackendAuth::getUser()->id;
         $query->where('user_id', '=', $user_id);*/
+    }
+
+    /**
+     * checking whether Page name is already exist
+     * @param  [type] $model [description]
+     * @return [type]        [description]
+     */
+    public function formBeforeSave($model){
+        $attributes = Input::get('Page');
+        if($model->id){
+            $rec = Db::table($model->table)->where('page_name', '=', $attributes['page_name'])->where('id', '!=', $model->id)->pluck('page_name');
+        }
+        else{     
+            $rec = Db::table($model->table)->where('page_name', $attributes['page_name'])->pluck('page_name');
+        }
+        if($rec){
+            throw new ApplicationException('Page name already exists Please provide different one.');
+        }
+    }
+
+    /**
+     * fucntion to call extrenal functions of same controller
+     * @param  string $functionName Name of the function   
+     * @param  array  $args         argument
+     * @return void               
+     */
+    public function call_ext_func($functionName='index',$args = array())
+    {
+        $this->$functionName($args);
     }
 
     /**

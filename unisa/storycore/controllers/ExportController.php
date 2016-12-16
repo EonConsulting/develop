@@ -1,6 +1,7 @@
 <?php namespace Unisa\Storycore\Controllers;
 
 use Backend\Classes\Controller;
+use Unisa\Ltiobject\Models\Ltiobject;
 use Unisa\Assets\Models\Asset;
 use Unisa\Pages\Models\Page;
 use Unisa\Storycore\Models\Storycore as StoryModel;
@@ -57,14 +58,12 @@ class ExportController extends Controller
             foreach ($stories as $story) {
                 $storyDetails = StoryModel::find($story);
                 $xmlName = $storyDetails->id.'.xml';
-                $pages = Db::table('unisa_storycore_story_pages')->where('storycore_id', $story)->select('page_id')->get();
                 
-                foreach ($pages as $key=>$page) {
-                    $pageDetails = Page::find($page->page_id);
-                    $assets = Db::table('unisa_pages_page_assets')->where('page_id', $page->page_id)->select('asset_id')->get();
+                foreach ($storyDetails->pages as $key=>$page) {
+                    $pageDetails = Page::find($page->id);
                     $xmlAsset = '';
-                    foreach ($assets as $asset) {
-                        $assetDetails = Asset::find($asset->asset_id);
+                    foreach ($pageDetails->assets as $asset) {
+                        $assetDetails = Asset::find($asset->id);
                         $assetFile = 'assets/'.BackendAuth::getUser()->id.'/'.$assetDetails->file_name.'.htm';
 
                         /**
@@ -74,7 +73,17 @@ class ExportController extends Controller
                             $zip->addFile($assetFile,'assets/'.$assetDetails->file_name.'.htm');
                         }
                         
-                    }   
+                    }
+                    foreach ($pageDetails->ltiobject as $object) {
+                        $ltiDetails = Ltiobject::find($object->id);
+                        $frame = rtrim($ltiDetails->launcher_url, '?').'==='.rtrim($ltiDetails->endpoint_url, '&').'==='.$ltiDetails->key.'==='.$ltiDetails->secret;
+                        $zip->addFromString('objects/'.$ltiDetails->object_name.'.htm', $frame);
+                    }
+                    $img ='';
+                    if($pageDetails->image){
+                        $img = basename($pageDetails->image->getPath());
+                        $zip->addFile($pageDetails->image->getLocalPath(), 'images/'.$img);
+                    }  
                 }  
             }
             $zip->addFile('assets/'.$xmlName,$xmlName);

@@ -3,7 +3,11 @@
 use Backend\Classes\Controller;
 use Unisa\Assets\Models\Asset;
 use Unisa\Pages\Models\Page;
+use Unisa\Ltiobject\Models\Ltiobject;
 use Unisa\Storycore\Models\Storycore as StoryModel;
+use Unisa\Storycore\Controllers\Storycore;
+use Unisa\Pages\Controllers\Pages;
+use System\Models\File;
 use BackendMenu;
 use Backend;
 use BackendAuth;
@@ -12,7 +16,7 @@ use Validator;
 use Redirect;
 use Flash;
 use ZipArchive;
-
+use Event;
 /**
  * Import Controller Back-end Controller
  */
@@ -86,7 +90,7 @@ class ImportController extends Controller
                 
                 $dirPath = $destinationPath.'/'.$dir;
                 $xmlFile = glob($dirPath.'/*.xml');
-                if(!file_exists($xmlFile[0])){
+                if(empty($xmlFile) || !file_exists($xmlFile[0])){
                     Flash::error('Please upload zip file with valid sturcture.'); 
                     return Redirect::back();
                 }
@@ -108,13 +112,21 @@ class ImportController extends Controller
                         }
 
                     }
-                    if(($pageId = $this->manage_page($story, $assetArr))){
+                    $ltis = ($story['objects'] != '' ? explode(',', $story['objects']) : array());
+                    $ltiArr = array();
+                    foreach ($ltis as $lti) {
+                        if(($ltiId = $this->manage_lti($lti, $dirPath.'/objects'))){
+                            $ltiArr[] = $ltiId;
+                        }
+                    }
+                    if(($pageId = $this->manage_page($story, $assetArr, $ltiArr, $dirPath.'/images'))){
                         $pageArr[] = $pageId;
                     }
+
                 }
                 
                 $this->manage_story($xml, $pageArr);
-                rename($xmlFile[0], 'assets/'.basename($xmlFile[0]));
+                //rename($xmlFile[0], 'assets/'.basename($xmlFile[0]));
 
                 /**
                  * Removing ZIP file and extracted folder after finishing import
@@ -192,28 +204,66 @@ class ImportController extends Controller
         return $assetId;
     }
 
+    protected function manage_lti($lti = '', $objPath=''){
+        $user_id = BackendAuth::getUser()->id;
+        $ltiId = 0;
+        $objFile = $objPath.'/'.$lti.'.htm';
+
+        if(file_exists($objFile)){
+            $assetInfo = pathinfo($objFile);
+            $content = explode('===', file_get_contents($objFile));
+            if(count($content) >=4){
+                $ltiData = ['object_name'=>$lti, 'description'=>$lti, 'endpoint_url'=>$content[1], 'launcher_url'=>$content[0], 'key'=>$content[2], 'secret'=>$content[3], 'user_id'=>$user_id];
+                $LTIObj = Ltiobject::where('user_id',$user_id)->where('object_name', $lti)->first();
+            }
+            
+            if(!$LTIObj){
+                $LTIObj = new Ltiobject;
+            }
+            $LTIObj->fill($ltiData);
+            $LTIObj->save();
+
+            $ltiId = $LTIObj->id;            
+           
+        }
+        return $ltiId;
+
+    }
+
     /**
      * Importing the Pages from XML file
      * @param  object $page     object of page
      * @param  array  $assetIds assets to padde in page
      * @return [type]           [description]
      */
-    protected function manage_page($page, $assetIds = array()){
+    protected function manage_page($page, $assetIds = array(), $ltiIds = array(), $imgPath = ''){
         $user_id = BackendAuth::getUser()->id;
-        $pageData = ['page_name'=>$page['title'], 'page_title'=>$page['title'], 'meta_keyword'=>$page['title'], 'meta_description'=>$page['title'], 'user_id'=>$user_id];
-        $pages = Page::where('page_title', $page['title'])->where('user_id',$user_id)->first();
+        $pageData = ['page_name'=>$page['name'], 'page_title'=>$page['title'], 'meta_keyword'=>$page['title'], 'meta_description'=>$page['title'], 'user_id'=>$user_id];
+        $pages = Page::where('page_name', $page['name'])->where('user_id',$user_id)->first();
         if(!$pages){
             $pages = new Page;
         }
         $pages->fill($pageData);
         $pages->save();
-
+        if($page['img'] != ''){
+            $imgFile = $imgPath.'/'.$page['img'] ;
+            
+            if(file_exists($imgFile)){
+                $pages->image()->create(['data' => $imgFile]);
+            }
+        }
         $pageId = $pages->id;
 
         /**
          * relatively linking assets to page
          */
         $pages->assets()->sync($assetIds);
+        $pages->ltiobject()->sync($ltiIds);
+
+        $pageController = new Pages;
+        $pageController->call_ext_func('formAfterSave',$pages);
+       // Event::fire('Pages.formAfterSave', [$pages]);
+
         return $pageId;
     }
 
@@ -237,6 +287,11 @@ class ImportController extends Controller
          * relatively linking pages to assets
          */
         $stories->pages()->sync($pageArr);
+
+        $storyController = new Storycore;
+        $storyController->call_ext_func('formAfterSave',$stories);
+
+ //       Event::fire('unisa.storycore.formAfterSave', [$stories]);
     }
 
     /**

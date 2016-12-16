@@ -52,7 +52,7 @@ class Assets extends Controller
      * @return void        
      */
     public function formBeforeSave($model){
-        $attributes = Input::get('Assets');
+        $attributes = Input::get('Asset');
         $rec = Db::table($model->table)->where('asset_name', $attributes['asset_name'])->pluck('asset_name');
         if($rec != ''){
             throw new ApplicationException('Asset Name already exists Please provide different one.');
