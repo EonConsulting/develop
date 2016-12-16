@@ -88,7 +88,6 @@ class PHPSaasWrapper {
 
         foreach ($tree as $branch => $twig) {
             $temp_twig = $twig;
-            $uri = '';
             $label = '';
 
             $twig_html = '';
