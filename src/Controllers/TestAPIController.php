@@ -57,6 +57,8 @@ class TestAPIController extends Controller {
 
         $api_links = phpsaaswrapper()->generate_api_use($key, $use);
 
+//        dd($api_links);
+
         $responses = [];
 
         $this->client = new Client;
@@ -67,7 +69,8 @@ class TestAPIController extends Controller {
         foreach($api_links as $k => $v) {
 
             if(is_array($v)) {
-                return redirect()->route('phpsaaswrapper.consume.intermediate', ['key' => $key, 'use' => $use]);
+                dd($v);
+//                return redirect()->route('phpsaaswrapper.consume.intermediate', ['key' => $key, 'use' => $use]);
             }
 
             if(!array_key_exists($k, $templates)) {

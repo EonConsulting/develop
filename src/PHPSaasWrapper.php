@@ -86,20 +86,41 @@ class PHPSaasWrapper {
         $config = new Config;
         $uses = $config->generate_api_uses($key);
 
-        $links = '<ul>';
+        $html = '<ul>';
+
+        dd($uses);
 
         foreach($uses as $use => $link) {
-            if(is_array($link) && array_key_exists('uri', $link) && array_key_exists('use', $link)) {
-                $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $link['use'] . '</a></li>';
+            if(is_array($link) && array_key_exists('links', $link) && array_key_exists('label', $link)) {
+                if(count($link['links']) > 1) {
+
+                    $html .= '<li>' . $link['label'] . '<ul>';
+
+                    foreach ($link['links'] as $k => $v) {
+                        $html .= '<li><a href="' . url($key . '/consume/' . $use . '.' . $k) . '">' . $v['label'] . '</a></li>';
+                    }
+
+                    $html .= '</ul></li>';
+                } else {
+
+                    $label = '';
+                    $slug = '';
+                    foreach ($link['links'] as $k => $v) {
+                        $label = $v['label'];
+                        $slug = $v['slug'];
+                    }
+
+                    $html .= '<li><a href="' . url($key . '/consume/' . $use . '.' . $slug) . '">' . $label . '</a></li>';
+                }
             } else {
-                $links .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
+                $html .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
             }
 
         }
 
-        $links .= '</ul>';
+        $html .= '</ul>';
 
-        return $links;
+        return $html;
     }
 
 }
