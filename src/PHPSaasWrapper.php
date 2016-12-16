@@ -82,43 +82,54 @@ class PHPSaasWrapper {
         return $config->generate_api_use($key, $use);
     }
 
-    public function display_api_uses($key) {
+    public function build_html_tree($key, $tree, $pre_branch = '') {
         $config = new Config;
-        $uses = $config->generate_api_uses($key);
+        $html = '';
 
-        $html = '<ul>';
+        foreach ($tree as $branch => $twig) {
+            $temp_twig = $twig;
+            $uri = '';
+            $label = '';
 
-        dd($uses);
+            $twig_html = '';
 
-        foreach($uses as $use => $link) {
-            if(is_array($link) && array_key_exists('links', $link) && array_key_exists('label', $link)) {
-                if(count($link['links']) > 1) {
-
-                    $html .= '<li>' . $link['label'] . '<ul>';
-
-                    foreach ($link['links'] as $k => $v) {
-                        $html .= '<li><a href="' . url($key . '/consume/' . $use . '.' . $k) . '">' . $v['label'] . '</a></li>';
-                    }
-
-                    $html .= '</ul></li>';
-                } else {
-
-                    $label = '';
-                    $slug = '';
-                    foreach ($link['links'] as $k => $v) {
-                        $label = $v['label'];
-                        $slug = $v['slug'];
-                    }
-
-                    $html .= '<li><a href="' . url($key . '/consume/' . $use . '.' . $slug) . '">' . $label . '</a></li>';
+            if(is_array($temp_twig)) {
+                if(array_key_exists('label', $temp_twig)) {
+                    $label = $temp_twig['label'];
                 }
+
+                unset($temp_twig['uri']);
+                unset($temp_twig['label']);
+
+                $twig_html = $this->build_html_tree($key, $temp_twig, $branch . '.');
             } else {
-                $html .= '<li><a href="' . url($key . '/consume/' . $use) . '">' . $use . '</a></li>';
+                $label = $branch;
+            }
+
+            $label_obj = $config->get_labels($key, $branch);
+            if(is_array($label_obj) && array_key_exists('label', $label_obj)) {
+                $label = $label_obj['label'];
+            }
+
+            if($twig_html != '') {
+                $html .= '<li>' . $label . ' ' . $twig_html . '</li>';
+            } else {
+                $html .= '<li><a href="' . url($key . '/consume/' . $pre_branch . $branch) . '">' . $label . '</a> ' . $twig_html . '</li>';
             }
 
         }
 
-        $html .= '</ul>';
+        if($html == '')
+            return $html;
+
+        return '<ul>' . $html . '</ul>';
+    }
+
+    public function display_api_uses($key) {
+        $config = new Config;
+        $uses = $config->generate_api_uses($key);
+
+        $html = $this->build_html_tree($key, $uses);
 
         return $html;
     }

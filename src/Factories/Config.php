@@ -685,10 +685,11 @@ class Config {
         $uses_keys = 'oauth.allows.' . $key . '.api_uses';
         $link_keys = 'oauth.allows.' . $key . '.api_links';
 
+//        $data = $this->get($link_keys);
+//        $data = $this->obj_array_recursive($key, $data, $link_keys, $uses_keys);
         $data = $this->get($link_keys);
         $data = $this->fill_data($link_keys, $data, $key);
         $data = $this->insert_main_labels($uses_keys, $data);
-        dd($data);
 
         return $data;
     }
@@ -817,7 +818,7 @@ class Config {
         return $result;
     }
 
-    function obj_array_recursive($key, $someArray, $link_keys) {
+    function obj_array_recursive($key, $someArray, $link_keys, $uses_keys) {
         $result = [];
         $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($someArray), \RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $k => $v) {
@@ -832,6 +833,7 @@ class Config {
                 $path_obj = implode('.', $p);
 
                 $obj = $this->get($link_keys . '.' . $path_obj);
+                $use_obj = $this->get($uses_keys . '.' . $path_obj);
 
                 if(gettype($obj) == 'string') {
                     $uri = $this->generate_uri($key, $obj);
@@ -848,6 +850,13 @@ class Config {
                         $result[$path_obj]['label'] = $label;
                     }
                 }
+
+                if(is_array($use_obj)) {
+                    if(array_key_exists('use', $use_obj)) {
+                        $value = $use_obj[$use_obj['use']];
+                        $result[$path_obj]['value'] = $value;
+                    }
+                }
             }
         }
         return $result;
@@ -861,46 +870,6 @@ class Config {
         }
         return $temp;
     }
-
-//    public function build_tree_all($keys, $tree, $link_keys = '', $main_key = false) {
-//        $temp_tree = [];
-//
-//        $keys = array_values($keys);
-//        $temp_keys = $keys;
-//        $previous_key = $keys[0];
-//
-//        if(count($temp_keys) == 0) {
-//            if(gettype($tree) == 'string') {
-//                echo 'nothing';
-//                return [];
-//            }
-//        }
-//
-//        foreach($tree as $branch => $twig) {
-//            if(gettype($twig) == 'string') {
-//                $uri = $this->generate_uri($main_key, $twig);
-//                $label = $this->generate_uri_label($main_key, $twig);
-//
-//                $temp_tree[$branch]['uri'] = $uri;
-//                $temp_tree[$branch]['label'] = $label;
-//            } else if(is_array($twig)) {
-//                if(array_key_exists('uri', $twig)) {
-//                    $uri = $this->generate_uri($main_key, $twig['uri']);
-////                    $label = $this->generate_uri_label($key);
-//                }
-//
-//                $temp_tree[$branch]['uri'] = $uri;
-//                $temp_tree[$branch]['label'] = $label;
-//                dd($twig);
-//            }
-//
-//
-//        }
-//
-//        dd($temp_tree);
-//
-//        return $temp_tree;
-//    }
 
     public function build_tree($keys, $tree, $link_keys = '', $main_key = false) {
 
@@ -939,7 +908,7 @@ class Config {
                     if($value == $key) {
                         $tree_data = $this->get($link_keys . '.' . implode('.', $keys));
 
-                        if(array_key_exists('uri', $tree_data)) {
+                        if(is_array($tree_data) && array_key_exists('uri', $tree_data)) {
                             $uri = $tree_data['uri'];
                         }
                         if(gettype($tree_data) == 'string') {
@@ -955,7 +924,7 @@ class Config {
                             $label = $key;
                         }
 
-                        if(array_key_exists('requires', $tree_data)) {
+                        if(is_array($tree_data) && array_key_exists('requires', $tree_data)) {
                             $requires = $tree_data['requires'];
                         } else {
                             $requires = false;
@@ -964,7 +933,7 @@ class Config {
                         $uri = $this->generate_uri($main_key, $uri, $requires);
                         $label = $this->generate_uri_label($main_key, $label, $requires);
 
-                        if(!array_key_exists($key, $tree_data)) {
+                        if(!array_key_exists($key, $temp_tree)) {
                             $temp_tree[$key] = [];
                         }
 
@@ -975,8 +944,6 @@ class Config {
             }
             $previous_key = $key;
         }
-
-        dd($temp_tree);
         return $temp_tree;
     }
 
@@ -1024,87 +991,6 @@ class Config {
         }
 
         return $result;
-
-//        $temp_data = $this->recursive_key_search($_data, $last_key, true);
-
-//        foreach($_data as $k => $v) {
-//            $temp_key = $key . '.' . $k;
-////            dd($_data);
-//            $td = $this->recursive_key_search($_data, $k, false);
-//
-//            if(is_array($td)) {
-//
-//                if(array_key_exists('value', $td)) {
-//                    foreach($td['value'] as $tk => $tv) {
-////                        dd($td['value']);
-//                        $result[$tv] = [];
-//                    }
-//                } else if(count($td) > 0) {
-//                    foreach($td as $tk => $tv) {
-//                        $result[$tv] = [];
-//                    }
-//                }
-//
-//            } else {
-//
-//            }
-//
-//        }
-
-
-//        array_walk_recursive($this->data, function ($item, $key) use (&$result) {
-//            if (preg_match('/\-\-(.*?)\-\-/', $item)) {
-//                $result[$key] = $item;
-//            }
-//        });
-
-//        foreach($_data as $k => $v) {
-//            $temp_key = $key . '.' . $k;
-//
-//            $td = $this->get($temp_key);
-////            dd($td);
-//
-//            if (gettype($td) == 'string') {
-//                if(is_array($v)) {
-//                    foreach($v as $tk => $tv) {
-//                        if(gettype($tv) == 'string') {
-//                            $temp_data[$tv] = '';
-//                        }
-//                    }
-//                } else {
-//                    $temp_data[$k] = '';
-//                }
-//            } else {
-//                if (!array_key_exists('uri', $td)) {
-//                    $d = $this->get_uses($temp_key, $td, $k);
-//                    if(is_array($d)) {
-//                        foreach($d as $tk => $tv) {
-//                            if(gettype($tv) == 'string') {
-//                                $temp_data[$tv] = '';
-//                            } else {
-//                                $temp_data[$tk] = $this->get_uses($temp_key, $tv, $tk);
-//                            }
-//                        }
-//                    } else {
-//                        $temp_data[$k] = $this->get_uses($temp_key, $td, $k);
-//                    }
-//
-//                } else {
-//                    if (array_key_exists('use', $td)) {
-//                        $use = $td['use'];
-//                        $value = $td[$use];
-//                        $temp_data[$k] = $value;
-//                    } else {
-//                        $temp_data[$k] = '';
-//                    }
-//                }
-//            }
-//        }
-
-//        echo '<pre>';
-//        print_r($temp_data);
-//        echo '</pre>';
-//        return $result;
     }
 
     /**
@@ -1197,160 +1083,9 @@ class Config {
         return $result;
     }
 
-    public function fill_out_data($key, $_data) {
-
+    function get_labels($key, $keys) {
+        return $this->get('oauth.allows.' . $key . '.api_uses.' . $keys);
     }
-
-//    /**
-//     * @param $key
-//     * @param $_data
-//     * @return array
-//     */
-//    private function get_uses($key, $_data) {
-//        $temp_data = [];
-//
-//        foreach($_data as $k => $v) {
-//            if(gettype($v) == 'array') {
-//                $label = false;
-//                if(array_key_exists('label', $v) && array_key_exists('use', $v)) {
-//                    $label = $v['label'];
-//                    $use = $v['use'];
-//                    $value = $v[$use];
-//
-//                    $temp_data[] = $value;
-//                } else {
-//                    $temp_data = array_merge($temp_data, $this->get_uses($k, $v));
-//                }
-//            } else {
-//                $temp_data[] = $v;
-//            }
-//        }
-//
-//        return $temp_data;
-//    }
-//
-//    /**
-//     * @param $data
-//     * @return mixed
-//     */
-//    private function fill_out_data($key, $data) {
-//        $base_key = 'oauth.allows.' . $key . '.api_links.';
-//        $base_key_uses = 'oauth.allows.' . $key . '.api_uses.';
-//        $for_return = [];
-//        $labels = [];
-//        $temp_key = '';
-//        if(array_key_exists(0, $data)) {
-//            for ($i = 0; $i < count($data); $i++) {
-//                $k = $data[$i];
-//
-//                $return_data = $this->get($base_key . $k);
-//                $temp_key = $k;
-//                $label = '';
-//
-//                if (is_array($return_data)) {
-//
-//                    if (!array_key_exists((string)$temp_key, $for_return)) {
-//                        $for_return[(string)$temp_key] = '';
-//                    }
-//
-//                    $keys = $this->get($base_key_uses . $k);
-//
-//                    if($keys) {
-//                        foreach($keys as $t_k => $t_v) {
-//                            if(gettype($t_v) == 'string') {
-//                                continue;
-//                            }
-//                            foreach($t_v as $endpoint => $endpoint_data) {
-//                                if (is_array($endpoint_data) && array_key_exists('label', $endpoint_data)) {
-//                                    $label = $endpoint_data['label'];
-//
-//                                    if (!array_key_exists((string)$endpoint, $labels))
-//                                        $labels[(string)$endpoint] = '';
-//
-//                                    $labels[(string)$endpoint] = $label;
-//                                    $for_return[(string)$endpoint]['label'] = $label;
-//                                } else if(is_array($endpoint_data)) {
-//                                    $label = $endpoint;
-//
-//                                    if (!array_key_exists((string)$endpoint, $labels))
-//                                        $labels[(string)$endpoint] = '';
-//
-//                                    $labels[(string)$endpoint] = $label;
-//                                    $for_return[(string)$endpoint]['label'] = $label;
-//                                } else if(gettype($endpoint_data) == 'string') {
-//                                    $label = $endpoint_data;
-//
-//                                    if (!array_key_exists((string)$label, $labels))
-//                                        $labels[(string)$label] = '';
-//
-//                                    $labels[(string)$label] = $label;
-//                                    $for_return[(string)$label]['label'] = $label;
-//                                } else if(gettype($label) == 'string') {
-//                                    $label = $endpoint_data;
-//
-//                                    $labels[(string)$endpoint_data] = $label;
-//                                    $for_return[(string)$endpoint_data]['label'] = $label;
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    if(is_array($return_data)) {
-//                        foreach($return_data as $rdk => $rdv) {
-//
-//                            echo array_key_exists((string)$k, $for_return);
-//                            echo (string)$k;
-//                            dd($for_return);
-//                            if(!array_key_exists((string)$k, $for_return)) {
-//                                $for_return[(string)$k] = [];
-//                                echo 'this';
-//                                dd($for_return[(string)$k]);
-//                            }
-//
-//                            dd($for_return[(string)$k]);
-//
-//                            if(!array_key_exists('links', $for_return[(string)$k])) {
-//                                $for_return[(string)$k]['links'] = [];
-//                            }
-//
-//                            if(!array_key_exists($rdk, $for_return[(string)$k]['links'])) {
-//                                $for_return[(string)$k]['links'][$rdk] = [];
-//                            }
-//
-//                            $for_return[(string)$k]['links'][$rdk]['label'] = $labels[$k];
-//
-//                            $gen_uri = false;
-//                            $gen_uri_label = false;
-//                            if(gettype($rdv) == 'string') {
-//                                $gen_uri = $this->generate_uri($key . '.api_links.' . $k , $rdv);
-//                                $gen_uri_label = $this->generate_uri_label($key . '.api_links.' . $k, $rdv);
-//                            } else if(array_key_exists('requires', $rdv)) {
-//                                $gen_uri = $this->generate_uri($key . '.api_links.' . $k . '.' . $rdk, $rdv, $rdv['requires']);;
-//                                $gen_uri_label = $this->generate_uri_label($key . '.api_links.' . $k . '.' . $rdk, $rdv, $rdv['requires']);
-//                            }
-//
-//                            $for_return[(string)$k]['links'][$rdk]['uri'] = $gen_uri;
-//                            $for_return[(string)$k]['links'][$rdk]['label'] = $gen_uri_label;
-//                        }
-//                    }
-//
-//                } else if (gettype($return_data) == 'string') {
-//
-//                    $temp = $this->get($base_key);
-//
-//                    $gen_uri = $this->generate_uri($key . '.api_links.' . $k, $return_data);
-//                    $gen_uri_label = $this->generate_uri_label($key . '.api_links.' . $k, $return_data);
-//
-//                    $for_return[(string)$k]['label'] = $k;
-//                    $for_return[(string)$k]['links'][$k]['uri'] = $gen_uri;
-//                    $for_return[(string)$k]['links'][$k]['label'] = $gen_uri_label;
-//
-//                }
-//            }
-//        }
-//
-//        return $for_return;
-//    }
 
     /**
      * @param $key
