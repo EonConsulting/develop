@@ -66,14 +66,12 @@ class Config {
                         'recipes' => 'http://api.cs50.net/food/3/recipes?key=--user_key--&output=--output--',
                         'menus' => 'http://api.cs50.net/food/3/menus?key=--user_key--&output=--output--',
                         'facts' => [
-//                            'facts' => [
-                                'uri' => 'http://api.cs50.net/food/3/facts?key=--user_key--&recipe=--recipe--&output=--output--',
-                                'requires' => [
-                                    'user_key',
-                                    'recipe',
-                                    'output'
-                                ]
-//                            ]
+                            'uri' => 'http://api.cs50.net/food/3/facts?key=--user_key--&recipe=--recipe--&output=--output--',
+                            'requires' => [
+                                'user_key',
+                                'recipe',
+                                'output'
+                            ]
                         ],
                         'buildings' => 'http://api.cs50.net/maps/2/buildings?key=--user_key--&output=--output--',
                     ],
@@ -616,15 +614,20 @@ class Config {
         return $uri;
     }
 
-    function generate_uri_label($key, $label, $requires = false) {
-        if(gettype($label) == 'array' && array_key_exists('label', $label))
-            $label = $label['label'];
+    function generate_uri_label($key, $label, $requires = false, $fallback = false) {
+        if(gettype($label) == 'array') {
+            if(array_key_exists('label', $label)) {
+                $label = $label['label'];
+            } else {
+                return $fallback;
+            }
+        }
 
         $key = 'oauth.allows.' . $key;
         $temp_keys = ($requires) ? $requires : $key . '.requires';
         try {
             $data = $this->get($temp_keys);
-        } catch(\Exception $exception) {
+        } catch (\Exception $exception) {
             $data = $requires;
         }
 
@@ -769,21 +772,24 @@ class Config {
 
         $data = [];
 
-        $keys = explode('.', $use[0]);
+        for($i = 0; $i < count($use); $i++) {
+            $u = $use[$i];
 
-        $uses_keys = (count($keys) > 1) ? 'oauth.allows.' . $key . '.api_uses.' . $use[0] : 'oauth.allows.' . $key . '.api_uses';
-        $link_keys = (count($keys) > 1) ? 'oauth.allows.' . $key . '.api_links.' . $use[0] : 'oauth.allows.' . $key . '.api_links';
-        $uses_data = $this->get($uses_keys);
+            $temp_data = [];
 
-        $uses = (gettype($use) != 'array') ? [$use] : $use;
-        if(count($keys) > 1) {
-            $uses = $keys;
+            $last_key = explode('.', $u);
+            $last_key = $last_key[count($last_key) -1];
+
+            $uses = 'oauth.allows.' . $key . '.api_links.' . $u;
+
+            $return_data = $this->get($uses);
+
+            $temp_data['uri'] = (is_array($return_data) && array_key_exists('requires', $return_data)) ? $this->generate_uri($key, $return_data, $return_data['requires']) : $this->generate_uri($key, $return_data);
+            $temp_data['label'] = (is_array($return_data)) ? $this->generate_uri_label($key, $return_data, false, $last_key) : $last_key;
+            $temp_data['slug'] = $u;
+
+            $data[$u] = $temp_data;
         }
-        $uses = implode('.', $uses);
-        $uses = 'oauth.allows.' . $key . '.api_uses.' . $uses;
-
-        $data = $this->get($uses);
-        $data = $this->build_tree($keys, $data, $link_keys, $key);
 
         return $data;
     }
@@ -884,66 +890,79 @@ class Config {
             }
         }
 
-        for($i = 0; $i < count($keys); $i++) {
-            $key = $keys[$i];
-            unset($temp_keys[$i]);
+        dd($keys);
 
-            foreach ($tree as $item => $value) {
-                if (is_array($value)) {
-                    // an array
-                    if (in_array($key, $value)) {
-                        $temp_value = $value[array_search($key, $value)];
-                        if(is_array($temp_value)) {
-                            $temp_tree[$previous_key] = $this->build_tree($temp_keys, $temp_value, $link_keys . '.' . implode('.', $temp_keys), $main_key);
-                        }
-                    } else if(array_key_exists($key, $value)) {
-                        if(array_key_exists('links', $value[$key])) {
-                            $temp_tree = $this->build_tree($temp_keys, $value[$key]['links'], $link_keys . '.' . implode('.', $temp_keys), $main_key);
-                        } else {
-                            $temp_tree[$key] = $this->get($link_keys . '.' . implode('.', $temp_keys));
-                        }
-                    }
-                } else {
-                    // not an array
-                    if($value == $key) {
-                        $tree_data = $this->get($link_keys . '.' . implode('.', $keys));
-
-                        if(is_array($tree_data) && array_key_exists('uri', $tree_data)) {
-                            $uri = $tree_data['uri'];
-                        }
-                        if(gettype($tree_data) == 'string') {
-                            $uri = $tree_data;
-                        }
-
-                        $label = '';
-                        if(is_array($tree_data) && array_key_exists('label', $tree_data)) {
-                            $label = $tree_data['label'];
-                        } else if(gettype($tree_data) == 'string') {
-                            $label = $tree_data;
-                        } else {
-                            $label = $key;
-                        }
-
-                        if(is_array($tree_data) && array_key_exists('requires', $tree_data)) {
-                            $requires = $tree_data['requires'];
-                        } else {
-                            $requires = false;
-                        }
-
-                        $uri = $this->generate_uri($main_key, $uri, $requires);
-                        $label = $this->generate_uri_label($main_key, $label, $requires);
-
-                        if(!array_key_exists($key, $temp_tree)) {
-                            $temp_tree[$key] = [];
-                        }
-
-                        $temp_tree[$key]['uri'] = $uri;
-                        $temp_tree[$key]['label'] = $label;
-                    }
-                }
-            }
-            $previous_key = $key;
-        }
+//        for($i = 0; $i < count($keys); $i++) {
+//            $key = $keys[$i];
+//            unset($temp_keys[$i]);
+//
+//            foreach ($tree as $item => $value) {
+//                if (is_array($value)) {
+//                    // an array
+//                    if (in_array($key, $value)) {
+//                        $temp_value = $value[array_search($key, $value)];
+//                        if(is_array($temp_value)) {
+//                            $temp_tree = $this->build_tree($temp_keys, $temp_value, $link_keys . '.' . implode('.', $temp_keys), $main_key);
+////                            $temp_tree[$previous_key] = $this->build_tree($temp_keys, $temp_value, $link_keys . '.' . implode('.', $temp_keys), $main_key);
+//                        }
+//                    } else if(array_key_exists($key, $value)) {
+//                        if(array_key_exists('links', $value[$key])) {
+//                            $temp_tree = $this->build_tree($temp_keys, $value[$key]['links'], $link_keys . '.' . implode('.', $temp_keys), $main_key);
+//                        } else {
+//                            $temp_tree = $this->get($link_keys . '.' . implode('.', $temp_keys));
+////                            $temp_tree[$key] = $this->get($link_keys . '.' . implode('.', $temp_keys));
+//                        }
+//                    }
+//                } else {
+//                    // not an array
+//                    if($value == $key) {
+//                        $tree_data = $this->get($link_keys);
+//                        echo $value . '<br />';
+//                        dd($tree_data);
+//
+//                        if(is_array($tree_data) && array_key_exists('uri', $tree_data)) {
+//                            $uri = $tree_data['uri'];
+//                        }
+//                        if(gettype($tree_data) == 'string') {
+//                            $uri = $tree_data;
+//                        }
+//
+//                        $label = '';
+//                        if(is_array($tree_data) && array_key_exists('label', $tree_data)) {
+//                            $label = $tree_data['label'];
+//                        } else if(gettype($tree_data) == 'string') {
+//                            $label = $tree_data;
+//                        } else {
+//                            $label = $key;
+//                        }
+//
+//                        if(is_array($tree_data) && array_key_exists('requires', $tree_data)) {
+//                            $requires = $tree_data['requires'];
+//                        } else {
+//                            $requires = false;
+//                        }
+//
+////                        dd($link_keys . '.' . implode('.', $keys));
+//                        $uri = $this->generate_uri($main_key, $uri, $requires);
+//                        $label = $this->generate_uri_label($main_key, $label, $requires);
+//                        $slug = implode('.', $keys);
+//
+////                        if(!array_key_exists($key, $temp_tree)) {
+////                            $temp_tree[$key] = [];
+////                        }
+//
+//                        $temp_tree['uri'] = $uri;
+//                        $temp_tree['label'] = $label;
+//                        $temp_tree['slug'] = $slug;
+//
+////                        $temp_tree[$key]['uri'] = $uri;
+////                        $temp_tree[$key]['label'] = $label;
+////                        $temp_tree[$key]['slug'] = $slug;
+//                    }
+//                }
+//            }
+//            $previous_key = $key;
+//        }
         return $temp_tree;
     }
 
@@ -952,33 +971,55 @@ class Config {
      * @param $data
      * @return array
      */
-    private function restrict_uses($key, $uses, $data, $loop_count = 0) {
-        $temp_data = [];
+    private function restrict_uses($uses, $key, $data) {
+        $result = [];
 
-        $_uses = implode('.', $uses);
-        $_uses = 'oauth.allows.' . $key . '.api_uses.' . $_uses;
+        echo $key;
+        dd($data);
 
-        $_data = $this->get($_uses);
+        return $result;
 
-        foreach($data as $k => $v) {
-            for($i = 0; $i < count($uses); $i++) {
-                $use = $uses[$i];
+//        if(!is_array($uses)) {
+//            $keys = explode('.', $uses);
+//            $last_key = $keys[count($keys) - 1];
+//        } else {
+//            $last_key = $uses[count($uses) - 1];
+//        }
+//
+//        if(in_array($last_key, $data)) {
+//            $result[] = $last_key;
+//        }
 
-                if(in_array($use, $v)) {
-                    $temp_data[] = $v[array_search($use, $v)];
-                    break;
-                }
-                if(array_key_exists($use, $v)) {
-                    if(is_array($v[$use]) && array_key_exists('links', $v[$use])) {
-                        dd($uses);
-                        dd($v[$use]['links']);
-                        dd($this->restrict_uses($key, $uses, $v[$use]['links']));
-                    }
-                }
+//        return $result;
 
-            }
-        }
-        return $temp_data;
+//        dd($last_key);
+
+//        $temp_data = [];
+//
+//        $_uses = implode('.', $uses);
+//        $_uses = 'oauth.allows.' . $key . '.api_uses.' . $_uses;
+//
+//        $_data = $this->get($_uses);
+//
+//        foreach($data as $k => $v) {
+//            for($i = 0; $i < count($uses); $i++) {
+//                $use = $uses[$i];
+//
+//                if(in_array($use, $v)) {
+//                    $temp_data[] = $v[array_search($use, $v)];
+//                    break;
+//                }
+//                if(array_key_exists($use, $v)) {
+//                    if(is_array($v[$use]) && array_key_exists('links', $v[$use])) {
+//                        dd($uses);
+//                        dd($v[$use]['links']);
+//                        dd($this->restrict_uses($key, $uses, $v[$use]['links']));
+//                    }
+//                }
+//
+//            }
+//        }
+//        return $temp_data;
     }
 
     public function get_uses($key, $_data, $last_key = '') {

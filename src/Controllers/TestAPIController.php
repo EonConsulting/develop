@@ -56,7 +56,7 @@ class TestAPIController extends Controller {
     function consume(Request $request, $key, $use) {
 
         $api_links = phpsaaswrapper()->generate_api_use($key, $use);
-
+//        echo 'api links';
 //        dd($api_links);
 
         $responses = [];
@@ -68,46 +68,125 @@ class TestAPIController extends Controller {
 
         foreach($api_links as $k => $v) {
 
-            if(is_array($v)) {
-                dd($v);
-//                return redirect()->route('phpsaaswrapper.consume.intermediate', ['key' => $key, 'use' => $use]);
-            }
-
-            if(!array_key_exists($k, $templates)) {
+            if (!array_key_exists($k, $templates)) {
                 $res = $config->get('oauth.allows.' . $key . '.templates.' . $k);
-                if(gettype($res) == 'string') {
+                if (gettype($res) == 'string') {
                     $templates[$k] = $res;
                 } else {
                     $templates[$k] = null;
                 }
             }
 
-
-            $response = $this->client->request('GET', $v, [
-                'headers' => [
-                    'accept' => '*/*',
-                ]
-            ])->getBody();
-
-            if(!array_key_exists($k, $responses)) {
+            if (!array_key_exists($k, $responses)) {
                 $responses[$k] = [];
             }
 
-            if(!array_key_exists('template', $responses)) {
+            if (!array_key_exists('template', $responses)) {
                 $responses[$k]['template'] = '';
             }
 
-            if(!array_key_exists('response', $responses)) {
+            if (!array_key_exists('response', $responses)) {
                 $responses[$k]['response'] = '';
             }
 
-            if(empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
+            if (empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
                 $templates[$k] = null;
             }
 
-            $responses[$k]['key'] = $key;
-            $responses[$k]['template'] = $templates[$k];
-            $responses[$k]['response'] = json_decode($response);
+            if(is_array($v)) {
+                $uri = false;
+                $label = false;
+                $slug = false;
+                $response = [];
+
+                if(array_key_exists('uri', $v))
+                    $uri = $v['uri'];
+
+                if(array_key_exists('label', $v))
+                    $label = $v['label'];
+
+                if(array_key_exists('slug', $v))
+                    $slug = $v['slug'];
+
+                if($uri) {
+                    $response = $this->client->request('GET', $uri, [
+                        'headers' => [
+                            'accept' => '*/*',
+                        ]
+                    ])->getBody();
+                }
+
+                $responses[$k]['key'] = $key;
+                $responses[$k]['label'] = $label;
+                $responses[$k]['slug'] = $slug;
+                $responses[$k]['template'] = $templates[$k];
+                $responses[$k]['response'] = json_decode($response);
+
+            }
+
+//            $uri = '';
+//
+//            if(is_array($v)) {
+//                foreach($v as $vk => $vv) {
+//                    $uri = $vv['uri'];
+//                    $slug = $vv['slug'];
+//
+//                    $response = $this->client->request('GET', $uri, [
+//                        'headers' => [
+//                            'accept' => '*/*',
+//                        ]
+//                    ])->getBody();
+//
+//                    if (!array_key_exists($k, $responses)) {
+//                        $responses[$k] = [];
+//                    }
+//
+//                    if (!array_key_exists('template', $responses)) {
+//                        $responses[$k]['template'] = '';
+//                    }
+//
+//                    if (!array_key_exists('response', $responses)) {
+//                        $responses[$k]['response'] = '';
+//                    }
+//
+//                    if (empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
+//                        $templates[$k] = null;
+//                    }
+//
+//                    $responses[$k]['key'] = $key;
+//                    $responses[$k]['template'] = $templates[$k];
+//                    $responses[$k]['response'] = json_decode($response);
+//
+//                }
+//            } else {
+//                $uri = $v;
+//
+//                $response = $this->client->request('GET', $uri, [
+//                    'headers' => [
+//                        'accept' => '*/*',
+//                    ]
+//                ])->getBody();
+//
+//                if (!array_key_exists($k, $responses)) {
+//                    $responses[$k] = [];
+//                }
+//
+//                if (!array_key_exists('template', $responses)) {
+//                    $responses[$k]['template'] = '';
+//                }
+//
+//                if (!array_key_exists('response', $responses)) {
+//                    $responses[$k]['response'] = '';
+//                }
+//
+//                if (empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
+//                    $templates[$k] = null;
+//                }
+//
+//                $responses[$k]['key'] = $key;
+//                $responses[$k]['template'] = $templates[$k];
+//                $responses[$k]['response'] = json_decode($response);
+//            }
         }
 
         return view('consume', ['responses' => $responses, 'key' => $key, 'use' => $use]);
@@ -182,6 +261,8 @@ class TestAPIController extends Controller {
                     $templates[$k] = null;
                 }
             }
+
+            dd($v);
 
             $queries = explode('?', $v);
             if(count($queries) >= 1) {
