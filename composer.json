@@ -21,7 +21,6 @@
   },
   "require": {
     "illuminate/support": "~5",
-    "guzzlehttp/guzzle": "^6.2",
-    "tsugi/lib": "dev-master#60bc5574df95e7bd657c18ecce5baed08680ada5"
+    "guzzlehttp/guzzle": "^6.2"
   }
 }

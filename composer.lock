@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc44356ef7b8070e9a61be6520b7fb60",
-    "content-hash": "d50615f76db847d38ca0a0ac8336804b",
+    "hash": "1f69c49aab8a25ce97b4aeb0a72267ed",
+    "content-hash": "cef66db131735676daa90b8c989a9ad9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -441,58 +441,12 @@
                 "response"
             ],
             "time": "2016-08-06 14:39:51"
-        },
-        {
-            "name": "tsugi/lib",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tsugiproject/tsugi-php.git",
-                "reference": "60bc5574df95e7bd657c18ecce5baed08680ada5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tsugiproject/tsugi-php/zipball/60bc5574df95e7bd657c18ecce5baed08680ada5",
-                "reference": "60bc5574df95e7bd657c18ecce5baed08680ada5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tsugi\\": "src/"
-                },
-                "exclude-from-classmap": [
-                    "/tests/",
-                    "phpdoc.dist.xml",
-                    "phpunit.xml.dist"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "csev",
-                    "email": "drchuck@gmail.com",
-                    "homepage": "http://www.dr-chuck.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The PHP Library to build interoperable learning tools",
-            "homepage": "http://www.tsugi.org/",
-            "time": "2016-11-26 16:59:43"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tsugi/lib": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

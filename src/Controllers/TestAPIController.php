@@ -25,6 +25,9 @@ class TestAPIController extends Controller {
         $this->client = new Client;
     }
 
+    public function index() {
+        return phpsaaswrapper()->index();
+    }
 
     private function needs_auth($key) {
         $needs_auth = (phpsaaswrapper()->needs_auth($key) == 'true') ? true : false;

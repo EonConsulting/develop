@@ -19,10 +19,6 @@ class ComposerStaticInitad287b79bf53c2d8092f4cbc50553c32
     );
 
     public static $prefixLengthsPsr4 = array (
-        'T' => 
-        array (
-            'Tsugi\\' => 6,
-        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -45,10 +41,6 @@ class ComposerStaticInitad287b79bf53c2d8092f4cbc50553c32
     );
 
     public static $prefixDirsPsr4 = array (
-        'Tsugi\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/tsugi/lib/src',
-        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',

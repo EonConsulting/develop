@@ -23,6 +23,11 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
         $this->app->singleton( 'phpsaaswrapper', function () {
             return new PHPSaasWrapper;
         });
+//        $this->app->register(
+//            'DaveJamesMiller\BreadCrumbs\ServiceProvider'
+//        );
+//        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+//        $loader->alias('Breadcrumbs', 'DaveJamesMiller\Breadcrumbs\Facade');
     }
 
     public function boot() {

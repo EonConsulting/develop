@@ -16,6 +16,7 @@ use EONConsulting\PHPSaasWrapper\OAuth\OAuthFactory;
 use EONConsulting\PHPSaasWrapper\src\Factories\AdapterFactory;
 use EONConsulting\PHPSaasWrapper\src\Factories\Config;
 use Illuminate\Http\Request;
+use Tsugi\Core\LTIX;
 
 class PHPSaasWrapper {
 
@@ -32,8 +33,23 @@ class PHPSaasWrapper {
         return true;
     }
 
-    public function tsugi() {
-//        echo ;
+    public function index() {
+
+        $config = new Config;
+
+        $apis = array_keys($config->get('oauth.allows'));
+
+        $html = '<ul>';
+
+        for($i = 0; $i < count($apis); $i++) {
+            $api = $apis[$i];
+
+            $html .= '<li><a href="' . route('phpsaaswrapper.base_request', $api) . '">' . $api . '</a></li>';
+        }
+
+        $html .= '</ul>';
+        return $html;
+
     }
 
     public function callback(Request $request) {
@@ -131,6 +147,7 @@ class PHPSaasWrapper {
     }
 
     public function display_api_uses($key) {
+        LTIX::laravelSetup(request());
         $config = new Config;
         $uses = $config->generate_api_uses($key);
 
