@@ -12,4 +12,7 @@ return array(
     '72579e7bd17821bb1321b87411366eae' => $vendorDir . '/illuminate/support/helpers.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
     'c226c25794146328500eabe7758865f0' => $baseDir . '/src/Http/helpers.php',
+    '9dc9121c30e42758e1c2f23369683161' => $vendorDir . '/guzzlehttp/guzzle/src/functions.php',
+    'c0c80413306c03cc819a9ad9f9f2f68d' => $vendorDir . '/guzzlehttp/psr7/src/functions.php',
+    '814c9f07f6be90246958901b4c642c81' => $vendorDir . '/guzzlehttp/promises/src/functions.php',
 );

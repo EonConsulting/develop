@@ -15,12 +15,13 @@
     "files": [
       "src/Http/helpers.php",
       "vendor/guzzlehttp/guzzle/src/functions.php",
-      "vendor/guzzlehttp/psr7/src/functions.php"
+      "vendor/guzzlehttp/psr7/src/functions.php",
       "vendor/guzzlehttp/promises/src/functions.php"
     ]
   },
   "require": {
     "illuminate/support": "~5",
-    "guzzlehttp/guzzle": "^6.2"
+    "guzzlehttp/guzzle": "^6.2",
+    "tsugi/lib": "dev-master#60bc5574df95e7bd657c18ecce5baed08680ada5"
   }
 }

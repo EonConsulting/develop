@@ -13,9 +13,16 @@ class ComposerStaticInitad287b79bf53c2d8092f4cbc50553c32
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'c226c25794146328500eabe7758865f0' => __DIR__ . '/../..' . '/src/Http/helpers.php',
+        '9dc9121c30e42758e1c2f23369683161' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions.php',
+        'c0c80413306c03cc819a9ad9f9f2f68d' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions.php',
+        '814c9f07f6be90246958901b4c642c81' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Tsugi\\' => 6,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -38,6 +45,10 @@ class ComposerStaticInitad287b79bf53c2d8092f4cbc50553c32
     );
 
     public static $prefixDirsPsr4 = array (
+        'Tsugi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tsugi/lib/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',

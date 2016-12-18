@@ -8,6 +8,8 @@
 
 namespace EONConsulting\PHPSaasWrapper\src;
 
+//require_once __DIR__ . '/tsugi/config.php';
+
 use EONConsulting\PHPSaasWrapper\Models\ServiceLinked;
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthEnum;
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthFactory;
@@ -28,6 +30,10 @@ class PHPSaasWrapper {
         }
 
         return true;
+    }
+
+    public function tsugi() {
+//        echo ;
     }
 
     public function callback(Request $request) {
