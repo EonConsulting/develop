@@ -147,7 +147,7 @@ class PHPSaasWrapper {
     }
 
     public function display_api_uses($key) {
-        LTIX::laravelSetup(request());
+
         $config = new Config;
         $uses = $config->generate_api_uses($key);
 
