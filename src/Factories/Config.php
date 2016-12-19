@@ -48,7 +48,7 @@ class Config {
                         'courses' => [
                             'courses',
                             'faculty',
-                            'field',
+                            'fields',
                         ],
                         'facts' => [
                             'recipes',
@@ -62,7 +62,7 @@ class Config {
                     'api_links' => [
                         'courses' => 'http://api.cs50.net/courses/3/courses?key=--user_key--&output=--output--',
                         'faculty' => 'http://api.cs50.net/courses/3/faculty?key=--user_key--&output=--output--',
-                        'field' => 'http://api.cs50.net/courses/3/field?key=--user_key--&output=--output--',
+                        'fields' => 'http://api.cs50.net/courses/3/fields?key=--user_key--&output=--output--',
                         'recipes' => 'http://api.cs50.net/food/3/recipes?key=--user_key--&output=--output--',
                         'menus' => 'http://api.cs50.net/food/3/menus?key=--user_key--&output=--output--',
                         'facts' => [
