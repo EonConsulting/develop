@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\GUI;
 
-
+/**
+ * Class GUIEnum
+ * @package EONConsulting\PHPStencil\src\Factories\GUI
+ */
 class GUIEnum {
 
     const FORM = 'FORM';

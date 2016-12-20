@@ -15,14 +15,19 @@ use EONConsulting\PHPStencil\src\Factories\GUI\GUIEnum;
 use EONConsulting\PHPStencil\src\Factories\GUI\GUIFactory;
 use EONConsulting\PHPStencil\src\Factories\Text\TextEnum;
 use EONConsulting\PHPStencil\src\Factories\Text\TextFactory;
+use EONConsulting\PHPStencil\src\Factories\WebService\WebServiceEnum;
+use EONConsulting\PHPStencil\src\Factories\WebService\WebServiceFactory;
 use EONConsulting\PHPStencil\src\Observers\CarModelObserver;
 
+/**
+ * Class PHPStencil
+ * @package EONConsulting\PHPStencil
+ */
 class PHPStencil {
 
-    public function hi() {
-        return 'hi';
-    }
-
+    /**
+     * @return mixed
+     */
     public function output() {
         // observer
 //        $event = new SayHello("Josh Harington");
@@ -30,13 +35,13 @@ class PHPStencil {
 //        $event->set_name("Hey there");
 //
 //        // observer
-        $car_model = new CarModel;
-        $car_model->attach(new CarModelObserver);
-        $car_model->notify();
+//        $car_model = new CarModel;
+//        $car_model->attach(new CarModelObserver);
+//        $car_model->notify();
 
         // factory - text
-//        $factory = new TextFactory(new AdapterFactory);
-//        $text = $factory->make(TextEnum::JSON);
+        $factory = new TextFactory(new AdapterFactory);
+        $text = $factory->make(TextEnum::CSV);
 //
 //        $xml = [
 //            'folders' => [
@@ -55,16 +60,16 @@ class PHPStencil {
 //                ['name' => 'My public file']
 //            ]
 //        ];
-//
-//        $csv = [
-//            ['Hey', 'there'],
-//            ['yo', 'someone'],
-//            ['Hey', 'there']
-//        ];
+
+        $csv = [
+            ['Hey', 'there'],
+            ['yo', 'someone'],
+            ['Hey', 'there']
+        ];
 //
 //        $json = ['Author' => ['name' => 'Josh Harington', 'gender' => 'male', 'profession' => 'Professonal Nerd.']];
-//
-//        return $text->output($json);
+
+        return $text->output($csv);
     }
 
     /**
@@ -94,24 +99,26 @@ class PHPStencil {
         return $gui->render($data);
     }
 
-//    public function service($type = 'rest', $data) {
-//
-//        if(($type != 'rest' && $type != 'soap') || !$data)
-//            return null;
-//
-//        switch($type) {
-//            case 'rest':
-//                $type = WebServiceEnum::REST;
-//                break;
-//            case 'soap':
-//                $type = WebServiceEnum::SOAP;
-//                break;
-//        }
-//
-//        $factory = new WebServiceFactory(new AdapterFactory);
-//        $service = $factory->make($type);
-//
-//        return $service->output($data);
-//    }
+    /**
+     * @param string $type
+     * @param $data
+     * @return mixed|null
+     */
+    public function service($type = 'rest', $data) {
+
+        if(($type != 'rest' && $type != 'soap') || !$data)
+            return null;
+
+        switch($type) {
+            case 'rest':
+                $type = WebServiceEnum::REST;
+                break;
+        }
+
+        $factory = new WebServiceFactory(new AdapterFactory);
+        $service = $factory->make($type);
+
+        return $service->output($data);
+    }
 
 }

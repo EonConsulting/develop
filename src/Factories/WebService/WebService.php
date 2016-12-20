@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\WebService;
 
-
+/**
+ * Class WebService
+ * @package EONConsulting\PHPStencil\src\Factories\WebService
+ */
 class WebService {
 
     protected $adapter;

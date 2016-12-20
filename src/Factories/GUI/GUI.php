@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\GUI;
 
-
+/**
+ * Class GUI
+ * @package EONConsulting\PHPStencil\src\Factories\GUI
+ */
 class GUI {
 
     protected $adapter;

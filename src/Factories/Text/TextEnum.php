@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\Text;
 
-
+/**
+ * Class TextEnum
+ * @package EONConsulting\PHPStencil\src\Factories\Text
+ */
 class TextEnum {
 
     const JSON = 'JSON';

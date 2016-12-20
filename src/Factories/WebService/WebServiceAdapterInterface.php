@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\WebService;
 
-
+/**
+ * Interface WebServiceAdapterInterface
+ * @package EONConsulting\PHPStencil\src\Factories\WebService
+ */
 interface WebServiceAdapterInterface {
 
     public function output($data);

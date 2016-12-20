@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories;
 
-
+/**
+ * Interface Factory
+ * @package EONConsulting\PHPStencil\src\Factories
+ */
 interface Factory {
 
     public function make($config);

@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\WebService;
 
-
+/**
+ * Class WebServiceEnum
+ * @package EONConsulting\PHPStencil\src\Factories\WebService
+ */
 class WebServiceEnum {
 
     const REST = 'REST';

@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories;
 
-
+/**
+ * Class Config
+ * @package EONConsulting\PHPStencil\src\Factories
+ */
 class Config {
 
     /**

@@ -2,6 +2,10 @@
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class PHPStencilServiceProvider
+ * @package EONConsulting\PHPStencil
+ */
 class PHPStencilServiceProvider extends ServiceProvider {
 
     /**
@@ -9,45 +13,22 @@ class PHPStencilServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         $this->app->bind( 'phpstencil', function () {
             return new PHPStencil();
         });
-
-        /* $this->mergeConfigFrom(
-             __DIR__ . '/config/boilerplate.php', 'boilerplate'
-         );*/
     }
 
-    public function boot()
-    {
+    /**
+     * What to boot with the package
+     */
+    public function boot() {
+        $this->loadRoutesFrom(__DIR__.'/Factories/WebService/Routes/routes_rest.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/Factories/WebService/Routes/routes_rest.php');
 
-        // Configuring with main route file
-        // Loading package view files directly from vendor directory as
-//        require __DIR__ . '/../Http/routes.php';
-
-        // Publishing packages views to /views
-//        $this->publishes([
-//            __DIR__ . '/views' => base_path('resources/views'),
-//        ]);
-
-        // Publishing config file to /config
-//        $this->publishes([
-//            __DIR__ . '/config' => config_path(),
-//        ]);
-
-        // Publishing Migration File
-//        $this->publishes([
-//            __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
-//        ], 'migrations');
-
-        // Publishing seeds file
-//        $this->publishes([
-//            __DIR__ . '/seeds' => $this->app->databasePath() . '/seeds'
-//        ], 'seeds');
+        $this->publishes([
+            __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations'
+        ], 'migrations');
     }
 }

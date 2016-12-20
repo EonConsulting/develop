@@ -11,6 +11,10 @@ namespace EONConsulting\PHPStencil\src\Factories\Text;
 use EONConsulting\PHPStencil\src\Factories\AdapterFactory;
 use EONConsulting\PHPStencil\src\Factories\Factory;
 
+/**
+ * Class TextFactory
+ * @package EONConsulting\PHPStencil\src\Factories\Text
+ */
 class TextFactory implements Factory  {
 
     protected $adapter;

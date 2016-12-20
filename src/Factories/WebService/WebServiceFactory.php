@@ -12,6 +12,10 @@ namespace EONConsulting\PHPStencil\src\Factories\WebService;
 use EONConsulting\PHPStencil\src\Factories\AdapterFactory;
 use EONConsulting\PHPStencil\src\Factories\Factory;
 
+/**
+ * Class WebServiceFactory
+ * @package EONConsulting\PHPStencil\src\Factories\WebService
+ */
 class WebServiceFactory implements Factory {
 
     protected $adapter;

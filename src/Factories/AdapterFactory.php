@@ -16,6 +16,10 @@ use EONConsulting\PHPStencil\src\Factories\Text\Adapters\XMLAdapter;
 use EONConsulting\PHPStencil\src\Factories\Text\Adapters\CSVAdapter;
 use EONConsulting\PHPStencil\src\Factories\Text\TextEnum;
 
+/**
+ * Class AdapterFactory
+ * @package EONConsulting\PHPStencil\src\Factories
+ */
 class AdapterFactory {
 
     /**

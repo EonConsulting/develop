@@ -11,6 +11,10 @@ namespace EONConsulting\PHPStencil\src\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class DummyTable
+ * @package EONConsulting\PHPStencil\src\Models
+ */
 class DummyTable extends Model {
 
     public $incrementing = true;

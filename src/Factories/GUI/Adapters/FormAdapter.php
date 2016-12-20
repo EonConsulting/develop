@@ -11,6 +11,10 @@ namespace EONConsulting\PHPStencil\src\Factories\GUI\Adapters;
 
 use EONConsulting\PHPStencil\src\Factories\GUI\GUIAdapterInterface;
 
+/**
+ * Class FormAdapter
+ * @package EONConsulting\PHPStencil\src\Factories\GUI\Adapters
+ */
 class FormAdapter implements GUIAdapterInterface {
 
     /**

@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\GUI;
 
-
+/**
+ * Interface GUIAdapterInterface
+ * @package EONConsulting\PHPStencil\src\Factories\GUI
+ */
 interface GUIAdapterInterface {
 
     public function getGUIName();

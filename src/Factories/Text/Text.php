@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\Text;
 
-
+/**
+ * Class Text
+ * @package EONConsulting\PHPStencil\src\Factories\Text
+ */
 class Text {
 
     protected $adapter;

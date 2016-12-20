@@ -10,6 +10,10 @@ namespace EONConsulting\PHPStencil\src\Factories\Text\Adapters;
 
 use EONConsulting\PHPStencil\src\Factories\Text\TextAdapterInterface;
 
+/**
+ * Class XMLAdapter
+ * @package EONConsulting\PHPStencil\src\Factories\Text\Adapters
+ */
 class XMLAdapter implements TextAdapterInterface {
 
     /**

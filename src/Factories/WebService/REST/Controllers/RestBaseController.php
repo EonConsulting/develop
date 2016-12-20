@@ -11,12 +11,23 @@ namespace EONConsulting\PHPStencil\src\Factories\WebService\REST\Controllers;
 
 use App\Http\Controllers\Controller;
 
+/**
+ * Class RestBaseController
+ * @package EONConsulting\PHPStencil\src\Factories\WebService\REST\Controllers
+ */
 class RestBaseController extends Controller {
 
+    /**
+     * RestBaseController constructor.
+     */
     public function __construct() {
 
     }
 
+    /**
+     * @param $messages
+     * @return array
+     */
     protected function return_error($messages) {
         return [
             'success' => false,
@@ -28,6 +39,11 @@ class RestBaseController extends Controller {
         ];
     }
 
+    /**
+     * @param $messages
+     * @param array $more_data
+     * @return array
+     */
     protected function return_success($messages, $more_data = []) {
         $arr = [
             'success' => true,

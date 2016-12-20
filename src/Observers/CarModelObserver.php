@@ -8,9 +8,15 @@
 
 namespace EONConsulting\PHPStencil\src\Observers;
 
-
+/**
+ * Class CarModelObserver
+ * @package EONConsulting\PHPStencil\src\Observers
+ */
 class CarModelObserver implements \SplObserver {
 
+    /**
+     * @param \SplSubject $event
+     */
     public function update(\SplSubject $event) {
         echo 'The car model is: ' . $event->model;
     }

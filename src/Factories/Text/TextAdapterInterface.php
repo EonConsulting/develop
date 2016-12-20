@@ -8,7 +8,10 @@
 
 namespace EONConsulting\PHPStencil\src\Factories\Text;
 
-
+/**
+ * Interface TextAdapterInterface
+ * @package EONConsulting\PHPStencil\src\Factories\Text
+ */
 interface TextAdapterInterface {
 
     public function output($data);

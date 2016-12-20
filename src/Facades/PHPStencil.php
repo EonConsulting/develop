@@ -11,8 +11,15 @@ namespace Packages\PHPStencil\src\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class PHPStencil
+ * @package Packages\PHPStencil\src\Facades
+ */
 class PHPStencil extends Facade {
 
+    /**
+     * @return string
+     */
     public static function getFacadeAccessor() {
         return 'phpstencil';
     }

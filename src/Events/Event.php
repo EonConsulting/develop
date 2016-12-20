@@ -3,15 +3,14 @@
 namespace EONConsulting\PHPStencil\src\Events;
 
 /**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/12/01
- * Time: 11:09 AM
+ * Class Event
+ * @package EONConsulting\PHPStencil\src\Events
  */
 class Event implements \SplSubject {
 
     // Storage object to store the observer
     protected $storage;
+
     /**
      * Event constructor.
      */

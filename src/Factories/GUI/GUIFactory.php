@@ -12,6 +12,10 @@ namespace EONConsulting\PHPStencil\src\Factories\GUI;
 use EONConsulting\PHPStencil\src\Factories\AdapterFactory;
 use EONConsulting\PHPStencil\src\Factories\Factory;
 
+/**
+ * Class GUIFactory
+ * @package EONConsulting\PHPStencil\src\Factories\GUI
+ */
 class GUIFactory implements Factory {
 
     protected $adapter;

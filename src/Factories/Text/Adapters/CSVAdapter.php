@@ -11,6 +11,10 @@ namespace EONConsulting\PHPStencil\src\Factories\Text\Adapters;
 
 use EONConsulting\PHPStencil\src\Factories\Text\TextAdapterInterface;
 
+/**
+ * Class CSVAdapter
+ * @package EONConsulting\PHPStencil\src\Factories\Text\Adapters
+ */
 class CSVAdapter implements TextAdapterInterface {
 
     /**
