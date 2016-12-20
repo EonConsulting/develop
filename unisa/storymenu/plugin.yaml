@@ -1,0 +1,15 @@
+plugin:
+    name: 'unisa.storymenu::lang.plugin.name'
+    description: 'unisa.storymenu::lang.plugin.description'
+    author: Unisa
+    icon: oc-icon-bars
+    homepage: ''
+permissions:
+    storymenu.manage_menu:
+        tab: 'unisa.storymenu::lang.storymenu.manage_menu'
+        label: 'unisa.storymenu::lang.storymenu.manage_menu'
+navigation:
+    menu:
+        label: 'unisa.storymenu::lang.storymenu.menu'
+        url: unisa/storymenu/storymenus
+        icon: icon-bars

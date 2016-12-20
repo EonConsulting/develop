@@ -1,6 +1,7 @@
 <?php namespace Unisa\Pages\Controllers;
 
 use Backend\Classes\Controller;
+use Unisa\Ltiobject\Models\Ltiobject;
 use Unisa\Assets\Models\Asset;
 use ApplicationException;
 use BackendMenu;
@@ -108,7 +109,8 @@ class Pages extends Controller
         foreach ($model->assets as $key => $asset) {
             $assetArr[] = $asset->file_name.'.htm';
         }
-        $this->generatePage($assetArr, $model->id, $dirPath);
+        //echo '<pre>';print_r($model->ltiobject);die;
+        $this->generatePage($assetArr, $model->ltiobject, $model->id, $dirPath);
     }
 
     /**
@@ -118,7 +120,7 @@ class Pages extends Controller
      * @param  string  $dirPath  Directory path to fetch assets.
      * @return void            
      */
-    protected function generatePage($assetArr = array(), $pageId=0, $dirPath=''){
+    protected function generatePage($assetArr = array(), $LTIObj= '', $pageId=0, $dirPath=''){
         if(!empty($assetArr) && $pageId >0){
             $pageContent = '';
             foreach ($assetArr as $asset) {
@@ -129,6 +131,12 @@ class Pages extends Controller
             $path = 'assets/'.BackendAuth::getUser()->id.'/pages';
             if(!is_dir($path)){
                 mkdir($path, 0777, true);
+            }
+            
+            if($LTIObj){
+                foreach ($LTIObj as $LTI) {
+                    $pageContent .= PHP_EOL.'<iframe width="800" height="600" src="'.rtrim($LTI->launcher_url, '?').'?endpoint='.rtrim($LTI->endpoint_url, '&').'&key='.rtrim($LTI->key, '&').'&secret='.$LTI->secret.'"></iframe>'.PHP_EOL;                    
+                }
             }
             file_put_contents($path.'/'.$pageId.'.htm', $pageContent);
         }

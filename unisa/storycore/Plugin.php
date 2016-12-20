@@ -1,6 +1,7 @@
 <?php namespace Unisa\Storycore;
 
 use System\Classes\PluginBase;
+use Event;
 
 class Plugin extends PluginBase
 {
@@ -23,5 +24,14 @@ class Plugin extends PluginBase
     			'code'=>'pagebox'
     		]
     	];
+    }
+
+    public function boot(){
+        Event::listen('eloquent.deleting: Unisa\Storycore\Models\Storycore', function ($record) {
+            $file = 'assets/'.$record->id.'.xml';
+            if(file_exists($file)){
+                unlink($file);
+            }
+        });
     }
 }

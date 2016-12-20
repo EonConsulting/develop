@@ -1,0 +1,11 @@
+name: Storymenus
+modelClass: Unisa\Storymenu\Models\Storymenu
+form: $/unisa/storymenu/models/storymenu/fields.yaml
+defaultRedirect: unisa/storymenu/storymenus
+create:
+    redirect: 'unisa/storymenu/storymenus/update/:id'
+    redirectClose: unisa/storymenu/storymenus
+update:
+    redirect: unisa/storymenu/storymenus
+    redirectClose: unisa/storymenu/storymenus
+preview: {  }

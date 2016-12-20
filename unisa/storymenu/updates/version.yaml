@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table unisa_storymenu_menu'
+    - builder_table_create_unisa_storymenu_menu.php
+1.0.3:
+    - 'Updated table unisa_storymenu_menu'
+    - builder_table_update_unisa_storymenu_menu.php
+1.0.4:
+    - 'Updated table unisa_storymenu_menu'
+    - builder_table_update_unisa_storymenu_menu_2.php

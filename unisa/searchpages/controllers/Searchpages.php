@@ -106,7 +106,7 @@ class Searchpages extends Controller
     }
 
     protected function versionise_page($pageName = '', $version = 1){
-        $newName = $pageName.$version;
+        $newName = $pageName.'_'.$version;
         $page = Page::where('page_name', $newName)->first();
         if($page){
             $newName = $this->versionise_page($pageName, $version+1);
