@@ -20,7 +20,6 @@
     ]
   },
   "require": {
-    "illuminate/support": "~5",
-    "phpdocumentor/phpdocumentor": "2.*"
+    "illuminate/support": "~5"
   }
 }
