@@ -1,0 +1,26 @@
+{
+    "name": "tsugi/lib",
+    "description": "The PHP Library to build interoperable learning tools",
+    "homepage": "http://www.tsugi.org/",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+    {
+        "name": "csev",
+        "email": "drchuck@gmail.com",
+        "homepage": "http://www.dr-chuck.com/",
+        "role": "Developer"
+    }
+    ],
+    "autoload": {
+        "psr-4": {"Tsugi\\": "src/"},
+        "exclude-from-classmap": [
+            "/tests/",
+            "phpdoc.dist.xml",
+            "phpunit.xml.dist"
+        ]
+    },
+    "require": {
+        "php": ">=5.5.0"
+    }
+}

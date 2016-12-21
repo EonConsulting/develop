@@ -17,6 +17,7 @@ class PHPStencilServiceProvider extends ServiceProvider {
         $this->app->bind( 'phpstencil', function () {
             return new PHPStencil();
         });
+        $this->app->register(\Tsugi\TsugiServiceProvider::class);
     }
 
     /**

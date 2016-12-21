@@ -10,10 +10,13 @@
   ],
   "autoload": {
     "psr-4": {
-      "EONConsulting\\PHPStencil\\": "src/"
+      "EONConsulting\\PHPStencil\\": "src/",
+      "Tsugi\\": "include/tsugi/"
     },
     "files": [
-      "src/Http/helpers.php"
+      "src/Http/helpers.php",
+      "includes/tsugi/helpers.php",
+      "includes/tsugi/config.php"
     ]
   },
   "require": {
