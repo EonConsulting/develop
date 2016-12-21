@@ -15,8 +15,8 @@
     },
     "files": [
       "src/Http/helpers.php",
-      "includes/tsugi/helpers.php",
-      "includes/tsugi/config.php"
+      "include/tsugi/helpers.php",
+      "include/tsugi/config.php"
     ]
   },
   "require": {
