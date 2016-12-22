@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 11:10 AM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src\Factories;
 
+/**
+ * Interface Factory
+ * @package EONConsulting\PHPSaasWrapper\src\Factories
+ */
 interface Factory {
 
+    /**
+     * @param $config
+     * @return mixed
+     */
     public function make($config);
 
 }

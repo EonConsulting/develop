@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/30
- * Time: 1:30 PM
- */
 
 namespace EONConsulting\PHPSaasWrapper\OAuth;
 
@@ -14,6 +8,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Illuminate\Http\Request;
 
+/**
+ * Class Service
+ * @package EONConsulting\PHPSaasWrapper\OAuth
+ */
 class Service {
 
     public $key;
@@ -52,10 +50,19 @@ class Service {
         $this->client = new Client;
     }
 
+    /**
+     * Get the Authorize URL
+     * @return mixed
+     */
     public function getAuthorizeUrl() {
         return $this->auth_url;
     }
 
+    /**
+     * Authorize the User
+     * @param Request $request
+     * @return bool|mixed
+     */
     public function authorize(Request $request) {
 
         $code = '';
@@ -105,6 +112,7 @@ class Service {
     }
 
     /**
+     * Get the Client ID
      * @return mixed
      */
     public function getClientId() {
@@ -112,6 +120,7 @@ class Service {
     }
 
     /**
+     * Set the Client ID
      * @param mixed $client_id
      */
     public function setClientId($client_id) {
@@ -119,6 +128,7 @@ class Service {
     }
 
     /**
+     * Get the Secret
      * @return mixed
      */
     private function getSecret() {
@@ -126,6 +136,7 @@ class Service {
     }
 
     /**
+     * Set the Secret
      * @param mixed $secret
      */
     public function setSecret($secret) {
@@ -133,6 +144,7 @@ class Service {
     }
 
     /**
+     * Get the Redirect URI
      * @return mixed
      */
     public function getRedirectUri() {
@@ -140,6 +152,7 @@ class Service {
     }
 
     /**
+     * Set the Redirect URI
      * @param mixed $redirect_uri
      */
     public function setRedirectUri($redirect_uri) {
@@ -147,6 +160,7 @@ class Service {
     }
 
     /**
+     * Get the Return URI
      * @return mixed
      */
     public function getReturnUri() {
@@ -154,6 +168,7 @@ class Service {
     }
 
     /**
+     * Set the Return URI
      * @param mixed $return_uri
      */
     public function setReturnUri($return_uri) {
@@ -161,6 +176,7 @@ class Service {
     }
 
     /**
+     * Get the Client
      * @return mixed
      */
     public function getClient() {
@@ -168,6 +184,7 @@ class Service {
     }
 
     /**
+     * Set the Client
      * @param mixed $client
      */
     public function setClient($client) {
@@ -175,6 +192,7 @@ class Service {
     }
 
     /**
+     * Get the Adapter
      * @return ServiceAdapter
      */
     public function getAdapter() {
@@ -182,6 +200,7 @@ class Service {
     }
 
     /**
+     * Set the Adapter
      * @param ServiceAdapter $adapter
      */
     public function setAdapter($adapter) {

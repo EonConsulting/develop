@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/30
- * Time: 2:00 PM
- */
 
 namespace EONConsulting\PHPSaasWrapper\OAuth\Services;
 
@@ -13,8 +7,13 @@ use EONConsulting\PHPSaasWrapper\OAuth\ServiceAdapter;
 use Guzzle\Http\Client;
 use Illuminate\Http\Request;
 
+/**
+ * Class Github
+ * @package EONConsulting\PHPSaasWrapper\OAuth\Services
+ */
 class Github extends ServiceAdapter {
 
+    // key
     public $key = 'github';
 
     /**

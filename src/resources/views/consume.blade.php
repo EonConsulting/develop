@@ -1,3 +1,8 @@
+<?php
+/**
+ * Consume all the API requests
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>

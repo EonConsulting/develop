@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/30
- * Time: 2:14 PM
- */
 
 namespace EONConsulting\PHPSaasWrapper\OAuth;
 
 
 use EONConsulting\PHPSaasWrapper\src\Factories\Config;
 
+/**
+ * Class ServiceAdapter
+ * @package EONConsulting\PHPSaasWrapper\OAuth
+ */
 class ServiceAdapter {
 
     public $key = '';
@@ -21,10 +19,10 @@ class ServiceAdapter {
     public $auth_url;
     public $access_token_uri;
 
-    public function __construct() {
-//        $this->set();
-    }
-
+    /**
+     * Set the Adapter
+     * @param $key
+     */
     public function set($key) {
         $config = new Config();
 

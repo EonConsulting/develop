@@ -1,3 +1,8 @@
+<?php
+/**
+ * Template: Render a Faculty
+ */
+?>
 <div class="col-md-3">
 
     <!--    --><?php

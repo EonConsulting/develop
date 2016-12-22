@@ -5,10 +5,8 @@ namespace EONConsulting\PHPSaasWrapper\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/12/01
- * Time: 10:01 PM
+ * Class ServiceAvailable (Model)
+ * @package EONConsulting\PHPSaasWrapper\Models
  */
 class ServiceAvailable extends Model {
 

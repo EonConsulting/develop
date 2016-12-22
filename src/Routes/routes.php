@@ -1,18 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 1:27 PM
+ * Routes for the PHPSaaSWrapper
  */
 
 Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\PHPSaasWrapper\src\Controllers'], function() {
+    // authentication via OAuth
     Route::get('/_eon_authenticate', 'AuthController@auth');
     Route::get('/_eon_phpsaaswrapper/auth/callback', function (\Illuminate\Http\Request $request) {
         return phpsaaswrapper()->callback($request);
     });
+
+    // list all of the api's
     Route::get('/list', 'TestAPIController@index');
 
+    // API usage
     Route::any('/{key}', 'TestAPIController@base_request')->name('phpsaaswrapper.base_request');
     Route::any('/{key}/consume/{use}', 'TestAPIController@consume')->name('phpsaaswrapper.consume');
     Route::any('/{key}/consume/{use}/intermediate', 'TestAPIController@consume_intermediate')->name('phpsaaswrapper.consume.intermediate');

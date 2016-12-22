@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/12/01
- * Time: 10:54 PM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src\Controllers;
 
@@ -14,6 +8,10 @@ use EONConsulting\PHPSaasWrapper\src\Factories\Config;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
+/**
+ * Class TestAPIController
+ * @package EONConsulting\PHPSaasWrapper\src\Controllers
+ */
 class TestAPIController extends Controller {
 
     protected $client;
@@ -25,10 +23,21 @@ class TestAPIController extends Controller {
         $this->client = new Client;
     }
 
+    /**
+     * Get all the APIs listed
+     *
+     * @return mixed
+     */
     public function index() {
         return phpsaaswrapper()->index();
     }
 
+    /**
+     * Check if the api needs authentication
+     *
+     * @param $key
+     * @return bool
+     */
     private function needs_auth($key) {
         $needs_auth = (phpsaaswrapper()->needs_auth($key) == 'true') ? true : false;
         if($needs_auth) {
@@ -37,6 +46,13 @@ class TestAPIController extends Controller {
         return false;
     }
 
+    /**
+     * Base of the request, looking if the current api needs Authentication or not
+     *
+     * @param Request $request
+     * @param $key
+     * @return $this
+     */
     function base_request(Request $request, $key) {
         if($this->needs_auth($key)) {
             echo 'needs auth';
@@ -56,11 +72,17 @@ class TestAPIController extends Controller {
         }
     }
 
+    /**
+     * Consume a specific use of an API
+     *
+     * @param Request $request
+     * @param $key
+     * @param $use
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function consume(Request $request, $key, $use) {
 
         $api_links = phpsaaswrapper()->generate_api_use($key, $use);
-//        echo 'api links';
-//        dd($api_links);
 
         $responses = [];
 
@@ -126,76 +148,20 @@ class TestAPIController extends Controller {
                 $responses[$k]['response'] = json_decode($response);
 
             }
-
-//            $uri = '';
-//
-//            if(is_array($v)) {
-//                foreach($v as $vk => $vv) {
-//                    $uri = $vv['uri'];
-//                    $slug = $vv['slug'];
-//
-//                    $response = $this->client->request('GET', $uri, [
-//                        'headers' => [
-//                            'accept' => '*/*',
-//                        ]
-//                    ])->getBody();
-//
-//                    if (!array_key_exists($k, $responses)) {
-//                        $responses[$k] = [];
-//                    }
-//
-//                    if (!array_key_exists('template', $responses)) {
-//                        $responses[$k]['template'] = '';
-//                    }
-//
-//                    if (!array_key_exists('response', $responses)) {
-//                        $responses[$k]['response'] = '';
-//                    }
-//
-//                    if (empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
-//                        $templates[$k] = null;
-//                    }
-//
-//                    $responses[$k]['key'] = $key;
-//                    $responses[$k]['template'] = $templates[$k];
-//                    $responses[$k]['response'] = json_decode($response);
-//
-//                }
-//            } else {
-//                $uri = $v;
-//
-//                $response = $this->client->request('GET', $uri, [
-//                    'headers' => [
-//                        'accept' => '*/*',
-//                    ]
-//                ])->getBody();
-//
-//                if (!array_key_exists($k, $responses)) {
-//                    $responses[$k] = [];
-//                }
-//
-//                if (!array_key_exists('template', $responses)) {
-//                    $responses[$k]['template'] = '';
-//                }
-//
-//                if (!array_key_exists('response', $responses)) {
-//                    $responses[$k]['response'] = '';
-//                }
-//
-//                if (empty($templates[$k]) || is_null($templates[$k]) || view()->exists($templates[$k])) {
-//                    $templates[$k] = null;
-//                }
-//
-//                $responses[$k]['key'] = $key;
-//                $responses[$k]['template'] = $templates[$k];
-//                $responses[$k]['response'] = json_decode($response);
-//            }
         }
 
         return view('consume', ['responses' => $responses, 'key' => $key, 'use' => $use]);
 
     }
 
+    /**
+     * Intermediate request for consuming an API
+     *
+     * @param Request $request
+     * @param $key
+     * @param $use
+     * @return string
+     */
     function consume_intermediate(Request $request, $key, $use) {
         $api_links = phpsaaswrapper()->generate_api_use($key, $use);
 
@@ -234,6 +200,15 @@ class TestAPIController extends Controller {
         return $links;
     }
 
+    /**
+     * Consume an API with filtering
+     *
+     * @param Request $request
+     * @param $key
+     * @param $use
+     * @param $options
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function consume_with_options(Request $request, $key, $use, $options) {
         $api_links = phpsaaswrapper()->generate_api_use($key, $use);
 

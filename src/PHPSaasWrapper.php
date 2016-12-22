@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 11:08 AM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src;
-
-//require_once __DIR__ . '/tsugi/config.php';
 
 use EONConsulting\PHPSaasWrapper\Models\ServiceLinked;
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthEnum;
@@ -18,8 +10,17 @@ use EONConsulting\PHPSaasWrapper\src\Factories\Config;
 use Illuminate\Http\Request;
 use Tsugi\Core\LTIX;
 
+/**
+ * Class PHPSaasWrapper
+ * @package EONConsulting\PHPSaasWrapper\src
+ */
 class PHPSaasWrapper {
 
+    /**
+     * Authorize the API
+     * @param $key
+     * @return bool|mixed
+     */
     public function authorize($key) {
         $factory = new OAuthFactory(new AdapterFactory);
         $service = $factory->make($key);
@@ -33,6 +34,10 @@ class PHPSaasWrapper {
         return true;
     }
 
+    /**
+     * Get all the API's
+     * @return string
+     */
     public function index() {
 
         $config = new Config;
@@ -52,6 +57,11 @@ class PHPSaasWrapper {
 
     }
 
+    /**
+     * Callback after authorization
+     * @param Request $request
+     * @return bool|string
+     */
     public function callback(Request $request) {
         $factory = new OAuthFactory(new AdapterFactory());
         $github = $factory->make(OAuthEnum::GITHUB);
@@ -79,21 +89,41 @@ class PHPSaasWrapper {
         // consume service
     }
 
+    /**
+     * Check if the API needs Authentication
+     * @param $key
+     * @return array|mixed
+     */
     public function needs_auth($key) {
         $config = new Config;
         return $config->needs_auth($key);
     }
 
+    /**
+     * Get the API Uses
+     * @param $key
+     * @return array|mixed
+     */
     public function get_api_uses($key) {
         $config = new Config;
         return $config->get_api_uses($key);
     }
 
+    /**
+     * Generate the API Uses with Lavels, URI's and Slugs
+     * @param $key
+     * @return array
+     */
     public function generate_api_uses($key) {
         $config = new Config;
         return $config->generate_api_uses($key);
     }
 
+    /**
+     * Generate the API Uses with Lavels, URI's and Slugs
+     * @param $key
+     * @return array
+     */
     public function generate_api_use($key, $use) {
         $config = new Config;
 
@@ -104,6 +134,13 @@ class PHPSaasWrapper {
         return $config->generate_api_use($key, $use);
     }
 
+    /**
+     * Build the HTML tree
+     * @param $key
+     * @param $tree
+     * @param string $pre_branch
+     * @return string
+     */
     public function build_html_tree($key, $tree, $pre_branch = '') {
         $config = new Config;
         $html = '';
@@ -146,6 +183,11 @@ class PHPSaasWrapper {
         return '<ul>' . $html . '</ul>';
     }
 
+    /**
+     * Display the API Uses
+     * @param $key
+     * @return string
+     */
     public function display_api_uses($key) {
 
         $config = new Config;
@@ -153,7 +195,7 @@ class PHPSaasWrapper {
 
         $html = $this->build_html_tree($key, $uses);
 
-        return $html;
+        return '<a href="' . url('/') . '">Home</a><br /><br />' . $html;
     }
 
 }

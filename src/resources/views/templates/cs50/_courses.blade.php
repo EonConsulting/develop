@@ -1,3 +1,8 @@
+<?php
+/**
+ * Template: Render a Course
+ */
+?>
 <div class="row">
 
     <?php

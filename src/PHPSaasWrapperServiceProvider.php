@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 11:08 AM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src;
 
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class PHPSaasWrapperServiceProvider
+ * @package EONConsulting\PHPSaasWrapper\src
+ */
 class PHPSaasWrapperServiceProvider extends ServiceProvider {
 
     /**
@@ -23,13 +21,11 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
         $this->app->singleton( 'phpsaaswrapper', function () {
             return new PHPSaasWrapper;
         });
-//        $this->app->register(
-//            'DaveJamesMiller\BreadCrumbs\ServiceProvider'
-//        );
-//        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-//        $loader->alias('Breadcrumbs', 'DaveJamesMiller\Breadcrumbs\Facade');
     }
 
+    /**
+     * Boot the service provider
+     */
     public function boot() {
         $this->loadRoutesFrom(__DIR__.'/Routes/routes.php');
         $this->publishes([

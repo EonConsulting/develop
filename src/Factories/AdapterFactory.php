@@ -1,22 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 11:11 AM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src\Factories;
-
 
 use EONConsulting\PHPSaasWrapper\OAuth\OAuthEnum;
 use EONConsulting\PHPSaasWrapper\OAuth\Services\Github;
 
+/**
+ * Class AdapterFactory
+ * @package EONConsulting\PHPSaasWrapper\src\Factories
+ */
 class AdapterFactory {
 
     /**
-     * @param $config -> Of type CONFIG
-     * @return
+     * Get the adapter needed
+     *
+     * @param $config
+     * @return Github
      */
     public function make($config) {
         switch ($config) {

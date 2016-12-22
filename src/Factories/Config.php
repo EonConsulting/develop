@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/11/28
- * Time: 11:11 AM
- */
 
 namespace EONConsulting\PHPSaasWrapper\src\Factories;
 
-
+/**
+ * Class Config
+ * @package EONConsulting\PHPSaasWrapper\src\Factories
+ */
 class Config {
 
     /**
@@ -103,379 +100,377 @@ class Config {
                         'florence' => ['id' => 'florence', 'label' => 'Florence Nightingale Letters', 'use' => 'id'],
                     ],
                     'api_links' => [
-//                        'collections' => [
-                            '46343' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/46343',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/46343/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/46343/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/46343/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                        '46343' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/46343',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            'artefacts' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/artefacts',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/artefacts/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/artefacts/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/artefacts/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/46343/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            'bcbooks' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/bcbooks',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/bcbooks/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/bcbooks/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/bcbooks/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/46343/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
                             ],
-                            'berkpost' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/berkpost',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/berkpost/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/berkpost/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/berkpost/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/46343/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            '26856' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/26856',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/26856/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/26856/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/26856/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                        ],
+                        'artefacts' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/artefacts',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            '23514' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/23514',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/23514/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/23514/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/23514/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/artefacts/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            'darwin' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/darwin',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/darwin/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/darwin/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total123' => [
-                                    'uri' => '--base_url--/collections/darwin/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/artefacts/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
                             ],
-                            '59404' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/59404',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/59404/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/59404/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/59404/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/artefacts/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            '46624' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/46624',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/46624/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/46624/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/46624/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                        ],
+                        'bcbooks' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/bcbooks',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            'cg' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/cg',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/cg/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/cg/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/cg/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/bcbooks/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
                             ],
-                            '52383' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/52383',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/52383/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/52383/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/52383/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/bcbooks/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
                             ],
-                            'florence' => [
-                                'collection_metadata' => [
-                                    'uri' => '--base_url--/collections/florence',
-                                    'label' => 'Collection Metadata',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items' => [
-                                    'uri' => '--base_url--/collections/florence/items',
-                                    'label' => 'Items',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-                                'items_metadata' => [
-                                    'uri' => '--base_url--/collections/florence/items/--item_id--',
-                                    'label' => 'Item Metadata',
-                                    'requires' => [
-                                        'base_url',
-                                        'item_id'
-                                    ]
-                                ],
-                                'total' => [
-                                    'uri' => '--base_url--/collections/florence/_total',
-                                    'label' => 'Total Results Count',
-                                    'requires' => [
-                                        'base_url'
-                                    ]
-                                ],
-//                            ]
+                            'total' => [
+                                'uri' => '--base_url--/collections/bcbooks/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        'berkpost' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/berkpost',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/berkpost/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/berkpost/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/berkpost/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        '26856' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/26856',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/26856/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/26856/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/26856/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        '23514' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/23514',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/23514/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/23514/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/23514/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        'darwin' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/darwin',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/darwin/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/darwin/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total123' => [
+                                'uri' => '--base_url--/collections/darwin/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        '59404' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/59404',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/59404/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/59404/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/59404/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        '46624' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/46624',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/46624/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/46624/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/46624/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        'cg' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/cg',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/cg/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/cg/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/cg/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        '52383' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/52383',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/52383/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/52383/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/52383/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                        ],
+                        'florence' => [
+                            'collection_metadata' => [
+                                'uri' => '--base_url--/collections/florence',
+                                'label' => 'Collection Metadata',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items' => [
+                                'uri' => '--base_url--/collections/florence/items',
+                                'label' => 'Items',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
+                            'items_metadata' => [
+                                'uri' => '--base_url--/collections/florence/items/--item_id--',
+                                'label' => 'Item Metadata',
+                                'requires' => [
+                                    'base_url',
+                                    'item_id'
+                                ]
+                            ],
+                            'total' => [
+                                'uri' => '--base_url--/collections/florence/_total',
+                                'label' => 'Total Results Count',
+                                'requires' => [
+                                    'base_url'
+                                ]
+                            ],
                         ],
                     ]
                 ]
@@ -485,6 +480,7 @@ class Config {
 
     /**
      * Get the config value for a specific value given.
+     *
      * @param $keys
      * @return array|mixed
      */
@@ -502,6 +498,14 @@ class Config {
         return $data;
     }
 
+    /**
+     * Put data in an array using its current structure
+     *
+     * @param $original_keys
+     * @param $data
+     * @param $data_to_add
+     * @return array
+     */
     public function put($original_keys, $data, $data_to_add) {
         $keys = explode('.', $original_keys);
         $loop_count = 0;
@@ -523,6 +527,8 @@ class Config {
     }
 
     /**
+     * Generate a redirect URI based on the API endpoint
+     *
      * @param $key
      * @return array|mixed
      */
@@ -552,6 +558,8 @@ class Config {
     }
 
     /**
+     * Generate the URI for the API endpoint
+     *
      * @param $key
      * @param $uri
      * @param bool $requires
@@ -592,7 +600,7 @@ class Config {
                 } else {
 
                     if(is_array($v)) {
-//                        $uri = $this->generate_uri($key, $v['uri'], $v['requires']);
+
                     } else {
 
                         $temp = '';
@@ -614,6 +622,15 @@ class Config {
         return $uri;
     }
 
+    /**
+     * Generate the Label for the API endpoint
+     *
+     * @param $key
+     * @param $label
+     * @param bool $requires
+     * @param bool $fallback
+     * @return bool|mixed
+     */
     function generate_uri_label($key, $label, $requires = false, $fallback = false) {
         if(gettype($label) == 'array') {
             if(array_key_exists('label', $label)) {
@@ -659,6 +676,12 @@ class Config {
         return $label;
     }
 
+    /**
+     * Check if it is inside of a multidimensional array
+     * @param $needle
+     * @param $haystack
+     * @return string
+     */
     function multi_in_array($needle, $haystack) {
         $return = '';
         foreach($haystack as $k => $v) {
@@ -672,6 +695,8 @@ class Config {
 
 
     /**
+     * Get all the USES of the API
+     *
      * @param $key
      * @return array|mixed
      */
@@ -681,6 +706,8 @@ class Config {
     }
 
     /**
+     * Generate all the USES of the API with URI's, Labels and slugs
+     *
      * @param $key
      * @return array
      */
@@ -688,8 +715,6 @@ class Config {
         $uses_keys = 'oauth.allows.' . $key . '.api_uses';
         $link_keys = 'oauth.allows.' . $key . '.api_links';
 
-//        $data = $this->get($link_keys);
-//        $data = $this->obj_array_recursive($key, $data, $link_keys, $uses_keys);
         $data = $this->get($link_keys);
         $data = $this->fill_data($link_keys, $data, $key);
         $data = $this->insert_main_labels($uses_keys, $data);
@@ -697,6 +722,14 @@ class Config {
         return $data;
     }
 
+    /**
+     * Fill out the data
+     *
+     * @param $keys
+     * @param $data
+     * @param $original_key
+     * @return array
+     */
     function fill_data($keys, $data, $original_key) {
         $result = [];
 

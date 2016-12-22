@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: vamoose
- * Date: 2016/12/01
- * Time: 9:58 PM
+ * Class PHPSaasWrapperMigrations
  */
 class PHPSaasWrapperMigrations extends \Illuminate\Database\Migrations\Migration  {
 
