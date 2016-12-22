@@ -1,9 +1,11 @@
 <?php namespace Unisa\Searchpages\Controllers;
 
 use Backend\Classes\Controller;
-use Unisa\Storycore\Models\Storycore;
+use Unisa\Storycore\Models\Storycore as StoryModel;
+use Unisa\Storycore\Controllers\Storycore;
 use Unisa\Pages\Models\Page;
 use Unisa\Pages\Controllers\Pages;
+use ApplicationException;
 use Backend;
 use BackendMenu;
 use BackendAuth;
@@ -74,13 +76,17 @@ class Searchpages extends Controller
      * @return [type] [description]
      */
     public function onCreatestory(){
+        if(!Input::get('story_name')){
+            throw new ApplicationException('Please provide storyline name.');
+        }
         $storyData = array('story_name'=>Input::get('story_name'), 'description'=>Input::get('description'), 'user_id'=>BackendAuth::getUser()->id);
-        $stories = new Storycore;
+        $stories = new StoryModel;
         $stories->fill($storyData);
         $stories->save();
 
         $stories->pages()->sync(Input::get('pages'));
-        Event::fire('Storycore.formAfterSave', [$stories]);
+        $storyController = new Storycore;
+        $storyController->call_ext_func('formAfterSave',$stories);
 
         Flash::success('Storyline created successfully');
     }
@@ -100,8 +106,7 @@ class Searchpages extends Controller
         
         $pageController = new Pages;
         $pageController->call_ext_func('formAfterSave',$newPage);
-        /*$te = Event::fire('Unisa.Pages.formAfterSave', [$newPage]);
-        echo '<pre>';print_r($te)die;*/
+        /*$te = Event::fire('Unisa.Pages.formAfterSave', [$newPage]);*/
         return Redirect::to(Backend::url("unisa\pages\pages\update", $newPage->id));
     }
 

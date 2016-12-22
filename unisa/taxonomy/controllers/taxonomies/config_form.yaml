@@ -1,0 +1,11 @@
+name: Taxonomies
+modelClass: Unisa\Taxonomy\Models\Taxonomy
+form: $/unisa/taxonomy/models/taxonomy/fields.yaml
+defaultRedirect: unisa/taxonomy/taxonomies
+create:
+    redirect: 'unisa/taxonomy/taxonomies/update/:id'
+    redirectClose: unisa/taxonomy/taxonomies
+update:
+    redirect: unisa/taxonomy/taxonomies
+    redirectClose: unisa/taxonomy/taxonomies
+preview: {  }

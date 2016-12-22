@@ -1,11 +1,11 @@
-<?php namespace Unisa\Storycore\Models;
+<?php namespace Unisa\Taxonomy\Models;
 
 use Model;
 
 /**
  * Model
  */
-class Storycore extends Model
+class Taxonomy extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
@@ -24,21 +24,13 @@ class Storycore extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'unisa_storycore_storylines';
+    public $table = 'unisa_taxonomy_taxonomy';
 
-    /**
-     * @var array Fillable fields
-     */
-    protected $fillable = ['id','story_name','description','user_id'];
+    protected $fillable = ['taxonomy_name', 'description', 'user_id'];
 
     public $belongsToMany = [
-        'pages'=>[
-            'Unisa\Pages\Models\Page',
-            'table'=>'unisa_storycore_story_pages',
-            'order'=>'page_name'
-        ],
-        'taxonomies'=>[
-            'Unisa\Taxonomy\Models\Taxonomy',
+        'stories'=>[
+            'Unisa\Storycore\Models\Storycore',
             'table'=>'unisa_taxonomy_taxo_stories',
             'order'=>'story_name'
         ]

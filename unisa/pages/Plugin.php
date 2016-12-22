@@ -6,6 +6,11 @@ use BackendAuth;
 
 class Plugin extends PluginBase
 {
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Unisa.Assets'];
+
     public function registerComponents()
     {
     }

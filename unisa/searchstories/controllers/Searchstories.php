@@ -2,6 +2,8 @@
 
 use Backend\Classes\Controller;
 use Unisa\Storycore\Models\Storycore;
+use Unisa\Taxonomy\Models\Taxonomy;
+use ApplicationException;
 use Backend;
 use BackendMenu;
 use BackendAuth;
@@ -82,5 +84,24 @@ class Searchstories extends Controller
         }else{
             Flash::error('Something went wrong Please try again.');
         }
+    }
+
+    /**
+     * Creates new taxonomy from the selected stories
+     * @return void
+     */
+    public function onCreateTaxonomy(){
+        if(!Input::get('taxonomy_name')){
+            throw new ApplicationException('Please enter Taxonomy Name.');
+        }
+
+        $TaxonomyData = array('taxonomy_name'=>Input::get('taxonomy_name'), 'description'=>Input::get('description'), 'user_id'=>BackendAuth::getUser()->id);
+        $stories = new Taxonomy;
+        $stories->fill($TaxonomyData);
+        $stories->save();
+
+        $stories->stories()->sync(Input::get('stories'));
+        
+        Flash::success('Taxonomy created successfully');
     }
 }

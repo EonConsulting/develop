@@ -5,6 +5,11 @@ use Event;
 
 class Plugin extends PluginBase
 {
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Unisa.Pages'];
+    
     public function registerComponents()
     {
     }

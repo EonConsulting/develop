@@ -12,3 +12,15 @@
 1.0.5:
     - 'Updated table unisa_storycore_storylines'
     - builder_table_update_unisa_storycore_storylines_2.php
+1.0.6:
+    - 'Created table unisa_storycore_story_pages'
+    - builder_table_create_unisa_storycore_story_pages_2.php
+1.0.7:
+    - 'Created table unisa_storycore_story_pages'
+    - builder_table_create_unisa_storycore_story_pages_3.php
+1.0.8:
+    - 'Updated table unisa_storycore_storylines'
+    - builder_table_update_unisa_storycore_storylines_3.php
+1.0.9:
+    - 'Updated table unisa_storycore_storylines'
+    - builder_table_update_unisa_storycore_storylines_4.php

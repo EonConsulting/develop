@@ -5,24 +5,24 @@
 </div>
 
 <?= Form::open(['url'=>Backend::url('unisa\searchpages\searchpages'), 'method'=>'POST']); ?>
-<div id="filters">
-<?php foreach($filters as $filter){ ?>
-    <div class="form-group" id="field">
-        <input class="form-control" type="text" name="chr[]" placeholder="name or description" value="<?php echo $filter; ?>" />
+    <div id="filters">
+    <?php foreach($filters as $filter){ ?>
+        <div class="form-group" id="field">
+            <input class="form-control" type="text" name="chr[]" placeholder="name or description" value="<?php echo $filter; ?>" />
+        </div>
+    <?php } ?>
+        <div class="form-group" id="field">
+            <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+        </div>
     </div>
-<?php } ?>
-    <div class="form-group" id="field">
-        <input class="form-control" type="text" name="chr[]" placeholder="name or description" />
+    <div class="clearfix"></div>
+    <div class="form-group ">
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        <button type="button" 
+            id="add_field"
+            class="btn btn-primary oc-icon-plus"
+        >add another field</button>
     </div>
-</div>
-<div class="clearfix"></div>
-<div class="form-group ">
-    <input type="submit" class="btn btn-primary" value="Submit" />
-    <button type="button" 
-        id="add_field"
-        class="btn btn-primary oc-icon-plus"
-    >add another field</button>
-</div>
 <?= Form::close(); ?>
 
 <div data-control="toolbar">
@@ -44,7 +44,7 @@
         <div class="modal-content">
             <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Are you sure you wanna do that?</h4>
+                    <h4 class="modal-title">Create storyline from pages?</h4>
                 </div>
                 <div class="modal-body">
                     <div class="layout-row">

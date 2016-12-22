@@ -1,0 +1,15 @@
+plugin:
+    name: 'unisa.taxonomy::lang.plugin.name'
+    description: 'unisa.taxonomy::lang.plugin.description'
+    author: Unisa
+    icon: oc-icon-bookmark
+    homepage: ''
+permissions:
+    taxonomy.manage_taxo:
+        tab: 'unisa.taxonomy::lang.taxonomy.manage_taxonomy'
+        label: 'unisa.taxonomy::lang.taxonomy.manage_taxonomy'
+navigation:
+    taxonomy:
+        label: 'unisa.taxonomy::lang.plugin.name'
+        url: unisa/taxonomy/taxonomies
+        icon: icon-bookmark

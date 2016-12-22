@@ -1,0 +1,17 @@
+fields:
+    taxonomy_name:
+        label: 'unisa.taxonomy::lang.taxonomy.taxo_name'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: 'unisa.taxonomy::lang.taxonomy.description'
+        span: auto
+        size: ''
+        oc.commentPosition: ''
+        type: textarea
+    stories:
+        label: Stories
+        span: left
+        type: storybox
