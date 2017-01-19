@@ -1,0 +1,11 @@
+<storyline id="s0" title="CIRCULAR FLOW" config="cf01" link="cf01" summary="Circular flow model" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Overview of circular flow" link="cf01" summary="An economy is a complex system and it is impossible to model or even describe all the different forces that impact on the level of economic activity." img="http://placehold.it/225x180"/>
+        <storyline id="s2" type="leaf" title="Three major flow" link="cf02" summary="In this section we build a simple model that represents the following three main flows in the economy." img="http://placehold.it/225x180"/>
+		<storyline id="s3" type="leaf" title="Link between production, income and spending" link="cf03" summary="The motivation for producing goods and services is to satisfy our needs and wants." img="http://placehold.it/225x180"/>
+        <storyline id="s4" type="branch" title="Building a circular flow" config="cf04" link="cf04" summary="In this section we build a circular flow model that we consist of two participants and two markets."/>
+        <storyline id="s5" type="leaf" title="Limitations of the circular flow" link="cf07" summary="The circular flow model only includes firms that produce consumer goods." img="http://placehold.it/225x180"/>
+        <storyline id="s6" type="leaf" title="Complete circular flow activity" link="cf06" summary="An assessment used to determine your understanding of circular flows." img="http://placehold.it/225x180"/>
+    </storyline_collection>
+ </storyline>
+

@@ -9,8 +9,13 @@
 namespace EONConsulting\Storyline\Core;
 
 
+use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
+
 class StorylineCore {
 
-
+    public function getMenu() {
+        $taxonomy = new XMLTaxonomy;
+        $taxonomy->load_files();
+    }
 
 }

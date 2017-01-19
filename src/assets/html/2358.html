@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html style="padding:0;">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="activity-item check-activity">
+            <p style="margin-top: 0px;">What do you think would happen to the total spending of households on petrol in the following examples?</p>
+            <form id="PPC36" class="iFramedRadioActivity">
+                <div class="row">
+                    <div class="col s6">
+                        <p style="margin-top: 0px;">The Price of petrol increases</p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_1">
+                            <label for="PPC36_1">Households will spend more on petrol.</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_2">
+                            <label for="PPC36_2">Households will spend less on petrol.</label>
+                        </p>
+                    </div>
+                    <div class="col s6">
+                        <p style="margin-top: 0px;">The Price of petrol decreases</p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_3">
+                            <label for="PPC36_3">Households will spend more on petrol.</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_4">
+                            <label for="PPC36_4">Households will spend less on petrol.</label>
+                        </p>
+                    </div>
+                </div>
+                <p>What do you think will happen to the total spending by households on restaurant meals if the following happens?</p>
+                <div class="row">
+                    <div class="col s6">
+                        <p style="margin-top: 0px;">The price of restaurant meals increases</p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_5">
+                            <label for="PPC36_5">Households will spend more on restaurant meals.</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_6">
+                            <label for="PPC36_6">Households will spend less on restaurant meals.</label>
+                        </p>
+                    </div>
+                    <div class="col s6">
+                        <p style="margin-top: 0px;">The price of restaurant meals decreases</p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_7">
+                            <label for="PPC36_7">Households will spend more on restaurant meals.</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_8">
+                            <label for="PPC36_8">Households will spend less on restaurant meals.</label>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <a class="waves-effect waves-light btn submit">Submit</a>
+                </div>
+            </form>
+            <br />
+            <div class="feedback blue" style="margin-bottom:10px;">
+                Intuitively, people believe that if the price of something increases, their total spending on that good or service will increase as well. In the next sections, we will show that this is not necessarily the case. Whether we spend more or less depends on the price elasticity of demand.
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+
+            $('.check-activity .submit').on('click', function () {
+                // Checks if at least one box is checked before allowing the user to submit
+                if ($(this).parents("form").find("input.checkbox:checked").length == 0) {
+                    alert("Please select at least 1 answer");
+                    return; //stops the script from running any further
+                }
+                $(this).parents('form').siblings('.feedback').show();
+                $(this).parents('form').find('.checkbox').attr('disabled', 'disabled');
+
+                var activityBlock = 'asset2358';
+                activityDone(activityBlock);
+            });
+
+        </script>
+    </body>
+</html>

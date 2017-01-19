@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>608 | Check Box</title>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+    <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="activity-item">
+      <table>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <p><strong><a href="#!" data-shows="step-1" class="show-con" id="row1-link">Step 1: Calculate the midpoints for P and Q<sub>d</sub></a></strong></p>
+                    </td>
+                </tr>
+                <tr class="row1 hide">
+                    <td class="step-1">
+                        <img src="154.svg">
+                    </td>
+                    <td class="step-1">
+                        <img src="155.svg">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p><strong><a href="#!" data-shows="step-2" class="show-con" id="row2-link">Step 2: Calculate the percentage change in P and Qd if price increases from R8 to R10.</a></strong></p>
+                    </td>
+                </tr>
+                <tr class="row2 hide">
+                    <td class="step-2">
+                        <img src="156.svg">
+                    </td>
+                    <td class="step-2">
+                        <img src="157.svg">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p><strong><a href="#!" data-shows="step-3" class="show-con" id="row3-link">Step 3: Use the formula for price elasticity to calculate the price elasticity coefficient.</a></strong></p>
+                    </td>
+                </tr>
+                <tr class="row3 hide">
+                    <td colspan="2" class="step-3">
+                        <img src="158.svg">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../components/js/economics.js" type="text/javascript"></script>
+    <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+    <script>
+    $( "#row1-link" ).one("click", function() {
+      $(".row1").removeClass("hide");
+        var activityBlock = 'asset2354';
+        activityDone(activityBlock);
+    });
+    $( "#row2-link" ).one("click", function() {
+      $(".row2").removeClass("hide");
+        var activityBlock = 'asset2354';
+        activityDone(activityBlock);
+    });
+    $( "#row3-link" ).one("click", function() {
+      $(".row3").removeClass("hide");
+        var activityBlock = 'asset2354';
+        activityDone(activityBlock);
+    });
+    </script>
+  </body>
+</html>
