@@ -30,6 +30,10 @@ class StorylineCoreServiceProvider extends ServiceProvider {
 //        $this->publishes([
 //            __DIR__ . '/resources/views' => base_path('resources/views'),
 //        ]);
+
+        $this->publishes([
+            __DIR__.'/assets' => public_path('vendor/storyline/core'),
+        ], 'public');
     }
 
 }
