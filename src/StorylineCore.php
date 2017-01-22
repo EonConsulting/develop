@@ -8,14 +8,34 @@
 
 namespace EONConsulting\Storyline\Core;
 
-
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
 
 class StorylineCore {
 
-    public function getMenu() {
+    public function getIndex() {
         $taxonomy = new XMLTaxonomy;
-        $taxonomy->load_files();
+        return $taxonomy->index();
+    }
+
+    public function getMenu($config = false) {
+        $taxonomy = new XMLTaxonomy;
+        return $taxonomy->getMenu($config);
+    }
+
+    public function getPrevious($config = false, $page = false) {
+        $taxonomy = new XMLTaxonomy;
+
+        if($config || $config && $page) {
+            return $taxonomy->getPreviousPage($config, $page);
+        }
+    }
+
+    public function getNext($config = false, $page = false) {
+        $taxonomy = new XMLTaxonomy;
+
+        if($config || $config && $page) {
+            return $taxonomy->getNextPage($config, $page);
+        }
     }
 
 }
