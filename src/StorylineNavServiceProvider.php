@@ -20,6 +20,9 @@ class StorylineNavServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->views();
+        $this->publishes([
+            __DIR__.'/assets' => public_path('vendor/storyline/nav'),
+        ], 'public');
     }
 
     public function views() {
