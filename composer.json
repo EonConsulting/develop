@@ -17,5 +17,6 @@
     ]
   },
   "require": {
+    "cviebrock/laravel-elasticsearch": "^1.2"
   }
 }

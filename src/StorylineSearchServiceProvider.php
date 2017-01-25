@@ -14,6 +14,11 @@ use Illuminate\Support\ServiceProvider;
 class StorylineSearchServiceProvider extends ServiceProvider {
 
     public function register() {
+        // Elastic Search
+        $this->app->register(\Cviebrock\LaravelElasticsearch\ServiceProvider::class);
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Elasticsearch', \Cviebrock\LaravelElasticsearch\Facade::class);
+
         $this->app->singleton( 'storyline_search', function () {
             return new StorylineSearch();
         });
