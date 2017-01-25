@@ -21,15 +21,31 @@ class LTIController extends TsugiController {
 
     public function config($config) {
 
+        $styles = [];
+        $scripts = [];
+        $custom_scripts = [];
+
         $menu = '';
         if(function_exists('storyline_menu')) {
             $menu = storyline_menu()->getMenuHTML($config, $config);
         }
 
-        return view('eon.lti::config', ['config' => $config, 'taxonomy' => $this->taxonomy->get($config), 'PageSL' => $config, 'menu' => $menu]);
+        $nav = '';
+        if(function_exists('storyline_nav')) {
+            $nav = storyline_nav()->getNavHTML($config);
+            $styles = array_merge($styles, storyline_nav()->getStyles());
+            $scripts = array_merge($scripts, storyline_nav()->getScripts());
+            $custom_scripts[] = storyline_nav()->getCustomScripts();
+        }
+
+        return view('eon.lti::config', ['config' => $config, 'taxonomy' => $this->taxonomy->get($config), 'PageSL' => $config, 'menu' => $menu, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts]);
     }
 
     public function single($config, $single) {
+
+        $styles = [];
+        $scripts = [];
+        $custom_scripts = [];
 
         $story = $this->taxonomy->getStoryline($config, $single);
 
@@ -46,7 +62,15 @@ class LTIController extends TsugiController {
         $next = $this->taxonomy->getNextPage($config, $single);
         $next['href'] = route('lti.single', [$next['parent_config'], $next['link']]);
 
-        return view('eon.lti::single', ['parent_config' => $config, 'story' => $story, 'page' => $file, 'menu' => $menu, 'previous' => $previous, 'next' => $next]);
+        $nav = '';
+        if(function_exists('storyline_nav')) {
+            $nav = storyline_nav()->getNavHTML($config, $single);
+            $styles = array_merge($styles, storyline_nav()->getStyles());
+            $scripts = array_merge($scripts, storyline_nav()->getScripts());
+            $custom_scripts[] = storyline_nav()->getCustomScripts();
+        }
+
+        return view('eon.lti::single', ['parent_config' => $config, 'story' => $story, 'page' => $file, 'menu' => $menu, 'previous' => $previous, 'next' => $next, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts]);
     }
 
 }

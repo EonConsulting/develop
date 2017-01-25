@@ -13,6 +13,10 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    @for($i = 0 ;$i < count($styles); $i++)
+        <link type="text/css" rel="stylesheet" href="{{ $styles[$i] }}"/>
+    @endfor
+
     <title>UNISA - eLearning</title>
 </head>
 
@@ -134,8 +138,11 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <iframe src="{{ $page }}" class="composite-embed" id="idIframe" onload="iframeLoaded()" frameBorder="0"></iframe>
+        <div class="col-md-4">
+            {!! $nav !!}
+        </div>
+        <div class="col-md-8">
+            <iframe src="{{ $page }}" class="composite-embed" id="idIframe" frameBorder="0"></iframe>
         </div>
     </div>
 </div>
@@ -144,6 +151,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="/vendor/storyline/core/js/materialize.min.js"></script>
 <script type="text/javascript" src="/vendor/storyline/core/js/economics.js"></script>
+
+@for($i = 0 ; $i < count($scripts); $i++)
+    <script src="{{  $scripts[$i] }}"></script>
+@endfor
+
+<?php $cs = ''; ?>
+@for($i = 0; $i < count($custom_scripts); $i++)
+    <?php $cs .= $custom_scripts[$i]; ?>
+@endfor
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -154,6 +170,7 @@
     ga('create', 'UA-77532820-1', 'auto');
     ga('send', 'pageview');
 
+    {!! $cs !!}
 </script>
 
 <style>
