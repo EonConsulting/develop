@@ -8,6 +8,8 @@
 
 namespace EONConsulting\Storyline\Core;
 
+use EONConsulting\Storyline\Core\Classes\CommonWords;
+use EONConsulting\Storyline\Core\Classes\GetSummary;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
 
 class StorylineCore {
@@ -36,6 +38,31 @@ class StorylineCore {
         if($config || $config && $page) {
             return $taxonomy->getNextPage($config, $page);
         }
+    }
+
+    public function getMostCommonWords($amount = 10) {
+        $taxonomy = new XMLTaxonomy;
+        $data = $taxonomy->index();
+
+        $get_summaries = new GetSummary();
+        $summaries = $get_summaries->getSummaries($data);
+
+        $common_words_obj = new CommonWords();
+        $words = $common_words_obj->getCommonWords($summaries, $amount);
+
+        return $words;
+    }
+
+    public function indexForSearch() {
+        if(function_exists('storyline_search')) {
+            $data = storyline_core()->getIndex();
+            foreach ($data as $config => $item) {
+                storyline_search()->index($item, $config);
+            }
+            return true;
+        }
+
+        return false;
     }
 
 }
