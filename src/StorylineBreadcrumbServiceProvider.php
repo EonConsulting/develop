@@ -20,9 +20,9 @@ class StorylineBreadcrumbServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
-//        $this->publishes([
-//            __DIR__.'/assets' => public_path('vendor/storyline/core'),
-//        ], 'public');
+        $this->publishes([
+            __DIR__.'/assets' => public_path('vendor/storyline/breadcrumbs'),
+        ], 'public');
     }
 
 }
