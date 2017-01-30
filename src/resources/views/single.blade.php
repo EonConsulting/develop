@@ -17,6 +17,12 @@
         <link type="text/css" rel="stylesheet" href="{{ $styles[$i] }}"/>
     @endfor
 
+    <style>
+        @for($i = 0 ;$i < count($custom_styles); $i++)
+              {{ $custom_styles[$i] }}
+        @endfor
+    </style>
+
     <title>UNISA - eLearning</title>
 </head>
 
@@ -134,21 +140,32 @@
             <h1 class="topic-list-header">{{ $story['title'] }}</h1>
             <br />
             <p>{!! strip_tags($story['summary']) !!}</p>
+            <br /><br />
+            {!! $breadcrumb !!}
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-4">
             {!! $nav !!}
+            <div class="clearfix"></div>
+            {!! $tag_cloud !!}
         </div>
         <div class="col-md-8">
-            <iframe src="{{ $page }}" class="composite-embed" id="idIframe" frameBorder="0"></iframe>
+            <iframe src="{{ $page }}" class="composite-embed" id="idIframe" frameBorder="0" style="display: block;"></iframe>
         </div>
     </div>
 </div>
 
 <!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="/vendor/storyline/core/js/materialize.min.js"></script>
 <script type="text/javascript" src="/vendor/storyline/core/js/economics.js"></script>
 
@@ -170,7 +187,9 @@
     ga('create', 'UA-77532820-1', 'auto');
     ga('send', 'pageview');
 
-    {!! $cs !!}
+    window.onload = function() {
+        {!! $cs !!}
+    };
 </script>
 
 <style>

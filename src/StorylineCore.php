@@ -8,6 +8,7 @@
 
 namespace EONConsulting\Storyline\Core;
 
+use EONConsulting\Storyline\Core\Classes\Breadcrumbs;
 use EONConsulting\Storyline\Core\Classes\CommonWords;
 use EONConsulting\Storyline\Core\Classes\GetSummary;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
@@ -63,6 +64,11 @@ class StorylineCore {
         }
 
         return false;
+    }
+
+    public function prepareForBreadcrumbs($config = false) {
+        $taxonomy = new XMLTaxonomy;
+        return $taxonomy->getMenu($config);
     }
 
 }

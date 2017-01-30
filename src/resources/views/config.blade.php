@@ -13,6 +13,10 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    @for($i = 0 ;$i < count($styles); $i++)
+        <link type="text/css" rel="stylesheet" href="{{ $styles[$i] }}"/>
+    @endfor
+
     <title>UNISA - eLearning</title>
 </head>
 
@@ -118,6 +122,8 @@
             <h1 class="topic-list-header">{{ $taxonomy['title'] }}</h1>
             <br />
             <p>{!! strip_tags($taxonomy['summary']) !!}</p>
+            <br /><br />
+            {!! $breadcrumb !!}
         </div>
     </div>
 

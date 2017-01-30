@@ -2117,7 +2117,7 @@ img.responsive-img, video.responsive-video {
   position: fixed !important; }
 
 /*********************
-  Transition Classes
+  Transition assets
 **********************/
 ul.staggered-list li {
   opacity: 0; }
@@ -2127,7 +2127,7 @@ ul.staggered-list li {
   transform-origin: 0 50%; }
 
 /*********************
-  Media Query Classes
+  Media Query assets
 **********************/
 @media only screen and (max-width : 600px) {
   .hide-on-small-only, .hide-on-small-and-down {
@@ -2510,7 +2510,7 @@ span.badge {
     right: -8%; } }
 
 /*******************
-  Utility Classes
+  Utility assets
 *******************/
 .hide {
   display: none !important; }
