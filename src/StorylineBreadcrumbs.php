@@ -88,7 +88,7 @@ class StorylineBreadcrumbs {
             if($i == 0) {
                 $link = route('lti.config', $item['config']);
             } else {
-                $link = route('lti.single', [$config, $item['config']]);
+                $link = route('lti.single', [$parent_config, $item['config']]);
             }
 
             $active = ($config == $item['config']) ? 'class="active"' : '';
