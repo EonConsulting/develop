@@ -42,7 +42,7 @@ class StorylineNav {
     }
 
     public function getCustomScripts() {
-        return "window.onload = function () { $('.tree-div').jstree({expanded: true}).on('select_node.jstree', function(node, selected, event) { console.log(selected); window.location.href = selected.node.a_attr.href; }); $('.jstree-icon.jstree-themeicon').remove(); }";
+        return "$('.tree-div').jstree({expanded: true}).on('select_node.jstree', function(node, selected, event) { console.log(selected); window.location.href = selected.node.a_attr.href; }); $('.jstree-icon.jstree-themeicon').remove();";
     }
 
     private function get_nav($config = false) {
