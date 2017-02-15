@@ -23,6 +23,7 @@ class AppStoreServiceProvider extends ServiceProvider {
     public function boot() {
         $this->publishMigrations();
         $this->views();
+        $this->routes();
         $this->publishes([
             __DIR__.'/assets' => public_path('vendor/appstore'),
         ], 'public');
@@ -39,6 +40,10 @@ class AppStoreServiceProvider extends ServiceProvider {
 
     public function views() {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'eon.appstore');
+    }
+
+    public function routes() {
+        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
     }
 
 }
