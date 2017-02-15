@@ -93,7 +93,7 @@
                             <p>{!! $tool['description'] !!}</p>
                         </div>
                         <div class="pull-bottom-left">
-                            <p><a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" class="btn btn-success btn-xs" role="button">View</a> <!-- <a href="#" class="btn btn-success btn-xs" role="button">Activate</a> --></p>
+                            <p><a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" class="btn btn-success btn-xs" role="button">View</a> <a href="{{ route('eon.laravellti.delete', $tool['context_id']) }}" class="btn btn-danger btn-xs" role="button">Delete</a></p>
                         </div>
                     </div>
                 </div>
