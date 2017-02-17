@@ -17,7 +17,6 @@ class PHPStencilServiceProvider extends ServiceProvider {
         $this->app->bind( 'phpstencil', function () {
             return new PHPStencil();
         });
-        $this->app->register(\Tsugi\TsugiServiceProvider::class);
     }
 
     /**
@@ -25,6 +24,7 @@ class PHPStencilServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->loadRoutesFrom(__DIR__.'/Factories/WebService/Routes/routes_rest.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 

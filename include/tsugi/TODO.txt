@@ -1,9 +1,0 @@
-
-Refactor all Outcome code into classes.
-
-Build lti.php load balancer.
-
-Figure out the top level I18N - Wish POEDIT had an exclude
-
-Look into context and resource_link override
-

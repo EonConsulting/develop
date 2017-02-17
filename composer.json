@@ -2,6 +2,7 @@
   "name": "eonconsulting/phpstencil",
   "description": "PHP Package Stencil",
   "license": "MIT",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Josh Harington",
@@ -10,13 +11,10 @@
   ],
   "autoload": {
     "psr-4": {
-      "EONConsulting\\PHPStencil\\": "src/",
-      "Tsugi\\": "include/tsugi/"
+      "EONConsulting\\PHPStencil\\": "src/"
     },
     "files": [
-      "src/Http/helpers.php",
-      "include/tsugi/helpers.php",
-      "include/tsugi/config.php"
+      "src/Http/helpers.php"
     ]
   },
   "require": {
