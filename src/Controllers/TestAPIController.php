@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class TestAPIController
- * @package EONConsulting\PHPSaasWrapper\src\Controllers
+ * @package EONConsulting\PHPSaasWrapper\src\Http
  */
 class TestAPIController extends Controller {
 
