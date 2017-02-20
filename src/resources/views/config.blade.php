@@ -131,7 +131,7 @@
         <div class="col-md-12">
             @if(array_key_exists('children', $taxonomy))
                 @foreach($taxonomy['children'] as $item)
-                    <div class="col-md-4 subtopic-card">
+                    <div class="col-md-3 subtopic-card">
                         <a class="topic-container" href="{{ route('lti.single', [$config, $item['link']]) }}">
                             <img src="{{ (array_key_exists('img', $item) && $item['img'] != '') ? ((strpos($item['img'], 'http') !== false) ? $item['img'] : '/vendor/storyline/core/images/' . $item['img']) : 'http://placehold.it/240x200' }}" alt="" class="img responsive-img">
                             <div class="card-title">
@@ -141,10 +141,14 @@
                                 <!-- hover effect -->
                                 {{--{!! str_replace(' ', '', strip_tags($item['summary'])) !!}--}}
                             </div>
+                            <div class="clearfix"></div>
                         </a>
+                        <div class="clearfix"></div>
+                        <br />
                     </div>
                 @endforeach
             @endif
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

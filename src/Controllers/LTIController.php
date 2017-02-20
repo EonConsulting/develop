@@ -1,10 +1,10 @@
 <?php
 namespace EONConsulting\Storyline\Core\Controllers;
 
+use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
-use JoshHarington\LaravelTsugi\Controllers\TsugiController;
 
-class LTIController extends TsugiController {
+class LTIController extends LTIBaseController {
 
     protected $taxonomy;
 
