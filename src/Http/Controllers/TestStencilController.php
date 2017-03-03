@@ -11,12 +11,12 @@ namespace EONConsulting\PHPStencil\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 
-class TestStencilController extends BaseStencilController {
+class TestStencilController extends LTIBaseController {
 
     protected $hasLTI = true;
 
     public function test() {
-        return 'test';
+        echo 'test';
     }
 
 }
