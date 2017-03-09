@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8">
 
-                <form class="form" id="form" name="form" method="post" action="/launchUrlEditor">
+                <form id="iframe-form" name="iframe-form">
 
                     @if (session('error_message'))
                         <div class="col-md-12">

@@ -11,8 +11,6 @@
 
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
-        .lti_frameResize {max-width: 450px; height: 450px !important; max-height:350px;}
-        iframe.lti_frameResize {height: 450px !important;}
 
         body {font-family:arial; background: transparent !important;}
         .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
@@ -20,6 +18,8 @@
         .ltickplugin {background: transparent;}
         .cke_dialog_contents_body {background-image: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckltiheader.gif') }}") !important;}
         .cke_dialog_contents tbody.tr {background: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckltiheader.gif') }}") !important}
+        .iframeCover {background: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckeditorLtiPlugin.gif') }}") !important}
+        .ckeditorframe {background: transparent !important;}
 
     </style>
 

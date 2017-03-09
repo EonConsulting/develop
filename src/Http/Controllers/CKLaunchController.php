@@ -44,11 +44,11 @@ class CKLaunchController extends LTIBaseController
     public function getLaunchContent($launch_url ='', $key='', $secret='')
     {
 
-        //Validate to Make Sure the Launch Url is not empty
-        if(! request()->has('launch_url')) {
-            session()->flash('error_message', 'The Launch URL can not be empty');
-            return redirect()->route('ckeditor.launchframe');
-        }
+//        //Validate to Make Sure the Launch Url is not empty
+//        if(! request()->has('launch_url')) {
+//            session()->flash('error_message', 'The Launch URL can not be empty');
+//            return redirect()->route('ckeditor.launchframe');
+//        }
 
         $launch_url = request()->launch_url;
         $key = request()->key;
