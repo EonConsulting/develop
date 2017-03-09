@@ -67,6 +67,14 @@ var csdialogDefinition = function (editor) {
                             validate: function () {
 
                             },
+                        },{
+                            type: 'text',
+                            id: '   height',
+                            label: 'Iframe Height',
+                            style: 'margin-top:5px',
+                            validate: function () {
+
+                            },
                         },
                     ],
 
@@ -80,6 +88,7 @@ var csdialogDefinition = function (editor) {
             var key = this.getContentElement('ltitab', 'launchkey').getInputElement().getValue();
             var secret = this.getContentElement('ltitab', 'launchsecret').getInputElement().getValue();
             var url = "/eon/lti/launch?launch_url=" + launch_url + "&key=" +key + "&secret=" + secret ;
+            var height = this.getContentElement('ltitab', 'height').getInputElement().getValue();
             var paragraph = new CKEDITOR.dom.element('div');
             var iframe =    new CKEDITOR.dom.element('iframe');
             // Set paragraphn Attributes
@@ -88,8 +97,8 @@ var csdialogDefinition = function (editor) {
             })
             // Set Iframe Attributes
             iframe.setAttributes({
-                //'width' :600,
-                'height':600,
+                'width' :'100%',
+                'height': height,
                 'type'  : 'text/html',
                 'src': url,
                 'allowtransparency': 'true',

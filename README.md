@@ -67,7 +67,8 @@ Publish All Assets to the vendor folder using the following command:
 
 
 #### The Road ahead
-     LTI CK Editor Standalone Version, Javascript Based Launcher
-     Update Bugs as we go
-     Include TAO Launcher
+     This Version of the plugin launches and create an instance of a Tool.
+     
+     The Second version of the plugin [Version 2](https://github.com/EonConsulting/ck-editor-plugin-v2)
+     lists all LTI Components, The user will just select a cmponent from
      

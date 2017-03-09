@@ -16,10 +16,6 @@
         .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
         p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
         .ltickplugin {background: transparent;}
-        .cke_dialog_contents_body {background-image: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckltiheader.gif') }}") !important;}
-        .cke_dialog_contents tbody.tr {background: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckltiheader.gif') }}") !important}
-        .iframeCover {background: url("{{ URL::asset('vendor/ckeditorplugin/ckeditor/plugins/coursecontent/logo/ckeditorLtiPlugin.gif') }}") !important}
-        .ckeditorframe {background: transparent !important;}
 
     </style>
 
