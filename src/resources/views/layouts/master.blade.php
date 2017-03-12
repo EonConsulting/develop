@@ -4,6 +4,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
+    <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 
 
     <!-- Custom Stylesheet for the CKEditor LTI Plugin -->
@@ -20,12 +21,19 @@
         /* Backgrounds */
         .unisa-grey     {background: #777777 !important}
 
-        /* Buttons */
+        /* Buttons Active */
+
         .unisa-blue-btn     {background: #172652 !important; border-color: #172652; color:#fff;}
         .unisa-red-btn      {background: #930010 !important; border-color: #930010; color:#fff;}
         .unisa-black-btn    {background: #222222 !important; border-color: #222222; color:#fff;}
         .unisa-orange-btn   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
         .unisa-grey-btn     {background: #777777 !important; border-color: #777777; color:#fff;}
+
+        .unisa-blue-btn:hover     {background: #172652 !important; border-color: #172652; color:#fff;}
+        .unisa-red-btn:hover      {background:red;color:#cccccc;}
+        .unisa-black-btn:hover    {background: #222222 !important; border-color: #222222; color:#fff;}
+        .unisa-orange-btn:hover   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
+        .unisa-grey-btn:hover     {background: #777777 !important; border-color: #777777; color:#fff;}
 
         /* Apps Css */
         .container{width:100%}

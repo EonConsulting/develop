@@ -37,7 +37,6 @@
             @foreach($tools as $tool)
                 <div class="app-item col-xs-3">
                     <div class="app-contents">
-                        <a href ="#">
                             <div class ="app-logo">
                                 <img class="img-thumbnail" src="{!! (is_string($tool['icon']) && $tool['icon'] == '') ? 'http://placehold.it/100x100' : $tool['icon'] !!}" alt="">
                             </div>
@@ -45,12 +44,10 @@
                                     <h4>{!! $tool['title'] !!}</h4>
                                     <p class="app-description">{!! $tool['description'] !!}</p>
                                     <div class="pull-bottom-left">
-                                         <p><a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" data-context="{{$tool['context_id']}}" class="appitem btn unisa-blue-btn btn-sm" role="button">View</a>
-                                             <a href="{{ route('eon.laravellti.delete', $tool['context_id']) }}" class="btn unisa-black-btn btn-sm" role="button">Delete</a></p>
+                                        <a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" data-context="{{$tool['context_id']}}" class="appitem btn unisa-orange-btn btn-sm" role="button"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>&nbsp;Insert Tool</a>
+                                             <!--<a href="{{ route('eon.laravellti.delete', $tool['context_id']) }}" class="btn unisa-black-btn btn-sm" role="button">Delete</a></p> -->
                                     </div>
                             </div>
-
-                        </a>
                     </div>
                 </div>
             @endforeach
