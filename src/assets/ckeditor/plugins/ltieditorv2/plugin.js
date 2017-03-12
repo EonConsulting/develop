@@ -13,7 +13,7 @@
                 CKEDITOR.dialog.add('ltieditorv2Dialog', function ()
                 {
                     return{
-                        title: 'LTI Tools',
+                        title: 'LTI Tools APP Store',
                         minWidth: 750,
                         minHeight: 450,
                         contents :
@@ -69,6 +69,7 @@
                                                         });
 
                                                         editor.insertElement(div, div.append(appframe));
+                                                        CKEDITOR.dialog.getCurrent().hide();
                                                     },
                                                 })
 
