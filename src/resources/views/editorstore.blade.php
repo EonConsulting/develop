@@ -44,8 +44,8 @@
                                     <h4>{!! $tool['title'] !!}</h4>
                                     <p class="app-description">{!! $tool['description'] !!}</p>
                                     <div class="pull-bottom-left">
-                                        <a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" data-context="{{$tool['context_id']}}" class="appitem btn unisa-orange-btn btn-sm" role="button"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>&nbsp;Insert Tool</a>
-                                             <!--<a href="{{ route('eon.laravellti.delete', $tool['context_id']) }}" class="btn unisa-black-btn btn-sm" role="button">Delete</a></p> -->
+                                        <a data-context="{{$tool['context_id']}}" class="appitem btn unisa-orange-btn btn-sm" role="button"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>&nbsp;Insert Tool</a>
+                                            {{--<!-- href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" -->--}}
                                     </div>
                             </div>
                     </div>
