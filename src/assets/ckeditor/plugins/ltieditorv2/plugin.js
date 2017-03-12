@@ -29,6 +29,7 @@
                                     height : 450,
                                     onContentLoad: function () {
                                         // DOM Iframe Access
+
                                         var iframe = document.getElementById(this._.frameId);
                                         var iframeWindow = iframe.contentWindow;
                                         // Global Vars
