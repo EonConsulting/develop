@@ -15,7 +15,7 @@ The Differences between V1 and V2
 
   Access an LTI Tool from the App Repository and use .
   
-### XML HTPP Request (AJAX)
+### XML HTPP Request
 
 
       
