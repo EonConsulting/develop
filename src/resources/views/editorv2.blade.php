@@ -21,6 +21,40 @@
                             config.allowedContent = true
                     );
                 </script>
+{{--//                    CKEDITOR.on('instanceReady', function (event) {--}}
+{{--//                        var requestURL = '/ckresponse';--}}
+{{--//                        $.get(requestURL, onSuccess);--}}
+{{--//                        function onSuccess(data, status) {--}}
+{{--//                            if (status = 'success') {--}}
+{{--//                                $.each(data, function (index, element) {--}}
+{{--//--}}
+{{--//                                    alert(element.title);--}}
+{{--//--}}
+{{--//                                })--}}
+{{--//                                return console.log(data, status);--}}
+{{--//                            }--}}
+{{--//--}}
+{{--//                        }--}}
+{{--//--}}
+{{--//                    });--}}
+
+                {{--<button id="getResponse">Get Response Data</button>--}}
+                <script>
+
+                    function onGetClick(event) {
+                        //We are not passing any data we are simply requesting data
+                        $.get();
+                    }
+                    function onSuccess(data, status, xhr){
+                        console.log(data, status, xhr);
+
+                        console.log(String(data.value).toUpperCase());
+                    }
+
+                    $('button#getResponse').on('click', onGetClick);
+
+
+                </script>
             </div>
 
         </div>

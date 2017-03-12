@@ -1,126 +1,106 @@
 /*
  * @example An iframe-based dialog with frame window fit dialog size.
  */
-( function($) {
+( function() {
+    var iframeWindow = null;
     CKEDITOR.plugins.add( 'ltieditorv2',
         {
+            requires: [ 'iframedialog' ],
             init: function( editor )
             {
+                var me = this;
 
+                CKEDITOR.dialog.add('ltieditorv2Dialog', function ()
+                {
+                    return{
+                        title: 'LTI Tools',
+                        minWidth: 750,
+                        minHeight: 450,
+                        contents :
+                        [
+                            {
+                                id: 'iframe',
+                                label: 'Insert an LTI Tool',
+                                expand: true,
+                                elements : [{
+                                    type: 'iframe',
+                                    src:  '/ckeditorstore',
+                                    width  : '100%',
+                                    height : 450,
+                                    onContentLoad: function () {
+                                        // DOM Iframe Access
+                                        var iframe = document.getElementById(this._.frameId);
+                                        var iframeWindow = iframe.contentWindow;
+                                        // Global Vars
+                                        var launch_url;
+                                        var key;
+                                        var secret;
+                                        //Still in this context we get the attribute of the clicked button
+                                        iframeWindow.$('.appitem').each(function () {
+                                            var $this = $(this);
+                                            $this.on("click", function () {
+                                                var context_id = $(this).data('context');
+                                               // console.log(context_id);
+                                                // Launch an AJAX Get Call i need to get keys to assign to on OK Event
+                                                $.ajax({
+                                                    url: '/ajaxresponse/' + context_id,
+                                                    type: 'GET',
+                                                    success: function (launchvars) {
+                                                        var launch_url = launchvars['launch_url'];
+                                                        var key        = launchvars['key'];
+                                                        var secret     = launchvars['secret'];
+                                                        var url        = "/eon/lti/launch?launch_url="+launch_url+"&key="+key+"&secret="+secret;
+                                                        var div        = new CKEDITOR.dom.element('div');
+                                                        var appframe   = new CKEDITOR.dom.element('iframe');
+                                                        //Set Iframe Attributes
+                                                        div.setAttributes({
+                                                            'class': 'appframe'
+                                                        });
+                                                        appframe.setAttributes({
+                                                            'width' :'100%',
+                                                            'height': 500,
+                                                            'type'  : 'text/html',
+                                                            'src': url,
+                                                            'allowtransparency': 'true',
+                                                            'frameborder': 0,
+                                                            'class': 'ckeditorframev2'
 
-                CKEDITOR.dialog.add('ltieditorv2Dialog', storedialogDefinition);
+                                                        });
+
+                                                        editor.insertElement(div, div.append(appframe));
+                                                    },
+                                                })
+
+                                            });
+                                        });
+
+                                    }
+
+                                }]
+                            }
+                        ],
+                        onOk : function () {
+                            //Notify the Iframe Scripts here
+                           editor.insert
+
+                        }
+
+                    }
+
+                });
 
                 editor.addCommand( 'ltieditorv2DialogCmd', new CKEDITOR.dialogCommand( 'ltieditorv2Dialog' ) );
 
                 editor.ui.addButton( 'ltieditorv2Dialog',
                     {
-                        label: 'LTI Store',
+                        label: 'LtiTools',
                         command: 'ltieditorv2DialogCmd',
                         icon: this.path + 'icons/content.png'
                     } );
-
             }
         } );
 
-    var storedialogDefinition = function (editor) {
-        var openMsgDialog = function () {
-            alert('This Launch URI can not be empty');
-        }
-        var dialogDefinition =
-        {
-            title : 'LTI Insert',
-            minWidth  : 450,
-            minHeight : 200,
-            contents  : [
-                {
-                    // To make things simple, we are just going to have one tab
-
-                    id: 'ltitab',
-                    label: 'Insert LTI Component',
-                    title: 'Insert an LTI Component',
-                    expand: true,
-                    padding: 5,
-                    elements : [{
-                        type: 'vbox',
-                        widths: [null, null],
-                        styles: ['vertical-align-top'],
-                        children: [
-                            {
-                                type: 'text',
-                                id: 'launch_url',
-                                label: 'Launch URL',
-                                style: 'margin-top:5px',
-                                validate: function () {
-                                    if (!this.getValue()){
-                                        openMsgDialog();
-                                        return false;
-                                    }
-                                },
-                            },{
-                                type: 'text',
-                                id: 'launchkey',
-                                label: 'Launch KEY',
-                                style: 'margin-top:5px',
-                                validate: function () {
-
-                                },
-                            },{
-                                type: 'text',
-                                id: 'launchsecret',
-                                label: 'Launch Secret',
-                                style: 'margin-top:5px',
-                                validate: function () {
-
-                                },
-                            },{
-                                type: 'text',
-                                id: 'height',
-                                label: 'Iframe Height',
-                                style: 'margin-top:5px',
-                                width: '100px',
-                                validate: function () {
-
-                                },
-                            },
-                        ],
-
-                    }]
-                }
-            ],
-            buttons : [ CKEDITOR.dialog.okButton, CKEDITOR.dialog.cancelButton ],
-
-            onOk : function () {
-                var launch_url = this.getContentElement('ltitab', 'launch_url').getInputElement().getValue();
-                var key = this.getContentElement('ltitab', 'launchkey').getInputElement().getValue();
-                var secret = this.getContentElement('ltitab', 'launchsecret').getInputElement().getValue();
-                var url = "/eon/lti/launch?launch_url=" + launch_url + "&key=" +key + "&secret=" + secret ;
-                var uheight = this.getContentElement('ltitab', 'height').getInputElement().getValue();
-                var paragraph = new CKEDITOR.dom.element('div');
-                var iframe =    new CKEDITOR.dom.element('iframe');
-                // Set paragraphn Attributes
-                paragraph.setAttributes({
-                    'class': 'iframeCover',
-                })
-                // Set Iframe Attributes
-                iframe.setAttributes({
-                    'width' :'100%',
-                    'height': uheight,
-                    'type'  : 'text/html',
-                    'src': url,
-                    'allowtransparency': 'true',
-                    'frameborder': 0,
-                    'class': 'ckeditorframe',
-
-                });
-
-                editor.insertElement(paragraph, paragraph.append(iframe));
-
-            }
-        };
-        return dialogDefinition;
-
-    }
-})(jQuery);
+} )();
 
 var toolbar = CKEDITOR.config.toolbarButtons;
 //toolbar[toolbar.length-1].items.push( 'coursecontentDialog' );

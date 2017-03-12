@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('ckeditorpluginv2::layouts.master')
 
 @section('custom-styles')
     <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet" />
@@ -85,9 +85,6 @@
         </div> <!-- /row -->
 
     </div> <!-- /container -->
-@endsection
-
-@section('custom-scripts')
     <script>
         location.href = "#";
         location.href = "#launch_window";
