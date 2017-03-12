@@ -40,23 +40,23 @@ class CKDomainsController extends LTIBaseController {
     }
 
     /**
-     *
+     * @param LTIContext $context
      * @return \Illuminate\Http\JsonResponse
      */
     function getAJAXresponse(LTIContext $context) {
         //This is an API that can be used to get a response of available domains
         //$.get(domain, data)Send Parameter Response in Real Time
+
         $key = ($context->key) ? $context->key->key_key : '';
         $secret = ($context->key) ? $context->key->secret : '';
         $launch_url = ($context->domain) ? $context->domain->domain : false;
-        //Array with Respoonse Keys and Values
+        //Array with Response Keys and Values
         $launch_params = [
             'key'         => $key,
             'secret'      => $secret,
             'launch_url'  => $launch_url
 
         ];
-        //Send Back Launch Url and Key
         return response()->json($launch_params);
 
     }
