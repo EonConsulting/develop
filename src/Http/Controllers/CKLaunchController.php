@@ -63,6 +63,11 @@ class CKLaunchController extends LTIBaseController
 
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
+
     public function getLaunchParams() {
 
         //Get a Response Array Object
@@ -71,6 +76,11 @@ class CKLaunchController extends LTIBaseController
         return response()->json($user);
 
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function launchtransport(Request $request) {
 
@@ -110,6 +120,10 @@ class CKLaunchController extends LTIBaseController
         return response()->json($this->passed);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function xmltransport(Request $request) {
 
         //Request XML File (Use Import Config and Read From File Method)
