@@ -8,6 +8,7 @@
 
 namespace EONConsulting\CKEditorPlugin\Http\Controllers;
 
+use EONConsulting\CKEditorPlugin\Models\LtiCkDomain;
 use App\Http\Controllers\Controller;
 use EONConsulting\LaravelLTI\Classes\Readers\ImportConfig;
 use EONConsulting\LaravelLTI\Http\Requests\StoreLTIToolRequest;
@@ -32,6 +33,15 @@ class CKLaunchController extends LTIBaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
+    protected $passed = [
+        'status'  => 'success',
+        'message' => 'Component has been Saved'
+    ];
+
+    protected $failed = [
+        'status' => 'error',
+    ];
+
     public function setLaunchContent() {return view('ckeditorplugin::ltiCKEditor');}
     public function forms() {return view('ckeditorplugin::iframeview');}
 
@@ -41,14 +51,7 @@ class CKLaunchController extends LTIBaseController
      * @param string $secret
      * @return mixed
      */
-    public function getLaunchContent($launch_url ='', $key='', $secret='')
-    {
-
-//        //Validate to Make Sure the Launch Url is not empty
-//        if(! request()->has('launch_url')) {
-//            session()->flash('error_message', 'The Launch URL can not be empty');
-//            return redirect()->route('ckeditor.launchframe');
-//        }
+    public function getLaunchContent($launch_url ='', $key='', $secret='') {
 
         $launch_url = request()->launch_url;
         $key = request()->key;
@@ -58,10 +61,102 @@ class CKLaunchController extends LTIBaseController
 
         return ($response);
 
-//        $response = array(
-//            'status' => 'success',
-//            'msg' => 'Setting created successfully',
-//        );
+    }
+
+    public function getLaunchParams() {
+
+        //Get a Response Array Object
+
+        $user = laravel_lti()->get_user_lti_details(request()->user());
+        return response()->json($user);
+
+    }
+
+    public function launchtransport(Request $request) {
+
+
+        if ($request->has('launch_url')) {
+
+            $launch_url = $request->all()['launch_url'];
+
+        }
+
+        if (LtiCkDomain::where('launch_url', $launch_url)->first()) {
+
+            return response()->json($this->failed);
+
+        }
+
+        $key = '';
+        $secret = '';
+
+        if ($request->has('key')) {
+
+            $key = $request->all()['key'];
+        }
+
+        if ($request->has('secret')) {
+
+            $secret = $request->all()['secret'];
+
+        }
+
+        $launchdomain = new LtiCkDomain;
+        $launchdomain->launch_url = $launch_url;
+        $launchdomain->key = $key;
+        $launchdomain->secret = $secret;
+        $launchdomain->save();
+
+        return response()->json($this->passed);
+    }
+
+    public function xmltransport(Request $request) {
+
+        //Request XML File (Use Import Config and Read From File Method)
+        $xml = ImportConfig::read_from_url($request->all()['url']);
+
+        if (!$xml) {
+
+            return response()->json($this->failed);
+        }
+
+        $arr = (array) $xml;
+
+        if ($arr && array_key_exists('bltilaunch_url', $arr)) {
+
+            $launch_url = $arr['bltilaunch_url'];
+
+        }else {
+
+            return response()->json($this->failed);
+        }
+
+        if (LtiCkDomain::where('launch_url', $launch_url)->first()) {
+
+            return response()->json($this->failed);
+
+        }
+
+        $key = '';
+        $secret ='';
+
+        if ($request->has('key')) {
+            $key = $request->all()['key'];
+        }
+
+        if ($request->has('secret')) {
+
+            $secret = $request->all()['secret'];
+        }
+
+        $domain = new LtiCkDomain;
+        $domain->launch_url = $launch_url;
+        $domain->key = $key;
+        $domain->secret = $secret;
+        $domain->save();
+
+        return response()->json($xml);
+
     }
 
 
