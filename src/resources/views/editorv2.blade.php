@@ -21,24 +21,6 @@
                             config.allowedContent = true
                     );
                 </script>
-{{--//                    CKEDITOR.on('instanceReady', function (event) {--}}
-{{--//                        var requestURL = '/ckresponse';--}}
-{{--//                        $.get(requestURL, onSuccess);--}}
-{{--//                        function onSuccess(data, status) {--}}
-{{--//                            if (status = 'success') {--}}
-{{--//                                $.each(data, function (index, element) {--}}
-{{--//--}}
-{{--//                                    alert(element.title);--}}
-{{--//--}}
-{{--//                                })--}}
-{{--//                                return console.log(data, status);--}}
-{{--//                            }--}}
-{{--//--}}
-{{--//                        }--}}
-{{--//--}}
-{{--//                    });--}}
-
-                {{--<button id="getResponse">Get Response Data</button>--}}
                 <script>
 
                     function onGetClick(event) {

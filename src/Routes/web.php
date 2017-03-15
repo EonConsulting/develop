@@ -9,6 +9,8 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\CKEditorPlu
         Route::any('/ajaxresponse/{context}', ['as' => 'ckresponse', 'uses' => 'CKDomainsController@getAJAXresponse']);
         Route::any('/appstore/launch/{context}', ['as' => 'eon.laravellti.appstore.launch', 'uses' => 'CKDomainsController@launch']);
         //Route::group(['middleware' => ['auth']], function() {
+        Route::match(['get', 'post'], '/connection', ['as' => 'connection', 'uses' => 'CKDomainsController@taoLaunch']);
+
 
     //});
 });

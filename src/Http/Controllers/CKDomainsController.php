@@ -9,6 +9,7 @@
 namespace EONConsulting\CKEditorPluginV2\Http\Controllers;
 
 
+use EONConsulting\CKEditorPlugin\src\Factories\Config;
 use EONConsulting\CKEditorPluginV2\CKEditorPluginV2;
 use EONConsulting\LaravelLTI\Classes\Readers\ImportConfig;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
@@ -19,7 +20,7 @@ class CKDomainsController extends LTIBaseController {
     /**
      * @var bool
      */
-    protected $hasLTI = true;
+    protected $hasLTI = false;
     /**
      * @return \Illuminate\Http\JsonResponse
      *
@@ -50,14 +51,18 @@ class CKDomainsController extends LTIBaseController {
         $key = ($context->key) ? $context->key->key_key : '';
         $secret = ($context->key) ? $context->key->secret : '';
         $launch_url = ($context->domain) ? $context->domain->domain : false;
-        //Array with Response Keys and Values
-        $launch_params = [
-            'key'         => $key,
-            'secret'      => $secret,
-            'launch_url'  => $launch_url
 
-        ];
-        return response()->json($launch_params);
+        return laravel_lti()->launch($launch_url, $key, $secret);
+
+
+    }
+
+    public function newLaunch(Request $request) {
+
+        $launch_url = $request->get('launch_url', '');
+        $key = $request->get('key','');
+        $secret = $request->get('secret');
+
 
     }
 

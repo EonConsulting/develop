@@ -7,12 +7,19 @@
  */
 
 namespace EONConsulting\CKEditorPluginV2;
+use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 
 
-class CKEditorPluginV2 {
+
+
+class CKEditorPluginV2 extends LTIBaseController {
+
+
 
     public function get_store() {
         return view('ckeditorpluginv2::store');
     }
+    //Connect to a TAO API and get a response (3 Calls to be made with CURL)
+
 
 }

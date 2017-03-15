@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit0fab9d71622b75ad3b4f27d4cca916af
 {
     public static $files = array (
-        'c1268ccf85fd50f269bbca560468186a' => __DIR__ . '/../..' . '/src/functions.php',
+        'ebce84dc47eb1d680f29b00d0efa287f' => __DIR__ . '/../..' . '/src/Http/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -25,7 +25,10 @@ class ComposerStaticInit0fab9d71622b75ad3b4f27d4cca916af
     );
 
     public static $classMap = array (
-        'EONConsulting\\CKEditorPluginV2\\AppStoreServiceProvider' => __DIR__ . '/../..' . '/src/CKEditorPluginV2ServiceProvider.php',
+        'EONConsulting\\CKEditorPluginV2\\CKEditorPluginV2' => __DIR__ . '/../..' . '/src/CKEditorPluginV2.php',
+        'EONConsulting\\CKEditorPluginV2\\CKEditorPluginV2ServiceProvider' => __DIR__ . '/../..' . '/src/CKEditorPluginV2ServiceProvider.php',
+        'EONConsulting\\CKEditorPluginV2\\Facades\\CKEditorPluginV2' => __DIR__ . '/../..' . '/src/Facades/CKEditorPluginV2.php',
+        'EONConsulting\\CKEditorPluginV2\\Http\\Controllers\\CKDomainsController' => __DIR__ . '/../..' . '/src/Http/Controllers/CKDomainsController.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
