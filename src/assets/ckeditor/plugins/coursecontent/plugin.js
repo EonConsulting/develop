@@ -107,15 +107,32 @@
                                                 type: 'post',
                                                 data: {launch_url: launch_url, key: key, secret: secret},
                                                 success: function (configparams) {
-                                                    if (configparams.status == 'error') {
-                                                        alert('A Component with that Launch URL exists :: Exiting with Error:' +erorlogNum);
+                                                    if (configparams.status == 'domainerror') {
+                                                        var domainExistsUrl = "/cklaunch?launch_url="+configparams.launch_url ;
+                                                        var propHeight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
+                                                        var propDiv = new CKEDITOR.dom.element('div');
+                                                        var propIframe = new CKEDITOR.dom.element('iframe');
+                                                        propDiv.setAttributes({
+                                                            'class': 'iframeCover',
+                                                        });
+                                                        propIframe.setAttributes({
+                                                            'width': '100%',
+                                                            'height': propHeight,
+                                                            'type': 'text/html',
+                                                            'src': domainExistsUrl,
+                                                            'frameborder': 0,
+                                                            'class': 'ckeditorframe',
+                                                        });
+
+                                                        editor.insertElement(propDiv, propDiv.append(propIframe));
+
                                                     } else {
                                                     // console.log(configparams);
                                                     var url = "/cklaunch?launch_url="+configparams.launch_url ;
                                                     var uheight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                                                     var div = new CKEDITOR.dom.element('div');
                                                     var iframe = new CKEDITOR.dom.element('iframe');
-                                                    // Set paragraph Attributes
+                                                    // Set Div Attributes
                                                     div.setAttributes({
                                                         'class': 'iframeCover',
                                                     });
@@ -130,6 +147,10 @@
                                                     });
                                                     editor.insertElement(div, div.append(iframe));
                                                 }
+                                                    if (config.status == 'Error') {
+                                                        alert('There was an Error Processing this Request' + erorlogNum)
+                                                        return false;
+                                                    }
                                             }
 
                                             })
@@ -161,11 +182,32 @@
 
                                                         editor.insertElement(div, div.append(iframe));
                                                     }
-                                                    else if (config.status == 'error') {
-                                                        alert('A Component with that Launch URL exists :: Exiting with Error' + erorlogNum)
-                                                        return false;
+                                                    else {
+                                                        console.log(config);
+                                                        var domainExistsUrl = "/cklaunch?launch_url="+ launch_url ;
+                                                        var propHeight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
+                                                        var propDiv = new CKEDITOR.dom.element('div');
+                                                        var propIframe = new CKEDITOR.dom.element('iframe');
+                                                        propDiv.setAttributes({
+                                                            'class': 'iframeCover',
+                                                        });
+                                                        propIframe.setAttributes({
+                                                            'width': '100%',
+                                                            'height': propHeight,
+                                                            'type': 'text/html',
+                                                            'src': domainExistsUrl,
+                                                            'frameborder': 0,
+                                                            'class': 'ckeditorframe',
+                                                        });
+
+                                                        editor.insertElement(propDiv, propDiv.append(propIframe));
                                                     }
-                                            },
+
+                                                    // if (config.status == 'Error') {
+                                                    //     alert('There was an Error Processing this Request' + erorlogNum)
+                                                    //     return false;
+                                                    // }
+                                            }
 
                                         });
                                     }

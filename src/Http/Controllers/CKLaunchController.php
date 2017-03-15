@@ -35,11 +35,14 @@ class CKLaunchController extends LTIBaseController
 
     protected $passed = [
         'status'  => 'success',
-        'message' => 'Component has been Saved'
     ];
 
     protected $failed = [
         'status' => 'error',
+    ];
+
+    protected $failedDomainExists = [
+        'status' => 'domainerror',
     ];
 
     public function setLaunchContent() {return view('ckeditorplugin::ltiCKEditor');}
@@ -97,7 +100,12 @@ class CKLaunchController extends LTIBaseController
 
         if (LtiCkDomain::where('launch_url', $launch_url)->first()) {
 
-            return response()->json($this->failed);
+                if ($request->has('key')) {
+
+                }
+
+            return response()->json(['launch_url' => $launch_url, $this->failedDomainExists]);
+
 
         }
 
@@ -149,14 +157,10 @@ class CKLaunchController extends LTIBaseController
             return response()->json($this->failed);
         }
 
-        if (LtiCkDomain::where('launch_url', $launch_url)->first()) {
-
-            return response()->json($this->failed);
-
-        }
 
         $key = '';
         $secret ='';
+
 
         if ($request->has('key')) {
             $key = $request->all()['key'];
@@ -165,6 +169,17 @@ class CKLaunchController extends LTIBaseController
         if ($request->has('secret')) {
 
             $secret = $request->all()['secret'];
+        }
+
+
+        if (LtiCkDomain::where('launch_url', $launch_url)->first()) {
+
+            LtiCkDomain::where('launch_url', $launch_url)->first()
+                ->update(['key' => $key, 'secret' => $secret]);
+
+            return response()->json(['launch_url' => $launch_url, $this->failedDomainExists]);
+
+
         }
 
         $domain = new LtiCkDomain;
