@@ -105,17 +105,17 @@
                                             $.ajax({
                                                 url: '/xmltransport',
                                                 type: 'post',
-                                                data: {url: launch_url, key: key, secret: secret},
+                                                data: {launch_url: launch_url, key: key, secret: secret},
                                                 success: function (configparams) {
                                                     if (configparams.status == 'error') {
                                                         alert('A Component with that Launch URL exists :: Exiting with Error:' +erorlogNum);
                                                     } else {
-                                                    var xml_launch_url = configparams['bltilaunch_url'];
-                                                    var url = xml_launch_url;
+                                                    // console.log(configparams);
+                                                    var url = "/cklaunch?launch_url="+configparams.launch_url ;
                                                     var uheight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                                                     var div = new CKEDITOR.dom.element('div');
                                                     var iframe = new CKEDITOR.dom.element('iframe');
-                                                    // Set paragraphn Attributes
+                                                    // Set paragraph Attributes
                                                     div.setAttributes({
                                                         'class': 'iframeCover',
                                                     });
@@ -142,7 +142,7 @@
                                             data: {launch_url: launch_url, key:key, secret:secret},
                                             success: function (config) {
                                                     if (config.status == 'success') {
-                                                        var url = launch_url;
+                                                        var url = "/cklaunch?launch_url="+launch_url ;
                                                         var div =       new CKEDITOR.dom.element('div');
                                                         var iframe =    new CKEDITOR.dom.element('iframe');
                                                         div.setAttributes({

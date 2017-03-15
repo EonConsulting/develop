@@ -46,20 +46,24 @@ class CKLaunchController extends LTIBaseController
     public function forms() {return view('ckeditorplugin::iframeview');}
 
     /**
-     * @param string $launch_url
-     * @param string $key
-     * @param string $secret
+     * @param Request $request
      * @return mixed
      */
-    public function getLaunchContent($launch_url ='', $key='', $secret='') {
+    public function newLaunch(Request $request) {
 
-        $launch_url = request()->launch_url;
-        $key = request()->key;
-        $secret = request()->secret;
+        $launch_url = $request->get('launch_url', '');
+        $key = $request->get('key', '');
+        $secret = $request->get('secret', '');
 
-        $response = laravel_lti()->launch($launch_url, $key, $secret);
+        //Returning an Object from LTiCkDomain
+        $obj = LtiCkDomain::where('launch_url', $launch_url)->first();
+        if (!$obj) {
+            return false;
+        }
+        $key = $obj->key;
+        $secret = $obj->secret;
 
-        return ($response);
+        return laravel_lti()->launch($launch_url, $key, $secret);
 
     }
 
@@ -127,7 +131,7 @@ class CKLaunchController extends LTIBaseController
     public function xmltransport(Request $request) {
 
         //Request XML File (Use Import Config and Read From File Method)
-        $xml = ImportConfig::read_from_url($request->all()['url']);
+        $xml = ImportConfig::read_from_url($request->all()['launch_url']);
 
         if (!$xml) {
 
@@ -169,7 +173,11 @@ class CKLaunchController extends LTIBaseController
         $domain->secret = $secret;
         $domain->save();
 
-        return response()->json($xml);
+//      $response = LtiCkDomain::where('launch_url', $launch_url)->first(); // Avoid Repeating Queries
+        $response = $domain->toArray();
+        unset($response['key']);
+        unset($response['secret']);
+        return response()->json($response);
 
     }
 
