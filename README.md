@@ -1,3 +1,3 @@
 # PHPStencil
 
-All the documentation can be found here: [PHPStencil Wiki](https://github.com/EonConsulting/PHPStencil/wiki)
+All the documentation can be found here: [Graphs Wiki](https://github.com/EonConsulting/Graphs/wiki)
