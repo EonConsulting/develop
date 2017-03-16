@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\CKEditorPlu
         Route::any('/xmltransport', ['as' => 'xmltransport', 'uses' => 'CKLaunchController@xmltransport']);
         Route::any('/launchtransport', ['as' => 'launchtransport', 'uses' => 'CKLaunchController@launchtransport']);
         Route::get('/cklaunch', ['as' => 'cklaunch', 'uses' => 'CKLaunchController@newLaunch']);
+        Route::any('/ckesavedata', ['as' => 'ckesavedata', 'uses' => 'SaveController@update']);
 });
 
 

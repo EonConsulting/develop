@@ -1,6 +1,16 @@
-/*
+/**
  * @Author Peace Ngara
- * EON consulting
+ * @Ck Editor Version 1 Plugin - Alias coursecontent
+ * @file Overview CK Editor LTI Insert from an LTI Link or Config file
+ *
+ */
+
+/**
+ * Fired When the User clicks the LTI Button on the Toolbar
+ * @since 1.0
+ * @event click
+ * @member CKEDITOR.editor
+ *
  */
 ( function() {
     CKEDITOR.plugins.add( 'coursecontent',
@@ -17,7 +27,7 @@
                         minHeight : 200,
                         contents  : [
                         {
-                            // To make things simple, we are just going to have one tab
+                            // Initialise and Open TAB
 
                             id: 'ltitab',
                             label: 'Insert LTI Component',
@@ -66,16 +76,6 @@
 
                                         },
                                     },
-                                    {
-                                        type: 'html',
-                                        id: 'errors',
-                                        html: '<div id="errordiv"></div>',
-                                        style: 'margin-top:5px',
-                                        width: '100px',
-                                        validate: function () {
-
-                                        },
-                                    },
                                 ],
 
                             }]
@@ -85,15 +85,16 @@
                         onOk : function () {
 
                             // Write a function that check if a certain character exists
-                            //First lets get the Field
+                            // First lets get the Field
                             var dialog = CKEDITOR.dialog.getCurrent();
                             var launch_url = dialog.getContentElement('ltitab', 'launch_url').getInputElement().getValue();
                             var key = dialog.getContentElement('ltitab', 'launchkey').getInputElement().getValue();
                             var secret = dialog.getContentElement('ltitab', 'launchsecret').getInputElement().getValue();
                             var uheight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                             var erorlogNum = 'XD0000000CK111';
+
                             //Writing a Conditional Statement
-                            //If Value Contains .xml -> Perfom a Different Action
+                            //If Value Contains an Index of .xml -> Send Config File to Server
 
                             $.ajax({
                                 url: '/ajresponse',

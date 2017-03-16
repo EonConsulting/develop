@@ -22,6 +22,7 @@ class VerifyCsrfToken extends BaseVerifier
         'connection', 'connection',
         'ajresponse', 'ajresponse',
         'xmltransport', 'xmltransport',
-        'launchtransport', 'launchtransport'
+        'launchtransport', 'launchtransport',
+        'ckeconnection', 'ckeconnection'
     ];
 }
