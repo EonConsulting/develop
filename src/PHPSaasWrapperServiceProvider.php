@@ -33,7 +33,7 @@ class PHPSaasWrapperServiceProvider extends ServiceProvider {
         ], 'migrations');
         $this->publishes([
             __DIR__ . '/database/seeds' => $this->app->databasePath() . '/seeds'
-        ], 'seeders');
+        ], 'seeds');
         $this->publishes([
             __DIR__ . '/resources/views' => base_path('resources/views'),
         ]);
