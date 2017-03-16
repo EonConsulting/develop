@@ -72,9 +72,10 @@
         });
 
 //        editor.resize($("#editor-wrapper").width(),$("#editor-wrapper").height(), true);
-//        var editor = ace.edit("editor");
-//        editor.setTheme("ace/theme/monokai");
-//        editor.getSession().setMode("ace/mode/html");
+
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/html");
 
         $.ajax({
             url: app_url + link,
@@ -84,13 +85,13 @@
             }
         });
 
-//        function showHTMLInIFrame() {
-//            $('#preview').html("<iframe src=" +
-//                "data:text/html," + encodeURIComponent(editor.getValue()) +
-//                "></iframe>");
-//        }
-//        editor.on("input", showHTMLInIFrame)
-//        showHTMLInIFrame();
-//        editor.navigateFileStart();
+        function showHTMLInIFrame() {
+            $('#preview').html("<iframe src=" +
+                "data:text/html," + encodeURIComponent(editor.getValue()) +
+                "></iframe>");
+        }
+        editor.on("input", showHTMLInIFrame)
+        showHTMLInIFrame();
+        editor.navigateFileStart();
     </script>
 @endsection

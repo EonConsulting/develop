@@ -28,30 +28,30 @@ class FileManagerController extends LTIBaseController {
 //        return view('eon.filemanager::index', ['html' => $html]);
 //    }
 //
-//    public function update(Request $request) {
-//        $page = request()->get('page');
-//        if(!$page) {
-//            return redirect()->back();
-//        }
-//
-////        dd($request->get('data'));
-//
-//        $ext = pathinfo($page, PATHINFO_EXTENSION);
-//        $file_name = pathinfo($page, PATHINFO_FILENAME) . '-' . time() . '.' . $ext;
-//
-//        if(!copy(public_path($page), public_path($file_name))) {
-//            return response()->json(['success' => false, 'success_message' => 'Page could not save.']);
-//        }
-//
-////        $contents = file_get_contents ($page);
-////        $contents = preg_replace("/<body[^>]*>(.*?)<\\/body>/is", $request->get('data'), $contents);
-////        file_put_contents($page, $contents);
-//
-//        $file = fopen(public_path($page), "w");
-//        fwrite($file, $request->get('data'));
-//        fclose($file);
-//        return response()->json(['success' => true, 'success_message' => 'Page saved.']);
-//    }
+    public function update(Request $request) {
+        $page = request()->get('page');
+        if(!$page) {
+            return redirect()->back();
+        }
+
+//        dd($request->get('data'));
+
+        $ext = pathinfo($page, PATHINFO_EXTENSION);
+        $file_name = pathinfo($page, PATHINFO_FILENAME) . '-' . time() . '.' . $ext;
+
+        if(!copy(public_path($page), public_path($file_name))) {
+            return response()->json(['success' => false, 'success_message' => 'Page could not save.']);
+        }
+
+//        $contents = file_get_contents ($page);
+//        $contents = preg_replace("/<body[^>]*>(.*?)<\\/body>/is", $request->get('data'), $contents);
+//        file_put_contents($page, $contents);
+
+        $file = fopen(public_path($page), "w");
+        fwrite($file, $request->get('data'));
+        fclose($file);
+        return response()->json(['success' => true, 'success_message' => 'Page saved.']);
+    }
 //
 //    function get_tree_html($data = []) {
 //        $html = '';
