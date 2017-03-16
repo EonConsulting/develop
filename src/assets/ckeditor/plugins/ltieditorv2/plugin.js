@@ -1,5 +1,16 @@
-/*
- * @example An iframe-based dialog with frame window fit dialog size.
+/**
+ * @Author Peace Ngara
+ * @Ck Editor Version 2 Plugin - Alias ltiv2plugin
+ * @file Overview CK Editor LTI Appstore Acceess Component
+ *
+ */
+
+/**
+ * Fired When the User clicks the LTI Button on the Toolbar
+ * @since 1.0
+ * @event click
+ * @member CKEDITOR.editor
+ *
  */
 ( function() {
     var iframeWindow = null;
@@ -14,8 +25,8 @@
                 {
                     return{
                         title: 'LTI Tools APP Store',
-                        minWidth: 750,
-                        minHeight: 450,
+                        minWidth: 600,
+                        minHeight: 400,
                         contents :
                         [
                             {
@@ -28,29 +39,21 @@
                                     width  : '100%',
                                     height : 450,
                                     onContentLoad: function () {
-                                        // DOM Iframe Access
-
+                                        // We Access the DOM Instance of the Iframe
                                         var iframe = document.getElementById(this._.frameId);
                                         var iframeWindow = iframe.contentWindow;
-                                        // Global Vars
-                                        var launch_url;
-                                        var key;
-                                        var secret;
-                                        //Still in this context we get the attribute of the clicked button
+                                        //Still in this context we get the attribute of the selected item
                                         iframeWindow.$('.appitem').each(function () {
                                             var $this = $(this);
                                             $this.on("click", function () {
                                                 var context_id = $(this).data('context');
                                                // console.log(context_id);
-                                                // Launch an AJAX Get Call i need to get keys to assign to on OK Event
+                                                // Launch an AJAX HTTP Request
                                                 $.ajax({
                                                     url: '/ajaxresponse/' + context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
-                                                        var launch_url = launchvars['launch_url'];
-                                                        var key        = launchvars['key'];
-                                                        var secret     = launchvars['secret'];
-                                                        var url        = "/eon/lti/launch?launch_url="+launch_url+"&key="+key+"&secret="+secret;
+                                                        var url        = '/ajaxresponse/' +context_id;;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         //Set Iframe Attributes
@@ -67,7 +70,7 @@
                                                             'class': 'ckeditorframev2'
 
                                                         });
-
+                                                        //Insert Element and Exit Dialog Window
                                                         editor.insertElement(div, div.append(appframe));
                                                         CKEDITOR.dialog.getCurrent().hide();
                                                     },
@@ -82,8 +85,7 @@
                             }
                         ],
                         onOk : function () {
-                            //Notify the Iframe Scripts here
-                           editor.insert
+                            //Hide the onOk and Cancel Buttons
 
                         }
 
