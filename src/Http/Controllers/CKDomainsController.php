@@ -8,12 +8,17 @@
 
 namespace EONConsulting\CKEditorPluginV2\Http\Controllers;
 
+use EONConsulting\CKEditorPlugin\Models\LtiCkDomain;
 use EONConsulting\CKEditorPlugin\src\Factories\Config;
 use EONConsulting\CKEditorPluginV2\CKEditorPluginV2;
 use EONConsulting\LaravelLTI\Classes\Readers\ImportConfig;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use EONConsulting\LaravelLTI\Models\LTIContext;
 use EONConsulting\LaravelLTI\Models\LTIDomain;
+use Illuminate\Http\Request;
+use EONConsulting\LaravelLTI\Classes\Domains;
+use Illuminate\Support\Facades\DB;
+use EONConsulting\CKEditorPluginV2\Http\Controllers\PartialMatch;
 
 class CKDomainsController extends LTIBaseController {
     /**
@@ -24,10 +29,44 @@ class CKDomainsController extends LTIBaseController {
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    function index() {
-        //This is the Store Iframe that will be requested by CKEditor Iframe in Pluigin.js of ckeditorv2 plugin
+    function index(Request $request) {
+
+
         $domainslist   = laravel_lti()->get_domains();
+
         return view('ckeditorpluginv2::editorstore', ['tools' => $domainslist]);
+
+
+    }
+
+    function searchdomains() {
+
+        return Domains::listDomains();
+    }
+
+    function selectsearch(Request $request) {
+
+        $term = $request->get('term');
+
+        if (!empty($term)) {
+            //Perfom Query only if request contains a search Parameter
+            $searches = DB::table('lti_domain')
+                ->join('lti_context', 'lti_domain.context_id', '=', 'lti_context.context_id')
+                ->where('title', 'like', $term  . '%')
+                ->orderBy('title')
+                ->simplePaginate(8);
+
+            return view('ckeditorpluginv2::search', ['searches' => $searches]);
+
+//            $response = ('lti_domain')->where([['json->bltititle', 'like', '%' . $term .'%']])
+////                ->orWhere([['json->bltidescription', 'like', $q]])
+//                ->get();
+//
+//            dd($response);
+
+
+        }
+
     }
 
     /**
