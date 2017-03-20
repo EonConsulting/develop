@@ -10,7 +10,7 @@
          <form name="save" id="save" action="/ckesavedata">
           <textarea id="ckeditorplugin" class="ckeditor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
              <br />
-             <button id="submit" class="btn" name="submit">Save Data</button>
+             <button id="submit" class="btn btn-sm unisa-blue-btn bnt-success" name="submit">Save Data</button>
              <input type="hidden" id="token" value="{{ csrf_token() }}"/>
          </form>
                 <script>

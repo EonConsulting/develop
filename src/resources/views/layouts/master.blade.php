@@ -17,6 +17,28 @@
         p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
         .ltickplugin {background: transparent;}
 
+        #editor-wrapper {
+            position: relative;
+            min-height: 450px;
+            height: 100%;
+            width: 100%;
+        }
+
+
+        /* Buttons Active */
+
+        .unisa-blue-btn     {background: #172652 !important; border-color: #172652; color:#fff;}
+        .unisa-red-btn      {background: #930010 !important; border-color: #930010; color:#fff;}
+        .unisa-black-btn    {background: #222222 !important; border-color: #222222; color:#fff;}
+        .unisa-orange-btn   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
+        .unisa-grey-btn     {background: #777777 !important; border-color: #777777; color:#fff;}
+
+        .unisa-blue-btn:hover     {background: #172652 !important; border-color: #172652; color:#fff;}
+        .unisa-red-btn:hover      {background:red;color:#cccccc;}
+        .unisa-black-btn:hover    {background: #222222 !important; border-color: #222222; color:#fff;}
+        .unisa-orange-btn:hover   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
+        .unisa-grey-btn:hover     {background: #777777 !important; border-color: #777777; color:#fff;}
+
     </style>
 
     <script>
