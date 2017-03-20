@@ -33,6 +33,9 @@
         .unisa-orange-btn   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
         .unisa-grey-btn     {background: #777777 !important; border-color: #777777; color:#fff;}
 
+        /* Borders and Shadows */
+        .unisabdr           {border:1px solid #222222}
+
         .unisa-blue-btn:hover     {background: #172652 !important; border-color: #172652; color:#fff;}
         .unisa-red-btn:hover      {background:red;color:#cccccc;}
         .unisa-black-btn:hover    {background: #222222 !important; border-color: #222222; color:#fff;}

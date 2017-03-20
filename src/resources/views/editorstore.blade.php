@@ -5,17 +5,21 @@
     <div class="domains">
 
     <div class="panel panel-default">
+
+    <div id="app-container" class="container">
+        <div class="app-header">
         <form action="selectsearch" class="navbar-form navbar-left" method="get">
             <div class="input-group custom-search-form">
-                <input type="text" class="form-control" name="term" placeholder="Search for a Component">
+                <input type="text" class="form-control unisabdr" name="term" placeholder="Search for a Component">
                 <span class="input-group-btn">
-                <button class="btn btn-default-sm" type="submit">
+                <button class="btn unisa-black-btn btn-sm" type="submit">
                 <i class="fa fa-search"></i>
                 </button>
                 </span>
             </div>
         </form>
-    <div id="app-container" class="container">
+        </div>
+
         <div class="row">
             @if (session('error_message'))
                 <div class="col-md-12">

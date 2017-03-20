@@ -21,7 +21,6 @@ class CKEditorSaveController extends LTIBaseController {
         if(!$page) {
             return redirect()->back();
         }
-        //dd($request->get('data'));
 
         $ext = 'html';
         $file_name = pathinfo($page, PATHINFO_FILENAME) . '-' . time() . '.' . $ext;
@@ -30,7 +29,10 @@ class CKEditorSaveController extends LTIBaseController {
         fwrite($file, $request->get('data'));
         fwrite($file, "</body></html>");
         fclose($file);
+
+
         return response()->json(['success' => true, 'success_message' => 'Page saved.' . $file_name]);
+
     }
 
 }

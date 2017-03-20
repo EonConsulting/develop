@@ -48,13 +48,24 @@ class CKDomainsController extends LTIBaseController {
 
         $term = $request->get('term');
 
+        if (!isset($term)) {
+
+            session()->flash('error_message', 'You Search Criteria Can Not be Empty');
+            return redirect()->back();
+
+        }
+
         if (!empty($term)) {
-            //Perfom Query only if request contains a search Parameter
+
+            //Perfom Query only if request contains a search Query Var
             $searches = DB::table('lti_domain')
                 ->join('lti_context', 'lti_domain.context_id', '=', 'lti_context.context_id')
                 ->where('title', 'like', $term  . '%')
+                //->orWhere('lti_domain.json->bltidescription', 'like', $term .'%')
                 ->orderBy('title')
                 ->simplePaginate(8);
+
+           // dd($searches);
 
             return view('ckeditorpluginv2::search', ['searches' => $searches]);
 
@@ -66,6 +77,7 @@ class CKDomainsController extends LTIBaseController {
 
 
         }
+
 
     }
 

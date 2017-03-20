@@ -5,11 +5,11 @@
     <div class="domains">
 
         <div class="panel panel-default">
-            <form action="selectsearch" class="navbar-form navbar-left" method="get">
+            <form id="form1" action="selectsearch" class="navbar-form navbar-left" method="get">
                 <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" name="term" placeholder="Search for a Component">
-                    <span class="input-group-btn">
-                <button class="btn btn-default-sm" type="submit">
+                    <input type="text" id="search" class="form-control" name="term" placeholder="Search for a Component">
+                    <span class="input-group-btn ">
+                <button class="btn btn-primary btn-sm" id="submit" type="submit">
                 <i class="fa fa-search"></i>
                 </button>
                 </span>
@@ -68,7 +68,6 @@
                             </div>
                         </div>
                             @else
-
                             <h3>Your Search Did not Match any Components</h3>
                             <btn onclick="goBack()" class="btn btn-sm unisa-black-btn">Back</btn>
                             @endif
@@ -82,10 +81,22 @@
                     function goBack() {
                         window.history.back();
                     }
+                    $.(document).ready( function () {
+                        $.('#submit').on('submit', function (e) {
+                            e.preventDefault();
+                            var formdata = $.('#search').val();
+                            if (formdata == '') {
+                            alert('This Field Can not be submitted Empty')}
+                            console.log(formdata);
+                        });
+
+                        return false;
+                    })
 
                 </script>
 
             </div> <!-- /row -->
 
         </div> <!-- /container -->
+    </div>
 @endsection
