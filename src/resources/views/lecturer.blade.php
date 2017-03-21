@@ -160,7 +160,7 @@
 
 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>  -->
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script> 
 
@@ -172,9 +172,10 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="jsxgraph.css" />
-<!-- <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script> -->
-<script type="text/javascript" src="js/jsxgraph2core.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="jsxgraph.css" /> -->
+<link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+<script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+<!-- <script type="text/javascript" src="js/jsxgraph2core.js"></script> -->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
