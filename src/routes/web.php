@@ -6,10 +6,10 @@
  * Time: 9:07 AM
  */
 
-Route::group(['middleware' => ['web'],  'namespace' => 'EONConsulting\PHPStencil\Http\Controllers'], function() {
+Route::group(['middleware' => ['web'],  'namespace' => 'EONConsulting\Graphs\Http\Controllers'], function() {
 
         // list all of the api's
-        Route::any('/test', ['as' => 'eon.test', 'uses' => 'TestStencilController@test']);
+        Route::any('/savetodatabase', ['as' => 'eon.test', 'uses' => 'TestStencilController@save']);
         Route::any('/tested', ['as' => 'eon.test', 'uses' => 'TestStencilController@tested']);
 
 
@@ -27,7 +27,7 @@ Route::match(['get', 'post'], '/fixed', function () {
  //   echo phpstencil()->output();
 });
 
-Route::match(['get', 'post'], '/', function () {
+Route::match(['get', 'post'], 'igraph', function () {
     
     return view('ph::goodbye');
  

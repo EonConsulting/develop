@@ -13,7 +13,7 @@ class CreateGraphsTable extends Migration
      */
     public function up()
     {
-        Schema::create('graphs', function (Blueprint $table) {
+        Schema::create('lti_graphs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
             $table->string('name');
@@ -28,6 +28,6 @@ class CreateGraphsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('graphs');
+        Schema::dropIfExists('lti_graphs');
     }
 }

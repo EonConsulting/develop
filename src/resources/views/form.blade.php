@@ -1,3 +1,0 @@
-<?php
-echo 'This is the form view';
-dd($data);

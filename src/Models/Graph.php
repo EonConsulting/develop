@@ -6,7 +6,7 @@
  * Time: 9:36 AM
  */
 
-namespace EONConsulting\PHPStencil\src\Models;
+namespace EONConsulting\Graphs\src\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,11 +15,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class DummyTable
  * @package EONConsulting\PHPStencil\src\Models
  */
-class DummyTable extends Model {
+class Graph extends Model {
 
     public $incrementing = true;
-    protected $table = 'dummy_table';
+    protected $table = 'lti_graphs';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'body', 'slug'];
+    protected $fillable = ['id', 'code', 'name'];
 
 }

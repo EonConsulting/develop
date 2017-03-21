@@ -14,8 +14,8 @@ class GraphsServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->bind( 'phpstencil', function () {
-            return new PHPStencil();
+        $this->app->bind( 'graphs', function () {
+            return new graphs();
         });
     }
 
@@ -23,9 +23,8 @@ class GraphsServiceProvider extends ServiceProvider {
      * What to boot with the package
      */
     public function boot() {
-        $this->loadRoutesFrom(__DIR__.'/Factories/WebService/Routes/routes_rest.php');
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'phpstencil');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'graphs');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'ph');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 

@@ -9,70 +9,52 @@
 namespace EONConsulting\Graphs\Http\Controllers;
 
 
+use EONConsulting\Graphs\src\Models\Graph;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use App\Http\Controllers;
+use Illuminate\Http\Request;
 
 
-class TestStencilController extends LTIBaseController {
+class TestStencilController extends LTIBaseController
+{
 
     protected $hasLTI = false;
 
-    public function test() {    
+    public function save(Request $request)
+    {
+        $code = $request->get('textareaCode');
+        $name = $request->get('graphName');
 
 
+        if (!empty($code && $name)) {
 
-        $link = mysqli_connect("localhost", "root", "", "interactivegraph");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
- 
-// Escape user inputs for security
-$code = mysqli_real_escape_string($link, $_REQUEST['textareaCode']);
-$gname = mysqli_real_escape_string($link, $_REQUEST['graphName']);
-// $school = mysqli_real_escape_string($link, $_REQUEST['school']);
+            //Select Model
+            $q = new Graph;
+            $q->code = $code;
+            $q->name = $name;
+            $q->save();
 
-// $programme = mysqli_real_escape_string($link, $_REQUEST['programme']);
-// $location = mysqli_real_escape_string($link, $_REQUEST['location']);
-// $notes = mysqli_real_escape_string($link, $_REQUEST['notes']);
+            //dd($q);
 
-// $profile_pic = mysqli_real_escape_string($link, $_REQUEST['profilepic']);
- 
-// attempt insert query execution
-
-
-
-
-
-$sql = "INSERT INTO graphs (code,name) VALUES ('$code','$gname')";
-if(mysqli_query($link, $sql)){
-    echo "Records added successfully.";
-    return redirect()->back();
-
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-}
-mysqli_close($link);
-         return view('ph::lecturer');
+            return redirect()->back()
+;
+        } else {
+            echo "ERROR: Request could not be executed";
+        }
+        return view('ph::lecturer');
     }
 
-     public function tested() {
-     //   echo 'test';
-    	 return view('ph::goodbye');
-
-    }
-     public function testing() {
-     //   echo 'test';
-    	 return view('ph::lecturer');
+    public function tested()
+    {
+        //   echo 'test';
+        return view('ph::goodbye');
 
     }
 
-    public function insert() {
-
-     //   echo 'test';
-
-
+    public function testing()
+    {
+        //   echo 'test';
+        return view('ph::lecturer');
 
     }
 }
