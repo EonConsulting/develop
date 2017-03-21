@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "EONConsulting\\PHPStencil\\": "src/"
+      "EONConsulting\\Graphs\\": "src/"
     },
     "files": [
       "src/Http/helpers.php"

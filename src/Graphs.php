@@ -6,7 +6,7 @@
  * Time: 8:50 AM
  */
 
-namespace EONConsulting\PHPStencil;
+namespace EONConsulting\Graphs;
 
 
 use EONConsulting\PHPStencil\src\Events\CarModel;
@@ -23,7 +23,7 @@ use EONConsulting\PHPStencil\src\Observers\CarModelObserver;
  * Class InteractiveGraphs
  * @package EONConsulting\InteractiveGraphs
  */
-class PHPStencil {
+class Graphs {
 
     /**
      * @return mixed
