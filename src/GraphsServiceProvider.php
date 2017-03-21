@@ -1,4 +1,4 @@
-<?php namespace EONConsulting\PHPStencil;
+<?php namespace EONConsulting\Graphs;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
  * Class PHPStencilServiceProvider
  * @package EONConsulting\InteractiveGraphs
  */
-class PHPStencilServiceProvider extends ServiceProvider {
+class GraphsServiceProvider extends ServiceProvider {
 
     /**
      * Register the service provider.

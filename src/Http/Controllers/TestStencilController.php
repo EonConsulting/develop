@@ -6,7 +6,7 @@
  * Time: 9:06 AM
  */
 
-namespace EONConsulting\PHPStencil\Http\Controllers;
+namespace EONConsulting\Graphs\Http\Controllers;
 
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
