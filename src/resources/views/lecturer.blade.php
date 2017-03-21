@@ -22,9 +22,9 @@
 
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                background-color: none;
+               
+                font-family:arial;  font-size: 14px; color:#333333; line-height: 1.42857143;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -91,8 +91,13 @@
     height: 300px;
     border: 1px solid black;
 }
-.textarea {
+.textareaCode {
     color: black;
+     width: 100%;
+     height: 510px;
+     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+     box-sizing: border-box;   
 
 }
 
@@ -155,12 +160,9 @@
 
 
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
 
-
-
-
-
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script> 
 
 
 
@@ -173,17 +175,6 @@
 <link rel="stylesheet" type="text/css" href="jsxgraph.css" />
 <!-- <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script> -->
 <script type="text/javascript" src="js/jsxgraph2core.js"></script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -207,7 +198,7 @@ console.log(code);
 
 
         var text = document.createElement('div');
-        text.setAttribute('class', 'jxgbox');
+        text.setAttribute('class', 'textareaCode');
         text.setAttribute('id', 'box2');
         text.setAttribute('style', 'width:660px; height:660px; float:right;');
         //console.log(text);
@@ -227,53 +218,6 @@ console.log(code);
 
 
 
-<div class="content">
-<!--                 <div class="title m-b-md">
-                    Fixed Graph
-                </div>
-                <div class="links">
-                    <a href="graph2">Interactive Graph</a>
-                    <a href="#">Fixed Graph</a> -->
-                  <!--   <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a> -->
-
-                    <input type="hidden" id="xposition" name="xposition" value="1" onchange="XX()">
-                    <input type="hidden" id="yposition" name="yposition" value="0" onchange="XX()">
-
-
-
-
-
-
-<!-- <div class="dropdown">
-<button onclick="myFunction()" class="dropbtn">Graph Type</button> 
-  <div id="myDropdown" class="dropdown-content " >
-<a href="graph2">Interactive Graph</a>
-<a href="#">Fixed Graph</a>
-  </div>
-</div> -->
-
-<!-- <form action="insert.blade.php" method="post">
-<select name="cars">
-  <option value="boundingbox">Bounding box</option>
-  <option value="line">Line</option>
-  <option value="circle">Circle</option>
-  <option value="polygon">Polygon</option>
-</select>
-<input type="checkbox" name="vehicle" value="Bike" checked="checked"> Read only <br>
-<input type="submit" value="Submit">
-</form>
- -->
-
-
-               <!--  </div> -->
-            </div>
-
-
-
-
-
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
@@ -285,35 +229,36 @@ function myFunction() {
 </script>
 
 
-<div class="container-fluid ">
+<div class="col-sm-12" >
   <!-- <h1>Hello World!</h1>
   <p>Resize the browser window to see the effect.</p> -->
 
   <div class="row">
 
-    <div class="col-sm-5 " >
+    <div class="col-sm-5 " style="background-color:none;" >
       
        Code
        <form action="test" method="post" >
-         <textarea id ="textareaCode" name="textareaCode"  rows="25" cols="60" style="color: black"></textarea>
-        <br> Graph Name: <input type="text" name="graphName" id="graphName" required="true">
-         <button id="save" type="submit" >Save Graph</button>
+         <textarea id ="textareaCode" class="textareaCode" name="textareaCode"   style="background-color:black; color: white;"></textarea>
+        <br style="color:red ;"> Graph Name: <input type="text" name="graphName" id="graphName" required="true">
+         <button id="save" type="submit" style="background: #172652 !important; border-color: #172652; color:#fff;" >Save Graph</button>
 </form>
     </div>
 
     <div class="col-sm-1 " style="background-color:none;">
 <br> <br> <br> <br> <br> <br> <br> <br>
 
-       <button>Drow The Graph</button> <br> <br>
-      
-
+<center>
+       <button style=" border:none; background-color:transparent; color: black ; "><h3>>>></h3></button> <br> <br>
+      </center>
+<br> <br> <br> <br> <br> <br> <br> <br>
   </div>
 
-    <div class="col-sm-6 " style="background-color:none;">
+    <div class="col-sm-6 " style="background-color:none; ">
 
     Preview
     <div id="preview1  ">
-               <div id='box2' class='jxgbox' style='width:550px; height:510px; float:right; border: groove;' ></div>
+               <div id='box2' class='textareaCode' style=' border: groove;' ></div>
     </div>
     </div>
 
@@ -326,6 +271,10 @@ function myFunction() {
 
 
 
+   <!--  font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+ -->
+    <!-- background: #2F3129;
+    color: #8F908A; -->
 <!-- 
 <center>
 
@@ -378,17 +327,6 @@ function myFunction() {
 
 //custom code 
 
-        var firstX = document.getElementById("xposition").value;
-        var firstY = document.getElementById("yposition").value;
-
-
-
-
-
-
-
-
-
 
     var board = JXG.JSXGraph.initBoard('box2', {boundingbox: [-1.5, 2, 1.5, -1], keepaspectratio:true, showcopyright: false, shownavigation: false});
 
@@ -420,7 +358,7 @@ function myFunction() {
             dash:2
         },
 
-        A = board.create('point', [firstX, firstY], cerise),
+        A = board.create('point', [1, 0], cerise),
         B = board.create('point', [-1, 0], cerise),
         C = board.create('point', [0.2, 1.5], cerise),
         pol = board.create('polygon',[A,B,C], {
