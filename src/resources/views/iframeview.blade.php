@@ -36,21 +36,24 @@
                     <div class="form-group">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="sizing-addon3">@</span>
-                            <input type="text" class="form-control" name = "key" id="key" placeholder="Key" value="{{ old('key') }}" aria-describedby="sizing-addon3">
+                            <input type="text" class="form-control" name="key" id="key" placeholder="Key"
+                                   value="{{ old('key') }}" aria-describedby="sizing-addon3">
                         </div>
                         <p></p>
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="sizing-addon3">@</span>
-                            <input type="text" class="form-control" name="secret" id="secret" placeholder="Secret" aria-describedby="sizing-addon3" value="{{ old('secret') }}">
+                            <input type="text" class="form-control" name="secret" id="secret" placeholder="Secret"
+                                   aria-describedby="sizing-addon3" value="{{ old('secret') }}">
                         </div>
                         <p></p>
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon" id="sizing-addon3">@</span>
-                            <input type="text" class="form-control" placeholder="Launch URL" id="launch_url" name="launch_url" aria-describedby="sizing-addon3" value="{{ old('launch_url') }}">
+                            <input type="text" class="form-control" placeholder="Launch URL" id="launch_url"
+                                   name="launch_url" aria-describedby="sizing-addon3" value="{{ old('launch_url') }}">
                         </div>
                         <p></p>
                         <div class="input-group input-group-sm">
-                           <button id="submit" type="submit"  class="btn btn-lg btn-success">Insert LTI</button>
+                            <button id="submit" type="submit" class="btn btn-lg btn-success">Insert LTI</button>
                         </div>
                     </div>
 
@@ -58,6 +61,6 @@
 
             </div>
         </div>
-</div>
+    </div>
 
 @endsection
