@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class DummyTable
  * @package EONConsulting\PHPStencil\src\Models
  */
-class Graph extends Model {
+class GraphModel extends Model {
 
     public $incrementing = true;
     protected $table = 'lti_graphs';

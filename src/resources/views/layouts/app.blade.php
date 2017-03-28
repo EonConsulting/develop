@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://jsxgraph.uni-bayreuth.de/distrib/GeonextReader.js" type="text/javascript"></script>
     <style>
         .textareaCode {
             color: black;

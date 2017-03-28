@@ -9,16 +9,6 @@
 namespace EONConsulting\Graphs;
 
 
-use EONConsulting\PHPStencil\src\Events\CarModel;
-use EONConsulting\PHPStencil\src\Factories\AdapterFactory;
-use EONConsulting\PHPStencil\src\Factories\GUI\GUIEnum;
-use EONConsulting\PHPStencil\src\Factories\GUI\GUIFactory;
-use EONConsulting\PHPStencil\src\Factories\Text\TextEnum;
-use EONConsulting\PHPStencil\src\Factories\Text\TextFactory;
-use EONConsulting\PHPStencil\src\Factories\WebService\WebServiceEnum;
-use EONConsulting\PHPStencil\src\Factories\WebService\WebServiceFactory;
-use EONConsulting\PHPStencil\src\Observers\CarModelObserver;
-
 /**
  * Class InteractiveGraphs
  * @package EONConsulting\InteractiveGraphs
@@ -28,97 +18,51 @@ class Graphs {
     /**
      * @return mixed
      */
-    public function output() {
-        // observer
-//        $event = new SayHello("Josh Harington");
-//        $event->attach(new SayHelloObserver());
-//        $event->set_name("Hey there");
-//
-//        // observer
-        $car_model = new CarModel;
-        $car_model->attach(new CarModelObserver);
-        $car_model->notify();
+  
 
-        // factory - text
-        $factory = new TextFactory(new AdapterFactory);
-        $text = $factory->make(TextEnum::JSON);
-//
-        $xml = [
-            'folders' => [
-                ['name' => 'Folder 1', 'id' => '1', 'files' => [
-                    ['name' => 'File 1', 'id' => '1', 'type' => 'psd'],
-                    ['name' => 'File 2', 'id' => '2', 'type' => 'csv'],
-                    ['name' => 'File 3', 'id' => '3', 'type' => 'pdf'],
-                ]],
-                ['name' => 'Folder 2', 'id' => '2'],
-                ['name' => 'Folder 3', 'id' => '3', 'files' => [
-                    ['name' => 'File 1', 'id' => '1', 'type' => 'txt'],
-                    ['name' => 'File 2', 'id' => '2', 'type' => 'csv'],
-                ]],
-            ],
-            'files' => [
-                ['name' => 'My public file']
-            ]
-        ];
+    public function drawgraph($this, $code, $divreplace) {
 
-        $csv = [
-            ['Hey', 'there'],
-            ['yo', 'someone'],
-            ['Hey', 'there']
-        ];
-//
-//        $json = ['Author' => ['name' => 'Josh Harington', 'gender' => 'male', 'profession' => 'Professonal Nerd.']];
 
-        return $text->output($csv);
+
+if ($this.hasClass("clicked-once")) {
+    // already been clicked once, refresh the page
+  //  var code = document.getElementById("textareaCode").value;
+   location.reload();
+    console.log(code);
+
+}
+ else {
+    // first time this is clicked, mark it
+    $this.addClass("clicked-once");
+               
+             //   var code = document.getElementById("textareaCode").value;
+                $("#preview2").replaceWith(code);
+
+                // var text = document.createElement('div');
+                // text.setAttribute('class', 'textareaCode');
+                // text.setAttribute('id', 'box2');
+                // text.setAttribute('style', 'width:660px; height:660px; float:right;');
+             
+                // $("#preview1").append(text);
+
+            //    var divreplace = "<div id='box2' class='textareaCode' style=' border: groove;'> ";
+                $("#preview1").replaceWith(divreplace);
+
+}
+
+
+
+
+
+     
     }
 
-    /**
-     * Render the GUI view of choice
-     * @param $type
-     * @param $data
-     * @return mixed|null
-     */
-    public function render($type = 'form', $data) {
-
-        if(($type != 'form' && $type != 'list') || !$data)
-            return null;
-
-        switch($type) {
-            case 'form':
-                $type = GUIEnum::FORM;
-                break;
-            case 'list':
-                $type = GUIEnum::UILIST;
-                break;
-        }
-
-        // factory - GUI
-        $factory = new GUIFactory(new AdapterFactory);
-        $gui = $factory->make($type);
-
-        return $gui->render($data);
+        public function fixed() {
+                  return TestStencilController::fixed();
+        //      return view('ph::lecturer');
     }
-
-    /**
-     * @param string $type
-     * @param $data
-     * @return mixed|null
-     */
-    public function service($type = 'rest', $data) {
-
-        if(($type != 'rest' && $type != 'soap') || !$data)
-            return null;
-
-        switch($type) {
-            case 'rest':
-                $type = WebServiceEnum::REST;
-                break;
-        }
-
-        $factory = new WebServiceFactory(new AdapterFactory);
-        $service = $factory->make($type);
-
-        return $service->output($data);
+        public function interactive () {            
+             return TestStencilController::interactive();
+        //      return view('ph::lecturer');
     }
-
 }

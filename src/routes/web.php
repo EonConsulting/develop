@@ -11,13 +11,7 @@ Route::group(['middleware' => ['web'],  'namespace' => 'EONConsulting\Graphs\Htt
         // list all of the api's
         Route::any('/savetodatabase', ['as' => 'eon.test', 'uses' => 'TestStencilController@save']);
         Route::any('/tested', ['as' => 'eon.test', 'uses' => 'TestStencilController@tested']);
-
-
-        Route::post('/delete/{lticontext}', ['as' => 'eon.laravellti.delete', 'uses' => 'DeleteLTIToolController@destroy']);
-
-       
-
-        Route::match(['get', 'post'], '/insert', 'TestStencilController@insert');
+  
 });
 
 Route::match(['get', 'post'], '/fixed', function () {
@@ -41,10 +35,8 @@ Route::match(['get', 'post'], '/lecturer', function () {
  //   echo phpstencil()->output();
 });
 
-Route::match(['get', 'post'], '/insert', 'TestStencilController@insert'); 
-Route::match(['get', 'post'], '/student', function () {
+
+Route::match(['get', 'post'], 'plotgraph', function () {
     
-    return view('ph::student');
- 
- //   echo phpstencil()->output();
-});
+    return view('ph::plotgraph');
+    });

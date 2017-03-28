@@ -15,7 +15,7 @@ class GraphsServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->bind( 'graphs', function () {
-            return new graphs();
+            return Graphs;
         });
     }
 

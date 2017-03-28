@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: jharing10
+ * User: bmmuffy
  * Date: 2017/02/17
  * Time: 9:06 AM
  */
@@ -9,7 +9,7 @@
 namespace EONConsulting\Graphs\Http\Controllers;
 
 
-use EONConsulting\Graphs\src\Models\Graph;
+use EONConsulting\Graphs\src\Models\GraphModel;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
@@ -23,38 +23,43 @@ class TestStencilController extends LTIBaseController
     public function save(Request $request)
     {
         $code = $request->get('textareaCode');
-        $name = $request->get('graphName');
+      //  $name = $request->get('graphName');
 
 
         if (!empty($code && $name)) {
 
             //Select Model
-            $q = new Graph;
+            $q = new GraphModel;
             $q->code = $code;
             $q->name = $name;
             $q->save();
 
             //dd($q);
 
-            return redirect()->back()
-;
+            return redirect()->back();
         } else {
             echo "ERROR: Request could not be executed";
         }
         return view('ph::lecturer');
     }
 
-    public function tested()
+    public function fixed()
     {
-        //   echo 'test';
-        return view('ph::goodbye');
+        //   fixed graph
+        return view('ph::welcomed');
 
     }
 
-    public function testing()
+    public function interactive()
     {
-        //   echo 'test';
-        return view('ph::lecturer');
+        //   interactive graph
+        return view('ph::goodbye');
+
+    }
+        public function lecturer()
+    {
+                //   Lecturer graph
+        return view('ph::goodbye');
 
     }
 }
