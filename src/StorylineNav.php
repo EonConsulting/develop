@@ -14,9 +14,18 @@ use EONConsulting\Storyline\Nav\Classes\RenderHTML;
 class StorylineNav {
 
     public function getNavHTML($config = false, $page = false) {
-        $menu = $this->get_nav($config);
+        $menu = $this->get_nav($config, storyline_core()->getMenu());
         $html_obj = new RenderHTML();
         $html = $html_obj->build($menu, true, $page);
+
+        return $html;
+    }
+
+    public function getNavHTMLFromCourse($course, $page = false) {
+        $menu = $this->get_nav(false, storyline_core()->getMenu(false, $course));
+        $data = storyline_core()->getIndex($course);
+        $html_obj = new RenderHTML();
+        $html = $html_obj->build($data, true, $page, false, $course);
 
         return $html;
     }
@@ -42,11 +51,10 @@ class StorylineNav {
     }
 
     public function getCustomScripts() {
-        return "$('.tree-div').jstree({expanded: true}).on('select_node.jstree', function(node, selected, event) { console.log(selected); window.location.href = selected.node.a_attr.href; }); $('.jstree-icon.jstree-themeicon').remove();";
+        return "$('#tree-div').jstree({expanded: true}).on('select_node.jstree', function(node, selected, event) { console.log(selected); window.location.href = selected.node.a_attr.href; }); $('.jstree-icon.jstree-themeicon').remove();";
     }
 
-    private function get_nav($config = false) {
-        $menu = storyline_core()->getMenu();
+    private function get_nav($config = false, $menu = false) {
         if($config) {
             for($i = 0; $i < count($menu); $i++) {
                 $m = $menu[$i];
