@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.lecturer')
 
 @section('custom-styles')
     <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet" />
@@ -87,7 +87,7 @@
             @foreach($tools as $tool)
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="{!! (is_string($tool['icon']) && $tool['icon'] == '') ? 'http://placehold.it/500x300' : $tool['icon'] !!}" alt="" class="img">
+                        <img src="{!! (is_string($tool['icon']) && $tool['icon'] == '') ? '/img/lti.png' : $tool['icon'] !!}" alt="" class="img img-responsive">
                         <div class="caption">
                             <h4>{!! $tool['title'] !!}</h4>
                             <p>{!! $tool['description'] !!}</p>

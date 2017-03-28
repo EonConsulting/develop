@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.lecturer')
 
 @section('custom-styles')
     <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet" />
