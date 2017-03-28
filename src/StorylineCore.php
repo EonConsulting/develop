@@ -8,20 +8,33 @@
 
 namespace EONConsulting\Storyline\Core;
 
+use App\Models\Course;
 use EONConsulting\Storyline\Core\Classes\Breadcrumbs;
 use EONConsulting\Storyline\Core\Classes\CommonWords;
 use EONConsulting\Storyline\Core\Classes\GetSummary;
+use EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBTaxonomy;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
 
 class StorylineCore {
 
-    public function getIndex() {
-        $taxonomy = new XMLTaxonomy;
-        return $taxonomy->index();
+    public function getIndex($course = false) {
+        if(!$course) {
+            $taxonomy = new XMLTaxonomy;
+            return $taxonomy->index();
+        }
+
+        $taxonomy = new DBTaxonomy();
+        return $taxonomy->get_course_taxonomy($course);
     }
 
-    public function getMenu($config = false) {
-        $taxonomy = new XMLTaxonomy;
+    public function getMenu($config = false, $course = false) {
+        if(!$course) {
+            $taxonomy = new XMLTaxonomy;
+            return $taxonomy->getMenu($config);
+        }
+
+        $taxonomy = new DBTaxonomy();
+        $taxonomy->set_course($course);
         return $taxonomy->getMenu($config);
     }
 
