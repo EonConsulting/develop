@@ -9,6 +9,7 @@
 namespace EONConsulting\Storyline\Menu;
 
 
+use App\Models\Course;
 use EONConsulting\Storyline\Menu\Classes\RenderHTML;
 
 class StorylineMenu {
@@ -21,6 +22,15 @@ class StorylineMenu {
         $menu = $this->get_menu($config);
         $html_obj = new RenderHTML();
         $html = $html_obj->build($menu, true, $page);
+
+        return $html;
+    }
+
+    public function getMenuHTMLFromCourse(Course $course, $config = false, $page = false) {
+        $data = storyline_core()->getIndex($course);
+
+        $html_obj = new RenderHTML();
+        $html = $html_obj->build($data, true, $page, false, $course);
 
         return $html;
     }
