@@ -18,8 +18,7 @@ body
 	margin: 20px;
 }
 
-.lti_frameResize {max-width: 450px; height: 450px !important; max-height:350px;}
-iframe.lti_frameResize {height: 450px !important;}
+.myplug_script { border: 2px solid red; }
 
 .cke_editable
 {

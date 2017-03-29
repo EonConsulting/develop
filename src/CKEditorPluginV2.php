@@ -7,7 +7,10 @@
  */
 
 namespace EONConsulting\CKEditorPluginV2;
+use EONConsulting\CKEditorPluginV2\Classes\DomainOBJ;
+use EONConsulting\CKEditorPluginV2\Http\Controllers\CKEditorSaveController;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use Illuminate\Http\Request;
 
 
 
@@ -19,7 +22,13 @@ class CKEditorPluginV2 extends LTIBaseController {
     public function get_store() {
         return view('ckeditorpluginv2::store');
     }
-    //Connect to a TAO API and get a response (3 Calls to be made with CURL)
 
+    public function list_domains() {
+        return DomainOBJ::listDomains();
+    }
+
+    public function makePDF($data = '') {
+        return CKEditorSaveController::htmltoPDF($data);
+    }
 
 }

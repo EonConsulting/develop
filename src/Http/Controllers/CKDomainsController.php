@@ -29,24 +29,22 @@ class CKDomainsController extends LTIBaseController {
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    function index(Request $request) {
+    function index() {
 
-
-        $domainslist   = laravel_lti()->get_domains();
+        $domainslist   = ckeditorpluginv2()->list_domains();
+//        dd($domainslist);
 
         return view('ckeditorpluginv2::editorstore', ['tools' => $domainslist]);
 
-
-    }
-
-    function searchdomains() {
-
-        return Domains::listDomains();
     }
 
     function selectsearch(Request $request) {
 
         $term = $request->get('term');
+
+//        $obj = new LTIDomain;
+//        $obj->json->bltidescription;
+//        dd($obj);
 
         if (!isset($term)) {
 
@@ -56,6 +54,8 @@ class CKDomainsController extends LTIBaseController {
         }
 
         if (!empty($term)) {
+
+            //
 
             //Perfom Query only if request contains a search Query Var
             $searches = DB::table('lti_domain')
@@ -113,7 +113,6 @@ class CKDomainsController extends LTIBaseController {
      */
 
     function launch(LTIContext $context) {
-
 
         $key = ($context->key) ? $context->key->key_key : '';
         $secret = ($context->key) ? $context->key->secret : '';

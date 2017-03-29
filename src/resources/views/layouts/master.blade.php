@@ -1,18 +1,44 @@
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
-    <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
-    <script src="{{ URL::asset('vendor/ckeditorpluginv2/js/select2.full.js') }}"></script>
+    <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/jquery-mathjax-to-png.js') }}"></script>
+    <script type="text/javascript">
+//        var iframe;
+//        var socket = new easyXDM.Socket({
+//            //This is a fallback- not needed in many cases
+//            swf: "easyxdm.swf",
+//            onReady: function(){
+//                iframe = document.createElement("iframe");
+//                iframe.frameBorder = 0;
+//                document.body.appendChild(iframe);
+//                iframe.src = "www.webmail.co.za";
+//                iframe.onchange = messageBack();
+//
+//            },
+//            onMessage: function(url, origin){
+//                iframe.src = url;
+//            }
+//        });
+//
+//        //Probe child.frame for dimensions.
+//        function messageBack(){
+//            socket.postMessage ( iframe.contentDocument.body.clientHeight + "," + iframe.contentDocument.body.clientWidth);
+//        };
+//
+//        //Poll for changes on children every 500ms.
+//        setInterval("messageBack()",500);
 
+    </script>
 
 
 
     <!-- Custom Stylesheet for the CKEditor LTI Plugin -->
     <style>
+
 
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
@@ -59,10 +85,11 @@
     <script>
         //Dialogue Insertion Point -->
 
-        var config = {
-            extraPlugins: 'dialog',
-            toolbar: [ [ 'LTIButton' ] ]
-        };
+                var config = {
+                    extraPlugins: 'dialog',
+                    toolbar: [ [ 'LTIButton' ] ]
+                };
+
     </script>
 </head>
 

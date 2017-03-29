@@ -53,14 +53,15 @@
             <?php $count = 0; ?>
 
             @foreach($tools as $tool)
+
                 <div class="app-item col-xs-3" id="app-listjs">
                     <div class="app-contents list">
                             <div class ="app-logo">
-                                <img class="img-thumbnail" src="{!! (is_string($tool['icon']) && $tool['icon'] == '') ? 'http://placehold.it/100x100' : $tool['icon'] !!}" alt="">
+                                <img class="img-thumbnail" src="https://edu-app-center.s3.amazonaws.com/uploads/production/lti_app/banner_image/college_board.png" alt="">
                             </div>
                             <div class="app-details">
                                     <h4 class="title">{!! $tool['title'] !!}</h4>
-                                    <p class="app-description">{!! $tool['description'] !!}</p>
+                                    <p class="app-description">{{ $tool['description'] }}</p>
                                     <div class="pull-bottom-left">
                                         <a data-context="{{$tool['context_id']}}" class="appitem btn unisa-orange-btn btn-sm" role="button"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>&nbsp;Insert Tool</a>
                                             <!-- href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" -->
@@ -72,9 +73,7 @@
             </div>
 
             <div class="clearfix"></div>
-        <script>
 
-        </script>
             <script>
                 {{--//Initialise Select 2 with Jquery--}}
                 {{--$(document).ready(function (){--}}
@@ -108,6 +107,8 @@
         </div> <!-- /row -->
 
     </div> <!-- /container -->
+    </div>
+
 @endsection
 
 @section('custom-scripts')
