@@ -9,7 +9,7 @@ The Differences between V1 and V2
 
 ####Version 1
    
-   Access an LTI Tool Providing the Launch Parameterss, URL, Key and Secret
+   Access an LTI Tool Providing the Launch Parameters, URL, Key and Secret
 
 ####Version 2
 
