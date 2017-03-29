@@ -13,6 +13,7 @@ Please note: for tool to work it has to be launched from an LTI Hosting Containe
     </ul>
     
    [Laravel LTI Base Package](https://github.com/EonConsulting/laravel-lti)
+   
    [Tsugi LTI Library](https://tsugi.org)
 
 ### The Following required Modules are included in the Assets Directory of the Plugin
