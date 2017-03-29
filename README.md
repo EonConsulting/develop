@@ -25,9 +25,9 @@ Please note: for tool to work it has to be launched from an LTI Hosting Containe
     <li>JQuery and Bootstrap :: Included as CDN</li>
     </ul>
     
-All the documentation on how to install a Package of this Nature can be found here: [Installation](https://github.com/EonConsulting/PHPStencil/wiki/Installation)
+All the documentation on how to install CKEditor Plugin Version is here: [Installation](https://github.com/EonConsulting/ck-editor-plugin-v1/wiki)
 
 This Link serves as an example only
 
 #### See the Wiki for Installation and Examples
-wiki     
+Wiki [Plugin Installation and Usage](https://github.com/EonConsulting/ck-editor-plugin-v1/wiki)     
