@@ -18,7 +18,7 @@ Please note: for tool to work it has to be launched from an LTI Hosting Containe
 ### The Following required Modules are included in the Assets Directory of the Plugin
 
 #### Plugin Dependencies
-    <ul>
+   <ul>
     <li>CK Editor 4+:</li>
     <li>CK Editor Dialog Plugin</li>
     <li>JQuery and Bootstrap :: Included as CDN</li>
