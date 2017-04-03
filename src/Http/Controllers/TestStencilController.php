@@ -23,7 +23,7 @@ class TestStencilController extends LTIBaseController
     public function save(Request $request)
     {
         $code = $request->get('textareaCode');
-      //  $name = $request->get('graphName');
+        $name = $request->get('graphName');
 
 
         if (!empty($code && $name)) {

@@ -11,7 +11,7 @@
         <p>Code</p>
             <form action="savetodatabase" method="post">
                 <textarea id="textareaCode" class="textareaCode" name="textareaCode"
-                          style="background-color:black; color: white;"></textarea>
+                          style="background-color: none; color: black;"></textarea><br>
                 <br style="color:red ;"> Graph Name: <input type="text" name="graphName" id="graphName" required="true">
                 <button id="save" type="submit"
                         style="background: #172652 !important; border-color: #172652; color:#fff;">Save Graph
@@ -23,7 +23,7 @@
             <br> <br> <br> <br> <br> <br> <br> <br>
 
             <center>
-                <button style=" border:none; background-color:transparent; color: black ; ">  <h3>>>></h3></button>
+                <button style=" border:none; background-color:transparent; color: black ; ">  <h3> > </h3></button>
                 <br> <br>
             </center>
             <br> <br> <br> <br> <br> <br> <br> <br>
@@ -43,8 +43,6 @@
 </div>
 <div id="preview2">
     <script type="text/javascript">
-
-
         (function () {
             var board = JXG.JSXGraph.initBoard('box2', {
                 boundingbox: [-1.5, 2, 1.5, -1],
@@ -52,19 +50,16 @@
                 showcopyright: false,
                 shownavigation: false
             });
-
             var cerise = {
                         strokeColor: '#901B77',
                         fillColor: '#CA147A'
                     },
-
                     grass = {
                         strokeColor: '#009256',
                         fillColor: '#65B72E',
                         visible: true,
                         withLabel: true
                     },
-
                     perpendicular = {
                         strokeColor: 'black',
                         dash: 1,
@@ -74,13 +69,11 @@
                             withLabel: true
                         })
                     },
-
                     median = {
                         strokeWidth: 1,
                         strokeColor: '#333333',
                         dash: 2
                     },
-
                     A = board.create('point', [1, 0], cerise),
                     B = board.create('point', [-1, 0], cerise),
                     C = board.create('point', [0.2, 1.5], cerise),
@@ -91,7 +84,6 @@
                             strokeColor: '#009256'
                         }
                     });
-
             var pABC, pBCA, pCAB, i1;
             perpendicular.point.name = 'H_c';
             pABC = board.create('perpendicular', [pol.borders[0], C], perpendicular);
@@ -101,7 +93,6 @@
             pCAB = board.create('perpendicular', [pol.borders[2], B], perpendicular);
             grass.name = 'H';
             i1 = board.create('intersection', [pABC, pCAB, 0], grass);
-
             var mAB, mBC, mCA;
             cerise.name = 'M_c';
             mAB = board.create('midpoint', [A, B], cerise);
@@ -109,14 +100,12 @@
             mBC = board.create('midpoint', [B, C], cerise);
             cerise.name = 'M_b';
             mCA = board.create('midpoint', [C, A], cerise);
-
             var ma, mb, mc, i2;
             ma = board.create('segment', [mBC, A], median);
             mb = board.create('segment', [mCA, B], median);
             mc = board.create('segment', [mAB, C], median);
             grass.name = 'S';
             i2 = board.create('intersection', [ma, mc, 0], grass);
-
             var c;
             grass.name = 'U';
             c = board.create('circumcircle', [A, B, C], {
@@ -125,7 +114,6 @@
                 strokeWidth: 1,
                 point: grass
             });
-
             var euler;
             euler = board.create('line', [i1, i2], {
                 strokeWidth: 2,
@@ -133,29 +121,23 @@
             });
             board.update();
         })();
-
         </script>
 </div>
     <script>
-
         $(document).ready(function () {
      
             $("button").click(function () {
   
-
   var $this = $(this); 
   var code = document.getElementById("textareaCode").value;
   var divreplace = "<div id='box2' class='textareaCode' style=' border: groove;'> ";
  // graphs()->drawgraph($this, $code, $divreplace);
-
 if ($this.hasClass("clicked-once")) {
     // already been clicked once, refresh the page
    location.reload();
    $("#preview2").replaceWith(code);
  $("#preview1").replaceWith(divreplace);
-
     console.log(code);
-
 }
  else {
     // first time this is clicked, mark it
@@ -163,28 +145,18 @@ if ($this.hasClass("clicked-once")) {
                
              //   var code = document.getElementById("textareaCode").value;
                 $("#preview2").replaceWith(code);
-
                 // var text = document.createElement('div');
                 // text.setAttribute('class', 'textareaCode');
                 // text.setAttribute('id', 'box2');
                 // text.setAttribute('style', 'width:660px; height:660px; float:right;');
              
                 // $("#preview1").append(text);
-
   
                 $("#preview1").replaceWith(divreplace);
-
 }
-
-
-
             });
         });
     </script>
 
 
 @endsection
-
-
-
-
