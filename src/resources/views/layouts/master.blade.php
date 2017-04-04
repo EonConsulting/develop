@@ -52,7 +52,7 @@
         .app-item {padding:10px;}
         #app-container .app-item .app-contents {background:#fff; border:1px solid #e0e0e0; padding:0px; position: relative;}
         #app-container .app-item .app-contents .app-logo {padding:10px; border-bottom: 1px dashed #cccccc}
-        #app-container .app-item .app-contents .app-logo img {width:140px; height:70px; border: 0; padding: 0; vertical-align: middle}
+        #app-container .app-item .app-contents .app-logo img {width:140px; height:auto; border: 0; padding: 0; vertical-align: middle}
         .img-thumbnail {max-width:100%; display: inline-block; border-radius:0; line-height:1.428571429;}
         #app-container .app-item .app-contents .app-details{padding:5px 10px;}
         #app-container .app-item .app-contents .app-details h4 {color:#222222; margin:0; padding:0 0 5px 0; font-size: 12px; text-align:center; border-bottom:1px dashed #cccccc; height:20px;}
