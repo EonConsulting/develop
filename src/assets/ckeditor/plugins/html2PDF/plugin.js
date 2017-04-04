@@ -33,11 +33,25 @@ CKEDITOR.plugins.add( 'html2PDF', {
 //Execute AJAX Request
 CKEDITOR.plugins.html2PDF = {
 	exec: function( editor ) {
-		var urlins = '/htmltoPDF';
+		var urlins = '/html2PDF';
 		CKEDITOR.instances.ltieditorv2inst.updateElement();
 		// var data = editor.$('#ltieditorv2inst').val();
+		CKEDITOR.getFullHTMLContent = function(editor){
+			var cnt = "";
+			editor.once('contentPreview', function(e){
+				cnt = e.data.dataValue;
+				return false;
+			});
+			editor.execCommand('preview');
 
-		var data = editor.value=encodeURIComponent(CKEDITOR.instances.ltieditorv2inst.getData());
+			return cnt;
+		};
+		// var data = editor.value=encodeURIComponent(CKEDITOR.instances.ltieditorv2inst.getData());
+		var rawdata = editor.value=encodeURIComponent(CKEDITOR.getFullHTMLContent(editor));
+
+		var data = editor.dataProcessor.toDataFormat( rawdata );
+
+
 		function submit(action, method, values) {
 			var form = $('<form/>', {
 				action: action,
@@ -58,26 +72,6 @@ CKEDITOR.plugins.html2PDF = {
 			{ name: 'data', value: data },
 
 		]);
-// 		var doc = new jsPDF();
-//
-// // We'll make our own renderer to skip this editor
-// 		var specialElementHandlers = {
-// 			'#editor': function(element, renderer){
-// 				return true;
-// 			}
-// 		};
-//
-// // All units are in the set measurement for the document
-// // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
-// 		doc.fromHTML(
-// 			data,
-// 			15,
-// 			15, {
-// 			'width': 170,
-// 			'elementHandlers': specialElementHandlers
-// 		});
-//
-// 		doc.save('hello.pdf')
 	},
 	canUndo: false,
 	readOnly: 1,

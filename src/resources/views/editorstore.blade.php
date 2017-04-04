@@ -57,7 +57,7 @@
                 <div class="app-item col-xs-3" id="app-listjs">
                     <div class="app-contents list">
                             <div class ="app-logo">
-                                <img class="img-thumbnail" src="https://edu-app-center.s3.amazonaws.com/uploads/production/lti_app/banner_image/college_board.png" alt="">
+                                <img class="img-thumbnail" src="{{$tool['logo_url']}}" alt="">
                             </div>
                             <div class="app-details">
                                     <h4 class="title">{!! $tool['title'] !!}</h4>

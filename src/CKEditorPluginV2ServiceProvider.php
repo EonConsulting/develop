@@ -18,7 +18,6 @@ class CKEditorPluginV2ServiceProvider extends ServiceProvider {
             return new CKEditorPluginV2;
         });
 
-        $this->app->register(\Barryvdh\DomPDF\ServiceProvider::class);
     }
 
 

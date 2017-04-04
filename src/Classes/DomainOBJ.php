@@ -29,6 +29,7 @@ class DomainOBJ {
                 'icon' => '',
                 'selection_height' => '',
                 'selection_width' => '',
+                'logo_url' => $domain->logo_uri
 
             ];
 

@@ -14,16 +14,9 @@
  */
 ( function() {
     var iframeWindow = null;
-    function createFakeElement(editor, realElement) {
-        var fakeElement = editor.createFakeParserElement(realElement, 'myplugin_script', 'iframe', true);
-        var fakeStyle = fakeElement.attributes.style || '';
-        fakeStyle = fakeElement.attributes.style = fakeStyle + 'width:10px;';
-        fakeStyle = fakeElement.attributes.style = fakeStyle + 'height:10px;';
-        return fakeElement;
-    }
     CKEDITOR.plugins.add( 'ltieditorv2',
         {
-            requires: [ 'iframedialog', 'fakeobjects', 'image' ],
+            requires: [ 'iframedialog' ],
             init: function( editor )
             {
                 var me = this;
@@ -54,35 +47,42 @@
                                             var $this = $(this);
                                             $this.on("click", function () {
                                                 var context_id = $(this).data('context');
-                                                // console.log(context_id);
+                                               // console.log(context_id);
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
                                                     url: '/ajaxresponse/' + context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         var url        = '/ajaxresponse/' +context_id;
-                                                        var height     = '';
-                                                        var width      = '';
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
+                                                        console.log('appframe', appframe);
                                                         //Set Iframe Attributes
                                                         div.setAttributes({
-                                                            'class': 'appframe',
-                                                            'id' : 'appframe'
+                                                            'class': 'appframe'
                                                         });
                                                         appframe.setAttributes({
                                                             'width' :'100%',
+                                                            'height': 750,
                                                             'type'  : 'text/html',
-                                                            'id':'ckv2frame',
-                                                            'height': '2000',
                                                             'src': url,
                                                             'allowtransparency': 'true',
                                                             'frameborder': 0,
-                                                            'scrolling': 'no',
-
+                                                            'class': 'ckeditorframev2',
+                                                            'scrolling': 'no'
                                                         });
-                                                        //Insert Element and Exit Dialog Window
+
+                                                        // $(appframe).on('load', function() {
+                                                        //     console.log('appframe2', appframe);
+                                                        //     $(appframe).height($(appframe).contents().find("html").height());
+                                                        //     // appframe.style.height = appframe.contentWindow.document.body.scrollHeight + 'px';
+                                                        //     // $(appframe).setAttribute('height', $(appframe).contentWindow.document.body.scrollHeight + 'px');
+                                                        // });
+                                                        // $(appframe).load();
+
                                                         editor.insertElement(div, div.append(appframe));
+
+                                                        //Insert Element and Exit Dialog Window
                                                         CKEDITOR.dialog.getCurrent().hide();
                                                     },
                                                 })
@@ -90,20 +90,6 @@
                                             });
                                         });
 
-                                    },
-                                    afterInit: function (editor) {
-                                        //Init FakeElement
-                                        var dataProcessor = editor.dataProcessor;
-                                        var dataFilter = dataProcessor && dataProcessor.dataFilter;
-                                        if (dataFilter) {
-                                            dataFilter.addRules({
-                                                elements: {
-                                                    'iframe': function (element) {
-                                                        return createFakeElement(editor, element);
-                                                    }
-                                                }
-                                            }, 5);
-                                        }
                                     }
 
                                 }]

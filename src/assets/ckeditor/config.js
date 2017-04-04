@@ -8,7 +8,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
     config.allowedContent = true;
-    config.extraAllowedContent = 'iframe[*]';
     config.removeFormatAttributes = '';
     // Define changes to default configuration here.
     // For complete reference see:
@@ -42,15 +41,4 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Simplify the dialog windows.
     config.removeDialogTabs = 'image:advanced;link:advanced';
-
-    config.mathJaxLib = '//cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-AMS-MML_SVG';
-    // config.mathJaxLib = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full';
-    config.mathJaxClass = 'un-math';
-
-
-    // Simplify the dialog windows.
-    // config.removeDialogTabs = 'image:advanced;link:advanced';
-
-    //Print to PDF plugin
-    // config.extraPlugins = 'mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard';
 };

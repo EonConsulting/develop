@@ -16,9 +16,11 @@ body
 	background-color: #fff;
 
 	margin: 20px;
+	padding:10px;
 }
 
-.myplug_script { border: 2px solid red; }
+.lti_frameResize {max-width: 450px; height: 450px !important; max-height:350px;}
+iframe.lti_frameResize {height: 450px !important;}
 
 .cke_editable
 {
