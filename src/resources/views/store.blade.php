@@ -8,11 +8,19 @@
             position: relative;
             padding: 0px;
             margin-bottom: 20px;
+            padding:10px;
         }
+
+        .tool-desc {font-size:11px; color:#666; height:50px; overflow:hidden}
+        .tool-title {font-weight:bold; font-size: 13px;}
+        .customcol {width:20% !important;}
+        .custom_form_style {
+            width: 100% !important; max-width:100% !important;display: inline-block;
+            margin:15px;}
 
         .thumbnail img {
             width: 100%;
-            height: 156px;
+            height: auto
         }
 
         .caption {
@@ -44,13 +52,18 @@
 
                 <h1>App Store <a href="{{ route('eon.laravellti.install') }}" class="pull-right btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span></a></h1><br />
                 <p>
-                    Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis interdum. Nulla vitae elit libero, a pharetra augue.
-                </p>
-                <p>
-                    Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Maecenas faucibus mollis interdum. Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-                </p>
+                    Welcome to the Appstore
                 <br />
             </div>
+            <form style="width:100%" action="#" method="get" class="custom_form_style ">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Tool Finder:">
+                    <span class="input-group-btn btn-primary">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-primary"><i class="fa fa-search"></i>
+                </button>
+              </span>
+                </div>
+            </form>
         </div>
 
         <div class="row">
@@ -85,12 +98,12 @@
 
             <?php $count = 0; ?>
             @foreach($tools as $tool)
-                <div class="col-xs-18 col-sm-6 col-md-3">
+                <div class="col-xs-18 customcol col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="{!! (is_string($tool['icon']) && $tool['icon'] == '') ? '/img/lti.png' : $tool['icon'] !!}" alt="" class="img img-responsive">
+                        <img src="{{$tool['logo_url']}}" alt="" class="img img-responsive">
                         <div class="caption">
-                            <h4>{!! $tool['title'] !!}</h4>
-                            <p>{!! $tool['description'] !!}</p>
+                            <h4 class="tool-title">{!! $tool['title'] !!}</h4>
+                            <p class="tool-desc">{!! $tool['description'] !!}</p>
                         </div>
                         <div class="pull-bottom-left">
                             <p><a href="{{ route('eon.laravellti.appstore.launch', $tool['context_id']) }}" class="btn btn-success btn-xs" role="button">View</a> <a href="{{ route('eon.laravellti.delete', $tool['context_id']) }}" class="btn btn-danger btn-xs" role="button">Delete</a></p>
