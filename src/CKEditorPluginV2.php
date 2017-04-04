@@ -13,11 +13,7 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 
 
-
-
 class CKEditorPluginV2 extends LTIBaseController {
-
-
 
     public function get_store() {
         return view('ckeditorpluginv2::store');

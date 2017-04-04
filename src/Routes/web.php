@@ -9,7 +9,6 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\CKEditorPlu
         Route::any('/ajaxresponse/{context}', ['as' => 'ckresponse', 'uses' => 'CKDomainsController@getAJAXresponse']);     //Route::group(['middleware' => ['auth']], function() {
         Route::match(['get', 'post'], '/connection', ['as' => 'connection', 'uses' => 'CKDomainsController@taoLaunch']);
         Route::any('/cksavedata', ['as' => 'connection', 'uses' => 'CKEditorSaveController@update']);
-        Route::any('/htmltoPDF', ['as' => 'htmltoPDF', 'uses' => 'CKEditorSaveController@htmltoPDF']);
         Route::any('/selectsearch', ['as' => 'selectsearch', 'uses' => 'CKDomainsController@selectsearch']);
 
 

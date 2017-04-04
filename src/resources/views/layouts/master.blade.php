@@ -5,32 +5,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/jquery-mathjax-to-png.js') }}"></script>
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></head>
+    {{--<script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/jquery-mathjax-to-png.js') }}"></script>--}}
     <script type="text/javascript">
-//        var iframe;
-//        var socket = new easyXDM.Socket({
-//            //This is a fallback- not needed in many cases
-//            swf: "easyxdm.swf",
-//            onReady: function(){
-//                iframe = document.createElement("iframe");
-//                iframe.frameBorder = 0;
-//                document.body.appendChild(iframe);
-//                iframe.src = "www.webmail.co.za";
-//                iframe.onchange = messageBack();
-//
-//            },
-//            onMessage: function(url, origin){
-//                iframe.src = url;
-//            }
-//        });
-//
-//        //Probe child.frame for dimensions.
-//        function messageBack(){
-//            socket.postMessage ( iframe.contentDocument.body.clientHeight + "," + iframe.contentDocument.body.clientWidth);
-//        };
-//
-//        //Poll for changes on children every 500ms.
-//        setInterval("messageBack()",500);
 
     </script>
 
