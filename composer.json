@@ -1,0 +1,21 @@
+{
+  "name": "eonconsulting/img-processor",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peace Ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\ImgProcessor\\": "src/"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
+  },
+  "require": {
+  }
+}
