@@ -40,13 +40,13 @@ class StorylineNav {
 
     public function getStyles() {
         return [
-            '/vendor/storyline/nav/themes/default/style.min.css'
+            url('/vendor/storyline/nav/themes/default/style.min.css')
         ];
     }
 
     public function getScripts() {
         return [
-            '/vendor/storyline/nav/jstree.min.js'
+            url('/vendor/storyline/nav/jstree.min.js')
         ];
     }
 
