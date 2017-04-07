@@ -67,7 +67,7 @@ class LTIController extends LTIBaseController {
 
         $story = $this->taxonomy->getStoryline($config, $single);
 
-        $file = '/vendor/storyline/core/html/' . $single . '.html';
+        $file = url('/vendor/storyline/core/html/' . $single . '.html');
 
         $menu = '';
         if(function_exists('storyline_menu')) {
