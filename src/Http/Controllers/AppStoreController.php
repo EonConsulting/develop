@@ -25,6 +25,15 @@ class AppStoreController extends LTIBaseController {
         return view('eon.appstore::store', ['tools' => $domains]);
     }
 
+    //Return Angular Rest Appstore //By Peace
+
+    function AngularRest() {
+
+        $domains = laravel_lti()->get_domains();
+
+        return $domains;
+    }
+
     function launch(LTIContext $context) {
 
 
