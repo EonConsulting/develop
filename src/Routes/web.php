@@ -5,6 +5,7 @@ Route::group(['middleware' => ['web'], 'namespace' => 'EONConsulting\CKEditorPlu
         // list all of the api's
 
         Route::any('/ckeditorstore', ['as' => 'ckeditorstore', 'uses' => 'CKDomainsController@index']);
+        Route::any('/ngstore', ['as' => 'ngstore', 'uses' => 'CKDomainsController@CKAngularRest']);
         Route::match(['get', 'post'], '/getEditorView', ['as' => 'getEditorView', 'uses' => 'CKDomainsController@getEditorView']);
         Route::any('/ajaxresponse/{context}', ['as' => 'ckresponse', 'uses' => 'CKDomainsController@getAJAXresponse']);     //Route::group(['middleware' => ['auth']], function() {
         Route::match(['get', 'post'], '/connection', ['as' => 'connection', 'uses' => 'CKDomainsController@taoLaunch']);
