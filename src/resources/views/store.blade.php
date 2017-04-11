@@ -112,7 +112,7 @@
             <div id="tools" ng-app="tools" ng-controller="ToolsListCtrl">
                 <header class="App-header">
                     <div class="form-group">
-                        <h1 style="color:#fff !important;"><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Apps&nbsp;&nbsp;&nbsp;
+                        <h1><i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;Apps&nbsp;&nbsp;&nbsp;
                         </h1>
                     </div>
                     <div class="form-group">
@@ -120,7 +120,7 @@
                                ng-model="query"/>
                     </div>
                     <div class="form-group">
-                        <select placeholder="Filter by Name" class="form-control" ng-model="orderList">
+                        <select class="form-control" ng-model="orderList">
                             <option value="name">Sort By Title</option>
                             <option value="description">Sort By Type</option>
                             <option value="">Oldest</option>
@@ -150,9 +150,9 @@
                                     <p class="tool-desc"><%tool.description %></p>
                                 </div>
                                 <div class="pull-bottom-left">
-                                    <p><a href="{{ route('eon.laravellti.appstore.launch', '<% tool.context_id %>')}}"
+                                    <p><a href="{{url('/eon/lti/appstore/launch/<% tool.context_id %>')}}"
                                           class="btn btn-success btn-xs" role="button">View</a> <a
-                                                href="{{ route('eon.laravellti.delete', '<% tool.context_id %>')}}"
+                                                href="{{url('/eon/lti/delete/<% tool.context_id %>')}}"
                                                 class="btn btn-danger btn-xs" role="button">Delete</a></p>
                                 </div>
                             </div>
