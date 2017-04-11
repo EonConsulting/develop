@@ -1,4 +1,4 @@
-@extends('ph::layouts.app')
+@extends('minds::layouts.app')
 
 @section('content')
 

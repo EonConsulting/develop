@@ -1,6 +1,6 @@
 {
-  "name": "eonconsulting/graphs",
-  "description": "PHP Package Stencil",
+  "name": "eonconsulting/mindmap",
+  "description": "Mind Map Package",
   "license": "MIT",
   "minimum-stability": "dev",
   "authors": [
@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "EONConsulting\\Graphs\\": "src/"
+      "EONConsulting\\MindMap\\": "src/"
     },
     "files": [
       "src/Http/helpers.php"

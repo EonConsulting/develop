@@ -7,6 +7,7 @@
  */
 
 namespace EONConsulting\MindMap;
+use EONConsulting\MindMap\Http\Controllers\TestStencilController;
 
 
 /**
@@ -19,13 +20,8 @@ class MindMap {
      * @return mixed
      */
   
+    public function getNowMindMap() {
+        return MindLogic::init_view();
+    }
 
-         public function fixed() {
-                  return TestStencilController::fixed();
-        //      return view('ph::lecturer');
-    }
-        public function interactive () {            
-             return TestStencilController::interactive();
-        //      return view('ph::lecturer');
-    }
 }

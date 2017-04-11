@@ -15,7 +15,7 @@ class MindMapServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->bind( 'mindmap', function () {
-            return MindMap;
+            return new MindMap;
         });
     }
 
@@ -25,7 +25,7 @@ class MindMapServiceProvider extends ServiceProvider {
     public function boot() {
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'mindmap');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'ph');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'minds');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
