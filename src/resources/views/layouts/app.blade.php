@@ -6,11 +6,11 @@
     <meta name="keywords" content="mind maps html5 mindmaps offline easy intuitive" />
     <meta name="google" content="notranslate"/>
     <title>mindmaps</title>
-    <link rel="icon" type="image/png" href="vendor/MindMap/img/favicon.ico" />
-    <link rel="stylesheet" href="vendor/MindMap/css/common.css">
-    <link rel="stylesheet" href="vendor/MindMap/css/app.css">
-    <link rel="stylesheet" href="vendor/MindMap/css/Aristo/jquery-ui-1.8.7.custom.css" />
-    <link rel="stylesheet" href="vendor/MindMap/css/minicolors/jquery.miniColors.css">
+    <link rel="icon" type="image/png" href="{{ url('/vendor/MindMap/img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ url('/vendor/MindMap/css/common.css') }}">
+    <link rel="stylesheet" href="{{ url('/vendor/MindMap/css/app.css') }}">
+    <link rel="stylesheet" href="{{ url('/vendor/MindMap/css/Aristo/jquery-ui-1.8.7.custom.css') }}" />
+    <link rel="stylesheet" href="{{ url('/vendor/MindMap/css/minicolors/jquery.miniColors.class') }}">
 
     <script id="template-float-panel" type="text/x-jquery-tmpl">
 <div class="ui-widget ui-dialog ui-corner-all ui-widget-content float-panel no-select">

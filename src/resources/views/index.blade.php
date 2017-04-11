@@ -41,8 +41,8 @@
     </div>
   </div>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script src="//api.filepicker.io/v0/filepicker.js"></script>
+  <script src="{{ url('//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js') }}"></script>
+  <script src="{{ url('//api.filepicker.io/v0/filepicker.js') }}"></script>
 
   <!-- DEBUG -->
   <!-- set debug flag for all scripts. Will be removed in production -->
@@ -53,54 +53,54 @@
   <!-- /DEBUG -->
 
   <!-- JS:LIB:BEGIN -->
-  <script src="vendor/MindMap/js/libs/jquery-ui-1.8.11.custom.min.js"></script>
-  <script src="vendor/MindMap/js/libs/dragscrollable.js"></script>
-  <script src="vendor/MindMap/js/libs/jquery.hotkeys.js"></script>
-  <script src="vendor/MindMap/js/libs/jquery.mousewheel.js"></script>
-  <script src="vendor/MindMap/js/libs/jquery.minicolors.js"></script>
-  <script src="vendor/MindMap/js/libs/jquery.tmpl.js"></script>
-  <script src="vendor/MindMap/js/libs/swfobject.js"></script>
-  <script src="vendor/MindMap/js/libs/downloadify.min.js"></script>
-  <script src="vendor/MindMap/js/libs/events.js"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/jquery-ui-1.8.11.custom.min.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/dragscrollable.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/jquery.hotkeys.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/jquery.mousewheel.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/jquery.minicolors.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/jquery.tmpl.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/swfobject.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/downloadify.min.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/libs/events.js') }}"></script>
 
-  <script src="vendor/MindMap/js/MindMaps.js"></script>
-  <script src="vendor/MindMap/js/Command.js"></script>
-  <script src="vendor/MindMap/js/CommandRegistry.js"></script>
-  <script src="vendor/MindMap/js/Action.js"></script>
-  <script src="vendor/MindMap/js/Util.js"></script>
-  <script src="vendor/MindMap/js/Point.js"></script>
-  <script src="vendor/MindMap/js/Document.js"></script>
-  <script src="vendor/MindMap/js/MindMap.js"></script>
-  <script src="vendor/MindMap/js/Node.js"></script>
-  <script src="vendor/MindMap/js/NodeMap.js"></script>
-  <script src="vendor/MindMap/js/UndoManager.js"></script>
-  <script src="vendor/MindMap/js/UndoController.js"></script>
-  <script src="vendor/MindMap/js/ClipboardController.js"></script>
-  <script src="vendor/MindMap/js/ZoomController.js"></script>
-  <script src="vendor/MindMap/js/ShortcutController.js"></script>
-  <script src="vendor/MindMap/js/HelpController.js"></script>
-  <script src="vendor/MindMap/js/FloatPanel.js"></script>
-  <script src="vendor/MindMap/js/Navigator.js"></script>
-  <script src="vendor/MindMap/js/Inspector.js"></script>
-  <script src="vendor/MindMap/js/ToolBar.js"></script>
-  <script src="vendor/MindMap/js/StatusBar.js"></script>
-  <script src="vendor/MindMap/js/CanvasDrawingTools.js"></script>
-  <script src="vendor/MindMap/js/CanvasView.js"></script>
-  <script src="vendor/MindMap/js/CanvasPresenter.js"></script>
-  <script src="vendor/MindMap/js/ApplicationController.js"></script>
-  <script src="vendor/MindMap/js/MindMapModel.js"></script>
-  <script src="vendor/MindMap/js/NewDocument.js"></script>
-  <script src="vendor/MindMap/js/OpenDocument.js"></script>
-  <script src="vendor/MindMap/js/SaveDocument.js"></script>
-  <script src="vendor/MindMap/js/MainViewController.js"></script>
-  <script src="vendor/MindMap/js/Storage.js"></script>
-  <script src="vendor/MindMap/js/Event.js"></script>
-  <script src="vendor/MindMap/js/Notification.js"></script>
-  <script src="vendor/MindMap/js/StaticCanvas.js"></script>
-  <script src="vendor/MindMap/js/PrintController.js"></script>
-  <script src="vendor/MindMap/js/ExportMap.js"></script>
-  <script src="vendor/MindMap/js/AutoSaveController.js"></script>
-  <script src="vendor/MindMap/js/FilePicker.js"></script>
+  <script src="{{ url('/vendor/MindMap/js/MindMaps.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Command.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/CommandRegistry.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Action.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Util.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Point.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Document.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/MindMap.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Node.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/NodeMap.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/UndoManager.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/UndoController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ClipboardController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ZoomController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ShortcutController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/HelpController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/FloatPanel.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Navigator.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Inspector.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ToolBar.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/StatusBar.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/CanvasDrawingTools.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/CanvasView.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/CanvasPresenter.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ApplicationController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/MindMapModel.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/NewDocument.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/OpenDocument.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/SaveDocument.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/MainViewController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Storage.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Event.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/Notification.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/StaticCanvas.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/PrintController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/ExportMap.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/AutoSaveController.js') }}"></script>
+  <script src="{{ url('/vendor/MindMap/js/FilePicker.js') }}"></script>
   <!-- JS:LIB:END -->
 
   <!-- PRODUCTION
