@@ -11,7 +11,7 @@
         <p>Code</p>
             <form action="savetodatabase" method="post">
                 <textarea id="textareaCode" class="textareaCode" name="textareaCode"
-                          style="background-color: none; color: black;"></textarea><br>
+                          style="background-color: none; color: black;" placeholder="Make sure the first parameter of initBoard is jxgbox eg: JXG.JSXGraph.initBoard('jxgbox' "></textarea><br>
                 <br style="color:red ;"> Graph Name: <input type="text" name="graphName" id="graphName" required="true">
                 <button id="save" type="submit"
                         style="background: #172652 !important; border-color: #172652; color:#fff;">Save Graph
@@ -34,17 +34,21 @@
 
             <p>Preview</p>
             <div id="preview1  ">
-                <div id='box2' class='textareaCode' style=' border: groove;'></div>
+                             <div id='jxgbox' class='textareaCode' style=' border: groove;'></div>
+                      
             </div>
         </div>
 
     </div>
 
 </div>
-<div id="preview2">
+<script>
+
+</script>
+ <div id="preview2">
     <script type="text/javascript">
-        (function () {
-            var board = JXG.JSXGraph.initBoard('box2', {
+      
+            var board = JXG.JSXGraph.initBoard('jxgbox', {
                 boundingbox: [-1.5, 2, 1.5, -1],
                 keepaspectratio: true,
                 showcopyright: false,
@@ -120,23 +124,23 @@
                 strokeColor: '#901B77'
             });
             board.update();
-        })();
+    
         </script>
-</div>
+ </div>
     <script>
         $(document).ready(function () {
      
-            $("button").click(function () {
+            $("button").on("click", function () {
   
   var $this = $(this); 
-  var code = document.getElementById("textareaCode").value;
+  var code =  document.getElementById("textareaCode").value; 
   var divreplace = "<div id='box2' class='textareaCode' style=' border: groove;'> ";
  // graphs()->drawgraph($this, $code, $divreplace);
 if ($this.hasClass("clicked-once")) {
     // already been clicked once, refresh the page
    location.reload();
-   $("#preview2").replaceWith(code);
- $("#preview1").replaceWith(divreplace);
+   $("#preview2").replaceWith('<script>'+code+'<\/script>');
+// $("#preview1").replaceWith(divreplace);
     console.log(code);
 }
  else {
@@ -144,7 +148,7 @@ if ($this.hasClass("clicked-once")) {
     $this.addClass("clicked-once");
                
              //   var code = document.getElementById("textareaCode").value;
-                $("#preview2").replaceWith(code);
+                $("#preview2").replaceWith('<script>'+code+'<\/script>');
                 // var text = document.createElement('div');
                 // text.setAttribute('class', 'textareaCode');
                 // text.setAttribute('id', 'box2');
