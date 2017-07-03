@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" inkscape:version="0.91 r13725" sodipodi:docname="[UECA-88][4]ELA53.svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 349 345"
+	 style="enable-background:new 0 0 349 345;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{fill:none;stroke:#3E7BBE;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st3{fill:#4D4D4D;}
+	.st4{font-family:'Verdana';}
+	.st5{font-size:16px;}
+	.st6{fill:#3E7BBE;}
+	.st7{font-size:16.0005px;}
+	.st8{display:inline;fill:#4D4D4D;}
+	.st9{font-size:11.077px;}
+	.st10{fill:none;stroke:#4D4D4D;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st11{fill:none;}
+</style>
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview72" inkscape:current-layer="svg2" inkscape:cx="218.6793" inkscape:cy="196.38614" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="706" inkscape:window-maximized="1" inkscape:window-width="1366" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="1.5839413" objecttolerance="10" pagecolor="#ffffff" showgrid="false">
+	</sodipodi:namedview>
+<g id="Layer_2" class="st0">
+</g>
+<line id="line8" class="st1" x1="26.9" y1="158.9" x2="321.9" y2="158.9"/>
+<polyline id="polyline10" class="st2" points="346.1,323 27.3,323 27.3,4.1 "/>
+<text id="text12" transform="matrix(1 0 0 1 13.3445 16.3541)" class="st3 st4 st5">P</text>
+<g id="g14" transform="translate(4.1492086,-4.0364583)">
+	<text id="text16" transform="matrix(1 0 0 1 12.8213 340.0673)" class="st3 st4 st5">0</text>
+</g>
+<text id="text18" transform="matrix(1 0 0 1 333.5397 340.0674)" class="st3 st4 st5">Q</text>
+<g id="g20">
+	<text id="text22" transform="matrix(1 0 0 1 1.6961 163.5608)" class="st3 st4 st5">R9</text>
+</g>
+<text id="text24" transform="matrix(1 -8.129730e-03 8.129730e-03 1 327.5394 164.1507)" class="st6 st4 st7">D</text>
+<g id="g26" class="st0">
+	<text id="text28" transform="matrix(1 2.250000e-03 -2.250000e-03 1 189.6986 126.222)" class="st8 st4 st5">E</text>
+	<text id="text30" transform="matrix(1 2.249994e-03 -2.249994e-03 1 199.8225 132.5922)" class="st8 st4 st9">2</text>
+</g>
+<g id="g32" class="st0">
+	<text id="text34" transform="matrix(1 2.250000e-03 -2.250000e-03 1 225.5284 180.1364)" class="st8 st4 st5">E</text>
+	<text id="text36" transform="matrix(1 2.249994e-03 -2.249994e-03 1 235.6526 186.5066)" class="st8 st4 st9">1</text>
+</g>
+<g id="g38">
+	<g id="g40">
+		<line id="line42" class="st10" x1="186.7" y1="158.9" x2="186.7" y2="198.1"/>
+		<g id="g44">
+			<polygon id="polygon46" class="st3" points="190.6,197 182.8,197 186.7,203.7 			"/>
+		</g>
+	</g>
+</g>
+<g id="g60">
+	<rect id="rect62" x="105" y="212.2" class="st11" width="163.2" height="44.2"/>
+	<text id="text64" transform="matrix(1 0 0 1 151.967 228.5701)" class="st3 st4 st5">At R9 Q</text>
+	<text id="text66" transform="matrix(1 0 0 1 214.3501 234.897)" class="st3 st4 st9">d</text>
+	<text id="text70" transform="matrix(1 0 0 1 110.3748 247.7703)" class="st3 st4 st5">approaches infinity</text>
+</g>
+</svg>

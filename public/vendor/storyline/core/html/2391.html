@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>704 | Chain of events</title>
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+    <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <style>
+      table{
+        width: 99%;
+      }
+      table p, table tr, table td{
+        text-align: left;
+      }
+      table thead td{
+        text-align: center;
+      }
+      table tr td{
+        vertical-align: top;
+        /*min-width: 20%;*/
+        margin-bottom: 2em;
+      }
+      .chain-item{
+        display: none;
+      }
+      table.ela{
+        border: 1px solid #292929;
+      }
+      table.ela tr, table.ela td{
+        border: none;
+      }
+      table.ela td{
+        width: 50%;
+      }
+    </style>
+
+    <div class="row" style="text-align:center;">
+      <div class="col s12">
+        <img src="../assets/105.svg" class="graph1 centered-graph" width="350" height="350">
+      </div> 
+    </div>
+
+
+    Given the price of R30 per packet, the <a graph="graph1" src="../assets/106.svg">quantity demanded</a> by Thabo is 10 packets a week.
+
+    His total spending on cigarettes is therefore R30 x 10 = R300. This is indicated by the <a graph="graph1" src="../assets/107.svg">area 0 R30 E 0</a> in the diagram.
+
+    Assuming a <a graph="graph1" src="../assets/108.svg">decrease in the supply of cigarettes</a>, the supply curve shifts upwards and the price increases to R33. This is an increase of 10%.
+
+    This increase in the price decreases his quantity demanded to 9,5 packets. This is a decrease of 5%. <a graph="graph1" src="../assets/124.svg">Show</a>
+
+    His total spending on cigarettes is now R33 x 9,5 = R313,50 This is indicated by the area <a graph="graph1" src="../assets/109.svg">0-R33-E<sub>1</sub>-9,5.</a>
+
+    Comparing his total spending at R30 <a graph="graph1" src="../assets/110.svg">(area 0-R30-E-10)</a>, with
+    his total spending at R33 <a graph="graph1" src="../assets/111.svg">(area 0-R33-E<sub>1</sub>-9, 50)</a>, it is clear that his total spending increases as the price of cigarettes increases.
+
+
+    <p style="margin-bottom:0;">
+    From this we can conclude that if demand is inelastic, like in the case of cigarettes, an increase in the price leads to an increase in total spending.
+    </p>
+    <div class="row">
+    <div class="col s12">
+    <p class="video-intro">
+    Click here to watch the video clip of the
+    impact of an increase in the price on total
+    spending.
+    </p>
+    <div class="video-holder">
+    <img src="http://placehold.it/560x315?text=video-placeholder">
+    </div>
+    </div> 
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../components/js/economics.js" type="text/javascript"></script>
+    <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        parent.iframeLoaded();
+      }
+      $('.revealLink1').on('click', function(){
+        $('.graph1').removeClass('hide');
+      });
+      $('.revealLink2').on('click', function(){
+        $('.graph2').removeClass('hide');
+      });
+      $('.revealLink3').on('click', function(){
+        $('.graph3').removeClass('hide');
+      });
+      $('.revealLink4').on('click', function(){
+        $('.graph4').removeClass('hide');
+      });
+      $('.revealLink5').on('click', function(){
+        $('.graph5').removeClass('hide');
+      });
+      $('.revealLink6').on('click', function(){
+        $('.graph6').removeClass('hide');
+      });
+      $('.revealLink7').on('click', function(){
+        $('.graph7').removeClass('hide');
+      });
+
+      $('.revealLink').on('click', function() {
+      var activityBlock = 'asset2391';
+      activityDone(activityBlock);
+      });
+    </script>
+  </body>
+</html>

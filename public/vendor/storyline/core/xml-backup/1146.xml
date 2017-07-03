@@ -1,0 +1,18 @@
+<storyline id="s0" title="CHANGES IN DEMAND AND SUPPLY" config="1146" link="2281" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Overview" link="1147" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="Changes in demand" link="1148" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="leaf" title="Change in demand if income increases" link="2796" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s4" type="leaf" title="An approach to analyse changes in demand and supply" link="1149" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s5" type="leaf" title="Decrease in demand" link="1150" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s6" type="leaf" title="Comparison between an increase in demand and a decrease in demand" link="2797" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s7" type="leaf" title="Changes in supply" link="1151" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s8" type="leaf" title="A decrease in supply" link="2798" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s9" type="leaf" title="Comparison of an increase in supply with a decrease in supply" link="2799" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s10" type="leaf" title="Summary of a change in demand and supply" link="1152" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s11" type="leaf" title="Simultaneous changes in demand and supply" link="1153" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s12" type="leaf" title="A decrease in demand and a decrease in supply" link="2800" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s13" type="leaf" title="A decrease in demand and an increase in supply" link="2801" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s14" type="leaf" title="An increase in demand and a decrease in supply" link="2807" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>1149 | Interactive paragraph</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="height: auto!important;">
+        <div class="embedded-activity">
+            <p>
+                Step 3: Determine whether the demand curve will shift to <a href="#!" class="selection">the left</a> or to <a href="#!" class="selection">the right</a>
+            </p>
+            <div class="feedback">
+                <p>
+                    In scenario, we determined that we were dealing with an increase in demand, which is represented by a rightward shift of the demand curve.
+                </p>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $(".selection").on('click', function(){
+                $(this).parent('p').siblings('.feedback').slideDown();
+                //iframeLoaded();
+                var activityBlock = 'assettemp_1149_3';
+                activityDone(activityBlock, 30);
+            });
+        </script>
+    </body>
+</html>

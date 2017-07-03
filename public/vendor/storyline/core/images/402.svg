@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 450 387.9" style="enable-background:new 0 0 450 387.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{opacity:0.35;fill:#7561AA;}
+	.st2{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3826,5.2592;}
+	.st5{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2817,5.138;}
+	.st6{fill:none;stroke:#4D4D4D;stroke-width:1.2871;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#4D4D4D;stroke-width:1.2871;stroke-miterlimit:10;stroke-dasharray:4.0224,4.8267;}
+	.st8{fill:none;stroke:#4D4D4D;stroke-width:1.2871;stroke-miterlimit:10;stroke-dasharray:4.0303,4.8361;}
+	.st9{display:inline;fill:#4D4D4D;}
+	.st10{font-family:'Verdana';}
+	.st11{font-size:16px;}
+	.st12{font-size:19px;}
+	.st13{fill:#4D4D4D;}
+	.st14{fill:#449A77;}
+	.st15{fill:#4D4D4E;}
+	.st16{fill:none;stroke:#449A77;stroke-width:2.596;stroke-miterlimit:10;}
+	.st17{fill:none;stroke:#449A77;stroke-width:1.73;stroke-miterlimit:10;}
+	.st18{fill:#3E7BBE;}
+	.st19{fill:none;stroke:#3E7BBE;stroke-width:1.7305;stroke-miterlimit:10;}
+</style>
+<g id="Layer_2" class="st0">
+</g>
+<g id="Dark_Grey">
+	<rect x="71" y="174.3" class="st1" width="169.4" height="176.6"/>
+	<polyline class="st2" points="390.1,350.9 71.3,350.9 71.3,32 	"/>
+	<g>
+		<g>
+			<line class="st3" x1="71" y1="191.1" x2="73.2" y2="191.1"/>
+			<line class="st4" x1="78.4" y1="191.1" x2="307.2" y2="191.1"/>
+			<polyline class="st3" points="309.8,191.1 312,191.1 312,193.3 			"/>
+			<line class="st5" x1="312" y1="198.4" x2="312" y2="346.6"/>
+			<line class="st3" x1="312" y1="349.1" x2="312" y2="351.3"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="72.3" y1="174.3" x2="74.3" y2="174.3"/>
+			<line class="st7" x1="79.1" y1="174.3" x2="236" y2="174.3"/>
+			<polyline class="st6" points="238.4,174.3 240.4,174.3 240.4,176.3 			"/>
+			<line class="st8" x1="240.4" y1="181.1" x2="240.4" y2="347.2"/>
+			<line class="st6" x1="240.4" y1="349.6" x2="240.4" y2="351.6"/>
+		</g>
+	</g>
+	<g class="st0">
+		<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 233.6986 144.112)" class="st9 st10 st11">E</text>
+		<text transform="matrix(0.583 1.311750e-003 -1.311750e-003 0.583 243.8016 150.4619)" class="st9 st10 st12">2</text>
+	</g>
+	<g class="st0">
+		<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 269.5284 198.0264)" class="st9 st10 st11">E</text>
+		<text transform="matrix(0.583 1.311750e-003 -1.311750e-003 0.583 279.6313 204.3763)" class="st9 st10 st12">1</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 36.4775 197.0265)" class="st13 st10 st11">100</text>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 36.4774 180.1124)" class="st13 st10 st11">110</text>
+	</g>
+	<text transform="matrix(1 0 0 1 57.3445 44.2441)" class="st13 st10 st11">P</text>
+	<text transform="matrix(1 0 0 1 224.6651 367.9577)" class="st13 st10 st11">750</text>
+	<text transform="matrix(1 0 0 1 288.6051 367.957)" class="st13 st10 st11">1 000</text>
+	<text transform="matrix(1 0 0 1 377.5397 367.9574)" class="st13 st10 st11">Q</text>
+	<g>
+		<text transform="matrix(1 0 0 1 56.8213 367.9573)" class="st13 st10 st11">0</text>
+	</g>
+</g>
+<g id="Layer_3">
+	<text transform="matrix(0.9995 -3.081000e-002 3.081000e-002 0.9995 359.2469 54.4955)" class="st14 st10 st11">S</text>
+	<text transform="matrix(0.5827 -1.796223e-002 1.796223e-002 0.5827 370.3742 60.4827)" class="st14 st10 st12">1</text>
+	<text transform="matrix(0.9995 -3.081000e-002 3.081000e-002 0.9995 224.1951 161.5567)" class="st15 st10 st11">E</text>
+	<text transform="matrix(0.5827 -1.796223e-002 1.796223e-002 0.5827 234.5025 167.5691)" class="st15 st10 st12">2</text>
+	<text transform="matrix(0.9995 -3.081000e-002 3.081000e-002 0.9995 297.9055 177.1575)" class="st15 st10 st11">E</text>
+	<text transform="matrix(0.5827 -1.796223e-002 1.796223e-002 0.5827 308.2129 183.1699)" class="st15 st10 st12">1</text>
+	<line class="st16" x1="356.2" y1="57.2" x2="188.9" y2="225.7"/>
+	<text transform="matrix(0.9995 -3.081000e-002 3.081000e-002 0.9995 373.181 127.1486)" class="st14 st10 st11">S</text>
+	<line class="st17" x1="371.5" y1="129.3" x2="198.9" y2="308.4"/>
+	<text transform="matrix(1 -8.130000e-003 8.130000e-003 1 378.2487 217.1168)" class="st18 st10 st11">D</text>
+	<line class="st19" x1="107.9" y1="144.6" x2="375.5" y2="206"/>
+</g>
+</svg>

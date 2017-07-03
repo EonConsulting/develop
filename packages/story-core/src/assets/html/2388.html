@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <title>704 | Chain of events</title>
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+
+        <p>
+            In terms of a chain of events, the impact of a decrease in demand on the equilibrium 
+            price and quantity can be described as follows: 
+        </p>
+
+
+        <p style="margin-left: 148px; margin-top:50px; font-size:1.5em;">
+            <span id="increase-1" class="chain-item">&#8595;Demand </span>
+            <span id="causes-1" class="chain-item">&#8594;</span> 
+            <span id="excess-1" class="chain-item">Excess supply</span>
+            <span id="excess-2" class="chain-item">(Q<sub>d</sub> < Q<sub>s</sub>)</span>
+            <span >   <span style="position:absolute;"> 
+                    <span id="arrow-1" class="chain-item">
+                        <span style="position:relative;top: -16px;left: 9px;writing-mode: tb-rl;  transform: rotate(230deg);">&#8594;</span> 
+                        <span style="position:relative;left: -15px;bottom: -11px;writing-mode: tb-rl;transform: rotate(-58deg);">&#8594;</span>  
+                    </span>
+
+                    <span id="last-1" class="chain-item">
+                        <span   style="position:relative;top:-40px;left:-13px;">&#8593;P<sub>e</sub></span> 
+                        <span  style="position:relative;left:-50px;bottom:-29px;">&#8593;Q<sub>e</sub></span></span> </span>
+            </span>
+            <br>
+        </p>
+
+
+
+        <p style="margin-top:50px;">
+            A <a href="#!" data-show="increase-1" class="chain first-item">decrease</a> in 
+            demand <a href="#!" data-show="causes-1" class="chain">causes</a> an 
+            <a href="#!" data-show="excess-1" class="chain">excess supply</a> since
+            the <a href="#!" data-show="excess-2 " class="chain">quantity demanded is less than the quantity supplied.</a>
+            This excess supply 
+            <a href="#!" data-show="arrow-1" class="chain">leads to</a>
+            a decrease in the price and the end result is that both 
+            <a href="#!" data-show="last-1" class="chain">the equilibrium price and the equilibrium quantity decrease.</a>
+        </p>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $(".chain").on('click', function () {
+                    if ($(this).hasClass("first-item")) {
+                        $(".chain-item").hide();
+                    }
+                    var child = $(this).data('show');
+                    $('#' + child).show();
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>704 | Chain of events</title>
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+    <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <style>
+      table{
+        width: 99%;
+      }
+      table p, table tr, table td{
+        text-align: left;
+      }
+      table thead td{
+        text-align: center;
+      }
+      table tr td{
+        vertical-align: top;
+        /*min-width: 20%;*/
+        margin-bottom: 2em;
+      }
+      .chain-item{
+        display: none;
+      }
+      table.ela{
+        border: 1px solid #292929;
+      }
+      table.ela tr, table.ela td{
+        border: none;
+      }
+      table.ela td{
+        width: 50%;
+      }
+    </style>
+
+    <div class="row" style="text-align:center; margin:0;">
+      <div class="col s12">
+        <img width="350" height="350" src="../assets/123.svg" class="graph1">
+      </div>
+    </div>
+
+    Given a price of R100 per restaurant meal, the <a graph="graph1" src="../assets/124.svg">quantity demanded</a> in a month is 1000 meals. 
+
+    The total spending on restaurant meals at R100 is R100 x 1 000 = R100 000. This is indicated by the area <a graph="graph1" src="../assets/125.svg">0-R100-E1-1 000</a> in the diagram.
+
+    A <a graph="graph1" src="../assets/127.svg">decrease in the supply of restaurant meals</a> shifts the supply curve upwards, and the price increases to R110 (which is a 10% increase).
+
+    
+
+    This increase in the price of restaurant meals decreases the quantity demanded to 750 meals (which is a 25% decrease).
+    <a graph="graph1" src="../assets/125.svg">Show</a>
+
+
+
+    The total spending on restaurant meals is now R110 x 750 = R82 500. This is indicated by the area <a graph="graph1" src="../assets/135.svg">0-R110-E<sub>1</sub> - 750.</a>
+
+    
+
+    Comparing total spending at R100 <a graph="graph1" src="../assets/128.svg">(area 0-R100-E 1000)</a> with total spending at R110 <a graph="graph1" src="../assets/129.svg">(area 0-R110-E<sub>1</sub> -750)</a>, it is clear that total spending decreases as the price of restaurant meals increases.
+
+    
+    From this we can conclude that if demand is elastic, like in the case of restaurant meals, an increase in the price leads to a decrease in total spending.
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../components/js/economics.js" type="text/javascript"></script>
+    <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $('.revealLink1').on('click', function(){
+        $('.graph1').removeClass('hide');
+      });
+        $('.revealLink2').on('click', function(){
+        $('.graph2').removeClass('hide');
+      });
+      $('.revealLink3').on('click', function(){
+        $('.graph3').removeClass('hide');
+      });
+        $('.revealLink4').on('click', function(){
+        $('.graph4').removeClass('hide');
+      });
+      $('.revealLink5').on('click', function(){
+        $('.graph5').removeClass('hide');
+      });
+      $('.revealLink6').on('click', function(){
+        $('.graph6').removeClass('hide');
+      });
+      $('.revealLink7').on('click', function(){
+        $('.graph7').removeClass('hide');
+      });
+
+      $('.revealLink').on('click', function() {
+      var activityBlock = 'asset2392';
+      activityDone(activityBlock);
+      });
+    </script>
+  </body>
+</html>

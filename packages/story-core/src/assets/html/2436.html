@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../components/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../components/css/economics.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../components/css/font-awesome.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>UNISA - eLearning | Department of Economics</title>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col s12">
+        <h1 id="title"></h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="summary" class="col s12">
+      </div>
+    </div>
+
+    <div class="row subtopic-cards">
+      <div>
+        <div id="blocks" class="row">
+					<!--replace the PHP with JS-->
+        </div>
+         <div id="block2" class="row">
+					<!--replace the PHP with JS-->
+        </div>
+      </div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../components/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../components/js/economics.js"></script>
+    <script type="text/javascript" src="../components/js/storyline_util.js"></script>
+
+
+<script>
+//Re-usable Config read Function
+
+function $_GET(param) {
+ var vars = {};
+ window.location.href.replace(
+  /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+  function( m, key, value ) { // callback
+   vars[key] = value !== undefined ? value : '';
+  }
+ );
+
+ if ( param ) {
+  return vars[param] ? vars[param] : null;
+ }
+ return vars;
+}
+var HeaderSL = $_GET('HeaderSL');
+var PageSL = $_GET('PageSL');
+
+Build_Storyline('', PageSL, true, true);
+
+</script>
+    <style>
+        .gsc-result .gs-title {
+            height:2em !important;
+        }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<storyline title="The price of other goods" link="2281" config="2509" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="The price of other goods" link="2508" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s1" type="leaf" title="Substitutes in production" link="715" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="Complements in production" link="2510" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

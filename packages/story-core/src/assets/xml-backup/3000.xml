@@ -1,0 +1,14 @@
+<storyline id="s0" title="PRODUCTION POSSIBILITIES CURVE" config="ppc" link="ppc" summary="
+    Economics is a social science and economists are confronted with a real world that is too complex and dynamic to be understood completely. One way in which economists deal with this complex reality is to build and use models that simplify the real world and help us to focus on the important forces that shape our economic lives.
+
+    In this section we will make use of such a model, the production possibilities curve or frontier, to illustrate the problem of scarcity, choice, inefficiency, efficiency and opportunity cost.
+  " img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Assumptions" link="404" summary="While thousands of different goods and services are produced in the real world, an important assumption of our model is that only..." img="http://placehold.it/225x180"/>
+        <storyline id="s2" type="leaf" title="Decisions Today Impact on Our Future" link="405" summary="A key issue that can be illustrated by the production possibilities curve is how the decisions we make today have an impact on our future..." img="http://placehold.it/225x180"/>
+        <storyline id="s3" type="leaf" title="Production possibilities table" link="406" summary="In this section we will construct a production possibilities table for a hypothetical country called Zanadu..." img="http://placehold.it/225x180"/>
+        <storyline id="s11" type="branch" title="Production possibilities table" link="4000" summary="In this section we will construct a production possibilities table for a hypothetical country called Zanadu..." img="http://placehold.it/225x180"/>
+        <storyline id="s4" type="leaf" title="Drawing a PPC" link="407" summary="We will make use of our production possibilities table for Zanadu to draw a production possibilities curve or frontier:" img="http://placehold.it/225x180"/>
+        <storyline id="s5" type="leaf" title="Scarcity" link="408" summary="Scarcity exists because there are not enough resources to satisfy unlimited needs and wants. Given the production..." img="http://placehold.it/225x180"/>
+    </storyline_collection>
+ </storyline>

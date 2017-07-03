@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <title>DSP Subtopic 12.1 - Change in income and demand schedule</title>
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .chain-item{
+                display: none;
+            }
+        </style>
+    </head>
+    <body onload="resizeIframe()">
+        <div>
+            <h2>Change in income and demand schedule</h2>
+        </div>
+        <p>
+            With fried chicken pieces as a normal good (in other words, an increase in income increases the demand for fried chicken pieces), 
+            we can now see how a change in income will affect the following demand schedule for fried chicken pieces.
+        </p> 
+        <p>
+            At each price, the quantity demanded is higher.  At a price of R7, the quantity demanded is 16 pieces instead of 12 pieces; 
+            at a price of R6, the quantity demanded is 22 pieces instead of 18 pieces; at a price of R5, the quantity demanded is 28 pieces instead of 24 pieces; and so on.
+        </p>
+        <p class="table-title">
+            Table 4 Increase in income 
+        </p>
+        <table style="width: 100%" border="1">
+            <tbody>
+                <tr>
+                    <td>Price of fried chicken per piece (rand)</td>
+                    <td>Quantity of fried chicken pieces demanded (per week)</td>
+                    <td>Quantity of fried chicken pieces demanded after an increase in income (per week)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>12</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>18</td>
+                    <td>22</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>24</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>30</td>
+                    <td>34</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>36</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>42</td>
+                    <td>46</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>48</td>
+                    <td>52</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <p class="video-intro">
+            Watch the following clip about income increase.
+        </p>
+        <div class="video-holder">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/k-mpKmXZM_8?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        
+        <div id="resize" class="col s12 m12 child-menu">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header">Resources<i class="material-icons">keyboard_arrow_right</i></div>
+                <div class="collapsible-body"></div>
+              </li>
+            </ul>
+          </div>
+          
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $(".chain").on('click', function () {
+                    var child = $(this).data('show');
+                    $('#' + child).show();
+                });
+            });
+        </script>
+        <br>
+    </body>
+</html>

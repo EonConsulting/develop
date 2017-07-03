@@ -1,0 +1,21 @@
+{
+  "name": "eonconsulting/story-core",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peace ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\StoryCore\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "require": {
+  }
+}
