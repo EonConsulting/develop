@@ -9,9 +9,17 @@ use App\Http\Controllers\Controller;
 class CoursesController extends Controller {
 
     public function index() {
-        $courses = Course::get();
+        //Could actually filter the request and return view
+        return view('lecturer.courses.list', ['courses' => $this->allCourses()]);
+    }
 
-        return view('lecturer.courses.list', ['courses' => $courses]);
+    public function courses() {
+        return view('nonlti.courses.list', ['courses' => $this->allCourses()]);
+    }
+
+    public function allCourses() {
+        $courses = Course::get();
+        return $courses;
     }
 
 }

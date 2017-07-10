@@ -103,7 +103,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('nonlti.users.profile') }}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('home.users.profile') }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
@@ -140,15 +140,15 @@
             <ul class="sidebar-menu">
                 <li class="header">Administrator</li>
 
-                <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'active' : '' }}">
-                    <a href="{{ route('lti.dashboards')}}">
+                <li class="{{ (Route::currentRouteName() == 'home.dashboards') ? 'active' : '' }}">
+                    <a href="{{ route('home.dashboards')}}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         <span class="pull-right-container"></span>
                     </a>
                 </li>
 
-                <li class="{{ (Route::currentRouteName() == 'lti.courses') ? 'active' : '' }}">
-                    <a href="{{ route('lti.courses') }}">
+                <li class="{{ (Route::currentRouteName() == 'home.courses') ? 'active' : '' }}">
+                    <a href="{{ route('home.courses') }}">
                         <i class="fa fa-list"></i> <span>Modules</span>
                         <span class="pull-right-container"></span>
                     </a>

@@ -33,6 +33,25 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/builders/storyline', ['as' => 'builders.storyline', 'uses' => 'Builders\\StorylineBuilderController@index']);
 });
 
+//Define Non LTI Auth Routes
+Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
+    Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
+    Route::group(['namespace' => 'Users'], function() {
+        Route::match(['get', 'post'], '/profile', ['as' => 'home.users.profile', 'uses' => 'ProfileController@index']);
+        Route::match(['get', 'post'], '/profile/update', ['as' => 'home.users.profile.update', 'uses' => 'ProfileController@update']);
+    });
+    Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function() {
+        //NON LTI Courses Controller - Create an Instance of the Same Course
+        Route::match(['get', 'post'], '/', ['as' => 'home.courses', 'uses' => 'CoursesController@courses']);
+        Route::match(['get', 'post'], '/{course}', ['as' => 'home.courses.single', 'uses' => 'CourseController@course']);
+
+        Route::match(['get', 'post'], '/{course}/lectures', ['as' => 'home.courses.single.lectures', 'uses' => 'CourseLectureController@index']);
+        Route::match(['get', 'post'], '/{course}/lectures/{storylineItem}', ['as' => 'home.courses.single.lectures.item', 'uses' => 'CourseLectureItemController@index']);
+    });
+});
+
+//Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);
+
 Route::get('/logout', function()
 {
     Auth::logout();
@@ -78,8 +97,6 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
 
 
 
-
-
         Route::match(['get', 'post'], '/profile/update', ['as' => 'lti.users.profile.update', 'uses' => 'ProfileLTIController@update']);
     });
     Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function() {
@@ -90,4 +107,3 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
     });
 });
 
-Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);

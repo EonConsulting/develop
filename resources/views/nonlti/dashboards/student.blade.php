@@ -1,7 +1,7 @@
-@extends('layouts.lecturer')
+@extends('layouts.nonlti')
 
 @section('site-title')
-    Student Dashboard
+    Student | Dashboard
 @endsection
 
 @section('custom-styles')
@@ -12,16 +12,22 @@
 
 @endsection
 
+@section('user-image')
+
+    {{url('/dist/img/user5-128x128.jpg')}}
+
+@endsection
+
 @section('mini-logo-title')
-    Unisa
+    Student
 @endsection
 
 @section('logo-title')
-    Unisa
+    Student
 @endsection
 
 @section('page-title')
-    Dashboard
+    Student Dashboard
 @endsection
 
 @section('content')
@@ -42,7 +48,7 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Bookmarks</span>
@@ -59,7 +65,7 @@
 
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-files-o"></i></span>
+                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Uploads</span>
@@ -72,7 +78,7 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-envelope-o"></i></span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Messages</span>
@@ -288,7 +294,7 @@
                                     <!-- /.direct-chat-info -->
                                     <img class="direct-chat-img" src="{{url('/dist/img/user1-128x128.jpg')}}" alt="message user image"><!-- /.direct-chat-img -->
                                     <div class="direct-chat-text">
-                                        This is a Great App i'm just loving it !!
+                                        Working with AdminLTE on a great new app! Wanna join?
                                     </div>
                                     <!-- /.direct-chat-text -->
                                 </div>
@@ -456,14 +462,11 @@
                                         <img src="{{url('/dist/img/default-50x50.gif')}}" alt="Product Image">
                                     </div>
                                     <div class="product-info">
-
-
-
                                         <a href="javascript:void(0)" class="product-title">Module 1
-                                            <!-- <span class="label label-warning pull-right">$1800</span></a> --> </a>
-                                        <span class="product-description">
+                                            <!-- <span class="label label-warning pull-right">$1800</span></a> -->
+                                            <span class="product-description">
                           Description of the module.
-                                                    </span></div>
+                                                    </span></a></div>
                                 </li>
                                 <!-- /.item -->
                                 <li class="item">
@@ -559,11 +562,11 @@
                             </div>
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">Assignment 1
-                                    <!-- <span class="label label-warning pull-right">$1800</span></a> --> </a>
-                                <span class="product-description">
+                                    <!-- <span class="label label-warning pull-right">$1800</span></a> -->
+                                    <span class="product-description">
                           Covers topics A-F its due on tuesday.
                         </span>
-                            </div>
+                                </a></div>
                         </li>
                         <!-- /.item -->
                         <li class="item">
@@ -629,12 +632,12 @@
 
 @section('custom-scripts')
     <!-- jvectormap -->
-    <script src="{{url('/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-    <script src="{{url('/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+    <script src="{{url('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+    <script src="{{url('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
     <!-- ChartJS 1.0.1 -->
-    <script src="{{url('/plugins/chartjs/Chart.min.js')}}"></script>
+    <script src="{{url('plugins/chartjs/Chart.min.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{url('/dist/js/pages/dashboard2.js')}}"></script>
+    <script src="{{url('dist/js/pages/dashboard2.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{url('/dist/js/demo.js')}}"></script>
+    <script src="{{url('dist/js/demo.js')}}"></script>
 @endsection

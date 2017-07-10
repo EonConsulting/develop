@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -24,22 +25,28 @@ class HomeController extends Controller
     public function index()
     {
         // check if user has any roles, if not
-//        return view('landing.todo');
+        // If User :: Authenticate()
+        $user = auth()->user();
+       // dd($user);
 
-//        dd(laravel_lti()->is_learner(auth()->user()));
-
-
-        // else
-        if (laravel_lti()->is_learner(auth()->user())) {
-            return view('lti.dashboards.student');
+        if(!$user) {
+            // user not found
+            return false;
         }
 
-        if (laravel_lti()->is_instructor(auth()->user())) {
+        if(!(laravel_lti()->is_learner($user) || laravel_lti()->is_instructor($user))) {
+            //return view('nonlti.dashboards.student');
+            return view('nonlti.dashboards.student');
+        }
+
+        if (laravel_lti()->is_learner($user)) {
+            return view('lti.dashboards.student');
+        }
+        if (laravel_lti()->is_instructor($user)) {
             return view('lti.dashboards.lecturer');
         }
 
-//        return view('admin.dashboards.dashboard'); Todo::replace
-        return view('lti.dashboards.student');
-        //return view('admin.dashboards.student');
+        //return view('lti.dashboards.student');
+        return view('nonlti.dashboards.student');
     }
 }
