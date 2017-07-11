@@ -70,7 +70,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form id="save" method="POST" action="/e-content/lecturer/content/builder">
+            <form id="save" method="POST" action="/lecturer/content/builder">
+                {{--Production URL--}}
+            {{--<form id="save" method="POST" action="/e-content/lecturer/content/builder">--}}
 
                 @if (session('error_message'))
                     <div class="alert alert-danger">
@@ -124,7 +126,7 @@
         $(function(){
 
             var editor = CKEDITOR.replace('ltieditorv2inst', {
-                        extraPlugins: 'ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                        extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                         allowedContent: true,
                         fullPage: true,
                         mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',

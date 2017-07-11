@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/eon/lti/*', '/eon/*', '/lti/*', '/lti', '/html2PDF', '/getEditorView', 'ajaxresponse', 'login', 'mindmap', 'savetodatabase', '/ajaxresponse/*', '/lecturer'
+        '/eon/lti/*', '/eon/*', '/lti/*', '/lti', '/html2PDF', '/getEditorView', 'ajaxresponse', 'login', 'mindmap', 'savetodatabase', '/ajaxresponse/*', '/lecturer',
+        '/launchtransport/', '/xmltransport/'
     ];
 }

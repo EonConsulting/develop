@@ -1,4 +1,4 @@
-@extends('layouts.lecturer')
+@extends('layouts.nonlti')
 
 @section('site-title')
     Profile
@@ -29,7 +29,7 @@
 @endsection
 
 @section('content')
-    @include('dual.profile', $data)
+    @include('dual.nonltiprofile', $data)
 @endsection
 
 @section('custom-scripts')
