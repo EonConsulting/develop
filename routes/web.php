@@ -2,38 +2,50 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| E-Content System Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now work !
+|
+| These Routes are only System Specific Routes, Package and Component
+| Routes are in there individual packages.
 |
 */
+
 /*
-Initialise EON LTI Components
-*/
-//Route::get('/mindmapinit', function () {
-//    return mindmap()->getNowMindMap();
-//});
-
-
+ * ---------------------------------------
+ * Public Front Page
+ * ---------------------------------------
+ */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
      return view('welcome');
 });
 
-
+/*
+ * ---------------------------------------
+ * Auth::routes();
+ * ---------------------------------------
+ */
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+/*
+ * ---------------------------------------
+ * Builders : Page : Storyline
+ * ---------------------------------------
+ */
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/builders/page', ['as' => 'builders.page', 'uses' => 'Builders\\PageBuilderController@index']);
     Route::get('/builders/storyline', ['as' => 'builders.storyline', 'uses' => 'Builders\\StorylineBuilderController@index']);
 });
 
-//Define Non LTI Auth Routes
+/*
+ * --------------------------------------
+ * Home - Non LTI Routes
+ * --------------------------------------
+ */
 Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
     Route::group(['namespace' => 'Users'], function() {
@@ -51,13 +63,6 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
 });
 
 //Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);
-
-Route::get('/logout', function()
-{
-    Auth::logout();
-    Session::flush();
-    return Redirect::to('/home');
-});
 
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
@@ -105,5 +110,17 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
         Route::match(['get', 'post'], '/{course}/lectures', ['as' => 'lti.courses.single.lectures', 'uses' => 'CourseLectureLTIController@index']);
         Route::match(['get', 'post'], '/{course}/lectures/{storylineItem}', ['as' => 'lti.courses.single.lectures.item', 'uses' => 'CourseLectureItemLTIController@index']);
     });
+});
+
+/*
+ * ----------------------------------------------------
+ * Other Routes
+ * ----------------------------------------------------
+ */
+Route::get('/logout', function()
+{
+    Auth::logout();
+    Session::flush();
+    return Redirect::to('/home');
 });
 
