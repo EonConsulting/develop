@@ -3,7 +3,7 @@
 namespace EONConsulting\ImgProcessor\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 
@@ -13,28 +13,42 @@ use Illuminate\Http\Request;
  * Date: 4/3/2017
  * Time: 5:04 AM
  */
-class ImgDetail extends LTIBaseController {
+class ImgDetail extends Controller {
+    /**
+     * @var Request
+     */
+    protected $newImgRequest;
 
-    protected $hasLTI = false;
-    protected $request;
-
+    /**
+     * ImgDetail constructor.
+     * @param Request $request
+     */
     public function __construct(Request $request) {
 
-        $this->request = $request;
+        $this->newImgRequest = $request;
 
     }
 
-    public function html2PDF($data = '')
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function process_image($data)
     {
-        //Validates Check if Data is Valid
-        if ($this->request->has('data')) {
-            $data = $this->request->get('data');
+        if(empty($this->request)) {
+            return false;
         }
 
-        $data = urldecode($data);
-
-        return $data;
+        $this->newImgRequest = $data;
 
     }
+
+    /**
+     * @return array
+     */
+    public function get_process_image() {
+        return $this->newImgRequest->all();
+    }
+
 
 }

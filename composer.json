@@ -16,6 +16,18 @@
       "src/Http/helpers.php"
     ]
   },
+  "scripts": {
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
   "require": {
+    "jonnyw/php-phantomjs": "4.*"
   }
 }
