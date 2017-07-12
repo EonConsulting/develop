@@ -8,38 +8,41 @@
 
 namespace App\Http\Controllers;
 
+use EONConsulting\LaravelLTI\Http\Controllers\LTIAuthBaseController;
+use EONConsulting\LaravelLTI\Models\UserLTILink;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class HomeController extends Controller
+class HomeController extends LTIAuthBaseController
 {
-    protected $user;
     /**
-     * HomeController constructor.
+     * @var bool
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    protected $hasAuth = true;
+    /**
+     * @var
+     */
+    protected $user;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function index()
     {
-        // check if user has any roles, if not
-        // Give him the Dashboard
-        $this->user = auth()->user();
+        //dd($this->user->id);
+
         switch ($this->get_user_role($this->user)) {
             case 'Instructor':
+                //return view('nonlti.dashboards.lecturer');
                 return view('nonlti.dashboards.lecturer');
             break;
             case 'Learner':
                 return view('nonlti.dashboards.student');
+            break;
             default:
                 return redirect('/');
         }
-        // Might Need Them in Future
+//         Might Need Them in Future
 //        if (laravel_lti()->is_learner($user)) {
 //            return view('lti.dashboards.student');
 //        }
@@ -52,7 +55,12 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * @param bool $user
+     * @return bool
+     */
     protected function get_user_role($user = false) {
+
         if(!$user) {
             return false;
         }
@@ -63,6 +71,7 @@ class HomeController extends Controller
 
         $lti = $this->user->lti;
         $role = $lti[0]->roles;
+
         if(count($role) == 0) {
             return false;
         }
