@@ -8,7 +8,9 @@
 
 namespace EONConsulting\Storyline\Nav;
 
-
+use App\Models\Course;
+use App\Models\Storyline;
+use App\Models\StorylineItem;
 use EONConsulting\Storyline\Nav\Classes\RenderHTML;
 
 class StorylineNav {
@@ -24,10 +26,32 @@ class StorylineNav {
     public function getNavHTMLFromCourse($course, $page = false) {
         $menu = $this->get_nav(false, storyline_core()->getMenu(false, $course));
         $data = storyline_core()->getIndex($course);
+        //Array of Data is formated ::
+
+        //dd($data);
+
         $html_obj = new RenderHTML();
         $html = $html_obj->build($data, true, $page, false, $course);
 
         return $html;
+    }
+
+    public function getNavHTMLFromCourseNORECURSION(Course $course) {
+
+//        //Get Current Course->Storyline->Items
+//        $data = storyline_core()->getIndex($course);
+////        dd($data);
+//        $html_obj = new RenderHTML();
+//        $html_menu = $html_obj->buildhtmlMENU($data, true, $page, false, $course);
+////        dd($html_menu);
+//        return $html_menu;
+
+        $storyline = $course->latest_storyline()->items->first();
+        $node = StorylineItem::where('id', '=', $storyline->id)->first();
+        $html_obj = new RenderHTML();
+        $html = $html_obj->renderNode($node, $course);
+        return $html;
+
     }
 
     public function getNavView($config = false, $page = false) {
