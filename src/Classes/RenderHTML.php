@@ -13,13 +13,64 @@ class RenderHTML {
 
     protected $menu;
     protected $html;
+    protected $child;
 
     /**
      * RenderHTML constructor.
      */
     public function __construct() {}
 
-    public function build($data = [], $root = false, $page = false, $parent_config = false, $course = false) {
+    function renderNode($node, $course)
+    {
+        $link = route('lti.courses.single.lectures.item', [$course->id, $node->id]);
+        if($node->isLeaf())
+        {
+            return '<li><a href="' . $link . '">' . $node->name . '</a></li>';
+        }
+        else
+        {
+            $html =  '<li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="' . $link . '">' . $node->name . '</a>';
+
+            $html .= '<ul class="dropdown-menu" role="menu">';
+            foreach($node->getImmediateDescendants() as $child)
+            {
+                $html .= $this->renderNode($child, $course);
+            }
+            $html .= '</ul>';
+
+            $html .= '</li>';
+        }
+
+        return $html;
+    }
+
+
+//    public function renderNode($node) {
+//
+//        $html = '<ul>';
+//        foreach ($node as $node)
+//        if( $node->isLeaf() ) {
+//            $html .= '<li>' . $node->name . '</li>';
+//        } else {
+//            $html .= '<li>' . $node->name;
+//
+//            $html .= '<ul>';
+//
+//            foreach($node->children as $child)
+//                $html .= $this->renderNode($child);
+//
+//            $html .= '</ul>';
+//
+//            $html .= '</li>';
+//        }
+//
+//        $html .= '</ul>';
+//
+//        return $html;
+//    }
+
+
+    public function build($data = [], $root = true, $page = false, $parent_config = false, $course = false) {
         $html = '';
         if(is_array($data) && array_key_exists(0, $data)) {
             $html = '<ul class="dropdown-menu" role="menu">';
@@ -28,7 +79,7 @@ class RenderHTML {
                 $has_children = array_key_exists('children', $d);
                 $main_active = ($page && array_key_exists('config', $d) && $d['config'] == $page) ? 'blue' : '';
                 $main_link = route('lti.courses.single.lectures.item', [$course->id, $d['id']]);
-                $html .= ($root && array_key_exists('title', $d)) ? '<li class="' . (($has_children) ? 'dropdown-submenu' : '') . '"><a class=" ' . $main_active . ' ' . (($has_children) ? 'ddropdown-toggle' : '') . '" href="' . (($has_children) ? '#' : $main_link) . '" ' . (($has_children) ? 'data-toggle="dropdown"' : '') . '>' . $d['title'] . '</a>' : '';
+                $html .= ($root && array_key_exists('title', $d)) ? '<li class="dropdown-submenu"><a class=" ' . $main_active . ' ' . (($has_children) ? 'ddropdown-toggle' : '') . '" href="' . (($has_children) ? '#' : $main_link) . '" ' . (($has_children) ? 'data-toggle="dropdown"' : '') . '>' . $d['title'] . '</a>' : '';
 
                 $main_config = array_key_exists('config', $d) ? $d['config'] : '';
 
@@ -36,7 +87,10 @@ class RenderHTML {
 
                 if (array_key_exists('children', $d)) {
                     $html .= '<ul class="dropdown-menu pull-right" role="menu">';
+
                     foreach ($d['children'] as $child) {
+
+//                        dd($d['children']);
                         $active = ($page && array_key_exists('config', $child) && $child['config'] == $page && $main_active == '') ? 'blue' : '';
                         $config = (array_key_exists('config', $child)) ? $child['config'] : '';
 
@@ -48,14 +102,17 @@ class RenderHTML {
 
                         if (array_key_exists('children', $child) && count($child['children']) > 0) {
                             $html .= '<li class="dropdown parent dropdown-submenu">';
-                            $html .= '<a class="' . $active . ' " href="' . $link . '">' . $child['title'] . '</a>';
-                            $html .= $this->build($child, false, $page, $parent_config, $course);
+                            $html .= $this->build($d['children'], true, $page, $parent_config, $course);
+                            $html .= '<a data-toggle="dropdown" class="' . $active . ' " href="' . $link . '">' . $child['title'] . '</a>';
+
+
                         } else {
                             $html .= '<li>';
                             $html .= '<a class="' . $active . ' " href="' . $link . '">' . $child['title'] . '</a>';
                         }
 
                         $html .= '</li>';
+
                     }
                     $html .= '</ul>';
                 }
