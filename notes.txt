@@ -1,5 +1,0 @@
-CKEditor:
-    Latex
-    MathJax
-
-Share Latex
