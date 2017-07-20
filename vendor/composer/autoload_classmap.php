@@ -7,7 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'EONConsulting\\ImgProcessor\\Facades\\ImgProcessor' => $baseDir . '/src/Facades/ImgProcessor.php',
-    'EONConsulting\\ImgProcessor\\Http\\Controllers\\ImgDetail' => $baseDir . '/src/Http/Controllers/ImgDetail.php',
+    'EONConsulting\\ImgProcessor\\Http\\Contracts\\ImageInterface' => $baseDir . '/src/Http/Contracts/ImageInterface.php',
+    'EONConsulting\\ImgProcessor\\Http\\Controllers\\PDFImageType' => $baseDir . '/src/Http/Controllers/PDFImageType.php',
     'EONConsulting\\ImgProcessor\\ImgProcessor' => $baseDir . '/src/ImgProcessor .php',
     'EONConsulting\\ImgProcessor\\ImgProcessorServiceProvider' => $baseDir . '/src/ImgProcessorServiceProvider.php',
     'JonnyW\\PhantomJs\\Cache\\CacheInterface' => $vendorDir . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Cache/CacheInterface.php',

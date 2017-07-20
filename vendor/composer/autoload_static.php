@@ -94,7 +94,8 @@ class ComposerStaticInit0fab9d71622b75ad3b4f27d4cca916af
 
     public static $classMap = array (
         'EONConsulting\\ImgProcessor\\Facades\\ImgProcessor' => __DIR__ . '/../..' . '/src/Facades/ImgProcessor.php',
-        'EONConsulting\\ImgProcessor\\Http\\Controllers\\ImgDetail' => __DIR__ . '/../..' . '/src/Http/Controllers/ImgDetail.php',
+        'EONConsulting\\ImgProcessor\\Http\\Contracts\\ImageInterface' => __DIR__ . '/../..' . '/src/Http/Contracts/ImageInterface.php',
+        'EONConsulting\\ImgProcessor\\Http\\Controllers\\PDFImageType' => __DIR__ . '/../..' . '/src/Http/Controllers/PDFImageType.php',
         'EONConsulting\\ImgProcessor\\ImgProcessor' => __DIR__ . '/../..' . '/src/ImgProcessor .php',
         'EONConsulting\\ImgProcessor\\ImgProcessorServiceProvider' => __DIR__ . '/../..' . '/src/ImgProcessorServiceProvider.php',
         'JonnyW\\PhantomJs\\Cache\\CacheInterface' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Cache/CacheInterface.php',
