@@ -7,10 +7,11 @@
  */
 namespace EONConsulting\Storyline\MindMap;
 
-
+use App\Models\Course;
 use EONConsulting\Storyline\MindMap\Classes\CourseStorylineMap;
 
-class StorylineMindMap extends CourseStorylineMap  {
+class StorylineMindMap extends CourseStorylineMap
+{
     /**
      * @var bool
      */
@@ -18,6 +19,19 @@ class StorylineMindMap extends CourseStorylineMap  {
     /**
      * @var string
      */
-    protected $type = 'JSON';
+    protected $type;
+
+    /**
+     * @param Course $course
+     * @param $type
+     * @return mixed
+     */
+    public function get_mind_map(Course $course, $type)
+    {
+        if (isset($type)) {
+            $this->type = $type;
+        }
+        return $this->get_course_map($course);
+    }
 
 }

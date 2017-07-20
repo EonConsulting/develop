@@ -33,14 +33,15 @@ class CourseStorylineMap
         if ($this->storyline) {
             switch ($this->type) {
                 case 'HTML' :
-                    return dd(storyline_nav()->getNavHTMLFromCourseNORECURSION($course));
-                break;
+                    return storyline_nav()->getNavHTMLFromCourseNORECURSION($course);
+                    break;
                 case 'JSON' :
                     $storyline = $course->latest_storyline();
-                    return dd(json_encode($storyline->items));
-                break;
+                    return json_encode($storyline->items);
+                    break;
             }
         }
+
     }
 
 }
