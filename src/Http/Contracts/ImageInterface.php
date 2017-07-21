@@ -15,19 +15,17 @@ namespace EONConsulting\ImgProcessor\Http\Contracts;
 Interface ImageInterface {
     /**
      * @param $data
+     * @param $default
      * @return mixed
      */
-    public function createImage($data);
+    public function createImage($data, $default);
 
     /**
-     * @param $ouputtype
+     * @param $data
+     * @param $default
      * @return mixed
      */
-    public function getImage($ouputtype);
+    public function stream($data, $default);
 
-    /**
-     * @return mixed
-     */
-    public function save_content();
 
 }
