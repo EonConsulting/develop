@@ -1,127 +1,108 @@
 <?php
-
+/**
+ * Created by PhpStorm.
+ * User: Peace-N | vamoose
+ * Date: 7/22/2017
+ * Time: 12:26 PM
+ */
 namespace App\Http\Controllers\Courses;
 
 use App\Models\Course;
 use App\Models\Storyline;
 use App\Models\StorylineItem;
+use EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBCourseStorylineBase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseStorylineController extends Controller {
+/**
+ * Class CourseStorylineController
+ * @package App\Http\Controllers\Courses
+ */
+class CourseStorylineController extends DBCourseStorylineBase
+{
+
+    /**
+     * @var $storylineId
+     */
     protected $storylineId;
-    public function index(Course $course) {
-        return view('lecturer.storylines.single', ['course' => $course]);
-    }
 
-    public function store(Request $request, Course $course) {
-        //Check If Course has a Storyline and do an Update else Create a New Storyline
-
-        $nodes = $request->all()['parts'];
-        $data = json_decode($nodes, true);
-        $stId = Storyline::where('course_id', '=', $course->id)->first();
-        //dd($stId);
-        if ($stId == null) {
-            $storyline = new Storyline;
-            $storyline->course_id = $course->id;
-            $storyline->creator_id = $request->user()->id;
-            $storyline->save();
-            $this->save_storyline_items($storyline,$data);
-        } else {
-            //$storyline = new Storyline;
-            //$storyline->course_id = $course->id;
-            //$storyline->creator_id = $request->user()->id;
-			//dd($stId);
-            $stId->update();
-            $this->save_storyline_items($stId,$data);
-
-        }
-
-
-        return response('The Storyline has been Saved', 200);
-
-    }
-
-    public function save_storyline_items($storyline, $data) {
-        $item = new StorylineItem;
-        //$storyline_id = $storyline->id;
-        $item->currentStoryLine($storyline->id);
-        $item->buildTree($data);
-    }
-
-    public function fixtree() {
-        //Fill in the _lft and _rgt Colunms if they are empty e.g imported Data
-        //Try and Catch
-//        $treefixer = new StorylineItem();
-//
-//      return $treefixer->fixTree();
-        return StorylineItem::scoped([ 'storyline_id' => 55 ])->fixTree();
-
-    }
     /**
      * @param Course $course
-     * @return string
-     * Credit Julius Nhodo | API and Angular
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function fetch(Course $course) {
-
-        $storyline = $course->latest_storyline();
-        $items = $storyline->items;
-        $decoded = (json_encode($items));
-        return $decoded;
+    public function index(Course $course)
+    {
+        return view('lecturer.storylines.single', ['course' => $course]);
+    }
+    /**
+     * @param Request $request
+     * @param Course $course
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|mixed|\Symfony\Component\HttpFoundation\Response
+     */
+    public function store(Request $request, Course $course)
+    {
+        $this->setNodes($request);
+        $this->setstId(Storyline::where('course_id', '=', $course->id)->first());
+        return $this->asset_store($request, $course);
     }
 
-
-
-    public function get_feed_items(array $elements, $childIten) {
-        $nodes = array();
-
-        foreach ($elements as $element) {
-            if ($element['parent_id'] == 0) {
-                if ($childIten) {
-                    $children = $this->get_feed_items($elements, $element['id']);
-                    $element['children'] = $children;
-                }
-                $nodes[] = $element;
-            }
-        }
-        return $nodes;
+    /**
+     * @param $storyline
+     * @param $data
+     */
+    public function save_storyline_items($storyline, $data)
+    {
+        $this->asset_save_storyline_items($storyline, $data);
     }
 
-
-        //From Feed
-    public function get(Course $course) {
-        $storyline = $course->latest_storyline();
-        if(!$storyline) {
-            return ['course' => $course, 'storyline' => [], 'items' => [], 'parts' => []];
-        }
-        $items = $storyline->items;
-
-        $tree = $this->get_storyline($items->toArray());
-
-        return ['course' => $course, 'storyline' => $storyline, 'items' => $items, 'parts' => $tree];
+    /**
+     * Fix a Tree with Existing Parent::Child Relationship in DB
+     * Tree Fixing Component
+     * @return mixed
+     */
+    public function fixtree()
+    {
+        //Fixed Scoped Tree
+        return StorylineItem::scoped(['storyline_id' => 55])->fixTree();
     }
 
-    private function get_storyline(array $elements, $parentId = false) {
-        $branch = array();
+    /**
+     * FETCH Latest Storyline
+     * @param Course $course
+     * @return mixed|string
+     */
+    public function fetch(Course $course)
+    {
+        return $this->asset_fetch($course);
+    }
 
-        foreach ($elements as $element) {
-            if ($element['parent_id'] == $parentId) {
-                $children = $this->get_storyline($elements, $element['id']);
-                if ($children) {
-                    $element['children'] = $children;
-                }
+    /**
+     * @param array $elements
+     * @param $childIten
+     * @return array|mixed
+     */
+    public function get_feed_items(array $elements, $childIten)
+    {
+        return $this->asset_get_feed_items($elements, $childIten);
+    }
 
-                if(array_key_exists('file_name', $element) && !is_null($element['file_name']) && array_key_exists('file_url', $element) && !is_null($element['file_url'])) {
-                    $element['files'] = [
-                        ['name' => $element['file_name'], 'url' => $element['file_url']]
-                    ];
-                }
-                $branch[] = $element;
-            }
-        }
+    /**
+     * @param Course $course
+     * @return array|mixed
+     */
+    public function get(Course $course)
+    {
+        return $this->asset_get($course);
+    }
 
-        return $branch;
+    /**
+     * @param array $elements
+     * @param bool $parentId
+     * @return array|mixed
+     */
+    protected function get_storyline(array $elements, $parentId = false)
+    {
+        return $this->asset_get_storyline($elements, $parentId);
     }
 
 }
