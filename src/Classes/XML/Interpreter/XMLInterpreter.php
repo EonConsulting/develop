@@ -19,6 +19,7 @@ class XMLInterpreter {
 
     public function read() {
         $feed = file_get_contents($this->file);
+        //?? Simple XML Depth Issues Issues ()
         $xml=simplexml_load_string($feed) or die("Error: Cannot create object");
         return $xml;
     }

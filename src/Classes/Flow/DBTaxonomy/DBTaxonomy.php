@@ -12,8 +12,13 @@ namespace EONConsulting\Storyline\Core\Flow\DBTaxonomy;
 use App\Models\Course;
 
 class DBTaxonomy {
-
+    /**
+     * @var array
+     */
     protected $trees;
+    /**
+     * @var array
+     */
     protected $course;
 
     public function __construct() {

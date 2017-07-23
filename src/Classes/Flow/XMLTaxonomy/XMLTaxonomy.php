@@ -30,6 +30,7 @@ class XMLTaxonomy {
 
 
     public function load_files() {
+        //?? Inteprator
         $interperator = new XMLInterpreter;
         foreach(glob(public_path('/vendor/storyline/core/xml').'/*.xml') as $file) {
             $interperator->load_file($file);

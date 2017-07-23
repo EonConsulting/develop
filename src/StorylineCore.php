@@ -54,6 +54,7 @@ class StorylineCore {
         }
     }
 
+
     public function getMostCommonWords($amount = 10) {
         $taxonomy = new XMLTaxonomy;
         $data = $taxonomy->index();
