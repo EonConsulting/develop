@@ -6,26 +6,12 @@ Laravel 5 package to read and write CSV files.
 
 First run composer command
 
-<code>composer require csv</code>
-
 Next add service provider to <code>config/app.php</code> file
 
     'providers' => [
         //... 
-        Wilgucki\Csv\CsvServiceProvider::class,
+        \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
     ]
-
-Add facades to <code>config/app.php</code> file
-
-    'aliases' => [
-        //...
-        'CsvReader' => Wilgucki\Csv\Facades\Reader::class,
-        'CsvWriter' => Wilgucki\Csv\Facades\Writer::class,
-    ]
-
-Last step is to publish package config
-
-<code>php artisan vendor:publish --provider="\Csv\CsvServiceProvider"</code>
 
 ##Usage
 
@@ -120,92 +106,4 @@ Don't forget to close file after you're done with your work.
 
     $writer->close();
 
-##Integrating with Eloquent models
 
-If you want/need to integrate CsvReader and/or CsvWriter with Eloquent model, there's a simple way to do this.
-The Csv package offers three traits in order to simplify the process. You can use all traits as well as one or two of your choise.
-
-**These traits hasn't been tested for relations.**
-
-###CsvCustomCollection
-
-CsvCustomCollection trait added to model class enables <code>toCsv</code> method that can be used on collection.
-
-    use Wilgucki\Csv\Traits\CsvCustomCollection;
-    
-    class SomeModel extends Model
-    {
-        use CsvCustomCollection;
-        
-        //...
-    }
-    
-    $items = SomeModel::all(); // you can use where as well
-    $csvData = $items->toCsv();
-
-###CsvExportable
-
-CsvExportable trait allows you to convert single model object to CSV data.
-
-    use Wilgucki\Csv\Traits\CsvExportable;
-    
-    class SomeModel extends Model
-    {
-        use CsvExportable;
-        
-        //...
-    }
-    
-    $csvData = SomeModel::find(1)->toCsv();
-
-###CsvImportable
-
-CsvImportable trait allows you to import data from CSV file and save it to database.
-Imported file must have header line containing column names as they are named in database table. Primary key must be named **id**.
-CSV importer will update all rows with matching id and add every row that isn't found in table.
-
-Each column from CSV file is checked against <code>$fillable</code> array, letting to insert or update only these columns that are
-present in it.
-
-    use Wilgucki\Csv\Traits\CsvImportable;
-    
-    class SomeModel extends Model
-    {
-        use CsvImportable;
-        
-        //...
-    }
-    
-    SomeModel::fromCsv('/path/to/file.csv');
-
-##Command line
-
-###csv:import
-
-To import CSV file into database table, use csv:import command.
-
-<code>php artisan csv:import model csv-file</code>
-
-- model - model class name with its namespace
-- csv-file - file name with path relative to project's root directory
-
-If you would like to import users, you could use command like this (remember to use correct CSV file path)
-
-<code>php artisan csv:import "App\User" storage/users.csv</code>
-
-###csv:export
-
-This command allows you to export data from database table into CSV file.
-
-<code>php artisan csv:export model csv-file</code>
-
-- model - model's class name with its namespace
-- csv-file - file name with path relative to project's root directory
-
-If you would like to export users, you could use command like this (remember to use correct CSV file path)
-
-<code>php artisan csv:export "App\User" storage/users.csv</code>
-
-##TODO
-
-- import/export to CSV with relations
