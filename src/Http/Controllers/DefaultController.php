@@ -1,5 +1,5 @@
 <?php
-namespace EONConsulting\File\Reader\Http\Controllers;
+namespace EONConsulting\Storyline\Table\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 

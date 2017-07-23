@@ -1,6 +1,6 @@
 <?php
 
-namespace EONConsulting\File\Reader;
+namespace EONConsulting\Storyline\Table;
 
 use Illuminate\Database\Eloquent\Collection;
 

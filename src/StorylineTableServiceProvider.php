@@ -1,12 +1,12 @@
 <?php
 
-namespace EONConsulting\File\Reader;
+namespace EONConsulting\Storyline\Table;
 
 use Illuminate\Support\ServiceProvider;
 //use EONConsulting\Csv\Reader\Commands\Export;
 //use EONConsulting\Csv\Reader\Commands\Import;
 
-class FileReaderServiceProvider extends ServiceProvider
+class StorylineTableServiceProvider extends ServiceProvider
 {
     public function boot()
     {

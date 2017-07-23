@@ -6,7 +6,7 @@
  * Time: 3:31 PM
  */
 
-namespace EONConsulting\File\Reader;
+namespace EONConsulting\Storyline\Table;
 
 
 Interface ReaderInterface{
