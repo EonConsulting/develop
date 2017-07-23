@@ -1,0 +1,22 @@
+{
+  "name": "csv/reader",
+  "description": "Laravel 5 package for writing and reading files",
+  "keywords": ["Laravel", "reader"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Reginald Bossman",
+      "email": "reggiestain@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\File\\Reader\\": "src/"
+    }
+
+  },
+  "minimum-stability":"dev",
+  "require": {
+    "illuminate/support":"~5"
+  }
+}
