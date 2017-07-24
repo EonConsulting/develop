@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="[UECA-313][2]DSP67.svg" inkscape:version="0.91 r13725"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px"
+	 viewBox="289 32.5 250 250" enable-background="new 289 32.5 250 250" xml:space="preserve">
+<sodipodi:namedview  id="namedview365" inkscape:cy="166.58049" inkscape:cx="211.81772" inkscape:zoom="1.7934888" showgrid="false" guidetolerance="10" gridtolerance="10" pagecolor="#ffffff" borderopacity="1" bordercolor="#666666" objecttolerance="10" inkscape:current-layer="svg2" inkscape:window-maximized="1" inkscape:window-y="304" inkscape:window-x="-8" inkscape:window-height="706" inkscape:window-width="1360" inkscape:pageshadow="2" inkscape:pageopacity="0">
+	</sodipodi:namedview>
+<polyline id="polyline7" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" points="530.623,260.952 
+	304.406,260.952 304.406,39.423 "/>
+<text id="text9" transform="matrix(1 0 0 1 499.5859 277.4456)" display="none" fill="#3E7BBE" enable-background="new    " font-family="'Verdana'" font-size="12.993">D</text>
+<text id="text11" transform="matrix(1 0 0 1 524.9375 62.8318)" fill="#459A77" font-family="'Verdana'" font-size="12.7088">S</text>
+<text id="text13" transform="matrix(1 0 0 1 533.625 67.8572)" fill="#459A77" font-family="'Verdana'" font-size="8.7984">1</text>
+<line id="line15" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="514.615" y1="281.38" x2="514.615" y2="284.953"/>
+<line id="line17" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="292.678" y1="57.494" x2="289.186" y2="57.494"/>
+<g id="g19" display="none">
+	<g id="g21" display="inline">
+		
+			<line id="line23" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="288.942" y1="57.494" x2="290.729" y2="57.494"/>
+		
+			<line id="line25" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="3.9965,4.7958" x1="294.626" y1="57.494" x2="306.889" y2="57.494"/>
+		<polyline id="polyline27" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="308.837,57.494 
+			310.624,57.494 310.624,59.281 		"/>
+		
+			<line id="line29" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.3979,5.2775" x1="310.624" y1="63.503" x2="310.624" y2="281.38"/>
+		
+			<line id="line31" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="310.624" y1="283.491" x2="310.624" y2="285.279"/>
+	</g>
+</g>
+<g id="g33" display="none">
+	<g id="g35" display="inline">
+		
+			<line id="line37" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="293.814" y1="262.216" x2="295.52" y2="262.216"/>
+		
+			<line id="line39" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2607,5.1127" x1="299.743" y1="262.216" x2="510.798" y2="262.216"/>
+		<polyline id="polyline41" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="512.828,262.216 
+			514.615,262.216 514.615,263.921 		"/>
+		
+			<line id="line43" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="5.5186,6.6221" x1="514.615" y1="269.362" x2="514.615" y2="276.508"/>
+		
+			<line id="line45" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="514.615" y1="279.188" x2="514.615" y2="280.975"/>
+	</g>
+</g>
+<g id="g47" display="none">
+	<g id="g49" display="inline">
+		
+			<line id="line51" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="300.067" y1="60.986" x2="300.067" y2="79.014"/>
+		<g id="g53">
+			<polygon id="polygon55" fill="#4D4D4D" points="303.153,78.039 296.9,78.039 300.067,83.562 			"/>
+		</g>
+	</g>
+</g>
+<g id="g57" display="none">
+	<g id="g59" display="inline">
+		
+			<line id="line61" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="300.067" y1="149.42" x2="300.067" y2="167.448"/>
+		<g id="g63">
+			<polygon id="polygon65" fill="#4D4D4D" points="303.153,166.555 296.9,166.555 300.067,171.995 			"/>
+		</g>
+	</g>
+</g>
+<g id="g67" display="none">
+	<g id="g69" display="inline">
+		
+			<line id="line71" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="299.905" y1="237.123" x2="299.905" y2="255.151"/>
+		<g id="g73">
+			<polygon id="polygon75" fill="#4D4D4D" points="303.072,254.257 296.738,254.257 299.905,259.698 			"/>
+		</g>
+	</g>
+</g>
+<g id="g77" display="none">
+	<g id="g79" display="inline">
+		
+			<line id="line81" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="316.065" y1="273.99" x2="330.032" y2="273.99"/>
+		<g id="g83">
+			<polygon id="polygon85" fill="#4D4D4D" points="329.058,270.905 329.058,277.157 334.58,273.99 			"/>
+		</g>
+	</g>
+</g>
+<g id="g87">
+	<g id="g89">
+		
+			<line id="line91" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="416.164" y1="142.999" x2="438.563" y2="142.999"/>
+		<g id="g93">
+			<polygon id="polygon95" fill="#4D4D4D" points="437.689,139.981 437.689,146.097 443.012,142.999 			"/>
+		</g>
+	</g>
+</g>
+<g id="g97" display="none">
+	<g id="g99" display="inline">
+		
+			<line id="line101" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="490.821" y1="273.99" x2="504.789" y2="273.99"/>
+		<g id="g103">
+			<polygon id="polygon105" fill="#4D4D4D" points="503.896,270.905 503.896,277.157 509.336,273.99 			"/>
+		</g>
+	</g>
+</g>
+<text id="text107" transform="matrix(1 0 0 1 477.1006 298.8049)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.993">14</text>
+<text id="text109" transform="matrix(1 0 0 1 506.2051 298.8049)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.993">80</text>
+<g id="g111" display="none">
+	
+		<text id="text113" transform="matrix(1 0 0 1 277.4277 62.509)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">8</text>
+</g>
+<text id="text115" transform="matrix(1 0 0 1 293.3208 48.3533)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.7088">P</text>
+<g id="g117" transform="translate(4.2083875,-4.0994936)">
+	<text id="text119" transform="matrix(1 0 0 1 292.0392 275.3439)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.7088">0</text>
+</g>
+<text id="text121" transform="matrix(1 0 0 1 521.4404 274.5002)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.7088">Q</text>
+<g id="Layer_2">
+	
+		<line id="line124" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="496.389" y1="257.457" x2="496.389" y2="260.952"/>
+	
+		<line id="line126" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="467.873" y1="257.457" x2="467.873" y2="260.952"/>
+	
+		<line id="line128" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="439.357" y1="257.457" x2="439.357" y2="260.952"/>
+	
+		<line id="line130" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="410.922" y1="257.457" x2="410.922" y2="260.952"/>
+	
+		<line id="line132" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="382.406" y1="257.457" x2="382.406" y2="260.952"/>
+	
+		<line id="line134" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="353.891" y1="257.457" x2="353.891" y2="260.952"/>
+	
+		<line id="line136" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="325.376" y1="257.457" x2="325.376" y2="260.952"/>
+	
+		<line id="line138" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="238.792" x2="304.406" y2="238.792"/>
+	
+		<line id="line140" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="210.118" x2="304.406" y2="210.118"/>
+	
+		<line id="line142" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="181.524" x2="304.406" y2="181.524"/>
+	
+		<line id="line144" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="152.928" x2="304.406" y2="152.928"/>
+	
+		<line id="line146" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="124.334" x2="304.406" y2="124.334"/>
+	
+		<line id="line148" display="none" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="307.822" y1="95.659" x2="304.406" y2="95.659"/>
+	<g id="g150" display="none">
+		<g id="g152" display="inline">
+			
+				<line id="line154" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="305.518" y1="67.065" x2="307.266" y2="67.065"/>
+			
+				<line id="line156" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.3693,5.243" x1="311.396" y1="67.065" x2="492.575" y2="67.065"/>
+			<polyline id="polyline158" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="494.641,67.065 
+				496.389,67.065 496.389,68.812 			"/>
+			
+				<line id="line160" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.3698,5.2436" x1="496.389" y1="72.942" x2="496.389" y2="254.122"/>
+			
+				<line id="line162" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="496.389" y1="256.187" x2="496.389" y2="257.934"/>
+		</g>
+	</g>
+	<g id="g164" display="none">
+		<g id="g166" display="inline">
+			
+				<line id="line168" fill="none" stroke="#4D4D4D" stroke-width="1.2918" stroke-miterlimit="10" x1="306.472" y1="95.659" x2="308.06" y2="95.659"/>
+			
+				<line id="line170" fill="none" stroke="#4D4D4D" stroke-width="1.2918" stroke-miterlimit="10" stroke-dasharray="4.0378,4.8452" x1="311.873" y1="95.659" x2="465.252" y2="95.659"/>
+			<polyline id="polyline172" fill="none" stroke="#4D4D4D" stroke-width="1.2918" stroke-miterlimit="10" points="467.158,95.659 
+				468.747,95.659 468.747,97.248 			"/>
+			
+				<line id="line174" fill="none" stroke="#4D4D4D" stroke-width="1.2918" stroke-miterlimit="10" stroke-dasharray="4.0384,4.8459" x1="468.668" y1="101.139" x2="467.952" y2="254.439"/>
+			
+				<line id="line176" fill="none" stroke="#4D4D4D" stroke-width="1.2918" stroke-miterlimit="10" x1="467.952" y1="256.346" x2="467.952" y2="257.934"/>
+		</g>
+	</g>
+	<g id="g178" display="none">
+		<g id="g180" display="inline">
+			
+				<line id="line182" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="307.187" y1="152.769" x2="308.934" y2="152.769"/>
+			
+				<line id="line184" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2351,5.0821" x1="312.985" y1="152.769" x2="407.109" y2="152.769"/>
+			<polyline id="polyline186" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="409.174,152.769 
+				410.922,152.769 410.922,154.438 			"/>
+			
+				<line id="line188" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2904,5.1484" x1="410.922" y1="158.568" x2="410.922" y2="253.963"/>
+			
+				<line id="line190" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="410.922" y1="256.029" x2="410.922" y2="257.776"/>
+		</g>
+	</g>
+	<g id="g192" display="none">
+		<g id="g194" display="inline">
+			
+				<line id="line196" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="307.346" y1="124.334" x2="309.013" y2="124.334"/>
+			
+				<line id="line198" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2022,5.0426" x1="313.064" y1="124.334" x2="435.862" y2="124.334"/>
+			<polyline id="polyline200" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="437.849,124.334 
+				439.597,124.334 439.597,126.001 			"/>
+			
+				<line id="line202" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2472,5.0966" x1="439.597" y1="130.052" x2="439.357" y2="254.201"/>
+			
+				<line id="line204" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="439.357" y1="256.267" x2="439.357" y2="257.934"/>
+		</g>
+	</g>
+	<g id="g206" display="none">
+		<g id="g208" display="inline">
+			
+				<line id="line210" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="307.742" y1="181.524" x2="309.49" y2="181.524"/>
+			
+				<line id="line212" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.2744,5.1291" x1="313.541" y1="181.524" x2="378.753" y2="181.524"/>
+			<polyline id="polyline214" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="380.739,181.524 
+				382.486,181.524 382.486,183.271 			"/>
+			
+				<line id="line216" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.3221,5.1864" x1="382.486" y1="187.401" x2="382.486" y2="253.248"/>
+			
+				<line id="line218" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="382.486" y1="255.313" x2="382.486" y2="257.061"/>
+		</g>
+	</g>
+	<g id="g220" display="none">
+		<g id="g222" display="inline">
+			
+				<line id="line224" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="307.901" y1="210.038" x2="309.569" y2="210.038"/>
+			
+				<line id="line226" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.4068,5.2879" x1="313.779" y1="210.038" x2="350.158" y2="210.038"/>
+			<polyline id="polyline228" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="352.303,210.038 
+				353.971,210.038 353.971,211.706 			"/>
+			
+				<line id="line230" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="4.6528,5.5831" x1="353.971" y1="216.155" x2="353.971" y2="254.599"/>
+			
+				<line id="line232" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="353.971" y1="256.823" x2="353.971" y2="258.571"/>
+		</g>
+	</g>
+	<g id="g234" display="none">
+		<g id="g236" display="inline">
+			
+				<line id="line238" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="307.027" y1="238.792" x2="308.775" y2="238.792"/>
+			
+				<line id="line240" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="5.5182,6.6216" x1="314.018" y1="238.792" x2="321.007" y2="238.792"/>
+			<polyline id="polyline242" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" points="323.628,238.792 
+				325.376,238.792 325.376,240.539 			"/>
+			
+				<line id="line244" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" stroke-dasharray="3.5292,4.2348" x1="325.376" y1="243.875" x2="325.376" y2="254.52"/>
+			
+				<line id="line246" fill="none" stroke="#4D4D4D" stroke-width="1.4" stroke-miterlimit="10" x1="325.376" y1="256.187" x2="325.376" y2="257.934"/>
+		</g>
+	</g>
+	<g id="g248">
+		<path id="path250" fill="none" d="M307.346,210.118"/>
+	</g>
+	<g id="g252">
+		<path id="path254" fill="none" d="M307.107,238.713"/>
+	</g>
+	
+		<line id="line256" fill="none" stroke="#459A77" stroke-width="1.7305" stroke-miterlimit="10" x1="491.146" y1="59.042" x2="332.445" y2="225.686"/>
+	
+		<text id="text258" transform="matrix(1 0 0 1 326.1777 248.3733)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">G</text>
+	
+		<text id="text260" transform="matrix(1 0 0 1 356.2544 219.2913)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">F</text>
+	
+		<text id="text262" transform="matrix(1 0 0 1 384.4521 191.093)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">E</text>
+	
+		<text id="text264" transform="matrix(1 0 0 1 413.2754 161.7112)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">D</text>
+	
+		<text id="text266" transform="matrix(1 0 0 1 441.2148 132.718)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">C</text>
+	
+		<text id="text268" transform="matrix(1 0 0 1 469.9258 104.9177)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">B</text>
+	
+		<text id="text270" transform="matrix(1 0 0 1 498.001 76.3235)" display="none" fill="#4D4D4D" enable-background="new    " font-family="'Verdana'" font-size="12.7088">A</text>
+	<g id="g272" display="none">
+		<g id="g274" display="inline">
+			<path id="path276" fill="#4E4E4E" d="M353.891,97.645c2.542,0,2.542-3.972,0-3.972C351.35,93.674,351.35,97.645,353.891,97.645
+				L353.891,97.645z"/>
+		</g>
+	</g>
+	<g id="g278" display="none">
+		<g id="g280" display="inline">
+			<path id="path282" fill="#4E4E4E" d="M382.406,126.32c2.542,0,2.542-3.972,0-3.972
+				C379.865,122.348,379.865,126.32,382.406,126.32L382.406,126.32z"/>
+		</g>
+	</g>
+	<g id="g284" display="none">
+		<g id="g286" display="inline">
+			<path id="path288" fill="#4E4E4E" d="M410.922,154.755c2.542,0,2.542-3.971,0-3.971
+				C408.301,150.784,408.301,154.755,410.922,154.755L410.922,154.755z"/>
+		</g>
+	</g>
+	<g id="g290" display="none">
+		<g id="g292" display="inline">
+			<path id="path294" fill="#4E4E4E" d="M439.357,183.509c2.542,0,2.542-3.972,0-3.972S436.815,183.509,439.357,183.509
+				L439.357,183.509z"/>
+		</g>
+	</g>
+	<g id="g296" display="none">
+		<g id="g298" display="inline">
+			<path id="path300" fill="#4E4E4E" d="M467.238,211.627c2.541,0,2.541-3.972,0-3.972
+				C464.696,207.656,464.696,211.627,467.238,211.627L467.238,211.627z"/>
+		</g>
+	</g>
+	<g id="g302" display="none">
+		<g id="g304" display="inline">
+			<path id="path306" fill="#4E4E4E" d="M496.389,240.698c2.542,0,2.542-3.972,0-3.972S493.847,240.698,496.389,240.698
+				L496.389,240.698z"/>
+		</g>
+	</g>
+	<g id="g308" display="none">
+		<g id="g310" display="inline">
+			<path id="path312" fill="#4E4E4E" d="M325.773,69.051c2.542,0,2.542-3.972,0-3.972C323.231,65.079,323.231,69.051,325.773,69.051
+				L325.773,69.051z"/>
+		</g>
+	</g>
+	<text id="text314" transform="matrix(1 0 0 1 493.2041 57.303)" fill="#449977" font-family="'Verdana'" font-size="12.7088">S</text>
+	
+		<line id="line316" fill="none" stroke="#459A77" stroke-width="2.596" stroke-miterlimit="10" x1="522.839" y1="64.602" x2="364.217" y2="231.246"/>
+</g>
+<g id="Layer_3" display="none">
+	<g id="g319" display="inline">
+		<text id="text321" transform="matrix(1 0 0 1 277.4277 267.1907)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">1</text>
+	</g>
+	<g id="g323" display="inline">
+		<text id="text325" transform="matrix(1 0 0 1 277.4277 237.9514)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">2</text>
+	</g>
+	<g id="g327" display="inline">
+		<text id="text329" transform="matrix(1 0 0 1 277.4277 208.7102)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">3</text>
+	</g>
+	<g id="g331" display="inline">
+		<text id="text333" transform="matrix(1 0 0 1 277.4277 179.47)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">4</text>
+	</g>
+	<g id="g335" display="inline">
+		<text id="text337" transform="matrix(1 0 0 1 277.4277 150.2297)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">5</text>
+	</g>
+	<g id="g339" display="inline">
+		<text id="text341" transform="matrix(1 0 0 1 277.4277 120.9895)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">6</text>
+	</g>
+	
+		<text id="text343" transform="matrix(1 0 0 1 302.0703 298.8049)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">12</text>
+	
+		<text id="text345" transform="matrix(1 0 0 1 330.8145 298.6692)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">18</text>
+	
+		<text id="text347" transform="matrix(1 0 0 1 360.5581 298.6692)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">24</text>
+	
+		<text id="text349" transform="matrix(1 0 0 1 389.855 298.8049)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">30</text>
+	
+		<text id="text351" transform="matrix(1 0 0 1 418.7568 298.6702)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">36</text>
+	
+		<text id="text353" transform="matrix(1 0 0 1 476.96 298.6682)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">48</text>
+	
+		<text id="text355" transform="matrix(1 0 0 1 507.0742 297.8694)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">52</text>
+	
+		<text id="text357" transform="matrix(1 0 0 1 448.293 298.8049)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">42</text>
+	
+		<line id="line359" display="inline" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" x1="292.678" y1="86.729" x2="289.186" y2="86.729"/>
+	<g id="g361" display="inline">
+		<text id="text363" transform="matrix(1 0 0 1 277.4277 91.7493)" fill="#4D4D4D" font-family="'Verdana'" font-size="12.993">7</text>
+	</g>
+</g>
+</svg>

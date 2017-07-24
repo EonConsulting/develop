@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>618 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+      <p class="self-assessment-intro">
+            Complete the following two statements by selecting all of the true options, more than one selection is possible.
+        </p>
+            <div class="activity-item check-activity">
+                <p>
+                      An increase in demand for accommodation in Cape Town …<br>
+                </p>
+                <form id="PPC36" class="iFramedRadioActivity">
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                                <input type="checkbox" class="checkbox" id="PPC36_1">
+                                <label for="PPC36_1">increases the quantity demanded</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="checkbox" id="PPC36_2">
+                                <label for="PPC36_2">decreases the quantity demanded</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="checkbox" id="PPC36_3">
+                                <label for="PPC36_3">increases the price</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" class="checkbox" id="PPC36_4">
+                                <label for="PPC36_4">decreases the price</label>
+                            </p>
+                            <div>
+                                <a class="waves-effect waves-light btn submit">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback blue" style="margin-bottom:40px;">
+                    An increase in the demand for accommodation increases the price and the quantity.  
+                    In terms of demand and supply curves the demand curve shifts to the right. 
+                </div>
+            </div>
+                
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('#PPC36 .submit').on('click', function() {
+
+                $(this).parents('form').siblings('.feedback').show();
+
+                $('#PPC36 .checkbox').each(function() {
+                    var capital = $(this).attr('capital');
+                    if (this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (!this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", "checked");
+                        this.checked = true;
+                    }
+                    if (!this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", ""); // For IE
+                        this.removeAttribute("checked"); // For other browsers
+                        this.checked = false;
+                    }
+                });
+
+                $('#PPC36_10').siblings('label').css('color', 'green');
+                $('#PPC36_10').prop("indeterminate", true);
+
+                $(this).parents('form').find('.checkbox').attr('disabled', 'disabled');
+                $(this).parents('form').siblings('.feedback').show();
+                
+                var activityBlock = 'asset2346';
+                activityDone(activityBlock);
+            });
+            
+             $('.radio-activity input').on('change', function () {
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset2346';
+                activityDone(activityBlock);
+            });
+            
+            
+        </script>
+    </body>
+</html>

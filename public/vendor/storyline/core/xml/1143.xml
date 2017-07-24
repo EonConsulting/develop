@@ -1,0 +1,11 @@
+<storyline id="s0" title="CHANGE IN DEMAND AND SUPPLY" config="1143" link="2281" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Overview" link="1147" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="Changes in Demand" link="1148" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="leaf" title="An approach to analyse changes in demand and supply" link="1149" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s4" type="leaf" title="Decrease in Demand" link="1150" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s5" type="leaf" title="Changes in Supply" link="1151" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s6" type="leaf" title="Summary of change in demand and supply" link="1152" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s7" type="leaf" title="Simultaneous changes in demand and supply" link="1153" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

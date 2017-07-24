@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html style="padding:0;">
+    <head>
+        <title>607 | Radio Button</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="height: auto!important;">
+
+        <div class="row" style="margin-bottom:0; text-align:center;">
+            <div class="col s12">
+                <img src="../assets/2514.svg" class="centered-graph graph1">
+                <p id="caption2514">An increase in supply</p>
+            </div>
+        </div>
+        <p style="margin:0;">
+            By comparing the new equilibrium position, <a class="caption-one" graph="graph1" src="../assets/2515.svg">E<sub>1</sub></a>, with the initial equilibrium position, <a class="caption-one" graph="graph1" src="../assets/2516.svg">E</a>, 
+            you can see that the equilibrium price decreases from <a class="caption-two" graph="graph1" src="../assets/2517.svg">R4 to R2</a>, and the equilibrium quantity 
+            increases from <a class="caption-two" graph="graph1" src="../assets/653.svg">3 000 to 4 200</a>. At this new equilibrium position, both the quantity demanded 
+            and the quantity supplied increase from 3 000 to 4 200. 
+        </p>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+        $(document).ready(function() {
+            $(".caption-one").on('click', function(){
+                $("#caption2514").html("An increase in supply");
+            });
+
+            $(".caption-two").on('click', function(){
+                $("#caption2514").html("An increase in supply creates and excess demand");
+            });
+        });
+            var activityBlock = 'asset2480';
+            activityDone(activityBlock);
+        </script>
+    </body>
+</html>
