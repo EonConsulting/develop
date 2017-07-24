@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class GraphModel extends Model {
 
-    public $incrementing = true;
     protected $table = 'lti_graphs';
     protected $primaryKey = 'id';
     protected $fillable = ['id', 'code', 'name'];

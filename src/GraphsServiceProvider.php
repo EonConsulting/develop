@@ -14,9 +14,10 @@ class GraphsServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->bind( 'graphs', function () {
-            return Graphs;
+        $this->app->singleton( 'graphs', function () {
+            return new Graphs;
         });
+
     }
 
     /**

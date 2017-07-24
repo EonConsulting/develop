@@ -1,17 +1,32 @@
 @extends('ph::layouts.app')
 @section('content')
-
 <div class="col-sm-12">
-    <!-- <h1>Hello World!</h1>
-    <p>Resize the browser window to see the effect.</p> -->
-
     <div class="row">
+        @if (session('error_message'))
+            <div class="alert alert-danger">
+                {{ session('error_message') }}
+            </div>
+        @endif
 
-        <div class="col-sm-5 " style="background-color:none;">
+        @if (session('success_message'))
+            <div class="alert alert-success">
+                {{ session('success_message') }}
+            </div>
+        @endif
+
+        @if($errors->count() > 0)
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="col-sm-5 " style="background-color:#eee; height:100%;">
         <p>Code</p>
             <form action="savetodatabase" method="post">
                 <textarea id="textareaCode" class="textareaCode" name="textareaCode"
-                          style="background-color: none; color: black;" placeholder="Make sure the first parameter of initBoard is jxgbox eg: JXG.JSXGraph.initBoard('jxgbox' "></textarea><br>
+                          style="background-color: none; color: black;" placeholder="Make sure the first parameter of initBoard is jxgbox eg: JXG.JSXGraph.initBoard('jxgbox')"></textarea><br>
                 <br style="color:red ;"> Graph Name: <input type="text" name="graphName" id="graphName" required="true">
                 <button id="save" type="submit"
                         style="background: #172652 !important; border-color: #172652; color:#fff;">Save Graph
@@ -19,22 +34,18 @@
             </form>
         </div>
 
-        <div class="col-sm-1 " style="background-color:none;">
-            <br> <br> <br> <br> <br> <br> <br> <br>
-
-            <center>
-                <button style=" border:none; background-color:transparent; color: black ; ">  <h3> > </h3></button>
-                <br> <br>
-            </center>
-            <br> <br> <br> <br> <br> <br> <br> <br>
-        
-        </div>
+        <div class="col-sm-1 " style="background-color:#eee; height:100%;">
+                <button class="btn-primary" style="border:none; position: absolute; top:35%;background-color:transparent; color: black ; ">  <h3>
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></h3>
+                        Preview
+                </button>
+               </div>
 
         <div class="col-sm-6 " style="background-color:none; ">
 
             <p>Preview</p>
             <div id="preview1  ">
-                             <div id='jxgbox' class='textareaCode' style=' border: groove;'></div>
+                             <div id='jxgbox' class='textareaCode' style=' border: 1px solid rgb(169, 169, 169);'></div>
                       
             </div>
         </div>
@@ -42,12 +53,9 @@
     </div>
 
 </div>
-<script>
-
-</script>
- <div id="preview2">
+<div id="preview2">
     <script type="text/javascript">
-      
+        (function () {
             var board = JXG.JSXGraph.initBoard('jxgbox', {
                 boundingbox: [-1.5, 2, 1.5, -1],
                 keepaspectratio: true,
@@ -124,23 +132,23 @@
                 strokeColor: '#901B77'
             });
             board.update();
-    
+        })();
         </script>
- </div>
+</div>
     <script>
         $(document).ready(function () {
      
-            $("button").on("click", function () {
+            $("button").click(function () {
   
   var $this = $(this); 
-  var code =  document.getElementById("textareaCode").value; 
+  var code = document.getElementById("textareaCode").value;
   var divreplace = "<div id='box2' class='textareaCode' style=' border: groove;'> ";
  // graphs()->drawgraph($this, $code, $divreplace);
 if ($this.hasClass("clicked-once")) {
     // already been clicked once, refresh the page
    location.reload();
-   $("#preview2").replaceWith('<script>'+code+'<\/script>');
-// $("#preview1").replaceWith(divreplace);
+   $("#preview2").replaceWith(code);
+ $("#preview1").replaceWith(divreplace);
     console.log(code);
 }
  else {
@@ -148,7 +156,7 @@ if ($this.hasClass("clicked-once")) {
     $this.addClass("clicked-once");
                
              //   var code = document.getElementById("textareaCode").value;
-                $("#preview2").replaceWith('<script>'+code+'<\/script>');
+                $("#preview2").replaceWith(code);
                 // var text = document.createElement('div');
                 // text.setAttribute('class', 'textareaCode');
                 // text.setAttribute('id', 'box2');
