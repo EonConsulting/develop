@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Storyline;
 use App\Models\StorylineItem;
-use EONConsulting\File\Reader\Csv;
+use EONConsulting\Storyline\Table\Csv;
 
 class DefaultController extends LTIBaseController {
 
@@ -34,13 +34,13 @@ class DefaultController extends LTIBaseController {
             if($typ = $request["filetype"])
                  switch ($typ) {
                     case "csv":
-                        $Read = new Csv($_FILES['csv']['tmp_name']);
-                          $handler = $Read->open(",",'"');
-                          $data = $Read->readAll();
-                          foreach ($data[1] as $value) {
-                                  $array[] = ['name' => $value,'file_url' => '', 'file_name' => '','children' => []];
-                            }
-                         $Read->close();
+                        $csv = array_map("str_getcsv", file($_FILES['csv']['tmp_name']));
+                        $header = array_shift($csv);
+                        $col = array_search("title", $header);
+                        foreach ($csv as $row) {
+                            $array[] = ['name' => $row[$col],'file_url' => '', 'file_name' => '','children' => []];
+                        }
+
                         $CVS = [
                             ['name'=>$course->title,'file_url' => '', 'file_name' => '','parent_id'=>null, 'children' => $array]
                         ];

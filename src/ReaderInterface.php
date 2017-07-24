@@ -15,9 +15,4 @@ Interface ReaderInterface{
 
     public function close();
 
-    public function getHeader();
-
-    public function readLine();
-
-    public function readAll();
 }
