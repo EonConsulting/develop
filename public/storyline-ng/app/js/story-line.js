@@ -19,7 +19,7 @@
 
 
             };
-          
+
             $scope.defaultData = [{
                 name: '',
                 file_url: '',
@@ -33,12 +33,8 @@
             // }
 
             $scope.saveStoryline = function(){
-<<<<<<< HEAD
-                var url = "/develop/public/lecturer/courses/" + $scope.course_id + "/storyline";
-=======
                 // var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
                 var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
->>>>>>> origin/master
                 $http.post(url, {parts: angular.toJson($scope.storylineItems)})
                     .then(function (response) {
                         $scope.html = '<p class="alert alert-success" style="margin-top:5px;">' +
@@ -52,13 +48,9 @@
 
             $scope.getPeople = function(){
                 $scope.isLoading = true;
-<<<<<<< HEAD
-                $http.get("/develop/public/lecturer/courses/" + $scope.course_id + "/storyline/feed")
-=======
 
                 // $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
                 $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
->>>>>>> origin/master
                     .then(function (response) {
                         //First function handles success
                         var dbItems = response.data;

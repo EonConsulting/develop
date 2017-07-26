@@ -9,15 +9,27 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid" id="root app">
+    <div class="col-md-12">
+        @if (session('error_message'))
+            <div class="alert alert-danger">
+                {{ session('error_message') }}
+            </div>
+        @endif
+
+        @if (session('success_message'))
+            <div class="alert alert-success">
+                {{ session('success_message') }}
+            </div>
+        @endif
+
+        @if($errors->count() > 0)
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
         <div class="row">
-<<<<<<< HEAD
-            @if (session('error_message'))
-                <div class="alert alert-danger">
-                    {{ session('error_message') }}
-                </div>
-            @endif
-=======
             {{--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>--}}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/css/jquery.ui.theme.css" />
             <div class="container"  id="root">
@@ -40,65 +52,13 @@
                                     </p>
                                 </div>
                             </div>
->>>>>>> origin/master
 
-            @if (session('success_message'))
-                <div class="alert alert-success">
-                    {{ session('success_message') }}
-                </div>
-            @endif
 
-            @if($errors->count() > 0)
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
-                </div>
-            @endif
 
-            <!-- CONTROLS -->
-            <div class="col-xs-6 col-md-3">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                               aria-expanded="true" aria-controls="collapseOne">
-                                <p class="panel-title">Storyline Controls</p>
-                            </a>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="menu-name-label howto open-label" for="menu-name">
-                                        <span>ToolBox Control</span></label>
-                                   </div>
-                                </p>
-                            </div>
                         </div>
 
                     </div>
-
                 </div>
-<<<<<<< HEAD
-            </div>
-            <!-- END CONTROLS -->
-
-            <!-- STORYLINE -->
-            <div class="col-xs-12 col-sm-6 col-md-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="major-publishing-actions">
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <label class="menu-name-label howto open-label" for="menu-name">
-                                        <span>Storyline</span>
-                                        <input name="menu-name" id="menu-name" type="text" class="form-control input-sm"
-                                               title="Enter menu name here" value="{{ $course->title }}" disabled>
-                                    </label>
-                                </div>
-                            </form>
-=======
                 <div class="col-xs-12 col-sm-6 col-md-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -178,53 +138,36 @@
 
                                 </div>
                             </div>
->>>>>>> origin/master
                         </div>
-                    </div>
-                    <div ng-app="demoApp" class="panel-body">
-                        <h5>Storyline Structure: <span style="color:#666; font-size:12px; font-style: italic">Drag any item into the Order Preferred, Toggle the Collapse on the Left for More Options</span></h5>
-                        <hr />
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <ng-view></ng-view>
-                                    {{--<input type="hidden" id="course_id" ng-model="{{ $course->id }}" />--}}
-                                    <script type="text/javascript">
-                                        var course_id = '{{ $course->id }}'
-                                    </script>
+                        <div ng-app="demoApp" class="panel-body">
+                            <h5>Storyline Structure: <span style="color:#666; font-size:12px; font-style: italic">Drag any item into the Order Preferred, Toggle the Collapse on the Left for More Options</span></h5>
+                            <hr />
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ng-view></ng-view>
+                                        {{--<input type="hidden" id="course_id" ng-model="{{ $course->id }}" />--}}
+                                        <script type="text/javascript">
+                                            var course_id = '{{ $course->id }}'
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel-heading">
-                        <!--<form class="form-inline">
-                            <div class="form-group">
-                                <input type="submit" name="save_menu" id="save_menu_header"
-                                       class="btn btn-primary btn-sm" value="Save Storyline">
-                            </div>-->
-                        </form>
+                        <div class="panel-heading">
+                            <!--<form class="form-inline">
+                                <div class="form-group">
+                                    <input type="submit" name="save_menu" id="save_menu_header"
+                                           class="btn btn-primary btn-sm" value="Save Storyline">
+                                </div>-->
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- END STORYLINE -->
 
+            </div>
         </div>
     </div>
-
-
-    <!--
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="row">
-                    <div class="container"  >
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    -->
 @endsection
 
 @section('custom-scripts')
@@ -254,10 +197,7 @@
     <script src="{{url('/storyline-ng/app/js/table-example.js')}}"></script>
     <script src="{{url('/storyline-ng/app/js/drop-confirmation.js')}}"></script>
     <script src="{{url('/storyline-ng/app/js/expand-on-hover.js')}}"></script>
-<<<<<<< HEAD
-    <script src="{{url('/vendor/filemanager/lib/ckfinder/ckfinder.js') }}"></script>
-@endsection
-=======
+
     <script src="{{url('/vendor/filemanager/lib/ckfinder/ckfinder.js')}}"></script>
     <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 
@@ -381,4 +321,3 @@
         });
     </script>
 @endsection
->>>>>>> origin/master

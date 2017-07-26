@@ -52,7 +52,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-<<<<<<< HEAD
+
             <div class="col-md-12">
                 <form id="save" method="POST" action="/lecturer/content/builder">
                     {{--Production URL--}}
@@ -81,16 +81,9 @@
                     <div class="input-group">
                         <input type="text" class="form-control" name="file_name" placeholder="Content Title" value=""/>
                         <span class="input-group-addon" id="basic-addon2">.html</span>
-=======
-            <form id="save" method="POST" action="/lecturer/content/builder">
-                {{--Production URL--}}
-            {{--<form id="save" method="POST" action="/lecturer/content/builder">--}}
 
-                @if (session('error_message'))
-                    <div class="alert alert-danger">
-                        {{ session('error_message') }}
->>>>>>> origin/master
                     </div>
+
                     <br />
                     <textarea id="ltieditorv2inst" class="ckeditor" name="editor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
                     <input type="hidden" id="data" name="data" />

@@ -129,8 +129,6 @@ Route::get('/logout', function()
     Session::flush();
     return Redirect::to('/home');
 });
-<<<<<<< HEAD
-=======
 
 /*
  * ----------------------------------------------------
@@ -140,4 +138,3 @@ Route::get('/logout', function()
 Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
     Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
 });
->>>>>>> origin/master

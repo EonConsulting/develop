@@ -14,9 +14,6 @@ use EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBCourseStorylineBase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseStorylineController extends Controller {
-    /**
-     * @var
 /**
  * Class CourseStorylineController
  * @package App\Http\Controllers\Courses
@@ -29,65 +26,10 @@ class CourseStorylineController extends DBCourseStorylineBase
      */
     protected $storylineId;
 
-<<<<<<< HEAD
-=======
     /**
      * @param Course $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
->>>>>>> origin/master
-    public function index(Course $course) {
-
-        $breadcrumbs = [
-            'title' => 'Modules',
-            'href' => route('courses'),
-            'child' => [
-                'title' => 'Manage '.$course->title,
-                'href' => route('courses.single', $course->id),
-                'child' => [
-                    'title' => 'Storyline',
-                ]
-            ],
-        ];
-
-        return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
-    }
-
-    /**
-     * @param Request $request
-     * @param Course $course
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-     */
-    public function store(Request $request, Course $course) {
-        //Check If Course has a Storyline and do an Update else Create a New Storyline
-
-        $nodes = $request->all()['parts'];
-
-        $data = json_decode($nodes, true);
-        dd($data);
-        exit();
-        $stId = Storyline::where('course_id', '=', $course->id)->first();
-
-        //dd($stId);
-        if ($stId == null) {
-            $storyline = new Storyline;
-            $storyline->course_id = $course->id;
-            $storyline->creator_id = $request->user()->id;
-            $storyline->save();
-            $this->save_storyline_items($storyline,$data);
-        } else {
-            //$storyline = new Storyline;
-            //$storyline->course_id = $course->id;
-            //$storyline->creator_id = $request->user()->id;
-			//dd($stId);
-            $stId->update();
-            $this->save_storyline_items($stId,$data);
-
-        }
-
-
-        return response('The Storyline has been Saved', 200);
-      
     public function index(Course $course)
     {
         return view('lecturer.storylines.single', ['course' => $course]);

@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/develop'),
+    'url' => env('APP_URL', "http://localhost:8050"),
 
     /*
     |--------------------------------------------------------------------------
