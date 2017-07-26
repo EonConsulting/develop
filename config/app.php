@@ -204,7 +204,6 @@ return [
         \EONConsulting\Storyline\TagCloud\StorylineTagCloudServiceProvider::class,
         \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
 
-
         /*
          * Application Service Providers...
          */

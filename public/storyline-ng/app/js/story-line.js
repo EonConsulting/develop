@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('demoApp')
+    angular.module("demoApp")
         .controller('StorylineCtrl', ['$sce','$scope', '$http', '$routeParams', function ($sce,$scope, $http, $routeParams) {
             $scope.course_id = course_id;
 
@@ -13,7 +13,12 @@
                 scope.toggle();
             };
 
+            $scope.showModal = function(storylineItem){
+                $('input[name="storyline_id"]').val(storylineItem.id);
+                $('#myCont').modal();
 
+
+            };
 
             $scope.defaultData = [{
                 name: '',
@@ -41,7 +46,6 @@
                         //Second function handles error
                     });
             }
-
 
             $scope.getPeople = function(){
                 $scope.isLoading = true;
