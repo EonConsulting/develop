@@ -7,7 +7,11 @@
       $routeProvider
         .when('/story-line', {
             controller: 'StorylineCtrl',
+<<<<<<< HEAD
           templateUrl: '/develop/public/storyline-ng/views/story-line.html'
+=======
+          templateUrl: '/storyline-ng/views/story-line.html'
+>>>>>>> origin/master
         })
         //.when('/cloning', {
         //  controller: 'CloningCtrl',

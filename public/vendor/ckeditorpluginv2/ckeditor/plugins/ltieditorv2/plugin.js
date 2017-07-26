@@ -25,7 +25,7 @@
                 {
                     return{
                         title: 'LTI Tools APP Store',
-                        minWidth: 600,
+                        minWidth: 820,
                         minHeight: 400,
                         contents :
                         [
@@ -35,7 +35,10 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
+<<<<<<< HEAD
                                     //src:  '/develop/public/public/ckeditorstore',
+=======
+>>>>>>> origin/master
                                     src:  '/ckeditorstore',
                                     width  : '100%',
                                     height : 450,
@@ -44,6 +47,7 @@
                                         var iframe = document.getElementById(this._.frameId);
                                         var iframeWindow = iframe.contentWindow;
                                         //Still in this context we get the attribute of the selected item
+
                                         iframeWindow.$('.appitem').each(function () {
                                             var $this = $(this);
                                             $this.on("click", function () {
@@ -51,7 +55,12 @@
                                                // console.log(context_id);
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
+                                                    url: '/ajaxresponse/' + context_id,
+                                                    type: 'GET',
+                                                    success: function (launchvars) {
+                                                        var url        = '/ajaxresponse/' +context_id;
                                                     //Production Url
+<<<<<<< HEAD
                                                     //url: '/develop/public/public/ajaxresponse/' + context_id,
                                                     url: '/ajaxresponse/' + context_id,
                                                     type: 'GET',
@@ -59,6 +68,15 @@
                                                         //Production
                                                         //var url        = '/develop/public/public/ajaxresponse/' +context_id;
                                                         var url        = '/ajaxresponse/' +context_id;
+=======
+                                                    //url: '/e-content/ajaxresponse/' + context_id,
+                                                    url: '/ajaxresponse/'+context_id,
+                                                    type: 'GET',
+                                                    success: function (launchvars) {
+                                                        //Production
+                                                        //var url        = '/e-content/ajaxresponse/' +context_id;
+                                                        var url        = '/ajaxresponse/'+context_id;
+>>>>>>> origin/master
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         console.log('appframe', appframe);
@@ -94,6 +112,7 @@
 
                                             });
                                         });
+
 
                                     }
 

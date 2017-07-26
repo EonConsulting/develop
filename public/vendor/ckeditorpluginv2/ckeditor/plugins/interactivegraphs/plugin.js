@@ -35,7 +35,11 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
+<<<<<<< HEAD
                                     //src:  '/develop/public/public/ckeditorstore',
+=======
+                                    //src:  '/ckeditorstore',
+>>>>>>> origin/master
                                     src:  '/graphstore',
                                     width  : '100%',
                                     height : 450,
@@ -52,12 +56,20 @@
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
                                                     //Production Url
+<<<<<<< HEAD
                                                     //url: '/develop/public/public/ajaxresponse/' + context_id,
+=======
+                                                    //url: '/ajaxresponse/' + context_id,
+>>>>>>> origin/master
                                                     url: '/graphstore/init/' + context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         //Production
+<<<<<<< HEAD
                                                         //var url        = '/develop/public/public/ajaxresponse/' +context_id;
+=======
+                                                        //var url        = '/ajaxresponse/' +context_id;
+>>>>>>> origin/master
                                                         var url        = '/graphstore/init/' +context_id;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');

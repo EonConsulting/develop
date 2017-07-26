@@ -32,3 +32,16 @@ notebooks.controller('ToolsListCtrl', function($scope, $http) {
     $scope.orderList = "title";
     $scope.init();
 });
+
+notebooks.directive('appitem',function(){
+    // Register to Dom During Copile Time
+    return {
+
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+
+        link: function($scope, iElm, iAttrs, controller) {
+            console.log('Here is your element', iElm);
+            // DO SOMETHING
+        }
+    };
+});

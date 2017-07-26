@@ -21,7 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-     return view('welcome');
+      return view('welcome');
 });
 
 /*
@@ -80,11 +80,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
         Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+
+
         // Feed POst Route from Web Pack
         //Route::get('/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@get']);
 
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
+
     });
     Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
         Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
@@ -126,3 +129,15 @@ Route::get('/logout', function()
     Session::flush();
     return Redirect::to('/home');
 });
+<<<<<<< HEAD
+=======
+
+/*
+ * ----------------------------------------------------
+ * Playground API's
+ * ----------------------------------------------------
+ */
+Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
+    Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
+});
+>>>>>>> origin/master

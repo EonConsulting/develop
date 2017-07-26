@@ -42,13 +42,15 @@
             "EONConsulting\\Storyline\\Nav\\": "packages/storyline-nav/src/",
             "EONConsulting\\Storyline\\Menu\\": "packages/storyline-menu/src/",
             "EONConsulting\\Storyline\\Breadcrumbs\\": "packages/storyline-breadcrumbs/src/",
+            "EONConsulting\\Storyline\\MindMap\\": "packages/storyline-mindmap/src/",
             "EONConsulting\\PHPSaasWrapper\\": "packages/PHPSaasWrapper/src/",
-            "EONConsulting\\StoryCore\\": "packages/story-core/src/",
             "EONConsulting\\CKEditorPluginV2\\": "packages/ck-editor-plugin-v2/src/",
             "EONConsulting\\CKEditorPlugin\\": "packages/ck-editor-plugin-v1/src/",
             "EONConsulting\\ImgProcessor\\": "packages/ImgProcessor/src/",
             "EONConsulting\\Graphs\\": "packages/Graphs/src/",
-            "EONConsulting\\MindMap\\": "packages/MindMap/src/"
+            "EONConsulting\\MindMap\\": "packages/MindMap/src/",
+            "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
+            "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/"
         },
         "files": [
             "packages/laravel-lti/src/functions.php",
@@ -59,13 +61,14 @@
             "packages/storyline-nav/src/functions.php",
             "packages/storyline-menu/src/functions.php",
             "packages/storyline-breadcrumbs/src/functions.php",
-            "packages/story-core/src/functions.php",
+            "packages/storyline-mindmap/src/functions.php",
             "packages/PHPSaasWrapper/src/Http/helpers.php",
             "packages/ck-editor-plugin-v1/src/functions.php",
             "packages/ck-editor-plugin-v2/src/functions.php",
             "packages/ImgProcessor/src/functions.php",
             "packages/Graphs/src/Http/helpers.php",
-            "packages/MindMap/src/Http/helpers.php"
+            "packages/MindMap/src/Http/helpers.php",
+            "packages/storyline-tagcloud/src/functions.php"
         ]
     },
     "autoload-dev": {

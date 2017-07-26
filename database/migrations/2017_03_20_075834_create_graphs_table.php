@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
 class CreateGraphsTable extends Migration
 {
     /**
@@ -13,10 +14,13 @@ class CreateGraphsTable extends Migration
      */
     public function up()
     {
-        Schema::create('graphs', function (Blueprint $table) {
+        Schema::create('lti_graphs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
+            $table->text('code');
             $table->string('name');
+         $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+         $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+
            
         });
     }
@@ -28,6 +32,6 @@ class CreateGraphsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('graphs');
+        Schema::dropIfExists('lti_graphs');
     }
 }

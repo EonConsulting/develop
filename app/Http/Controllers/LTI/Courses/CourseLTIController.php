@@ -13,8 +13,10 @@ class CourseLTIController extends LTIBaseController {
 //        dd(storyline_core()->getIndex($course));
 
         $data = storyline_core()->getIndex($course);
+        $tagArray  =  explode(',',$course->tags);
+        $WordList  =    storyline_tag_cloud()->generateWordList($tagArray);
 
-        return view('lti.courses.single', ['data' => $data, 'course' => $course]);
+        return view('lti.courses.single', ['data' => $data, 'course' => $course,'wordlist'=> $WordList]);
     }
 
 }

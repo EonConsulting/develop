@@ -24,12 +24,14 @@ class CourseLectureItemLTIController extends LTIBaseController {
         $custom_styles = [];
 
         $nav = '';
+
         if(function_exists('storyline_nav')) {
             $nav = storyline_nav()->getNavHTMLFromCourse($course);
             $styles = array_merge($styles, storyline_nav()->getStyles());
             $scripts = array_merge($scripts, storyline_nav()->getScripts());
             $custom_scripts[] = storyline_nav()->getCustomScripts();
         }
+
         //Peace Additions to J. Harington's Initial Storyline Nav
         $navigation = '';
         if (function_exists('storyline_nav')){

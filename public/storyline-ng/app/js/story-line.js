@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('demoApp')
+    angular.module("demoApp")
         .controller('StorylineCtrl', ['$sce','$scope', '$http', '$routeParams', function ($sce,$scope, $http, $routeParams) {
             $scope.course_id = course_id;
 
@@ -13,8 +13,13 @@
                 scope.toggle();
             };
 
+            $scope.showModal = function(storylineItem){
+                $('input[name="storyline_id"]').val(storylineItem.id);
+                $('#myCont').modal();
 
 
+            };
+          
             $scope.defaultData = [{
                 name: '',
                 file_url: '',
@@ -22,14 +27,18 @@
                 children:[]
             }];
 
-
             //
             // $scope.clicked = function(storylineItem){
             //     alert(JSON.stringify(storylineItem));
             // }
 
             $scope.saveStoryline = function(){
+<<<<<<< HEAD
                 var url = "/develop/public/lecturer/courses/" + $scope.course_id + "/storyline";
+=======
+                // var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
+                var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
+>>>>>>> origin/master
                 $http.post(url, {parts: angular.toJson($scope.storylineItems)})
                     .then(function (response) {
                         $scope.html = '<p class="alert alert-success" style="margin-top:5px;">' +
@@ -41,10 +50,15 @@
                     });
             }
 
-
             $scope.getPeople = function(){
                 $scope.isLoading = true;
+<<<<<<< HEAD
                 $http.get("/develop/public/lecturer/courses/" + $scope.course_id + "/storyline/feed")
+=======
+
+                // $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
+                $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
+>>>>>>> origin/master
                     .then(function (response) {
                         //First function handles success
                         var dbItems = response.data;
@@ -96,9 +110,6 @@
                 return records;
             }
 
-
-
-
             $scope.populateMenu = function(parents, dbItems){
                 var collection = [];
                 var data = $scope.getMenuItems(dbItems);
@@ -148,9 +159,6 @@
             $scope.expandAll = function () {
                 $scope.$broadcast('angular-ui-tree:expand-all');
             };
-
-
-
 
             $scope.openPopup = function (storylineItem) {
                 CKFinder.popup( {

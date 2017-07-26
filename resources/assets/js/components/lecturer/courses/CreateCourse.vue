@@ -17,11 +17,25 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="form-group">
                         <div class="col-md-12">
                             <label>Module Summary</label>
                             <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
                         </div>
+=======
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label>Module Summary</label>
+                        <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label>Tags <small>(Separate by a comma)</small></label>
+                        <input type="text" class="form-control tags" name="tags"/>
+>>>>>>> origin/master
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
