@@ -16,9 +16,6 @@ class ContentBuilderController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
-        if($request->ajax()){
-            session()->flash('error_message','fffffff');
-        }else {
             $page = public_path() . '/EON/system/public/vendor/storyline/core/files/content/' . $this->new_file_request($request) . '.html';
             $file = fopen($page, "w");
             fwrite($file, json_decode($request->get('data')));
@@ -26,7 +23,6 @@ class ContentBuilderController extends Controller {
 
             session()->flash('success_message', 'File saved under ' . $this->new_file_request($request) . '.html');
             return redirect()->route('content.builder');
-        }
     }
 
     /**
