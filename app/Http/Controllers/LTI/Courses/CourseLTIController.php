@@ -13,7 +13,6 @@ class CourseLTIController extends LTIBaseController {
 //        dd(storyline_core()->getIndex($course));
 
         $data = storyline_core()->getIndex($course);
-
         return view('lti.courses.single', ['data' => $data, 'course' => $course]);
     }
 

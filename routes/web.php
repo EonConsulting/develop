@@ -21,6 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
+    //return storyline_mind_map()->get_course_map(new \App\Models\Course());
      return view('welcome');
 });
 
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
+
     });
     Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
         Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
@@ -124,3 +126,11 @@ Route::get('/logout', function()
     return Redirect::to('/home');
 });
 
+/*
+ * ----------------------------------------------------
+ * Playground API's
+ * ----------------------------------------------------
+ */
+Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
+    Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
+});
