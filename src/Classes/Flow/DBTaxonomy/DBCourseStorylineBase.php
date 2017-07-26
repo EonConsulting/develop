@@ -107,10 +107,13 @@ class DBCourseStorylineBase extends Controller
      */
     protected function asset_save_storyline_items($storyline, $data)
     {
+        dd($data);
         $item = new StorylineItem;
         //$storyline_id = $storyline->id;
         $item->currentStoryLine($storyline->id);
-        $item->buildTree($data);
+        $item->buildTree();
+
+
     }
 
     /**
