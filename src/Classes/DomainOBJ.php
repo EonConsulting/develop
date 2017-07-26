@@ -12,7 +12,9 @@ namespace EONConsulting\CKEditorPluginV2\Classes;
 use EONConsulting\LaravelLTI\Models\LTIDomain;
 
 class DomainOBJ {
-
+    /**
+     * @return array
+     */
     static public function listDomains() {
         $domains_obj = LTIDomain::with('context')->with('key')->get();
         $domains = [];
@@ -78,7 +80,6 @@ class DomainOBJ {
 
             $domains[] = $obj;
         }
-//        dd($domains);
         return $domains;
     }
 

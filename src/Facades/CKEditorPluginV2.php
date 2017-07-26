@@ -15,6 +15,4 @@ class CKEditorPluginV2 extends Facade {
     protected static function getFacadeAccessor() {
         return 'ckeditorpluginv2';
     }
-
-
 }

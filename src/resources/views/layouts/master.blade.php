@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@yield('site-title') |  {{config('app.name')}}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
     <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></head>
-    {{--<script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/jquery-mathjax-to-png.js') }}"></script>--}}
+    <![endif]-->
+
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+
+
+    <!-- Piwik -->
     <script type="text/javascript">
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//dev.unisaonline.net/piwik/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <!-- End Piwik Code -->
+
+@yield('custom-styles')
+<!-- <link href="{{url('/vendor/laravellti/css/bootstrap.min.css')}}" rel="stylesheet" /> -->
+
+<script type="text/javascript">
 
     </script>
 
@@ -62,16 +92,16 @@
     <script>
         //Dialogue Insertion Point -->
 
-                var config = {
-                    extraPlugins: 'dialog',
-                    toolbar: [ [ 'LTIButton' ] ]
+             var config = {
+                    extraPlugins: 'dialog', 
+                    toolbar: [ [ 'LTIButton', 'mathjax' ] ]
                 };
 
     </script>
 </head>
 
 <body>
-<div class="container">
+<div class="wrapper" id="app">
     @yield('content')
 </div>
 </body>

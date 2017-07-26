@@ -29,71 +29,29 @@ class CKDomainsController extends LTIBaseController {
      * @return \Illuminate\Http\JsonResponse
      *
      */
-    function index() {
+    public function index() {
 
         $domainslist   = ckeditorpluginv2()->list_domains();
-//        dd($domainslist);
 
         return view('ckeditorpluginv2::editorstore', ['tools' => $domainslist]);
 
     }
 
-    function CKAngularRest() {
+    /**
+     * @return array
+     */
+    public function CKAngularRest() {
 
         $domainslist = ckeditorpluginv2()->list_domains();
 
         return $domainslist;
     }
 
-//    function selectsearch(Request $request) {
-//
-//        $term = $request->get('term');
-//
-////        $obj = new LTIDomain;
-////        $obj->json->bltidescription;
-////        dd($obj);
-//
-//        if (!isset($term)) {
-//
-//            session()->flash('error_message', 'You Search Criteria Can Not be Empty');
-//            return redirect()->back();
-//
-//        }
-//
-//        if (!empty($term)) {
-//
-//            //
-//
-//            //Perfom Query only if request contains a search Query Var
-//            $searches = DB::table('lti_domain')
-//                ->join('lti_context', 'lti_domain.context_id', '=', 'lti_context.context_id')
-//                ->where('title', 'like', $term  . '%')
-//                //->orWhere('lti_domain.json->bltidescription', 'like', $term .'%')
-//                ->orderBy('title')
-//                ->simplePaginate(8);
-//
-//           // dd($searches);
-//
-//            return view('ckeditorpluginv2::search', ['searches' => $searches]);
-//
-////            $response = ('lti_domain')->where([['json->bltititle', 'like', '%' . $term .'%']])
-//////                ->orWhere([['json->bltidescription', 'like', $q]])
-////                ->get();
-////
-////            dd($response);
-//
-//
-//        }
-//
-//
-//    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    function getEditorView() {
-        //Here we Just Simply Creating an instance of the Editor
+    public function getEditorView() {
         return view('ckeditorpluginv2::editorv2');
     }
 
@@ -101,7 +59,8 @@ class CKDomainsController extends LTIBaseController {
      * @param LTIContext $context
      * @return \Illuminate\Http\JsonResponse
      */
-    function getAJAXresponse(LTIContext $context) {
+
+    public function getAJAXresponse(LTIContext $context) {
         //This is an API that can be used to get a response of available domains
         //$.get(domain, data)Send Parameter Response in Real Time
 
@@ -119,7 +78,7 @@ class CKDomainsController extends LTIBaseController {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
 
-    function launch(LTIContext $context) {
+    public function launch(LTIContext $context) {
 
         $key = ($context->key) ? $context->key->key_key : '';
         $secret = ($context->key) ? $context->key->secret : '';

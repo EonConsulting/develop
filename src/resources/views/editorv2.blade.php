@@ -25,7 +25,7 @@
              */
 
             CKEDITOR.replace('ltieditorv2inst', {
-                extraPlugins: 'ltieditorv2,docprops,html2PDF,mathjax2,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                extraPlugins: 'ltieditorv2,docprops,html2PDF,dialog,xml,templates,widget,lineutils,widgetselection,clipboard,mathjax',
                 allowedContent: true,
                 fullPage: true,
                 mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
@@ -39,7 +39,7 @@
 
                     });
 
-            CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");
+            CKEDITOR.document.appendStyleSheet("{{ url('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");
             CKEDITOR.instances.ltieditorv2inst.updateElement();
 
 
@@ -48,7 +48,7 @@
             //            },false);
 
             // CKEDITOR.config.allowedContent = true;
-            {{--//document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
+            {{--//document.appendStyleSheet("{{ url('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
 
 
             //                                $('#submit').click(function (event) {
