@@ -1,3 +1,4 @@
+
 <!-- Nested node template -->
 
 <button aria-haspopup="true" class="btn btn-sm btn-success dropdown-toggle" ng-click="saveStoryline()"> Save Storyline</button>
@@ -27,14 +28,18 @@
            placeholder="Content Title" />
 
     <a class="btn btn-default btn-xs"
-       data-nodrag
-       ng-click="openPopup(storylineItem)">
-      <span>Select File</span>
+           data-nodrag
+           ng-click="openPopup(storylineItem)">
+    <span>Select Content</span>
     </a>
-
     <span class="label label-default">File Name:</span> &nbsp;
     <span class="label label-success">{{storylineItem.file_name}}</span>
 
+    <a class="btn btn-default btn-xs clickme"
+       data-nodrag
+       ng-click="showModal(storylineItem)">
+      <span class="fa fa-pencil"></span> Create Content
+    </a>
       <a class="pull-right btn btn-danger btn-xs"
          data-nodrag
          ng-click="remove(this)">
@@ -73,6 +78,6 @@
       </ol>
     </div>
     <div ng-hide="!isLoading">Loading Storyline...</div>
-    <!--<div>{{storylineItems | json}}</div>
+    <!--<div>{{storylineItems | json}}</div>-->
   </div>
 </div>

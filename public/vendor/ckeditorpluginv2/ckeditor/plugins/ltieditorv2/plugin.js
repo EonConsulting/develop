@@ -35,7 +35,6 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
-                                    //src:  '/e-content/ckeditorstore',
                                     src:  '/ckeditorstore',
                                     width  : '100%',
                                     height : 450,
@@ -52,6 +51,10 @@
                                                // console.log(context_id);
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
+                                                    url: '/ajaxresponse/' + context_id,
+                                                    type: 'GET',
+                                                    success: function (launchvars) {
+                                                        var url        = '/ajaxresponse/' +context_id;
                                                     //Production Url
                                                     //url: '/e-content/ajaxresponse/' + context_id,
                                                     url: '/ajaxresponse/'+context_id,

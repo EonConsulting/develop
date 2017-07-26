@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label>Tags <small>(Separate by a comma)</small></label>
-                        <input type="text" class="form-control tags"/>
+                        <input type="text" class="form-control tags" name="tags"/>
                     </div>
                 </div>
                 <div class="form-group">

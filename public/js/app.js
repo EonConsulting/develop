@@ -35458,7 +35458,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Applications/MAMP/htdocs/EON/system/resources/assets/js/components/lecturer/courses/CreateCourse.vue"
+//Component.options.__file = "/Applications/MAMP/htdocs/EON/system/resources/assets/js/components/lecturer/courses/CreateCourse.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateCourse.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -35592,7 +35592,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', [_vm._v("Tags "), _c('small', [_vm._v("(Separate by a comma)")])]), _vm._v(" "), _c('input', {
     staticClass: "form-control tags",
     attrs: {
-      "type": "text"
+      "type": "text",
+        "name": "tags"
     }
   })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

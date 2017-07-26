@@ -33,5 +33,5 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="{{url('/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>
+
 @endsection

@@ -200,10 +200,12 @@ return [
 //        \EONConsulting\PHPSaasWrapper\src\PHPSaasWrapperServiceProvider::class,
         //\EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
         \EONConsulting\MindMap\MindMapServiceProvider::class,
+       // \EONConsulting\StoryCore\StoryCoreServiceProvider::class,
         //\EONConsulting\StoryCore\StoryCoreServiceProvider::class,
         //\EONConsulting\PHPStencil\PHPStencilServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
-
+        \EONConsulting\Storyline\TagCloud\StorylineTagCloudServiceProvider::class,
+        \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
 
         /*
          * Application Service Providers...

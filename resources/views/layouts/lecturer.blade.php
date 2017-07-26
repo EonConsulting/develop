@@ -357,7 +357,7 @@
                         <i class="fa fa-book"></i> <span>Content Builder</span>
                         <span class="pull-right-container">
 
-            </span>
+                </span>
                     </a>
                 </li>
 

@@ -10,9 +10,12 @@ use App\Http\Controllers\Controller;
 class CourseLectureLTIController extends LTIBaseController {
 
     public function index(Course $course) {
+
         $data = storyline_core()->getIndex($course);
 
         $latest_storyline = $course->latest_storyline()->items()->first();
+
+
         return redirect()->route('lti.courses.single.lectures.item', [$course->id, $latest_storyline->id]);
 
 //        dd($data);
@@ -32,12 +35,14 @@ class CourseLectureLTIController extends LTIBaseController {
         }
 
         $menu = '';
+
         if(function_exists('storyline_nav')) {
             $menu = storyline_menu()->getMenuHTMLFromCourse($course);
 //            $styles = array_merge($styles, storyline_menu()->getStyles());
 //            $scripts = array_merge($scripts, storyline_menu()->getScripts());
 //            $custom_scripts[] = storyline_menu()->getCustomScripts();
         }
+
 
         return view('lti.courses.lectures', ['data' => $data, 'course' => $course, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles, 'menu' => $menu]);
     }

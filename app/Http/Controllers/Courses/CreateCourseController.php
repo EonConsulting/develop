@@ -18,7 +18,6 @@ class CreateCourseController extends Controller {
         $description = $request->get('description', '');
         $tags = $request->get('tags', '');
         $featured_images = $request->file('featured_image');
-
         $course = new Course;
 
         $course->title = $title;

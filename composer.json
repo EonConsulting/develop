@@ -48,7 +48,9 @@
             "EONConsulting\\CKEditorPlugin\\": "packages/ck-editor-plugin-v1/src/",
             "EONConsulting\\ImgProcessor\\": "packages/ImgProcessor/src/",
             "EONConsulting\\Graphs\\": "packages/Graphs/src/",
-            "EONConsulting\\MindMap\\": "packages/MindMap/src/"
+            "EONConsulting\\MindMap\\": "packages/MindMap/src/",
+            "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
+            "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/"
         },
         "files": [
             "packages/laravel-lti/src/functions.php",
@@ -65,7 +67,8 @@
             "packages/ck-editor-plugin-v2/src/functions.php",
             "packages/ImgProcessor/src/functions.php",
             "packages/Graphs/src/Http/helpers.php",
-            "packages/MindMap/src/Http/helpers.php"
+            "packages/MindMap/src/Http/helpers.php",
+            "packages/storyline-tagcloud/src/functions.php"
         ]
     },
     "autoload-dev": {

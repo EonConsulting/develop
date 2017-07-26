@@ -21,8 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-    //return storyline_mind_map()->get_course_map(new \App\Models\Course());
-     return view('welcome');
+      return view('welcome');
 });
 
 /*
@@ -81,6 +80,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
         Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+
+
         // Feed POst Route from Web Pack
         //Route::get('/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@get']);
 

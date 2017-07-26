@@ -37,6 +37,13 @@
                         <a href="{{ route('lti.courses.single.lectures', $course['id']) }}" class="list-group-item">Go to lectures</a>
                     </div>
                 </div>
+                <div class="panel">
+                    <div id="tegcloud" class="col-lg-offset-4 col-lg-4">
+                    @foreach ($wordlist as $tags)
+                        <a href="#" style="font-size:{{ $tags['text'] }};color: rgb(52, 152, 219);">{{ $tags['weight'] }}</a>
+                    @endforeach
+                    </div>
+                </div>
             </div>
             <div class="col-md-9">
                 <div class="panel">
@@ -100,4 +107,6 @@
     <script src="{{url('/dist/js/pages/dashboard2.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{url('/dist/js/demo.js')}}"></script>
+
+    </script>
 @endsection
