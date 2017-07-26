@@ -1,7 +1,7 @@
 @extends('layouts.lecturer')
 
 @section('custom-styles')
-    <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{ url ('vendor/appstore/css/bootstrap.min.css')}}" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
     <script src="{{url('/js/ng.js')}}"></script>
 
@@ -11,6 +11,9 @@
             padding: 0px;
             margin-bottom: 20px;
             padding: 10px;
+            min-height: 250px !important;
+            max-height: 250px !important;
+            overflow: hidden;
         }
 
         .tool-desc {
@@ -127,7 +130,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" ng-model="CatList">
+                        <select class="form-control" ng-model="categories">
                             <option value="">All Categories</option>
                             <option value="">Community</option>
                             <option value="">Content</option>
@@ -144,14 +147,14 @@
                 <p><span>Results: <% tools.length %></span></p>
                         <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="col-xs-18 customcol col-sm-6 col-md-3">
                             <div class="thumbnail">
-                                <img src="<% tool.logo_url %>" alt="" class="img img-responsive">
+                                <img ng-src="<% tool.logo_url %>" alt="" class="img img-responsive">
                                 <div class="caption">
                                     <h4 class="tool-title"><% tool.title %></h4>
                                     <p class="tool-desc"><%tool.description %></p>
                                 </div>
                                 <div class="pull-bottom-left">
                                     <p><a href="{{url('/eon/lti/appstore/launch/<% tool.context_id %>')}}"
-                                          class="btn btn-success btn-xs" role="button">View</a> <a
+                                          class="btn btn-primary btn-xs" role="button">View</a> <a
                                                 href="{{url('/eon/lti/delete/<% tool.context_id %>')}}"
                                                 class="btn btn-danger btn-xs" role="button">Delete</a></p>
                                 </div>
