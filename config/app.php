@@ -192,6 +192,7 @@ return [
         \EONConsulting\Storyline\Nav\StorylineNavServiceProvider::class,
         \EONConsulting\Storyline\Menu\StorylineMenuServiceProvider::class,
         \EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
+        \EONConsulting\Storyline\MindMap\StorylineMindMapServiceProvider::class,
         \EONConsulting\CKEditorPluginV2\CKEditorPluginV2ServiceProvider::class,
         \EONConsulting\ImgProcessor\ImgProcessorServiceProvider::class,
         \EONConsulting\CKEditorPlugin\CKEditorPluginServiceProvider::class,
@@ -199,7 +200,8 @@ return [
 //        \EONConsulting\PHPSaasWrapper\src\PHPSaasWrapperServiceProvider::class,
         //\EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
         \EONConsulting\MindMap\MindMapServiceProvider::class,
-        \EONConsulting\StoryCore\StoryCoreServiceProvider::class,
+        //\EONConsulting\StoryCore\StoryCoreServiceProvider::class,
+        //\EONConsulting\PHPStencil\PHPStencilServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
 
 
@@ -278,6 +280,7 @@ return [
         'StorylineNav' => \EONConsulting\Storyline\Nav\Facades\StorylineNav::class,
         'StorylineMenu' => \EONConsulting\Storyline\Menu\Facades\StorylineMenu::class,
         'StorylineBreadcrumbs' => \EONConsulting\Storyline\Breadcrumbs\Facades\StorylineBreadcrumbs::class,
+        'StorylineMindMap' => \EONConsulting\Storyline\MindMap\Facades\StorylineMindMap::class,
         'CKEditorV2' => \EONConsulting\CKEditorPluginV2\Facades\CKEditorPluginV2::class,
         'ImgProcessor' => \EONConsulting\ImgProcessor\Facades\ImgProcessor::class,
         'CKEditor' => \Packages\CKEditorPlugin\src\Facades\CKEditorPlugin::class,
@@ -285,6 +288,7 @@ return [
 //        'PHPSaasWrapper' => \EONConsulting\PHPSaasWrapper\src\Facades\PHPSaasWrapper::class,
         //'StorylineBreadcrumbs' => EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs::class,
         'MindMap' => \EONConsulting\MindMap\Facades\MindMap::class,
+        'PHPStencil' => \EONConsulting\PHPStencil\PHPStencil::class,
     ],
 
 ];

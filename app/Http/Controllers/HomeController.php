@@ -78,4 +78,9 @@ class HomeController extends LTIAuthBaseController
 
         return $role;
     }
+
+    public function current_user() {
+        $this->user = auth()->user();
+        return $this->user->lti[0];
+    }
 }
