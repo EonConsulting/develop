@@ -10,7 +10,16 @@ use App\Http\Controllers\Controller;
 class CreateCourseController extends Controller {
 
     public function index() {
-        return view('lecturer.courses.create');
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Create a Module',
+            ],
+        ];
+
+        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
     }
 
     public function store(StoreCourseRequest $request) {

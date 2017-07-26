@@ -49,7 +49,7 @@
         mounted() {
 
             $('#tok').val(window.Laravel.csrfToken);
-            var url = '/lecturer/courses/{course}/notify/users';
+            var url = '/develop/public/lecturer/courses/{course}/notify/users';
             url = url.replace('{course}', this.courseid);
             var self = this;
 

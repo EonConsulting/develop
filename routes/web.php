@@ -92,6 +92,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
     });
 });
 
+/*
+ * --------------------------------------
+ * Home - LTI Routes
+ * --------------------------------------
+ */
+//
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
 Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
     Route::group(['namespace' => 'Dashboards'], function() {
@@ -99,9 +105,6 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
     });
     Route::group(['namespace' => 'Users'], function() {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);
-
-
-
         Route::match(['get', 'post'], '/profile/update', ['as' => 'lti.users.profile.update', 'uses' => 'ProfileLTIController@update']);
     });
     Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function() {
@@ -123,4 +126,3 @@ Route::get('/logout', function()
     Session::flush();
     return Redirect::to('/home');
 });
-

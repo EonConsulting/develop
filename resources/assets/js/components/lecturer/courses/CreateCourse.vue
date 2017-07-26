@@ -1,50 +1,48 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <form method="POST" class="form-horizontal">
-                <input type="hidden" name="_token" id="login-token"/>
-                <div class="form-group">
-                    <div class="col-md-8">
-                        <label>Module Title</label>
-                        <input type="text" class="form-control" placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
-                    </div>
-                    <div class="col-md-4">
-                        <label>Module Slug</label>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon3">modules/</span>
-                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled v-model="course_slug">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="row">
+                <form method="POST" class="form-horizontal">
+                    <input type="hidden" name="_token" id="login-token"/>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <label>Module Title</label>
+                            <input type="text" class="form-control" placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Module Slug</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon3">modules/</span>
+                                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled v-model="course_slug">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label>Module Summary</label>
-                        <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label>Module Summary</label>
+                            <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label>Tags <small>(Separate by a comma)</small></label>
-                        <input type="text" class="form-control tags"/>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label>Tags <small>(Separate by a comma)</small></label>
+                            <input type="text" class="form-control tags"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label>Featured Image</label>
-                        <!--<upload-form></upload-form>-->
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label>Featured Image</label>
+                            <!--<upload-form></upload-form>-->
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <button class="btn btn-primary btn-block" type="submit">Save</button>
+                        </div>
                     </div>
-                    <div class="col-md-1 pull-right">
-                        <button class="btn btn-primary btn-block" type="submit">Save</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </template>
-
-<style>
-
-</style>
 
 <script>
     export default {

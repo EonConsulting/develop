@@ -76,7 +76,7 @@
             console.log('Component ready.');
             $('#tok').val(window.Laravel.csrfToken);
 
-            var url = '/lecturer/courses/{course}/storyline/feed';
+            var url = '/develop/public/lecturer/courses/{course}/storyline/feed';
             url = url.replace('{course}', this.courseid);
             var self = this;
 

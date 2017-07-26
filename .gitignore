@@ -7,4 +7,9 @@
 Homestead.json
 Homestead.yaml
 .env
-/nbproject/private/
+/nbproject
+composer.json
+composer.lock
+gulpfile.js
+package.json
+/packages

@@ -10,8 +10,22 @@ use App\Http\Controllers\Controller;
 
 class CourseStorylineController extends Controller {
     protected $storylineId;
+
     public function index(Course $course) {
-        return view('lecturer.storylines.single', ['course' => $course]);
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+                'href' => route('courses.single', $course->id),
+                'child' => [
+                    'title' => 'Storyline',
+                ]
+            ],
+        ];
+
+        return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
 
     public function store(Request $request, Course $course) {
