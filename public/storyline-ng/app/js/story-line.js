@@ -19,14 +19,13 @@
 
 
             };
-
+          
             $scope.defaultData = [{
                 name: '',
                 file_url: '',
                 file_name: '',
                 children:[]
             }];
-
 
             //
             // $scope.clicked = function(storylineItem){
@@ -49,6 +48,7 @@
 
             $scope.getPeople = function(){
                 $scope.isLoading = true;
+
                 // $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
                 $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
                     .then(function (response) {
@@ -102,9 +102,6 @@
                 return records;
             }
 
-
-
-
             $scope.populateMenu = function(parents, dbItems){
                 var collection = [];
                 var data = $scope.getMenuItems(dbItems);
@@ -154,9 +151,6 @@
             $scope.expandAll = function () {
                 $scope.$broadcast('angular-ui-tree:expand-all');
             };
-
-
-
 
             $scope.openPopup = function (storylineItem) {
                 CKFinder.popup( {

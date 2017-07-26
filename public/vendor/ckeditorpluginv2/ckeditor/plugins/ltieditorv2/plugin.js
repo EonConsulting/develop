@@ -25,7 +25,7 @@
                 {
                     return{
                         title: 'LTI Tools APP Store',
-                        minWidth: 600,
+                        minWidth: 820,
                         minHeight: 400,
                         contents :
                         [
@@ -43,6 +43,7 @@
                                         var iframe = document.getElementById(this._.frameId);
                                         var iframeWindow = iframe.contentWindow;
                                         //Still in this context we get the attribute of the selected item
+
                                         iframeWindow.$('.appitem').each(function () {
                                             var $this = $(this);
                                             $this.on("click", function () {
@@ -54,6 +55,14 @@
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         var url        = '/ajaxresponse/' +context_id;
+                                                    //Production Url
+                                                    //url: '/e-content/ajaxresponse/' + context_id,
+                                                    url: '/ajaxresponse/'+context_id,
+                                                    type: 'GET',
+                                                    success: function (launchvars) {
+                                                        //Production
+                                                        //var url        = '/e-content/ajaxresponse/' +context_id;
+                                                        var url        = '/ajaxresponse/'+context_id;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         console.log('appframe', appframe);
@@ -89,6 +98,7 @@
 
                                             });
                                         });
+
 
                                     }
 

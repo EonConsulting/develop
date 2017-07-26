@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="{{url('/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
+
+    <!-- Alchemy -->
+    <link rel="stylesheet" href="http://cdn.graphalchemist.com/alchemy.min.css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{url('/dist/css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -51,7 +52,7 @@ MathJax.Hub.Config({
 
     @yield('custom-styles')
 </head>
-<body class="hold-transition skin-blue-light sidebar-mini @yield('body-class')">
+<body onload="init()" class="hold-transition skin-blue-light sidebar-mini @yield('body-class')">
 <div class="wrapper">
 
     <header class="main-header">
@@ -393,7 +394,9 @@ MathJax.Hub.Config({
 
 <!-- jQuery 2.2.3 -->
 <script src="{{url('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<!-- Bootstrap 3.3.6 -->
+<!-- Jquery UI -->
+<script src="{{url('/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
+!-- Bootstrap 3.3.6 -->
 <script src="{{url('/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{url('/plugins/fastclick/fastclick.js')}}"></script>

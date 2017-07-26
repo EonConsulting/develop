@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
+
     });
     Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
         Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
@@ -126,3 +127,11 @@ Route::get('/logout', function()
     return Redirect::to('/home');
 });
 
+/*
+ * ----------------------------------------------------
+ * Playground API's
+ * ----------------------------------------------------
+ */
+Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
+    Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
+});
