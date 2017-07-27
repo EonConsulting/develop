@@ -32,9 +32,14 @@ class DBTaxonomy {
 
     public function get_course_taxonomy(Course $course) {
         $storyline = $course->latest_storyline();
-        $items = $storyline->items;
 
-        $tree = $this->get_storyline($items->toArray());
+        $tree = null;
+
+        if(isset($storyline->items)) {
+            $items = $storyline->items;
+
+            $tree = $this->get_storyline($items->toArray());
+        }
 
         return $tree;
     }
