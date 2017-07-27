@@ -18,15 +18,6 @@ class CoursesController extends Controller {
         return view('lecturer.courses.list', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs]);
     }
 
-    public function courses() {
-
-        $breadcrumbs = [
-            'title' => 'Modules',
-        ];
-
-        return view('nonlti.courses.list', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs]);
-    }
-
     public function allCourses() {
         $courses = Course::get();
         return $courses;

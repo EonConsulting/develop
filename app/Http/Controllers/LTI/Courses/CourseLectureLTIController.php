@@ -44,7 +44,7 @@ class CourseLectureLTIController extends LTIBaseController {
         }
 
 
-        return view('lti.courses.lectures', ['data' => $data, 'course' => $course, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles, 'menu' => $menu]);
+        return view('student.courses.lectures', ['data' => $data, 'course' => $course, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles, 'menu' => $menu]);
     }
 
 }

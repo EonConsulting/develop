@@ -13,8 +13,6 @@
             </div>
             <div class="user-online-status">
 
-
-
                 <!--
                 TODO: if online then class should be user-online-dot,
                       if offline, then user-offline-dot.
@@ -52,6 +50,56 @@
                 <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards')}}">
                     <i class="fa fa-braille fa-lg left-menu-icon"></i>
                     Dashboard
+                </a>
+            </li>
+
+            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}">
+                    <i class="fa fa-edit fa-lg left-menu-icon"></i>
+                    Modules
+                </a>
+
+                <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+                <div class="left-menu-sub">
+                    <ul>
+
+                        <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('courses') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                All
+                            </a>
+                        </li>
+
+
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('courses.create') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Create
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+            </li>
+
+            <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+
+            <!-- TODO: If role == instructor/admin the show this menu item -->
+            <li class="{{ (Route::currentRouteName() == 'content.builder') ? 'left-menu-active' : '' }}">
+                <a href="{{ route('content.builder') }}">
+                    <i class="fa fa-book fa-lg left-menu-icon"></i>
+                    Content Builder
+                </a>
+            </li>
+
+
+            <!-- TODO: If role == instructor/admin the show this menu item -->
+            <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
+                <a href="{{ route('eon.laravellti.appstore') }}">
+                    <i class="fa fa-th fa-lg left-menu-icon"></i>
+                    App Store
                 </a>
             </li>
 
@@ -100,56 +148,6 @@
                 </div>
 
             </li>
-
-            <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'content.builder') ? 'left-menu-active' : '' }}">
-                <a href="{{ route('content.builder') }}">
-                    <i class="fa fa-book fa-lg left-menu-icon"></i>
-                    Content Builder
-                </a>
-            </li>
-
-
-
-            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-edit fa-lg left-menu-icon"></i>
-                    Modules
-                </a>
-
-
-                <div class="left-menu-sub">
-                    <ul>
-
-                        <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('courses') }}">
-                                <i class="fa fa-circle-o left-menu-icon"></i>
-                                All
-                            </a>
-                        </li>
-
-
-                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('courses.create') }}">
-                                <i class="fa fa-circle-o left-menu-icon"></i>
-                                Create
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-
-            </li>
-
-
-            <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
-                <a href="{{ route('eon.laravellti.appstore') }}">
-                    <i class="fa fa-th fa-lg left-menu-icon"></i>
-                    App Store
-                </a>
-            </li>
-
-
+        <?php endif; ?>
         </ul>
     </div>
