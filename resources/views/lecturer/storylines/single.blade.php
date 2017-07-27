@@ -1,29 +1,11 @@
-@extends('layouts.lecturer')
+@extends('layouts.app')
 
-@section('site-title')
-    Storyline Builder
-@endsection
 
 @section('custom-styles')
-    <link rel="stylesheet" href="{{url('/storyline-ng/Content/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{url('/storyline-ng/app/angular-ui-tree.css')}}">
     <link rel="stylesheet" href="{{url('/storyline-ng/app/app.css')}}">
-@endsection
-
-@section('body-class')
-
-@endsection
-
-@section('mini-logo-title')
-    Unisa
-@endsection
-
-@section('logo-title')
-    Unisa
-@endsection
-
-@section('page-title')
-    Storyline Builder
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/css/jquery.ui.theme.css" />
 @endsection
 
 @section('content')
@@ -215,6 +197,7 @@
     <script src="{{url('/storyline-ng/app/js/table-example.js')}}"></script>
     <script src="{{url('/storyline-ng/app/js/drop-confirmation.js')}}"></script>
     <script src="{{url('/storyline-ng/app/js/expand-on-hover.js')}}"></script>
+
     <script src="{{url('/vendor/filemanager/lib/ckfinder/ckfinder.js')}}"></script>
     <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 

@@ -10,11 +10,12 @@ class CoursesController extends Controller {
 
     public function index() {
         //Could actually filter the request and return view
-        return view('lecturer.courses.list', ['courses' => $this->allCourses()]);
-    }
 
-    public function courses() {
-        return view('nonlti.courses.list', ['courses' => $this->allCourses()]);
+        $breadcrumbs = [
+            'title' => 'Modules',
+        ];
+
+        return view('lecturer.courses.list', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs]);
     }
 
     public function allCourses() {

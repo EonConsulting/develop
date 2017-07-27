@@ -13,12 +13,15 @@
     "jquery": "^3.1.1",
     "laravel-mix": "^0.8.1",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.1.10",
+    "laravel-elixir": "^6.0.0-15"
   },
   "dependencies": {
+    "chart.js": "^2.6.0",
     "cross-env": "^3.2.3",
     "vue-ckeditor": "^1.0.0",
     "vue-ckeditor2": "^1.0.3",
-    "vue-resource": "^1.2.1"
+    "vue-resource": "^1.2.1",
+    "vuedraggable": "^2.14.1"
   }
 }

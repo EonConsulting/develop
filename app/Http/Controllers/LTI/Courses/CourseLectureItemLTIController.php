@@ -8,6 +8,7 @@ use App\Models\StorylineItem;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use EONConsulting\Storyline\Nav\StorylineNav;
 
 class CourseLectureItemLTIController extends LTIBaseController {
 
@@ -47,7 +48,7 @@ class CourseLectureItemLTIController extends LTIBaseController {
 
         //Get and Make Breadcrumbs
         if (function_exists('storyline_breadcrumbs')) {
-            $breadcrumbs = storyline_breadcrumbs()->showCatBreadCrumb($storylineItem->id, $storylineItem->id, $course);
+            $catBreadcrumbs = storyline_breadcrumbs()->showCatBreadCrumb($storylineItem->id, $storylineItem->id, $course);
 
         }
         //Get Next Storyline Item uses the Course Model
@@ -70,7 +71,7 @@ class CourseLectureItemLTIController extends LTIBaseController {
             $tag_cloud = storyline_tag_cloud()->getHTML($course);
         }
 
-        return view('lti.courses.lecture', ['data' => $data, 'course' => $course, 'breadcrumbs' => $breadcrumbs,
+        return view('student.courses.lecture', ['data' => $data, 'course' => $course, 'catBreadcrumbs' => $catBreadcrumbs,
             'navigation' => $navigation,'nav' => $nav,'styles' => $styles, 'scripts' => $scripts,
             'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles,
             'menu' => $menu, 'storyline' => $storyline, 'storyline_item' => $storylineItem,

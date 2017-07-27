@@ -19,7 +19,7 @@
 
 
             };
-          
+
             $scope.defaultData = [{
                 name: '',
                 file_url: '',

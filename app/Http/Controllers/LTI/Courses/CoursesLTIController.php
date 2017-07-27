@@ -12,7 +12,7 @@ class CoursesLTIController extends LTIBaseController {
     public function index() {
         $courses = Course::get();
 
-        return view('lti.courses.list', ['courses' => $courses]);
+        return view('student.courses.list', ['courses' => $courses]);
     }
 
 }

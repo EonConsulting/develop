@@ -8,7 +8,12 @@ use App\Http\Controllers\Controller;
 class ContentBuilderController extends Controller {
 
     public function index() {
-        return view('lecturer.builders.page');
+
+        $breadcrumbs = [
+            'title' => 'Content Builder',
+        ];
+
+        return view('lecturer.builders.page', ['breadcrumbs' => $breadcrumbs]);
     }
 
     /**

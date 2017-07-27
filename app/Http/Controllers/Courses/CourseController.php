@@ -8,11 +8,29 @@ use App\Http\Controllers\Controller;
 class CourseController extends Controller {
     //LTI
     public function show(Course $course) {
-        return view('lecturer.courses.single', ['course' => $course]);
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+            ],
+        ];
+
+        return view('lecturer.courses.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
     //NON LTI
     public function course(Course $course) {
-        return view('nonlti.courses.single', ['course' => $course]);
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+            ],
+        ];
+
+        return view('nonlti.courses.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
 
 }

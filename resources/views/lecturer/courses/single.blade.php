@@ -1,32 +1,8 @@
-@extends('layouts.lecturer')
-
-@section('site-title')
-    Modules
-@endsection
-
-@section('custom-styles')
-
-@endsection
-
-@section('body-class')
-
-@endsection
-
-@section('mini-logo-title')
-    Unisa
-@endsection
-
-@section('logo-title')
-    Unisa
-@endsection
-
-@section('page-title')
-    Modules
-@endsection
+@extends('layouts.app')
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid" id="app">
         <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-default">
@@ -51,11 +27,9 @@
 
 @endsection
 
-@section('app-js')
-    <script src="{{url('/js/app.js')}}"></script>
-@endsection
 
 @section('custom-scripts')
+    <script src="{{url('/js/app.js')}}"></script>
     <script>
         $(document).ready(function($) {
 

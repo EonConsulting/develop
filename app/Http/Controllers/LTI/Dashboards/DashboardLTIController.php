@@ -10,40 +10,20 @@ class DashboardLTIController extends LTIBaseController {
 
     public function index() {
 
+        $data = array(
+            'page_title' => 'Dashboard', //make this the name if the page
+            'parent_title' => 'Instructor', //leave empty if none
+        );
+
         if(laravel_lti()->is_learner(auth()->user())) {
-            // run user related queries
-            // get latest test scores
-            // get upcoming deliverables
-            return view('lti.dashboards.student');
-        }
 
-        if(laravel_lti()->is_instructor(auth()->user())) {
-            // get test progress from student
-            // get x
-            return view('lti.dashboards.lecturer');
-        }
+            return view('dashboards.student', $data);
 
-//        $user = auth()->user();
-//        if(!$user) {
-//            // user not found
-//        }
-//
-//        $lti = $user->lti;
-//        if(count($lti) == 0) {
-//            // no lti links found
-//        }
-//
-//        $lti = $lti[0];
-//        $role = $lti->roles;
-//
-//        switch($role) {
-//            case 'Learner':
-//                return view('lti.dashboards.student');
-//                break;
-//            case 'Instructor':
-//                return view('lti.dashboards.lecturer');
-//                break;
-//        }
+        } elseif (laravel_lti()->is_instructor(auth()->user())) {
+
+            return view('dashboards.lecturer', $data);
+
+        }
 
     }
 

@@ -1,11 +1,7 @@
-@extends('layouts.lecturer')
-
-@section('site-title')
-    Content Builder
-@endsection
+@extends('layouts.app')
 
 @section('custom-styles')
-{{--    <link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
+{{--<link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
     <style>
 
         .cke_button__LTIButton_icon { display:none !important;  }
@@ -48,64 +44,55 @@
         #app-container .app-item .app-contents .app-details{padding:5px 10px;}
         #app-container .app-item .app-contents .app-details h4 {color:#222222; margin:0; padding:0 0 5px 0; font-size: 12px; text-align:center; border-bottom:1px dashed #cccccc; height:20px;}
         #app-container .app-item .app-contents .app-details p.app-description {font-size:10px; color: #2e383c; height:38px; overflow: hidden; padding:10px 0}
+
+        .ckeditor {height: 100%;}
     </style>
 @endsection
 
-@section('body-class')
-
-@endsection
-
-@section('mini-logo-title')
-    Unisa
-@endsection
-
-@section('logo-title')
-    Unisa
-@endsection
-
-@section('page-title')
-    Content Builder
-@endsection
-
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <form id="save" method="POST" action="/lecturer/content/builder">
-                {{--Production URL--}}
-            {{--<form id="save" method="POST" action="/lecturer/content/builder">--}}
 
-                @if (session('error_message'))
-                    <div class="alert alert-danger">
-                        {{ session('error_message') }}
+            <div class="col-md-12">
+                <form id="save" method="POST" action="/lecturer/content/builder">
+                    {{--Production URL--}}
+                {{--<form id="save" method="POST" action="/e-content/lecturer/content/builder">--}}
+
+                    @if (session('error_message'))
+                        <div class="alert alert-danger">
+                            {{ session('error_message') }}
+                        </div>
+                    @endif
+
+                    @if (session('success_message'))
+                        <div class="alert alert-success">
+                            {{ session('success_message') }}
+                        </div>
+                    @endif
+
+                    @if($errors->count() > 0)
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="file_name" placeholder="Content Title" value=""/>
+                        <span class="input-group-addon" id="basic-addon2">.html</span>
+
                     </div>
-                @endif
 
-                @if (session('success_message'))
-                    <div class="alert alert-success">
-                        {{ session('success_message') }}
-                    </div>
-                @endif
-
-                @if($errors->count() > 0)
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div class="input-group">
-                    <input type="text" class="form-control" name="file_name" placeholder="Content Title" value=""/>
-                    <span class="input-group-addon" id="basic-addon2">.html</span>
-                </div>
-                <br />
-                <textarea id="ltieditorv2inst" class="ckeditor" name="editor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
-                <input type="hidden" id="data" name="data" />
-                <br />
-                <button type="button" id="btnsbmit" class="btn btn-primary btn-sm">Save Content</button>
-                <button type="button" id="btnsbmit" class="btn btn-warning btn-sm">Move to trash</button>
-                {{ csrf_field() }}
-            </form>
+                    <br />
+                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
+                    <input type="hidden" id="data" name="data" />
+                    <br />
+                    <button type="button" id="btnsbmit" class="btn btn-primary btn-sm">Save Content</button>
+                    <button type="button" id="btnsbmit" class="btn btn-warning btn-sm">Move to trash</button>
+                    {{ csrf_field() }}
+                </form>
+            </div>
         </div>
     </div>
 @endsection
@@ -134,11 +121,11 @@
                     on : {
                         // maximize the editor on startup
                         'instanceReady' : function( evt ) {
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset.css')}}');
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset-print.css')}}');
-                            this.document.appendStyleSheet(' {{url('/vendor/storyline/core/components/css/materialize.css')}}' );
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/economics.css' )}}');
-                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons' );
+                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset.css")}}');
+                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset-print.css")}}');
+                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/materialize.css")}}' );
+                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/economics.css")}}');
+                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons');
                         }
                     }
                 }
