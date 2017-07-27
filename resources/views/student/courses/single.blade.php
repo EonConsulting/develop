@@ -11,13 +11,18 @@
             <div class="col-md-3">
                 <div class="panel">
                     <div class="list-group">
+
+                        <?php if($data === null): ?>
+                        <a href="" class="list-group-item">No Lectures Available</a>
+                        <?php else: ?>
                         <a href="{{ route('lti.courses.single.lectures', $course['id']) }}" class="list-group-item">Go to lectures</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="panel">
-                    <div class="pane-heading">
+                    <div class="panel-heading">
                         <h4 class="">{{ $course['title'] }}</h4>
                     </div>
                     <div class="panel-body">
