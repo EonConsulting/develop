@@ -144,56 +144,23 @@
                 <div class="form-group">
 
                     <div class="radio">
-                        <input id="radio4" name="category" type="radio" value="all" ng-model="category">
-                        <label for="radio4">
-                            All Categories
-                        </label>
+                        <input id="radio4" name="All Categories" type="radio" value="" ng-model="catFilter" checked />
+                        <label for="radio4">All Categories</label>
+                        @foreach($categories as $category)
+                            <input id="{{$category['title']}}" name="{{$category['title']}}" type="radio" value="{{$category['title']}}" ng-model="catFilter" />
+                            <label for="{{$category['title']}}">{{$category['title']}}</label><br>
+                        @endforeach
                     </div>
-
-                    <div class="radio">
-                        <input id="radio5" name="category" type="radio" value="community" ng-model="category">
-                        <label for="radio5">
-                            Community
-                        </label>
-                    </div>
-
-                    <div class="radio">
-                        <input id="radio6" name="category" type="radio" value="content" ng-model="category">
-                        <label for="radio6">
-                            Content
-                        </label>
-                    </div>
-
-                    <div class="radio">
-                        <input id="radio7" name="category" type="radio" value="math" ng-model="category">
-                        <label for="radio7">
-                            Math
-                        </label>
-                    </div>
-
-                    <div class="radio">
-                        <input id="radio8" name="category" type="radio" value="media" ng-model="category">
-                        <label for="radio8">
-                            Media
-                        </label>
-
-                    <div class="radio">
-                        <input id="radio9" name="category" type="radio" value="open_access" ng-model="category">
-                        <label for="radio9">
-                            Open Access
-                        </label>
-                    </div>
-
                 </div>
 
-                <div class="form-group">
-                    <select class="form-control" ng-model="catFilter">
-                        <option value="">All Applications</option>
-                    @foreach($tools as $tool)
-                        <option value="{{$tool['title']}}">{{$tool['title']}}</option>
-                    @endforeach
-                    </select>
-                </div>
+                {{--<div class="form-group">--}}
+                    {{--<select class="form-control" ng-model="catFilter">--}}
+                        {{--<option value="">All Applications</option>--}}
+                    {{--@foreach($tools as $tool)--}}
+                        {{--<option value="{{$tool['title']}}">{{$tool['title']}}</option>--}}
+                    {{--@endforeach--}}
+                    {{--</select>--}}
+                {{--</div>--}}
 
             </div>
 
@@ -201,7 +168,7 @@
 
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
-                <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="app-entry shadow pull-left">
+                <div ng-repeat="tool in tools | filter:query | orderBy: orderList | filter:catFilter" class="app-entry shadow pull-left">
                     <div>
                         <div class="app-logo">
                             <img src="<% tool.logo_url %>" alt="" class="img img-responsive">

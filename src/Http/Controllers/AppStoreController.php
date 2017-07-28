@@ -28,11 +28,10 @@ class AppStoreController extends LTIBaseController {
             "title" => "App Store",
         ];
 
-        return view('eon.appstore::store', ['tools' => $domains, 'breadcrumbs' => $breadcrumbs]);
-
         $categories = AppCategory::all(['title']);
-        //dd(LTIDomain::with('context')->with('key')->get());
-        return view('eon.appstore::store', ['tools' => $this->getCatApps($categories)]);
+
+        return view('eon.appstore::store', ['tools' => $domains, 'breadcrumbs' => $breadcrumbs, 'categories' => $this->getCatApps($categories)]);
+
     }
 
     protected function getCatApps($categories) {
