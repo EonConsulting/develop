@@ -130,13 +130,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" ng-model="categories">
-                            <option value="">All Categories</option>
-                            <option value="">Community</option>
-                            <option value="">Content</option>
-                            <option value="">Math</option>
-                            <option value="">Media</option>
-                            <option value="">Open Access</option>
+                        <select class="form-control" ng-model="catFilter">
+                            <option value="">All Applications</option>
+                        @foreach($tools as $tool)
+                            <option value="{{$tool['title']}}">{{$tool['title']}}</option>
+                        @endforeach
                         </select>
                     </div>
                     <div class="form-group pull-right">
@@ -145,7 +143,7 @@
 
                 </header>
                 <p><span>Results: <% tools.length %></span></p>
-                        <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="col-xs-18 customcol col-sm-6 col-md-3">
+                        <div ng-repeat="tool in tools | filter:query | orderBy: orderList | filter:catFilter" class="col-xs-18 customcol col-sm-6 col-md-3">
                             <div class="thumbnail">
                                 <img ng-src="<% tool.logo_url %>" alt="" class="img img-responsive">
                                 <div class="caption">

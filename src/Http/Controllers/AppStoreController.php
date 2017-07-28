@@ -10,6 +10,7 @@ namespace EONConsulting\AppStore\Http\Controllers;
 
 
 use EONConsulting\AppStore\AppStore;
+use EONConsulting\AppStore\Models\AppCategory;
 use EONConsulting\LaravelLTI\Classes\Readers\ImportConfig;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use EONConsulting\LaravelLTI\Models\LTIContext;
@@ -20,9 +21,13 @@ class AppStoreController extends LTIBaseController {
     protected $hasLTI = false;
 
     function index() {
-        $domains = laravel_lti()->get_domains();
+        $categories = AppCategory::all(['title']);
+        //dd(LTIDomain::with('context')->with('key')->get());
+        return view('eon.appstore::store', ['tools' => $this->getCatApps($categories)]);
+    }
 
-        return view('eon.appstore::store', ['tools' => $domains]);
+    protected function getCatApps($categories) {
+        return $categories;
     }
 
     //Return Angular Rest Appstore //By Peace
@@ -30,7 +35,6 @@ class AppStoreController extends LTIBaseController {
     function AngularRest() {
 
         $domains = laravel_lti()->get_domains();
-
         return $domains;
     }
 
