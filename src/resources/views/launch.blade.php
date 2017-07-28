@@ -1,4 +1,4 @@
-@extends('layouts.lecturer')
+@extends('layouts.app')
 
 @section('custom-styles')
     <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet" />
@@ -37,7 +37,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col-md-12">

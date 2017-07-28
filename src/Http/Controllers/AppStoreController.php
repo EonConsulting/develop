@@ -20,9 +20,15 @@ class AppStoreController extends LTIBaseController {
     protected $hasLTI = false;
 
     function index() {
+
         $domains = laravel_lti()->get_domains();
 
-        return view('eon.appstore::store', ['tools' => $domains]);
+        $breadcrumbs = [
+            "title" => "App Store",
+        ];
+
+        return view('eon.appstore::store', ['tools' => $domains, 'breadcrumbs' => $breadcrumbs]);
+
     }
 
     //Return Angular Rest Appstore //By Peace
