@@ -101,6 +101,18 @@
                     <i class="fa fa-th fa-lg left-menu-icon"></i>
                     App Store
                 </a>
+                <div class="left-menu-sub">
+                <ul>
+                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
+                        <a href="{{ route('eon.laravellti.appstore') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Apps</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore.install') ? 'left-menu-active' : '' }}">
+                        <a href="{{ route('eon.laravellti.install') }}"><i class="fa fa-circle-o left-menu-icon"></i>Add Apps</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.cats') ? 'left-menu-active' : '' }}">
+                        <a href="{{ route('eon.laravellti.cats') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+                    <li class="{{ (Route::currentRouteName() == 'eeon.laravellti.cats.create') ? 'left-menu-active' : '' }}">
+                        <a href="{{ route('eon.laravellti.cats.create') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create</a></li>
+                </ul>
+                </div>
             </li>
 
             <!-- TODO: If role == admin the show this menu item -->
