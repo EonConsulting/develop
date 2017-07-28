@@ -46,11 +46,12 @@
     <!-- Custom Stylesheet for the CKEditor LTI Plugin -->
     <style>
 
+        body {font-family: "Open Sans",sans-serif; background: transparent !important; margin: 0px; padding: 15px;}
 
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
 
-        body {font-family:arial; background: transparent !important;}
+
         .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
         p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
         .ltickplugin {background: transparent;}
@@ -93,7 +94,7 @@
         //Dialogue Insertion Point -->
 
              var config = {
-                    extraPlugins: 'dialog', 
+                    extraPlugins: 'dialog',
                     toolbar: [ [ 'LTIButton', 'mathjax' ] ]
                 };
 

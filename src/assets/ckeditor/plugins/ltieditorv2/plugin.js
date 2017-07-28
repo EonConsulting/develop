@@ -25,8 +25,8 @@
                 {
                     return{
                         title: 'LTI Tools APP Store',
-                        minWidth: 820,
-                        minHeight: 400,
+                        Width: '50px',
+                        Height: '600px',
                         contents :
                         [
                             {
@@ -38,7 +38,7 @@
                                     //src:  '/e-content/ckeditorstore',
                                     src:  '/ckeditorstore',
                                     width  : '100%',
-                                    height : 450,
+                                    height : '100%',
                                     onContentLoad: function () {
                                         // We Access the DOM Instance of the Iframe
                                         var iframe = document.getElementById(this._.frameId);
