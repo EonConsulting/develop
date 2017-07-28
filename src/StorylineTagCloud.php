@@ -53,17 +53,22 @@ class StorylineTagCloud {
     public function generateWordList($word_list) {
 
         $return = [];
-        foreach($word_list as $word => $count) {
 
-            $data = [
-                'text' => $word,
-                'weight' => $count,
-            ];
+        if($word_list[0] != "") {
+            foreach($word_list as $count => $word) {
 
-            if(rand() % 2 == 0)
-                $data['html'] = ['class' => 'vertical'];
+                $data = [
+                    'text' => $word,
+                    'weight' => $count,
+                ];
 
-            $return[] = $data;
+                if(rand() % 2 == 0)
+                    $data['html'] = ['class' => 'vertical']; //what does this do?
+
+                $return[] = $data;
+            }
+        } else {
+            $return = null;
         }
 
         return $return;
