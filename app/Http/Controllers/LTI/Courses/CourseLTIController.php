@@ -16,7 +16,20 @@ class CourseLTIController extends LTIBaseController {
         $tagArray  =  explode(',',$course->tags);
         $WordList  =    storyline_tag_cloud()->generateWordList($tagArray);
 
-        return view('student.courses.single', ['data' => $data, 'course' => $course,'wordlist'=> $WordList]);
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('lti.courses'),
+            'child' => [
+                'title' => $course->title,
+            ],
+        ];
+
+        return view('student.courses.single', [
+            'data' => $data,
+            'course' => $course,
+            'wordlist'=> $WordList,
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
 
 }

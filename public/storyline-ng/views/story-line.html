@@ -10,8 +10,8 @@
 <script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content" class="banner">
 
-    <a class="btn btn-success btn-xs" ng-if="storylineItem.children && storylineItem.children.length > 0"
-       data-nodrag 
+    <a class="stoyline-btn" ng-if="storylineItem.children && storylineItem.children.length > 0"
+       data-nodrag
        ng-click="toggle(this)">
       <span
         class="glyphicon"
@@ -22,36 +22,41 @@
         </span>
     </a>
 
-    <input type="text"
+    <input class="content-title"
+           type="text"
            data-nodrag
            ng-model="storylineItem.name"
            placeholder="Content Title" />
 
-    <a class="btn btn-default btn-xs"
-           data-nodrag
-           ng-click="openPopup(storylineItem)">
-    <span>Select Content</span>
-    </a>
     <span class="label label-default">File Name:</span> &nbsp;
     <span class="label label-success">{{storylineItem.file_name}}</span>
 
-    <a class="btn btn-default btn-xs clickme"
+
+    <a class="stoyline-btn storyline-btn-delete pull-right"
+       data-nodrag
+       ng-click="remove(this)">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+
+  <a class="stoyline-btn storyline-btn-add pull-right"
+     data-nodrag
+     ng-click="newSubItem(this)"
+     style="margin-right: 8px;">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
+
+    <a class="btn btn-default btn-sm clickme pull-right"
        data-nodrag
        ng-click="showModal(storylineItem)">
       <span class="fa fa-pencil"></span> Create Content
     </a>
-      <a class="pull-right btn btn-danger btn-xs"
-         data-nodrag
-         ng-click="remove(this)">
-        <span class="glyphicon glyphicon-remove"></span>
-      </a>
 
-    <a class="pull-right btn btn-primary btn-xs"
-       data-nodrag
-       ng-click="newSubItem(this)"
-       style="margin-right: 8px;">
-      <span class="glyphicon glyphicon-plus"></span>
+    <a class="btn btn-default btn-sm pull-right"
+           data-nodrag
+           ng-click="openPopup(storylineItem)">
+        <span class="fa fa-folder-open"></span> Select Content
     </a>
+
   </div>
   <ol ui-tree-nodes="" ng-model="storylineItem.children" ng-class="{hidden: collapsed}">
     <li ng-repeat="storylineItem in storylineItem.children"

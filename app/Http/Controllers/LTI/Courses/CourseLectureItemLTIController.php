@@ -71,11 +71,35 @@ class CourseLectureItemLTIController extends LTIBaseController {
             $tag_cloud = storyline_tag_cloud()->getHTML($course);
         }
 
-        return view('student.courses.lecture', ['data' => $data, 'course' => $course, 'catBreadcrumbs' => $catBreadcrumbs,
-            'navigation' => $navigation,'nav' => $nav,'styles' => $styles, 'scripts' => $scripts,
-            'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles,
-            'menu' => $menu, 'storyline' => $storyline, 'storyline_item' => $storylineItem,
-            'next' => $next, 'previous' => $previous]);
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('lti.courses'),
+            'child' => [
+                'title' => $course->title,
+                'href' => route('lti.courses.single', $course['id']),
+                'child' => [
+                    'title' => 'Lectures'
+                ],
+            ],
+        ];
+
+        return view('student.courses.lecture', [
+            'data' => $data,
+            'course' => $course,
+            'catBreadcrumbs' => $catBreadcrumbs,
+            'navigation' => $navigation,
+            'nav' => $nav,
+            'styles' => $styles,
+            'scripts' => $scripts,
+            'custom_scripts' => $custom_scripts,
+            'custom_styles' => $custom_styles,
+            'menu' => $menu,
+            'storyline' => $storyline,
+            'storyline_item' => $storylineItem,
+            'next' => $next,
+            'previous' => $previous,
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
 
 }

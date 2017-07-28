@@ -20,9 +20,19 @@ class CourseContentController extends Controller {
 
         $items = $storyline->items;
 
-        return view('lecturer.courses.content', ['course' => $course, 'items' => $items, 'storyline' => $storyline]);
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+                'href' => route('courses.single', $course->id),
+                'child' => [
+                    'title' => 'Content'
+                ],
+            ],
+        ];
 
-
+        return view('lecturer.courses.content', ['course' => $course, 'items' => $items, 'storyline' => $storyline, 'breadcrumbs' => $breadcrumbs]);
     }
 
 

@@ -15,13 +15,23 @@ class DashboardLTIController extends LTIBaseController {
             'parent_title' => 'Instructor', //leave empty if none
         );
 
+
+
         if(laravel_lti()->is_learner(auth()->user())) {
 
-            return view('dashboards.student', $data);
+            $breadcrumbs = [
+                'title' => 'Student Dashboard'
+            ];
+
+            return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
 
         } elseif (laravel_lti()->is_instructor(auth()->user())) {
 
-            return view('dashboards.lecturer', $data);
+            $breadcrumbs = [
+                'title' => 'Lecturer Dashboard'
+            ];
+
+            return view('dashboards.lecturer', $data, ['breadcrumbs' => $breadcrumbs]);
 
         }
 
