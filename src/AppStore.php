@@ -9,6 +9,8 @@
 namespace EONConsulting\AppStore;
 
 
+use EONConsulting\AppStore\Http\Controllers\AppsMetaClass;
+
 class AppStore {
 
     public function get_store() {

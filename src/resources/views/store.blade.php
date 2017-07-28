@@ -176,7 +176,6 @@
                         <label for="radio8">
                             Media
                         </label>
-                    </div>
 
                     <div class="radio">
                         <input id="radio9" name="category" type="radio" value="open_access" ng-model="category">
@@ -185,6 +184,15 @@
                         </label>
                     </div>
 
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control" ng-model="catFilter">
+                        <option value="">All Applications</option>
+                    @foreach($tools as $tool)
+                        <option value="{{$tool['title']}}">{{$tool['title']}}</option>
+                    @endforeach
+                    </select>
                 </div>
 
             </div>

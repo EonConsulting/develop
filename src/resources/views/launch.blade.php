@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('custom-styles')
-    <link href="/vendor/appstore/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url('/vendor/appstore/css/bootstrap.min.css') }}" rel="stylesheet" />
 
     <style>
         .thumbnail {
