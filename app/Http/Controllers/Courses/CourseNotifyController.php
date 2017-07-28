@@ -13,7 +13,20 @@ use Illuminate\Support\Facades\Mail;
 class CourseNotifyController extends Controller {
 
     public function index(Course $course) {
-        return view('lecturer.courses.notify', ['course' => $course]);
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+                'href' => route('courses.single', $course->id),
+                'child' => [
+                    'title' => 'Notify Users'
+                ],
+            ],
+        ];
+
+        return view('lecturer.courses.notify', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
 
     public function store(Request $request, Course $course) {

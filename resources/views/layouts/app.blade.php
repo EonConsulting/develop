@@ -2,14 +2,6 @@
 
 $lti = laravel_lti()->is_lti(auth()->user());
 
-if (!isset($page_title)) {
-    $page_title = 'Page title not set.';
-}
-
-if(!isset($parent_title)) {
-    $parent_title = '';
-}
-
 ?>
 
 <!DOCTYPE html>

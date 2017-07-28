@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="clearfix"></div>
-                        <hr>
+                        <!--<hr>
 
                         <div class="row sp-top-15 sp-bot-15">
 
@@ -131,8 +131,8 @@
                                 4
                             </div>
                             <div class="clearfix"></div>
-                        </div>
-
+                        </div>-->
+                        <div style="height: 10px;"></div>
                     </div>
 
                 </div>

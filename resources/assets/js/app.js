@@ -1,4 +1,4 @@
-
+deve
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -22,7 +22,7 @@ Vue.component('groups', require('./components/builders/storyline/partials/groups
 Vue.component('group', require('./components/builders/storyline/partials/group.vue'));
 Vue.component('ckfinder', require('./components/builders/storyline/partials/ckfinder.vue'));
 
-Vue.component('creat-course', require('./components/lecturer/courses/CreateCourse.vue'));
+Vue.component('create-course', require('./components/lecturer/courses/CreateCourse.vue'));
 Vue.component('courses', require('./components/lecturer/courses/Courses.vue'));
 Vue.component('course-notify-users', require('./components/lecturer/courses/Notify.vue'));
 

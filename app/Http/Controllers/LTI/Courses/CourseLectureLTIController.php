@@ -43,8 +43,29 @@ class CourseLectureLTIController extends LTIBaseController {
 //            $custom_scripts[] = storyline_menu()->getCustomScripts();
         }
 
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('lti.courses'),
+            'child' => [
+                'title' => $course->title,
+                'href' => '',
+                'child' => [
+                    'title' => 'Lectures'
+                ],
+            ],
+        ];
 
-        return view('student.courses.lectures', ['data' => $data, 'course' => $course, 'nav' => $nav, 'styles' => $styles, 'scripts' => $scripts, 'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles, 'menu' => $menu]);
+        return view('student.courses.lectures', [
+            'data' => $data,
+            'course' => $course,
+            'nav' => $nav,
+            'styles' => $styles,
+            'scripts' => $scripts,
+            'custom_scripts' => $custom_scripts,
+            'custom_styles' => $custom_styles,
+            'menu' => $menu,
+            'breadcrumbs' => $breadcrumbs,
+        ]);
     }
 
 }
