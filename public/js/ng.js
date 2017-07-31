@@ -16,9 +16,9 @@ notebooks.controller('ToolsListCtrl', function($scope, $http) {
     $scope.init = function () {
         $scope.loading = true;
         $http.get('/eon/lti/ngappstore').
-            success(function (data, status, headers, config) {
+        success(function (data, status, headers, config) {
             $scope.tools = data;
-             $scope.loading = false;
+            $scope.loading = false;
         });
     };
 
@@ -30,6 +30,7 @@ notebooks.controller('ToolsListCtrl', function($scope, $http) {
     // };
 
     $scope.orderList = "title";
+    $scope.catFilter = "";
     $scope.init();
 });
 
