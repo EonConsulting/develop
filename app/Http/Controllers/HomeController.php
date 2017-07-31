@@ -34,10 +34,10 @@ class HomeController extends LTIAuthBaseController
         switch ($this->get_user_role($this->user)) {
             case 'Instructor':
                 //return view('nonlti.dashboards.lecturer');
-                return view('lti.dashboards.lecturer');
+                return view('dashboards.lecturer');
             break;
             case 'Learner':
-                return view('lti.dashboards.student');
+                return view('dashboards.student');
             break;
             default:
                 return redirect('/');
