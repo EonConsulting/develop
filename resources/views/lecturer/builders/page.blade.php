@@ -54,9 +54,9 @@
         <div class="row">
 
             <div class="col-md-12">
-                <form id="save" method="POST" action="/e-content/lecturer/content/builder">
+                <form id="save" method="POST" action="/lecturer/content/builder">
                     {{--Production URL--}}
-                {{--<form id="save" method="POST" action="/e-content/lecturer/content/builder">--}}
+                {{--<form id="save" method="POST" action="/lecturer/content/builder">--}}
 
                     @if (session('error_message'))
                         <div class="alert alert-danger">

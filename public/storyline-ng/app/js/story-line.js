@@ -35,7 +35,7 @@
 
             $scope.saveStoryline = function(){
                 // var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
-                var url = "/e-content/lecturer/courses/" + $scope.course_id + "/storyline";
+                var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
                 $http.post(url, {parts: angular.toJson($scope.storylineItems)})
                     .then(function (response) {
                         $scope.html = '<p class="alert alert-success" style="margin-top:5px;">' +
@@ -50,7 +50,7 @@
             $scope.getPeople = function(){
                 $scope.isLoading = true;
                 // $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
-                $http.get("/e-content/lecturer/courses/" + $scope.course_id + "/storyline/feed")
+                $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
                     .then(function (response) {
                         //First function handles success
                         var dbItems = response.data;

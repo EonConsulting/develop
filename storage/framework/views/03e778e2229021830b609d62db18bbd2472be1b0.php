@@ -87,7 +87,7 @@
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             <h4 class="modal-title"></h4>
                                         </div>
-                                        <form id="saveCont" action="/e-content/lecturer/storeContent">
+                                        <form id="saveCont" action="/lecturer/storeContent">
                                             <div class="modal-body csv-view">
                                                 <div class="modal-msg"></div>
                                                 <div class="form-group">
@@ -178,7 +178,7 @@
                   var course_id = '<?php echo e($course->id); ?>';
                   var file_type       = $(this).attr('data');
                 $.ajax({
-                url: '/e-content/lecturer/csv/fileupload/'+course_id+'/'+file_type,
+                url: '/lecturer/csv/fileupload/'+course_id+'/'+file_type,
                 type: "GET",
                 asyn: false,
                 beforeSend: function () {

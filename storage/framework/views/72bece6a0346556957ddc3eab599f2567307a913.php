@@ -12,7 +12,7 @@
     var course_id = '<?php echo e($course); ?>';
 
    $("#input-id").fileinput({
-        uploadUrl: "/e-content/lecturer/csv/storeStoryline/"+course_id, // server upload action
+        uploadUrl: "/lecturer/csv/storeStoryline/"+course_id, // server upload action
         uploadAsync: true,
         showPreview: true,
         allowedFileExtensions: [filetype],
