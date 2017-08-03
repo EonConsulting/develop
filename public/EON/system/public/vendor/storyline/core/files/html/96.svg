@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-80 203.1 450 387.9" style="enable-background:new -80 203.1 450 387.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{fill:none;}
+	.st2{fill:#4D4D4D;}
+	.st3{font-family:'Verdana';}
+	.st4{font-size:16px;}
+	.st5{fill:none;stroke:#3E7BBE;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st7{fill:#3E7BBE;}
+	.st8{font-size:16.0005px;}
+</style>
+<g id="Layer_2" class="st0">
+</g>
+<g id="Dark_Grey">
+	<g class="st0">
+		
+			<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 -296.3014 347.212)" class="st3 st4" style="display:inline;fill:#4D4D4D;">E</text>
+		
+			<text transform="matrix(1 2.249994e-003 -2.249994e-003 1 -286.1786 353.5823)" class="st3" style="display:inline;fill:#4D4D4D; font-size:11.077px;">2</text>
+	</g>
+	<g class="st0">
+		
+			<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 -260.4716 401.1264)" class="st3 st4" style="display:inline;fill:#4D4D4D;">E</text>
+		
+			<text transform="matrix(1 2.249994e-003 -2.249994e-003 1 -250.3486 407.4966)" class="st3" style="display:inline;fill:#4D4D4D; font-size:11.077px;">1</text>
+	</g>
+	<g>
+		<rect x="-12.3" y="557.2" class="st1" width="306.7" height="48.2"/>
+		<text transform="matrix(1 0 0 1 115.2575 571.0579)" class="st2 st3 st4">Elastic</text>
+	</g>
+	<line class="st5" x1="45" y1="284.4" x2="247.9" y2="431.3"/>
+	<polyline class="st6" points="306.1,554 -12.7,554 -12.7,235.1 	"/>
+	<text transform="matrix(1 0 0 1 -25.6555 247.3444)" class="st2 st3 st4">P</text>
+	<g>
+		<text transform="matrix(1 0 0 1 -25.6555 567.5576)" class="st2 st3 st4">0</text>
+	</g>
+	<text transform="matrix(1 0 0 1 303.5397 571.0574)" class="st2 st3 st4">Q</text>
+	<text transform="matrix(1 -8.129732e-003 8.129732e-003 1 247.8997 444.6401)" class="st7 st3 st8">D</text>
+	<g>
+		<rect x="-13.1" y="225.1" class="st1" width="319.2" height="44.2"/>
+		<text transform="matrix(1 0 0 1 119.0124 238.9493)" class="st2 st3 st4">Luxury</text>
+	</g>
+</g>
+</svg>

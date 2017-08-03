@@ -1,0 +1,87 @@
+<!-- Nested node template -->
+
+<button aria-haspopup="true" class="btn btn-sm btn-success dropdown-toggle" ng-click="saveStoryline()"> Save Storyline</button>
+<button class="btn btn-sm btn-primary" ng-click="expandAll()" id="btnExpandAll">Expand all</button>
+<button class="btn btn-sm btn-primary" ng-click="collapseAll()">Collapse all</button> <br />
+<div ng-bind-html="responsetext"></div>
+
+
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content" class="banner">
+
+    <a class="stoyline-btn" ng-if="storylineItem.children && storylineItem.children.length > 0"
+       data-nodrag
+       ng-click="toggle(this)">
+      <span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }">
+        </span>
+    </a>
+
+    <input class="content-title"
+           type="text"
+           data-nodrag
+           ng-model="storylineItem.name"
+           placeholder="Content Title" />
+
+    <span class="label label-default">File Name:</span> &nbsp;
+    <span class="label label-success">{{storylineItem.file_name}}</span>
+
+
+    <a class="stoyline-btn storyline-btn-delete pull-right"
+       data-nodrag
+       ng-click="remove(this)">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+
+  <a class="stoyline-btn storyline-btn-add pull-right"
+     data-nodrag
+     ng-click="newSubItem(this)"
+     style="margin-right: 8px;">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
+
+    <a class="btn btn-default btn-sm clickme pull-right"
+       data-nodrag
+       ng-click="showModal(storylineItem)">
+      <span class="fa fa-pencil"></span> Create Content
+    </a>
+
+    <a class="btn btn-default btn-sm pull-right"
+           data-nodrag
+           ng-click="openPopup(storylineItem)">
+        <span class="fa fa-folder-open"></span> Select Content
+    </a>
+
+  </div>
+  <ol ui-tree-nodes="" ng-model="storylineItem.children" ng-class="{hidden: collapsed}">
+    <li ng-repeat="storylineItem in storylineItem.children"
+        ui-tree-node
+        ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+<!--<div class="row">-->
+  <!--<div class="col-sm-12">-->
+
+    <!--<button class="btn btn-xs btn-default" ng-click="expandAll()">Expand all</button>-->
+    <!--<button class ="btn btn-xs btn-default" ng-click="collapseAll()">Collapse all</button>-->
+  <!--</div>-->
+<!--</div>-->
+<div class="row">
+  <div class="col-sm-12">
+    <div ui-tree id="tree-root" ng-hide="isLoading">
+      <ol ui-tree-nodes ng-model="storylineItems">
+        <li ng-repeat="storylineItem in storylineItems"
+            callbacks="treeOptions"
+            ui-tree-node
+            ng-include="'nodes_renderer.html'"></li>
+      </ol>
+    </div>
+    <div ng-hide="!isLoading">Loading Storyline...</div>
+    <!--<div>{{storylineItems | json}}</div>-->
+  </div>
+</div>

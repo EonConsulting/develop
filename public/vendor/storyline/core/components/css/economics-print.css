@@ -1,0 +1,40 @@
+/*!
+ * UNISA eLearning - Department of econimics
+ * Copyright 2015 TTRO
+ * Author: Mike Saunders
+ */
+@media print {
+    body {
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: "Verdana", "Roboto", sans-serif;
+      font-size:12px;
+    }
+    img {
+      max-width:300px !important;
+    }
+    i.tooltipped {
+      display:none;
+    }
+    td, th {
+    padding: 5px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border:1px solid #000;
+    text-align:center;
+    background:none;
+  }
+  .activity-links a.icon-link, .activity-links a.icon-link img {
+    float: left;
+    width: 35px;
+    height: 35px;
+    margin: 3px 3px 0 0;
+  }
+  .activity-links {
+    float:left;
+    width:100%;
+    margin-bottom:20px;
+  }
+}
+

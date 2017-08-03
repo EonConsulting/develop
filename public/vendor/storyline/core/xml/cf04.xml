@@ -1,0 +1,8 @@
+<storyline id="s0" title="BUILDING A CIRCULAR FLOW" config="cf04" link="cf04" summary="Building a circular flow model" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Participants in the circular flow" link="cf04" summary="The two participants in the circular flow are households and firms." img="http://placehold.it/225x180"/>
+        <storyline id="s2" type="leaf" title="Markets in the circular flow" link="cf05" summary="The factor market is the market in which the factors of production are bought and sold." img="http://placehold.it/225x180"/>
+		<storyline id="s3" type="leaf" title="Complete circular flow" link="cf07" summary="In a complete circular flow model, the interaction and interdependence between the major participants in the various markets are captured and explained." img="http://placehold.it/225x180"/>
+    </storyline_collection>
+ </storyline>
+

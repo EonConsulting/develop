@@ -1,0 +1,203 @@
+<html><head><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script> <styles><link type="text/css" rel="stylesheet" href="/css/frame-default.css"  media="screen,projection"/></styles></head><body>
+<h3 class="Heading2">Rounding</h3>
+
+<table border="1" cellpadding="0" cellspacing="0" class="Table_Definition" style="width:100%;">
+<tbody>
+	<tr>
+		<td>
+		<p class="Definition">Rounding means reducing the digits in a number while trying to keep<br />
+		its value similar. &nbsp;The result is less accurate, but easier to use.</p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<h3 class="Heading3">Method to round numbers</h3>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style_Steps" style="width:100%;">
+<tbody>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 1</span></p>
+		</th>
+		<td>
+		<p><span class="BodyText">Decide which is the <span class="PalBc">last digit</span> to <span class="PalBc">keep</span>.</span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 2</span></p>
+		</th>
+		<td>
+		<p><span class="BodyText">Leave it the <span class="PalAb">same</span> if the <span class="PalAb">next digit</span> is <span class="PalAb">less than</span> <span class="math-tex">\(\PalAb5\)</span>.&nbsp;&nbsp;This is called <span class="PalAb">rounding down</span>.</span></p>
+
+		<p><span class="BodyText">But&nbsp;<span class="PalAa">increase</span>&nbsp;it&nbsp;<span class="PalAa">by one</span>&nbsp;if the&nbsp;<span class="PalAa">next digit</span>&nbsp;is&nbsp;<span class="math-tex">\(\PalAa5\)</span>&nbsp;<span class="PalAa">or more</span>. &nbsp;This is called&nbsp;<span class="PalAa">rounding up</span>.</span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 3</span></p>
+		</th>
+		<td>
+		<p><span class="BodyText">If necessary, replace removed digits with zeros, for example when rounding whole numbers.</span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<h3 class="Heading3">Example of rounding whole numbers</h3>
+
+<p><span class="BodyText">Round <span class="math-tex">\(74\)</span> to the nearest <span class="math-tex">\(10\)</span>.</span></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style_Steps" style="width:100%;">
+<tbody>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 1</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">We want to <span class="PalBc">keep</span> the <span class="math-tex">\(\PalBc7\)</span>&nbsp;as it is in the <span class="PalBc">tens&#39; position</span>.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalBc74\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 2</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">The <span class="PalAb">next digit</span> is <span class="math-tex">\(\PalAb4\)</span> which is <span class="PalAb">less than </span><span class="math-tex">\(\PalAb5\)</span>, so <span class="PalAb">no change</span> is needed to <span class="math-tex">\(\PalBc7\)</span>.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalBc7\PalAb4 \)</span></span></p>
+
+		<p><span class="BodyText"><span class="math-tex">\(\approx\PalAb{70}\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 3</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">Replace the removed digits with zeros, so the <span class="math-tex">\(\PalAb4\)</span> is replaced by a <span class="math-tex">\(\PalAb0\)</span>.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalAb7\PalAb0\)</span></span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">So, <span class="math-tex">\(74\)</span>&nbsp;was&nbsp;<span class="PalAb">rounded down</span> and the answer is <span class="math-tex">\(70\)</span>.</span></p>
+
+<h3 class="Heading3">Example of rounding to units</h3>
+
+<p><span class="BodyText">Round <span class="math-tex">\(8\Ndp6\)</span> to the nearest unit.</span></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style_Steps" style="width:100%;">
+<tbody>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 1</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">We want to <span class="PalBc">keep</span> the <span class="math-tex">\(\PalBc8\)</span>&nbsp;as it is in the <span class="PalBc">units&#39; position</span>.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalBc8\Ndp6\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 2</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">The <span class="PalAa">next digit</span> is <span class="math-tex">\(\PalAa6\)</span> which is <span class="math-tex">\(\PalAa5\)</span> <span class="PalAa">or more</span>, so <span class="PalAa">increase</span> the <span class="math-tex">\(\PalBc8\)</span> <span class="PalAa">by one</span> to <span class="math-tex">\(\PalAa9\)</span>.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalBc8\Ndp\PalAa6\)</span></span></p>
+
+		<p><span class="BodyText"><span class="math-tex">\(\approx\PalAa9\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 15%;">
+		<p><span class="BodyText">Step 3</span></p>
+		</th>
+		<td style="width: 60%;">
+		<p><span class="BodyText">Since the removed digits came after the decimal comma, it is not necessary to replace them with zeroes.</span></p>
+		</td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td>
+		<p><span class="BodyText"><span class="math-tex">\(\PalAa9\)</span></span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<p>So,&nbsp;<span class="math-tex">\(8\Ndp6\)</span>&nbsp;was&nbsp;<span class="PalAa">rounded up</span>&nbsp;and the answer is&nbsp;<span class="math-tex">\(9\)</span>.</p>
+
+<h3 class="Heading3">Example of rounding to different&nbsp;digits</h3>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Skeleton" style="width:100%;">
+<tbody>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText"><span>Rounding&nbsp;<span class="math-tex">\(238\Ndp7\PalBc2\PalAb48\)</span></span></span></td>
+		<td style="width: 2%; text-align: left;">&nbsp;</td>
+		<td style="width: 43%; text-align: left;"><span class="BodyText"><span>to the nearest&nbsp;</span><span class="PalBc">hundredth&nbsp;</span><span>gives</span></span></td>
+		<td style="width: 10%; text-align: left;"><span class="BodyText"><span class="math-tex">\(238\Ndp7\PalAb2\)</span><span>.</span></span></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText">Rounding&nbsp;<span class="math-tex">\(238\Ndp\PalBc7\PalAb248\)</span></span></td>
+		<td style="width: 2%; text-align: left;">&nbsp;</td>
+		<td style="width: 40%; text-align: left;"><span class="BodyText"><span>to the nearest&nbsp;</span><span class="PalBc">tenth&nbsp;</span>gives</span></td>
+		<td style="width: 20%; text-align: left;"><span class="BodyText"><span class="math-tex">\(238\Ndp\PalAb7\)</span>.</span></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText">Rounding&nbsp;<span class="math-tex">\(23\PalBc8\Ndp\PalAa7248\)</span></span></td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td style="width: 40%; text-align: left;"><span class="BodyText"><span>to the nearest <span class="PalBc">unit </span></span>gives</span></td>
+		<td style="width: 20%; text-align: left;"><span class="BodyText"><span class="math-tex">\(23\PalAa9\)</span>.</span></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText">Rounding&nbsp;<span class="math-tex">\(2\PalBc3\PalAa8\Ndp7248\)</span></span></td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td style="width: 40%; text-align: left;"><span class="BodyText"><span>to the nearest <span class="PalBc">ten </span></span>gives</span></td>
+		<td style="width: 20%; text-align: left;"><span class="BodyText"><span class="math-tex">\(2\PalAa{40}\)</span>.</span></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText">Rounding&nbsp;<span class="math-tex">\(238\Ndp72\PalBc4\PalAa8\)</span></span></td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td style="width: 40%; text-align: left;"><span class="BodyText"><span>to <span class="PalBc">three decimal places</span> gives</span></span></td>
+		<td style="width: 20%; text-align: left;"><span class="BodyText"><span class="math-tex">\(238\Ndp72\PalAa5\)</span>.</span></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 30%; text-align: right;"><span class="BodyText">Rounding&nbsp;<span class="math-tex">\(\PalBc2\PalAb38\Ndp7248\)</span></span></td>
+		<td style="width: 2%;">&nbsp;</td>
+		<td style="width: 40%; text-align: left;"><span class="BodyText"><span>to <span class="PalBc">hundred</span> gives</span></span></td>
+		<td style="width: 20%; text-align: left;"><span class="BodyText"><span class="math-tex">\(\PalAb{200}\)</span>.</span></td>
+		<td>&nbsp;</td>
+	</tr>
+</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+</body></html>

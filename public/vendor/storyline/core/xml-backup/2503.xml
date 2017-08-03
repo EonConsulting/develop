@@ -1,0 +1,7 @@
+<storyline title="Related goods" link="2281" config="2503" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Related Goods" link="2501" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="Substitutes" link="621" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="leaf" title="Complements" link="2505" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

@@ -1,0 +1,434 @@
+<html><head><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script> <styles><link type="text/css" rel="stylesheet" href="/css/frame-default.css"  media="screen,projection"/></styles></head><body>
+<h3 class="Heading2">Transformations and rates: exercise</h3>
+
+<table align="left" border="1" cellpadding="10" cellspacing="1" class="Table_Skeleton" style="width:100%;">
+<tbody>
+	<tr>
+		<td style="text-align: left;">
+		<ol>
+		<li><span class="BodyText">The following table shows the yearly living expenses for a typical student at a university&nbsp;over a number of years. Assume 1996 is the base year (with CPI of 100).</span>
+
+		<table border="1" cellpadding="1" cellspacing="1" class="Table_Skeleton" style="width:100%;">
+		<thead>
+			<tr>
+				<th><span class="BodyText">Year</span></th>
+				<th><span class="BodyText">Actual yearly expenses (R)</span></th>
+				<th><span class="BodyText">CPI Base year = 1996</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span class="BodyText">1995<br />
+				200<br />
+				2005</span></td>
+				<td><span class="BodyText">116 000<br />
+				125 500<br />
+				146 500</span></td>
+				<td><span class="BodyText">98,0<br />
+				108,5<br />
+				121,5</span></td>
+			</tr>
+		</tbody>
+		</table>
+
+		<p><span class="BodyText">Calculate the inflation adjusted expenses of a student over the period. That is, complete the&nbsp;following table: &nbsp;</span></p>
+
+		<table border="1" cellpadding="1" cellspacing="1" class="Table_Skeleton" style="width:100%;">
+		<thead>
+			<tr>
+				<th><span class="BodyText">Year</span></th>
+				<th><span class="BodyText">Actual<br />
+				expenses (R)</span></th>
+				<th><span class="BodyText">CPI Base year = 1996</span></th>
+				<th><span class="BodyText"><span class="math-tex">\(\displaystyle\frac {\text{actual expenses}} {\text{CPI}}\times{100}\)</span></span></th>
+				<th><span class="BodyText">Deflated<br />
+				expenses (R)</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span class="BodyText">1995</span></td>
+				<td><span class="BodyText">116 000</span></td>
+				<td><span class="BodyText">98,0</span></td>
+				<td><span class="BodyText"><span class="math-tex">\(\displaystyle\frac {\text{116 000}} {98,0}\times{100}\)</span></span></td>
+				<td><span class="BodyText">118 367,35</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2000</span></td>
+				<td><span class="BodyText">125 500</span></td>
+				<td><span class="BodyText">108,5</span></td>
+				<td>
+				<style type="text/css">td.upper_line { border-top:solid 1px black; }
+    table.fraction {margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+				</style>
+				<table align="center" cellpadding="0" cellspacing="0" class="fraction">
+				<tbody>
+					<tr>
+						<td nowrap="nowrap" rowspan="2" style="text-align: right;"><span class="math-tex">\( =~\)</span></td>
+						<td nowrap="nowrap" style="text-align: left;"><input id="Text1" name="Text1" size="10" type="text" /></td>
+						<td nowrap="nowrap" rowspan="2" style="text-align: left;"><span class="math-tex">\( ~\times 100\)</span></td>
+					</tr>
+					<tr>
+						<td class="upper_line" nowrap="nowrap" style="text-align: left;"><input id="Text2" name="Text2" size="10" type="text" /></td>
+					</tr>
+				</tbody>
+				</table>
+				</td>
+				<td><input id="Text3" name="Text3" size="10" type="text" /></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2005</span></td>
+				<td><span class="BodyText">146 500</span></td>
+				<td><span class="BodyText">121,5</span></td>
+				<td>
+				<style type="text/css">td.upper_line { border-top:solid 1px black; }
+    table.fraction {margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+				</style>
+				<table align="center" cellpadding="0" cellspacing="0" class="fraction">
+				<tbody>
+					<tr>
+						<td nowrap="nowrap" rowspan="2" style="text-align: right;"><span class="math-tex">\( =~\)</span></td>
+						<td nowrap="nowrap" style="text-align: left;"><input id="Text4" name="Text4" size="10" type="text" /></td>
+						<td nowrap="nowrap" rowspan="2" style="text-align: left;"><span class="math-tex">\( ~\times 100\)</span></td>
+					</tr>
+					<tr>
+						<td class="upper_line" nowrap="nowrap" style="text-align: left;"><input id="Text5" name="Text5" size="10" type="text" /></td>
+					</tr>
+				</tbody>
+				</table>
+				</td>
+				<td><input id="Text6" name="Text6" size="10" type="text" /></td>
+			</tr>
+		</tbody>
+		</table>
+		<span class="BodyText">&nbsp;<br />
+		Consider the inflation adjusted expenses and answer the following questions:</span>
+
+		<ol type="a">
+		<li>What would the yearly expenses of a student in 1996 have been if it was R116 000 in 1995? <input id="Text7" name="Text7" size="10" type="text" /></li>
+		<li>What would the yearly expenses of a student in 1996 have been if it was R146 500 in 2005? <input id="Text8" name="Text8" size="10" type="text" /></li>
+		</ol>
+		</li>
+		<li>You own a small recording company. You sell CDs through your website for R105, including shipping and handling. You get an e-mail from a person who owns a record store in England who would like to sell your CDs in his store. He is willing to pay R75 for each of your CDs and wants to sell them in his store for ₤11 (eleven pounds). He says his profit from each sale would be ₤5 and he would split it with you. The exchange rate between South African rand and the British pound is R14,50 = ₤1,00.<br />
+		&nbsp;
+		<ol type="a">
+		<li>The profit (in pounds) that you will get from the sale of each CD in the British store is ₤ <input id="Text9" name="Text9" size="10" type="text" /></li>
+		<li>In rand, that profit is equal to R <input id="Text10" name="Text10" size="10" type="text" /></li>
+		<li>The total amount that you will receive per CD that is sold is R <input id="Text11" name="Text11" size="10" type="text" /></li>
+		</ol>
+		</li>
+		<li>The price of a one kilogram (32,15 fine ounces) gold bullion bar is $48 484,85. The exchange rate is
+		<p style="text-align: center;">R1,00 = $0,12.</p>
+
+		<p>The price of one fine ounce gold in rand is R <input id="Text12" name="Text12" size="10" type="text" /></p>
+		</li>
+		<li>
+		<p>Consider the same table we used earlier with some of the GDP values as published by Stats SA:<br />
+		&nbsp;</p>
+
+		<table align="left" border="1" cellpadding="10" cellspacing="1" class="Table_Skeleton" style="width:100%;">
+		<tbody>
+			<tr valign="top">
+				<th><span class="BodyText">Period</span></th>
+				<th><span class="BodyText">Real annual<br />
+				GDP (R million)</span></th>
+				<th><span class="BodyText">Annual real growth<br />
+				rate</span></th>
+			</tr>
+			<tr>
+				<th><span class="BodyText">Annual</span></th>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2003</span></td>
+				<td><span class="BodyText">1 273 129</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2004</span></td>
+				<td><span class="BodyText">1 330 390&nbsp;</span></td>
+				<td><span class="BodyText">4,5</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2005</span></td>
+				<td><span class="BodyText">1 401 066&nbsp;</span></td>
+				<td><span class="BodyText">5,3</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2006</span></td>
+				<td><span class="BodyText">1 478 492&nbsp;</span></td>
+				<td><span class="BodyText">5,5</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2007</span></td>
+				<td><span class="BodyText">1 561 076&nbsp;</span></td>
+				<td><span class="BodyText">5,6</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2008</span></td>
+				<td><span class="BodyText">1 619 802</span></td>
+				<td><span class="BodyText">3,8</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2009</span></td>
+				<td><span class="BodyText">1 598 057</span></td>
+				<td><span class="BodyText">&ndash;1,3</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2010</span></td>
+				<td><span class="BodyText">1 646 664&nbsp;</span></td>
+				<td><span class="BodyText">3,0</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2011</span></td>
+				<td><span class="BodyText">1 700 826</span></td>
+				<td><span class="BodyText">3,3</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2012</span></td>
+				<td><span class="BodyText">1 741 549</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr valign="top">
+				<th><span class="BodyText">Quarters</span></th>
+				<th><span class="BodyText">Annualised<br />
+				quarterly<br />
+				GDP<br />
+				(R million)</span></th>
+				<th><span class="BodyText">Annualised<br />
+				percentage change.<br />
+				Quarterly growth<br />
+				rate as an annual<br />
+				rate (Q/Q)</span></th>
+				<th><span class="BodyText">Quarterly value added<br />
+				to GDP<br />
+				(R million)</span></th>
+				<th><span class="BodyText">Real GDP unadjusted<br />
+				year-on-year quarterly<br />
+				percent<br />
+				change<br />
+				(Y/Y)</span></th>
+			</tr>
+			<tr class="BodyText" span="">
+				<td><span class="BodyText">2011:1</span></td>
+				<td><span class="BodyText">1 688 852</span></td>
+				<td><span class="BodyText">4,5</span></td>
+				<td><span class="BodyText">410 603</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2011:2</span></td>
+				<td><span class="BodyText">1 695 909&nbsp;</span></td>
+				<td><span class="BodyText">1,7</span></td>
+				<td><span class="BodyText">423 026</span></td>
+				<td><span class="BodyText">3,4</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2011:3</span></td>
+				<td><span class="BodyText">1 702 846</span></td>
+				<td><span class="BodyText">1,6</span></td>
+				<td><span class="BodyText">428 925</span></td>
+				<td><span class="BodyText">3,0</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2011:4</span></td>
+				<td><span class="BodyText">1 715 698</span></td>
+				<td><span class="BodyText">3,1</span></td>
+				<td><span class="BodyText">438 273</span></td>
+				<td><span class="BodyText">3,1</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2012:1</span></td>
+				<td><span class="BodyText">1 726 539</span></td>
+				<td><span class="BodyText">2,6</span></td>
+				<td><span class="BodyText">419 963</span></td>
+				<td><span class="BodyText">2,3</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2012:2</span></td>
+				<td><span class="BodyText">1 740 329&nbsp;</span></td>
+				<td><span class="BodyText">3,2</span></td>
+				<td><span class="BodyText">435 188</span></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2012:3</span></td>
+				<td><span class="BodyText">1 744 988</span></td>
+				<td><span class="BodyText">1,1</span></td>
+				<td><span class="BodyText">438 296</span></td>
+				<td><span class="BodyText">2,2</span></td>
+			</tr>
+			<tr>
+				<td><span class="BodyText">2012:4</span></td>
+				<td><span class="BodyText">1 754 342</span></td>
+				<td>&nbsp;</td>
+				<td><span class="BodyText">448 103</span></td>
+				<td><span class="BodyText">2,2</span></td>
+			</tr>
+		</tbody>
+		</table>
+
+		<p>&nbsp;</p>
+
+		<ol type="a">
+		<li><span class="BodyText">The annual real growth rate from 2011 to 2012 is <input id="Text13" name="Text13" size="10" type="text" /> %.</span></li>
+		<li><span class="BodyText">The percent change between quarter 3 of 2012 and quarter 4 of 2012 as an annualised rate is <input id="Text14" name="Text14" size="10" type="text" /> %.</span></li>
+		<li><span class="BodyText">The year-on-year quarterly percentage change between quarter 2 of 2011 and quarter 2 of 2012 is calculated as <input id="Text15" name="Text15" size="10" type="text" /> %.</span></li>
+		<li><span class="BodyText">The growth rate from 2006 to 2010 is <input id="Text16" name="Text16" size="10" type="text" /> %.</span></li>
+		</ol>
+		</li>
+		</ol>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<div id="submit1" style="display:block">
+<p><button onclick="showScore()" type="button">Show score</button></p>
+</div>
+
+<div id="kommentaar1" style="display:none">
+<p><input id="Text24" name="Text24" readonly="readonly" size="100" style="background-color:lightblue;" type="text" value="" /></p>
+</div>
+
+<div id="submit2" style="display:none">
+<p><button onclick="showMemo()" type="button">Show calculations</button></p>
+</div>
+
+<div id="submit3" style="display:none">
+<p><button onclick="resetValues()" type="button">Clear</button></p>
+</div>
+
+<div id="memo" style="display:none">
+<p class="Image" style="text-align: center;"><iframe frameborder="0" height="420" scrolling="no" src="/FBN1501/assets/100.html" width="650"></iframe></p>
+</div><script>
+function showScore() 
+{
+  var percent = "%.  "
+var score = "Your score is "
+var inform1 = "Errors are marked red.  Click 'Show calculations' to see the solutions on the page below."
+var inform2 = "Click 'Show calculations' to still see the solutions on the page below."
+   var y = 0;
+    var x = [ "Text1",
+ "Text2",
+ "Text3",
+ "Text4",
+"Text5",
+ "Text6",
+ "Text7",
+ "Text8",
+ "Text9",
+ "Text10",
+ "Text11",
+ "Text12",
+ "Text13",
+ "Text14",
+ "Text15",
+ "Text16" ];
+var answer = [ 8.00,
+ 18.50,
+ 22.30,
+ 4.00,
+ 4.00,
+ 55.55,
+ 64.80,
+422.10,
+ 318.70,
+ 485.20,
+ 373.20,
+ 129.46,
+ 116.65,
+ 117.10,
+ 75.50,
+ 88.42]; 
+/* var answer = [125500,
+ 108.5,
+ 115668.20,
+ 146500,
+ 121.5,
+ 120576.13,
+ 00.00,
+00.00,
+ 2.50,
+ 36.25,
+ 11.25,
+ 12567.35,
+ 2.4,
+ 2.2,
+ 2.9,
+ 2.7]; */
+  for(count = 0; count < 16; count++)
+    {
+      if  (document.getElementById(x[count]).value == answer[count])
+        {
+        document.getElementById(x[count]).style.color = "black";
+      document.getElementById(x[count]).setAttribute('readonly',
+ 'readonly');
+          y++;
+          }
+    else
+    {
+         document.getElementById(x[count]).style.color = "red";
+                         if (document.getElementById(x[count]).value == "")
+         {
+            document.getElementById(x[count]).value = "?";
+         }
+      }
+  }
+      total = y/16*100;
+var totalfinal = total.toPrecision(3);
+if (totalfinal != 100.00)
+{
+document.getElementById("Text17").value = 
+(score+totalfinal+percent+inform1); 
+}
+else
+{
+document.getElementById("Text17").value = 
+(score+totalfinal+percent+inform2);
+  document.getElementById("submit1").style.display="none";  
+} 
+   document.getElementById("kommentaar1").style.display="block";
+  document.getElementById("submit2").style.display="block";
+  document.getElementById("submit3").style.display="block";
+  }
+</script><script>
+function resetValues() 
+{
+    var x = [ "Text1",
+ "Text2",
+ "Text3",
+ "Text4",
+"Text5",
+ "Text6",
+ "Text7",
+ "Text8",
+ "Text9",
+ "Text10",
+ "Text11",
+ "Text12",
+ "Text13",
+ "Text14",
+ "Text15",
+ "Text16" ];
+    for(count = 0; count < 16; count++)
+    {
+          document.getElementById(x[count]).style.color = "black";
+      document.getElementById(x[count]).value = "";
+      document.getElementById("submit1").style.display="block";  
+   document.getElementById("kommentaar1").style.display="none";
+      document.getElementById("submit2").style.display="none"; 
+      document.getElementById("submit3").style.display="none";  
+      document.getElementById("memo").style.display="none";
+   document.getElementById(x[count]).removeAttribute('readonly');   
+     }
+  }
+</script><script>
+function showMemo() 
+{
+                 document.getElementById("memo").style.display="block";
+      document.getElementById("submit2").style.display="none";  
+     }
+</script>
+</body></html>

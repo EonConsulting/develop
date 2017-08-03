@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="Dark_Grey" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="[UECA-283][2]DSP37.svg" inkscape:version="0.91 r13725"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px"
+	 viewBox="289 32.5 250 250" enable-background="new 289 32.5 250 250" xml:space="preserve">
+<sodipodi:namedview  id="namedview99" inkscape:cy="197.34305" inkscape:cx="219.57942" inkscape:zoom="1.8552141" showgrid="false" guidetolerance="10" gridtolerance="10" pagecolor="#ffffff" borderopacity="1" bordercolor="#666666" objecttolerance="10" inkscape:current-layer="Dark_Grey" inkscape:window-maximized="1" inkscape:window-y="304" inkscape:window-x="-8" inkscape:window-height="706" inkscape:window-width="1360" inkscape:pageshadow="2" inkscape:pageopacity="0">
+	</sodipodi:namedview>
+<polyline id="polyline5" fill="none" stroke="#4D4D4D" stroke-width="2.1601" stroke-miterlimit="10" points="529.352,265.99 
+	302.022,265.99 302.022,38.589 "/>
+<text id="text7" transform="matrix(1 0 0 1 292.3564 47.3206)" fill="#4D4D4D" font-family="'Verdana'" font-size="11.4092">P</text>
+<g id="g9" transform="translate(3.8783875,-5.0964936)">
+	<text id="text11" transform="matrix(1 0 0 1 290.8706 280.3282)" fill="#4D4D4D" font-family="'Verdana'" font-size="11.4092">0</text>
+</g>
+<text id="text13" transform="matrix(1 0 0 1 521.0811 278.9338)" fill="#4D4D4D" font-family="'Verdana'" font-size="11.4092">Q</text>
+<text id="text15" transform="matrix(1 0 0 1 479.7334 38.3401)" display="none" fill="#449A77" enable-background="new    " font-family="'Verdana'" font-size="12.993">S</text>
+<g id="g17" display="none">
+	
+		<text id="text19" transform="matrix(0.9995 -0.0308 0.0308 0.9995 492.1309 95.4553)" display="inline" fill="#449A77" font-family="'Verdana'" font-size="12.9927">S</text>
+	
+		<text id="text21" transform="matrix(0.9995 -0.0308 0.0308 0.9995 501.167 100.3176)" display="inline" fill="#449A77" font-family="'Verdana'" font-size="8.9949">1</text>
+</g>
+<line id="line23" fill="none" stroke="#3E7BBE" stroke-width="1.7305" stroke-miterlimit="10" x1="356.502" y1="73.102" x2="492.913" y2="223.704"/>
+<line id="line25" fill="none" stroke="#3E7BBE" stroke-width="2.596" stroke-miterlimit="10" x1="383.599" y1="73.102" x2="520.01" y2="223.704"/>
+<line id="line27" fill="none" stroke="#3E7BBE" stroke-width="2.596" stroke-miterlimit="10" x1="326.552" y1="73.102" x2="462.964" y2="223.704"/>
+<line id="line29" display="none" fill="none" stroke="#449A77" stroke-width="2.596" stroke-miterlimit="10" x1="492.121" y1="105.243" x2="351.958" y2="250.685"/>
+<line id="line31" display="none" fill="none" stroke="#449A77" stroke-width="1.73" stroke-miterlimit="10" x1="479.696" y1="45.882" x2="343.837" y2="182.715"/>
+<g id="g33" display="none">
+	
+		<text id="text35" transform="matrix(1 0.0022 -0.0022 1 421.084 117.0481)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.9931">E</text>
+	
+		<text id="text37" transform="matrix(1 0.0022 -0.0022 1 429.2891 122.2043)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="8.9953">2</text>
+</g>
+<g id="g39" display="none">
+	
+		<text id="text41" transform="matrix(1 0.0022 -0.0022 1 450.1807 160.8303)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="12.9931">E</text>
+	
+		<text id="text43" transform="matrix(1 0.0022 -0.0022 1 458.3848 165.9866)" display="inline" fill="#4D4D4D" font-family="'Verdana'" font-size="8.9953">1</text>
+</g>
+<g id="g45" display="none">
+	<g id="g47" display="inline">
+		<path id="path49" fill="#4E4E4E" d="M346.923,84.292c2.599,0,2.599-4.061,0-4.061S344.325,84.292,346.923,84.292L346.923,84.292z"
+			/>
+	</g>
+</g>
+<g id="g51" display="none">
+	<g id="g53" display="inline">
+		<path id="path55" fill="#4E4E4E" d="M392.074,127.169c2.599,0,2.599-4.061,0-4.061S389.476,127.169,392.074,127.169
+			L392.074,127.169z"/>
+	</g>
+</g>
+<g id="g57" display="none">
+	<g id="g59" display="inline">
+		<path id="path61" fill="#4E4E4E" d="M482.214,214.061c2.599,0,2.599-4.061,0-4.061S479.615,214.061,482.214,214.061
+			L482.214,214.061z"/>
+	</g>
+</g>
+<g id="g63" display="none">
+	<g id="g65" display="inline">
+		<path id="path67" fill="#4E4E4E" d="M437.875,171.183c2.599,0,2.599-4.06,0-4.06S435.276,171.183,437.875,171.183L437.875,171.183
+			z"/>
+	</g>
+</g>
+<g id="g3431" transform="translate(-1.0780427,5.9292348)">
+	<text id="text69" transform="matrix(1 0 0 1 465.5175 225.4411)" fill="#3E7BBE" font-family="'Verdana'" font-size="11.4092">D</text>
+	<text id="text71" transform="matrix(1 0 0 1 474.3075 229.9529)" fill="#3E7BBE" font-family="'Verdana'" font-size="7.8988">2</text>
+	<text id="text73" transform="matrix(1 0 0 1 522.0859 225.4411)" fill="#3E7BBE" font-family="'Verdana'" font-size="11.4092">D</text>
+	<text id="text75" transform="matrix(1 0 0 1 530.8759 229.9529)" fill="#3E7BBE" font-family="'Verdana'" font-size="7.8988">1</text>
+	<text id="text77" transform="matrix(1 0 0 1 494.6581 225.4411)" fill="#3E7BBE" font-family="'Verdana'" font-size="11.4092">D</text>
+</g>
+<g id="g79">
+	<g id="g81">
+		
+			<line id="line83" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="417.612" y1="144.267" x2="398.644" y2="144.267"/>
+		<g id="g85">
+			<polygon id="polygon87" fill="#4D4D4D" points="399.5,141.487 394.722,144.196 399.429,146.977 			"/>
+		</g>
+	</g>
+</g>
+<g id="g89">
+	<g id="g91">
+		
+			<line id="line93" fill="none" stroke="#4D4D4D" stroke-width="1.7305" stroke-miterlimit="10" x1="423.245" y1="144.196" x2="442.214" y2="144.196"/>
+		<g id="g95">
+			<polygon id="polygon97" fill="#4D4D4D" points="441.357,146.906 446.135,144.267 441.429,141.415 			"/>
+		</g>
+	</g>
+</g>
+</svg>

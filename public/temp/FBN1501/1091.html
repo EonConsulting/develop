@@ -1,0 +1,131 @@
+<html><head><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script> <styles><link type="text/css" rel="stylesheet" href="/css/frame-default.css"  media="screen,projection"/></styles></head><body>
+<h3 class="Heading2">Example</h3>
+
+<p><span class="BodyText">Consider the&nbsp;table below that&nbsp;deals&nbsp;with the prices of magazine advertisement pages.</span></p>
+
+<p><span class="BodyText">The first two columns give the <span class="PalBc">prices</span>&nbsp;in <span class="PalAb">2013</span> and <span class="PalAa">2014</span>. &nbsp;The last two columns give the number of advertisements placed in <span class="PalAb">2013</span> and <span class="PalAa">2014</span>. &nbsp;These last two columns of numbers are called the <span class="PalBc">quantities</span>.</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="Table_Style1" style="width:100%;">
+<thead>
+	<tr>
+		<th colspan="3" rowspan="1" scope="col"><span class="BodyText">Magazine</span></th>
+		<th scope="col" style="width: 22%;"><span class="BodyText"><span class="PalBc">Prices</span><br />
+		in&nbsp;<span class="PalAb"><span>2013</span></span><br />
+		<span class="math-tex">\(\PalBc p_{\PalAb{2013}}\)</span><br />
+		<span><span class="PalAb">base year</span></span></span></th>
+		<th scope="col" style="width: 22%;"><span class="BodyText"><span><span class="PalBc">Prices </span><br />
+		in <span class="PalAa">2014</span></span><br />
+		<span class="math-tex">\(\PalBc p_{\PalAa{2014}}\)</span><br />
+		<span><span class="PalAa">given year</span></span></span></th>
+		<th scope="col" style="width: 20%;"><span class="BodyText"><span><span class="PalBc">Quantities</span><br />
+		in <span class="PalAb">2013</span></span><br />
+		<span class="math-tex">\(\PalBc q_{\PalAb{2013}}\)</span><br />
+		<span><span class="PalAb">base year</span></span></span></th>
+		<th colspan="3" rowspan="1" scope="col" style="width: 20%;"><span class="BodyText"><span><span class="PalBc">Quantities</span><br />
+		in <span class="PalAa">2014</span></span><br />
+		<span class="math-tex">\(\PalBc q_{\PalAa{2014}}\)</span><br />
+		<span><span class="PalAa">given year</span></span></span></th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td style="width: 1%;">&nbsp;</td>
+		<td class="Table_Number" style="text-align: left;">
+		<p><span class="BodyText"><span>Budget Living</span></span></p>
+		</td>
+		<td>&nbsp;</td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(\Cur 18 \Tsp 000\Cdp00\)</span></span></td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(\Cur 16 \Tsp 200\Cdp00\)</span></span></td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(1\Tsp200\)</span></span></td>
+		<td style="text-align: center;">&nbsp;</td>
+		<td class="Table_Number"><span class="BodyText"><span class="math-tex">\(1\Tsp320\)</span></span></td>
+		<td style="text-align: center; width: 8%;">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td class="Table_Number" style="text-align: left;">
+		<p><span class="BodyText"><span>Business Daily</span></span></p>
+		</td>
+		<td>&nbsp;</td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(\Cur 45 \Tsp 000\Cdp00\)</span></span></td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(\Cur 45 \Tsp 990\Cdp00\)</span></span></td>
+		<td style="text-align: center;"><span class="BodyText"><span class="math-tex">\(1\Tsp270\)</span></span></td>
+		<td style="text-align: center;">&nbsp;</td>
+		<td class="Table_Number"><span class="BodyText"><span class="math-tex">\(950\)</span></span></td>
+		<td style="text-align: center;">&nbsp;</td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">Before we calculate a composite index, we have to consider&nbsp;something else.</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="Table_Definition" style="width:100%;">
+<tbody>
+	<tr>
+		<td>
+		<p class="Definition">To calculate&nbsp;<span class="math-tex">\(\displaystyle\sum {\PalBc p_{\PalAb0}\PalBc q_{\PalAb0}}\)</span>:&nbsp;For each row in the table, multiply the value<br />
+		in the <span class="math-tex">\(\PalBc p_\PalAb0\)</span> column&nbsp;with the&nbsp;value&nbsp;in the <span class="math-tex">\(\PalBc q_\PalAb0\)</span> column and get a&nbsp;product.<br />
+		Then add&nbsp;all the products.</p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style_Steps" style="width:100%;">
+<tbody>
+	<tr>
+		<th scope="row" style="width: 20%;">
+		<p><span class="BodyText">Calculate the quantity</span></p>
+		</th>
+		<td style="width: 12%; text-align: right; vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(\displaystyle\sum {\PalBc p_{\PalAb0}\PalBc q_{\PalAb0}}\)</span></span></p>
+		</td>
+		<td style="width: 5%; text-align: center;">
+		<p><span class="BodyText"><span class="math-tex">\(=\)</span></span></p>
+		</td>
+		<td style="vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(\displaystyle\sum {\PalBc p_{\PalAb{2013}}\PalBc q_{\PalAb{2013}}}\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 40%;">
+		<p><span class="BodyText">For each row, multiply <span class="math-tex">\(\PalBc p_\PalAb0\)</span>&nbsp;and <span class="math-tex">\(\PalBc q_\PalAb0\)</span>&nbsp;values</span></p>
+		</th>
+		<td style="width: 12%; text-align: right;">&nbsp;</td>
+		<td style="width: 5%; text-align: center; vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(=\)</span></span></p>
+		</td>
+		<td style="vertical-align: top;"><span class="BodyText"><span class="math-tex">\(\Cur 18 \Tsp 000\Cdp00\times1\Tsp200+\Cur 45 \Tsp 000\Cdp00\times1\Tsp270\)</span></span></td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 40%;">
+		<p><span class="BodyText">Add the products</span></p>
+		</th>
+		<td style="width: 12%; text-align: right;">&nbsp;</td>
+		<td style="width: 5%; text-align: center; vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(=\)</span></span></p>
+		</td>
+		<td style="vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(\Cur 21 \Tsp 600\Tsp000\Cdp00+\Cur 57 \Tsp 150\Tsp000\Cdp00\)</span></span></p>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" style="width: 40%;">
+		<p>&nbsp;</p>
+		</th>
+		<td style="width: 12%; text-align: right;">&nbsp;</td>
+		<td style="width: 5%; text-align: center; vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(=\)</span></span></p>
+		</td>
+		<td style="vertical-align: top;">
+		<p><span class="BodyText"><span class="math-tex">\(\Cur 78 \Tsp 750\Tsp000\Cdp00\)</span></span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<ul></ul>
+
+</body></html>

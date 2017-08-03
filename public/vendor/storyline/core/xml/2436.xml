@@ -1,0 +1,14 @@
+<storyline id="s0" title="ELASTICITY" config="2436" link="2281" summary="" img="">
+    <storyline_collection>
+        <storyline id="s0" type="leaf" title="Overview of price elasticity" link="2363" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s1" type="leaf" title="Description of price elasticity of demand" link="2364" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="Measurement of price elasticity" link="2365" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="leaf" title="Types of price elasticity" link="2366" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s4" type="leaf" title="Demand curves and demand elasticity" link="2367" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s5" type="leaf" title="Factors that impact on price elasticity" link="2368" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s6" type="leaf" title="Household spending and price elasticity" link="2369" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s7" type="leaf" title="Total spending and price elastic demand" link="2806" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s8" type="leaf" title="Firms&#8217; total revenue and price elasticity" link="2370" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>
+

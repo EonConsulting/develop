@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>704 | Chain of events</title>
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+    <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <p style="font-size:1.5em; margin-left:320px;">
+        <span id="decrease-1" class="chain-item">&#8595;</span>
+        <span id="price-of-2" class="chain-item">P<sub>x</sub> </span>
+        <span id="causes-2" class="chain-item">&#8594;</span>
+        <span id="decrease-2" class="chain-item">&#8595;</span>
+        <span id="qs-2" class="chain-item">Q<sub>s</sub> </span>
+        &#173;
+        &nbsp;
+    </p>
+    <p style="margin-left: 20px">
+        A 
+        <a href="#!" data-show="decrease-1" class="chain first-item">decrease</a> in the 
+        <a href="#!" data-show="price-of-2" class="chain">price</a> of the product (P) 
+        <a href="#!" data-show="causes-2" class="chain">
+            causes
+        </a> a 
+        <a href="#!" data-show="decrease-2" class="chain">decrease</a> in the 
+        <a href="#!" data-show="qs-2" class="chain">quantity supplied</a>.
+    </p>
+   
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../components/js/economics.js" type="text/javascript"></script>
+    <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+    <script>
+        $(function(){
+            $(".chain").on('click', function(){
+                if ($(this).hasClass("first-item")) {
+                    $(".chain-item").hide();
+                }
+                var child = $(this).data('show');
+                $('#' + child).show();
+            });
+        });
+    </script>
+  </body>
+</html>
