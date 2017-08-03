@@ -7,7 +7,7 @@
       $routeProvider
         .when('/e-content/story-line', {
             controller: 'StorylineCtrl',
-          templateUrl: '/e-content/storyline-ng/views/story-line.html'
+          templateUrl: '/storyline-ng/views/story-line.html'
         })
         //.when('/cloning', {
         //  controller: 'CloningCtrl',
