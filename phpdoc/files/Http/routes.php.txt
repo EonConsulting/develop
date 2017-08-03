@@ -7,3 +7,4 @@ Route::match(['get','post'],'/csv/storeStoryline/{course}','EONConsulting\Storyl
 Route::match(['post'],'/storeContent','EONConsulting\Storyline\Table\Http\Controllers\DefaultController@storeContent');
 
 });
+
