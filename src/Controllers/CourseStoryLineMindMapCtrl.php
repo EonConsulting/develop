@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2016, University of South Africa and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -27,20 +28,26 @@
  * @version 1.0.0
  * @since 1.0.0
  */
-
-namespace EONConsulting\Storyline\MindMap\Facades;
-
-
-use Illuminate\Support\Facades\Facade;
+namespace EONConsulting\Storyline\MindMap\Controllers;
+use App\Http\Controllers\Controller;
+use EONConsulting\Storyline\MindMap\StorylineMindMap;
+use App\Models\Course;
 
 /**
- * Class StorylineMindMap
- * @package EONConsulting\Storyline\MindMap\Facades
+ * Class CourseStoryLineMindMapCtrl
+ * @package EONConsulting\Storyline\MindMap\Controllers
  */
-class StorylineMindMap extends Facade {
-
-    protected static function getFacadeAccessor() {
-        return 'storyline_mind_map';
+class CourseStoryLineMindMapCtrl extends Controller
+{
+    /**
+     * @param Course $course
+     * @return mixed
+     * @api
+     * Returns a Formated JSON for Use with GO JS or HTML LIST
+     */
+    public function index(Course $course) {
+        $mindMap = new StorylineMindMap();
+        return $mindMap->get_mind_map($course, 'JSON');
     }
 
 }
