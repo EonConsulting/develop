@@ -15,7 +15,7 @@ notebooks.controller('ToolsListCtrl', function($scope, $http) {
 
     $scope.init = function () {
         $scope.loading = true;
-        $http.get('/e-content/eon/lti/ngappstore').
+        $http.get('/eon/lti/ngappstore').
         success(function (data, status, headers, config) {
             $scope.tools = data;
             $scope.loading = false;

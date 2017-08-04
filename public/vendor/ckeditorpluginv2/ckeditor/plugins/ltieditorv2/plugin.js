@@ -35,7 +35,7 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
-                                    src:  '/e-content/ckeditorstore',
+                                    src:  '/ckeditorstore',
                                     width  : '100%',
                                     height : 450,
                                     onContentLoad: function () {

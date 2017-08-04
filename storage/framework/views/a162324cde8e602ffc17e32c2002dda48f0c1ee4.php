@@ -1,24 +1,22 @@
-@extends('layouts.app')
+<?php $__env->startSection('custom-styles'); ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="<?php echo e(url('/dist/js/jstree/themes/proton/style.min.css')); ?>" />
 
 
-@section('custom-styles')
-    {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/materialize.min.css"  media="screen,projection"/>--}}
-    {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/economics.css"  media="screen,projection"/>--}}
-    {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/font-awesome.css"  media="screen,projection"/>--}}
-    {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/bootstrap-3.3.7.min.css"  media="screen,projection"/>--}}
-    {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/custom.css"  media="screen,projection"/>--}}
-    {{--@for($i = 0 ;$i < count($styles); $i++)--}}
-    {{--<link type="text/css" rel="stylesheet" href="{{ $styles[$i] }}"/>--}}
-    {{--@endfor--}}
-    <link rel="stylesheet" href="{{url('/dist/js/jstree/themes/proton/style.min.css')}}" />
-
-
-    {{--<link type="text/css" rel="stylesheet" href="/plugins/bootstrap-submenu/dist/css/bootstrap-submenu.min.css">--}}
+    
 
     <style>
-        @for($i = 0 ;$i < count($custom_styles); $i++)
-            {{ $custom_styles[$i] }}
-        @endfor
+        <?php for($i = 0 ;$i < count($custom_styles); $i++): ?>
+            <?php echo e($custom_styles[$i]); ?>
+
+        <?php endfor; ?>
 .dropdown-submenu {
             position: relative;
         }
@@ -140,23 +138,25 @@
 
 
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('menu')
+<?php $__env->startSection('menu'); ?>
     <div class="">
         <ul class="nav navbar-nav" data-submenu="true;">
-                {!! $menu !!}
+                <?php echo $menu; ?>
+
         </ul>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid">
         <div class="row">
 
             <div class="col-md-3">
                 <ul class="nav navbar-nav" data-submenu="true;">
-                        {!! $menu !!}
+                        <?php echo $menu; ?>
+
                 </ul>
             </div>
 
@@ -164,9 +164,10 @@
                 <!--breadcrumbs-->
                 <ul class="breadcrumbs">
 
-                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id])}}">Home</a> &raquo;</li>
-                    {!! $catBreadcrumbs !!}
-                    <li>&nbsp;&nbsp;{{ $storyline_item->name }}</li>
+                    <li><a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id])); ?>">Home</a> &raquo;</li>
+                    <?php echo $catBreadcrumbs; ?>
+
+                    <li>&nbsp;&nbsp;<?php echo e($storyline_item->name); ?></li>
 
                 </ul>
             </div>
@@ -175,39 +176,40 @@
         <div class="clearfix"></div>
         <div class="row">
             <div class="col-md-3">
-                {{--{!!  $nav !!}--}}
+                
                 <div id ="navigation">
                     <ul class="course-nav">
-                        {!! $navigation !!}
+                        <?php echo $navigation; ?>
+
                     </ul>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-9">
-                <iframe src="{{'/e-content/'}}{{$storyline_item->file_url}}" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
-                <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
-                <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
+                <iframe src="<?php echo e('/e-content/'); ?><?php echo e($storyline_item->file_url); ?>" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
+                <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $previous])); ?>" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
+                <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $next])); ?>" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
 
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('custom-scripts')
-    <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
-    {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
-    {{--<script src="{{url('/js/mtree.js')}}"></script>--}}
-    {{--<script>--}}
-    {{--$(document).ready(function() {--}}
-    {{--var mtree = $('ul.mtree');--}}
-    {{--});--}}
-    {{--</script>--}}
+<?php $__env->startSection('custom-scripts'); ?>
+    <script src="<?php echo e(url('/dist/js/jstree/jstree.min.js')); ?>"></script>
+    
+    
+    
+    
+    
+    
+    
 
-    {{--<script>--}}
-    {{--$('.mtree > li a').click(function() {--}}
-    {{--$(this).parent().find('ul').toggle();--}}
-    {{--});--}}
-    {{--</script>--}}
+    
+    
+    
+    
+    
     <script>
         $(function() {
             $('#navigation').jstree({
@@ -225,19 +227,20 @@
         //Add A Class to Open First Item in Tree
         $('ul.course-nav li:first-child').addClass('jstree-open');
     </script>
-    {{--@for($i = 0 ; $i < count($scripts); $i++)--}}
-    {{--<script src="{{  $scripts[$i] }}"></script>--}}
-    {{--@endfor--}}
+    
+    
+    
 
     <?php $cs = ''; ?>
-    @for($i = 0; $i < count($custom_scripts); $i++)
+    <?php for($i = 0; $i < count($custom_scripts); $i++): ?>
         <?php $cs .= $custom_scripts[$i]; ?>
-    @endfor
+    <?php endfor; ?>
 
     <script>
 
         window.onload = function() {
-            {!! $cs !!}
+            <?php echo $cs; ?>
+
             $('a.sidebar-toggle').trigger('click');
         };
 
@@ -262,4 +265,6 @@
         }
         //        $('[data-submenu]').submenupicker();
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
