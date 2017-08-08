@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 450 387.9" style="enable-background:new 0 0 450 387.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{fill:none;stroke:#3E7BBE;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st3{fill:#4D4D4D;}
+	.st4{font-family:'Verdana';}
+	.st5{font-size:16px;}
+	.st6{fill:#3E7BBE;}
+	.st7{fill:none;}
+</style>
+<g id="Layer_2" class="st0">
+</g>
+<g id="Dark_Grey">
+	<g class="st0">
+		
+			<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 -216.3014 144.112)" class="st4 st5" style="display:inline;fill:#4D4D4D;">E</text>
+		
+			<text transform="matrix(0.583 1.311750e-003 -1.311750e-003 0.583 -206.1984 150.4619)" class="st4" style="display:inline;fill:#4D4D4D; font-size:19px;">2</text>
+	</g>
+	<g class="st0">
+		
+			<text transform="matrix(1 2.250000e-003 -2.250000e-003 1 -180.4716 198.0264)" class="st4 st5" style="display:inline;fill:#4D4D4D;">E</text>
+		
+			<text transform="matrix(0.583 1.311750e-003 -1.311750e-003 0.583 -170.3687 204.3763)" class="st4" style="display:inline;fill:#4D4D4D; font-size:19px;">1</text>
+	</g>
+	<line class="st1" x1="183.4" y1="67.4" x2="278" y2="299.3"/>
+	<polyline class="st2" points="386,350.9 67.2,350.9 67.2,32 	"/>
+	<text transform="matrix(1 0 0 1 47.2985 44.2441)" class="st3 st4 st5">P</text>
+	<g>
+		<text transform="matrix(1 0 0 1 46.7753 371.9573)" class="st3 st4 st5">0</text>
+	</g>
+	<text transform="matrix(1 0 0 1 373.4937 371.9574)" class="st3 st4 st5">Q</text>
+	<text transform="matrix(1 -8.130000e-003 8.130000e-003 1 278.0428 316.374)" class="st6 st4 st5">D</text>
+	<g>
+		<rect x="66.8" y="358.1" class="st7" width="306.7" height="24.2"/>
+		<text transform="matrix(1 0 0 1 186.2726 371.9574)" class="st3 st4 st5">Inelastic</text>
+	</g>
+</g>
+</svg>

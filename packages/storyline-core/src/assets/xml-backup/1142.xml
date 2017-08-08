@@ -1,0 +1,8 @@
+<storyline id="s0" title="DEMAND AND SUPPLY" config="1142" link="2281" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="Introduction" link="606" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="branch" title="Demand" config="2493" link="2281" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="branch" title="Supply" config="2507" link="2281" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s4" type="branch" title="Market equilibrium" config="1083" link="2281" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

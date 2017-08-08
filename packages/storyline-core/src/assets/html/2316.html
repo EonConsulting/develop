@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="activity-item check-activity">
+            <form id="PPC36" class="iFramedRadioActivity">
+                <div class="row">
+                    <div class="col s12">
+                        <p>
+                            Can I still buy 5 pieces for R25?<br>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_7">
+                            <label for="PPC36_7">Yes</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_8">
+                            <label for="PPC36_8">No</label>
+                        </p>
+                    </div>
+                    
+                    <div class="col s12">
+                        <p>
+                            Has my intention changed?
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_9">
+                            <label for="PPC36_9">Yes</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="checkbox" id="PPC36_10">
+                            <label for="PPC36_10">No</label>
+                        </p>
+                        <div>
+                            <a class="waves-effect waves-light btn submit">Submit</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback blue">
+                I can no longer buy 5 pieces for R25, but that does not mean my intention has changed, 
+                I may still intend to buy 5 pieces of chicken at that price, and will have to keep 
+                looking in the market for a willing seller.
+            </div>
+        </div>
+
+        <p class="activity-intro">
+            Let’s say I intend to buy 5 pieces of chicken at R5 per piece but when I get to the shop 
+            it is sold out and I am unable to buy any.
+        </p>
+
+        <div class="activity-item radio-activity">
+            <form id="PPC36" class="iFramedRadioActivity">
+                <div class="row">
+                    <div class="col s12">
+                        <p>
+                            Has my intention changed?<br>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC36_11">
+                            <label for="PPC36_11">Yes</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC36_12">
+                            <label for="PPC36_12">No</label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback blue">
+                Once again, my intention has not changed. This is a crucial point.  As stated earlier in 
+                the definition of demand, here we are dealing with the intention of buyers and not the 
+                actual outcome in the market. I intend buying a certain number of pieces of fried chicken 
+                based on my taste for it, its price and my income. The fact that when I arrived at the fried 
+                chicken outlet they were sold out, did not change my intentions. It did, however, change the 
+                outcome in that I was not able to buy it and satisfy my want for it.
+            </div>    
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('#PPC36 .submit').on('click', function () {
+                // Checks if at least one box is checked before allowing the user to submit
+                if ($(this).parents("form").find("input.checkbox:checked").length == 0) {
+                    alert("Please select at least 1 answer");
+                    return; //stops the script from running any further
+                }
+                $(this).parents('form').siblings('.feedback').show();
+
+                $('#PPC36 .checkbox').each(function () {
+                    var capital = $(this).attr('capital');
+                    if (this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (!this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", "checked");
+                        this.checked = true;
+                    }
+                    if (!this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", ""); // For IE
+                        this.removeAttribute("checked"); // For other browsers
+                        this.checked = false;
+                    }
+                });
+
+                $('#PPC36_7').siblings('label').css('color', 'green');
+                $('#PPC36_7').prop("indeterminate", true);
+
+                $(this).parents('form').find('.checkbox').attr('disabled', 'disabled');
+                $(this).parents('form').siblings('.feedback').show();
+
+                var activityBlock = 'asset2316';
+                activityDone(activityBlock);
+            });
+            
+            
+            $('.radio-activity input').on('change', function () {
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset2316';
+                activityDone(activityBlock);
+            });
+            
+        </script>
+    </body>
+</html>
