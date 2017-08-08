@@ -1,0 +1,17 @@
+<?php
+
+namespace EONConsulting\PHPSaasWrapper\src\Factories;
+
+/**
+ * Interface Factory
+ * @package EONConsulting\PHPSaasWrapper\src\Factories
+ */
+interface Factory {
+
+    /**
+     * @param $config
+     * @return mixed
+     */
+    public function make($config);
+
+}

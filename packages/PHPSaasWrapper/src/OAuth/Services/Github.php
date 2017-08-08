@@ -1,0 +1,26 @@
+<?php
+
+namespace EONConsulting\PHPSaasWrapper\OAuth\Services;
+
+
+use EONConsulting\PHPSaasWrapper\OAuth\ServiceAdapter;
+use Guzzle\Http\Client;
+use Illuminate\Http\Request;
+
+/**
+ * Class Github
+ * @package EONConsulting\PHPSaasWrapper\OAuth\Services
+ */
+class Github extends ServiceAdapter {
+
+    // key
+    public $key = 'github';
+
+    /**
+     * Github constructor.
+     */
+    public function __construct() {
+        parent::set($this->key);
+    }
+
+}
