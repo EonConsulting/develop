@@ -2,6 +2,6 @@ set list=app-store ck-editor-plugin-v2 file-manager Graphs ImgProcessor laravel-
 
 for %%a in (%list%) do (
 
-   git subtree add --prefix=packages/ https://github.com/EonConsulting/%%a.git
+   git subtree add --prefix=packages/ https://github.com/EonConsulting/%%a.git --squash
    
 )
