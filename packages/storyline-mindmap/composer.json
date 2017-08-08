@@ -1,0 +1,21 @@
+{
+  "name": "eonconsulting/storyline-mindmap",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peace Ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\Storyline\\MindMap\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "require": {
+  }
+}
