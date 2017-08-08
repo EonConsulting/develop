@@ -1,0 +1,33 @@
+{
+  "name": "eonconsulting/img-processor",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peace Ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\ImgProcessor\\": "src/"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "require": {
+    "jonnyw/php-phantomjs": "4.*"
+  }
+}
