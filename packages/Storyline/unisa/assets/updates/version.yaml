@@ -1,0 +1,5 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table unisa_assets_assets'
+    - builder_table_create_unisa_assets_assets.php

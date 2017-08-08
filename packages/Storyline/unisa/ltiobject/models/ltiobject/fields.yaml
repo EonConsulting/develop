@@ -1,0 +1,35 @@
+fields:
+    object_name:
+        label: 'unisa.ltiobject::lang.LTI.object_name'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: 'unisa.ltiobject::lang.LTI.object_desc'
+        size: ''
+        oc.commentPosition: ''
+        span: auto
+        type: textarea
+    launcher_url:
+        label: 'unisa.ltiobject::lang.LTI.launcher_url'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    endpoint_url:
+        label: 'unisa.ltiobject::lang.LTI.endpoint_url'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    key:
+        label: 'unisa.ltiobject::lang.LTI.key'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    secret:
+        label: 'unisa.ltiobject::lang.LTI.secret'
+        span: auto
+        oc.commentPosition: ''
+        type: text

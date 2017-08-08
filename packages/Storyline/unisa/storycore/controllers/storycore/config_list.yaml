@@ -1,0 +1,12 @@
+title: Storycore
+modelClass: Unisa\Storycore\Models\Storycore
+list: $/unisa/storycore/models/storycore/columns.yaml
+recordUrl: 'unisa/storycore/storycore/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: '20'
+showSetup: false
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

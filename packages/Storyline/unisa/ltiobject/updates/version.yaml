@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table unisa_ltiobject_lti'
+    - builder_table_create_unisa_ltiobject_lti.php
+1.0.3:
+    - 'Updated table unisa_ltiobject_lti'
+    - builder_table_update_unisa_ltiobject_lti.php
+1.0.4:
+    - 'Updated table unisa_ltiobject_lti'
+    - builder_table_update_unisa_ltiobject_lti_2.php

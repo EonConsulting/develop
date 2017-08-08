@@ -1,0 +1,11 @@
+columns:
+    taxonomy_name:
+        label: 'unisa.taxonomy::lang.taxonomy.taxo_name'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'unisa.taxonomy::lang.taxonomy.description'
+        type: text
+        searchable: true
+        sortable: true

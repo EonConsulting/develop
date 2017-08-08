@@ -1,0 +1,15 @@
+name: Pages
+modelClass: Unisa\Pages\Models\Page
+form: $/unisa/pages/models/page/fields.yaml
+defaultRedirect: unisa/pages/pages
+create:
+    title: 'unisa.pages::lang.pages.create_page'
+    redirect: 'unisa/pages/pages/update/:id'
+    redirectClose: unisa/pages/pages
+    flashSave: 'unisa.pages::lang.pages.creaed_page'
+update:
+    title: 'unisa.pages::lang.pages.upd_page'
+    redirect: unisa/pages/pages
+    redirectClose: unisa/pages/pages
+    flashSave: 'unisa.pages::lang.pages.suc_upd_page'
+    flashDelete: 'unisa.pages::lang.pages.del_page'
