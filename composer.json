@@ -1,0 +1,21 @@
+{
+  "name": "eonconsulting/ckeditorpluginv2",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peace Ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\CKEditorPluginV2\\": "src/"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
+  },
+  "require": {
+  }
+}
