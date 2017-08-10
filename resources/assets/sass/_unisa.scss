@@ -6,7 +6,7 @@ $colour4: #fb7217;
 $light-gray: #e6e6e6;
 
 html {font-family: "Open Sans",sans-serif;}
-body {font-family: "Open Sans",sans-serif; background: #f1f1f1;}
+body {font-family: "Open Sans",sans-serif; background: #f1f1f1; display: none;}
 
 a {color: $unisa-orange;}
 a:hover {text-decoration: none; color: $colour1;}
@@ -16,7 +16,10 @@ a:active {text-decoration: none;}
 
 //areas
 .menu-area {width: 230px; min-height: 100%; position: absolute; top: 0; left: 0;}
-.rightside-area {margin-left: 230px; min-height: 100vh; background: #f9faf7;}
+.menu-area-collapse {width: 50px;}
+.menu-area-overlay {background: #f1f1f1; z-index: 999; box-shadow: 0px 0px 50px grey; position: fixed;}
+.rightside-area {margin-left: 230px; min-height: 100vh; background: #f9faf7; border-width: 0px 0px 0px 1px; border-style: solid; border-color: $light-gray;}
+.rightside-area-expand {margin-left: 50px;}
 .rightside-area-collapse {margin-left: 0px;}
 .header-area {height: 70px; background: #ffffff; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $unisa-orange;}
 .content-area {padding-top: 15px;}
@@ -53,6 +56,9 @@ $user-box-height: 70px;
 .left-menu-sub ul li {border: none;}
 .left-menu-sub a {color: #828282; padding: 7px 10px 7px 20px; margin-top: -5px;}
 .left-menu-hover a:hover {color: $unisa-orange;}
+
+.menu-open-btn {height: 50px; width: 50px; padding: 10px; font-size: 24px; text-align: center;}
+.menu-open-btn a {padding: 0px;}
 
 //header-area
 .header-breadcrumb {padding-left: 20px; float: left;}
@@ -119,6 +125,7 @@ $user-box-height: 70px;
 .mr-bot-15 {margin-bottom: 15px;}
 .shadow {box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);}
 .basic-clearfix {overflow-y: auto; overflow-x: hidden;}
+.hidden {display: none;}
 
 //Bootstrap overrides
 .panel {border-radius: 0%;}

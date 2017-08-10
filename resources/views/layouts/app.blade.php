@@ -7,16 +7,16 @@ $lti = laravel_lti()->is_lti(auth()->user());
 <!DOCTYPE html>
 <html>
     <head>
-        @include('templates.pagehead')
 
+        @include('templates.pagehead')
 
         @yield('custom-styles')
 
     </head>
 
-    <body>
+    <body id="app-body">
 
-        <div class="menu-area hidden-xs">
+        <div class="menu-area" id="menu" >
             @include('templates.menu')
         </div>
 

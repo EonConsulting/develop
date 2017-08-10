@@ -371,7 +371,7 @@
     var ctx = document.getElementById("assignmentChart");
 
     var assignmentChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: ["January", "February", "March", "April", "May", "June"],
             datasets: [{
