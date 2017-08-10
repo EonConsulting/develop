@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" sodipodi:docname="[UECA-349}[2]DSP103.svg" inkscape:version="0.91 r13725"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-80 203.1 450 387.9"
+	 style="enable-background:new -80 203.1 450 387.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:none;fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st2{display:inline;}
+	.st3{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:3.9965,4.7958;}
+	.st5{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3979,5.2775;}
+	.st6{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2607,5.1127;}
+	.st7{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:5.5186,6.6221;}
+	.st8{fill:none;stroke:#4D4D4D;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st9{fill:#4D4D4D;}
+	.st10{display:none;fill:none;stroke:#4D4D4D;stroke-width:1.312;stroke-miterlimit:10;}
+	.st11{display:none;fill:#FFFFFF;}
+	.st12{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st13{fill:none;stroke:#3E7BBE;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st14{fill:#3E7BBE;}
+	.st15{font-family:'Verdana';}
+	.st16{font-size:16px;}
+	.st17{font-size:11px;}
+	.st18{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3693,5.243;}
+	.st19{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3698,5.2436;}
+	.st20{fill:none;stroke:#96201E;stroke-width:1.2918;stroke-miterlimit:10;}
+	.st21{fill:none;stroke:#96201E;stroke-width:1.2918;stroke-miterlimit:10;stroke-dasharray:4.0005,4.8004;}
+	.st22{fill:none;stroke:#96201E;stroke-width:1.2918;stroke-miterlimit:10;stroke-dasharray:3.9299,4.7157;}
+	.st23{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2351,5.0821;}
+	.st24{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2904,5.1484;}
+	.st25{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;}
+	.st26{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.5781,5.4937;}
+	.st27{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2022,5.0426;}
+	.st28{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2472,5.0966;}
+	.st29{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2685,5.122;}
+	.st30{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.0722,4.8865;}
+	.st31{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.0808,4.8968;}
+	.st32{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.4068,5.2879;}
+	.st33{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.6528,5.5831;}
+	.st34{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:5.5182,6.6216;}
+	.st35{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:3.5292,4.2348;}
+	.st36{display:inline;fill:none;}
+	.st37{fill:none;stroke:#459A77;stroke-width:1.7305;stroke-miterlimit:10;}
+	.st38{display:none;fill:#4D4D4D;enable-background:new    ;}
+	.st39{fill:#4E4E4E;}
+	.st40{fill:#449977;}
+	.st41{display:none;fill:none;stroke:#459A77;stroke-width:2.596;stroke-miterlimit:10;}
+	.st42{fill:#96201E;}
+	.st43{font-size:10px;}
+	.st44{fill:none;stroke:#96201E;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.4967,5.3959;}
+	.st45{fill:none;stroke:#4D4D4D;stroke-width:1.3;stroke-miterlimit:10;}
+	.st46{fill:#FFFFFF;}
+	.st47{font-family:'Helvetica';}
+	.st48{font-size:11.25px;}
+	.st49{fill:none;stroke:#4D4D4D;stroke-width:1.7102;stroke-miterlimit:10;}
+</style>
+<sodipodi:namedview  inkscape:cy="166.58049" objecttolerance="10" showgrid="false" inkscape:zoom="1.7934888" inkscape:cx="128.44425" guidetolerance="10" gridtolerance="10" borderopacity="1" pagecolor="#ffffff" bordercolor="#666666" id="namedview537" inkscape:current-layer="g4777-9" inkscape:window-maximized="1" inkscape:window-y="-8" inkscape:window-x="1352" inkscape:window-height="1058" inkscape:window-width="1920" inkscape:pageshadow="2" inkscape:pageopacity="0">
+	</sodipodi:namedview>
+<text id="text9" transform="matrix(1 0 0 1 10.3923 1154.0552)" class="st15 st16" style="display:none;fill:#3E7BBE;enable-background:new    ;">D</text>
+<g id="g11" class="st0">
+	<text id="text13" transform="matrix(1 0 0 1 28.9369 909.8786)" class="st15 st16" style="display:inline;fill:#459A77;">S</text>
+	
+		<text id="text15" transform="matrix(1 0 0 1 39.8751 916.2057)" class="st15" style="display:inline;fill:#459A77; font-size:11.077px;">1</text>
+</g>
+<g id="g17" class="st0">
+	<text id="text19" transform="matrix(1 0 0 1 -63.6386 909.8548)" class="st15 st16" style="display:inline;fill:#459A77;">S</text>
+	
+		<text id="text21" transform="matrix(1 0 0 1 -52.701 916.1819)" class="st15" style="display:inline;fill:#459A77; font-size:11.077px;">1</text>
+</g>
+<line id="line23" class="st1" x1="28.9" y1="1158.9" x2="28.9" y2="1163.3"/>
+<line id="line25" class="st1" x1="-244.4" y1="883.2" x2="-248.7" y2="883.2"/>
+<g id="g27" class="st0">
+	<g id="g29" class="st2">
+		<line id="line31" class="st3" x1="-249" y1="883.2" x2="-246.8" y2="883.2"/>
+		<line id="line33" class="st4" x1="-242" y1="883.2" x2="-226.9" y2="883.2"/>
+		<polyline id="polyline35" class="st3" points="-224.5,883.2 -222.3,883.2 -222.3,885.4 		"/>
+		<line id="line37" class="st5" x1="-222.3" y1="890.6" x2="-222.3" y2="1158.9"/>
+		<line id="line39" class="st3" x1="-222.3" y1="1161.5" x2="-222.3" y2="1163.7"/>
+	</g>
+</g>
+<g id="g41" class="st0">
+	<g id="g43" class="st2">
+		<line id="line45" class="st3" x1="-243" y1="1135.3" x2="-240.9" y2="1135.3"/>
+		<line id="line47" class="st6" x1="-235.7" y1="1135.3" x2="24.2" y2="1135.3"/>
+		<polyline id="polyline49" class="st3" points="26.7,1135.3 28.9,1135.3 28.9,1137.4 		"/>
+		<line id="line51" class="st7" x1="28.9" y1="1144.1" x2="28.9" y2="1152.9"/>
+		<line id="line53" class="st3" x1="28.9" y1="1156.2" x2="28.9" y2="1158.4"/>
+	</g>
+</g>
+<g id="g55" class="st0">
+	<g id="g57" class="st2">
+		<line id="line59" class="st8" x1="-235.3" y1="887.5" x2="-235.3" y2="909.7"/>
+		<g id="g61">
+			<polygon id="polygon63" class="st9" points="-231.5,908.5 -239.2,908.5 -235.3,915.3 			"/>
+		</g>
+	</g>
+</g>
+<g id="g65" class="st0">
+	<g id="g67" class="st2">
+		<line id="line69" class="st8" x1="-235.3" y1="996.4" x2="-235.3" y2="1018.6"/>
+		<g id="g71">
+			<polygon id="polygon73" class="st9" points="-231.5,1017.5 -239.2,1017.5 -235.3,1024.2 			"/>
+		</g>
+	</g>
+</g>
+<g id="g75" class="st0">
+	<g id="g77" class="st2">
+		<line id="line79" class="st8" x1="-235.5" y1="1104.4" x2="-235.5" y2="1126.6"/>
+		<g id="g81">
+			<polygon id="polygon83" class="st9" points="-231.6,1125.5 -239.4,1125.5 -235.5,1132.2 			"/>
+		</g>
+	</g>
+</g>
+<g id="g85" class="st0">
+	<g id="g87" class="st2">
+		<line id="line89" class="st8" x1="-215.6" y1="1149.8" x2="-198.4" y2="1149.8"/>
+		<g id="g91">
+			<polygon id="polygon93" class="st9" points="-199.6,1146 -199.6,1153.7 -192.8,1149.8 			"/>
+		</g>
+	</g>
+</g>
+<g id="g95" class="st0">
+	<g id="g97" class="st2">
+		<line id="line99" class="st8" x1="-57" y1="1093.2" x2="-78" y2="1072.9"/>
+		<g id="g101">
+			<polygon id="polygon103" class="st9" points="-79.9,1076.5 -74.5,1070.9 -82,1069 			"/>
+		</g>
+	</g>
+</g>
+<g id="g105" class="st0">
+	<g id="g107" class="st2">
+		<line id="line109" class="st8" x1="-90.9" y1="1058.7" x2="-111.8" y2="1038.4"/>
+		<g id="g111">
+			<polygon id="polygon113" class="st9" points="-113.7,1042 -108.3,1036.4 -115.9,1034.5 			"/>
+		</g>
+	</g>
+</g>
+<g id="g115" class="st0">
+	<g id="g117" class="st2">
+		<line id="line119" class="st8" x1="-140.1" y1="1059.6" x2="-119.8" y2="1038.6"/>
+		<g id="g121">
+			<polygon id="polygon123" class="st9" points="-123.4,1036.7 -117.8,1042.1 -115.9,1034.6 			"/>
+		</g>
+	</g>
+</g>
+<g id="g125" class="st0">
+	<g id="g127" class="st2">
+		<line id="line129" class="st8" x1="-172.3" y1="1091.8" x2="-152" y2="1070.9"/>
+		<g id="g131">
+			<polygon id="polygon133" class="st9" points="-155.6,1069 -150,1074.4 -148.1,1066.8 			"/>
+		</g>
+	</g>
+</g>
+<g id="g155" class="st0">
+	<g id="g157" class="st2">
+		<line id="line159" class="st8" x1="-122.7" y1="1014.9" x2="-151.9" y2="1014.9"/>
+		<g id="g161">
+			<polygon id="polygon163" class="st9" points="-150.8,1018.7 -150.8,1011 -157.5,1014.9 			"/>
+		</g>
+	</g>
+</g>
+<g id="g165" class="st0">
+	<g id="g167" class="st2">
+		<line id="line169" class="st8" x1="-0.4" y1="1149.8" x2="16.8" y2="1149.8"/>
+		<g id="g171">
+			<polygon id="polygon173" class="st9" points="15.7,1146 15.7,1153.7 22.4,1149.8 			"/>
+		</g>
+	</g>
+</g>
+<text id="text175" transform="matrix(1 0 0 1 -17.2961 1180.3573)" class="st38 st15 st16">14</text>
+<text id="text177" transform="matrix(1 0 0 1 18.5438 1180.3577)" class="st38 st15 st16">80</text>
+<g id="g179" class="st0">
+	<text id="text181" transform="matrix(1 0 0 1 -263.1787 889.3755)" class="st15 st16" style="display:inline;fill:#4D4D4D;">8</text>
+</g>
+<path id="path199" inkscape:connector-curvature="0" class="st10" d="M-185.9,952.2c0.7-2.8-4.2-8.2,11.5-9.7
+	c14.2-1.4,37.5,0.1,46.5-1.3c9-1.4,11.7-6.6,11.7-6.6s3.5,5,10.6,6.3s19.2,1.2,37.7,1.3s22.8,3.7,23.2,5.6c0.4,1.6,0.5,4.5,0.5,4.5"
+	/>
+<text id="text489" transform="matrix(1 0 0 1 19.6144 1179.2046)" class="st38 st15 st16">52</text>
+<path id="path507" inkscape:connector-curvature="0" class="st11" d="M-76.1,1097.7H-157c-3.6,0-6.5-2.9-6.5-6.5v-13.4
+	c0-3.6,2.9-6.5,6.5-6.5h80.9c3.6,0,6.5,2.9,6.5,6.5v13.4C-69.6,1094.8-72.5,1097.7-76.1,1097.7z"/>
+<g>
+	<g>
+		<g id="g115-8" transform="translate(0.67356307,1.2395953)">
+			<g id="g117-7">
+				<line id="line119-4" class="st8" x1="116.2" y1="424.4" x2="136.5" y2="403.4"/>
+				<g id="g121-3">
+					<polygon id="polygon123-8" class="st9" points="138.5,406.9 140.4,399.4 132.9,401.5 					"/>
+				</g>
+			</g>
+		</g>
+		<g id="g105-6" transform="translate(2.7821319,1.7299422)">
+			<g id="g107-3">
+				<line id="line109-3" class="st8" x1="167.6" y1="423.1" x2="146.7" y2="402.8"/>
+				<g id="g111-5">
+					<polygon id="polygon113-9" class="st9" points="150.2,400.8 142.6,398.9 144.8,406.4 					"/>
+				</g>
+			</g>
+		</g>
+		<g id="g105-6-2" transform="translate(39.581917,37.414582)">
+			<g id="g107-3-7">
+				<line id="line109-3-0" class="st8" x1="165.4" y1="421.2" x2="144.5" y2="400.9"/>
+				<g id="g111-5-7">
+					<polygon id="polygon113-9-5" class="st9" points="148,398.9 140.4,397 142.6,404.5 					"/>
+				</g>
+			</g>
+		</g>
+		
+			<g id="g115-8-5" transform="translate(-31.10807,35.251518)" inkscape:transform-center-y="1.3720335" inkscape:transform-center-x="-2.5413423">
+			<g id="g117-7-3">
+				<line id="line119-4-4" class="st8" x1="113.2" y1="424.6" x2="133.5" y2="403.6"/>
+				<g id="g121-3-1">
+					<polygon id="polygon123-8-1" class="st9" points="135.5,407.1 137.4,399.6 129.9,401.7 					"/>
+				</g>
+			</g>
+		</g>
+	</g>
+	<g>
+		<polyline id="polyline7" class="st12" points="294,526.8 9.1,526.8 9.1,247.9 		"/>
+		<g id="g135" transform="translate(3.3454349,29.551341)">
+			<g id="g137">
+				<line id="line139" class="st13" x1="205.4" y1="412.5" x2="153.4" y2="412.5"/>
+				<g id="g141">
+					<polygon id="polygon143" class="st14" points="147.8,412.5 154.5,416.4 154.5,408.6 					"/>
+				</g>
+			</g>
+		</g>
+		<text id="text183" transform="matrix(1 0 0 1 -4.7187 259.1762)" class="st9 st15 st16">P</text>
+		<text transform="matrix(1 0 0 1 202.9369 438.7833)" class="st9 st15 st17">E</text>
+		<text transform="matrix(1 0 0 1 209.9369 438.7833)" class="st9 st15 st17">x</text>
+		<text transform="matrix(1 0 0 1 216.3369 438.7833)" class="st9 st15 st17">cess demand </text>
+		<text transform="matrix(1 0 0 1 227.3369 453.1833)" class="st9 st15 st17">= 1 200</text>
+		<g id="g191" transform="translate(4.2083875,-4.0994936)">
+			<text id="text193" transform="matrix(1 0 0 1 -5.2419 543.8894)" class="st9 st15 st16">0</text>
+		</g>
+		<text id="text195" transform="matrix(1 0 0 1 282.4765 543.8893)" class="st9 st15 st16">Q</text>
+		<g id="Layer_2">
+			<line id="line202" class="st12" x1="250.9" y1="522.4" x2="250.9" y2="526.8"/>
+			<line id="line204" class="st12" x1="215" y1="522.4" x2="215" y2="526.8"/>
+			<line id="line206" class="st12" x1="179.1" y1="522.4" x2="179.1" y2="526.8"/>
+			<line id="line208" class="st12" x1="143.3" y1="522.4" x2="143.3" y2="526.8"/>
+			<line id="line210" class="st12" x1="107.4" y1="522.4" x2="107.4" y2="526.8"/>
+			<line id="line212" class="st12" x1="71.5" y1="522.4" x2="71.5" y2="526.8"/>
+			<line id="line214" class="st12" x1="35.6" y1="522.4" x2="35.6" y2="526.8"/>
+			<line id="line216" class="st12" x1="13.5" y1="498.9" x2="9.2" y2="498.9"/>
+			<line id="line218" class="st12" x1="13.5" y1="462.8" x2="9.2" y2="462.8"/>
+			<line id="line220" class="st12" x1="13.5" y1="426.8" x2="9.2" y2="426.8"/>
+			<line id="line222" class="st12" x1="13.5" y1="390.8" x2="9.2" y2="390.8"/>
+			<line id="line224" class="st12" x1="13.5" y1="354.8" x2="9.2" y2="354.8"/>
+			<line id="line226" class="st12" x1="13.5" y1="318.7" x2="9.2" y2="318.7"/>
+			<g id="g228" class="st0">
+				<g id="g230" class="st2">
+					<line id="line232" class="st3" x1="10.6" y1="282.7" x2="12.8" y2="282.7"/>
+					<line id="line234" class="st18" x1="18" y1="282.7" x2="246.1" y2="282.7"/>
+					<polyline id="polyline236" class="st3" points="248.7,282.7 250.9,282.7 250.9,284.9 					"/>
+					<line id="line238" class="st19" x1="250.9" y1="290.1" x2="250.9" y2="518.2"/>
+					<line id="line240" class="st3" x1="250.9" y1="520.8" x2="250.9" y2="523"/>
+				</g>
+			</g>
+			<g id="g242">
+				<g id="g244">
+					<line id="line246" class="st20" x1="11.8" y1="462.7" x2="13.8" y2="462.7"/>
+					<line id="line248" class="st21" x1="18.6" y1="462.7" x2="209.8" y2="462.5"/>
+					<polyline id="polyline250" class="st20" points="212.2,462.5 214.2,462.5 214.2,464.4 					"/>
+					<line id="line252" class="st22" x1="214.3" y1="469.2" x2="215" y2="518.7"/>
+					<line id="line254" class="st20" x1="215" y1="521" x2="215.1" y2="523"/>
+				</g>
+			</g>
+			<g id="g256" class="st0">
+				<g id="g258" class="st2">
+					<line id="line260" class="st3" x1="12.7" y1="390.6" x2="14.9" y2="390.6"/>
+					<line id="line262" class="st23" x1="20" y1="390.6" x2="138.5" y2="390.6"/>
+					<polyline id="polyline264" class="st3" points="141.1,390.6 143.3,390.6 143.3,392.7 					"/>
+					<line id="line266" class="st24" x1="143.3" y1="397.9" x2="143.3" y2="518"/>
+					<line id="line268" class="st3" x1="143.3" y1="520.6" x2="143.3" y2="522.8"/>
+				</g>
+			</g>
+			<g id="g270" class="st0">
+				<g id="g272" class="st2">
+					<line id="line274" class="st3" x1="107.4" y1="390.6" x2="107.4" y2="392.7"/>
+					<line id="line276" class="st24" x1="107.4" y1="397.9" x2="107.4" y2="518"/>
+					<line id="line278" class="st3" x1="107.4" y1="520.6" x2="107.4" y2="522.8"/>
+				</g>
+			</g>
+			<g id="g280">
+				<g id="g282">
+					<line id="line284" class="st25" x1="71.5" y1="462.6" x2="71.5" y2="464.7"/>
+					<line id="line286" class="st26" x1="71.5" y1="470.2" x2="71.5" y2="517.9"/>
+					<line id="line288" class="st25" x1="71.5" y1="520.6" x2="71.5" y2="522.8"/>
+				</g>
+			</g>
+			<g id="g290" class="st0">
+				<g id="g292" class="st2">
+					<line id="line294" class="st3" x1="12.9" y1="354.8" x2="15" y2="354.8"/>
+					<line id="line296" class="st27" x1="20.1" y1="354.8" x2="174.7" y2="354.8"/>
+					<polyline id="polyline298" class="st3" points="177.2,354.8 179.4,354.8 179.4,356.9 					"/>
+					<line id="line300" class="st28" x1="179.4" y1="362" x2="179.1" y2="518.3"/>
+					<line id="line302" class="st3" x1="179.1" y1="520.9" x2="179.1" y2="523"/>
+				</g>
+			</g>
+			<g id="g304">
+				<g id="g306">
+					<line id="line308" class="st25" x1="10" y1="427.3" x2="12.2" y2="427.3"/>
+					<line id="line310" class="st29" x1="17.3" y1="427.3" x2="174.4" y2="427.3"/>
+					<polyline id="polyline312" class="st25" points="177,427.3 179.1,427.3 179.1,429.5 					"/>
+					<line id="line314" class="st30" x1="179.1" y1="434.4" x2="179.1" y2="458.8"/>
+					<line id="line316" class="st25" x1="179.1" y1="461.3" x2="179.1" y2="463.4"/>
+				</g>
+			</g>
+			<g id="g318">
+				<g id="g320">
+					<line id="line322" class="st25" x1="179.1" y1="463" x2="179.1" y2="465.2"/>
+					<line id="line324" class="st31" x1="179.1" y1="470.1" x2="179.1" y2="521.5"/>
+					<line id="line326" class="st25" x1="179.1" y1="523.9" x2="179.1" y2="526.1"/>
+				</g>
+			</g>
+			<g id="g328" class="st0">
+				<g id="g330" class="st2">
+					<line id="line332" class="st3" x1="13.6" y1="462.7" x2="15.7" y2="462.7"/>
+					<line id="line334" class="st32" x1="21" y1="462.7" x2="66.8" y2="462.7"/>
+					<polyline id="polyline336" class="st3" points="69.5,462.7 71.6,462.7 71.6,464.8 					"/>
+					<line id="line338" class="st33" x1="71.6" y1="470.4" x2="71.6" y2="518.8"/>
+					<line id="line340" class="st3" x1="71.6" y1="521.6" x2="71.6" y2="523.8"/>
+				</g>
+			</g>
+			<g id="g342" class="st0">
+				<g id="g344" class="st2">
+					<line id="line346" class="st3" x1="12.5" y1="498.9" x2="14.7" y2="498.9"/>
+					<line id="line348" class="st34" x1="21.3" y1="498.9" x2="30.1" y2="498.9"/>
+					<polyline id="polyline350" class="st3" points="33.4,498.9 35.6,498.9 35.6,501.1 					"/>
+					<line id="line352" class="st35" x1="35.6" y1="505.3" x2="35.6" y2="518.7"/>
+					<line id="line354" class="st3" x1="35.6" y1="520.8" x2="35.6" y2="523"/>
+				</g>
+			</g>
+			<g id="g356" class="st0">
+				<path id="path358" class="st36" d="M12.9,462.8"/>
+			</g>
+			<g id="g360" class="st0">
+				<path id="path362" class="st36" d="M12.6,498.8"/>
+			</g>
+			<line id="line364" class="st37" x1="253" y1="279.7" x2="35.7" y2="498.7"/>
+			<text id="text366" transform="matrix(1 0 0 1 36.6472 510.9962)" class="st38 st15 st16">G</text>
+			<text id="text368" transform="matrix(1 0 0 1 74.5128 474.382)" class="st38 st15 st16">F</text>
+			<text id="text370" transform="matrix(1 0 0 1 110.0128 438.8817)" class="st38 st15 st16">E</text>
+			<text id="text372" transform="matrix(1 0 0 1 146.3014 401.8904)" class="st38 st15 st16">D</text>
+			<text id="text374" transform="matrix(1 0 0 1 181.4765 365.3895)" class="st38 st15 st16">C</text>
+			<text id="text376" transform="matrix(1 0 0 1 217.6228 330.3895)" class="st38 st15 st16">B</text>
+			<text id="text378" transform="matrix(1 0 0 1 252.9681 294.3895)" class="st38 st15 st16">A</text>
+			<g id="g380" class="st0">
+				<g id="g382" class="st2">
+					<path id="path384" class="st39" d="M71.5,321.2c3.2,0,3.2-5,0-5S68.3,321.2,71.5,321.2L71.5,321.2z"/>
+				</g>
+			</g>
+			<g id="g386" class="st0">
+				<g id="g388" class="st2">
+					<path id="path390" class="st39" d="M107.4,357.3c3.2,0,3.2-5,0-5S104.2,357.3,107.4,357.3L107.4,357.3z"/>
+				</g>
+			</g>
+			<g id="g392" class="st0">
+				<g id="g394" class="st2">
+					<path id="path396" class="st39" d="M143.3,393.1c3.2,0,3.2-5,0-5C140,388.1,140,393.1,143.3,393.1L143.3,393.1z"/>
+				</g>
+			</g>
+			<g id="g398" class="st0">
+				<g id="g400" class="st2">
+					<path id="path402" class="st39" d="M179.1,429.3c3.2,0,3.2-5,0-5S175.9,429.3,179.1,429.3L179.1,429.3z"/>
+				</g>
+			</g>
+			<g id="g404" class="st0">
+				<g id="g406" class="st2">
+					<path id="path408" class="st39" d="M214.2,464.7c3.2,0,3.2-5,0-5S211,464.7,214.2,464.7L214.2,464.7z"/>
+				</g>
+			</g>
+			<g id="g410" class="st0">
+				<g id="g412" class="st2">
+					<path id="path414" class="st39" d="M250.9,501.3c3.2,0,3.2-5,0-5S247.7,501.3,250.9,501.3L250.9,501.3z"/>
+				</g>
+			</g>
+			<g id="g416" class="st0">
+				<g id="g418" class="st2">
+					<path id="path420" class="st39" d="M36.1,285.2c3.2,0,3.2-5,0-5S32.9,285.2,36.1,285.2L36.1,285.2z"/>
+				</g>
+			</g>
+			<text id="text422" transform="matrix(1 0 0 1 255.7097 277.5872)" class="st40 st15 st16">S</text>
+			<line id="line424" class="st41" x1="284.2" y1="275.6" x2="114.5" y2="455.4"/>
+			<line id="line426" class="st41" x1="191.6" y1="275.5" x2="21.9" y2="455.4"/>
+			<text id="text428" transform="matrix(1 0 0 1 253.0703 509.609)" class="st14 st15 st16">D</text>
+			<line id="line430" class="st13" x1="32.7" y1="278.6" x2="250" y2="498.7"/>
+		</g>
+		<g id="g433">
+			<text id="text435" transform="matrix(1 0 0 1 -5.0704 504.9586)" class="st9 st15 st16">1</text>
+		</g>
+		<g id="g437">
+			<g id="g439">
+				<path id="path441" inkscape:connector-curvature="0" class="st42" d="M4.9,468.9h-9.1V467c0.7-0.5,1.4-1,2.1-1.6
+					c0.7-0.6,1.3-1.1,1.7-1.5c0.6-0.6,1.1-1.1,1.3-1.6s0.4-0.9,0.4-1.3c0-0.5-0.2-0.9-0.5-1.2c-0.3-0.3-0.8-0.4-1.5-0.4
+					c-0.5,0-1,0.1-1.5,0.3c-0.5,0.2-1,0.5-1.5,0.8H-4v-2.6c0.4-0.2,0.9-0.3,1.6-0.5s1.4-0.2,2.2-0.2c1.5,0,2.6,0.3,3.3,0.9
+					c0.7,0.6,1.1,1.5,1.1,2.6c0,0.7-0.2,1.4-0.6,2.1s-0.9,1.3-1.7,2c-0.5,0.4-1,0.8-1.4,1.2c-0.5,0.4-0.8,0.6-1,0.8h5.4V468.9
+					L4.9,468.9z"/>
+			</g>
+		</g>
+		<g id="g443">
+			<g id="g445">
+				<path id="path447" inkscape:connector-curvature="0" class="st42" d="M3.7,427.5c0.3,0.2,0.5,0.5,0.6,0.8
+					c0.2,0.3,0.2,0.7,0.2,1.2s-0.1,1.1-0.3,1.5c-0.2,0.5-0.5,0.9-1,1.2c-0.4,0.3-1,0.6-1.5,0.8c-0.6,0.2-1.3,0.3-2.2,0.3
+					c-1,0-1.8-0.1-2.5-0.2c-0.7-0.2-1.3-0.3-1.7-0.5v-2.7h0.3c0.4,0.3,1,0.5,1.6,0.7s1.2,0.3,1.7,0.3c0.3,0,0.6,0,1-0.1
+					c0.4,0,0.7-0.2,0.9-0.3s0.3-0.3,0.5-0.5c0.1-0.2,0.2-0.5,0.2-0.8s-0.1-0.6-0.2-0.8c-0.1-0.2-0.4-0.3-0.6-0.4
+					c-0.3-0.1-0.6-0.1-0.9-0.1s-0.7,0-1,0h-0.6v-2.1h0.7c0.4,0,0.8,0,1.1,0s0.6-0.1,0.8-0.2c0.2-0.1,0.4-0.2,0.5-0.4
+					c0.1-0.2,0.2-0.4,0.2-0.7c0-0.2-0.1-0.4-0.2-0.6c-0.1-0.1-0.3-0.3-0.5-0.3c-0.2-0.1-0.4-0.2-0.7-0.2s-0.5,0-0.7,0
+					c-0.5,0-1,0.1-1.6,0.3c-0.6,0.2-1.1,0.4-1.7,0.7h-0.3v-2.5c0.4-0.2,1-0.3,1.7-0.5s1.5-0.2,2.2-0.2s1.4,0.1,1.9,0.2
+					c0.6,0.1,1,0.3,1.4,0.5c0.4,0.3,0.7,0.6,1,0.9c0.2,0.4,0.3,0.8,0.3,1.3c0,0.6-0.2,1.2-0.6,1.7s-0.9,0.8-1.6,1v0.1
+					c0.3,0,0.5,0.1,0.8,0.2C3.2,427.2,3.5,427.3,3.7,427.5L3.7,427.5z"/>
+			</g>
+		</g>
+		<g id="g449">
+			<text id="text451" transform="matrix(1 0 0 1 -5.07 396.9366)" class="st9 st15 st16">4</text>
+		</g>
+		<g id="g453">
+			<text id="text455" transform="matrix(1 0 0 1 -5.0702 360.9296)" class="st9 st15 st16">5</text>
+		</g>
+		<g id="g457">
+			<text id="text459" transform="matrix(1 0 0 1 -5.0702 324.922)" class="st9 st15 st16">6</text>
+		</g>
+		<text id="text461" transform="matrix(1 0 0 1 21.8596 539.2499)" class="st9 st15 st43">1 200</text>
+		<g id="g463" transform="translate(0,-4.5440061)">
+			<path id="path465" inkscape:connector-curvature="0" class="st42" d="M63.9,543.8H59v-1.3h1.5v-3.8H59v-1.2c0.2,0,0.5,0,0.7,0
+				s0.4-0.1,0.5-0.1c0.2-0.1,0.3-0.2,0.4-0.3s0.1-0.3,0.1-0.5h1.6v6h1.5v1.2L63.9,543.8L63.9,543.8z"/>
+			<path id="path467" inkscape:connector-curvature="0" class="st42" d="M75.3,541.7c0,0.6-0.3,1.2-0.8,1.6
+				c-0.5,0.4-1.3,0.6-2.3,0.6c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.3-1-0.5c-0.2-0.2-0.4-0.4-0.5-0.7s-0.2-0.5-0.2-0.8
+				c0-0.4,0.1-0.7,0.3-1s0.6-0.5,1.1-0.7l0,0c-0.4-0.2-0.7-0.4-0.9-0.7c-0.2-0.3-0.3-0.6-0.3-1c0-0.6,0.3-1,0.8-1.4s1.2-0.6,2.1-0.6
+				s1.6,0.2,2.1,0.5s0.8,0.8,0.8,1.3c0,0.3-0.1,0.7-0.3,0.9s-0.5,0.5-1,0.7l0,0c0.5,0.2,0.9,0.5,1.1,0.8
+				C75.1,540.8,75.3,541.3,75.3,541.7L75.3,541.7z M73.5,541.8c0-0.2-0.1-0.4-0.2-0.5s-0.4-0.3-0.7-0.4c-0.1,0-0.3-0.1-0.5-0.2
+				c-0.2-0.1-0.4-0.1-0.5-0.2c-0.1,0.1-0.3,0.3-0.4,0.5s-0.2,0.4-0.2,0.6c0,0.3,0.1,0.6,0.4,0.8c0.2,0.2,0.6,0.3,0.9,0.3
+				c0.1,0,0.2,0,0.4,0c0.1,0,0.3-0.1,0.4-0.1c0.1-0.1,0.2-0.2,0.3-0.3S73.5,542,73.5,541.8L73.5,541.8z M73.3,538.4
+				c0-0.2-0.1-0.4-0.3-0.6s-0.4-0.2-0.8-0.2c-0.1,0-0.2,0-0.4,0s-0.2,0.1-0.3,0.1c-0.1,0.1-0.2,0.1-0.2,0.2
+				c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.2,0.1,0.3,0.2,0.4c0.1,0.1,0.3,0.2,0.5,0.3c0.1,0,0.2,0.1,0.4,0.1c0.2,0.1,0.3,0.1,0.6,0.2
+				c0.1-0.2,0.3-0.3,0.3-0.5S73.3,538.6,73.3,538.4z"/>
+			<path id="path469" inkscape:connector-curvature="0" class="st42" d="M82.6,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7c0.2,0.3,0.4,0.7,0.5,1.2S82.6,539.5,82.6,540.1z M80.7,540.1c0-0.9-0.1-1.5-0.3-1.9
+				c-0.2-0.4-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9c0.2,0.4,0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C80.6,541.6,80.7,541,80.7,540.1z"/>
+			<path id="path471" inkscape:connector-curvature="0" class="st42" d="M89.9,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7c0.2,0.3,0.4,0.7,0.5,1.2S89.9,539.5,89.9,540.1z M88,540.1c0-0.9-0.1-1.5-0.3-1.9
+				c-0.2-0.4-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9c0.2,0.4,0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C87.9,541.6,88,541,88,540.1z"/>
+		</g>
+		<text id="text473" transform="matrix(1 0 0 1 130.2042 539.2497)" class="st9 st15 st43">3 000</text>
+		<g id="g475" transform="translate(0,-4.5440061)">
+			<g id="g477">
+				<path id="path479" inkscape:connector-curvature="0" class="st42" d="M171.7,540.4c0.2,0.1,0.3,0.3,0.4,0.5
+					c0.1,0.2,0.1,0.4,0.1,0.7s-0.1,0.7-0.2,1c-0.1,0.3-0.3,0.5-0.6,0.8c-0.3,0.2-0.6,0.4-1,0.5s-0.8,0.2-1.3,0.2
+					c-0.6,0-1.1,0-1.6-0.1s-0.8-0.2-1.1-0.3v-1.8h0.2c0.3,0.2,0.6,0.3,1,0.4c0.4,0.1,0.7,0.2,1.1,0.2c0.2,0,0.4,0,0.6,0
+					c0.2,0,0.4-0.1,0.6-0.2c0.1-0.1,0.2-0.2,0.3-0.3s0.1-0.3,0.1-0.5s0-0.4-0.1-0.5s-0.2-0.2-0.4-0.2c-0.2-0.1-0.4-0.1-0.6-0.1
+					c-0.2,0-0.4,0-0.6,0h-0.4v-1.3h0.4c0.3,0,0.5,0,0.7,0s0.4-0.1,0.5-0.1c0.1-0.1,0.3-0.1,0.3-0.2c0.1-0.1,0.1-0.3,0.1-0.5
+					c0-0.1,0-0.3-0.1-0.4c-0.1-0.1-0.2-0.2-0.3-0.2c-0.1-0.1-0.3-0.1-0.4-0.1c-0.1,0-0.3,0-0.4,0c-0.3,0-0.6,0.1-1,0.2
+					c-0.4,0.1-0.7,0.3-1,0.5h-0.2V537c0.3-0.1,0.6-0.2,1.1-0.3s0.9-0.1,1.4-0.1s0.9,0,1.2,0.1s0.6,0.2,0.9,0.3
+					c0.3,0.2,0.5,0.4,0.6,0.6s0.2,0.5,0.2,0.8c0,0.4-0.1,0.8-0.4,1.1c-0.3,0.3-0.6,0.5-1,0.6v0.1c0.2,0,0.3,0.1,0.5,0.1
+					S171.5,540.2,171.7,540.4L171.7,540.4z"/>
+				<path id="path481" inkscape:connector-curvature="0" class="st42" d="M183.3,541.3c0,0.4-0.1,0.7-0.2,1.1
+					c-0.1,0.4-0.3,0.6-0.6,0.8s-0.6,0.4-0.9,0.6c-0.3,0.2-0.8,0.2-1.2,0.2s-0.8-0.1-1.2-0.2c-0.4-0.1-0.7-0.3-0.9-0.5
+					c-0.3-0.3-0.5-0.6-0.7-1.1s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.7c0.1-0.5,0.4-0.9,0.7-1.3c0.3-0.4,0.7-0.6,1.2-0.8s1.1-0.3,1.8-0.3
+					c0.2,0,0.5,0,0.8,0s0.5,0.1,0.6,0.1v1.4h-0.2c-0.1,0-0.2-0.1-0.4-0.1c-0.2-0.1-0.4-0.1-0.7-0.1c-0.6,0-1.1,0.2-1.5,0.5
+					s-0.6,0.7-0.6,1.3c0.3-0.1,0.5-0.3,0.8-0.4c0.3-0.1,0.6-0.1,0.9-0.1c0.3,0,0.5,0,0.8,0.1s0.5,0.2,0.7,0.3
+					c0.3,0.2,0.5,0.4,0.6,0.8C183.2,540.7,183.3,540.8,183.3,541.3L183.3,541.3z M181.1,542.4c0.1-0.1,0.2-0.2,0.2-0.4
+					c0.1-0.2,0.1-0.4,0.1-0.6s0-0.4-0.1-0.6s-0.2-0.3-0.3-0.4c-0.1-0.1-0.3-0.2-0.4-0.2c-0.2,0-0.3-0.1-0.5-0.1c-0.1,0-0.3,0-0.4,0
+					c-0.1,0-0.3,0.1-0.4,0.1c0,0,0,0.1,0,0.2c0,0.1,0,0.2,0,0.3c0,0.4,0,0.7,0.1,1s0.2,0.5,0.3,0.6s0.2,0.2,0.3,0.2s0.3,0.1,0.4,0.1
+					c0.1,0,0.2,0,0.4-0.1C181,542.4,181,542.5,181.1,542.4L181.1,542.4z"/>
+				<path id="path483" inkscape:connector-curvature="0" class="st42" d="M190.6,540.1c0,0.6-0.1,1.2-0.2,1.6
+					c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+					s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+					c0.6,0,1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7s0.4,0.7,0.5,1.2S190.6,539.5,190.6,540.1z M188.7,540.1c0-0.9-0.1-1.5-0.3-1.9
+					s-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9s0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+					C188.6,541.6,188.7,541,188.7,540.1z"/>
+				<path id="path485" inkscape:connector-curvature="0" class="st42" d="M197.9,540.1c0,0.6-0.1,1.2-0.2,1.6
+					c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+					s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+					s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7s0.4,0.7,0.5,1.2S197.9,539.5,197.9,540.1z M196,540.1c0-0.9-0.1-1.5-0.3-1.9
+					s-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9s0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+					C195.9,541.6,196,541,196,540.1z"/>
+			</g>
+		</g>
+		<text id="text487" transform="matrix(1 0 0 1 238.4679 539.2499)" class="st9 st15 st43">4 800</text>
+		<g id="g491" transform="translate(0,-4.5440061)">
+			<path id="path493" inkscape:connector-curvature="0" class="st42" d="M208.8,542.1h-1v1.7H206v-1.7h-3.5v-1.4l3.4-4.2h1.9v4.3h1
+				L208.8,542.1L208.8,542.1z M206.1,540.8v-2.6l-2.1,2.6H206.1z"/>
+			<path id="path495" inkscape:connector-curvature="0" class="st42" d="M219.7,543.8H214v-1.2c0.4-0.3,0.9-0.7,1.3-1
+				s0.8-0.7,1.1-0.9c0.4-0.4,0.7-0.7,0.8-1s0.2-0.6,0.2-0.8c0-0.3-0.1-0.6-0.3-0.8s-0.5-0.3-0.9-0.3c-0.3,0-0.6,0.1-0.9,0.2
+				c-0.3,0.1-0.6,0.3-0.9,0.5h-0.2v-1.6c0.2-0.1,0.6-0.2,1-0.3s0.9-0.2,1.4-0.2c0.9,0,1.6,0.2,2.1,0.6c0.5,0.4,0.7,0.9,0.7,1.6
+				c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.6,0.8-1.1,1.3c-0.3,0.3-0.6,0.5-0.9,0.8c-0.3,0.2-0.5,0.4-0.6,0.5h3.3v1.3L219.7,543.8
+				L219.7,543.8z"/>
+			<path id="path497" inkscape:connector-curvature="0" class="st42" d="M226.9,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7s0.4,0.7,0.5,1.2S226.9,539.5,226.9,540.1z M225,540.1c0-0.9-0.1-1.5-0.3-1.9
+				s-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9s0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C225,541.6,225,541,225,540.1z"/>
+			<path id="path499" inkscape:connector-curvature="0" class="st42" d="M234.2,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7s0.4,0.7,0.5,1.2S234.2,539.5,234.2,540.1z M232.3,540.1c0-0.9-0.1-1.5-0.3-1.9
+				s-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9s0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C232.3,541.6,232.3,541,232.3,540.1z"/>
+		</g>
+		<line id="line501" class="st12" x1="13.5" y1="282.7" x2="9.2" y2="282.7"/>
+		<g id="g503">
+			<text id="text505" transform="matrix(1 0 0 1 -5.07 288.9151)" class="st9 st15 st16">7</text>
+		</g>
+		<g id="g517">
+			<g id="g519">
+				<line id="line521" class="st25" x1="107.4" y1="427.3" x2="107.4" y2="429.5"/>
+				<line id="line523" class="st44" x1="107.4" y1="434.9" x2="107.4" y2="521.2"/>
+				<line id="line525" class="st25" x1="107.4" y1="523.9" x2="107.4" y2="526.1"/>
+			</g>
+		</g>
+		<g id="g527" transform="translate(0,-4.5440061)">
+			<path id="path529" inkscape:connector-curvature="0" class="st42" d="M101,543.8h-5.7v-1.2c0.4-0.3,0.9-0.7,1.3-1
+				s0.8-0.7,1.1-0.9c0.4-0.4,0.7-0.7,0.8-1s0.2-0.6,0.2-0.8c0-0.3-0.1-0.6-0.3-0.8s-0.5-0.3-0.9-0.3c-0.3,0-0.6,0.1-0.9,0.2
+				c-0.3,0.1-0.6,0.3-0.9,0.5h-0.2v-1.6c0.2-0.1,0.6-0.2,1-0.3s0.9-0.2,1.4-0.2c0.9,0,1.6,0.2,2.1,0.6c0.5,0.4,0.7,0.9,0.7,1.6
+				c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.6,0.8-1.1,1.3c-0.3,0.3-0.6,0.5-0.9,0.8c-0.3,0.2-0.5,0.4-0.6,0.5h3.3L101,543.8L101,543.8
+				L101,543.8z"/>
+			<path id="path531" inkscape:connector-curvature="0" class="st42" d="M112.1,542.1h-1v1.7h-1.8v-1.7h-3.5v-1.4l3.4-4.2h1.9v4.3h1
+				V542.1L112.1,542.1z M109.3,540.8v-2.6l-2.1,2.6H109.3z"/>
+			<path id="path533" inkscape:connector-curvature="0" class="st42" d="M119.2,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7c0.2,0.3,0.4,0.7,0.5,1.2S119.2,539.5,119.2,540.1z M117.3,540.1c0-0.9-0.1-1.5-0.3-1.9
+				c-0.2-0.4-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9c0.2,0.4,0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C117.2,541.6,117.3,541,117.3,540.1z"/>
+			<path id="path535" inkscape:connector-curvature="0" class="st42" d="M126.5,540.1c0,0.6-0.1,1.2-0.2,1.6
+				c-0.1,0.4-0.3,0.9-0.5,1.2s-0.6,0.6-0.9,0.7c-0.3,0.1-0.8,0.2-1.4,0.2c-0.5,0-1-0.1-1.4-0.2c-0.4-0.1-0.7-0.4-0.9-0.7
+				s-0.4-0.7-0.5-1.2s-0.2-1-0.2-1.6s0.1-1.2,0.2-1.6c0.1-0.4,0.3-0.9,0.5-1.2s0.6-0.6,0.9-0.7c0.4-0.2,0.8-0.2,1.4-0.2
+				s1,0.1,1.4,0.2c0.4,0.2,0.7,0.4,0.9,0.7c0.2,0.3,0.4,0.7,0.5,1.2S126.5,539.5,126.5,540.1z M124.6,540.1c0-0.9-0.1-1.5-0.3-1.9
+				c-0.2-0.4-0.5-0.6-0.9-0.6s-0.7,0.2-0.9,0.6c-0.2,0.4-0.3,1-0.3,1.9s0.1,1.5,0.3,1.9c0.2,0.4,0.5,0.6,0.9,0.6s0.7-0.2,0.9-0.6
+				C124.6,541.6,124.6,541,124.6,540.1z"/>
+		</g>
+		<g id="g4777-9" transform="translate(-294.34489,-130.64775)">
+			<path id="path509-9-7" inkscape:connector-curvature="0" class="st45" d="M404.6,562.5c0.2,3.1,4.1,3.9,6.5,4.1
+				c7,0.5,13.9,0.2,20.9,1c2.6,0.3,4.6,1.2,6.4,3.3h0.7c0.2,0,0.8-1,0.9-1.1c0.6-0.6,1.2-1.2,1.8-1.7c1.3-1,3.1-1.1,4.6-1.2
+				c3.7-0.2,7.3-0.4,11-0.5c3.6-0.1,7.2-0.1,10.7-0.5c2-0.3,4.8-1.4,5-3.9"/>
+		</g>
+		<rect x="94.2" y="485.3" class="st46" width="26.5" height="17.5"/>
+		<rect x="164.8" y="485.3" class="st46" width="26.5" height="17.5"/>
+		<g id="g4777" transform="translate(2.7348137e-6,-1)">
+			<text transform="matrix(1 0 0 1 73.8381 495.6617)" class="st9 st47 st48">Excess demand = 2 400</text>
+			<path id="path509-9" inkscape:connector-curvature="0" class="st49" d="M73.8,467.2c0.3,6.2,8.2,7.8,13,8.2c14,0.9,28,0.5,42,1.9
+				c5.3,0.6,9.3,2.4,12.8,6.7h1.3c0.3,0,1.5-1.9,1.8-2.2c1.1-1.2,2.3-2.4,3.6-3.4c2.7-2,6.2-2.3,9.3-2.5c7.4-0.5,14.7-0.8,22.1-1
+				c7.2-0.2,14.4-0.1,21.5-1c4.1-0.6,9.6-2.8,9.9-7.8"/>
+		</g>
+	</g>
+	<text id="text197" transform="matrix(1 0 0 1 151.5502 397.0508)" class="st9 st15 st16">E</text>
+</g>
+</svg>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/packages/ImgProcessor/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/Graphs/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/PHPSaasWrapper/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/MindMap/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/ck-editor-plugin-v1/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/ImgProcessor/vendor/symfony/dependency-injection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/PHPStencil/phpDocumentor.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/packages/ImgProcessor/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/Graphs/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/PHPSaasWrapper/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/MindMap/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/ck-editor-plugin-v1/phpDocumentor.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/ImgProcessor/vendor/symfony/dependency-injection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
+          <root url="phar://$MODULE_DIR$/packages/PHPStencil/phpDocumentor.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>

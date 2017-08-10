@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ELA overview | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+      <div class="activity-item check-activity">
+            <p>
+                Which of the following do you think is the reason people become more upset when the price of petrol rises than when the price of ice cream rises? <br>
+            </p>
+            <form id="PPC36" class="iFramedRadioActivity">
+              <div class="row">
+                <div class="col s12">
+                  <p>
+                    <input type="checkbox" class="checkbox" id="PPC36_4">
+                    <label for="PPC36_4">It is the government's fault that the petrol price rises</label>
+                  </p>
+                  <p>
+                    <input type="checkbox" class="checkbox" id="PPC36_5">
+                    <label for="PPC36_5">It is extremely difficult for people to decrease the quantity of petrol they use</label>
+                  </p>
+                  <p>
+                    <input type="checkbox" class="checkbox" id="PPC36_6">
+                    <label for="PPC36_6">It is easier to reduce the quantity of ice cream bought than to reduce the quantity of petrol bought.</label>
+                  </p>
+                  <div>
+                    <a class="waves-effect waves-light btn submit">Submit</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="feedback blue" style="margin-bottom:26px;">
+                Yes, it is easier to eat less ice cream than to use less petrol. As the price of petrol increases, 
+                it is very difficult to decrease the quantity of petrol we demand. That is probably why we get 
+                more upset if the price of petrol rises, than if the price of ice cream rises.  
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('#PPC36 .submit').on('click', function() {
+                // Checks if at least one box is checked before allowing the user to submit
+                if ($(this).parents("form").find("input.checkbox:checked").length == 0) {
+                    alert("Please select at least 1 answer");
+                    return; //stops the script from running any further
+                }
+                $(this).parents('form').siblings('.feedback').show();
+
+                $('#PPC36 .checkbox').each(function() {
+                    var capital = $(this).attr('capital');
+                    if (this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (!this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", "checked");
+                        this.checked = true;
+                    }
+                    if (!this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", ""); // For IE
+                        this.removeAttribute("checked"); // For other browsers
+                        this.checked = false;
+                    }
+                });
+
+                $('#PPC36_7').siblings('label').css('color', 'green');
+                $('#PPC36_7').prop("indeterminate", true);
+
+                $(this).parents('form').find('.checkbox').attr('disabled', 'disabled');
+                $(this).parents('form').siblings('.feedback').show();
+                
+                var activityBlock = 'asset2348';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

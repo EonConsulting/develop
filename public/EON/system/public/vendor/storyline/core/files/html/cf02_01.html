@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>410 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+    <body style="height: auto!important;">
+
+        <p class="activity-intro">Thinking about these flows answer the following question.</p>
+
+        <!-- <manually added activities -->
+        <div id="asset4" class="asset embedded-activity">
+            <div class="activity-item radio-activity">
+                <p>
+                    Do you think a person who is employed by a factory that produces mattresses is part of the flow of production, income and spending?
+                </p>
+                <form>
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="PPC32_1" />
+                                <label for="PPC32_1">The person is only part of the production flow.</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="PPC32_2" />
+                                <label for="PPC32_2">The person is only part of the income flow. </label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="PPC32_3" />
+                                <label for="PPC32_3">The person is only part of the spending flow. </label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="PPC32_4" />
+                                <label for="PPC32_4">The person is part of all three flows.</label>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+                <div class="feedback">The person is part of all three flows.
+                <p> While the person is working in the factory producing mattresses, he or she is part of the production flow. 
+                    When the person is paid, he or she is part of the income flow, and when he or she spends this income, he or 
+                    she is part of the spending flow. 
+
+                    
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('.radio-activity input').on('change', function(){
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+                
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset1029';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

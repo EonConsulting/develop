@@ -1,0 +1,7 @@
+<storyline title="A change in income" link="2281" config="2495" summary="" img="">
+    <storyline_collection>
+        <storyline id="s1" type="leaf" title="A change in income" link="618" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s2" type="leaf" title="A change in income and demand schedule" link="2494" summary="..." img="http://placehold.it/250x200"/>
+        <storyline id="s3" type="leaf" title="A change in income: demand curve" link="2496" summary="..." img="http://placehold.it/250x200"/>
+    </storyline_collection>
+ </storyline>

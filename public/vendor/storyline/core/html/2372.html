@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p>We can also represent the law of demand as a curve, known as the demand curve.<br><br>
+            The demand curve is based on our demand schedule.<br><br>
+            The graph below shows two axes, namely <span style="color: #3366ff;"><a graph="graph1" src="../assets/257.svg">the
+                    vertical axis</a></span> and <span style="color: #3366ff;"><a graph="graph1" src="../assets/258.svg">the horizontal
+                    axis</a></span>. The vertical axis shows the price (P) of a product or
+            service, say fried chicken pieces. It starts at zero and there are seven
+            price intervals (1, 2, 3, 4, 5, 6 and 7).&nbsp;</p>
+        <p>The horizontal axis measures the quantity demanded (Qd). There are seven
+            quantity intervals (2, 4, 6, 8, 10, 12 and 14). </p>
+        <p class="activity-intro">
+            Click on the combination points in the
+            table to construct the graph.</p>
+        <p>Point A in the table corresponds to a price (P) of R7 and a quantity (Qd) of two pieces of fried chicken, as can be read off from the vertical and horizontal axes respectively. To draw point B, we obtain the point that represents a price of R6 and a quantity of four. To draw point C, we obtain the point that represents a price of R5 and a quantity of six. Points D, E, F and G are obtained in the same way.&nbsp;</p>
+        <p class="table-title">Table 2 Individual demand for fried chicken pieces</p>
+        <div class="row">
+            <div class="col s6 no-padding">
+                <table style="width: 100%" border="1">
+                    <tbody>
+                        <tr>
+                            <td>Combination</td>
+                            <td>Price of fried chicken per piece (rand)</td>
+                            <td>Quantity of fried chicken pieces demanded (per week)</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/259.svg">A</a></span></td>
+                            <td>7</td>
+                            <td>&nbsp; 2</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/260.svg">B</a></span></td>
+                            <td>6</td>
+                            <td>&nbsp; 4</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/261.svg">C</a></span></td>
+                            <td>5</td>
+                            <td>&nbsp; 6</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/262.svg">D</a></span></td>
+                            <td>4</td>
+                            <td>&nbsp; 8</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/263.svg">E</a></span></td>
+                            <td>3</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/264.svg">F</a></span></td>
+                            <td>2</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: #3366ff;"><a graph="graph1" src="../assets/265.svg">G</a></span></td>
+                            <td>1</td>
+                            <td>14</td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div class="col s6" style="text-align:center; margin-top:-14px;">
+                <img class="graph1" src="266.svg" />
+            </div>
+        </div>
+
+        <!--<img alt="" src="../../../../../Desktop/CSS_121015/img/Non%20TAO%20Embedded.png">-->
+        <p>By <span style="color: #3366ff;"><a graph="graph1" src="../assets/266.svg">connecting these points</a></span>, we
+            obtain a line, shown as D. This is our demand curve for fried chicken
+            pieces.&nbsp;</p>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            //    this listens for when the text above the graph is clicked and changes the images by calling changeImage();
+            $('.values a').on('click', function () {
+                var value = $(this).data('val');
+                $('#graph').val(value);
+                changeImage(value);
+            });
+
+            var activityBlock = 'asset2372';
+            activityDone(activityBlock);
+
+        </script>
+    </body>
+</html>

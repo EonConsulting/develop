@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="activity-item radio-activity">
+            <p>
+                What do you think will happen to the market demand curve for fried chicken pieces if the preference for it by households decreases?<br>
+            </p>
+            <form>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_4" />
+                            <label for="PPC32_4">It will shift to the left.</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_5" />
+                            <label for="PPC32_5">There will be a downward movement along the demand curve.</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_6" />
+                            <label for="PPC32_6">It will shift to the right. </label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_7" />
+                            <label for="PPC32_7">There will be an upward movement along the demand curve.. </label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_8" />
+                            <label for="PPC32_8">It will remain unchanged.</label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback">
+                Let’s see what happens to the demand curve.
+            </div>
+            <p>
+                From the previous information, we know that at each price, a lower quantity of fried chicken pieces will be demanded. There is thus a new demand curve for fried chicken pieces. This new demand curve is positioned to the left of the previous demand curve, and a leftward shift has therefore occurred in the demand curve for fried chicken pieces. 
+            </p>
+            <p class="activity-intro">
+                Study the new demand curve (D<span style="font-size: 0.6em">1</span>) in the following figure:
+            </p>
+            <div class="row">
+                <div class="col s6">
+                    <p>
+                        Can you see the following?
+                    </p>
+                    <ul>
+                        <li>At R7 per piece, the quantity of fried chicken pieces demanded is 6.</li>
+                        <li>At R6 per piece, the quantity of fried chicken pieces demanded is 12.</li>
+                        <li>At R5 per piece, the quantity of fried chicken pieces demanded is 18.</li>
+                        <li>At R5 per piece, the quantity of fried chicken pieces demanded is 18.</li>
+                        <li>At R4 per piece, the quantity of fried chicken pieces demanded is 24.</li>
+                        <li>At R3 per piece, the quantity of fried chicken pieces demanded is 30.</li>
+                        <li>At R2 per piece, the quantity of fried chicken pieces demanded is 36.</li>
+                        <li>At R1 per piece, the quantity of fried chicken pieces demanded is 42.</li>
+                    </ul>
+                </div>
+                <div class="col s6" style="padding-top:30px;">
+                    <img src="../assets/280.svg">
+                </div>
+            </div>
+        </div> 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+              $('.radio-activity input').on('change', function () {
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset2322';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

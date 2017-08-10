@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="table-wrapper">
+            <table>
+                <tbody>
+                    <tr>
+                        <td valign="top" width="40%">
+                            <img src="../assets/41.svg" class="centered-graph" width="100%">
+                        </td>
+                        <td>
+                            <ol>
+                                <li>
+                                    <!--embedded activity-->
+                                    <div class="activity-item check-activity">
+                                        <p>
+                                            If the price increases from P<sub>3</sub> to P<sub>4</sub>, the quantity demanded will 
+                                            <a href="#!" class="either_or">increase</a> / <a href="#!" class="either_or">decrease</a> 
+                                            from Q<sub>3</sub> to Q<sub>2</sub>. <br>
+                                        </p>
+                                        <div class="feedback blue">
+                                            The quantity demanded decreases, since an inverse relationship exists between the price 
+                                            and the quantity demanded. The decrease is from Q<sub>3</sub> to Q<sub>2</sub>.
+                                        </div>
+                                    </div>
+                                    <!--end of-->
+                                </li>
+                                <li>
+                                    <!--embedded activity-->
+                                    <div class="activity-item check-activity">
+                                        <p>
+                                            If the price decreases from P<sub>4</sub> to P<sub>2</sub>, the quantity demanded will 
+                                            <a href="#!" class="either_or">increase</a> / <a href="#!" class="either_or">decrease</a> from Q<sub>2</sub> to Q<sub>4</sub>.  <br>
+                                        </p>
+                                        <div class="feedback blue">
+                                            The quantity demanded increases, since an inverse relationship exists between the price and the quantity demanded. The increase is from Q<sub>2</sub> to Q<sub>4</sub>.
+                                        </div>
+                                    </div>
+                                    <!--end of-->
+                                </li>
+                            </ol>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+
+            $(document).ready(function () {
+
+
+                $('.either_or').click(function () {
+                    $(this).parents('.activity-item').find('.feedback').show();
+
+                    var activityBlock = 'asset2349';
+                    activityDone(activityBlock);
+                });
+            });
+
+        </script>
+    </body>
+</html>

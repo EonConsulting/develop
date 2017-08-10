@@ -1,0 +1,105 @@
+<html><head><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script> <styles><link type="text/css" rel="stylesheet" href="/css/frame-default.css"  media="screen,projection"/></styles></head><body>
+<h3 class="Heading2">Example - Even</h3>
+
+<p><span class="BodyText">When computing the median of an even number of data values&nbsp;in a&nbsp;sample, the first step is to&nbsp;</span><span class="BodyText">order the data values from the smallest to largest.</span></p>
+
+<p><span class="BodyText">Refer to the example below to discover the rest of the procedure to compute the median of an even number of data values.</span></p>
+
+<p><span class="BodyText">A survey of&nbsp;</span><span class="math-tex">\(14\)</span><span class="BodyText">&nbsp;employees&#39; performance scores out of&nbsp;</span><span class="math-tex">\(50\)</span><span class="BodyText">&nbsp;gave&nbsp;the following&nbsp;results, ordered from lowest to highest:</span></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style1" style="width:100%;">
+<tbody>
+	<tr>
+		<td style="text-align: center;"><span class="math-tex">\(32\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(35\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(36\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(36\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(37\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(38\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAb{38}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAb{39}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(39\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(39\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(40\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(40\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(42\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(45\)</span></td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">The <span class="PalAb">median</span> is the <span class="PalAb">midpoint</span> between the <span class="PalAb">two middle scores</span>. &nbsp;In this case the median is the value <span class="math-tex">\(\PalAb{38\Ndp5}\)</span>. &nbsp;It was found by adding the two middle scores together and dividing by two:</span></p>
+
+<p style="text-align: center;"><span class="math-tex">\(\displaystyle\frac{\PalAb{38}+\PalAb{39}}{2}=\PalAb{38\Ndp5}\)</span></p>
+
+<p><span class="BodyText">If the two middle scores are the same value, then the median is that value.</span></p>
+
+<p><span class="BodyText">How do we know where the <span class="PalAb">middle number</span> is?</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="Table_Definition" style="width:100%;">
+<tbody>
+	<tr>
+		<td>
+		<p class="Definition"><span>Given a data set of size&nbsp;</span><span class="math-tex">\(\PalAa{n}\)</span><span>&nbsp;sorted in ascending sequence,</span><br />
+		<span>the&nbsp;</span><span class="PalBc">position</span><span>&nbsp;of the&nbsp;</span><span class="PalAb">median</span><span>&nbsp;</span><span class="math-tex">\((\PalAb{Me})\)</span><span>&nbsp;is the&nbsp;</span><span class="math-tex">\(\PalBc{\left(\displaystyle\frac{\PalAa n+1}{2}\right)^{\text{th}}}\)</span><span>&nbsp;</span><span class="PalBc">value</span><span>.</span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">Our data set has&nbsp;</span><span class="math-tex">\(\PalAa{14}\)</span><span class="BodyText">&nbsp;</span><span class="PalAa">values</span><span class="BodyText">, so the&nbsp;</span><span class="PalBc">position</span><span class="BodyText">&nbsp;of the&nbsp;</span><span class="PalAb">median</span><span class="BodyText">&nbsp;is the following value:</span></p>
+
+<p style="text-align: center;"><span class="math-tex">\(\PalBc{\left(\displaystyle\frac{\PalAa n +1}{2}\right)^{\text{th}}\text{value}}=\displaystyle\frac{\PalAa {14} +1}{2}=\frac{15}{2}=\PalBc{7\Ndp5^\text{th} \text{ value}}\)</span></p>
+
+<p><span class="BodyText">The&nbsp;</span><span class="PalAb">median</span><span class="BodyText">&nbsp;is the&nbsp;</span><span class="math-tex">\(\PalBc{7\Ndp5^{\text{th}}}\)</span><span class="BodyText">&nbsp;</span><span class="PalBc">value</span><span class="BodyText">&nbsp;in the ordered data set. &nbsp;So, the&nbsp;</span><span class="PalAb">median</span><span class="BodyText">&nbsp;is&nbsp;</span><span class="math-tex">\(\PalAb{38\Ndp5}\)</span><span class="BodyText">.</span></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="Table_Style1" style="width:100%;">
+<tbody>
+	<tr>
+		<td colspan="6" rowspan="1" style="text-align: right;">&nbsp;</td>
+		<td colspan="2" rowspan="1" style="text-align: center;"><span class="math-tex">\(\PalBc{7\Ndp5^{\text{th}}}\)</span></td>
+		<td colspan="6" rowspan="1" style="text-align: center;">&nbsp;</td>
+	</tr>
+	<tr>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{1^{\text{st}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{2^{\text{nd}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{3^{\text{rd}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{4^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{5^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{6^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{7^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{8^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{9^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{10^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{11^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{12^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{13^{\text{th}}}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAa{14^{\text{th}}}\)</span></td>
+	</tr>
+	<tr>
+		<td style="text-align: center;"><span class="math-tex">\(32\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(35\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(36\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(36\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(37\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(38\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAb{38}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(\PalAb{39}\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(39\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(39\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(40\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(40\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(42\)</span></td>
+		<td style="text-align: center;"><span class="math-tex">\(45\)</span></td>
+	</tr>
+	<tr>
+		<td colspan="6" rowspan="1" style="text-align: center;">&nbsp;</td>
+		<td colspan="2" rowspan="1" style="text-align: center;"><span class="math-tex">\(\PalAb{38\Ndp5}\)</span></td>
+		<td colspan="6" rowspan="1" style="text-align: center;">&nbsp;</td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">Note that it is not taken into account whether there is a duplication of scores around the median.</span></p>
+
+</body></html>

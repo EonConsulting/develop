@@ -1,0 +1,42 @@
+<html><head><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script> <styles><link type="text/css" rel="stylesheet" href="/css/frame-default.css"  media="screen,projection"/></styles></head><body>
+<h3 class="Heading2">Repetition</h3>
+
+<p><span class="BodyText">Consider the lock below which uses three digits for its code:</span></p>
+
+<p class="Image">
+<img alt="" src="/FBN1501/assets/400.svg" style="width: 350px; height: 350px;" /></p>
+
+<p><span class="BodyText">Suppose it has a code of <span class="math-tex">\(461\)</span>. &nbsp;Order is important because <span class="math-tex">\(614\)</span> differs from <span class="math-tex">\(461\)</span> and the lock will not open. &nbsp;It has to be <span class="math-tex">\(4-6-1\)</span>. &nbsp;Therefore, we can say the lock uses a permutation of numbers.</span></p>
+
+<p><span class="BodyText">For a lock like this, you can use <span class="math-tex">\(222\)</span> as a code as well. &nbsp;Therefore, we say that repetition is allowed. &nbsp;Once the two is used, you can use it again.</span></p>
+
+<p><span class="BodyText">For permutations with repetition:</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="Table_Definition" style="width:100%;">
+<tbody>
+	<tr>
+		<td>
+		<p class="Definition">When you have <span class="math-tex">\(\PalBc n\)</span> things to choose from and repetition is allowed,<br />
+		you have <span class="math-tex">\(\PalBc n\)</span> choices each time.<br />
+		<br />
+		When choosing <span class="math-tex">\(\PalAb r\)</span> of them, the number of permutations is:<br />
+		<span class="math-tex">\(\PalBc n \times \PalBc n \times \ldots \times\PalBc n \)</span>&nbsp;(<span class="math-tex">\(\PalAb r\)</span>&nbsp;times)<br />
+		<br />
+		It is easier to write it&nbsp;by using an exponent of <span class="math-tex">\(\PalAb r\)</span>&nbsp;as follows:<br />
+		Write&nbsp;<span class="math-tex">\(\PalBc n \times \PalBc n \times \ldots \times\PalBc n \)</span>&nbsp;<span>(</span><span class="math-tex">\(\PalAb r\)</span><span>&nbsp;times) as&nbsp;<span class="math-tex">\(\PalBc n^\PalAb r\)</span>.</span></p>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<p><span class="BodyText">In other words, there are <span class="math-tex">\(\PalBc n\)</span> possibilities for the first choice, then&nbsp;there are <span class="math-tex">\(\PalBc n\)</span> possibilities for the second choice, and so on, multiplying each time.</span></p>
+
+<p><span class="BodyText">Consider the lock above again. &nbsp;For each of the <span class="PalAb">three</span> positions in the code, we can choose from <span class="math-tex">\(\PalBc{10}\)</span> different digits, namely&nbsp;<span class="math-tex">\(0,1,\ldots9\)</span>. &nbsp;Thus there are:</span></p>
+
+<p style="text-align: center;"><span class="BodyText"><span class="math-tex">\(\PalBc{10}\times\PalBc{10}\times\PalBc{10}=\PalBc{10}^\PalAb3=1\Tsp000\)</span>&nbsp;permutations.</span></p>
+
+<p><span class="BodyText">In this case <span class="math-tex">\(\PalBc n\)</span> (the number of things to choose from) is <span class="math-tex">\(\PalBc{10}\)</span> and <span class="math-tex">\(\PalAb r\)</span> (the number of times you choose a digit) equals <span class="math-tex">\(\PalAb3\)</span>.</span></p>
+
+<p><span class="BodyText">We see <span class="Emphasis_1">repetition</span> is allowed and <span class="Emphasis_1">order</span> matters.</span></p>
+
+</body></html>

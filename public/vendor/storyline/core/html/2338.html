@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html style="padding-bottom:0;">
+    <head>
+        <title>1150 | Radio Button</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="height: auto!important;">
+        <div class="activity-item radio-activity">
+            <p style="margin-top:0;">
+                What would happen to the demand for fried chicken pieces if the price of fried chicken burgers were to decrease?
+            </p>
+
+            <form>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <p style="margin:0;">
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_7" />
+                            <label for="PPC32_7">The demand for fried chicken pieces would increase,</label>
+                        </p>
+                        <p style="margin-bottom:0;">
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_8" />
+                            <label for="PPC32_8">The demand for fried chicken pieces would decrease.</label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback" style="margin-bottom:10px;">
+                The demand for fried chicken pieces would decrease since households would rather buy chicken burgers than fried chicken pieces. 
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('.radio-activity input').on('change', function () {
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset2338';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

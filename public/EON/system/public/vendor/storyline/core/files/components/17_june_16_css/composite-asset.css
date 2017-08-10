@@ -1,0 +1,256 @@
+/*!
+ * UNISA eLearning - Department of economics
+ * Copyright 2015 TTRO
+ * Author: Mike Saunders
+ */
+html {
+  /*overflow:hidden;*/
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+body {
+  font-family: "Verdana", "Roboto", sans-serif;
+  color: #2d2f31;
+  line-height:1.5em;
+  font-size: 14px;
+}
+h2 {
+  margin: 0;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  padding: 10px 18px 10px 18px;
+  font-weight:100;
+  background-color: #bdbdbd;
+  line-height:1.1em;
+}
+
+h3 {
+  padding: 12px;
+  text-transform: uppercase;
+  font-size: 1.5em !important;
+  box-sizing: border-box;
+  background-color: #e0e0e0 !important;
+}
+
+img {
+  max-width:100%;
+}
+img.centered-graph {
+  max-width:450px;
+}
+
+.video-holder {
+  text-align: center;
+}
+
+.activity-asset iframe {
+  width: 100%;
+}
+
+table {
+  border:0;
+  border-spacing:0;
+  border-collapse: collapse;
+}
+td, th {
+  padding: 5px 5px;
+  display: table-cell;
+  vertical-align: middle;
+  border: 1px solid #000;
+  text-align: center;
+  background: none;
+  border-spacing:0;
+}
+th {
+  font-weight:bold;
+}
+
+/***************
+      Range
+***************/
+.range-field {
+  position: relative; }
+
+input[type=range], input[type=range] + span {
+  cursor: pointer; }
+
+input[type=range] {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  margin: 15px 0px;
+  padding: 0; }
+
+input[type=range] + span {
+  position: absolute;
+  display:none;
+  border: none;
+  height: 0;
+  width: 0;
+  border-radius: 50%;
+  background-color: #26a69a;
+  top: 10px;
+  margin-left: -6px;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg); }
+  input[type=range] + span span {
+    display: block;
+    width: 30px;
+    text-align: center;
+    color: #26a69a;
+    font-size: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg); }
+  input[type=range] + span.active {
+    border-radius: 50% 50% 50% 0; }
+    input[type=range] + span.active span {
+      color: #fff;
+      margin-left: -1px;
+      margin-top: 8px;
+      font-size: 10px; }
+
+input[type=range]:focus {
+  outline: none; }
+
+input[type=range] {
+  -webkit-appearance: none; }
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 3px;
+  background: #c2c0c2;
+  border: none; }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: #26a69a;
+  transform-origin: 50% 50%;
+  margin: -5px 0 0 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s; }
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc; }
+
+input[type=range] {
+  /* fix for FF unable to apply focus style bug  */
+  border: 1px solid white;
+  /*required for proper track sizing in FF*/ }
+
+input[type=range]::-moz-range-track {
+  height: 3px;
+  background: #ddd;
+  border: none; }
+
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #26a69a;
+  margin-top: -5px; }
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px; }
+
+input[type=range]:focus::-moz-range-track {
+  background: #ccc; }
+
+input[type=range]::-ms-track {
+  height: 3px;
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+  /*remove default tick marks*/
+  color: transparent; }
+
+input[type=range]::-ms-fill-lower {
+  background: #777; }
+
+input[type=range]::-ms-fill-upper {
+  background: #ddd; }
+
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #26a69a; }
+
+input[type=range]:focus::-ms-fill-lower {
+  background: #888; }
+
+input[type=range]:focus::-ms-fill-upper {
+  background: #ccc; }
+
+.feedback {
+  display:none;
+  padding:1em;
+  background:#2196F3 !important;
+  color:#fff;
+}
+
+
+/* Custom classes to add manually via BlueGriffon */
+.width50 {
+  width:47%;
+  margin:0 16px 0 0;
+}
+.width50:nth-child(2) {
+  margin:0;
+}
+.width100 {
+  width:100%;
+}
+.self-assessment-intro {
+  padding-left: 12px;
+}
+.self-assessment-intro::before {
+    content: ">>> ";
+    font-weight: bold;
+}
+.table-title {
+  margin: 20px 0;
+  padding-left: 1.5rem;
+  border-left: 5px solid #ee6e73;
+  font-size: 12px;
+  font-style:italic;
+}
+.right {
+  float: right !important;
+}
+img.right {
+    margin:0 0 10px 10px
+}
+.left {
+  float: left !important;
+}
+.clear-float {
+  clear:both;
+}
+

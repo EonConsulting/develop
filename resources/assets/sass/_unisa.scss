@@ -1,0 +1,127 @@
+$unisa-orange: #fb7217;
+$colour1: #00c0ef;
+$colour2: #dd4b39;
+$colour3: #00a65a;
+$colour4: #fb7217;
+$light-gray: #e6e6e6;
+
+html {font-family: "Open Sans",sans-serif;}
+body {font-family: "Open Sans",sans-serif; background: #f1f1f1;}
+
+a {color: $unisa-orange;}
+a:hover {text-decoration: none; color: $colour1;}
+a:active {text-decoration: none;}
+
+.header {}
+
+//areas
+.menu-area {width: 230px; min-height: 100%; position: absolute; top: 0; left: 0;}
+.rightside-area {margin-left: 230px; min-height: 100vh; background: #f9faf7;}
+.rightside-area-collapse {margin-left: 0px;}
+.header-area {height: 70px; background: #ffffff; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $unisa-orange;}
+.content-area {padding-top: 15px;}
+
+//template-menu-user
+$user-box-height: 70px;
+
+.user-box {border-style: solid; border-width: 0px 0px 1px 0px; border-color: #e6e6e6;}
+.user-id {height: $user-box-height;}
+.user-icon {width: 50px; height: 50px; margin: 10px; border-radius: 100%; overflow: hidden; float: left;}
+.user-icon img {width: inherit;}
+
+.user-info {float: left; margin: 5px 0px 5px 0px;}
+
+.user-name {font-size: 14px; margin-top: 10px}
+.user-online-status {}
+.user-online-dot {background: #00a65a; height: 10px; width: 10px; border-radius: 100%; margin: 3px 5px 0px 0px; float: left;}
+.user-offline-dot {background: #981414; height: 10px; width: 10px; border-radius: 100%; margin: 3px 5px 0px 0px; float: left;}
+.user-online-text {float: left; font-size: 10px}
+
+.menu-collapse-button{height: 50px; float: right; vertical-align: middle; padding: 25px 10px 0px 10px;}
+
+//template-menu-sidebar
+.left-menu {overflow: hidden; font-size: 14px;}
+.left-menu ul {list-style: none; margin: 0px; padding: 0px;}
+.left-menu ul li {display: block; list-style: none; border-style: solid; border-width: 0px 0px 1px 0px; border-color: #e6e6e6;}
+.left-menu-active {background: #FFF;}
+.left-menu-icon {width: 30px; margin-right: 10px; text-align: center;}
+
+.left-menu a {display: block; color: #313131; text-decoration: none; padding: 15px 10px 15px 10px;}
+.left-menu a:hover {color: $unisa-orange;}
+
+.left-menu-sub {padding-bottom: 10px;}
+.left-menu-sub ul li {border: none;}
+.left-menu-sub a {color: #828282; padding: 7px 10px 7px 20px; margin-top: -5px;}
+.left-menu-hover a:hover {color: $unisa-orange;}
+
+//header-area
+.header-breadcrumb {padding-left: 20px; float: left;}
+.header-breadcrumb span {display: inline-block; padding-top: 20px; font-size: 20px;}
+.header-breadcrumb-parent-title {color: $unisa-orange;}
+.header-breadcrumb-divider {padding: 0px 10px 0px 10px; color: #999999;}
+.header-breadcrumb-page-title {}
+
+.header-notifications {float: right;}
+
+.header-logo {float: right; padding: 15px 15px 0px 15px;}
+
+
+//Dashboard Items
+.dashboard-card {background: #FFF;}
+.dashboard-card hr {margin-top: 10px; margin-bottom: 10px;}
+.nofitication-card {background: #FFF; height: 90px;}
+.notification-card-icon {float: left; width: 90px; height: 90px; background: #666; text-align: center; font-size: 45px; line-height: 90px; color: #FFF;}
+.notification-card-text {margin-left: 90px; padding: 10px;}
+.notification-card-text h1 {font-size: 14px; text-transform: uppercase; padding: 0px; margin: 5px 0px 5px 0px;}
+.notification-card-text p {font-size: 20px; font-weight: 700;}
+.dashboard-card-heading {font-size: 16px; font-weight: 700; text-transform: uppercase; padding: 15px 7px 2px 15px; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $light-gray;}
+
+.row::before, .row::after {content: none;}
+
+.progressbar-wrapper {margin-bottom: 10px;}
+.progressbar-wrapper span {font-weight: 700; text-transform: uppercase; font-size: 12px;}
+.progressbar {width: 100%; background-color: $light-gray;}
+.progressbar-fill {width: 1%; height: 10px; background-color: grey;}
+
+.chatbox-messages {height: 250px; max-height: 250px; scroll-behavior: smooth; overflow-y: scroll; padding: 0px 10px 5px 10px;}
+.chatbox-entry {padding: 5px 0px 0px 0px;}
+.chatbox-entry form input {}
+.chatbox-entry form input:focus {outline: none;}
+
+.chatbox-messages them {max-width: 80%; display: block; float: left; clear: both; padding: 5px; border-radius: 5px; overflow: hidden; margin-top: 5px; background: $light-gray;}
+.chatbox-messages me {max-width: 80%; display: block; float: right; clear: both; padding: 5px; border-radius: 5px; overflow: hidden; margin-top: 5px; color: #FFF; background: $colour2;}
+
+.chatbox-message-wrapper {margin-right: 34px;}
+.chatbox-submit-wrapper {float: right;}
+
+.chatbox-message {width: 100%; border-width: 0px 0px 1px 0px; border-color: $light-gray; border-style: solid; padding: 5px 0px 5px 0px;}
+.chatbox-message:focus {border-color: $colour2;}
+.chatbox-submit {font-family: 'FontAwesome'; width: 34px; background: none; border: none; padding: 5px}
+.chatbox-submit:hover {color: $colour2;}
+
+.dashboard-card-item {min-height: 50px;}
+.dashboard-card-item-icon {width: 50px; height: 50px; background: $light-gray; float: left; text-align: center; line-height: 50px; font-size: 24px;}
+.dashboard-card-item-text {margin-left: 50px; padding: 5px; font-size: 12px;}
+.dashboard-card-item-text h1 {font-size: 12px; text-transform: uppercase; margin: 0px; font-weight: 700;}
+.dashboard-card-item-text p {margin: 0px;}
+
+.dashboard-card-bottom-link {text-align: center; padding: 5px 0px 10px 0px;}
+
+//Footer area
+.main-footer {padding: 15px; background: #FFF; border-width: 1px 0px 0px 0px; border-style: solid; border-color: #e6e6e6; font-size: 10px;}
+
+//mixins
+.bg-col-1 {background: $colour1;} .bg-col-2 {background: $colour2;} .bg-col-3 {background: $colour3;} .bg-col-4 {background: $colour4;}
+.txt-col-1 {color: $colour1} .txt-col-2 {color: $colour2} .txt-col-3 {color: $colour3} .txt-col-4 {color: $colour4}
+.top-bdr-0 {border-top: $light-gray 1px solid;} .top-bdr-1 {border-top: $colour1 2px solid;} .top-bdr-2 {border-top: $colour2 2px solid;} .top-bdr-3 {border-top: $colour3 2px solid;} .top-bdr-4 {border-top: $colour4 2px solid;}
+.sp-top-15 {padding-top: 15px;} .sp-bot-15 {padding-bottom: 15px;}
+.sp-top-5 {padding-top: 5px;} .sp-bot-5 {padding-bottom: 5px;}
+.mr-bot-15 {margin-bottom: 15px;}
+.shadow {box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);}
+.basic-clearfix {overflow-y: auto; overflow-x: hidden;}
+
+//Bootstrap overrides
+.panel {border-radius: 0%;}
+.panel > .list-group:last-child .list-group-item:last-child, .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {border-radius: 0%;}
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color: $unisa-orange; border-color: $unisa-orange;}
+.panel > .list-group:first-child .list-group-item:first-child, .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {border-radius: 0%;}
