@@ -75,7 +75,7 @@
 
                         <div class="row sp-top-15">
                             <div class="col-md-8">
-                                <canvas id="assignmentChart" height="180"></canvas>
+                                <canvas id="assignmentChart" height="180" style="height: 180px"></canvas>
                             </div>
                             <div class="col-md-4">
 

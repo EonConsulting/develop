@@ -72,8 +72,8 @@
                     <div class="container-fluid">
 
                         <div class="row sp-top-15">
-                            <div class="col-md-8" style="height: 180px;">
-                                <canvas id="assignmentChart" height="180"></canvas>
+                            <div class="col-md-8">
+                                <canvas id="assignmentChart" height="180" style="height: 180px"></canvas>
                             </div>
                             <div class="col-md-4">
 
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="clearfix"></div>
-    <!--                <hr>
+                        <!--<hr>
 
                         <div class="row sp-top-15 sp-bot-15">
 
@@ -129,8 +129,8 @@
                                 4
                             </div>
                             <div class="clearfix"></div>
-                        </div>
--->                     <div style="height: 10px;"></div>
+                        </div>-->
+                        <div style="height: 10px;"></div>
                     </div>
 
                 </div>
@@ -369,10 +369,9 @@
     //--------------------------
 
     var ctx = document.getElementById("assignmentChart");
-    ctx.height = 180;
 
     var assignmentChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ["January", "February", "March", "April", "May", "June"],
             datasets: [{
@@ -416,7 +415,6 @@
             }
         },
     });
-
 
     //--------------------------
     //-PROGRESS BAR CODE--------
