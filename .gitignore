@@ -7,3 +7,4 @@ _notes/
 .env
 /packages
 /vendor
+/nbproject/private/
