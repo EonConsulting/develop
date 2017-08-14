@@ -1,0 +1,22 @@
+{
+  "name": "eonconsulting/storyline-search",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Josh Harington",
+      "email": "josh1@live.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\Storyline\\Search\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "require": {
+    "cviebrock/laravel-elasticsearch": "^1.2"
+  }
+}

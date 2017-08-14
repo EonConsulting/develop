@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <title>DSP Subtopic 12 - A change in income</title>
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .chain-item{
+                display: none;
+            }
+        </style>
+    </head>
+    <body onload="resizeIframe()">
+        <h2>A change in income</h2>
+        <!--embedded activity--> 
+        <div class="activity-asset">
+            <iframe src="2319.html" frameborder="0" id="asset2319" height="454"></iframe> 
+        </div>
+        <!--end of embedded activity-->
+
+        <p>
+            When income increases (all other things remaining the same) in a market, consumers normally buy more of most goods and services; 
+            and when income decreases, they normally buy fewer of most goods and services.
+        </p>
+
+        <p>
+            We can thus expect to see an increase in the demand for fried chicken pieces if household income increases.  
+        </p>
+        <p>
+            In a chain of events, this is written as follows:
+        </p>
+        <!--This is section is a chain event section -->
+        <div class="activity-asset" style ="height:100px;">
+            <iframe src="2415.html" frameborder="0" id="asset2415"></iframe> 
+        </div>
+        <!--end of embedded activity -->
+
+
+        <p>
+            Hence there is therefore a positive relationship between income and the demand for fried chicken pieces.
+        </p>
+
+        <p style="margin-left:20px;">
+            <i>When an increase in income leads to an increase in the demand for a good or service, the good is referred to as a <b>normal good or service</b>.</i>
+            Fried chicken pieces are therefore a normal good since an increase in income led to an increase in demand. 
+        </p>
+
+        <p style="margin-left:20px;" >
+            <i>An <strong>inferior good,</strong> however, is a good or service whose demand decreases if income increases.</i>
+            For inferior goods, a negative relationship exists between a change in income and the demand for the good or service. 
+        </p>
+
+        <p class="video-intro">
+            Watch the following video clip for the difference between normal and inferior goods.
+        </p>
+        <div class="video-holder">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/WcjYC-JljBE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        
+        <div id="resize" class="col s12 m12 child-menu">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header">Resources<i class="material-icons">keyboard_arrow_right</i></div>
+                <div class="collapsible-body"></div>
+              </li>
+            </ul>
+          </div>
+          
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $(".chain").on('click', function () {
+                    var child = $(this).data('show');
+                    $('#' + child).show();
+                });
+            });
+        </script>
+        <br>
+    </body>
+</html>

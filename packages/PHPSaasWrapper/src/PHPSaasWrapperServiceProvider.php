@@ -1,0 +1,42 @@
+<?php
+
+namespace EONConsulting\PHPSaasWrapper\src;
+
+
+use Illuminate\Support\ServiceProvider;
+
+/**
+ * Class PHPSaasWrapperServiceProvider
+ * @package EONConsulting\PHPSaasWrapper\src
+ */
+class PHPSaasWrapperServiceProvider extends ServiceProvider {
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton( 'phpsaaswrapper', function () {
+            return new PHPSaasWrapper;
+        });
+    }
+
+    /**
+     * Boot the service provider
+     */
+    public function boot() {
+        $this->loadRoutesFrom(__DIR__.'/Routes/routes.php');
+        $this->publishes([
+            __DIR__ . '/database/migrations' => $this->app->databasePath() . '/migrations'
+        ], 'migrations');
+        $this->publishes([
+            __DIR__ . '/database/seeds' => $this->app->databasePath() . '/seeds'
+        ], 'seeds');
+        $this->publishes([
+            __DIR__ . '/resources/views' => base_path('resources/views'),
+        ]);
+    }
+
+}

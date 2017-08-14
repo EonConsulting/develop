@@ -1,0 +1,23 @@
+{
+  "name": "eonconsulting/phpstencil",
+  "description": "PHP Package Stencil",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Josh Harington",
+      "email": "josh1@live.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\PHPStencil\\": "src/"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
+  },
+  "require": {
+    "illuminate/support": "~5"
+  }
+}

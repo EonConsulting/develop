@@ -1,0 +1,21 @@
+{
+  "name": "eonconsulting/app-store",
+  "description": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Josh Harington",
+      "email": "josh1@live.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\AppStore\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "require": {
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "eonconsulting/CKEditorPlugin",
+  "description": "An LTI Plugin for the CKEditor to get LTI Info from the Appstore",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Peace Ngara",
+      "email": "peacengara@aol.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\CKEditorPlugin\\": "src/"
+    },
+    "files": [
+      "src/Http/helpers.php"
+    ]
+  },
+  "require": {
+    "illuminate/support": "~5",
+    "ckeditor/ckeditor": "~4"
+  }
+}

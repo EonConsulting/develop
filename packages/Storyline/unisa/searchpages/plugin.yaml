@@ -1,0 +1,20 @@
+plugin:
+    name: 'unisa.searchpages::lang.plugin.name'
+    description: 'unisa.searchpages::lang.plugin.description'
+    author: Unisa
+    icon: oc-icon-search
+    homepage: ''
+permissions:
+    page.search_pages:
+        tab: 'unisa.searchpages::lang.searchpage.search_pages'
+        label: 'unisa.searchpages::lang.searchpage.search_pages'
+navigation:
+    search_pages:
+        label: 'unisa.searchpages::lang.searchpage.search_pages'
+        url: unisa/searchpages/searchpages
+        icon: icon-search
+        sideMenu:
+            sub_search_pages:
+                label: 'unisa.searchpages::lang.searchpage.search_pages'
+                url: unisa/searchpages/searchpages
+                icon: icon-sitemap

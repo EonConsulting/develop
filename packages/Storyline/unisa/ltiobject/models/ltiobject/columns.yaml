@@ -1,0 +1,16 @@
+columns:
+    object_name:
+        label: 'unisa.ltiobject::lang.LTI.object_name'
+        type: text
+        searchable: true
+        sortable: true
+    object_link:
+        label: 'unisa.ltiobject::lang.LTI.object_link'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'unisa.ltiobject::lang.LTI.object_desc'
+        type: text
+        searchable: true
+        sortable: true

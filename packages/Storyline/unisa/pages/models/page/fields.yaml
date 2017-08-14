@@ -1,0 +1,55 @@
+fields:
+    page_name:
+        label: 'unisa.pages::lang.pages.page_name'
+        oc.commentPosition: ''
+        span: left
+        required: 1
+        type: text
+    preview:
+        label: 'unisa.pages::lang.pages.asset_preview'
+        span: right
+        type: previewbox
+    page_title:
+        label: 'unisa.pages::lang.pages.page_title'
+        oc.commentPosition: ''
+        span: left
+        type: text
+    meta_keyword:
+        label: 'unisa.pages::lang.pages.meta_keyword'
+        oc.commentPosition: ''
+        span: left
+        type: text
+    meta_description:
+        label: 'unisa.pages::lang.pages.meta_description'
+        oc.commentPosition: ''
+        span: left
+        type: text
+    summary:
+        label: 'unisa.pages::lang.pages.summary'
+        size: ''
+        oc.commentPosition: ''
+        span: left
+        required: 1
+        type: textarea
+    assets:
+        label: 'unisa.pages::lang.pages.assets'
+        span: left
+        type: assetbox
+    ltiobject:
+        label: 'unisa.pages::lang.pages.lti_obj'
+        span: left
+        required: 1
+        type: ltibox
+    image:
+        label: Image
+        span: left
+        oc.commentPosition: ''
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        required: 1
+        imageWidth: '100'
+        imageHeight: '100'
+        type: fileupload

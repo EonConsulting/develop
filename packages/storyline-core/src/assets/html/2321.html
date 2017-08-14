@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>608 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="activity-item radio-activity">
+            <p>
+                What do you think would happen to the Dlamini family’s demand for fried
+                chicken pieces if Mr Dlamini, acting on the advice of his doctor, decides
+                to buy less fried chicken per week? How would this affect the demand
+                schedule for fried chicken pieces? <br>
+                <br>
+                This would cause...<br>
+            </p>
+            <form>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_1" />
+                            <label for="PPC32_1">a higher quantity demanded at each price.</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_2" />
+                            <label for="PPC32_2">a lower quantity demanded at each price.</label>
+                        </p>
+                        <p>
+                            <input class="with-gap" name="group1" type="radio" id="PPC32_3" />
+                            <label for="PPC32_3">no change to quantity demanded at each price.</label>
+                        </p>
+                    </div>
+                </div>
+            </form>
+            <div class="feedback">
+                If people's tastes and preferences change, the demand for the good and
+                service will change, and at each price a different quantity will be
+                demanded than before.
+            </div>
+        </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+             $('.radio-activity input').on('change', function () {
+                var form = $(this).parent('p').parent('div').parent('div').parent('form');
+
+                $(this).parents('form').siblings('.feedback').show();
+                var activityBlock = 'asset2321';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Courses;
 use App\Models\Course;
 use App\Models\Storyline;
 use App\Models\StorylineItem;
-use EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase;
+use EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBCourseStorylineBase;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,7 +43,7 @@ class CourseStorylineController extends DBCourseStorylineBase
                 ],
             ],
         ];
-		
+
         return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
     /**

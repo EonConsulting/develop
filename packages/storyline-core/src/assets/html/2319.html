@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>618 | Check Box</title>
+        <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/composite-asset-print.css" media="print">
+        <link type="text/css" rel="stylesheet" href="../components/css/materialize.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="../components/css/economics.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+      <div id="2319" class="activity-item check-activity">
+       <!-- <p>
+            Assume that the Dlamini family likes fried chicken pieces. Mrs Dlamini, 
+            who works as a computer programmer, receives an increase in her income<br>
+        </p>-->
+        <form id="PPC36" class="iFramedRadioActivity">
+            <div class="row">
+                <!--<div class="col s12">
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_1">
+                        <label for="PPC36_1">Increase it</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_2">
+                        <label for="PPC36_2">Decrease it</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_3">
+                        <label for="PPC36_3">Leave it unchanged</label>
+                    </p>
+                    <p>&nbsp;</p>
+                </div>-->
+                <div>
+                    <p>
+                        What do you think would happen to the demand for fried chicken pieces if the income 
+                        of households in the market were to increase? 
+                    </p>
+                </div>
+                <div class="col s12">
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_4">
+                        <label for="PPC36_4">Increase it</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_5">
+                        <label for="PPC36_5">Decrease it</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_6">
+                        <label for="PPC36_6">Leave it unchanged</label>
+                    </p>
+                    <p>&nbsp;</p>
+                </div>
+                <div>
+                    <p>
+                        Would you say a positive or negative relationship exists between the income 
+                        of households and the demand for goods and services?
+                    </p>
+                </div>
+                <div class="col s12">
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_7">
+                        <label for="PPC36_7">Positive</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_8">
+                        <label for="PPC36_8">Negative</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="checkbox" id="PPC36_9">
+                        <label for="PPC36_9">No relationship</label>
+                    </p>
+                    <div>
+                        <a class="waves-effect waves-light btn submit">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+        <div class="feedback blue">
+            If my income increases, I buy more; and I think other households would do the same and the market demand would increase.  
+            Since an increase in income leads to an increase in demand, we have a positive relationship.
+        </div>
+    </div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="../components/js/economics.js" type="text/javascript"></script>
+        <script src="../components/js/materialize.min.js" type="text/javascript"></script>
+        <script>
+            $('#2319 .submit').on('click', function() {
+                // Checks if at least one box is checked before allowing the user to submit
+                if ($(this).parents("form").find("input.checkbox:checked").length == 0) {
+                    alert("Please select at least 1 answer");
+                    return; //stops the script from running any further
+                }
+                $(this).parents('form').siblings('.feedback').show();
+
+                $('#PPC36 .checkbox').each(function() {
+                    var capital = $(this).attr('capital');
+                    if (this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (!this.checked && capital == 'true') {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", "checked");
+                        this.checked = true;
+                    }
+                    if (!this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'green');
+                    }
+                    if (this.checked && capital == undefined) {
+                        $(this).siblings('label').css('color', 'red');
+                        this.setAttribute("checked", ""); // For IE
+                        this.removeAttribute("checked"); // For other browsers
+                        this.checked = false;
+                    }
+                });
+
+                $('#PPC36_10').siblings('label').css('color', 'green');
+                $('#PPC36_10').prop("indeterminate", true);
+
+                $(this).parents('form').find('.checkbox').attr('disabled', 'disabled');
+                $(this).parents('form').siblings('.feedback').show();
+                
+                var activityBlock = 'asset2319';
+                activityDone(activityBlock);
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+fields:
+    menu_title:
+        label: 'unisa.storymenu::lang.storymenu.menu_title'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: 'unisa.storymenu::lang.storymenu.description'
+        size: ''
+        oc.commentPosition: ''
+        span: auto
+        type: textarea

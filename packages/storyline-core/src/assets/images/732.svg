@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 450 387.9" style="enable-background:new 0 0 450 387.9;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#4D4D4D;stroke-width:2.1601;stroke-miterlimit:10;}
+	.st1{fill:#4D4D4D;}
+	.st2{font-family:'Verdana';}
+	.st3{font-size:16px;}
+	.st4{fill:#4D4D4E;}
+	.st5{font-size:11px;}
+	.st6{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2131,5.0557;}
+	.st8{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3198,5.1838;}
+	.st9{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2259,5.0711;}
+	.st10{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2278,5.0733;}
+	.st11{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3278,5.1934;}
+	.st12{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2331,5.0797;}
+	.st13{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2157,5.0589;}
+	.st14{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.3337,5.2006;}
+	.st15{display:none;}
+	.st16{display:inline;}
+	.st17{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.5228,5.4273;}
+	.st18{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.4297,5.3156;}
+	.st19{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2417,5.0901;}
+	.st20{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2904,5.1484;}
+	.st21{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2719,5.1265;}
+	.st22{fill:none;stroke:#4D4D4D;stroke-width:1.4;stroke-miterlimit:10;stroke-dasharray:4.2654,5.1187;}
+	.st23{fill:#449A77;}
+	.st24{fill:none;stroke:#449A77;stroke-width:1.73;stroke-miterlimit:10;}
+	.st25{fill:#FFFFFF;}
+	.st26{fill:none;stroke:#3E7BBE;stroke-width:1.73;stroke-miterlimit:10;}
+	.st27{fill:#3E7BBE;}
+	.st28{font-size:19px;}
+	.st29{fill:none;stroke:#3E7BBE;stroke-width:2.596;stroke-miterlimit:10;}
+	.st30{display:none;fill:none;stroke:#3E7BBE;stroke-width:2.596;stroke-miterlimit:10;}
+	.st31{display:inline;fill:#3E7BBE;}
+	.st32{font-size:10px;}
+	.st33{fill:none;stroke:#4D4D4D;stroke-width:1.7305;stroke-miterlimit:10;}
+</style>
+<g id="Main_Graph">
+	<polyline class="st0" points="390.1,350.9 71.3,350.9 71.3,72 	"/>
+	<text transform="matrix(1 0 0 1 57.3445 83.2441)" class="st1 st2 st3">P</text>
+	<g>
+		<text transform="matrix(1 0 0 1 56.8213 367.9378)" class="st1 st2 st3">0</text>
+	</g>
+	<text transform="matrix(1 0 0 1 378.5397 367.9378)" class="st1 st2 st3">Q</text>
+</g>
+<g id="X_and_Y_axis">
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 166.9685 367.9379)" class="st4 st2 st5">3 000</text>
+	</g>
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 209.8247 367.938)" class="st4 st2 st5">3 600</text>
+	</g>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 81.2561 367.9383)" class="st4 st2 st5">1 800</text>
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 124.1123 367.9384)" class="st4 st2 st5">2 400</text>
+	</g>
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 252.6811 367.9382)" class="st4 st2 st5">4 200</text>
+	</g>
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 295.5373 367.938)" class="st4 st2 st5">4 800</text>
+	</g>
+	<g>
+		<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 338.3937 367.938)" class="st4 st2 st5">5 400</text>
+	</g>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8148 150.9951)" class="st4 st2 st3">6</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8147 114.7206)" class="st4 st2 st3">7</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8148 187.2691)" class="st4 st2 st3">5</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8148 259.8171)" class="st4 st2 st3">3</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8147 223.5431)" class="st4 st2 st3">4</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8148 296.0916)" class="st4 st2 st3">2</text>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 56.8148 332.3651)" class="st4 st2 st3">1</text>
+	<line class="st0" x1="353.3" y1="346.5" x2="353.3" y2="350.8"/>
+	<line class="st0" x1="310.5" y1="346.5" x2="310.5" y2="350.8"/>
+	<line class="st0" x1="267.5" y1="346.5" x2="267.5" y2="350.8"/>
+	<line class="st0" x1="223.6" y1="346.5" x2="223.6" y2="350.8"/>
+	<line class="st0" x1="183" y1="346.5" x2="183" y2="350.8"/>
+	<line class="st0" x1="138.6" y1="346.5" x2="138.6" y2="350.8"/>
+	<line class="st0" x1="96.7" y1="346.5" x2="96.7" y2="350.8"/>
+	<line class="st0" x1="75.5" y1="326.9" x2="71.2" y2="326.9"/>
+	<line class="st0" x1="75.5" y1="290.6" x2="71.2" y2="290.6"/>
+	<line class="st0" x1="75.5" y1="254.9" x2="71.2" y2="254.9"/>
+	<line class="st0" x1="75.5" y1="217.8" x2="71.2" y2="217.8"/>
+	<line class="st0" x1="75.5" y1="183.1" x2="71.2" y2="183.1"/>
+	<line class="st0" x1="75.5" y1="146.1" x2="71.2" y2="146.1"/>
+	<line class="st0" x1="75.5" y1="109.8" x2="71.2" y2="109.8"/>
+</g>
+<g id="Path_and_Letter">
+	<g>
+		<g>
+			<line class="st6" x1="71.7" y1="217.8" x2="73.8" y2="217.8"/>
+			<line class="st7" x1="78.9" y1="217.8" x2="178.3" y2="217.8"/>
+			<polyline class="st6" points="180.8,217.8 183,217.8 183,220 			"/>
+			<line class="st8" x1="183" y1="225.2" x2="183" y2="346.1"/>
+			<line class="st6" x1="183" y1="348.7" x2="183" y2="350.9"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="72.2" y1="146.1" x2="74.3" y2="146.1"/>
+			<line class="st9" x1="79.4" y1="146.1" x2="262.8" y2="146.1"/>
+			<polyline class="st6" points="265.3,146.1 267.5,146.1 267.5,148.3 			"/>
+			<line class="st10" x1="267.5" y1="153.4" x2="267.5" y2="346.2"/>
+			<line class="st6" x1="267.5" y1="348.7" x2="267.5" y2="350.9"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="71.3" y1="183.1" x2="73.4" y2="183.1"/>
+			<line class="st11" x1="78.6" y1="183.1" x2="218.8" y2="183.1"/>
+			<polyline class="st6" points="221.4,183.1 223.6,183.1 223.6,185.3 			"/>
+			<line class="st12" x1="223.6" y1="190.4" x2="223.6" y2="346.2"/>
+			<line class="st6" x1="223.6" y1="348.7" x2="223.6" y2="350.9"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="310.7" y1="183.9" x2="310.7" y2="186.1"/>
+			<line class="st13" x1="310.7" y1="191.2" x2="310.7" y2="346.3"/>
+			<line class="st6" x1="310.7" y1="348.8" x2="310.7" y2="351"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="224.3" y1="183.3" x2="226.5" y2="183.3"/>
+			<line class="st14" x1="231.7" y1="183.3" x2="305.4" y2="183.3"/>
+			<line class="st6" x1="308" y1="183.3" x2="310.1" y2="183.3"/>
+		</g>
+	</g>
+	<g class="st15">
+		<g class="st16">
+			<line class="st6" x1="234.4" y1="165.8" x2="236.5" y2="165.8"/>
+			<line class="st17" x1="242" y1="165.8" x2="308.9" y2="165.8"/>
+			<polyline class="st6" points="311.6,165.8 313.8,165.8 313.8,168 			"/>
+			<line class="st18" x1="313.8" y1="173.3" x2="314.2" y2="346"/>
+			<line class="st6" x1="314.2" y1="348.7" x2="314.2" y2="350.9"/>
+		</g>
+	</g>
+	<g class="st15">
+		<g class="st16">
+			<line class="st6" x1="193" y1="199.8" x2="195.2" y2="199.8"/>
+			<line class="st19" x1="200.2" y1="199.8" x2="347" y2="199.8"/>
+			<polyline class="st6" points="349.6,199.8 351.7,199.8 351.7,202 			"/>
+			<line class="st20" x1="351.7" y1="207.1" x2="352.1" y2="346.1"/>
+			<line class="st6" x1="352.1" y1="348.7" x2="352.2" y2="350.9"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="353.3" y1="219.2" x2="353.3" y2="221.4"/>
+			<line class="st21" x1="353.3" y1="226.5" x2="353.3" y2="346.1"/>
+			<line class="st6" x1="353.3" y1="348.7" x2="353.3" y2="350.9"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st6" x1="183" y1="218.1" x2="185.1" y2="218.1"/>
+			<line class="st22" x1="190.3" y1="218.1" x2="347.2" y2="218.1"/>
+			<line class="st6" x1="349.8" y1="218.1" x2="352" y2="218.1"/>
+		</g>
+	</g>
+</g>
+<g id="Supply_Curve">
+	<text transform="matrix(1 0 0 1 333.5013 92.0296)" class="st23 st2 st3">S</text>
+	<line class="st24" x1="330.3" y1="94.5" x2="118.3" y2="271.9"/>
+</g>
+<g id="Demand_curve">
+	<rect x="302.4" y="303.9" class="st25" width="17.6" height="21.5"/>
+	<line class="st26" x1="81.7" y1="133.4" x2="302.2" y2="319"/>
+	<text transform="matrix(1 0 0 1 304.9887 320.1727)" class="st27 st2 st3">D</text>
+	<text transform="matrix(1 0 0 1 177.2285 207.4512)" class="st1 st2 st3">E</text>
+	<text transform="matrix(1 0 0 1 257.7813 129.6735)" class="st1 st2 st3">E</text>
+	<text transform="matrix(0.583 0 0 0.583 267.8984 136.0006)" class="st1 st2 st28">1</text>
+	<line class="st29" x1="195.7" y1="86" x2="354.3" y2="219.2"/>
+	<text transform="matrix(1 0 0 1 357.1602 219.8486)" class="st27 st2 st3">D</text>
+	<text transform="matrix(0.583 0 0 0.583 369.4884 226.1757)" class="st27 st2 st28">1</text>
+	<line class="st30" x1="183.1" y1="49.4" x2="376.9" y2="223.1"/>
+	<g class="st15">
+		<text transform="matrix(0.9995 -3.081000e-002 3.081000e-002 0.9995 380.2063 231.7513)" class="st31 st2 st3">D</text>
+		<text transform="matrix(0.5827 -1.796223e-002 1.796223e-002 0.5827 392.7236 237.6957)" class="st31 st2 st28">1</text>
+	</g>
+</g>
+<g id="Arrows">
+	<circle class="st1" cx="183" cy="217.8" r="3"/>
+	<circle class="st1" cx="223.6" cy="183.3" r="3"/>
+	<circle class="st1" cx="310.7" cy="183.3" r="3"/>
+	<circle class="st1" cx="353.3" cy="218.1" r="3"/>
+	<circle class="st1" cx="267.5" cy="146.1" r="3"/>
+	<rect x="230.7" y="184.1" class="st25" width="74.3" height="26.6"/>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 248.8239 195.1969)"><tspan x="0" y="0" class="st4 st2 st32">Excess </tspan><tspan x="-17.8" y="12" class="st4 st2 st32">demand 1 200</tspan></text>
+</g>
+<g id="Layer_7">
+	<g>
+		<g>
+			<line class="st33" x1="212.5" y1="192.8" x2="213.4" y2="192.1"/>
+			<g>
+				<polygon class="st1" points="214.9,195.8 217.7,188.6 210,189.8 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="201.7" y1="201.8" x2="202.6" y2="201.1"/>
+			<g>
+				<polygon class="st1" points="204.1,204.8 206.9,197.6 199.2,198.8 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="190.1" y1="211.8" x2="191" y2="211.1"/>
+			<g>
+				<polygon class="st1" points="192.5,214.8 195.3,207.6 187.6,208.8 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="322.6" y1="192.8" x2="321.7" y2="192.1"/>
+			<g>
+				<polygon class="st1" points="325.1,189.9 317.4,188.6 320.1,195.9 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="333.1" y1="201.1" x2="332.2" y2="200.4"/>
+			<g>
+				<polygon class="st1" points="335.6,198.2 327.9,196.9 330.6,204.1 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="249.6" y1="161.8" x2="250.4" y2="161.1"/>
+			<g>
+				<polygon class="st1" points="252,164.8 254.8,157.6 247.1,158.8 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="235.8" y1="173.8" x2="236.6" y2="173.1"/>
+			<g>
+				<polygon class="st1" points="238.2,176.8 241,169.5 233.3,170.8 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="284.8" y1="160.6" x2="283.9" y2="159.9"/>
+			<g>
+				<polygon class="st1" points="287.3,157.6 279.6,156.3 282.3,163.6 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="299.3" y1="172.9" x2="298.5" y2="172.2"/>
+			<g>
+				<polygon class="st1" points="301.8,169.9 294.2,168.6 296.9,175.9 				"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<line class="st33" x1="344.6" y1="211.3" x2="343.8" y2="210.6"/>
+			<g>
+				<polygon class="st1" points="347.1,208.4 339.5,207.1 342.2,214.3 				"/>
+			</g>
+		</g>
+	</g>
+	<rect x="239.8" y="225.1" class="st25" width="55.8" height="39.4"/>
+	<text transform="matrix(1 -1.260000e-003 1.260000e-003 1 246.9567 234.1993)"><tspan x="0" y="0" class="st4 st2 st5">Excess </tspan><tspan x="-1.7" y="13.2" class="st4 st2 st5">demand</tspan><tspan x="4.6" y="26.4" class="st4 st2 st5">2 400</tspan></text>
+</g>
+</svg>

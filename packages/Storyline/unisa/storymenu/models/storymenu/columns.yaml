@@ -1,0 +1,16 @@
+columns:
+    menu_title:
+        label: 'unisa.storymenu::lang.storymenu.menu_title'
+        type: text
+        searchable: true
+        sortable: true
+    page_url:
+        label: 'unisa.storymenu::lang.storymenu.page_url'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'unisa.storymenu::lang.storymenu.description'
+        type: text
+        searchable: true
+        sortable: true

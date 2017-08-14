@@ -1,0 +1,15 @@
+name: Assets
+modelClass: Unisa\Assets\Models\Asset
+form: $/unisa/assets/models/asset/fields.yaml
+defaultRedirect: unisa/assets/assets
+create:
+    title: 'unisa.assets::lang.assets.create_asset'
+    redirect: 'unisa/assets/assets/update/:id'
+    redirectClose: unisa/assets/assets
+    flashSave: 'unisa.assets::lang.assets.asset_added'
+update:
+    title: 'unisa.assets::lang.assets.upd_asset'
+    redirect: unisa/assets/assets
+    redirectClose: unisa/assets/assets
+    flashSave: 'unisa.assets::lang.assets.suc_upd_asset'
+    flashDelete: 'unisa.assets::lang.assets.del_asset'

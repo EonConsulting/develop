@@ -1,0 +1,16 @@
+columns:
+    asset_name:
+        label: 'unisa.assets::lang.assets.asset_name'
+        type: text
+        searchable: true
+        sortable: true
+    file_name:
+        label: 'unisa.assets::lang.assets.file_name'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'unisa.assets::lang.assets.description'
+        type: text
+        searchable: true
+        sortable: true

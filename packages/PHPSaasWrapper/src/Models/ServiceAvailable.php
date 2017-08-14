@@ -1,0 +1,19 @@
+<?php
+
+namespace EONConsulting\PHPSaasWrapper\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Class ServiceAvailable (Model)
+ * @package EONConsulting\PHPSaasWrapper\Models
+ */
+class ServiceAvailable extends Model {
+
+    public $incrementing = true;
+    protected $table = 'psw_services_available';
+    protected $primaryKey = 'service_id';
+    protected $fillable = ['service_name', 'service_key'];
+    protected $hidden = ['created_at', 'updated_at'];
+
+}
