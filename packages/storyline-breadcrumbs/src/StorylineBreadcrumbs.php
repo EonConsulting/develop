@@ -169,7 +169,7 @@ class StorylineBreadcrumbs {
         //$check = DB::getInstance()->query("SELECT ID, Name FROM categories WHERE ID = '$catID' LIMIT 1")->fetch();
 //        $check = DB::table('storyline_items')->select('id, name')->where('id', $catID)->first();
         $check= StorylineItem::where('id', $catID)->select('id','name', 'file_url')->first()->toArray();
-        $html = '<a href=' . route('lti.courses.single.lectures.item', [$course->id, $d['id']]) .'> '. $check['name'] .' </a>';
+        $html = '<a href=' . route('lti.courses.single.lectures.item', [$course->id, $check['id']]) .'> '. $check['name'] .' </a>';
         return $html;
 
     }
