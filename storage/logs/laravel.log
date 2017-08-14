@@ -8565,6 +8565,7 @@ Stack trace:
 [2017-08-06 22:01:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBTaxonomy' not found' in C:\EON\dev_dump_20170802\packages\storyline-core\src\StorylineCore.php:26
 Stack trace:
 #0 {main}  
+<<<<<<< HEAD
 [2017-08-07 08:57:41] local.ERROR: PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
 #0 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(68): PDO->__construct('mysql:host=127....', 'root', '', Array)
@@ -10542,3 +10543,95 @@ Stack trace:
 #38 /home/vagrant/Code/dev_dump_20170802/public/index.php(53): App\Http\Kernel->handle()
 #39 /home/vagrant/Code/dev_dump_20170802/public/index.php(0): {main}()
 #40 {main}  
+=======
+[2017-08-14 07:59:45] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:19:26] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:20:15] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\Flow\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:21:18] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\Flow\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:23:11] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\Flow\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:24:28] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\Http\Controllers\Courses\DBCorseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:24:42] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\Flow\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:31:25] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\Flow\DBTaxonomy\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:48:48] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:50:48] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:54:32] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:56:44] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:56:46] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:57:03] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:57:20] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Classes\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 08:59:35] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:02:08] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:02:13] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:03:23] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:04:47] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:05:17] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\Http\Controllers\Courses\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:06:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-13 23:08:31] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined method Tsugi\Laravel\LTIX::laravelauthSetup()' in C:\wamp64\www\develop\packages\laravel-lti\src\Http\Controllers\LTIAuthBaseController.php:46
+Stack trace:
+#0 {main}  
+[2017-08-14 09:09:12] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:13:06] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:13:09] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:13:10] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:13:24] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:14:31] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+[2017-08-14 09:17:21] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Controllers\DBCourseStorylineBase' not found' in C:\wamp64\www\develop\app\Http\Controllers\Courses\CourseStorylineController.php:22
+Stack trace:
+#0 {main}  
+>>>>>>> 19b5fe54abb55f9c2665c5b76ba1c8ed461032bd

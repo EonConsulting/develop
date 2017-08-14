@@ -1,10 +1,10 @@
-@extends('ckeditorpluginv2::layouts.master')
 
-@section('custom-styles')
-    <link href="{{ url ('/css/app.css')}}" rel="stylesheet"/>
-    <link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />
+
+<?php $__env->startSection('custom-styles'); ?>
+    <link href="<?php echo e(url ('/css/app.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(url('/vendor/appstore/css/radio-checkbox.css')); ?>" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-    <script src="{{url('/js/ng.js')}}"></script>
+    <script src="<?php echo e(url('/js/ng.js')); ?>"></script>
 
     <style>
 
@@ -70,37 +70,39 @@
             }
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid">
 
         <div class="row">
-            @if (session('error_message'))
+            <?php if(session('error_message')): ?>
                 <div class="col-md-12">
                     <div class="alert alert-danger">
-                        {{ session('error_message') }}
+                        <?php echo e(session('error_message')); ?>
+
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
 
-            @if (session('success_message'))
+            <?php if(session('success_message')): ?>
                 <div class="col-md-12">
                     <div class="alert alert-success">
-                        {{ session('success_message') }}
+                        <?php echo e(session('success_message')); ?>
+
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
 
-            @if($errors->count() > 0)
+            <?php if($errors->count() > 0): ?>
                 <div class="col-md-12">
                     <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div><?php echo e($error); ?></div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
 
         <div class="row">
@@ -235,11 +237,11 @@
         </div> <!-- /row -->
 
     </div> <!-- /container -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('custom-scripts')
-    {{--<script src="/vendor/appstore/js/jquery.min.js"></script>--}}
-    {{--<script src="/vendor/appstore/js/bootstrap.min.js"></script>--}}
+<?php $__env->startSection('custom-scripts'); ?>
+    
+    
     <script>
 
         $(document).ready(function () {
@@ -249,4 +251,6 @@
         });
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('ckeditorpluginv2::layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
