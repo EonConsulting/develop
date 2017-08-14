@@ -3,7 +3,7 @@
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -297,12 +297,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/glyphicons-halflings-regular.eot"));
-  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"),
-       url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"),
-       url("../fonts/glyphicons-halflings-regular.woff") format("woff"),
-       url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"),
-       url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("/bootstrap/fonts/glyphicons-halflings-regular.eot");
+  src: url("/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/bootstrap/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/bootstrap/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/bootstrap/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 .glyphicon {
@@ -7680,8 +7676,8 @@ html {
 
 body {
   font-family: "Open Sans",sans-serif;
-  background: #f9faf7;
   background: #f1f1f1;
+  display: none;
 }
 
 a {
@@ -7705,10 +7701,28 @@ a:active {
   left: 0;
 }
 
+.menu-area-collapse {
+  width: 50px;
+}
+
+.menu-area-overlay {
+  background: #f1f1f1;
+  z-index: 999;
+  box-shadow: 0px 0px 50px grey;
+  position: fixed;
+}
+
 .rightside-area {
   margin-left: 230px;
   min-height: 100vh;
   background: #f9faf7;
+  border-width: 0px 0px 0px 1px;
+  border-style: solid;
+  border-color: #e6e6e6;
+}
+
+.rightside-area-expand {
+  margin-left: 50px;
 }
 
 .rightside-area-collapse {
@@ -7846,6 +7860,18 @@ a:active {
 
 .left-menu-hover a:hover {
   color: #fb7217;
+}
+
+.menu-open-btn {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.menu-open-btn a {
+  padding: 0px;
 }
 
 .header-breadcrumb {
@@ -8151,6 +8177,10 @@ a:active {
 .basic-clearfix {
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
 }
 
 .panel {
