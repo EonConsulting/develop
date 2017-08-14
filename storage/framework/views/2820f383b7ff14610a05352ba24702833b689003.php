@@ -5,7 +5,7 @@
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
 
-        body {font-family:arial; background: transparent !important;}
+        /*body {font-family:arial; background: transparent !important;}*/
         .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
         p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
         .ltickplugin {background: transparent;}
@@ -118,7 +118,7 @@
                         allowedContent: true,
                         fullPage: true,
                         mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                        height: 280,
+                        height: 500,
                     on : {
                         // maximize the editor on startup
                         'instanceReady' : function( evt ) {
