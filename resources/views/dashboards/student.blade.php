@@ -74,7 +74,7 @@
                     <div class="container-fluid">
 
                         <div class="row sp-top-15">
-                            <div class="col-md-8">
+                            <div class="col-md-8" style="height: 180px;">
                                 <canvas id="assignmentChart" height="180" style="height: 180px"></canvas>
                             </div>
                             <div class="col-md-4">
@@ -373,7 +373,7 @@
     var ctx = document.getElementById("assignmentChart");
 
     var assignmentChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: ["January", "February", "March", "April", "May", "June"],
             datasets: [{

@@ -71,7 +71,10 @@
                     <span class="menu_collapse">
                         Modules
                     </span>
-                    <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
+
+                    <?php if(laravel_lti()->is_instructor(auth()->user())): ?>
+                    <span class='pull-right'><i class='toggle fa fa-plus'></i></span>
+                    <?php endif; ?>
                 </a>
 
                 <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
