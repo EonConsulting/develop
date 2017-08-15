@@ -8,3 +8,6 @@ _notes/
 /packages
 /vendor
 /nbproject/private/
+/storage/debugbar
+/storage/framework/views
+/storage/framework/sessions
