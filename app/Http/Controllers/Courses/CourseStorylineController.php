@@ -43,7 +43,7 @@ class CourseStorylineController extends DBCourseStorylineBase
                 ],
             ],
         ];
-		
+
         return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
     /**

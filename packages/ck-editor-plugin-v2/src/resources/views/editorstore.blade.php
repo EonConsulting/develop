@@ -8,6 +8,8 @@
 
     <style>
 
+    body {display: block;}
+
     .cke_dialog_contents_body {margin: 0px; padding: 0px; background: #f1f1f1}
 
     .header {}

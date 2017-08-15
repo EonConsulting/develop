@@ -5,6 +5,5 @@ _notes/
 /bower_components/
 /node_modules/
 .env
-/packages
 /vendor
 /nbproject/private/
