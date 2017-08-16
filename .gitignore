@@ -6,4 +6,4 @@ _notes/
 /node_modules/
 .env
 /vendor
-/nbproject/private/
+/nbproject/*

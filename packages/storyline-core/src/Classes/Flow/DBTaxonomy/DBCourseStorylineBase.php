@@ -39,6 +39,8 @@ class DBCourseStorylineBase extends Controller
      */
     public function setNodes(Request $request) {
         $this->nodes = json_decode($request->all()['parts'], true);
+        
+       return $this->nodes;
     }
 
     /**
@@ -63,9 +65,9 @@ class DBCourseStorylineBase extends Controller
         if($this->checkHasStoryLineId()) {
             throw new Exception('Could Not Find Storyline');
         }
-
+       
         $this->createStoryLIne($request, $course);
-
+ exit();
         return response('The Storyline has been Saved', 200);
     }
 
@@ -98,7 +100,9 @@ class DBCourseStorylineBase extends Controller
         } else {
             $this->stId->update();
             $this->asset_save_storyline_items($this->stId, $this->nodes);
+             var_dump($this->nodes);
         }
+        exit();
     }
 
     /**
@@ -107,11 +111,10 @@ class DBCourseStorylineBase extends Controller
      */
     protected function asset_save_storyline_items($storyline, $data)
     {
-        dd($data);
         $item = new StorylineItem;
         //$storyline_id = $storyline->id;
         $item->currentStoryLine($storyline->id);
-        $item->buildTree();
+        $item->buildTree($data);
 
 
     }
