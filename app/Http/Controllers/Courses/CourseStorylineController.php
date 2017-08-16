@@ -51,11 +51,29 @@ class CourseStorylineController extends DBCourseStorylineBase
      * @param Course $course
      * @return \Illuminate\Contracts\Routing\ResponseFactory|mixed|\Symfony\Component\HttpFoundation\Response
      */
-    public function store(Request $request, Course $course)
-    {
-        $this->setNodes($request);
-        $this->setstId(Storyline::where('course_id', '=', $course->id)->first());
+    public function storeback(Request $request, Course $course){   
+        $this->setNodes($request);             
+        $this->setstId(Storyline::where('course_id', '=', $course->id)->first());   
         return $this->asset_store($request, $course);
+    }
+    
+     public function store(Request $request, Course $course) {
+        //Check If Course has a Storyline and do an Update else Create a New Storyline
+        $nodes = $request->all()['parts'];
+        $data = json_decode($nodes, true);
+        $stId = Storyline::where('course_id', '=', $course->id)->first();
+        if ($stId == null) {
+            $storyline = new Storyline;
+            $storyline->course_id = $course->id;
+            $storyline->creator_id = $request->user()->id;
+            $storyline->save();
+            $this->save_storyline_items($storyline,$data);
+        } else {            
+            $stId->update();
+            $this->save_storyline_items($stId,$data);
+
+        }
+        return response('The Storyline has been Saved', 200);
     }
 
     /**
