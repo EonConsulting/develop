@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Auth;
 use Tsugi\Config\ConfigInfo;
 use Tsugi\Laravel\LTIX;
 use Illuminate\Support\Facades\Hash;
-
 use App\Http\Controllers\Controller;
 use Tsugi\Util\LTI;
 

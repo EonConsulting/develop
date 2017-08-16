@@ -6,7 +6,7 @@
 
 // If we just are using Tsugi but not part of another site
 $apphome = false;
-$wwwroot = env('APP_URL', 'http://localhost/');
+$wwwroot = env('APP_URL', 'http://unisa.local/');
 //echo $wwwroot;
 // $wwwroot = 'http://localhost:8888/tsugi';
 // $wwwroot = "https://fb610139.ngrok.io/tsugi";
