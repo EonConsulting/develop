@@ -162,7 +162,6 @@
                         finder.on( 'files:choose', function( evt ) {                           
                             var file = evt.data.files.first();
                             storylineItem.file_url = angular.copy(file.getUrl());    
-                            alert(storylineItem.file_url);
                             storylineItem.file_name = angular.copy(file.get('name'));
                             //alert(JSON.stringify($scope.storylineItems[index]));
                             // document.getElementById('file_url2' ).value = textel;
