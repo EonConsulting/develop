@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: jharing10
@@ -8,37 +9,35 @@
 
 namespace EONConsulting\Storyline\Nav\Classes;
 
-
 class RenderHTML {
+
     /**
      * Menu Items
      */
     protected $menu;
+
     /**
      * Htm Contents
      */
     protected $html;
-
     protected $items = array();
+
     /**
      * RenderHTML constructor.
      */
-    public function __construct() {}
+    public function __construct() {
+        
+    }
 
-    function renderNode($node, $course)
-    {
+    function renderNode($node, $course) {
         $link = route('lti.courses.single.lectures.item', [$course->id, $node->id]);
-        if($node->isLeaf())
-        {
+        if ($node->isLeaf()) {
             return '<li><a href="' . $link . '">' . $node->name . '</a></li>';
-        }
-        else
-        {
-            $html =  '<li><a href="' . $link . '">' . $node->name . '</a>';
+        } else {
+            $html = '<li><a href="' . $link . '">' . $node->name . '</a>';
 
             $html .= '<ul>';
-            foreach($node->getImmediateDescendants() as $child)
-            {
+            foreach ($node->getImmediateDescendants() as $child) {
                 $html .= $this->renderNode($child, $course);
             }
             $html .= '</ul>';
@@ -48,8 +47,6 @@ class RenderHTML {
 
         return $html;
     }
-
-
 
 //    public function buildhtmlMENU($data = [], $root = false, $page = false, $parent_config = false, $course = false) {
 //        $html = '';
@@ -142,9 +139,9 @@ class RenderHTML {
 //    }
 
     public function build($data = [], $root = false, $page = false, $parent_config = false, $course = false) {
-        if(is_array($data) && array_key_exists(0, $data)) {
+        if (is_array($data) && array_key_exists(0, $data)) {
             $html = ($root) ? '<div id="tree-div"><ul>' : '<ul>';
-            for($i = 0; $i < count($data); $i++) {
+            for ($i = 0; $i < count($data); $i++) {
                 $html .= $this->build($data[$i], false, $page, $parent_config, $course);
             }
             $html .= ($root) ? '</ul></div>' : '</ul>';
@@ -164,7 +161,7 @@ class RenderHTML {
                     $active = ($page && array_key_exists('config', $child) && $child['config'] == $page && $main_active == '') ? 'blue' : '';
                     $config = (array_key_exists('config', $child)) ? $child['config'] : '';
 
-                    if($course) {
+                    if ($course) {
                         $link = route('lti.courses.single.lectures.item', [$course->id, $child['id']]);
                     } else {
                         $link = route('lti.courses.single.lectures.item', [0, $child['id']]);
