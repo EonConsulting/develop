@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: jharing10
@@ -27,13 +28,19 @@ class StorylineNav {
         $menu = $this->get_nav(false, storyline_core()->getMenu(false, $course));
         $data = storyline_core()->getIndex($course);
         //Array of Data is formated ::
-
         //dd($data);
 
         $html_obj = new RenderHTML();
         $html = $html_obj->build($data, true, $page, false, $course);
 
         return $html;
+    }
+
+    public function getNavTreeFromCourse(Course $course) {
+        $storyline = $course->latest_storyline()->items->first();
+        $node = StorylineItem::where('id', '=', $storyline->id)->first();
+        $full_tree = $node->getDescendantsAndSelf()->toHierarchy();
+        return $full_tree;
     }
 
     public function getNavHTMLFromCourseNORECURSION(Course $course) {
@@ -51,7 +58,6 @@ class StorylineNav {
         $html_obj = new RenderHTML();
         $html = $html_obj->renderNode($node, $course);
         return $html;
-
     }
 
     public function getNavView($config = false, $page = false) {
@@ -79,10 +85,10 @@ class StorylineNav {
     }
 
     private function get_nav($config = false, $menu = false) {
-        if($config) {
-            for($i = 0; $i < count($menu); $i++) {
+        if ($config) {
+            for ($i = 0; $i < count($menu); $i++) {
                 $m = $menu[$i];
-                if($m['config'] == $config) {
+                if ($m['config'] == $config) {
                     $menu = $m;
                     break;
                 }
