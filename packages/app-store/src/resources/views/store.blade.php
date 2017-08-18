@@ -16,7 +16,7 @@
         .applist {margin-left: 180px; padding: 0px 10px 0px 10px;}
 
         .install-button {width: 180px; float: left;}
-        .btn-install {width: 100%; margin: 0px 10px 0px 10px;}
+        .btn-install {width: 100%; margin: 0px 15px 0px 15px;}
 
         .search-bar {margin-left: 195px; padding: 0px 10px 0px 10px;}
         .search-bar input[type=text] {outline: none; border-radius: 0px; border-width: 0px 0px 1px 0px; border-color: #e6e6e6; border-style: solid;}

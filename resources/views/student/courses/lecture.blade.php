@@ -164,7 +164,7 @@
                 <!--breadcrumbs-->
                 <ul class="breadcrumbs">
 
-                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id])}}">Home</a> &raquo;</li>
+                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id]) }}">Home</a> &raquo;</li>
                     {!! $catBreadcrumbs !!}
                     <li>&nbsp;&nbsp;{{ $storyline_item->name }}</li>
 

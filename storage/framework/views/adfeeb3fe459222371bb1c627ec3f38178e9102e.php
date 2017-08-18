@@ -1,7 +1,6 @@
 
     <div class="user-box">
 
-
         <div id="menu-open">
             <!--Profile pic icon -->
             <div class="user-icon">
@@ -31,7 +30,7 @@
             </div>
 
             <div class="menu-collapse-button">
-                <a href="#" id="collapse-menu">
+                <a href="#" id="collapse-menu" data-toggle="tooltip" data-placement="bottom" title="Collapse Menu">
                     <i class="fa fa-chevron-left"></i>
                 </a>
             </div>

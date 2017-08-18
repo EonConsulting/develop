@@ -151,7 +151,7 @@
                     </div>
 
 
-                    <div class="chatbox-messages">
+                    <div data-simplebar class="chatbox-messages">
 
                         <them>
                             Hi there
@@ -353,7 +353,6 @@
 
     </div>
 
-</div>
 @endsection
 
 @section('custom-scripts')

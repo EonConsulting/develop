@@ -136,7 +136,7 @@ class StorylineBreadcrumbs {
 //       $row = DB::getInstance()->query("SELECT parent FROM categories WHERE ID = '$catID'")->fetch();
         //$row = DB::table('storyline_items')->select('parent_id')->where('id', $catID)->first();
         $row = array();
-        $row= StorylineItem::where('id', $catID)->select('parent_id')->first()->toArray();
+        $row = StorylineItem::where('id', $catID)->select('parent_id')->first()->toArray();
         $path = array();
         if (!$row['parent_id'] == '') {
             $path[] = $row['parent_id'];

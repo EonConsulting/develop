@@ -62,11 +62,14 @@ class CourseLectureItemLTIController extends LTIBaseController {
 		$previous = StorylineItem::where('id', '<', $storylineItem->id)
             ->where('storyline_id', '=', $storyline->id)
             ->max('id');
+        
         //Get Next Big Int Id on DB MysQL
         $next = StorylineItem::where('id', '>', $storylineItem->id)
             ->where('storyline_id', '=', $storyline->id)
             ->min('id');
+        
         $tag_cloud = '';
+        
         if (function_exists('storyline_tag_cloud')) {
             $tag_cloud = storyline_tag_cloud()->getHTML($course);
         }
