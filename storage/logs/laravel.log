@@ -13987,3 +13987,9 @@ Stack trace:
 #22 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #23 C:\Users\michael\Documents\projects\eon\src\eContent\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #24 {main}  
+[2017-08-18 00:56:21] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBTaxonomy' not found' in C:\wamp64\www\develop\packages\storyline-core\src\StorylineCore.php:26
+Stack trace:
+#0 {main}  
+[2017-08-18 00:56:56] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBTaxonomy' not found' in C:\wamp64\www\develop\packages\storyline-core\src\StorylineCore.php:26
+Stack trace:
+#0 {main}  
