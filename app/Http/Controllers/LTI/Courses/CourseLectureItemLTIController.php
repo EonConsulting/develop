@@ -9,14 +9,18 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\Storyline\Nav\StorylineNav;
+use EONConsulting\Storyline\Core\StorylineCore;
+use EONConsulting\Storyline\Menu\StorylineMenu;
+use EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs;
+use EONConsulting\Storyline\TagCloud\StorylineTagCloud;
 
 class CourseLectureItemLTIController extends LTIBaseController {
 
     public function index(Course $course, StorylineItem $storylineItem) {
 
-        $data = storyline_core()->getIndex($course);
+        $slCore = new StorylineCore();
+        $data = $slCore->getIndex($course);
 
-//        dd($data);
         $storyline = $course->storylines()->first();
 
         $styles = [];
@@ -26,31 +30,28 @@ class CourseLectureItemLTIController extends LTIBaseController {
 
         $nav = '';
 
-        if(function_exists('storyline_nav')) {
-            $nav = storyline_nav()->getNavHTMLFromCourse($course);
-            $styles = array_merge($styles, storyline_nav()->getStyles());
-            $scripts = array_merge($scripts, storyline_nav()->getScripts());
-            $custom_scripts[] = storyline_nav()->getCustomScripts();
-        }
+        $slNav = new StorylineNav();
+        $nav = $slNav->getNavHTMLFromCourse($course);
+        $styles = array_merge($styles, $slNav->getStyles());
+        $scripts = array_merge($scripts, $slNav->getScripts());
+        $custom_scripts[] = $slNav->getCustomScripts();
 
         //Peace Additions to J. Harington's Initial Storyline Nav
+        // Mike H refactored this so that we just pass data in 1 query
+        // and then user @each in blade to process the tree
         $navigation = '';
-        if (function_exists('storyline_nav')){
-            $navigation = storyline_nav()->getNavHTMLFromCourseNORECURSION($course);
-        }
+        $navigation = $slNav->getNavTreeFromCourse($course);
 
         $menu = '';
-        if(function_exists('storyline_menu')) {
-            $menu = storyline_menu()->getMenuHTMLFromCourse($course);
-        }
+        // MH: This is not used anywhere, so we have cut the queries in half so far
+        //$slMenu = new StorylineMenu();
+        //$menu = $slMenu->getMenuHTMLFromCourse($course);
 
         $breadcrumbs = '';
 
         //Get and Make Breadcrumbs
-        if (function_exists('storyline_breadcrumbs')) {
-            $catBreadcrumbs = storyline_breadcrumbs()->showCatBreadCrumb($storylineItem->id, $storylineItem->id, $course);
-
-        }
+        $slBreadcrumbs = new StorylineBreadcrumbs();
+        $catBreadcrumbs = $slBreadcrumbs->showCatBreadCrumb($storylineItem->id, $storylineItem->id, $course);
         //Get Next Storyline Item uses the Course Model
         //Get Next Storyline Item uses the Course Model
         //$next = $storylineItem['next'];
@@ -59,16 +60,18 @@ class CourseLectureItemLTIController extends LTIBaseController {
         //$previous = StorylineItem::where('id', '<', $storylineItem->id)->max('id');
         //Get Next Big Int Id on DB MysQL
         //$next = StorylineItem::where('id', '>', $storylineItem->id)->min('id');
-		$previous = StorylineItem::where('id', '<', $storylineItem->id)
-            ->where('storyline_id', '=', $storyline->id)
-            ->max('id');
+        $previous = StorylineItem::where('id', '<', $storylineItem->id)
+                ->where('storyline_id', '=', $storyline->id)
+                ->max('id');
         //Get Next Big Int Id on DB MysQL
         $next = StorylineItem::where('id', '>', $storylineItem->id)
-            ->where('storyline_id', '=', $storyline->id)
-            ->min('id');
+                ->where('storyline_id', '=', $storyline->id)
+                ->min('id');
+
         $tag_cloud = '';
+        $slTagcloud = new StorylineTagCloud();
         if (function_exists('storyline_tag_cloud')) {
-            $tag_cloud = storyline_tag_cloud()->getHTML($course);
+            $tag_cloud = $slTagcloud->getHTML($course);
         }
 
         $breadcrumbs = [
