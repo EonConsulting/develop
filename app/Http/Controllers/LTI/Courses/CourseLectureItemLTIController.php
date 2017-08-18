@@ -42,10 +42,10 @@ class CourseLectureItemLTIController extends LTIBaseController {
         $navigation = '';
         $navigation = $slNav->getNavTreeFromCourse($course);
 
+        // MH: This is also creating too many queries
+        // also using same result from above, 1 query to rule them all :)
         $menu = '';
-        // MH: This is not used anywhere, so we have cut the queries in half so far
-        //$slMenu = new StorylineMenu();
-        //$menu = $slMenu->getMenuHTMLFromCourse($course);
+        $menu = $navigation;
 
         $breadcrumbs = '';
 
