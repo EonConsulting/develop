@@ -156,7 +156,14 @@
 
             <div class="col-md-3">
                 <ul class="nav navbar-nav" data-submenu="true;">
-                        {!! $menu !!}
+                      @foreach($menu as $navitem)
+                          <li>
+                              <a href="{{ route('lti.courses.single.lectures.item', [$course->id, $navitem->id]) }}">{{$navitem->name}}</a>
+                              @if(count($navitem->children))
+                                  @include('student.courses.lecture-nav', ['children' => $navitem->children, 'course' => $course])
+                              @endif
+                          </li>
+                      @endforeach
                 </ul>
             </div>
 
