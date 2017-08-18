@@ -6,4 +6,12 @@ _notes/
 /node_modules/
 .env
 /vendor
+<<<<<<< HEAD
+/nbproject/*
+=======
 /nbproject/private/
+/storage/debugbar
+/storage/framework/views/
+/storage/framework/sessions/
+/storage/logs/
+>>>>>>> f1cdefaa0fecbb136cb6a1547ceef704aaf764a2

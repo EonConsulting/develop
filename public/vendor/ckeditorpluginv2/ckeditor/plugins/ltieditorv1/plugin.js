@@ -13,6 +13,8 @@
  *
  */
 ( function() {
+    
+    if(document.domain === 'dev.unisaonline.net'){var URL = '/e-content/'}else{var URL = '/'}
     CKEDITOR.plugins.add( 'ltieditorv1',
         {
             init: function( editor )
@@ -97,19 +99,19 @@
                             //If Value Contains an Index of .xml -> Send Config File to Server
 
                             $.ajax({
-                                url: '/e-content/ajresponse',
+                                url: URL+'ajresponse',
                                 type: 'GET',
                                 success: function(launchparams) {
                                     // var dialog = CKEDITOR.dialog.getCurrent();
 
                                     if (launch_url.indexOf('.xml') > -1) {
                                             $.ajax({
-                                                url: '/e-content/xmltransport',
+                                                url: 'xmltransport',
                                                 type: 'post',
                                                 data: {launch_url: launch_url, key: key, secret: secret},
                                                 success: function (configparams) {
                                                     if (configparams.status == 'domainerror') {
-                                                        var domainExistsUrl = "/e-content/cklaunch?launch_url="+configparams.launch_url ;
+                                                        var domainExistsUrl = URL+"cklaunch?launch_url="+configparams.launch_url ;
                                                         var propHeight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                                                         var propDiv = new CKEDITOR.dom.element('div');
                                                         var propIframe = new CKEDITOR.dom.element('iframe');
@@ -129,7 +131,7 @@
 
                                                     } else {
                                                     // console.log(configparams);
-                                                    var url = "/e-content/cklaunch?launch_url="+configparams.launch_url ;
+                                                    var url = URL+"cklaunch?launch_url="+configparams.launch_url ;
                                                     var uheight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                                                     var div = new CKEDITOR.dom.element('div');
                                                     var iframe = new CKEDITOR.dom.element('iframe');
@@ -159,12 +161,12 @@
                                          }
                                     else {
                                         $.ajax({
-                                            url: '/e-content/launchtransport',
+                                            url: URL+'launchtransport',
                                             type: 'post',
                                             data: {launch_url: launch_url, key:key, secret:secret},
                                             success: function (config) {
                                                     if (config.status == 'success') {
-                                                        var url = "/e-content/cklaunch?launch_url="+launch_url ;
+                                                        var url = URL+"cklaunch?launch_url="+launch_url ;
                                                         var div =       new CKEDITOR.dom.element('div');
                                                         var iframe =    new CKEDITOR.dom.element('iframe');
                                                         div.setAttributes({
@@ -185,7 +187,7 @@
                                                     }
                                                     else {
                                                         console.log(config);
-                                                        var domainExistsUrl = "/e-content/cklaunch?launch_url="+ launch_url ;
+                                                        var domainExistsUrl = URL+"cklaunch?launch_url="+ launch_url ;
                                                         var propHeight = dialog.getContentElement('ltitab', 'height').getInputElement().getValue();
                                                         var propDiv = new CKEDITOR.dom.element('div');
                                                         var propIframe = new CKEDITOR.dom.element('iframe');
