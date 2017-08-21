@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('custom-css')
 
+@section('page-title')
+    Student Dashboard
+@endsection
+
+
+@section('custom-css')
 
 @endsection
 
@@ -151,7 +156,7 @@
                     </div>
 
 
-                    <div class="chatbox-messages">
+                    <div data-simplebar class="chatbox-messages">
 
                         <them>
                             Hi there
@@ -353,7 +358,6 @@
 
     </div>
 
-</div>
 @endsection
 
 @section('custom-scripts')

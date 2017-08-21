@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Storyline Builder
+@endsection
 
 @section('custom-styles')
     <link rel="stylesheet" href="{{url('/storyline-ng/app/angular-ui-tree.css')}}">

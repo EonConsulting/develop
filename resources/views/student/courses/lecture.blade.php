@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Lecture
+@endsection
 
 @section('custom-styles')
     {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/materialize.min.css"  media="screen,projection"/>--}}
@@ -171,7 +174,7 @@
                 <!--breadcrumbs-->
                 <ul class="breadcrumbs">
 
-                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id])}}">Home</a> &raquo;</li>
+                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id]) }}">Home</a> &raquo;</li>
                     {!! $catBreadcrumbs !!}
                     <li>&nbsp;&nbsp;{{ $storyline_item->name }}</li>
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Courses
+@endsection
+
 @section('custom-styles')
     <style>
 
