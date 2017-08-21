@@ -10,6 +10,8 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         @include('templates.pagehead')
 
+        <title>@yield('page-title') | {{config('app.name')}}</title>
+        
         @yield('custom-styles')
 
     </head>
@@ -20,20 +22,23 @@ $lti = laravel_lti()->is_lti(auth()->user());
             @include('templates.menu')
         </div>
 
-        <div class="rightside-area basic-clearfix">
+        <div class="rightside-area">
 
             <div class="header-area">
                 @include('templates.header')
             </div>
 
-            <div class="content-area">
-                    @yield('content')
+            <div data-simplebar class="content-area">
+                <div style="height: 15px;"></div>
+                @yield('content')
             </div>
 
+            <div>
+                @include('templates.footer')
+            </div>
+
+
         </div>
-
-
-        @include('templates.footer')
 
         @include('templates.default-scripts')
 

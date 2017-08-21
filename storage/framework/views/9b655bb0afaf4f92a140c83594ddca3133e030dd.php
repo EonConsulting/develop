@@ -1,6 +1,5 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><?php echo $__env->yieldContent('site-title'); ?> |  <?php echo e(config('app.name')); ?></title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -16,6 +15,8 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
+<!--Simple Bar-->
+<link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
 
 <script>
     window.Laravel = <?php echo json_encode([
