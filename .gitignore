@@ -6,9 +6,7 @@ _notes/
 /node_modules/
 .env
 /vendor
-<<<<<<< HEAD
 /nbproject/*
-=======
 /nbproject/private/
 /storage/debugbar
 /storage/framework/views/
