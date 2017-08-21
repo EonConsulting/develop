@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('custom-css')
 
+@section('page-title')
+    Lecturer Dashboard
+@endsection
+
+
+@section('custom-css')
 
 @endsection
 
@@ -110,8 +115,8 @@
                             </div>
                         </div>
 
-                        <div class="clearfix"></div>
-    <!--                <hr>
+    <!--                    <div class="clearfix"></div>
+                    <hr>
 
                         <div class="row sp-top-15 sp-bot-15">
 
@@ -151,49 +156,49 @@
                     </div>
 
 
-                    <div class="chatbox-messages">
+                    <div data-simplebar class="chatbox-messages">
 
                         <them>
                             Hi there
                         </them>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <them>
                             How are you?
                         </them>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <me>
                             Hi, I'm fine and you?
                         </me>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <me>
                             What's up?
                         </me>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <them>
                             Have you done task 4? I'm stuck on the second question. I'm not sure what they want.
                         </them>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <me>
                             I have, it was quite tricky.
                         </me>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                         <me>
                             I found some info in the text book that helped.
                         </me>
 
-                        <div class="clearfix"></div>
+                        <div></div>
 
                     </div>
 
@@ -353,7 +358,6 @@
 
     </div>
 
-</div>
 @endsection
 
 @section('custom-scripts')

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Create a Course
+@endsection
+
 @section('content')
 
 <div id="app">

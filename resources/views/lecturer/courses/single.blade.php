@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    View Course
+@endsection
+
 @section('content')
 
     <div class="container-fluid" id="app">

@@ -7678,6 +7678,7 @@ body {
   font-family: "Open Sans",sans-serif;
   background: #f1f1f1;
   display: none;
+  overflow: hidden;
 }
 
 a {
@@ -7714,11 +7715,23 @@ a:active {
 
 .rightside-area {
   margin-left: 230px;
-  min-height: 100vh;
   background: #f9faf7;
   border-width: 0px 0px 0px 1px;
   border-style: solid;
   border-color: #e6e6e6;
+  overflow: hidden;
+  height: 100vh;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  align-items: stretch;
 }
 
 .rightside-area-expand {
@@ -7735,10 +7748,25 @@ a:active {
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   border-color: #fb7217;
+  -webkit-box-ordinal-group: 1;
+  order: 0;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  -webkit-align-self: auto;
+  -ms-grid-row-align: auto;
+  align-self: auto;
 }
 
 .content-area {
-  padding-top: 15px;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  -webkit-box-ordinal-group: 1;
+  order: 0;
+  flex: 1 1 auto;
+  -webkit-align-self: auto;
+  -ms-grid-row-align: auto;
+  align-self: auto;
+  overflow-y: auto;
 }
 
 .user-box {
@@ -7984,7 +8012,7 @@ a:active {
   height: 250px;
   max-height: 250px;
   scroll-behavior: smooth;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 0px 10px 5px 10px;
 }
 
@@ -8096,6 +8124,13 @@ a:active {
   border-style: solid;
   border-color: #e6e6e6;
   font-size: 10px;
+  -webkit-box-ordinal-group: 1;
+  order: 0;
+  -webkit-box-flex: 0;
+  flex: 0 1 auto;
+  -webkit-align-self: auto;
+  -ms-grid-row-align: auto;
+  align-self: auto;
 }
 
 .bg-col-1 {

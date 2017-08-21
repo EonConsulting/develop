@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('custom-css'); ?>
 
 
@@ -149,7 +151,7 @@
                     </div>
 
 
-                    <div class="chatbox-messages">
+                    <div data-simplebar class="chatbox-messages">
 
                         <them>
                             Hi there
@@ -351,7 +353,6 @@
 
     </div>
 
-</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('custom-scripts'); ?>

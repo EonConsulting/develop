@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Notify Users
+@endsection
 
 @section('custom-styles')
 

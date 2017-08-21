@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('page-title')
-    Content Builder
+    Content Builder - {{ $item->name }}
 @endsection
 
 @section('custom-styles')
-{{--<link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
+    {{--    <link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
     <style>
 
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
 
-        /*body {font-family:arial; background: transparent !important;}*/
+        body {font-family:arial; background: transparent !important;}
         .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
         p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
         .ltickplugin {background: transparent;}
@@ -48,19 +48,14 @@
         #app-container .app-item .app-contents .app-details{padding:5px 10px;}
         #app-container .app-item .app-contents .app-details h4 {color:#222222; margin:0; padding:0 0 5px 0; font-size: 12px; text-align:center; border-bottom:1px dashed #cccccc; height:20px;}
         #app-container .app-item .app-contents .app-details p.app-description {font-size:10px; color: #2e383c; height:38px; overflow: hidden; padding:10px 0}
-
-        .ckeditor {height: 100%;}
     </style>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-md-12">
-                <form id="save" method="POST" action="/lecturer/content/builder">
-                    {{--Production URL--}}
-                {{--<form id="save" method="POST" action="/lecturer/content/builder">--}}
+                <form id="save" method="POST">
 
                     @if (session('error_message'))
                         <div class="alert alert-danger">
@@ -82,18 +77,17 @@
                         </div>
                     @endif
 
+                    <label>File Name:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="file_name" placeholder="Content Title" value=""/>
+                        <input type="text" class="form-control" name="file_name" placeholder="File name" value="{{ (old('file_name')) ? old('file_name') : $item->name }}"/>
                         <span class="input-group-addon" id="basic-addon2">.html</span>
-
                     </div>
-
                     <br />
-                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
+                    <label>Content:</label>
+                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">{!! $html !!}</textarea>
                     <input type="hidden" id="data" name="data" />
                     <br />
-                    <button type="button" id="btnsbmit" class="btn btn-primary btn-sm">Save Content</button>
-                    <button type="button" id="btnsbmit" class="btn btn-warning btn-sm">Move to trash</button>
+                    <button type="button" id="btnsbmit" class="btn">Save Data</button>
                     {{ csrf_field() }}
                 </form>
             </div>
@@ -112,29 +106,29 @@
             toolbar: [[ 'LTIButton' ]]
         };
     </script>
-
     <script>
         $(function(){
 
             var editor = CKEDITOR.replace('ltieditorv2inst', {
-                        extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                        allowedContent: true,
-                        fullPage: true,
-                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                        height: 500,
+                    extraPlugins: 'ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                    allowedContent: true,
+                    fullPage: true,
+                    mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
                     on : {
                         // maximize the editor on startup
                         'instanceReady' : function( evt ) {
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset.css")}}');
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset-print.css")}}');
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/materialize.css")}}' );
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/economics.css")}}');
-                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons');
+                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset.css')}}');
+                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset-print.css')}}');
+                            this.document.appendStyleSheet(' {{url('/vendor/storyline/core/components/css/materialize.css')}}' );
+                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/economics.css' )}}');
+                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons' );
                         }
-                    }
-                }
+                    },
+                },
+                config.allowedContent = true
             );
 
+            editor.config.fullPage = true;
 
 //            CKEDITOR.on('instanceReady',
 //            function (evt) {
@@ -144,8 +138,8 @@
 //            });
 
             {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
-//            CKEDITOR.instances.ltieditorv2inst.updateElement();
-//            editor.updateElement();
+            //            CKEDITOR.instances.ltieditorv2inst.updateElement();
+            //            editor.updateElement();
 
             //Custom Function to get the Data from the Editor
             function getData() {
