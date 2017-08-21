@@ -38,7 +38,24 @@ class CourseContentController extends Controller {
 
     public function show(Course $course, StorylineItem $storylineItem) {
         $html = file_get_contents(public_path($storylineItem->file_url));
-        return view('lecturer.courses.edit', ['course' => $course, 'item' => $storylineItem, 'html' => $html]);
+
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Manage '.$course->title,
+                'href' => route('courses.single', $course->id),
+                'child' => [
+                    'title' => 'Course Content',
+                    'href' => route('courses.single.content', $course->id),
+                    'child' => [
+                        'title' => 'Edit Content'
+                    ],
+                ],
+            ],
+        ];
+
+        return view('lecturer.courses.edit', ['course' => $course, 'item' => $storylineItem, 'html' => $html, 'breadcrumbs' => $breadcrumbs]);
     }
 
     public function update(Request $request, Course $course, StorylineItem $storylineItem) {

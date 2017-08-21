@@ -1,3 +1,7 @@
+<?php $__env->startSection('page-title'); ?>
+    View Course
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 
     <div class="container-fluid" id="app">

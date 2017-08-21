@@ -1,3 +1,7 @@
+<?php $__env->startSection('page-title'); ?>
+    Course List
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('custom-styles'); ?>
 
 <?php $__env->stopSection(); ?>

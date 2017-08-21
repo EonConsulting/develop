@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Content Builder
+@endsection
+
 @section('custom-styles')
 {{--<link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
     <style>

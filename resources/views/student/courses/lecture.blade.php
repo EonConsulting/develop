@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Lecture
+@endsection
 
 @section('custom-styles')
     {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/materialize.min.css"  media="screen,projection"/>--}}
@@ -164,7 +167,7 @@
                 <!--breadcrumbs-->
                 <ul class="breadcrumbs">
 
-                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id])}}">Home</a> &raquo;</li>
+                    <li><a href="{{ route('lti.courses.single.lectures.item', [$course->id, $storyline_item->id]) }}">Home</a> &raquo;</li>
                     {!! $catBreadcrumbs !!}
                     <li>&nbsp;&nbsp;{{ $storyline_item->name }}</li>
 
@@ -176,9 +179,16 @@
         <div class="row">
             <div class="col-md-3">
                 {{--{!!  $nav !!}--}}
-                <div id ="navigation">
+                <div id="navigation">
                     <ul class="course-nav">
-                        {!! $navigation !!}
+                        @foreach($navigation as $navitem)
+                            <li>
+                                <a href="{{ route('lti.courses.single.lectures.item', [$course->id, $navitem->id]) }}">{{$navitem->name}}</a>
+                                @if(count($navitem->children))
+                                    @include('student.courses.lecture-nav', ['children' => $navitem->children, 'course' => $course])
+                                @endif
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="clearfix"></div>
