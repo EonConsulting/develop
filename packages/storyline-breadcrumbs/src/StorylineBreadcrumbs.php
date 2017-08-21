@@ -142,6 +142,7 @@ class StorylineBreadcrumbs {
             $path[] = $row['parent_id'];
             $path = array_merge($this->getCategoryTreeIDs($row['parent_id']), $path);
         }
+
         return $path;
 
     }

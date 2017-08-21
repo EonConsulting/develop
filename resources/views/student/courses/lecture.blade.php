@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Lecture
+@endsection
 
 @section('custom-styles')
     {{--<link type="text/css" rel="stylesheet" href="/vendor/storyline/core/css/materialize.min.css"  media="screen,projection"/>--}}

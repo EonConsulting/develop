@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('custom-css')
 
+@section('page-title')
+    Student Dashboard
+@endsection
+
+
+@section('custom-css')
 
 @endsection
 

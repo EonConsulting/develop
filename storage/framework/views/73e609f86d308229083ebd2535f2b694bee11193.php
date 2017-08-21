@@ -180,10 +180,16 @@
         <div class="row">
             <div class="col-md-3">
                 
-                <div id ="navigation">
+                <div id="navigation">
                     <ul class="course-nav">
-                        <?php echo $navigation; ?>
-
+                        <?php $__currentLoopData = $navigation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li>
+                                <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $navitem->id])); ?>"><?php echo e($navitem->name); ?></a>
+                                <?php if(count($navitem->children)): ?>
+                                    <?php echo $__env->make('student.courses.lecture-nav', ['children' => $navitem->children, 'course' => $course], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
                 <div class="clearfix"></div>

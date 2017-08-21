@@ -1,5 +1,11 @@
 
 
+
+<?php $__env->startSection('page-title'); ?>
+    Lecturer Dashboard
+<?php $__env->stopSection(); ?>
+
+
 <?php $__env->startSection('custom-css'); ?>
 
 <?php $__env->stopSection(); ?>

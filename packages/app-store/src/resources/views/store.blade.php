@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    App Store
+@endsection
+
 @section('custom-styles')
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
     <script src="{{url('/js/ng.js')}}"></script>

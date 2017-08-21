@@ -1,3 +1,7 @@
+<?php $__env->startSection('page-title'); ?>
+    Create a Course
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 
 <div id="app">

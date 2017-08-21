@@ -10,6 +10,8 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         <?php echo $__env->make('templates.pagehead', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
+        <title><?php echo $__env->yieldContent('page-title'); ?> | <?php echo e(config('app.name')); ?></title>
+        
         <?php echo $__env->yieldContent('custom-styles'); ?>
 
     </head>
