@@ -56,9 +56,9 @@
         <div class="row">
 
             <div class="col-md-12">
-                <form id="save" method="POST" action="/lecturer/content/builder">
-                    
                 
+                    <?php echo e(Form::open( array('url' => action('Content\ContentBuilderController@store'), 'files'=>true,'method'=>'post') )); ?>
+
 
                     <?php if(session('error_message')): ?>
                         <div class="alert alert-danger">
@@ -96,7 +96,8 @@
                     <button type="button" id="btnsbmit" class="btn btn-warning btn-sm">Move to trash</button>
                     <?php echo e(csrf_field()); ?>
 
-                </form>
+                <?php echo e(Form::close()); ?>
+
             </div>
         </div>
     </div>
