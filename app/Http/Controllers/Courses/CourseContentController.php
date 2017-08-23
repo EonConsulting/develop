@@ -37,9 +37,13 @@ class CourseContentController extends Controller {
 
 
     public function show(Course $course, StorylineItem $storylineItem) {
-        $html = file_get_contents(public_path($storylineItem->file_url));
-
-        $breadcrumbs = [
+        if(empty($storylineItem->file_url))
+            
+          $html = ''; 
+        
+        if(!empty($storylineItem->file_url))
+           $html = file_get_contents(public_path($storylineItem->file_url));        
+           $breadcrumbs = [
             'title' => 'Modules',
             'href' => route('courses'),
             'child' => [
@@ -54,7 +58,7 @@ class CourseContentController extends Controller {
                 ],
             ],
         ];
-
+                 
         return view('lecturer.courses.edit', ['course' => $course, 'item' => $storylineItem, 'html' => $html, 'breadcrumbs' => $breadcrumbs]);
     }
 

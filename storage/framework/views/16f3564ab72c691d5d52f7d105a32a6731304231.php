@@ -1,3 +1,7 @@
+<?php $__env->startSection('page-title'); ?>
+    Content Builder
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('custom-styles'); ?>
 
     <style>
