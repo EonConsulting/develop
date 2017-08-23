@@ -1,6 +1,6 @@
-@extends('layouts.lti')
+@extends('layouts.app')
 
-@section('site-title')
+@section('page-title')
     Modules
 @endsection
 
@@ -42,26 +42,6 @@
             </li>
         </ul>
     </div>
-@endsection
-
-@section('body-class')
-
-@endsection
-
-@section('user-image')
-    {{url('/dist/img/user3-128x128.jpg')}}
-@endsection
-
-@section('mini-logo-title')
-    Modules
-@endsection
-
-@section('logo-title')
-    Modules
-@endsection
-
-@section('page-title')
-    Modules
 @endsection
 
 @section('content')

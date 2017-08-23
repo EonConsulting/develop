@@ -6,3 +6,11 @@
 <script src="{{ url('/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
+<!--Simple Bar-->
+<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

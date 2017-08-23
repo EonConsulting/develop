@@ -11,7 +11,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
 
         @yield('custom-styles')
-
+        
     </head>
 
     <body>
@@ -36,8 +36,6 @@ $lti = laravel_lti()->is_lti(auth()->user());
         @include('templates.footer')
 
         @include('templates.default-scripts')
-
-
 
         @yield('custom-scripts')
 

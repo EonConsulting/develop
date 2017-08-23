@@ -6,7 +6,7 @@ $colour4: #fb7217;
 $light-gray: #e6e6e6;
 
 html {font-family: "Open Sans",sans-serif;}
-body {font-family: "Open Sans",sans-serif; background: #f1f1f1; display: none;}
+body {font-family: "Open Sans",sans-serif; background: #f1f1f1; display: none; overflow: hidden;}
 
 a {color: $unisa-orange;}
 a:hover {text-decoration: none; color: $colour1;}
@@ -18,11 +18,57 @@ a:active {text-decoration: none;}
 .menu-area {width: 230px; min-height: 100%; position: absolute; top: 0; left: 0;}
 .menu-area-collapse {width: 50px;}
 .menu-area-overlay {background: #f1f1f1; z-index: 999; box-shadow: 0px 0px 50px grey; position: fixed;}
-.rightside-area {margin-left: 230px; min-height: 100vh; background: #f9faf7; border-width: 0px 0px 0px 1px; border-style: solid; border-color: $light-gray;}
+.rightside-area {
+    margin-left: 230px; background: #f9faf7; border-width: 0px 0px 0px 1px; border-style: solid; border-color: $light-gray;
+    overflow: hidden;
+    height: 100vh;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
 .rightside-area-expand {margin-left: 50px;}
 .rightside-area-collapse {margin-left: 0px;}
-.header-area {height: 70px; background: #ffffff; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $unisa-orange;}
-.content-area {padding-top: 15px;}
+.header-area {
+    height: 70px; background: #ffffff; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $unisa-orange;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
+
+.content-area {
+    flex: 1 1 auto;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    overflow-y: auto;
+}
 
 //template-menu-user
 $user-box-height: 70px;
@@ -89,7 +135,7 @@ $user-box-height: 70px;
 .progressbar {width: 100%; background-color: $light-gray;}
 .progressbar-fill {width: 1%; height: 10px; background-color: grey;}
 
-.chatbox-messages {height: 250px; max-height: 250px; scroll-behavior: smooth; overflow-y: scroll; padding: 0px 10px 5px 10px;}
+.chatbox-messages {height: 250px; max-height: 250px; scroll-behavior: smooth; overflow-y: auto; padding: 0px 10px 5px 10px;}
 .chatbox-entry {padding: 5px 0px 0px 0px;}
 .chatbox-entry form input {}
 .chatbox-entry form input:focus {outline: none;}
@@ -114,7 +160,19 @@ $user-box-height: 70px;
 .dashboard-card-bottom-link {text-align: center; padding: 5px 0px 10px 0px;}
 
 //Footer area
-.main-footer {padding: 15px; background: #FFF; border-width: 1px 0px 0px 0px; border-style: solid; border-color: #e6e6e6; font-size: 10px;}
+.main-footer {
+    padding: 15px; background: #FFF;
+    border-width: 1px 0px 0px 0px; border-style: solid; border-color: #e6e6e6; font-size: 10px;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+}
 
 //mixins
 .bg-col-1 {background: $colour1;} .bg-col-2 {background: $colour2;} .bg-col-3 {background: $colour3;} .bg-col-4 {background: $colour4;}

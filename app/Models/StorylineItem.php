@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-Use Baum\Node;
+use Baum\Node;
 class StorylineItem extends Node {
     //Enable Nested Sets//
     //use NodeTrait;
