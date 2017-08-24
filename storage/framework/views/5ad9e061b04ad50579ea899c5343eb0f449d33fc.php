@@ -1,3 +1,9 @@
+
+
+<?php $__env->startSection('page-title'); ?>
+    View Course
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('custom-styles'); ?>
     <style>
     .course-card {

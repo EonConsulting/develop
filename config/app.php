@@ -206,6 +206,8 @@ return [
         \EONConsulting\Storyline\TagCloud\StorylineTagCloudServiceProvider::class,
         \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
 
+        \EONConsulting\Storyline2\Storyline2ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -215,6 +217,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ViewComposerServiceProvider::class,
+
+
 
 
     ],
