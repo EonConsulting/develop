@@ -58,9 +58,8 @@
         <div class="row">
 
             <div class="col-md-12">
-                <form id="save" method="POST" action="/lecturer/content/builder">
-                    {{--Production URL--}}
-                {{--<form id="save" method="POST" action="/lecturer/content/builder">--}}
+                
+                    {{  Form::open( array('url' => action('Content\ContentBuilderController@store'), 'files'=>true,'method'=>'post') )  }}
 
                     @if (session('error_message'))
                         <div class="alert alert-danger">
@@ -95,7 +94,7 @@
                     <button type="button" id="btnsbmit" class="btn btn-primary btn-sm">Save Content</button>
                     <button type="button" id="btnsbmit" class="btn btn-warning btn-sm">Move to trash</button>
                     {{ csrf_field() }}
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
  * Time: 10:36 AM
  */
 
-namespace EONConsulting\Storyline\Core\Flow\DBTaxonomy;
+namespace EONConsulting\Storyline\Core\Flow;
 
 
 use App\Models\Course;
