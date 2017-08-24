@@ -21,12 +21,15 @@ class ContentBuilderController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
-            $page = public_path() . '/EON/system/public/vendor/storyline/core/files/content/' . $this->new_file_request($request) . '.html';
-            $file = fopen($page, "w");
-            fwrite($file, json_decode($request->get('data')));
-            fclose($file);
-
-            session()->flash('success_message', 'File saved under ' . $this->new_file_request($request) . '.html');
+            if(empty($request->get("file_name"))){
+               session()->flash('error_message', 'Please add content title.');        
+               }else{              
+               $page = public_path() . '/EON/system/public/vendor/storyline/core/files/content/' . $this->new_file_request($request) . '.html';
+               $file = fopen($page, "w");
+               fwrite($file, json_decode($request->get('data')));
+               fclose($file);
+               session()->flash('success_message', 'File saved under ' . $this->new_file_request($request) . '.html');           
+              }
             return redirect()->route('content.builder');
     }
 
