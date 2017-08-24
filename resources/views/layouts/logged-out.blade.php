@@ -6,17 +6,21 @@
         @yield('custom-styles')
     </head>
 
-    <body>
+    <body id="app-body">
 
-        <div class="content">
-            <!-- Main content -->
-            <section class="content">
+
+        <div class="rightside-area rightside-area-collapse">
+
+            <div data-simplebar class="content-area">
+                <div style="height: 15px;"></div>
                 @yield('content')
-            </section>
-            <!-- /.content -->
-        </div>
+            </div>
 
-        @include('templates.footer')
+            <div>
+                @include('templates.footer')
+            </div>
+
+        </div>
 
         @include('templates.default-scripts')
 

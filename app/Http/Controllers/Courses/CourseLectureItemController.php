@@ -67,7 +67,7 @@ class CourseLectureItemController {
             $tag_cloud = storyline_tag_cloud()->getHTML($course);
         }
 
-        return view('nonlti.courses.lecture', ['data' => $data, 'course' => $course, 'breadcrumbs' => $breadcrumbs,
+        return view('student.courses.lecture', ['data' => $data, 'course' => $course, 'breadcrumbs' => $breadcrumbs,
             'navigation' => $navigation,'nav' => $nav,'styles' => $styles, 'scripts' => $scripts,
             'custom_scripts' => $custom_scripts, 'custom_styles' => $custom_styles,
             'menu' => $menu, 'storyline' => $storyline, 'storyline_item' => $storylineItem,

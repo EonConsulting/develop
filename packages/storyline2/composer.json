@@ -1,5 +1,5 @@
 {
-    "name": "eon/storyline2",
+    "name": "eonconsulting/storyline2",
     "description": "Breathing new life into storyline. A renaissance if you will. It will be better.",
     "type": "package",
     "authors": [
@@ -8,11 +8,10 @@
             "email": "kcrous@iqbusiness.net"
         }
     ],
-    "require": {},
     "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "eon\\storyline2\\": "packages/storyline2/src"
-        }
-    }
+      "psr-4": {
+        "EONConsulting\\Storyline2\\": "src/"
+      }
+    },
+    "require": {}
 }

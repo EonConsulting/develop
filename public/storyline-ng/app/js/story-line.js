@@ -102,9 +102,6 @@
                 return records;
             }
 
-
-
-
             $scope.populateMenu = function(parents, dbItems){
                 var collection = [];
                 var data = $scope.getMenuItems(dbItems);
@@ -121,7 +118,6 @@
                         children: []
                     };
                     menuItem.children = $scope.populateMenu(children, data);
-
                     collection.push(menuItem);
                 });
                 return collection;
@@ -159,12 +155,13 @@
 
 
             $scope.openPopup = function (storylineItem) {
+               
                 CKFinder.popup( {
                     chooseFiles: true,
-                    onInit: function( finder ) {
-                        finder.on( 'files:choose', function( evt ) {
+                    onInit: function( finder ) {                       
+                        finder.on( 'files:choose', function( evt ) {                           
                             var file = evt.data.files.first();
-                            storylineItem.file_url = angular.copy(file.getUrl());
+                            storylineItem.file_url = angular.copy(file.getUrl());    
                             storylineItem.file_name = angular.copy(file.get('name'));
                             //alert(JSON.stringify($scope.storylineItems[index]));
                             // document.getElementById('file_url2' ).value = textel;

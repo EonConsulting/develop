@@ -30,7 +30,7 @@ class CourseController extends Controller {
             ],
         ];
 
-        return view('nonlti.courses.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
+        return view('student.courses.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
 
 }

@@ -49,7 +49,8 @@
             "EONConsulting\\Graphs\\": "packages/Graphs/src/",
             "EONConsulting\\MindMap\\": "packages/MindMap/src/",
             "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
-            "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/"
+            "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
+            "EONConsulting\\Storyline2\\": "packages/storyline2/src"
         },
         "files": [
             "packages/laravel-lti/src/functions.php",
