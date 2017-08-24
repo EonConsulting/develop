@@ -4,6 +4,7 @@
  * This Implementation uses Angular to query a RESTFul API Service and Return Results
  */
 
+
 var notebooks = angular.module('tools', [], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
@@ -15,7 +16,9 @@ notebooks.controller('ToolsListCtrl', function($scope, $http) {
 
     $scope.init = function () {
         $scope.loading = true;
-        $http.get('/eon/lti/ngappstore').
+
+        $http.get( ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/eon/lti/ngappstore').
+
         success(function (data, status, headers, config) {
             $scope.tools = data;
             $scope.loading = false;

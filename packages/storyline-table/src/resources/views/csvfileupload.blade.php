@@ -1,18 +1,19 @@
-<link rel="stylesheet" href="/vendor/csvfileupload/css/fileinput.min.css">
+<link rel="stylesheet" href="{{ url('/vendor/csvfileupload/css/fileinput.min.css') }}">
 
 <input id="input-id" type="file" name="csv" class="file-loading" data-preview-file-type="image">
 <div id="kv-error-1" style="margin-top:10px;display:none"></div>
 <div id="kv-success-1" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
-
+<!-- Global JS Config -->
+<script src="{{ url('/js/global-config.js') }}"></script>
 <!-- the main fileinput plugin file -->
-<script src="/vendor/csvfileupload/js/fileinput.js"></script>
+<script src="{{ url('/vendor/csvfileupload/js/fileinput.js') }}"></script>
 
 <script>
     var filetype = '{{ $filetype }}';
     var course_id = '{{ $course }}';
 
    $("#input-id").fileinput({
-        uploadUrl: "/lecturer/csv/storeStoryline/"+course_id, // server upload action
+        uploadUrl: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + "/lecturer/csv/storeStoryline/" + course_id, // server upload action
         uploadAsync: true,
         showPreview: true,
         allowedFileExtensions: [filetype],
@@ -37,5 +38,3 @@
         },3000)
     });
 </script>
-
-

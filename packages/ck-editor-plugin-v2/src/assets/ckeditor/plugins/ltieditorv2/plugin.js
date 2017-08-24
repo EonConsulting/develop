@@ -12,6 +12,8 @@
  * @member CKEDITOR.editor
  *
  */
+
+ console.log("Subdir is set to: " + config["subdir"]);
 ( function() {
     var iframeWindow = null;
     CKEDITOR.plugins.add( 'ltieditorv2',
@@ -36,7 +38,7 @@
                                 elements : [{
                                     type: 'iframe',
                                     //src:  '/e-content/ckeditorstore',
-                                    src:  '/ckeditorstore',
+                                    src:  ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ckeditorstore',
                                     width  : '100%',
                                     height : '100%',
                                     onContentLoad: function () {
@@ -54,12 +56,12 @@
                                                 $.ajax({
                                                     //Production Url
                                                     //url: '/e-content/ajaxresponse/' + context_id,
-                                                    url: '/ajaxresponse/'+context_id,
+                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/'+context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         //Production
                                                         //var url        = '/e-content/ajaxresponse/' +context_id;
-                                                        var url        = '/ajaxresponse/'+context_id;
+                                                        var url        = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/'+context_id;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         console.log('appframe', appframe);
