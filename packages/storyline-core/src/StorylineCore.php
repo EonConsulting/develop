@@ -12,7 +12,8 @@ use App\Models\Course;
 use EONConsulting\Storyline\Core\Classes\Breadcrumbs;
 use EONConsulting\Storyline\Core\Classes\CommonWords;
 use EONConsulting\Storyline\Core\Classes\GetSummary;
-use EONConsulting\Storyline\Core\Flow\DBTaxonomy\DBTaxonomy;
+
+use EONConsulting\Storyline\Core\Flow\DBTaxonomy;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
 
 class StorylineCore {
