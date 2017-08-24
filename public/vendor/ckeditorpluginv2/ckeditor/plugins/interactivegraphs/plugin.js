@@ -36,7 +36,7 @@
                                 elements : [{
                                     type: 'iframe',
                                     //src:  '/ckeditorstore',
-                                    src:  '/graphstore',
+                                    src:  ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/graphstore',
                                     width  : '100%',
                                     height : 450,
                                     onContentLoad: function () {
@@ -53,12 +53,12 @@
                                                 $.ajax({
                                                     //Production Url
                                                     //url: '/ajaxresponse/' + context_id,
-                                                    url: '/graphstore/init/' + context_id,
+                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/graphstore/init/' + context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         //Production
                                                         //var url        = '/ajaxresponse/' +context_id;
-                                                        var url        = '/graphstore/init/' +context_id;
+                                                        var url        = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/graphstore/init/' +context_id;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         console.log('appframe', appframe);
