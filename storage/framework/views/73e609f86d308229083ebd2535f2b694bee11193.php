@@ -161,8 +161,14 @@
 
             <div class="col-md-3">
                 <ul class="nav navbar-nav" data-submenu="true;">
-                        <?php echo $menu; ?>
-
+                      <?php $__currentLoopData = $menu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <li>
+                              <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $navitem->id])); ?>"><?php echo e($navitem->name); ?></a>
+                              <?php if(count($navitem->children)): ?>
+                                  <?php echo $__env->make('student.courses.lecture-nav', ['children' => $navitem->children, 'course' => $course], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                              <?php endif; ?>
+                          </li>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
 
@@ -198,7 +204,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-9">
-                <iframe src="<?php echo e('/'); ?><?php echo e($storyline_item->file_url); ?>" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
+                <iframe src="<?php echo e(url("").$storyline_item->file_url); ?>" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
                 <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $previous])); ?>" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
                 <a href="<?php echo e(route('lti.courses.single.lectures.item', [$course->id, $next])); ?>" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
 
