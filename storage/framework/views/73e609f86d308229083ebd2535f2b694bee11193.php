@@ -1,5 +1,8 @@
 
 
+<?php $__env->startSection('page-title'); ?>
+    Lecture
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('custom-styles'); ?>
     

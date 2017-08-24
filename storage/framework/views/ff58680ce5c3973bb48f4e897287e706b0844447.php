@@ -1,7 +1,12 @@
 
 
-<?php $__env->startSection('custom-css'); ?>
 
+<?php $__env->startSection('page-title'); ?>
+    Student Dashboard
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('custom-css'); ?>
 
 <?php $__env->stopSection(); ?>
 
@@ -9,6 +14,14 @@
 <?php $__env->startSection('content'); ?>
 
     <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 15px;">
+                <div class="beta-notice">
+                    Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
+                </div>
+            </div>
+        </div>
 
         <div class="row">
 

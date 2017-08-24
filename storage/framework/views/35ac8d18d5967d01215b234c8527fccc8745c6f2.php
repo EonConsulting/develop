@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('page-title'); ?>
     View Course
 <?php $__env->stopSection(); ?>

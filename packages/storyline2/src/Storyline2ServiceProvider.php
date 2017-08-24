@@ -1,6 +1,6 @@
 <?php
 
-namespace Eon\Storyline2;
+namespace EONConsulting\Storyline2;
 
 use Illuminate\Support\ServiceProvider;
 
