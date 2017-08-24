@@ -35,7 +35,7 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
-                                    src:  '/ckeditorstore',
+                                    src:  ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ckeditorstore',
                                     width  : '100%',
                                     height : 450,
                                     onContentLoad: function () {
@@ -52,13 +52,13 @@
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
                                                     //Production Url - Use if on Dev Server
-                                                    url: '/e-content/ajaxresponse/' + context_id,
+                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/' + context_id,
 													//Local Url - Use if On Local Machine
                                                     //url: '/ajaxresponse/'+context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
                                                         //Production Url - Use if on Dev Server
-                                                        var url        = '/e-content/ajaxresponse/' +context_id;
+                                                        var url        = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/' +context_id;
 														//Local Url - Use if On Local Machine
                                                         //var url        = '/ajaxresponse/'+context_id;
                                                         var div        = new CKEDITOR.dom.element('div');

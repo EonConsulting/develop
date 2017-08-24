@@ -12,7 +12,7 @@
             $scope.toggle = function (scope) {
                 scope.toggle();
             };
-            
+
 			$scope.showModal = function(storylineItem){
                 $('input[name="storyline_id"]').val(storylineItem.id);
                 $('#myCont').modal();
@@ -35,7 +35,7 @@
 
             $scope.saveStoryline = function(){
                 // var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
-                var url = "/lecturer/courses/" + $scope.course_id + "/storyline";
+                var url = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + "/lecturer/courses/" + $scope.course_id + "/storyline";
                 $http.post(url, {parts: angular.toJson($scope.storylineItems)})
                     .then(function (response) {
                         $scope.html = '<p class="alert alert-success" style="margin-top:5px;">' +
@@ -50,7 +50,7 @@
             $scope.getPeople = function(){
                 $scope.isLoading = true;
                 // $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
-                $http.get("/lecturer/courses/" + $scope.course_id + "/storyline/feed")
+                $http.get( ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + "/lecturer/courses/" + $scope.course_id + "/storyline/feed")
                     .then(function (response) {
                         //First function handles success
                         var dbItems = response.data;
@@ -155,13 +155,13 @@
 
 
             $scope.openPopup = function (storylineItem) {
-               
+
                 CKFinder.popup( {
                     chooseFiles: true,
-                    onInit: function( finder ) {                       
-                        finder.on( 'files:choose', function( evt ) {                           
+                    onInit: function( finder ) {
+                        finder.on( 'files:choose', function( evt ) {
                             var file = evt.data.files.first();
-                            storylineItem.file_url = angular.copy(file.getUrl());    
+                            storylineItem.file_url = angular.copy(file.getUrl());
                             storylineItem.file_name = angular.copy(file.get('name'));
                             //alert(JSON.stringify($scope.storylineItems[index]));
                             // document.getElementById('file_url2' ).value = textel;
