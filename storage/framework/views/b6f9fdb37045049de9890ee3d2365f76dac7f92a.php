@@ -1,3 +1,9 @@
+
+
+<?php $__env->startSection('page-title'); ?>
+    Storyline Builder
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('custom-styles'); ?>
     <link rel="stylesheet" href="<?php echo e(url('/storyline-ng/app/angular-ui-tree.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(url('/storyline-ng/app/app.css')); ?>">
@@ -283,4 +289,5 @@
         });
     </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
