@@ -1,6 +1,8 @@
 $developer = true;
 $collapsed = false;
 
+console.log(window.global_conf.subdir);
+
 $(document).ready(function() {
 
     initPrefs();
