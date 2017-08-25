@@ -6,9 +6,8 @@ Student Dashboard
 @endsection
 
 
-@section('custom-css')
+@section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" />
 @endsection
 
 
@@ -493,64 +492,88 @@ move(document.getElementById('goal4progress'), 78);
                 center: 'title',
                 right: 'month,basicWeek,basicDay'
             },
-            defaultDate: '2017-05-12',
+            defaultDate: '2017-08-20',
             navLinks: true, // can click day/week names to navigate views
-            editable: true,
+            editable: false,
             eventLimit: true, // allow "more" link when too many events
             events: [
                 {
                     title: 'All Day Event',
-                    start: '2017-05-01'
+                    start: '2017-08-01',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Long Event',
-                    start: '2017-05-07',
-                    end: '2017-05-10'
+                    start: '2017-08-07',
+                    end: '2017-08-10',
+                    backgroundColor: '#f39c12', //yellow
+                    borderColor: '#f39c12' //yellow
                 },
                 {
                     id: 999,
                     title: 'Repeating Event',
-                    start: '2017-05-09T16:00:00'
+                    start: '2017-08-09T16:00:00',
+                    backgroundColor: '#0073b7', //Blue
+                    borderColor: '#0073b7' //Blue
                 },
                 {
                     id: 999,
                     title: 'Repeating Event',
-                    start: '2017-05-16T16:00:00'
+                    start: '2017-08-16T16:00:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Conference',
-                    start: '2017-05-11',
-                    end: '2017-05-13'
+                    start: '2017-08-11',
+                    end: '2017-08-13',
+                    backgroundColor: '#00a65a', //Success (green)
+                    borderColor: '#00a65a' //Success (green)
                 },
                 {
                     title: 'Meeting',
-                    start: '2017-05-12T10:30:00',
-                    end: '2017-05-12T12:30:00'
+                    start: '2017-08-12T10:30:00',
+                    end: '2017-08-12T12:30:00',
+                    backgroundColor: '#0073b7', //Blue
+                    borderColor: '#0073b7' //Blue
                 },
                 {
                     title: 'Lunch',
-                    start: '2017-05-12T12:00:00'
+                    start: '2017-08-12T12:00:00',
+                    backgroundColor: '#f39c12', //yellow
+                    borderColor: '#f39c12' //yellow
                 },
                 {
                     title: 'Meeting',
-                    start: '2017-05-12T14:30:00'
+                    start: '2017-08-12T14:30:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Happy Hour',
-                    start: '2017-05-12T17:30:00'
+                    start: '2017-08-12T17:30:00',
+                    backgroundColor: '#f39c12', //yellow
+                    borderColor: '#f39c12' //yellow
                 },
                 {
                     title: 'Dinner',
-                    start: '2017-05-12T20:00:00'
+                    start: '2017-08-12T20:00:00',
+                    backgroundColor: '#0073b7', //Blue
+                    borderColor: '#0073b7' //Blue
                 },
                 {
                     title: 'Birthday Party',
-                    start: '2017-05-13T07:00:00'
+                    start: '2017-08-13T07:00:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Click for Google',
                     url: 'http://google.com/',
-                    start: '2017-05-28'
+                    start: '2017-08-28',
+                    backgroundColor: '#f39c12', //yellow
+                    borderColor: '#f39c12' //yellow
                 }
             ]
         });
