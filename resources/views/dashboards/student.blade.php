@@ -153,6 +153,16 @@ Student Dashboard
                 <div class="dashboard-card-heading">
                     Dashboard Filters
                 </div>
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <label class="control-label" for="db_filters_course">Please select a course</label>
+                        <select class="form-control" id="db_filters_course">
+                            <option>FNB101 Financial Accounting</option>
+                            <option>XYZ201 Superhero Fundamentals</option>
+                            <option>ABC202 Superhero Gadgetary</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -161,6 +171,9 @@ Student Dashboard
 
                 <div class="dashboard-card-heading">
                     Timeline
+                </div>
+                <div class="container-fluid">
+                    <div id="student_timeline"></div>
                 </div>
             </div>
         </div>
@@ -385,7 +398,8 @@ Student Dashboard
 <script src="{{url('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <!-- SlimScroll 1.3.0 -->
 <script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
-<!-- ChartJS -->
+<!-- ChartJS for Student Calendar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <script>
@@ -472,9 +486,75 @@ move(document.getElementById('goal4progress'), 78);
 //--------------------------
 //-STUDENT CALENDAR---------
 //--------------------------
-$(document).ready(function(){
-    
-});
+    $(document).ready(function () {
+        $('#student_timeline').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+            },
+            defaultDate: '2017-05-12',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: '2017-05-01'
+                },
+                {
+                    title: 'Long Event',
+                    start: '2017-05-07',
+                    end: '2017-05-10'
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: '2017-05-09T16:00:00'
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: '2017-05-16T16:00:00'
+                },
+                {
+                    title: 'Conference',
+                    start: '2017-05-11',
+                    end: '2017-05-13'
+                },
+                {
+                    title: 'Meeting',
+                    start: '2017-05-12T10:30:00',
+                    end: '2017-05-12T12:30:00'
+                },
+                {
+                    title: 'Lunch',
+                    start: '2017-05-12T12:00:00'
+                },
+                {
+                    title: 'Meeting',
+                    start: '2017-05-12T14:30:00'
+                },
+                {
+                    title: 'Happy Hour',
+                    start: '2017-05-12T17:30:00'
+                },
+                {
+                    title: 'Dinner',
+                    start: '2017-05-12T20:00:00'
+                },
+                {
+                    title: 'Birthday Party',
+                    start: '2017-05-13T07:00:00'
+                },
+                {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: '2017-05-28'
+                }
+            ]
+        });
+    });
 </script>
 
 @endsection
