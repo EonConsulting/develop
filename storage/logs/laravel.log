@@ -17188,3 +17188,6 @@ Stack trace:
 #54 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #55 /home/vagrant/Code/dev_dump_20170802/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #56 {main}  
+[2017-08-25 08:52:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline2\Storyline2ServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:612
+Stack trace:
+#0 {main}  

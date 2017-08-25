@@ -9,7 +9,7 @@
 <!-- FastClick -->
 <script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
 <!--Simple Bar-->
-<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+<!--<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>-->
 
 <script>
     $(function () {
