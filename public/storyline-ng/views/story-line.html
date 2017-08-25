@@ -12,13 +12,13 @@
     <a class="stoyline-btn" ng-if="storylineItem.children && storylineItem.children.length > 0"
        data-nodrag
        ng-click="toggle(this)">
-      <span
-        class="glyphicon"
+        <i
+        class="fa"
         ng-class="{
-          'glyphicon-chevron-right': collapsed,
-          'glyphicon-chevron-down': !collapsed
-        }">
-        </span>
+          'fa-chevron-right': collapsed,
+          'fa-chevron-down': !collapsed
+        }"
+        ></i>
     </a>
 
     <input class="content-title"
@@ -33,26 +33,26 @@
     <a class="stoyline-btn storyline-btn-delete pull-right"
        data-nodrag
        ng-click="remove(this)">
-      <span class="glyphicon glyphicon-remove"></span>
+      <i class="fa fa-remove"></i>
     </a>
 
   <a class="stoyline-btn storyline-btn-add pull-right"
      data-nodrag
      ng-click="newSubItem(this)"
      style="margin-right: 8px;">
-    <span class="glyphicon glyphicon-plus"></span>
+    <i class="fa fa-plus"></i>
   </a>
 
     <a class="btn btn-default btn-sm clickme pull-right"
        data-nodrag
        ng-click="showModal(storylineItem)">
-      <span class="fa fa-pencil"></span> Create Content
+      <i class="fa fa-pencil"></i> Create Content
     </a>
 
     <a class="btn btn-default btn-sm pull-right"
            data-nodrag
            ng-click="openPopup(storylineItem)">
-        <span class="fa fa-folder-open"></span> Select Content
+        <i class="fa fa-folder-open"></i> Select Content
     </a>
 
   </div>

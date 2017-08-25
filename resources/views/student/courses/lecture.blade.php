@@ -201,7 +201,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-9">
-                <iframe src="{{'/'}}{{$storyline_item->file_url}}" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
+                <iframe src="{{ url("")."/".$storyline_item->file_url }}" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
                 <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
                 <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
 

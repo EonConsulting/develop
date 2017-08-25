@@ -6,10 +6,12 @@
     <title><?php echo $__env->yieldContent('site-title'); ?> |  <?php echo e(config('app.name')); ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Global JS Config -->
+    <script src="<?php echo e(url('/js/global-config.js')); ?>"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="<?php echo e(URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js')); ?>"></script>
-    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></head>
-    <![endif]-->
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+</head>
 
     <script>
         window.Laravel = <?php echo json_encode([
@@ -105,5 +107,6 @@
 <div class="wrapper" id="app">
     <?php echo $__env->yieldContent('content'); ?>
 </div>
+
 </body>
 </html>

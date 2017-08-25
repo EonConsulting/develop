@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('page-title')
-    App Launcher
-@endsection
-
 @section('custom-styles')
     <link href="{{ url('/vendor/appstore/css/bootstrap.min.css') }}" rel="stylesheet" />
 
@@ -81,7 +77,6 @@
         <div class="row">
 
             <div class="col-md-12" id="launch_window">
-                
                 <?php echo $content; ?>
             </div>
 
