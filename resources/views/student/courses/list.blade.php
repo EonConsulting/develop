@@ -62,7 +62,7 @@
                             </div>
                             <div class="btn-course-container">
                                 <a href="{{ route('lti.courses.single', $course['id']) }}" class="btn-course btn-course-view" role="button">
-                                    <span class="glyphicon glyphicon-blackboard"></span> View
+                                    <i class="fa fa-mortar-board"></i> View
                                 </a>
                             </div>
                         </div>

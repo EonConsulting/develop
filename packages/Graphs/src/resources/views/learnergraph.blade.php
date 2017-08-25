@@ -10,7 +10,7 @@
             <div class="col-sm-12 " style="background-color:none; ">
 
                 <p>Preview</p>
-                <div id="preview1  ">
+                <div id="preview1">
                     <div id='jxgbox' class='textareaCode' style=' border: groove;'></div>
                 </div>
             </div>
@@ -19,8 +19,7 @@
 
     </div>
     <div id="preview2">
-        <
-        <script style="text/javascript">
+        <script type="text/javascript">
             {!! $graph->code !!}
         </script>
     </div>
