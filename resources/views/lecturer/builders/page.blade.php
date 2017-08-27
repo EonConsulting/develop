@@ -121,6 +121,7 @@
                         fullPage: true,
                         mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
                         height: 500,
+                         
                     on : {
                         // maximize the editor on startup
                         'instanceReady' : function( evt ) {
