@@ -190,7 +190,7 @@
                     <ul class="course-nav">
                         @foreach($navigation as $navitem)
                             <li>
-                                <a href="{{ route('lti.courses.single.lectures.item', [$course->id, $navitem->id]) }}">{{$navitem->name}}</a>
+                                <a href="{{ route('lti.courses.single.lectures.item', [$course->id, $navitem->id]) }}" class="prev" id="{{$navitem->id}}" data="{{$course->id}}">{{$navitem->name}}</a>
                                 @if(count($navitem->children))
                                     @include('student.courses.lecture-nav', ['children' => $navitem->children, 'course' => $course])
                                 @endif
@@ -278,5 +278,32 @@
 //            }
         }
         //        $('[data-submenu]').submenupicker();
+        $(document).ready(function(){
+            $(".jstree-node").click(function(e){
+                  e.stopPropagation();
+                  e.preventDefault();
+                  var storyline = $('.prev').attr("id");
+                  var courseId = $('.prev').attr("data");
+                  var student = '<?php echo auth()->user()->name;?>';
+                $.ajax({
+                url: '/student/progression',
+                type: "POST",
+                asyn: false,
+                data:{course: courseId,storyline: storyline,student: student,_token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR)
+                {
+                    $('.csv-view').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                   // location.reload();
+                }
+              });
+            });
+            
+        });
     </script>
 @endsection

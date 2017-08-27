@@ -17,11 +17,11 @@ class DefaultController extends LTIBaseController {
     /**
      * @param Request $request
      */
-    public function storeData(Request $request) {
+    public function storeProgress(Request $request) {
         $StudentProgress = new StudentProgress();
         $StudentProgress->student =  $request->get('student');
-        $StudentProgress->course_id = (int) $request->get('course_id');
-        $StudentProgress->storyline_item_id = (int) $request->get('topic');
+        $StudentProgress->course_id = (int) $request->get('course');
+        $StudentProgress->storyline_item_id = (int) $request->get('storyline');
     if($StudentProgress->save()){
         echo "yeeeeeee";
       }else{

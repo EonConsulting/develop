@@ -12,7 +12,7 @@ namespace EONConsulting\Student\Progression;
 
 use Illuminate\Support\ServiceProvider;
 
-class StorylineTableServiceProvider extends ServiceProvider
+class StudentProgressionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -20,7 +20,7 @@ class StorylineTableServiceProvider extends ServiceProvider
             __DIR__.'/assets' => public_path('vendor/student-progression'),
         ],'public');
 
-            require __DIR__.'/Http/Route/routes.php';
+            require __DIR__.'/Http/routes.php';
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'student-progression');
     }
 

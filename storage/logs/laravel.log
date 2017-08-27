@@ -17305,3 +17305,12 @@ Stack trace:
 [2017-08-27 11:33:42] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Student\Progression\StudentProgressionServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:208
 Stack trace:
 #0 {main}  
+[2017-08-27 12:25:33] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Student\Progression\StudentProgressionServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:208
+Stack trace:
+#0 {main}  
+[2017-08-27 12:27:49] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'EONConsulting\Student\Progression\StudentProgressionServiceProvider::boot(): Failed opening required 'C:\wamp64\www\develop\packages\student-progression\src/Http/Route/routes.php' (include_path='.;C:\php\pear')' in C:\wamp64\www\develop\packages\student-progression\src\StudentProgressionServiceProvider.php:23
+Stack trace:
+#0 {main}  
+[2017-08-27 06:11:41] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'App\Models\StudentProgress' not found' in C:\wamp64\www\develop\packages\student-progression\src\Http\Controllers\DefaultController.php:21
+Stack trace:
+#0 {main}  
