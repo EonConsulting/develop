@@ -256,6 +256,7 @@
         window.onload = function() {
             {!! $cs !!}
             $('a.sidebar-toggle').trigger('click');
+            saveProgress();
         };
 
         $('.dropdown').hover(function(){
@@ -278,32 +279,61 @@
 //            }
         }
         //        $('[data-submenu]').submenupicker();
+        function saveProgress(){
+            var storyline = $('.prev').attr("id");
+            var courseId = $('.prev').attr("data");
+            var student = '{{auth()->user()->name}}';
+            $.ajax({
+                    url: '/student/progression',
+                    type: "POST",
+                    asyn: false,
+                    data:{course: courseId,storyline: storyline,student: student,_token: "{{ csrf_token() }}"},
+                    beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                   },
+                   success: function (data, textStatus, jqXHR){
+                     if(data === 'false'){
+                        alert('true');
+                     }
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                   // location.reload();
+                   }
+                  });
+        }
+        
         $(document).ready(function(){
             $(".jstree-node").click(function(e){
                   e.stopPropagation();
                   e.preventDefault();
                   var storyline = $('.prev').attr("id");
                   var courseId = $('.prev').attr("data");
-                  var student = '<?php echo auth()->user()->name;?>';
-                $.ajax({
-                url: '/student/progression',
-                type: "POST",
-                asyn: false,
-                data:{course: courseId,storyline: storyline,student: student,_token: "{{ csrf_token() }}"},
-                beforeSend: function () {
+                  var student = '{{auth()->user()->name}}';
+                  var topic  = $(this).text();                                
+                    $.ajax({
+                    url: '/student/progression',
+                    type: "POST",
+                    asyn: false,
+                    data:{course: courseId,storyline: storyline,student: student,topic: topic,_token: "{{ csrf_token() }}"},
+                    beforeSend: function () {
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR)
-                {
-                    $('.csv-view').html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
+                   },
+                   success: function (data, textStatus, jqXHR){
+                     if(data.msg === 'false'){
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/"+data.story;
+                     }else{
+                         window.location.href = "/lti/courses/{{$course->id}}/lectures/"+data.story;
+                     }    
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                    // location.reload();
-                }
-              });
-            });
-            
+                   }
+                  });
+                  //}
+                });
+               
         });
     </script>
 @endsection
