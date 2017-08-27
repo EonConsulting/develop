@@ -22,7 +22,7 @@ class DefaultController extends LTIBaseController {
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
         $progress = $StudentProgress::whereStorylineItemId($request->get('storyline'))->first();
-        $StorylineItem::select('id')->where('sttoryline_id',$progress->storyline_id);
+        
         if($progress){
             
             $message = 'true';
@@ -50,6 +50,14 @@ class DefaultController extends LTIBaseController {
            $StudentProgress->course_id = (int) $request->get('course');
            $StudentProgress->storyline_item_id = (int) $request->get('storyline');
            $StudentProgress->save();
+    }
+    
+    /**
+     * @param $storyline
+     * @param $CVS
+     */
+    public function topics($request,$StudentProgress) {
+         $StorylineItem::select('id')->where('sttoryline_id',$progress->storyline_id);  
     }
 
 }
