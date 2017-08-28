@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Global JS Config -->
 <script src="{{ url('/js/global-config.js') }}"></script>
 <!-- jQuery 2.2.3 -->
@@ -16,3 +17,23 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+=======
+<!-- Global JS Config -->
+<script src="{{ url('/js/global-config.js') }}"></script>
+<!-- jQuery 2.2.3 -->
+<script src="{{ url('/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
+<!-- Menu Collapse script -->
+<script src="{{ url('/js/menu-collapse.js') }}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{ url('/bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
+<!--Simple Bar-->
+<!--<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>-->
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+>>>>>>> 4cb07cb1ca500c9e7359b6d93c5f6b97cac8ad5c

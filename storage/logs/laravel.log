@@ -17188,6 +17188,11 @@ Stack trace:
 #54 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #55 /home/vagrant/Code/dev_dump_20170802/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #56 {main}  
+<<<<<<< HEAD
+[2017-08-25 08:52:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline2\Storyline2ServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:612
+Stack trace:
+#0 {main}  
+=======
 [2017-08-24 12:58:18] local.ERROR: PDOException: could not find driver in C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('mysql:host=127....', 'root', 'secret', Array)
@@ -17287,6 +17292,7 @@ Stack trace:
 #21 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(114): Illuminate\Foundation\Console\Kernel->bootstrap()
 #22 C:\EON\dev_dump_20170802\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #23 {main}  
+<<<<<<< HEAD
 [2017-08-25 12:31:33] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(68): PDO->__construct('mysql:host=loca...', 'root', 'secret', Array)
@@ -17549,3 +17555,6 @@ Stack trace:
 #12 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(189): Illuminate\Foundation\Http\Kernel->terminateMiddleware(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #13 /home/vagrant/Code/public/index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #14 {main}  
+=======
+>>>>>>> d76404ac8d804169bf3357f204955eae618ed715
+>>>>>>> 4cb07cb1ca500c9e7359b6d93c5f6b97cac8ad5c
