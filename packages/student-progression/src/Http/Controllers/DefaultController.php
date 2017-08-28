@@ -18,46 +18,65 @@ class DefaultController extends LTIBaseController {
      * @param Request $request
      */
     public function storeProgress(Request $request) {
-        
+
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
-        $progress = $StudentProgress::whereStorylineItemId($request->get('storyline'))->first();
-        
-        if($progress){
-            
+        $progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
+        if ($progress) {
+            $storylineItemId = $progress->storyline_item_id;
+            $topicArray = $this->topics($StorylineItem, $progress->storyline_id);
+            ksort($topicArray);
+            $key = array_search($storylineItemId, $topicArray);
+            $q = $StorylineItem::whereId($topicArray[$key + 1])->first();
+            $fileURL  = $this->check_level($request->get('id'),$topicArray[$key + 1],$progress,$q);
             $message = 'true';
-            $story   = $progress->storyline_item_id;
-           }else{
-            $this->save_progress($request,$StudentProgress);           
+            $story   = $fileURL;
+        } else {
+            $this->save_progress($request,$StudentProgress);
+            $story = $request->get('storyline');
             $message = 'false';
-            $story   = $request->get('storyline');
-          }
-          
-          $response = array(
+        }
+
+        $response = array(
             'msg' => $message,
-            'story'=>$story,
-          );
-          
-          return \Response::json($response);
+            'story' => $story,
+        );
+
+        return \Response::json($response);
     }
 
     /**
      * @param $storyline
      * @param $CVS
      */
-    public function save_progress($request,$StudentProgress) {
-           $StudentProgress->student =  $request->get('student');
-           $StudentProgress->course_id = (int) $request->get('course');
-           $StudentProgress->storyline_item_id = (int) $request->get('storyline');
-           $StudentProgress->save();
+    public function save_progress($request, $StudentProgress) {
+        $StudentProgress->student = $request->get('student');
+        $StudentProgress->course_id = (int) $request->get('course');
+        $StudentProgress->storyline_item_id = (int) $request->get('id');
+        $StudentProgress->storyline_id = (int) $request->get('storyline');
+        $StudentProgress->save();
     }
-    
+
     /**
      * @param $storyline
      * @param $CVS
      */
-    public function topics($request,$StudentProgress) {
-         $StorylineItem::select('id')->where('sttoryline_id',$progress->storyline_id);  
+    public function topics($StorylineItem, $storylineId) {
+        $query = $StorylineItem::where('storyline_id', $storylineId)->get();
+
+        foreach ($query as $value) {
+            $topic[] = $value->id;
+        }
+
+        return $topic;
+    }
+
+    public function check_level($level,$plusOne,$progress,$q) {
+        if ($level > $plusOne) {
+            return $progress->file_url;
+        } else {
+            return $q->file_url;
+        }
     }
 
 }
