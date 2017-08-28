@@ -73,7 +73,7 @@ Student Dashboard
             <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Monthly Performance
+                    Results
                 </div>
 
                 <div class="container-fluid">

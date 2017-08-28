@@ -46,7 +46,7 @@
     <!-- Custom Stylesheet for the CKEditor LTI Plugin -->
     <style>
 
-        body {font-family: "Open Sans",sans-serif; background: transparent !important; margin: 0px; padding: 15px;}
+        body {font-family: "Open Sans",sans-serif; background: transparent !important; margin: 0px; padding: 15px; overflow-y: scroll;}
 
         .cke_button__LTIButton_icon { display:none !important;  }
         .cke_button__LtiTools_label { display: inline !important }
