@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
     <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+
 </head>
 
     <script>
@@ -108,5 +109,7 @@
     @yield('content')
 </div>
 
+<!--Simple Bar-->
+<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
 </body>
 </html>
