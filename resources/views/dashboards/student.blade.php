@@ -8,7 +8,6 @@ Student Dashboard
 
 @section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
 @endsection
 
 
@@ -86,7 +85,7 @@ Student Dashboard
                 </div>
 
                 <div class="container-fluid">
-                    <div id="student-results"></div>
+                    <canvas id="student-results"></canvas>
                 </div>
             </div>
         </div>
@@ -176,85 +175,6 @@ Student Dashboard
 <!-- Student timeline -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<script>
-
-//--------------------------
-//-CHART CODE---------------
-//--------------------------
-
-/*
- Element ctx = document.getElementById("assignmentChart");
- var assignmentChart = new Chart(ctx, {
- type: 'bar',
- data: {
- labels: ["January", "February", "March", "April", "May", "June"],
- datasets: [{
- label: 'Assessment Score',
- data: [92, 62, 53, 81, 72, 78],
- backgroundColor: [
- 'rgba(251, 114, 23, 1)'
- 'rgba(255, 99, 132, 0.2)',
- 'rgba(54, 162, 235, 0.2)',
- 'rgba(255, 206, 86, 0.2)',
- 'rgba(75, 192, 192, 0.2)',
- 'rgba(153, 102, 255, 0.2)',
- 'rgba(255, 159, 64, 0.2)'
- ],
- borderColor: [
- 'rgba(251, 114, 25, 1)'
- 'rgba(255,99,132,1)',
- 'rgba(54, 162, 235, 1)',
- 'rgba(255, 206, 86, 1)',
- 'rgba(75, 192, 192, 1)',
- 'rgba(153, 102, 255, 1)',
- 'rgba(255, 159, 64, 1)'
- ],
- borderWidth: 1
- }]
- },
- options: {
- responsive: true,
- maintainAspectRatio: false,
- scales: {
- yAxes: [{
- ticks: {
- beginAtZero: true
- }
- }]
- },
- elements: {
- point: {
- radius: 0
- }
- }
- },
- });
- */
-//--------------------------
-//-PROGRESS BAR CODE--------
-//--------------------------
-
-/* function move(elem, progress) {
- //var elem = document.getElementById("goal1progress");
- var width = 1;
- var id = setInterval(frame, 10);
- function frame() {
- if (width >= progress) {
- clearInterval(id);
- } else {
- width++;
- elem.style.width = width + '%';
- }
- }
- }
- 
- move(document.getElementById('goal1progress'), 65);
- move(document.getElementById('goal2progress'), 13);
- move(document.getElementById('goal3progress'), 44);
- move(document.getElementById('goal4progress'), 78); */
-</script>
 
 <script type="text/javascript">
     //--------------------------
@@ -347,26 +267,125 @@ Student Dashboard
     $(document).ready(function () {
 
         // AREA CHART
-        var area = new Morris.Area({
+        /*var line = new Morris.Line({
             element: 'student-results',
             resize: true,
             data: [
-                {y: '2018-03-01 Test 1', ca: 60, ya: 55, re: 65},
-                {y: '2018-04-01 Test 2', ca: 62, ya: 55, re: 63},
-                {y: '2018-05-02 Test 3', ca: 55, ya: 55, re: 61},
-                {y: '2018-05-22 Test 4', ca: 63, ya: 55, re: 55},
-                {y: '2018-06-03 Test 5', ca: 70, ya: 55, re: 49},
-                {y: '2018-06-15 Test 6', ca: 62, ya: 55, re: 50},
-                {y: '2018-07-10 Test 7', ca: 69, ya: 55, re: 50},
-                {y: '2018-07-15 Test 8', ca: 57, ya: 55, re: 70},
-                {y: '2018-07-22 Test 9', ca: 59, ya: 55, re: 65},
-                {y: '2018-08-01 Test 10', ca: 63, ya: 55, re: 61}
+                {y: '2018-03-01', ca: 55, ya: 55, yr: 55},
+                {y: '2018-04-01', ca: 62, ya: 55, yr: 63},
+                {y: '2018-05-02', ca: 55, ya: 55, yr: 61},
+                {y: '2018-05-22', ca: 63, ya: 55, yr: 55},
+                {y: '2018-06-03', ca: 70, ya: 55, yr: 49},
+                {y: '2018-06-15', ca: 62, ya: 55, yr: 50},
+                {y: '2018-07-10', ca: 69, ya: 55, yr: 50},
+                {y: '2018-07-15', ca: 76, ya: 55, yr: 70},
+                {y: '2018-07-22', ca: 59, ya: 55, yr: 65},
+                {y: '2018-08-01', ca: 63, ya: 55, yr: 61}
             ],
+            pointSize: 7,
+            postUnits: '%',
+            ymax: 100,
             xkey: 'y',
-            ykeys: ['ca', 'ya', 're'],
+            ykeys: ['ca', 'ya', 'yr'],
             labels: ['Class Average', 'Your Average', 'Your Result'],
             lineColors: ['#930010', '#012147', '#f7931d'],
-            hideHover: 'auto'
+            hideHover: 'auto',
+            axes: true,
+            grid: true
+        }); */
+
+        var areaChartCanvas = $('#student-results').get(0).getContext('2d');
+        
+        var areaChartData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Class Average',
+                    backgroundColor: 'rgba(147, 0, 16, 0.3)',
+                    borderColor: 'rgba(147, 0, 16, 1)',
+                    borderWidth: 1,
+                    fillColor: 'rgba(210, 214, 222, 1)',
+                    strokeColor: 'rgba(210, 214, 222, 1)',
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: [55, 66, 80, 81, 56, 60, 40, 55, 62, 75, 51, 80]
+                },
+                {
+                    label: 'Your Average',
+                    backgroundColor: 'rgba(1, 33, 71, 0.3)',
+                    borderColor: 'rgba(1, 33, 71, 1)',
+                    borderWidth: 1,
+                    fillColor: 'rgba(60,141,188,0.9)',
+                    strokeColor: 'rgba(60,141,188,0.8)',
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [48, 58, 60, 62, 67, 55, 70, 82, 74, 58, 73, 83]
+                },
+                {
+                    label: 'Your Results',
+                    backgroundColor: 'rgba(247, 147, 29, 0.3)',
+                    borderColor: 'rgba(247, 147, 29, 1)',
+                    borderWidth: 1,
+                    fillColor: 'rgba(60,141,188,0.9)',
+                    strokeColor: 'rgba(60,141,188,0.8)',
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [68, 59, 60, 72, 56, 55, 60, 49, 66, 72, 76, 52]
+                }
+            ]
+        };
+        
+        
+        var areaChartOptions = {
+            //Boolean - If we should show the scale at all
+            showScale: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: false,
+            //String - Colour of the grid lines
+            scaleGridLineColor: 'rgba(0,0,0,.05)',
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - Whether the line is curved between points
+            bezierCurve: true,
+            //Number - Tension of the bezier curve between points
+            bezierCurveTension: 0.3,
+            //Boolean - Whether to show a dot for each point
+            pointDot: false,
+            //Number - Radius of each point dot in pixels
+            pointDotRadius: 4,
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth: 1,
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius: 20,
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke: true,
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth: 2,
+            //Boolean - Whether to fill the dataset with a color
+            datasetFill: true,
+            //String - A legend template
+            legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: true,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true
+        };
+        
+        // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+        var areaChart = new Chart(areaChartCanvas , {
+            type: "line",
+            data: areaChartData,
+            options: areaChartOptions
         });
 
     });
