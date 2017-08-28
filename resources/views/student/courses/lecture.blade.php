@@ -288,12 +288,13 @@ Lecture
             url: '/student/progression',
             type: "POST",
             asyn: false,
-            data: {course: courseId, id: id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+            data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
             beforeSend: function () {
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
+                    //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
                     //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                 } else {
                     //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
@@ -314,20 +315,21 @@ Lecture
             var courseId = $('.prev').attr("course");
             var storyline = $('.prev').attr("storyline");
             var student = '{{auth()->user()->name}}';
+            var topic = $(this).text();
             $.ajax({
                 url: '/student/progression',
                 type: "POST",
                 asyn: false,
-                data: {course: courseId, id: id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+                data: {course: courseId, id: id, storyline: storyline, topic: topic,student: student, _token: "{{ csrf_token() }}"},
                 beforeSend: function () {
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {      
-                        $('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
-                        //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else {
-                       // window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

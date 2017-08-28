@@ -27,14 +27,15 @@ class DefaultController extends LTIBaseController {
             $topicArray = $this->topics($StorylineItem, $progress->storyline_id);
             ksort($topicArray);
             $key = array_search($storylineItemId, $topicArray);
-            $q = $StorylineItem::whereId($topicArray[$key + 1])->first();
-            $fileURL  = $this->check_level($request->get('id'),$topicArray[$key + 1],$progress,$q);
+            $URL = $StorylineItem::whereId($topicArray[$key])->first();
+            $plusOneURL = $StorylineItem::whereId($topicArray[$key + 1])->first();
+            $fileURL  = $this->check_level($request->get('id'),$topicArray[$key + 1],$URL,$plusOneURL);
             $message = 'true';
-            $story   = $fileURL;
+            $story   =  $fileURL;
         } else {
-            $this->save_progress($request,$StudentProgress);
-            $story = $request->get('storyline');
+            $this->save_progress($request,$StudentProgress);            
             $message = 'false';
+            $story = $request->get('storyline');
         }
 
         $response = array(
@@ -67,15 +68,14 @@ class DefaultController extends LTIBaseController {
         foreach ($query as $value) {
             $topic[] = $value->id;
         }
-
         return $topic;
     }
 
-    public function check_level($level,$plusOne,$progress,$q) {
+    public function check_level($level,$plusOne,$URL,$plusOneURL) {
         if ($level > $plusOne) {
-            return $progress->file_url;
+            return $URL->id;
         } else {
-            return $q->file_url;
+            return $plusOneURL->id;
         }
     }
 
