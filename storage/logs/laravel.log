@@ -17067,7 +17067,7 @@ Stack trace:
 #53 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #54 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #55 /home/vagrant/Code/dev_dump_20170802/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#56 {main}  
+#56 {main}
 [2017-08-24 02:28:43] local.ERROR: ErrorException: Object of class Illuminate\Routing\UrlGenerator could not be converted to string in /home/vagrant/Code/dev_dump_20170802/storage/framework/views/73e609f86d308229083ebd2535f2b694bee11193.php:207
 Stack trace:
 #0 /home/vagrant/Code/dev_dump_20170802/storage/framework/views/73e609f86d308229083ebd2535f2b694bee11193.php(207): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(4096, 'Object of class...', '/home/vagrant/C...', 207, Array)
@@ -17187,12 +17187,7 @@ Stack trace:
 #53 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #54 /home/vagrant/Code/dev_dump_20170802/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #55 /home/vagrant/Code/dev_dump_20170802/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#56 {main}  
-<<<<<<< HEAD
-[2017-08-25 08:52:54] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline2\Storyline2ServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:612
-Stack trace:
-#0 {main}  
-=======
+#56 {main}
 [2017-08-24 12:58:18] local.ERROR: PDOException: could not find driver in C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('mysql:host=127....', 'root', 'secret', Array)
@@ -17228,7 +17223,7 @@ Stack trace:
 #30 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(267): Illuminate\Foundation\Application->bootstrapWith(Array)
 #31 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(114): Illuminate\Foundation\Console\Kernel->bootstrap()
 #32 C:\EON\dev_dump_20170802\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#33 {main}  
+#33 {main}
 [2017-08-24 12:58:19] local.ERROR: PDOException: could not find driver in C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:68
 Stack trace:
 #0 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(68): PDO->__construct('mysql:host=127....', 'root', 'secret', Array)
@@ -17291,7 +17286,7 @@ Stack trace:
 #20 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(267): Illuminate\Foundation\Application->bootstrapWith(Array)
 #21 C:\EON\dev_dump_20170802\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(114): Illuminate\Foundation\Console\Kernel->bootstrap()
 #22 C:\EON\dev_dump_20170802\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
-#23 {main}  
+#23 {main}
 <<<<<<< HEAD
 [2017-08-25 12:31:33] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
@@ -17329,7 +17324,7 @@ Stack trace:
 #31 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->bootstrap()
 #32 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #33 /home/vagrant/Code/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#34 {main}  
+#34 {main}
 [2017-08-25 12:31:33] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(68): PDO->__construct('mysql:host=loca...', 'root', 'secret', Array)
@@ -17394,7 +17389,7 @@ Stack trace:
 #21 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->bootstrap()
 #22 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #23 /home/vagrant/Code/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#24 {main}  
+#24 {main}
 [2017-08-25 12:32:36] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(68): PDO->__construct('mysql:host=loca...', 'root', 'secret', Array)
@@ -17431,7 +17426,7 @@ Stack trace:
 #31 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->bootstrap()
 #32 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #33 /home/vagrant/Code/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#34 {main}  
+#34 {main}
 [2017-08-25 12:32:36] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(68): PDO->__construct('mysql:host=loca...', 'root', 'secret', Array)
@@ -17496,7 +17491,7 @@ Stack trace:
 #21 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(146): Illuminate\Foundation\Http\Kernel->bootstrap()
 #22 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #23 /home/vagrant/Code/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#24 {main}  
+#24 {main}
 [2017-08-25 12:35:29] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:43
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -17537,7 +17532,7 @@ Stack trace:
 #35 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\Pipeline\Pipeline->then(Object(Closure))
 #36 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #37 /home/vagrant/Code/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
-#38 {main}  
+#38 {main}
 [2017-08-25 12:35:30] production.ERROR: RuntimeException: The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths. in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Encryption/Encrypter.php:43
 Stack trace:
 #0 /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php(27): Illuminate\Encryption\Encrypter->__construct('', 'AES-256-CBC')
@@ -17556,5 +17551,4 @@ Stack trace:
 #13 /home/vagrant/Code/public/index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #14 {main}  
 =======
->>>>>>> d76404ac8d804169bf3357f204955eae618ed715
 >>>>>>> 4cb07cb1ca500c9e7359b6d93c5f6b97cac8ad5c

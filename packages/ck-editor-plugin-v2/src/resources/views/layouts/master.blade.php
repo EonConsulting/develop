@@ -109,7 +109,5 @@
     @yield('content')
 </div>
 
-<!--Simple Bar-->
-<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
 </body>
 </html>
