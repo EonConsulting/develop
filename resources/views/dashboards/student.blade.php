@@ -8,6 +8,7 @@ Student Dashboard
 
 @section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
 @endsection
 
 
@@ -76,81 +77,20 @@ Student Dashboard
     </div>
 
     <div class="row">
-        <div class="col-md-12 sp-top-15">
+
+        <div class="col-md-8 sp-top-15">
             <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Monthly Performance
+                    Results
                 </div>
 
                 <div class="container-fluid">
-
-                    <div class="row sp-top-15">
-                        <div class="col-md-8" style="height: 180px;">
-                            <canvas id="assignmentChart" height="180" style="height: 180px"></canvas>
-                        </div>
-                        <div class="col-md-4">
-
-                            <div class="progressbar-wrapper">
-                                <span>Goal 1</span>
-                                <div id="goal1bar" class="progressbar">
-                                    <div id="goal1progress" class="progressbar-fill bg-col-1"></div>
-                                </div>
-                            </div>
-
-                            <div class="progressbar-wrapper">
-                                <span>Goal 2</span>
-                                <div id="goal2bar" class="progressbar">
-                                    <div id="goal2progress" class="progressbar-fill bg-col-2"></div>
-                                </div>
-                            </div>
-
-                            <div class="progressbar-wrapper">
-                                <span>Goal 3</span>
-                                <div id="goal3bar" class="progressbar">
-                                    <div id="goal3progress" class="progressbar-fill bg-col-3"></div>
-                                </div>
-                            </div>
-
-                            <div class="progressbar-wrapper">
-                                <span>Goal 4</span>
-                                <div id="goal4bar" class="progressbar">
-                                    <div id="goal4progress" class="progressbar-fill bg-col-4"></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <!--<hr>
-
-                    <div class="row sp-top-15 sp-bot-15">
-
-                        <div class="col-md-3">
-                            1
-                        </div>
-
-                        <div class="col-md-3">
-                            2
-                        </div>
-
-                        <div class="col-md-3">
-                            3
-                        </div>
-
-                        <div class="col-md-3">
-                            4
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>-->
-                    <div style="height: 10px;"></div>
+                    <div id="student-results"></div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-4 sp-top-15 sp-bot-15">
             <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
 
@@ -167,10 +107,11 @@ Student Dashboard
                     </select>
                     <label for="metric-type-filter">Please select a metric type</label>
                     <select class="form-control" id="metric-type-filter">
+                        <option>Current Average</option>
+                        <option>Formal Assessment</option>
                         <option>Assignment</option>
                         <option>Exam</option>
-                        <option>Self Evaluation</option>
-                        <option>Tests</option>
+                        <option>Self Assessment</option>
                     </select>
                     <label for="metric-item-filter">Please select item</label>
                     <select class="form-control" id="metric-item-filter">
@@ -182,6 +123,9 @@ Student Dashboard
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row">
 
         <div class="col-md-8 sp-top-15 sp-bot-15">
             <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
@@ -191,218 +135,32 @@ Student Dashboard
                 </div>
 
                 <div class="container-fluid">
-                    <div id="timeline"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 sp-top-15 sp-bot-15">
-            <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
-
-                <div class="dashboard-card-heading">
-                    Direct Chats
-                </div>
-
-
-                <div data-simplebar class="chatbox-messages">
-
-                    <them>
-                        Hi there
-                    </them>
-
-                    <div class="clearfix"></div>
-
-                    <them>
-                        How are you?
-                    </them>
-
-                    <div class="clearfix"></div>
-
-                    <me>
-                        Hi, I'm fine and you?
-                    </me>
-
-                    <div class="clearfix"></div>
-
-                    <me>
-                        What's up?
-                    </me>
-
-                    <div class="clearfix"></div>
-
-                    <them>
-                        Have you done task 4? I'm stuck on the second question. I'm not sure what they want.
-                    </them>
-
-                    <div class="clearfix"></div>
-
-                    <me>
-                        I have, it was quite tricky.
-                    </me>
-
-                    <div class="clearfix"></div>
-
-                    <me>
-                        I found some info in the text book that helped.
-                    </me>
-
-                    <div class="clearfix"></div>
-
-                </div>
-
-                <div class="container-fluid top-bdr-0">
-                    <div class="chatbox-entry">
-                        <form action="#">
-
-                            <div class="chatbox-submit-wrapper">
-                                <input class="chatbox-submit" type="submit" value="">
-                            </div>
-
-                            <div class="chatbox-message-wrapper">
-                                <input class="chatbox-message" type="text" placeholder="Enter your message here...">
-                            </div>
-
-                        </form>
-                    </div>
+                    <div id="student-timeline"></div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4 sp-top-15">
-            <div class="dashboard-card shadow top-bdr-3  mr-bot-15">
+            <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Modules
+                    Timeline Key
                 </div>
 
-                <div class="container-fluid sp-top-15">
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Module 1</h1>
-                            <p>Description of the Module</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Module 2</h1>
-                            <p>Description of the Module</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Module 3</h1>
-                            <p>Description of the Module</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Module 4</h1>
-                            <p>Description of the Module</p>
-                        </div>
+                <div class="container-fluid">
+                    <div id="external-events">
+                        <div class="btn btn-success">Formal Assessment</div><br/>
+                        <div class="btn btn-warning">Assignment</div><br/>
+                        <div class="btn btn-danger">Exam</div><br/>
+                        <div class="btn btn-info">Self Assessment</div><br/>
+                        <div class="btn btn-primary">Other</div>
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="dashboard-card-bottom-link">
-                    <a href="#">View all Modules</a>
-                </div>
-
             </div>
         </div>
-
-        <div class="col-md-4 sp-top-15">
-            <div class="dashboard-card shadow top-bdr-1  mr-bot-15">
-
-                <div class="dashboard-card-heading">
-                    Assignments
-                </div>
-
-                <div class="container-fluid sp-top-15">
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Assignemnt 1</h1>
-                            <p>Description of the Assignemnt</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Assignemnt 2</h1>
-                            <p>Description of the Assignemnt</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Assignemnt 3</h1>
-                            <p>Description of the Assignemnt</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="dashboard-card-item">
-                        <div class="dashboard-card-item-icon">
-                            <i class="fa fa-cubes"></i>
-                        </div>
-                        <div class="dashboard-card-item-text">
-                            <h1>Assignemnt 4</h1>
-                            <p>Description of the Assignemnt</p>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <hr>
-
-                <div class="dashboard-card-bottom-link">
-                    <a href="#">View all Assignements</a>
-                </div>
-
-            </div>
-        </div>
-
     </div>
+
+    <div class="clearfix"></div>
 
 </div>
 
@@ -418,80 +176,84 @@ Student Dashboard
 <!-- Student timeline -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script>
 
 //--------------------------
 //-CHART CODE---------------
 //--------------------------
 
-var ctx = document.getElementById("assignmentChart");
-var assignmentChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June"],
-        datasets: [{
-                label: 'Assessment Score',
-                data: [92, 62, 53, 81, 72, 78],
-                backgroundColor: [
-                    'rgba(251, 114, 23, 1)'
-                            /*'rgba(255, 99, 132, 0.2)',
-                             'rgba(54, 162, 235, 0.2)',
-                             'rgba(255, 206, 86, 0.2)',
-                             'rgba(75, 192, 192, 0.2)',
-                             'rgba(153, 102, 255, 0.2)',
-                             'rgba(255, 159, 64, 0.2)'*/
-                ],
-                borderColor: [
-                    'rgba(251, 114, 25, 1)'
-                            /*'rgba(255,99,132,1)',
-                             'rgba(54, 162, 235, 1)',
-                             'rgba(255, 206, 86, 1)',
-                             'rgba(75, 192, 192, 1)',
-                             'rgba(153, 102, 255, 1)',
-                             'rgba(255, 159, 64, 1)'*/
-                ],
-                borderWidth: 1
-            }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-        },
-        elements: {
-            point: {
-                radius: 0
-            }
-        }
-    },
-});
+/*
+ Element ctx = document.getElementById("assignmentChart");
+ var assignmentChart = new Chart(ctx, {
+ type: 'bar',
+ data: {
+ labels: ["January", "February", "March", "April", "May", "June"],
+ datasets: [{
+ label: 'Assessment Score',
+ data: [92, 62, 53, 81, 72, 78],
+ backgroundColor: [
+ 'rgba(251, 114, 23, 1)'
+ 'rgba(255, 99, 132, 0.2)',
+ 'rgba(54, 162, 235, 0.2)',
+ 'rgba(255, 206, 86, 0.2)',
+ 'rgba(75, 192, 192, 0.2)',
+ 'rgba(153, 102, 255, 0.2)',
+ 'rgba(255, 159, 64, 0.2)'
+ ],
+ borderColor: [
+ 'rgba(251, 114, 25, 1)'
+ 'rgba(255,99,132,1)',
+ 'rgba(54, 162, 235, 1)',
+ 'rgba(255, 206, 86, 1)',
+ 'rgba(75, 192, 192, 1)',
+ 'rgba(153, 102, 255, 1)',
+ 'rgba(255, 159, 64, 1)'
+ ],
+ borderWidth: 1
+ }]
+ },
+ options: {
+ responsive: true,
+ maintainAspectRatio: false,
+ scales: {
+ yAxes: [{
+ ticks: {
+ beginAtZero: true
+ }
+ }]
+ },
+ elements: {
+ point: {
+ radius: 0
+ }
+ }
+ },
+ });
+ */
 //--------------------------
 //-PROGRESS BAR CODE--------
 //--------------------------
 
-function move(elem, progress) {
-//var elem = document.getElementById("goal1progress");
-    var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-        if (width >= progress) {
-            clearInterval(id);
-        } else {
-            width++;
-            elem.style.width = width + '%';
-        }
-    }
-}
-
-move(document.getElementById('goal1progress'), 65);
-move(document.getElementById('goal2progress'), 13);
-move(document.getElementById('goal3progress'), 44);
-move(document.getElementById('goal4progress'), 78);
+/* function move(elem, progress) {
+ //var elem = document.getElementById("goal1progress");
+ var width = 1;
+ var id = setInterval(frame, 10);
+ function frame() {
+ if (width >= progress) {
+ clearInterval(id);
+ } else {
+ width++;
+ elem.style.width = width + '%';
+ }
+ }
+ }
+ 
+ move(document.getElementById('goal1progress'), 65);
+ move(document.getElementById('goal2progress'), 13);
+ move(document.getElementById('goal3progress'), 44);
+ move(document.getElementById('goal4progress'), 78); */
 </script>
 
 <script type="text/javascript">
@@ -499,7 +261,7 @@ move(document.getElementById('goal4progress'), 78);
     //-STUDENT TIMELINE CODE--------
     //--------------------------
     $(document).ready(function () {
-        $('#timeline').fullCalendar({
+        $('#student-timeline').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -512,7 +274,9 @@ move(document.getElementById('goal4progress'), 78);
             events: [
                 {
                     title: 'All Day Event',
-                    start: '2018-08-01'
+                    start: '2018-08-01',
+                    backgroundColor: '#00a65a', //Success (green)
+                    borderColor: '#00a65a' //Success (green)
                 },
                 {
                     title: 'Long Event',
@@ -522,7 +286,9 @@ move(document.getElementById('goal4progress'), 78);
                 {
                     id: 999,
                     title: 'Repeating Event',
-                    start: '2018-08-09T16:00:00'
+                    start: '2018-08-09T16:00:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     id: 999,
@@ -537,11 +303,15 @@ move(document.getElementById('goal4progress'), 78);
                 {
                     title: 'Meeting',
                     start: '2018-08-12T10:30:00',
-                    end: '2018-08-12T12:30:00'
+                    end: '2018-08-12T12:30:00',
+                    backgroundColor: '#00a65a', //Success (green)
+                    borderColor: '#00a65a' //Success (green)
                 },
                 {
                     title: 'Lunch',
-                    start: '2018-08-12T12:00:00'
+                    start: '2018-08-12T12:00:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Meeting',
@@ -553,11 +323,15 @@ move(document.getElementById('goal4progress'), 78);
                 },
                 {
                     title: 'Dinner',
-                    start: '2018-08-12T20:00:00'
+                    start: '2018-08-12T20:00:00',
+                    backgroundColor: '#f56954', //red
+                    borderColor: '#f56954' //red
                 },
                 {
                     title: 'Birthday Party',
-                    start: '2018-08-13T07:00:00'
+                    start: '2018-08-13T07:00:00',
+                    backgroundColor: '#00a65a', //Success (green)
+                    borderColor: '#00a65a' //Success (green)
                 },
                 {
                     title: 'Click for Google',
@@ -566,6 +340,35 @@ move(document.getElementById('goal4progress'), 78);
                 }
             ]
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // AREA CHART
+        var area = new Morris.Area({
+            element: 'student-results',
+            resize: true,
+            data: [
+                {y: '2018-03-01 Test 1', ca: 60, ya: 55, re: 65},
+                {y: '2018-04-01 Test 2', ca: 62, ya: 55, re: 63},
+                {y: '2018-05-02 Test 3', ca: 55, ya: 55, re: 61},
+                {y: '2018-05-22 Test 4', ca: 63, ya: 55, re: 55},
+                {y: '2018-06-03 Test 5', ca: 70, ya: 55, re: 49},
+                {y: '2018-06-15 Test 6', ca: 62, ya: 55, re: 50},
+                {y: '2018-07-10 Test 7', ca: 69, ya: 55, re: 50},
+                {y: '2018-07-15 Test 8', ca: 57, ya: 55, re: 70},
+                {y: '2018-07-22 Test 9', ca: 59, ya: 55, re: 65},
+                {y: '2018-08-01 Test 10', ca: 63, ya: 55, re: 61}
+            ],
+            xkey: 'y',
+            ykeys: ['ca', 'ya', 're'],
+            labels: ['Class Average', 'Your Average', 'Your Result'],
+            lineColors: ['#930010', '#012147', '#f7931d'],
+            hideHover: 'auto'
+        });
+
     });
 </script>
 

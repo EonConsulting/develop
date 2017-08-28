@@ -81,7 +81,7 @@
         <div class="row">
 
             <div class="col-md-12" id="launch_window">
-                
+
                 <?php echo $content; ?>
             </div>
 
