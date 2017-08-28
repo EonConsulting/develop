@@ -5,9 +5,9 @@
 
     .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
       $routeProvider
-        .when('/e-content/story-line', {
+        .when( ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/story-line', {
             controller: 'StorylineCtrl',
-          templateUrl: '/storyline-ng/views/story-line.html'
+          templateUrl: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/storyline-ng/views/story-line.html'
         })
         //.when('/cloning', {
         //  controller: 'CloningCtrl',
@@ -38,7 +38,7 @@
         //  templateUrl: '/views/expand-on-hover.html'
         //})
         .otherwise({
-            redirectTo: '/e-content/story-line'
+            redirectTo: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/story-line'
         });
 
       // testing issue #521

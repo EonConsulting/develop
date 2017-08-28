@@ -81,7 +81,8 @@
         <div class="row">
 
             <div class="col-md-12" id="launch_window">
-                <?php print($content); ?>
+                
+                <?php echo $content; ?>
             </div>
 
             <div class="clearfix"></div>

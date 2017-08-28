@@ -6,10 +6,12 @@
     <title>@yield('site-title') |  {{config('app.name')}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Global JS Config -->
+    <script src="{{ url('/js/global-config.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('vendor/ckeditorpluginv2/ckeditor/ckeditor.js') }}"></script>
-    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></head>
-    <![endif]-->
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+</head>
 
     <script>
         window.Laravel = {!! json_encode([
@@ -105,5 +107,6 @@
 <div class="wrapper" id="app">
     @yield('content')
 </div>
+
 </body>
 </html>

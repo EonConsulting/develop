@@ -1,3 +1,5 @@
+<!-- Global JS Config -->
+<script src="{{ url('/js/global-config.js') }}"></script>
 <!-- jQuery 2.2.3 -->
 <script src="{{ url('/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 <!-- Menu Collapse script -->
@@ -7,7 +9,7 @@
 <!-- FastClick -->
 <script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
 <!--Simple Bar-->
-<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+<!--<script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>-->
 
 <script>
     $(function () {

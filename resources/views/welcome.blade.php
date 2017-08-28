@@ -1,88 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.logged-out')
 
-    <title>UNISA e-Content System</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('page-title')
+    Lecturer Dashboard
+@endsection
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway';
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
 
-        .full-height {
-            height: 100vh;
-        }
+@section('custom-styles')
+<style>
 
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
+    .rightside-area {
+        background: #FFF;
+    }
 
-        .position-ref {
-            position: relative;
-        }
+    .top-bar {
+        text-align: right;
+    }
 
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
+    .top-bar a {
+        display: inline-block;
+        padding: 10px;
+    }
 
-        .content {
-            text-align: center;
-        }
+    .title {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 150px;
+        font-weight: 300;
+    }
 
-        .title {
-            font-size: 84px;
-        }
+    .title-image {
+        margin-bottom: 50px;
+    }
 
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
+    .links {
+        text-align: center;
+    }
 
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            <a href="{{ url('/login') }}">Login</a>
-            <a href="{{ url('/register') }}">Register</a>
+    .links a {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .notice-container {
+        padding-top: 50px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+</style>
+@endsection
+
+@section('content')
+
+    <div class="container-fluid">
+        <div class="top-bar">
+            @if (Route::has('login'))
+                <a href="{{ url('/login') }}">Login</a>
+                <a href="{{ url('/register') }}">Register</a>
+            @endif
         </div>
-    @endif
 
-    <div class="content">
-        <div class="title m-b-md">
-            UNISA e-Content System
+        <div class="title">
+            <div class="title-image">
+                <img width="200px" src="{{url('/img/unisa-logo.png')}}" alt="">
+            </div>
+
+            e-Content System
         </div>
 
         <div class="links">
             <a href="https://github.com/EonConsulting">Github</a>
             <a href="https://github.com/orgs/EonConsulting/people">Team</a>
         </div>
+
+        <div class="notice-container">
+            <div class="beta-notice">
+                Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
+            </div>
+        </div>
+
     </div>
-</div>
-</body>
-</html>
+
+@endsection
