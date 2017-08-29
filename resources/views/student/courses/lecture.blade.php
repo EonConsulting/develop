@@ -308,19 +308,18 @@ Lecture
     }
 
     $(document).ready(function () {
-        $(".jstree-node").click(function (e) {
+        $(".jstree-anchor").click(function (e) {
             e.stopPropagation();
             e.preventDefault();
-            var id = $('.prev').attr("id");
-            var courseId = $('.prev').attr("course");
-            var storyline = $('.prev').attr("storyline");
+            var id = $(this).attr("id");
+            var courseId = $(this).attr("course");
+            var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->name}}';
-            var topic = $(this).text();
             $.ajax({
                 url: '/student/progression',
                 type: "POST",
                 asyn: false,
-                data: {course: courseId, id: id, storyline: storyline, topic: topic,student: student, _token: "{{ csrf_token() }}"},
+                data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
                 beforeSend: function () {
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
