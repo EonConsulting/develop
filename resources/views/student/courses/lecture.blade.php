@@ -325,9 +325,9 @@ Lecture
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {      
-                        //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else {
+                        alert('Please complete current Learning Objective before moving to the Next one!');
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }
                 },

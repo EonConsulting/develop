@@ -23,7 +23,6 @@ class DefaultController extends LTIBaseController {
 
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
-
         $progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
 
         if ($progress) {
@@ -32,17 +31,17 @@ class DefaultController extends LTIBaseController {
             $key = array_search($progress->storyline_item_id, $topicArray);
             $row = $StorylineItem::whereId($topicArray[$key])->first();
             $plusRow = $StorylineItem::whereId($topicArray[$key + 1])->first();
-            $storyId = $this->check_level($request->get('id'), $topicArray[$key + 1], $row, $request,$StudentProgress, $plusRow->id);
+            $storyId = $this->check_level($request->get('id'), $topicArray[$key + 1], $row, $request, $StudentProgress, $plusRow->id);
             //$this->save_progress($request, $StudentProgress, $storyId);
             $message = 'true';
             $story = $storyId;
         } else {
-            $record = $StudentProgress::whereStudent($request->get('student'))->orderBy('updated_at', 'desc')->first();            
-            $check = $this->check_record($record, $StorylineItem, $request,$StudentProgress);
+            $record = $StudentProgress::whereStudent($request->get('student'))->orderBy('updated_at', 'desc')->first();
+            $check = $this->check_record($record, $StorylineItem, $request, $StudentProgress);
             $story = $check;
-            $message = 'false';
+            $message = '';
         }
-        
+
         $response = array(
             'msg' => $message,
             'story' => $story,
@@ -57,8 +56,7 @@ class DefaultController extends LTIBaseController {
      * @param type $StudentProgress
      * @param type $storylineItem
      */
-     
-    public function save_progress($request, $StudentProgress,$storylineItem) {
+    public function save_progress($request, $StudentProgress, $storylineItem) {
         $StudentProgress->student = $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_item_id = $storylineItem;
@@ -79,7 +77,7 @@ class DefaultController extends LTIBaseController {
         }
         return $topic;
     }
-    
+
     /**
      * 
      * @param type $level
@@ -90,15 +88,15 @@ class DefaultController extends LTIBaseController {
      * @param type $storyId
      * @return type
      */
-    public function check_level($level, $plusOne, $row, $request,$StudentProgress, $storyId) {
+    public function check_level($level, $plusOne, $row, $request, $StudentProgress, $storyId) {
         if ($level >= $plusOne) {
             $this->save_progress($request, $StudentProgress, $plusOne);
             return $plusOne;
-            }else if($level <= $plusOne){
+        } else if ($level <= $plusOne) {
             return $row->id;
-           }else{
-            return $row->id;  
-           }
+        } else {
+            return $row->id;
+        }
     }
 
     /**
@@ -115,11 +113,11 @@ class DefaultController extends LTIBaseController {
             ksort($topicArray);
             $key = array_search($record->storyline_item_id, $topicArray);
             $row = $StorylineItem::whereId($topicArray[$key])->first();
-            $plusRow = $StorylineItem::whereId($topicArray[$key + 1])->first();                 
+            $plusRow = $StorylineItem::whereId($topicArray[$key + 1])->first();
             $storyId = $this->check_level($request->get('id'), $topicArray[$key + 1], $row, $request, $StudentProgress, $plusRow->id);
-            
+
             return $storyId;
-        } 
+        }
     }
 
 }
