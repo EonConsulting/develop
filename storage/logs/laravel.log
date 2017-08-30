@@ -17289,6 +17289,7 @@ Stack trace:
 <<<<<<< HEAD
 #23 {main}  
 >>>>>>> d76404ac8d804169bf3357f204955eae618ed715
+<<<<<<< HEAD
 [2017-08-27 11:31:43] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Student\Progression\StudentProgressionServiceProvider' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php:208
 Stack trace:
 #0 {main}  
@@ -20026,6 +20027,20 @@ Stack trace:
 #51 C:\wamp64\www\develop\server.php(21): require_once('C:\\wamp64\\www\\d...')
 #52 {main}  
 =======
+[2017-08-28 07:33:36] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'EONConsulting\Storyline2\Storyline2ServiceProvider' not found in C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:612
+Stack trace:
+#0 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(570): Illuminate\Foundation\Application->resolveProvider('EONConsulting\\S...')
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\ProviderRepository.php(75): Illuminate\Foundation\Application->register('EONConsulting\\S...')
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(549): Illuminate\Foundation\ProviderRepository->load(Array)
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\RegisterProviders.php(17): Illuminate\Foundation\Application->registerConfiguredProviders()
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(208): Illuminate\Foundation\Bootstrap\RegisterProviders->bootstrap(Object(Illuminate\Foundation\Application))
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(162): Illuminate\Foundation\Application->bootstrapWith(Array)
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(146): Illuminate\Foundation\Http\Kernel->bootstrap()
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#9 {main}  
+>>>>>>> 386d07ae10bd1640a44d5bb79d74bad82ef04ef5
+=======
 #23 {main}
 <<<<<<< HEAD
 [2017-08-25 12:31:33] production.ERROR: PDOException: SQLSTATE[HY000] [1049] Unknown database 'unisa' in /home/vagrant/Code/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:68
@@ -20292,6 +20307,7 @@ Stack trace:
 #14 {main}  
 =======
 >>>>>>> 4cb07cb1ca500c9e7359b6d93c5f6b97cac8ad5c
+<<<<<<< HEAD
 >>>>>>> develop
 [2017-08-28 04:19:23] local.ERROR: exception 'Exception' with message 'Property [file_url] does not exist on this collection instance.' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Support\Collection.php:1650
 Stack trace:
@@ -21354,3 +21370,4 @@ Stack trace:
 #23 C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(114): Illuminate\Foundation\Console\Kernel->bootstrap()
 #24 C:\wamp64\www\develop\artisan(36): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #25 {main}  
+
