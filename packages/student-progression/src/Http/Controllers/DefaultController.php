@@ -15,65 +15,108 @@ use App\Models\StudentProgress;
 class DefaultController extends LTIBaseController {
 
     /**
+     * 
      * @param Request $request
+     * @return type
      */
-    public function storeData(Request $request) {
+    public function storeProgress(Request $request) {
+
         $StudentProgress = new StudentProgress();
-        $StudentProgress->student =  $request->get('student');
-        $StudentProgress->course_id = (int) $request->get('course_id');
-        $StudentProgress->storyline_item_id = (int) $request->get('topic');
-    if($StudentProgress->save()){
-        echo "yeeeeeee";
-      }else{
-          echo "naaaaaaaaaa";
-      }
-        exit();
+        $StorylineItem = new StorylineItem();
+        $progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
+
+        if ($progress) {
+            $topicArray = $this->topics($StorylineItem, $progress->storyline_id);
+            ksort($topicArray);
+            $key = array_search($progress->storyline_item_id, $topicArray);
+            $row = $StorylineItem::whereId($topicArray[$key])->first();
+            $plusRow = $StorylineItem::whereId($topicArray[$key + 1])->first();
+            $storyId = $this->check_level($request->get('id'), $topicArray[$key + 1], $row, $request, $StudentProgress, $plusRow->id);
+            //$this->save_progress($request, $StudentProgress, $storyId);
+            $message = 'true';
+            $story = $storyId;
+        } else {
+            $record = $StudentProgress::whereStudent($request->get('student'))->orderBy('updated_at', 'desc')->first();
+            $check = $this->check_record($record, $StorylineItem, $request, $StudentProgress);
+            $story = $check;
+            $message = '';
+        }
+
+        $response = array(
+            'msg' => $message,
+            'story' => $story,
+        );
+
+        return \Response::json($response);
     }
 
     /**
-     * @param $storyline
-     * @param $CVS
+     * 
+     * @param type $request
+     * @param type $StudentProgress
+     * @param type $storylineItem
      */
-    public function save_storyline_items($storyline, $CVS) {
-        $item = new StorylineItem;
-        //$storyline_id = $storyline->id;
-        $item->currentStoryLine($storyline->id);
-        $item->buildTree($CVS);
+    public function save_progress($request, $StudentProgress, $storylineItem) {
+        $StudentProgress->student = $request->get('student');
+        $StudentProgress->course_id = (int) $request->get('course');
+        $StudentProgress->storyline_item_id = $storylineItem;
+        $StudentProgress->storyline_id = (int) $request->get('storyline');
+        $StudentProgress->save();
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * 
+     * @param type $StorylineItem
+     * @param type $storylineId
+     * @return type
      */
-    public function storeContent(Request $request) {
-        if ($request->ajax()) {
+    public function topics($StorylineItem, $storylineId) {
+        $query = $StorylineItem::where('storyline_id', $storylineId)->get();
+        foreach ($query as $value) {
+            $topic[] = $value->id;
+        }
+        return $topic;
+    }
 
-            if ($request->get('file_name')) {
-                $page = public_path() . '/EON/system/public/vendor/storyline/core/files/content/' . $this->new_file_request($request) . '.html';
-                $file = fopen($page, "w");
-                fwrite($file, json_decode($request->get('data')));
-                fclose($file);
-                $results_array = ['message' => 'success', 'data' => $page];
-                echo json_encode($results_array);
-            } else {
-                $results_array = ['message' => 'error'];
-                echo json_encode($results_array);
-            }
+    /**
+     * 
+     * @param type $level
+     * @param type $plusOne
+     * @param type $row
+     * @param type $request
+     * @param type $StudentProgress
+     * @param type $storyId
+     * @return type
+     */
+    public function check_level($level, $plusOne, $row, $request, $StudentProgress, $storyId) {
+        if ($level >= $plusOne) {
+            $this->save_progress($request, $StudentProgress, $plusOne);
+            return $plusOne;
+        } else if ($level <= $plusOne) {
+            return $row->id;
+        } else {
+            return $row->id;
         }
     }
 
     /**
-     * @param $request
-     * @return mixed
-     *
+     * 
+     * @param type $record
+     * @param type $StorylineItem
+     * @param type $request
+     * @param type $StudentProgress
+     * @return string
      */
-    protected function new_file_request($request) {
-        $file_name = $request->get('file_name');
-        if (str_word_count($file_name) > 1) {
-            $new_file_name = preg_replace('/\s+/', '_', $file_name);
-            return $new_file_name;
-        } else {
-            return $file_name;
+    public function check_record($record, $StorylineItem, $request, $StudentProgress) {
+        if ($record) {
+            $topicArray = $this->topics($StorylineItem, $record->storyline_id);
+            ksort($topicArray);
+            $key = array_search($record->storyline_item_id, $topicArray);
+            $row = $StorylineItem::whereId($topicArray[$key])->first();
+            $plusRow = $StorylineItem::whereId($topicArray[$key + 1])->first();
+            $storyId = $this->check_level($request->get('id'), $topicArray[$key + 1], $row, $request, $StudentProgress, $plusRow->id);
+
+            return $storyId;
         }
     }
 
