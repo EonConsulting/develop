@@ -14,7 +14,12 @@ class Storyline2ServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        include __DIR__.'/routes.php';
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'eon.storyline2');
+
+        $this->publishes([
+            __DIR__.'/assets' => base_path('public/vendor/storyline2'),
+        ]);
     }
 
     /**
@@ -24,6 +29,6 @@ class Storyline2ServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 }
