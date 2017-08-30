@@ -205,9 +205,9 @@ return [
         Baum\Providers\BaumServiceProvider::class,
         \EONConsulting\Storyline\TagCloud\StorylineTagCloudServiceProvider::class,
         \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
-
         \EONConsulting\Storyline2\Storyline2ServiceProvider::class,
-
+        \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
+        
         /*
          * Application Service Providers...
          */
@@ -297,3 +297,4 @@ return [
     ],
 
 ];
+
