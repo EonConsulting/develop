@@ -70,6 +70,7 @@ $config['backends'][] = array(
     'adapter'      => 'local',
 //    'baseUrl'      => '/ckfinder/userfiles/',
     'baseUrl'      => 'EON/system/public/vendor/storyline/core/',
+    //'root'         => '/home/vagrant/Code/develop/public/EON/system/public/vendor/storyline/core/',
     'root'         => '/var/www/html/laravel/public/EON/system/public/vendor/storyline/core/', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,
