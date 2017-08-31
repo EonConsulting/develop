@@ -13,9 +13,7 @@
                     <form class="search" action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
                         <label for="search">Search</label> <span class=twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
                             <input class="typeahead" name="term"></span>
-                            {{--<a href="{{ url('/lti/courses/search/?from='.$output['from'].'&size='.$output['size'].'&term='.$output['term']) }}" class="btn btn-primary" id="search" value="search">Search</a>--}}
                             <a href="#" class="btn btn-primary" id="search" value="search">Search</a>
-                            {{--<a href="/lti/courses/search/?from=5&size=10&term=bus" class="btn btn-primary" id="search" value="search">Search</a>--}}
                     </form>
                 </div>
 
@@ -39,9 +37,9 @@
                     <li><a id="p" href="{{ url('/lti/courses/search/?from='.$output['fromPrev'].'&size='.$output['size'].'&term='.$output['term']) }}">Previous</a></li>
                 @endif
 
-                {{--@if ($output['fromNext'] = $output['total'])--}}
+                @if ($output['fromNext'] < $output['total'])
                         <li><a id="n" href="{{ url('/lti/courses/search/?from='.$output['fromNext'].'&size='.$output['size'].'&term='.$output['term']) }}">Next</a></li>
-                {{--@endif--}}
+                @endif
 
             </ul>
         </div>
