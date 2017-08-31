@@ -91,7 +91,7 @@
                     <textarea id="ltieditorv2inst" class="ckeditor" name="editor">
                         &lt;p&gt;Initial editor content.&lt;/p&gt;
 
-                        <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'></script>
+                        <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'></script>
                     </textarea>
                     <input type="hidden" id="data" name="data" />
                     <br />
@@ -138,7 +138,7 @@
                             var ckeditor_head = window.frames[0].document.head;
                             var script = document.createElement( 'script' );
                             script.type = 'text/javascript';
-                            script.src = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG";
+                            script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG";
                             //$("#someElement").append( script );
 
                             ckeditor_head.append(script);
@@ -159,7 +159,7 @@
             console.log(ckeditor_head.contents());
 
             ckeditor_head.append($("<script/>", {
-                src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
+                src: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
                 type: "text/javascript"
             }));*/
 

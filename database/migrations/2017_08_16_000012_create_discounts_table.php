@@ -20,7 +20,7 @@ class CreateDiscountsTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('id');
             $table->string('order_id', 191);
             $table->string('order_dicount', 191);
