@@ -14,7 +14,8 @@
                         <label for="search">Search</label> <span class=twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
                             <input class="typeahead" name="term"></span>
                             {{--<a href="{{ url('/lti/courses/search/?from='.$output['from'].'&size='.$output['size'].'&term='.$output['term']) }}" class="btn btn-primary" id="search" value="search">Search</a>--}}
-                            <a href="/lti/courses/search/?from=5&size=10&term=bus" class="btn btn-primary" id="search" value="search">Search</a>
+                            <a href="#" class="btn btn-primary" id="search" value="search">Search</a>
+                            {{--<a href="/lti/courses/search/?from=5&size=10&term=bus" class="btn btn-primary" id="search" value="search">Search</a>--}}
                     </form>
                 </div>
 
