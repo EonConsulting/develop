@@ -20,7 +20,7 @@ class CreateLtiUsersDomainsMetaTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('lti_user_id');

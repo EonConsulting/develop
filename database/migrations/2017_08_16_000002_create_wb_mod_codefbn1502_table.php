@@ -20,7 +20,7 @@ class CreateWbModCodefbn1502Table extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('section_id')->default('0');
             $table->integer('page_id')->default('0');
             $table->text('content');
