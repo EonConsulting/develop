@@ -8,6 +8,20 @@ Student Dashboard
 
 @section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
+
+<style>
+
+    .progress {
+        height: 30px;
+    }
+
+    .progress-bar {
+        padding-top: 4px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+</style>
 @endsection
 
 
@@ -16,14 +30,14 @@ Student Dashboard
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-12" style="margin-bottom: 15px;">
+        <div class="col-md-12">
             <div class="beta-notice">
                 Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
             </div>
         </div>
     </div>
 
-    <div class="row">
+<!--    <div class="row">
 
         <div class="col-md-3">
             <div class="nofitication-card shadow">
@@ -73,91 +87,135 @@ Student Dashboard
             </div>
         </div>
 
-    </div>
+    </div>-->
 
     <div class="row">
 
-        <div class="col-md-8 sp-top-15">
+        <div class="col-md-12 sp-top-15">
             <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Results
+                    Course Results
                 </div>
 
-                <div class="container-fluid">
-                    <canvas id="student-results"></canvas>
+                <div class="row sp-top-15 sp-bot-15 basic-clearfix">
+
+                  <div class="col-md-2">
+                    <div class="container-fluid">
+                        <h3>Filters</h3>
+                        <label for="course-filter">Course</label>
+                        <select class="form-control" id="course-filter">
+                            <option>FBN101 - Financial Business 101</option>
+                            <option>SHF101 - Superhero Fundamentals 101</option>
+                            <option>SHE101 - Sperhero Equipment 101</option>
+                        </select>
+                        <br>
+                        <label for="metric-type-filter">Metric</label>
+                        <select class="form-control" id="metric-type-filter">
+                            <option>Current Average</option>
+                            <option>Formal Assessment</option>
+                            <option>Assignment</option>
+                            <option>Exam</option>
+                            <option>Self Assessment</option>
+                        </select>
+                        <br>
+                        <label for="metric-item-filter">Assignment/Assessment</label>
+                        <select class="form-control" id="metric-item-filter">
+                            <option>Assignment 1</option>
+                            <option>Assignment 2</option>
+                            <option>Assignment 3</option>
+                            <option>Assignment 4</option>
+                        </select>
+                    </div>
+                  </div> <!-- end col-md-4 -->
+
+                  <div class="col-md-2">
+                      <h3>Progession</h3>
+                      <div class="container-fluid sp-top-15 sp-bot-15">
+
+                        Videos
+                        <div class="progress">
+                            <div class="progress-bar bg-col-1" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 70%">
+                                70%
+                            </div>
+                        </div>
+
+                        E-Books
+                        <div class="progress">
+                            <div class="progress-bar bg-col-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 25%;">
+                                25%
+                            </div>
+                        </div>
+
+                        Articles
+                        <div class="progress">
+                            <div class="progress-bar bg-col-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 40%">
+                                40%
+                            </div>
+                        </div>
+                        Study Guide
+                        <div class="progress">
+                            <div class="progress-bar bg-col-4" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 35%;">
+                                35%
+                            </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-8">
+                    <h3>Results</h3>
+                    <div class="container-fluid" style="height: 300px;">
+
+                        <canvas id="student-results"></canvas>
+                    </div>
+                  </div><!-- end col-md-8 -->
+
                 </div>
+
+
             </div>
         </div>
 
-        <div class="col-md-4 sp-top-15 sp-bot-15">
-            <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
-
-                <div class="dashboard-card-heading">
-                    Course Filters
-                </div>
-
-                <div class="container-fluid">
-                    <label for="course-filter">Please select a course</label>
-                    <select class="form-control" id="course-filter">
-                        <option>FBN101 - Financial Business 101</option>
-                        <option>SHF101 - Superhero Fundamentals 101</option>
-                        <option>SHE101 - Sperhero Equipment 101</option>
-                    </select>
-                    <label for="metric-type-filter">Please select a metric type</label>
-                    <select class="form-control" id="metric-type-filter">
-                        <option>Current Average</option>
-                        <option>Formal Assessment</option>
-                        <option>Assignment</option>
-                        <option>Exam</option>
-                        <option>Self Assessment</option>
-                    </select>
-                    <label for="metric-item-filter">Please select item</label>
-                    <select class="form-control" id="metric-item-filter">
-                        <option>Assignment 1</option>
-                        <option>Assignment 2</option>
-                        <option>Assignment 3</option>
-                        <option>Assignment 4</option>
-                    </select>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-md-8 sp-top-15 sp-bot-15">
+
+    <div class="row">
+        <div class="col-md-12 sp-top-15 sp-bot-15 basic-clearfix">
             <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
 
                 <div class="dashboard-card-heading">
                     Timeline
                 </div>
 
-                <div class="container-fluid">
-                    <div id="student-timeline"></div>
-                </div>
-            </div>
-        </div>
+                <div class="row basic-clearfix sp-top-15 sp-bot-15">
+                    <div class="col-md-6">
+                        <div class="container-fluid">
+                            <div id="student-timeline"></div>
+                        </div>
+                    </div>
 
-        <div class="col-md-4 sp-top-15">
-            <div class="dashboard-card shadow top-bdr-4">
 
-                <div class="dashboard-card-heading">
-                    Timeline Key
-                </div>
-
-                <div class="container-fluid">
-                    <div id="external-events">
-                        <div class="btn btn-success">Formal Assessment</div><br/>
-                        <div class="btn btn-warning">Assignment</div><br/>
-                        <div class="btn btn-danger">Exam</div><br/>
-                        <div class="btn btn-info">Self Assessment</div><br/>
-                        <div class="btn btn-primary">Other</div>
+                    <div class="col-md-6">
+                        <h3>Timeline Key</h3>
+                        <div class="container-fluid">
+                            <div id="external-events">
+                                <div class="btn btn-success">Formal Assessment</div><br/>
+                                <div class="btn btn-warning">Assignment</div><br/>
+                                <div class="btn btn-danger">Exam</div><br/>
+                                <div class="btn btn-info">Self Assessment</div><br/>
+                                <div class="btn btn-primary">Other</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
+
+            </div> <!-- end card -->
+        </div> <!-- end col-md-12 -->
+    </div> <!-- end row -->
 
     <div class="clearfix"></div>
 
@@ -187,6 +245,8 @@ Student Dashboard
                 center: 'title',
                 right: 'month,basicWeek,basicDay'
             },
+            height: 400,
+            aspectRatio: 1,
             defaultDate: '2018-08-12',
             navLinks: true, // can click day/week names to navigate views
             editable: false,
@@ -295,53 +355,55 @@ Student Dashboard
         }); */
 
         var areaChartCanvas = $('#student-results').get(0).getContext('2d');
-        
+
         var areaChartData = {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
                 {
-                    label: 'Class Average',
-                    backgroundColor: 'rgba(147, 0, 16, 0.3)',
-                    borderColor: 'rgba(147, 0, 16, 1)',
-                    borderWidth: 1,
-                    fillColor: 'rgba(210, 214, 222, 1)',
-                    strokeColor: 'rgba(210, 214, 222, 1)',
-                    pointColor: 'rgba(210, 214, 222, 1)',
-                    pointStrokeColor: '#c1c7d1',
+                    label: 'Your Results',
+                    backgroundColor: 'rgba(0, 166, 90, 0)',
+                    borderColor: 'rgba(0, 166, 90, 1)',
+                    borderWidth: 2,
+                    fillColor: 'rgba(0, 166, 90, 0.9)',
+                    strokeColor: 'rgba(0, 166, 90, 0.8)',
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(0, 166, 90,1)',
                     pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data: [55, 66, 80, 81, 56, 60, 40, 55, 62, 75, 51, 80]
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [68, 59, 60, 72, 56, 55, 61, 49, 66, 72, 76, 52]
                 },
                 {
                     label: 'Your Average',
-                    backgroundColor: 'rgba(1, 33, 71, 0.3)',
-                    borderColor: 'rgba(1, 33, 71, 1)',
+                    backgroundColor: 'rgba(130, 201, 169, 0)',
+                    borderColor: 'rgba(130, 201, 169, 1)',
                     borderWidth: 1,
-                    fillColor: 'rgba(60,141,188,0.9)',
-                    strokeColor: 'rgba(60,141,188,0.8)',
+                    fillColor: 'rgba(221, 75, 57,0.9)',
+                    strokeColor: 'rgba(221, 75, 57,0.8)',
                     pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointStrokeColor: 'rgba(221, 75, 57,1)',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [48, 58, 60, 62, 67, 55, 70, 82, 74, 58, 73, 83]
+                    data: [68, 64, 62.3, 64.75, 63, 62, 60, 62, 63, 64, 65, 63]
                 },
                 {
-                    label: 'Your Results',
-                    backgroundColor: 'rgba(247, 147, 29, 0.3)',
-                    borderColor: 'rgba(247, 147, 29, 1)',
+                    label: 'Class Average',
+                    backgroundColor: 'rgba(220, 220, 220, 0)',
+                    borderColor: 'rgba(220, 220, 220, 1)',
                     borderWidth: 1,
-                    fillColor: 'rgba(60,141,188,0.9)',
-                    strokeColor: 'rgba(60,141,188,0.8)',
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    fillColor: 'rgba(0, 192, 239,1)',
+                    strokeColor: 'rgba(0, 192, 239,1)',
+                    pointColor: 'rgba(0, 192, 239,1)',
+                    pointStrokeColor: 'rgba(0, 192, 239,1)',
                     pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [68, 59, 60, 72, 56, 55, 60, 49, 66, 72, 76, 52]
-                }
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80]
+                },
+
+
             ]
         };
-        
-        
+
+
         var areaChartOptions = {
             //Boolean - If we should show the scale at all
             showScale: true,
@@ -360,9 +422,9 @@ Student Dashboard
             //Number - Tension of the bezier curve between points
             bezierCurveTension: 0.3,
             //Boolean - Whether to show a dot for each point
-            pointDot: false,
+            pointDot: true,
             //Number - Radius of each point dot in pixels
-            pointDotRadius: 4,
+            pointDotRadius: 1,
             //Number - Pixel width of point dot stroke
             pointDotStrokeWidth: 1,
             //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
@@ -376,16 +438,27 @@ Student Dashboard
             //String - A legend template
             legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
             //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             //Boolean - whether to make the chart responsive to window resizing
-            responsive: true
+            responsive: true,
+
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100  // minimum value will be 0.
+                    }
+                }]
+            }
         };
-        
+
         // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
         var areaChart = new Chart(areaChartCanvas , {
             type: "line",
             data: areaChartData,
-            options: areaChartOptions
+            options: areaChartOptions,
+
         });
 
     });
