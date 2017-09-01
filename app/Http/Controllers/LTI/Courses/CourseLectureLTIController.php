@@ -104,33 +104,33 @@ class CourseLectureLTIController extends LTIBaseController {
             $hits = $output->hits->hits;
             $total = $output->hits->total;
 
+            $fromNext = $request->get('from') + 1 * $size;
+            $fromPrev = $request->get('from') - 1 * $size;
+
+            $finalOutput = [];
+            foreach ($hits as $hit) {
+                $finalOutput[] = array(
+                    'total' => $total,
+                    "id" => $hit->_id,
+                    "title" => $hit->_source->title,
+                    "description" => $hit->_source->description,
+                    "fromNext" => $fromNext,
+                    "fromPrev" => $fromPrev,
+                    "size" => $size,
+                    "term" => $term
+                );
+            };
+
+            if ($request->ajax()) {
+                return response()
+                    ->json($finalOutput);
+            } else {
+                return response()
+                    ->view('student.courses.searchOutput', ['finalOutput' => $finalOutput], 200);
+            }
+
         } catch(\ErrorException $e) {
             return back();
-        };
-
-        $fromNext = $request->get('from') + 1 * $size;
-        $fromPrev = $request->get('from') - 1 * $size;
-
-        $finalOutput = [];
-        foreach ($hits as $hit) {
-            $finalOutput[] = array(
-                'total' => $total,
-                "id" => $hit->_id,
-                "title" => $hit->_source->title,
-                "description" => $hit->_source->description,
-                "fromNext" => $fromNext,
-                "fromPrev" => $fromPrev,
-                "size" => $size,
-                "term" => $term
-            );
-        }
-
-        if ($request->ajax()) {
-            return response()
-                ->json($finalOutput);
-        } else {
-            return response()
-                ->view('student.courses.searchOutput', ['finalOutput' => $finalOutput], 200);
         }
     }
 }
