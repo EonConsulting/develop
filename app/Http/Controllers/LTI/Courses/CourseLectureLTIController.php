@@ -6,7 +6,6 @@ use App\Models\Course;
 use App\Tools\Elasticsearch\Elasticsearch;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class CourseLectureLTIController extends LTIBaseController {
 
@@ -98,20 +97,24 @@ class CourseLectureLTIController extends LTIBaseController {
             }
         }';
 
-        $output = $elasticsearch->search($query, $from, $size);
+        try {
+            $output = $elasticsearch->search($query, $from, $size);
+            $output = json_decode($output);
 
-        $output = json_decode($output);
+            $hits = $output->hits->hits;
+            $total = $output->hits->total;
 
-        $hits = $output->hits->hits;
-
-        $finalOutput = [];
+        } catch(\ErrorException $e) {
+            return back();
+        };
 
         $fromNext = $request->get('from') + 1 * $size;
         $fromPrev = $request->get('from') - 1 * $size;
 
+        $finalOutput = [];
         foreach ($hits as $hit) {
             $finalOutput[] = array(
-                'total' => $output->_shards->total,
+                'total' => $total,
                 "id" => $hit->_id,
                 "title" => $hit->_source->title,
                 "description" => $hit->_source->description,
