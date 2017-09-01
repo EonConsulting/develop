@@ -134,27 +134,27 @@ Student Dashboard
 
                             Videos
                             <div class="progress">
-                                <div class="progress-bar bg-col-1" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 70%">
+                                <div class="progress-bar bg-col-1" id="progress_videos" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 70%">
                                     70%
                                 </div>
                             </div>
 
                             E-Books
                             <div class="progress">
-                                <div class="progress-bar bg-col-2" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 25%;">
+                                <div class="progress-bar bg-col-2" id="progress_ebooks" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 25%;">
                                     25%
                                 </div>
                             </div>
 
                             Articles
                             <div class="progress">
-                                <div class="progress-bar bg-col-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 40%">
+                                <div class="progress-bar bg-col-3" id="progress_articles" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 40%">
                                     40%
                                 </div>
                             </div>
                             Study Guide
                             <div class="progress">
-                                <div class="progress-bar bg-col-4" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 35%;">
+                                <div class="progress-bar bg-col-4" id="progress_stude_guide" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="min-width: 6em; width: 35%;">
                                     35%
                                 </div>
                             </div>
@@ -338,6 +338,27 @@ $(document).ready(function () {
                 "description": "FBN1502 - Business Numerical Skills B"
             }
         ];
+        
+        var progression = [
+            {
+                "course_id": "FBN1501",
+                "progress": {
+                    "videos": "25",
+                    "ebooks": "35",
+                    "articles": "40",
+                    "study_guide": "22"
+                }
+            },
+            {
+                "course_id": "FBN1502",
+                "progress": {
+                    "videos": "35",
+                    "ebooks": "65",
+                    "articles": "70",
+                    "study_guide": "52"
+                }
+            }
+        ];
 
         var results = [
             {
@@ -362,6 +383,12 @@ $(document).ready(function () {
                 {
                     renderGraph(obj);
                 }
+            });
+            $.each(progression, function(index, obj){
+               if (obj.course_id === self.val())
+               {
+                   renderProgression(obj);
+               }
             });
         });
         
@@ -472,6 +499,14 @@ $(document).ready(function () {
                 data: areaChartData,
                 options: areaChartOptions
             });
+        }
+        
+        function renderProgression(data)
+        {
+            $("#progress_videos").css("width", data.progress.videos);
+            $("#progress_ebooks").css("width", data.progress.ebooks);;
+            $("#progress_articles").css("width", data.progress.articles);;
+            $("#progress_study_guide").css("width", data.progress.study_guide);;
         }
     });
 </script>
