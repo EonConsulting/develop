@@ -25,7 +25,6 @@ Route::get('/', function () {
 });
 
 Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
-Route::get('lti/courses/search/page',  ['uses' => 'LTI\Courses\CourseLectureLTIController@page']);
 
 /*
  * ---------------------------------------

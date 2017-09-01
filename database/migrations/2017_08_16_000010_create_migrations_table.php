@@ -20,7 +20,7 @@ class CreateMigrationsTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('id');
             $table->string('migration', 191);
             $table->integer('batch');

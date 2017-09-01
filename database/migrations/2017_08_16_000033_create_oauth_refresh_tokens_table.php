@@ -20,7 +20,7 @@ class CreateOauthRefreshTokensTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('id');
             $table->string('access_token_id', 100);
             $table->tinyInteger('revoked');

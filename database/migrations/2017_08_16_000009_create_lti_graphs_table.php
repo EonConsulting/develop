@@ -20,7 +20,7 @@ class CreateLtiGraphsTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'MyISAM';
+            $table->engine = 'InnodDB';
             $table->increments('id');
             $table->text('code');
             $table->string('name', 191);
