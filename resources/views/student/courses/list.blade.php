@@ -159,7 +159,7 @@
             <div class="col-md-12">
                 <div class="container" style="margin-left:72px; margin-bottom: 20px">
                     <form class="search" action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
-                        <label for="search">Search</label> <span class=twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
+                        <label for="search">Search</label> <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
                             <input class="typeahead" name="term"></span>
                             <a href="" class="btn btn-primary" id="search" value="search">Search</a>
                     </form>
