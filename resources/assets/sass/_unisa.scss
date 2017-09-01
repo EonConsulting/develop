@@ -183,6 +183,7 @@ $user-box-height: 70px;
 
 //mixins
 .bg-col-1 {background: $colour1;} .bg-col-2 {background: $colour2;} .bg-col-3 {background: $colour3;} .bg-col-4 {background: $colour4;}
+.bg-col-1-dark {background: darken($colour1,20%);} .bg-col-2-dark {background: darken($colour2,20%);} .bg-col-3-dark {background: darken($colour3,20%)} .bg-col-4-dark {background: darken($colour4,20%);}
 .txt-col-1 {color: $colour1} .txt-col-2 {color: $colour2} .txt-col-3 {color: $colour3} .txt-col-4 {color: $colour4}
 .top-bdr-0 {border-top: $light-gray 1px solid;} .top-bdr-1 {border-top: $colour1 2px solid;} .top-bdr-2 {border-top: $colour2 2px solid;} .top-bdr-3 {border-top: $colour3 2px solid;} .top-bdr-4 {border-top: $colour4 2px solid;}
 .sp-top-15 {padding-top: 15px;} .sp-bot-15 {padding-bottom: 15px;}
@@ -197,3 +198,10 @@ $user-box-height: 70px;
 .panel > .list-group:last-child .list-group-item:last-child, .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {border-radius: 0%;}
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color: $unisa-orange; border-color: $unisa-orange;}
 .panel > .list-group:first-child .list-group-item:first-child, .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {border-radius: 0%;}
+
+.btn-default {}
+.btn-primary {}
+.btn-success {background: $colour3;} .btn-success:hover {background: darken($colour3,20%)}
+.btn-info {background: $colour1;} .btn-info:hover {background: darken($colour1,20%)}
+.btn-warning {background: $colour4;} .btn-warning:hover {background: darken($colour4,20%)}
+.btn-danger {background: $colour2;} .btn-danger:hover {background: darken($colour2,20%)}
