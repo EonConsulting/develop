@@ -30,7 +30,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI'),
+    'es_uri' => env('ES_URI', 'http://localhost:9200'),
 
 
     /*
