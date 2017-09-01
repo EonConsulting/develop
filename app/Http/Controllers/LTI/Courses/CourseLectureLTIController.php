@@ -103,15 +103,15 @@ class CourseLectureLTIController extends LTIBaseController {
         $output = json_decode($output);
 
         $hits = $output->hits->hits;
-
-        $finalOutput = [];
+        $total = $output->hits->total;
 
         $fromNext = $request->get('from') + 1 * $size;
         $fromPrev = $request->get('from') - 1 * $size;
 
+        $finalOutput = [];
         foreach ($hits as $hit) {
             $finalOutput[] = array(
-                'total' => $output->_shards->total,
+                'total' => $total,
                 "id" => $hit->_id,
                 "title" => $hit->_source->title,
                 "description" => $hit->_source->description,
