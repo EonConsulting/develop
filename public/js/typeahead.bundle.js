@@ -1115,12 +1115,14 @@
         function buildCss() {
             var css = {
                 wrapper: {
-                    position: "relative",
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
                     display: "inline-block"
                 },
                 hint: {
                     position: "absolute",
-                    top: "0",
+                    top: "14",
                     left: "0",
                     borderColor: "transparent",
                     boxShadow: "none",
@@ -1128,12 +1130,12 @@
                 },
                 input: {
                     position: "relative",
-                    verticalAlign: "top",
+                    //verticalAlign: "top",
                     backgroundColor: "transparent"
                 },
                 inputWithNoHint: {
                     position: "relative",
-                    verticalAlign: "top"
+                    //verticalAlign: "top"
                 },
                 menu: {
                     position: "absolute",
