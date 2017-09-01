@@ -21,6 +21,11 @@ Student Dashboard
         font-weight: 700;
     }
 
+     .btn-cal-key {
+         width: 100%;
+         font-weight: 700;
+     }
+
 </style>
 @endsection
 
@@ -38,7 +43,7 @@ Student Dashboard
     </div>
 
     <!--    <div class="row">
-    
+
             <div class="col-md-3">
                 <div class="nofitication-card shadow">
                     <div class="notification-card-icon bg-col-1">
@@ -50,7 +55,7 @@ Student Dashboard
                     </div>
                 </div>
             </div>
-    
+
             <div class="col-md-3">
                 <div class="nofitication-card shadow">
                     <div class="notification-card-icon bg-col-2">
@@ -62,7 +67,7 @@ Student Dashboard
                     </div>
                 </div>
             </div>
-    
+
             <div class="col-md-3">
                 <div class="nofitication-card shadow">
                     <div class="notification-card-icon bg-col-3">
@@ -74,7 +79,7 @@ Student Dashboard
                     </div>
                 </div>
             </div>
-    
+
             <div class="col-md-3">
                 <div class="nofitication-card shadow">
                     <div class="notification-card-icon bg-col-4">
@@ -86,7 +91,7 @@ Student Dashboard
                     </div>
                 </div>
             </div>
-    
+
         </div>-->
 
     <div class="row">
@@ -190,26 +195,24 @@ Student Dashboard
                 </div>
 
                 <div class="row basic-clearfix sp-top-15 sp-bot-15">
-                    <div class="col-md-6">
-                        <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="col-md-10">
                             <div id="student-timeline"></div>
                         </div>
-                    </div>
 
 
-                    <div class="col-md-6">
-                        <h3>Timeline Key</h3>
-                        <div class="container-fluid">
-                            <div id="external-events">
-                                <div class="btn btn-success">Formal Assessment</div><br/>
-                                <div class="btn btn-warning">Assignment</div><br/>
-                                <div class="btn btn-danger">Exam</div><br/>
-                                <div class="btn btn-info">Self Assessment</div><br/>
-                                <div class="btn btn-primary">Other</div>
+                        <div class="col-md-2">
+                            <h4>Timeline Key</h3>
+                            <div>
+                                <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
+                                <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
+                                <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
+                                <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
+                                <p><div class="btn btn-primary btn-cal-key">Other</div></p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> <!--end row>
 
 
             </div> <!-- end card -->
@@ -244,8 +247,7 @@ $(document).ready(function () {
             center: 'title',
             right: 'month,basicWeek,basicDay'
         },
-        height: 400,
-        aspectRatio: 1,
+        height: 500,
         defaultDate: '2018-08-12',
         navLinks: true, // can click day/week names to navigate views
         editable: false,
@@ -266,8 +268,8 @@ $(document).ready(function () {
                 id: 999,
                 title: 'Repeating Event',
                 start: '2018-08-09T16:00:00',
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
             },
             {
                 id: 999,
@@ -289,8 +291,8 @@ $(document).ready(function () {
             {
                 title: 'Lunch',
                 start: '2018-08-12T12:00:00',
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
             },
             {
                 title: 'Meeting',
@@ -303,8 +305,8 @@ $(document).ready(function () {
             {
                 title: 'Dinner',
                 start: '2018-08-12T20:00:00',
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
             },
             {
                 title: 'Birthday Party',
@@ -338,7 +340,7 @@ $(document).ready(function () {
                 "description": "FBN1502 - Business Numerical Skills B"
             }
         ];
-        
+
         var progression = [
             {
                 "course_id": "FBN1501",
@@ -391,7 +393,7 @@ $(document).ready(function () {
                }
             });
         });
-        
+
         // and lets just select the first record on page load
         $("#course-filter").trigger("change"); // val("val2").change();
 
@@ -500,7 +502,7 @@ $(document).ready(function () {
                 options: areaChartOptions
             });
         }
-        
+
         function renderProgression(data)
         {
             // set progress bar width and values
