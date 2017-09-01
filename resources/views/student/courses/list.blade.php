@@ -145,6 +145,7 @@
                 var termChars = e.target.value;
                 if(termChars.length === 3) {
                     var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
+                    var url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
                     setTerm(url);
                 }
             });
