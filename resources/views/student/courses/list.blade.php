@@ -100,9 +100,8 @@
                             <input class="form-control typeahead" name="term">
                         </div>
                         <span style="position: relative;">
-                             <a href="" class="btn btn-primary" id="search" value="search">Search</a>
+                            <a href="" class="btn btn-primary" id="search">Search</a>
                         </span>
-
                     </form>
                 </div>
 
@@ -171,8 +170,6 @@
                 }
             });
 
-            courseSearch.initialize();
-
             $('.typeahead').typeahead(null, {
                 highlight: true,
                 minLength: 3,
@@ -189,6 +186,13 @@
                     suggestion: courses.title*/
                 }
             });
+
+            /*$('input.typeahead').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#search').submit();
+                    return true;
+                }
+            });*/
         });
     </script>
 @endsection
