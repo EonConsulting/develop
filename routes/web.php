@@ -24,6 +24,8 @@ Route::get('/', function () {
       return view('welcome');
 });
 
+Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
+
 /*
  * ---------------------------------------
  * Auth::routes();
@@ -62,6 +64,8 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
     });
 });
 
+
+
 //Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);
 
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
@@ -80,19 +84,20 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
         Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+
+
         // Feed POst Route from Web Pack
         //Route::get('/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@get']);
 
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
-		
-		
+
+
 
     });
-    
     Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
         Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
-        Route::post('/builder', ['as' => 'content.store', 'uses' => 'ContentBuilderController@store']);
+        Route::post('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@store']);
     });
 });
 

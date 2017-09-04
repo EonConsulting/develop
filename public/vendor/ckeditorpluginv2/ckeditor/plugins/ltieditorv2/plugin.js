@@ -26,7 +26,7 @@
                     return{
                         title: 'LTI Tools APP Store',
                         minWidth: 820,
-                        minHeight: 400,
+                        minHeight: 600,
                         contents :
                         [
                             {
@@ -36,8 +36,10 @@
                                 elements : [{
                                     type: 'iframe',
                                     src:  ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ckeditorstore',
-                                    width  : '100%',
-                                    height : 450,
+                                    width  : 1000,
+                                    height : 800,
+                                    scrolling: 'yes',
+
                                     onContentLoad: function () {
                                         // We Access the DOM Instance of the Iframe
                                         var iframe = document.getElementById(this._.frameId);
@@ -76,7 +78,7 @@
                                                             'allowtransparency': 'true',
                                                             'frameborder': 0,
                                                             'class': 'ckeditorframev2',
-                                                            'scrolling': 'no'
+                                                            'scrolling': 'yes'
                                                         });
 
                                                         // $(appframe).on('load', function() {

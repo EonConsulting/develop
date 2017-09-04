@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-@section('page-title')
-    Courses
-@endsection
-
 @section('custom-styles')
     <style>
 
@@ -45,6 +40,49 @@
         .btn-course-delete {padding: 15px 15px 15px 0px; float: right; color: #dd4b39;}
 
 
+        /*
+         *Type Ahead
+         */
+
+         .tt-menu {
+             background: #FFF;
+             padding: 10px;
+         }
+
+         .search-area {
+            padding-top: 20px;
+            padding-bottom: 20px;
+         }
+
+         .search-area label {
+             font-weight: 300;
+             font-size: 20px;
+         }
+
+         .search-input {
+             position: relative;
+             display: inline-block;
+             height: 36px;
+             width: 300px;
+         }
+
+         .twitter-typeahead {
+            padding-top: 14px;
+            width: 300px;
+         }
+
+         .typeahead {
+
+         }
+
+         .tt-input {
+
+         }
+
+         .tt-hint {
+
+         }
+
     </style>
 @endsection
 
@@ -52,6 +90,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <div class="search-area">
+                    <form id="search-form">
+
+                        <span style="position: relative;">
+                            <label for="search">Search</label>
+                        </span>
+                        <div class="search-input">
+                            <input class="form-control typeahead" name="term">
+                        </div>
+                        <span style="position: relative;">
+                            <a href="" class="btn btn-primary" id="search">Search</a>
+                        </span>
+                    </form>
+                </div>
+
+
                 <?php $count = 0; ?>
                 @foreach($courses as $course)
                     <div class="course-card shadow">
@@ -62,7 +116,7 @@
                             </div>
                             <div class="btn-course-container">
                                 <a href="{{ route('lti.courses.single', $course['id']) }}" class="btn-course btn-course-view" role="button">
-                                    <i class="fa fa-mortar-board"></i> View
+                                    <span class="glyphicon glyphicon-blackboard"></span> View
                                 </a>
                             </div>
                         </div>
@@ -71,16 +125,74 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('custom-scripts')
-    <!-- jvectormap -->
-    <script src="{{url('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-    <script src="{{url('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-    <!-- ChartJS 1.0.1 -->
-    <script src="{{url('plugins/chartjs/Chart.min.js')}}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{url('dist/js/pages/dashboard2.js')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{url('dist/js/demo.js')}}"></script>
+
+    <script src="{{url('js/typeahead.bundle.js')}}"></script>
+
+    {{--Typeahead--}}
+    <script>
+
+        var url = '';
+
+        $(document).ready(function() {
+            $(".typeahead").typeahead({}).on("input", function(e) {
+                var termChars = e.target.value;
+                if(termChars.length >= 3) {
+                    //var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
+                    url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
+                    setTerm(url);
+                }
+            });
+
+            function setTerm(url) {
+                $("a").prop("href", url);
+            }
+
+            $(document).keypress(function(e) {
+                if(e.which == 13) {
+                    window.location.href = url;
+                }
+            });
+
+            var courseSearch = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                rateLimitWait: 1200,
+                remote: {
+                    url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
+                    prepare: function (query, settings) {
+                        settings.url = settings.url.replace('%QUERY', query);
+                        return settings;
+                    }
+                }
+            });
+
+            $('.typeahead').typeahead(null, {
+                highlight: true,
+                minLength: 3,
+                name: 'term',
+                source: courseSearch,
+                display: "title",
+                templates: {
+                    empty: [
+                        '<div class="noitems">',
+                            'Nothing to show',
+                         '</div>'
+                    ].join('\n')/*,
+                    pending: "",
+                    suggestion: courses.title*/
+                }
+            });
+
+            /*$('input.typeahead').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#search').submit();
+                    return true;
+                }
+            });*/
+        });
+    </script>
 @endsection
