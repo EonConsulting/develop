@@ -91,11 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-area">
-                    <form action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
-
-
-
-
+                    <form id="search-form">
 
                         <span style="position: relative;">
                             <label for="search">Search</label>
@@ -104,9 +100,8 @@
                             <input class="form-control typeahead" name="term">
                         </div>
                         <span style="position: relative;">
-                            <a href="" class="btn btn-primary" id="search" value="search">Search</a>
+                             <a href="" class="btn btn-primary" id="search" value="search">Search</a>
                         </span>
-
 
                     </form>
                 </div>
@@ -140,12 +135,15 @@
 
     {{--Typeahead--}}
     <script>
+
+        var url = '';
+
         $(document).ready(function() {
             $(".typeahead").typeahead({}).on("input", function(e) {
                 var termChars = e.target.value;
-                if(termChars.length === 3) {
-                    var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
-                    var url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
+                if(termChars.length >= 3) {
+                    //var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
+                    url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
                     setTerm(url);
                 }
             });
@@ -153,6 +151,12 @@
             function setTerm(url) {
                 $("a").prop("href", url);
             }
+
+            $(document).keypress(function(e) {
+                if(e.which == 13) {
+                    window.location.href = url;
+                }
+            });
 
             var courseSearch = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),

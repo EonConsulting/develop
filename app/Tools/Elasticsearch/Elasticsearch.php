@@ -15,9 +15,8 @@ class Elasticsearch
         $from = $from === null ? 0 : $from;
         $size = $size === null ? 10 : $size;
 
-        //$search = config('app.es_uri') . '/u-index/courses/_search?from=' . $from . '&size=' . $size;
-        $search = 'http://dev.unisaonline.net:9200/u-index/courses/_search?from=' . $from . '&size=' . $size;
-
+        $search = 'http://localhost:9200/u-index/courses/_search?from=' . $from . '&size=' . $size;
+        //$search = 'http://dev.unisaonline.net:9200/u-index/courses/_search?from=' . $from . '&size=' . $size;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $search);
