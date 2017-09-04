@@ -174,7 +174,7 @@
                 empty: [
                     '<div class="noitems">',
                         'Nothing to show',
-                     '</div>'
+                    '</div>'
                 ].join('\n')/*,
                 pending: "",
                 suggestion: courses.title*/
