@@ -130,7 +130,7 @@ class CourseLectureLTIController extends LTIBaseController {
             }
 
         } catch(\ErrorException $e) {
-            return back();
+            return back()->withErrors(['empty' => 'Nothing to show']);
         }
     }
 }

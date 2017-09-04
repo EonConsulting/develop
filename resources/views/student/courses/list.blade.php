@@ -91,7 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-area">
-                    <form name="search" id="search" action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
+                    <form action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
                         <span style="position: relative;">
                             <label for="search">Search</label>
                         </span>
@@ -104,6 +104,11 @@
                     </form>
                 </div>
 
+                <div>
+                    @if($errors->any())
+                        <h2>{{$errors->first()}}</h2><br />
+                    @endif
+                </div>
 
                 <?php $count = 0; ?>
                 @foreach($courses as $course)
@@ -129,7 +134,7 @@
 
 @section('custom-scripts')
 
-    <script src="{{url('js/typeahead.bundle.js')}}"></script>
+<script src="{{url('js/typeahead.bundle.js')}}"></script>
 
     {{--Typeahead--}}
     <script>
@@ -142,46 +147,45 @@
                 }
             });
 
-            function setTerm(url) {
-                $("a").prop("href", url);
+        function setTerm(url) {
+            $("a").prop("href", url);
+        }
+
+        var courseSearch = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            rateLimitWait: 1200,
+            remote: {
+                url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
+                prepare: function (query, settings) {
+                    settings.url = settings.url.replace('%QUERY', query);
+                    return settings;
+                }
             }
-
-            var courseSearch = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                rateLimitWait: 1200,
-                remote: {
-                    url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
-                    prepare: function (query, settings) {
-                        settings.url = settings.url.replace('%QUERY', query);
-                        return settings;
-                    }
-                }
-            });
-
-            $('.typeahead').typeahead(null, {
-                highlight: true,
-                minLength: 3,
-                name: 'term',
-                source: courseSearch,
-                display: "title",
-                templates: {
-                    empty: [
-                        '<div class="noitems">',
-                            'Nothing to show',
-                         '</div>'
-                    ].join('\n')/*,
-                    pending: "",
-                    suggestion: courses.title*/
-                }
-            });
-
-            /*$('input.typeahead').keypress(function(e) {
-                if (e.which === 13) {
-                    $('#search').submit();
-                    return true;
-                }
-            });*/
         });
-    </script>
+
+        $('.typeahead').typeahead(null, {
+            highlight: true,
+            minLength: 3,
+            name: 'term',
+            source: courseSearch,
+            display: "title",
+            templates: {
+                empty: [
+                    '<div class="noitems">',
+                        'Nothing to show',
+                     '</div>'
+                ].join('\n')/*,
+                pending: "",
+                suggestion: courses.title*/
+            }
+        });
+
+        $('input.typeahead').keypress(function(e) {
+            if (e.which === 13) {
+                $('#search')[0].click();
+            }
+        });
+    });
+</script>
 @endsection
