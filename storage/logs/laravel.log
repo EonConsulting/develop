@@ -268,3 +268,6 @@ Stack trace:
 #53 C:\wamp64\www\develop\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #54 C:\wamp64\www\develop\server.php(21): require_once('C:\\wamp64\\www\\d...')
 #55 {main}  
+[2017-09-04 15:24:21] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'EONConsulting\Storyline2\Models\Storyline' not found' in C:\wamp64\www\develop\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasRelationships.php:487
+Stack trace:
+#0 {main}  

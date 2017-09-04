@@ -14,6 +14,7 @@ use App\Models\Course;
 use App\Models\Storyline;
 use App\Models\StorylineItem;
 
+
 class Storyline2ViewsJSON extends BaseController {
 
     public function render(Course $course) {
@@ -21,11 +22,12 @@ class Storyline2ViewsJSON extends BaseController {
         //TODO: get course tree and use instead of the following demo array
 
         //hardcoded for design
+                $var =    $course::find(14);
         
-        $storyline = $course->latest_storyline();
-        //$items = $storyline->items;
-        dd($storyline);
-        //return response()->json($example_course);
+        $storyline = $var->latest_storyline();
+        $items = $storyline->items;
+        
+        return response()->json($items);
         exit();
         $example_course = [
             [

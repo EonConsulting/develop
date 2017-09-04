@@ -103,7 +103,7 @@ class CourseStorylineController extends DBCourseStorylineBase
      */
     public function fetch(Course $course)
     {
-        return $this->asset_fetch($course);
+       return $this->asset_fetch($course);
     }
 
     /**
