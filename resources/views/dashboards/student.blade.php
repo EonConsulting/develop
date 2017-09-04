@@ -254,19 +254,19 @@ $(document).ready(function () {
         eventLimit: true, // allow "more" link when too many events
         events: [
             {
-                title: 'All Day Event',
+                title: 'FBN101 Test',
                 start: '2018-08-01',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
-                title: 'Long Event',
+                title: 'New Student Welcome',
                 start: '2018-08-07',
                 end: '2018-08-10'
             },
             {
                 id: 999,
-                title: 'Repeating Event',
+                title: 'FBN102 Exam',
                 start: '2018-08-09T16:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
@@ -277,7 +277,7 @@ $(document).ready(function () {
                 start: '2018-08-16T16:00:00'
             },
             {
-                title: 'Conference',
+                title: 'Student Conference',
                 start: '2018-08-11',
                 end: '2018-08-13'
             },
@@ -289,34 +289,34 @@ $(document).ready(function () {
                 borderColor: '#00a65a' //Success (green)
             },
             {
-                title: 'Lunch',
+                title: 'FBN101 Exam',
                 start: '2018-08-12T12:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
-                title: 'Meeting',
+                title: 'FNB104 Test',
                 start: '2018-08-12T14:30:00'
             },
             {
-                title: 'Happy Hour',
+                title: 'FBN105 Test',
                 start: '2018-08-12T17:30:00'
             },
             {
-                title: 'Dinner',
+                title: 'FBN103 Exam',
                 start: '2018-08-12T20:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
-                title: 'Birthday Party',
+                title: 'FBN102 Test',
                 start: '2018-08-13T07:00:00',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
-                title: 'Click for Google',
-                url: 'http://google.com/',
+                title: 'MyUnisa',
+                url: 'http://unisa.ac.za/',
                 start: '2018-08-28'
             }
         ]
