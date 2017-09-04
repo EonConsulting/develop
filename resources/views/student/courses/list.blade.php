@@ -91,12 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-area">
-                    <form action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
-
-
-
-
-
+                    <form name="search" id="search" action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
                         <span style="position: relative;">
                             <label for="search">Search</label>
                         </span>
@@ -104,10 +99,8 @@
                             <input class="form-control typeahead" name="term">
                         </div>
                         <span style="position: relative;">
-                            <a href="" class="btn btn-primary" id="search" value="search">Search</a>
+                            <a href="" class="btn btn-primary" id="search">Search</a>
                         </span>
-
-
                     </form>
                 </div>
 
@@ -144,7 +137,6 @@
             $(".typeahead").typeahead({}).on("input", function(e) {
                 var termChars = e.target.value;
                 if(termChars.length === 3) {
-                    var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
                     var url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
                     setTerm(url);
                 }
@@ -167,8 +159,6 @@
                 }
             });
 
-            courseSearch.initialize();
-
             $('.typeahead').typeahead(null, {
                 highlight: true,
                 minLength: 3,
@@ -183,6 +173,13 @@
                     ].join('\n')/*,
                     pending: "",
                     suggestion: courses.title*/
+                }
+            });
+
+            $('input.typeahead').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#search').submit();
+                    return true;
                 }
             });
         });

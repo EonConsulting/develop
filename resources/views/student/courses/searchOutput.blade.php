@@ -1,5 +1,4 @@
 {{--
-  Created by PhpStorm.
   User: Dario.Alfredo
   Date: 8/23/2017
   Time: 10:27 AM
@@ -70,15 +69,8 @@
                             <input class="form-control typeahead" name="term">
                         </span>
                         <span>
-                            <a href="" class="btn btn-primary" id="search" value="search">Search</a>
+                            <a href="" class="btn btn-primary" id="search">Search</a>
                         </span>
-
-
-
-<!--
-                        <label for="search">Search</label> <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                            <input class="typeahead" name="term"></span>
-                            <a href="#" class="btn btn-primary" id="search" value="search">Search</a>-->
                     </form>
                 </div>
 
