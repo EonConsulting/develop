@@ -176,12 +176,12 @@
                 }
             });
 
-            $('input.typeahead').keypress(function(e) {
+            /*$('input.typeahead').keypress(function(e) {
                 if (e.which === 13) {
                     $('#search').submit();
                     return true;
                 }
-            });
+            });*/
         });
     </script>
 @endsection
