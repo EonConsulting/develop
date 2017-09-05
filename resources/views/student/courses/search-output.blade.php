@@ -73,8 +73,9 @@
                         </span>
                     </form>
                 </div>
+                <?php if(!($finalOutput['total'] === 0)): ?>
 
-                @foreach($finalOutput as $output)
+                @foreach($finalOutput['results'] as $output)
                     <div class="course-card shadow">
                         <div class="">
                             <div class="caption">
@@ -89,19 +90,33 @@
                         </div>
                     </div>
                 @endforeach
+
+                <?php else: ?>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="container-fluid">
+                                <span style="font-weight: 300; font-size: 24px;">No results to show</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <?php endif; ?>
+
             </div>
         </div>
 
         <div>
             <ul class="pager">
-                @if ($output['fromPrev'] >= 0)
-                    <li><a id="p" href="{{ url('/lti/courses/search/?from='.$output['fromPrev'].'&size='.$output['size'].'&term='.$output['term']) }}">Previous</a></li>
+
+                @if ($finalOutput['fromPrev'] >= 0)
+                    <li><a id="p" href="{{ url('/lti/courses/search/?from='.$finalOutput['fromPrev'].'&size='.$finalOutput['size'].'&term='.$finalOutput['term']) }}">Previous</a></li>
                 @endif
 
-                @if ($output['fromNext'] < $output['total'])
-                        <li><a id="n" href="{{ url('/lti/courses/search/?from='.$output['fromNext'].'&size='.$output['size'].'&term='.$output['term']) }}">Next</a></li>
+                @if ($finalOutput['fromNext'] < $finalOutput['total'])
+                    <li><a id="n" href="{{ url('/lti/courses/search/?from='.$finalOutput['fromNext'].'&size='.$finalOutput['size'].'&term='.$finalOutput['term']) }}">Next</a></li>
                 @endif
-
             </ul>
         </div>
     </div>

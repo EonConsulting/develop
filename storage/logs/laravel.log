@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2017-08-31 09:08:55] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'Tsugi\Config\ConfigInfo' not found in /home/vagrant/Code/develop/packages/laravel-lti/src/Http/Controllers/config.php:30
 Stack trace:
 #0 /home/vagrant/Code/develop/packages/laravel-lti/src/Http/Controllers/LTIBaseController.php(11): require_once()
@@ -5096,3 +5097,5 @@ Stack trace:
 #21 C:\wamp64\www\eContent\develop\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(114): Illuminate\Foundation\Console\Kernel->bootstrap()
 #22 C:\wamp64\www\eContent\develop\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #23 {main}  
+=======
+>>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5

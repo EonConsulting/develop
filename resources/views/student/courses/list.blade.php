@@ -91,7 +91,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-area">
+<<<<<<< HEAD
                     <form action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
+=======
+                    <form id="search-form">
+
+>>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5
                         <span style="position: relative;">
                             <label for="search">Search</label>
                         </span>
@@ -138,11 +143,15 @@
 
     {{--Typeahead--}}
     <script>
+
+        var url = '';
+
         $(document).ready(function() {
             $(".typeahead").typeahead({}).on("input", function(e) {
                 var termChars = e.target.value;
-                if(termChars.length === 3) {
-                    var url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
+                if(termChars.length >= 3) {
+                    //var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
+                    url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
                     setTerm(url);
                 }
             });
@@ -151,6 +160,7 @@
             $("a").prop("href", url);
         }
 
+<<<<<<< HEAD
         var courseSearch = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -160,6 +170,24 @@
                 prepare: function (query, settings) {
                     settings.url = settings.url.replace('%QUERY', query);
                     return settings;
+=======
+            $(document).keypress(function(e) {
+                if(e.which == 13) {
+                    window.location.href = url;
+                }
+            });
+
+            var courseSearch = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                rateLimitWait: 1200,
+                remote: {
+                    url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
+                    prepare: function (query, settings) {
+                        settings.url = settings.url.replace('%QUERY', query);
+                        return settings;
+                    }
+>>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5
                 }
             }
         });
