@@ -27,7 +27,6 @@ function renderTree(tree_data) {
 }
 
 function treeToJSON() {
-
     var v = $('#tree').jstree(true).get_json();
     console.log(v);
 
@@ -98,8 +97,7 @@ function renameNode(nodeId, nodeNewTitle) {
     if ($.trim(nodeId) == "")
         nodeId = createdNodeId;
     var actionUrl = "/Home/RenameNode?nodeId=" + nodeId + "&nodeNewTitle=" + nodeNewTitle;
-    $.ajax(
-            {
+    $.ajax({
                 type: "POST",
                 url: actionUrl,
                 data: null,
@@ -114,8 +112,7 @@ function renameNode(nodeId, nodeNewTitle) {
 
 function deleteSubNode(nodeId) {
     var actionUrl = "/Home/DeleteSubNode?folderId=" + nodeId;
-    $.ajax(
-            {
+    $.ajax({
                 type: "POST",
                 url: actionUrl,
                 data: null,
