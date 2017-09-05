@@ -38,7 +38,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          //Render JSON Route
          //Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2JSONrender');
          Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
-
+         Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2JSONrename');
 
         //Add more routes
     });

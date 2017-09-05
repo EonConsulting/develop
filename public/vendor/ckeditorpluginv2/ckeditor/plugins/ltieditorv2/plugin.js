@@ -12,6 +12,8 @@
  * @member CKEDITOR.editor
  *
  */
+
+console.log("Subdir is set to: " + config["subdir"]);
 ( function() {
     var iframeWindow = null;
     CKEDITOR.plugins.add( 'ltieditorv2',
@@ -25,8 +27,8 @@
                 {
                     return{
                         title: 'LTI Tools APP Store',
-                        minWidth: 820,
-                        minHeight: 600,
+                        Width: '50px',
+                        Height: '600px',
                         contents :
                         [
                             {
@@ -35,11 +37,10 @@
                                 expand: true,
                                 elements : [{
                                     type: 'iframe',
+                                    //src:  '/e-content/ckeditorstore',
                                     src:  ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ckeditorstore',
-                                    width  : 1000,
-                                    height : 800,
-                                    scrolling: 'yes',
-
+                                    width  : '100%',
+                                    height : '100%',
                                     onContentLoad: function () {
                                         // We Access the DOM Instance of the Iframe
                                         var iframe = document.getElementById(this._.frameId);
@@ -53,16 +54,14 @@
                                                // console.log(context_id);
                                                 // Launch an AJAX HTTP Request
                                                 $.ajax({
-                                                    //Production Url - Use if on Dev Server
-                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/' + context_id,
-													//Local Url - Use if On Local Machine
-                                                    //url: '/ajaxresponse/'+context_id,
+                                                    //Production Url
+                                                    //url: '/e-content/ajaxresponse/' + context_id,
+                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/'+context_id,
                                                     type: 'GET',
                                                     success: function (launchvars) {
-                                                        //Production Url - Use if on Dev Server
-                                                        var url        = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/' +context_id;
-														//Local Url - Use if On Local Machine
-                                                        //var url        = '/ajaxresponse/'+context_id;
+                                                        //Production
+                                                        //var url        = '/e-content/ajaxresponse/' +context_id;
+                                                        var url        = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '' ) + '/ajaxresponse/'+context_id;
                                                         var div        = new CKEDITOR.dom.element('div');
                                                         var appframe   = new CKEDITOR.dom.element('iframe');
                                                         console.log('appframe', appframe);
@@ -78,7 +77,7 @@
                                                             'allowtransparency': 'true',
                                                             'frameborder': 0,
                                                             'class': 'ckeditorframev2',
-                                                            'scrolling': 'yes'
+                                                            'scrolling': 'no'
                                                         });
 
                                                         // $(appframe).on('load', function() {

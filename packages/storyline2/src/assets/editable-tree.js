@@ -26,100 +26,39 @@ function renderTree(tree_data) {
 
 }
 
-function treeToJSON() {
-    var v = $('#tree').jstree(true).get_json();
+function treeToJSON(){
+
+    var v =$(tree_id).jstree(true).get_json('#', { 'flat': true });
     console.log(v);
 
 }
 
-
 //detect when node is clicked, ie. selected node changes
 $(tree_id).on("changed.jstree", function (e, data) {
-
     console.log("Node selected");
-
 });
 
-
-//detect changes in the tree structure
-$events = [
-    "create_node.jstree",
-    "rename_node.jstree",
-    "delete_node.jstree",
-    "move_node.jstree",
-    "cut.jstree",
-    "paste.jstree"
-
-];
-
-$events.each(function (item) {
-    $(tree_id).on(item, function (e, data) {
-        treeToJSON();
-
-    });
+$(tree_id).on("create_node.jstree", function (e, data) {
+    console.log("Node created");
 });
 
-function saveHiearchy(node_id, parent_id) {
-    var actionUrl = "/Home/SaveHiearchy?childId=" + node_id + "&parentId=" + parent_id;
-    $.ajax(
-            {
-                type: "POST",
-                url: actionUrl,
-                data: null,
-                dataType: "json",
-                success: function (data) {
+$(tree_id).on("rename_node.jstree", function (e, data) {
+    console.log("Node renamed");
+});
 
-                },
-                error: function (req, status, error) {
+$(tree_id).on("delete_node.jstree", function (e, data) {
+    console.log("Node deleted");
+});
 
-                }
-            });
-}
+$(tree_id).on("move_node.jstree", function (e, data) {
+    console.log("Node moved");
+});
 
-function createNode(NODE, parentId) {
-    var folderName = $(NODE.innerHTML).filter("a")[0].innerText;
-    var actionUrl = "/Home/CreateFolder?folderName=" + folderName + "&parentId=" + parentId;
-    $.ajax(
-            {
-                type: "POST",
-                url: actionUrl,
-                data: null,
-                dataType: "json",
-                success: function (data) {
-                    createdNodeId = data.nodeId;
-                },
-                error: function (req, status, error) {
-                }
-            });
-}
+$(tree_id).on("cut.jstree", function (e, data) {
+    console.log("Node cut");
+});
 
-function renameNode(nodeId, nodeNewTitle) {
-    if ($.trim(nodeId) == "")
-        nodeId = createdNodeId;
-    var actionUrl = "/Home/RenameNode?nodeId=" + nodeId + "&nodeNewTitle=" + nodeNewTitle;
-    $.ajax({
-                type: "POST",
-                url: actionUrl,
-                data: null,
-                dataType: "json",
-                success: function (data) {
-                },
-                error: function (req, status, error) {
-                }
-            });
+$(tree_id).on("paste.jstree", function (e, data) {
+    console.log("paste pasted");
+});
 
-}
-
-function deleteSubNode(nodeId) {
-    var actionUrl = "/Home/DeleteSubNode?folderId=" + nodeId;
-    $.ajax({
-                type: "POST",
-                url: actionUrl,
-                data: null,
-                dataType: "json",
-                success: function (data) {
-                },
-                error: function (req, status, error) {
-                }
-            });
-}

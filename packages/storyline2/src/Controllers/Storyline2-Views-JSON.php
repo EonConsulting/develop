@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: jharing10
@@ -13,11 +14,10 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Course;
 use App\Models\Storyline;
 use App\Models\StorylineItem;
-
+use Symfony\Component\HttpFoundation\Request;
 
 class Storyline2ViewsJSON extends BaseController {
 
- 
     /**
      * 
      * @param Course $course
@@ -39,18 +39,16 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach($items as $k => $node) {
+        foreach ($items as $k => $node) {
 
             $map[] = [
                 'id' => $node['id'],
                 'parent' => ($node['parent_id'] === null ? '#' : $node['parent_id']),
                 'text' => $node['name']
             ];
-
         }
 
         return json_encode($map);
-
     }
 
     /**
@@ -62,20 +60,30 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach($items as $k => $node) {
-
+        foreach ($items as $k => $node) {
             $map[] = [
                 'id' => $node['id'],
                 'parent_id' => ($node['parent'] === '#' ? null : $node['parent_id']),
                 'name' => $node['text']
             ];
-
         }
 
         return json_encode($map);
-
     }
 
-
+    public function rename(Request $request) {
+        if (is_array($request->data)) {
+            $ItemId = (int) $request->data['id'];
+            $node = StorylineItem::find($ItemId);
+            $node->name = $request->data['text'];
+            if ($node->save()) {
+                $msg = 'success';
+            }else{
+                $msg = 'failed';
+            }
+            
+            return response()->json(['msg' => $msg]);
+        }
+    }
 
 }
