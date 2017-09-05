@@ -16,19 +16,12 @@ use App\Models\StorylineItem;
 
 
 class Storyline2ViewsJSON extends BaseController {
-
-    public function render(Course $course) {
-
+    
+    public function index() {
         //TODO: get course tree and use instead of the following demo array
 
         //hardcoded for design
-                $var =    $course::find(14);
         
-        $storyline = $var->latest_storyline();
-        $items = $storyline->items;
-        
-        return response()->json($items);
-        exit();
         $example_course = [
             [
                 'id' => '0',
@@ -119,6 +112,21 @@ class Storyline2ViewsJSON extends BaseController {
 
 
         return response()->json($example_course);
-    } //end render()
+       
+    } 
+
+    public function render(Course $course) {  
+        
+        $var = $course::find(14);      
+        $storyline = $var->latest_storyline();
+        $items = $storyline->items;       
+        //dd(json_encode($items));
+        $decoded = json_encode($items);
+        return $decoded;
+              
+    } 
+    
+   
+    
 
 }
