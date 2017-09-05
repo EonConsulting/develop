@@ -44,44 +44,44 @@
          *Type Ahead
          */
 
-         .tt-menu {
-             background: #FFF;
-             padding: 10px;
-         }
+        .tt-menu {
+            background: #FFF;
+            padding: 10px;
+        }
 
-         .search-area {
+        .search-area {
             padding-top: 20px;
             padding-bottom: 20px;
-         }
+        }
 
-         .search-area label {
-             font-weight: 300;
-             font-size: 20px;
-         }
+        .search-area label {
+            font-weight: 300;
+            font-size: 20px;
+        }
 
-         .search-input {
-             position: relative;
-             display: inline-block;
-             height: 36px;
-             width: 300px;
-         }
+        .search-input {
+            position: relative;
+            display: inline-block;
+            height: 36px;
+            width: 300px;
+        }
 
-         .twitter-typeahead {
+        .twitter-typeahead {
             padding-top: 14px;
             width: 300px;
-         }
+        }
 
-         .typeahead {
+        .typeahead {
 
-         }
+        }
 
-         .tt-input {
+        .tt-input {
 
-         }
+        }
 
-         .tt-hint {
+        .tt-hint {
 
-         }
+        }
 
     </style>
 @endsection
@@ -91,12 +91,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-area">
-<<<<<<< HEAD
                     <form action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
-=======
-                    <form id="search-form">
-
->>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5
                         <span style="position: relative;">
                             <label for="search">Search</label>
                         </span>
@@ -139,43 +134,22 @@
 
 @section('custom-scripts')
 
-<script src="{{url('js/typeahead.bundle.js')}}"></script>
+    <script src="{{url('js/typeahead.bundle.js')}}"></script>
 
     {{--Typeahead--}}
     <script>
-
-        var url = '';
-
         $(document).ready(function() {
             $(".typeahead").typeahead({}).on("input", function(e) {
                 var termChars = e.target.value;
-                if(termChars.length >= 3) {
-                    //var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
-                    url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
+                if(termChars.length === 3) {
+                    var url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
                     setTerm(url);
                 }
             });
 
-        function setTerm(url) {
-            $("a").prop("href", url);
-        }
-
-<<<<<<< HEAD
-        var courseSearch = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            rateLimitWait: 1200,
-            remote: {
-                url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
-                prepare: function (query, settings) {
-                    settings.url = settings.url.replace('%QUERY', query);
-                    return settings;
-=======
-            $(document).keypress(function(e) {
-                if(e.which == 13) {
-                    window.location.href = url;
-                }
-            });
+            function setTerm(url) {
+                $("a").prop("href", url);
+            }
 
             var courseSearch = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -187,33 +161,31 @@
                         settings.url = settings.url.replace('%QUERY', query);
                         return settings;
                     }
->>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5
                 }
-            }
-        });
+            });
 
-        $('.typeahead').typeahead(null, {
-            highlight: true,
-            minLength: 3,
-            name: 'term',
-            source: courseSearch,
-            display: "title",
-            templates: {
-                empty: [
-                    '<div class="noitems">',
+            $('.typeahead').typeahead(null, {
+                highlight: true,
+                minLength: 3,
+                name: 'term',
+                source: courseSearch,
+                display: "title",
+                templates: {
+                    empty: [
+                        '<div class="noitems">',
                         'Nothing to show',
-                    '</div>'
-                ].join('\n')/*,
+                        '</div>'
+                    ].join('\n')/*,
                 pending: "",
                 suggestion: courses.title*/
-            }
-        });
+                }
+            });
 
-        $('input.typeahead').keypress(function(e) {
-            if (e.which === 13) {
-                $('#search')[0].click();
-            }
+            $('input.typeahead').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#search')[0].click();
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endsection
