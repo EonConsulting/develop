@@ -49,11 +49,9 @@
 
 @section('custom-scripts')
 
-<script>
-      
+<script>     
       var url = "{{{ url('') }}}" + "/storyline2/json-render"; //add storyline_id: .../json-render/storyline_id
       var tree_id = "#tree";
-
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>

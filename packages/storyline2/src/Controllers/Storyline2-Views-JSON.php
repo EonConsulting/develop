@@ -18,12 +18,9 @@ use App\Models\StorylineItem;
 class Storyline2ViewsJSON extends BaseController {
     
     public function index() {
-        //TODO: get course tree and use instead of the following demo array
-
-        //hardcoded for design
-        
+      
         $example_course = [
-            [
+               [
                 'id' => '0',
                 'text' => 'Introduction',
                 'icon' => '/',
@@ -109,14 +106,11 @@ class Storyline2ViewsJSON extends BaseController {
 
         ];
 
-
-
         return response()->json($example_course);
        
     } 
 
-    public function render(Course $course) {  
-        
+    public function render(Course $course) {         
         $var = $course::find(14);      
         $storyline = $var->latest_storyline();
         $items = $storyline->items;       
