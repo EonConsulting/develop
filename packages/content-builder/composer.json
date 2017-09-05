@@ -1,0 +1,17 @@
+{
+    "name": "eonconsulting/content-builder",
+    "description": "The content builder that will be used as part of the new Storyline2 package.",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Kenny Crous",
+            "email": "kcrous@iqbusiness.net"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "EONConsulting\\content-builder\\": "src/"
+      }
+    },
+    "require": {}
+}

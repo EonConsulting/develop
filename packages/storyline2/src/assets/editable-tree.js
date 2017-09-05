@@ -28,7 +28,7 @@ function renderTree(tree_data) {
 
 function treeToJSON(){
 
-    var v = $('#tree').jstree(true).get_json();
+    var v =$(tree_id).jstree(true).get_json('#', { 'flat': true });
     console.log(v);
 
 }
@@ -36,26 +36,31 @@ function treeToJSON(){
 
 //detect when node is clicked, ie. selected node changes
 $(tree_id).on("changed.jstree", function (e, data) {
-
     console.log("Node selected");
-
 });
 
 
 //detect changes in the tree structure
-$events = [
+$(tree_id).on("create_node.jstree", function (e, data) {
+    console.log("Node created");
+});
 
-    "create_node.jstree",
-    "rename_node.jstree",
-    "delete_node.jstree",
-    "move_node.jstree",
-    "cut.jstree",
-    "paste.jstree"
+$(tree_id).on("rename_node.jstree", function (e, data) {
+    console.log("Node renamed");
+});
 
-];
+$(tree_id).on("delete_node.jstree", function (e, data) {
+    console.log("Node deleted");
+});
 
-$events.each(function(item){
-    $(tree_id).on(item, function (e, data) {
-        treeToJSON();
-    });
+$(tree_id).on("move_node.jstree", function (e, data) {
+    console.log("Node moved");
+});
+
+$(tree_id).on("cut.jstree", function (e, data) {
+    console.log("Node cut");
+});
+
+$(tree_id).on("paste.jstree", function (e, data) {
+    console.log("paste pasted");
 });
