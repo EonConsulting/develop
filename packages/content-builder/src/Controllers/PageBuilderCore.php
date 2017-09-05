@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Builders;
+namespace EONConsulting\ContentBuilder\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 class PageBuilderCore extends Controller {
 
     public function index() {
-        return view('lecturer.builders.page');
+
+        return view('eon.content-builder::student.view', ['breadcrumbs' => $breadcrumbs]);
     }
 
 }

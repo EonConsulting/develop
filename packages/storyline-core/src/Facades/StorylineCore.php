@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Facade;
 class StorylineCore extends Facade {
 
     protected static function getFacadeAccessor() {
+
         return 'storyline_core';
+
     }
 
 }

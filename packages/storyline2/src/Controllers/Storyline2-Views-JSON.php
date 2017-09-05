@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class Storyline2ViewsJSON extends BaseController {
 
     /**
-     * 
+     *
      * @param Course $course
      * @return type
      */
@@ -31,7 +31,7 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
+     *
      * @param type $items
      * @return type
      */
@@ -52,7 +52,7 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
+     *
      * @param type $items
      * @return type
      */
@@ -69,21 +69,6 @@ class Storyline2ViewsJSON extends BaseController {
         }
 
         return json_encode($map);
-    }
-
-    public function rename(Request $request) {
-        if (is_array($request->data)) {
-            $ItemId = (int) $request->data['id'];
-            $node = StorylineItem::find($ItemId);
-            $node->name = $request->data['text'];
-            if ($node->save()) {
-                $msg = 'success';
-            }else{
-                $msg = 'failed';
-            }
-            
-            return response()->json(['msg' => $msg]);
-        }
     }
 
 }

@@ -66,7 +66,7 @@ Storyline Student Single
         });
 
         function renameNode(data) {
-            var actionUrl = "{{{ url('') }}}" + "/storyline2/rename";
+            var actionUrl = "{{{ url('') }}}" + "/storyline2/rename-item";
             $.ajax({
                 type: "POST",
                 url: actionUrl,

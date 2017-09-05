@@ -217,7 +217,7 @@ return [
         \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
 
         \EONConsulting\Storyline2\Storyline2ServiceProvider::class,
-
+        \EONConsulting\ContentBuilder\ContentBuilderServiceProvider::class,
         /*
          * Application Service Providers...
          */

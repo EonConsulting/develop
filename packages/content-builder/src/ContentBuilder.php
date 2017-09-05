@@ -1,7 +1,7 @@
 <?php
 namespace EONConsulting\ContentBuilder;
 
-class Storyline2 {
+class ContentBuilder {
 
 
 
