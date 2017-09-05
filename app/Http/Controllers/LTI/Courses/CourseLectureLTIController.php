@@ -137,14 +137,12 @@ class CourseLectureLTIController extends LTIBaseController {
             }
 
         } catch(\ErrorException $e) {
-<<<<<<< HEAD
-            return back()->withErrors(['empty' => 'Nothing to show']);
-=======
+
             //echo $e;
 
             //return response()->view('student.courses.search-output', ['finalOutput' => [], 'breadcrumbs' => $breadcrumbs], 200);
             return back();
->>>>>>> a2e73b828c2bdada7b1817bc257fec27af5f18c5
+
         }
     }
 }
