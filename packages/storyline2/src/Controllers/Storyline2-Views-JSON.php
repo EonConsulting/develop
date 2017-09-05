@@ -120,7 +120,7 @@ class Storyline2ViewsJSON extends BaseController {
         $var = $course::find(14);      
         $storyline = $var->latest_storyline();
         $items = $storyline->items;       
-        //dd(json_encode($items));
+        dd(json_encode($items));
         $decoded = json_encode($items);
         return $decoded;
               
