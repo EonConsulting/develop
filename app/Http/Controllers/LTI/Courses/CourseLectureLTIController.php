@@ -97,6 +97,10 @@ class CourseLectureLTIController extends LTIBaseController {
             }
         }';
 
+        $breadcrumbs = [
+            'title' => 'Search Results'
+        ];
+
         try {
             $output = $elasticsearch->search($query, $from, $size);
             $output = json_decode($output);
@@ -104,33 +108,41 @@ class CourseLectureLTIController extends LTIBaseController {
             $hits = $output->hits->hits;
             $total = $output->hits->total;
 
-            $fromNext = $request->get('from') + 1 * $size;
-            $fromPrev = $request->get('from') - 1 * $size;
+            $fromNext = $request->get('from') + $size; //from = 0 then this = 10, 10+1*10=110
+            $fromPrev = $request->get('from') - $size;
 
-            $finalOutput = [];
+            $finalOutput = [
+                "fromNext" => $fromNext,
+                "fromPrev" => $fromPrev,
+                "total" => $total,
+                "size" => $size,
+                "term" => $term,
+                "results" => []
+            ];
+
             foreach ($hits as $hit) {
-                $finalOutput[] = array(
-                    'total' => $total,
+                $finalOutput['results'][] = array(
                     "id" => $hit->_id,
                     "title" => $hit->_source->title,
                     "description" => $hit->_source->description,
-                    "fromNext" => $fromNext,
-                    "fromPrev" => $fromPrev,
-                    "size" => $size,
-                    "term" => $term
                 );
             };
 
             if ($request->ajax()) {
                 return response()
-                    ->json($finalOutput);
+                    ->json($finalOutput['results']);
             } else {
                 return response()
-                    ->view('student.courses.searchOutput', ['finalOutput' => $finalOutput], 200);
+                    ->view('student.courses.search-output', ['finalOutput' => $finalOutput, 'breadcrumbs' => $breadcrumbs], 200);
             }
 
         } catch(\ErrorException $e) {
-            return back()->withErrors(['empty' => 'Nothing to show']);
+
+            //echo $e;
+
+            //return response()->view('student.courses.search-output', ['finalOutput' => [], 'breadcrumbs' => $breadcrumbs], 200);
+            return back();
+
         }
     }
 }
