@@ -70,7 +70,12 @@ class Storyline2ViewsJSON extends BaseController {
 
         return json_encode($map);
     }
-
+    
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
     public function rename(Request $request) {
         if (is_array($request->data)) {
             $ItemId = (int) $request->data['id'];
