@@ -24,9 +24,10 @@ class Storyline2ViewsJSON extends BaseController {
      * @return type
      */
     public function render(Course $course) {
-        $var = $course::find(14);
+        $var = $course::find(20);
         $storyline = $var->latest_storyline();
         $items = $storyline->items;
+
         return $this->items_to_tree($items);
     }
 
@@ -39,8 +40,7 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach ($items as $k => $node) {
-
+        foreach ($items as $node) {
             $map[] = [
                 'id' => $node['id'],
                 'parent' => ($node['parent_id'] === null ? '#' : $node['parent_id']),
@@ -70,25 +70,47 @@ class Storyline2ViewsJSON extends BaseController {
 
         return json_encode($map);
     }
-    
+
     /**
      * 
      * @param Request $request
      * @return type
      */
     public function rename(Request $request) {
-        if (is_array($request->data)) {
-            $ItemId = (int) $request->data['id'];
-            $node = StorylineItem::find($ItemId);
-            $node->name = $request->data['text'];
-            if ($node->save()) {
+        if ($request->data['text'] === 'New node') {
+            $ItemId   = (int) $request->data['parent'];
+            $text     = $request->data['original']['text'];
+            $parentId = (int)$request->data['parents'][1];    
+            //dd($text);
+            $Item = StorylineItem::where('id', '=', $ItemId)->first();
+            $newItem = StorylineItem::create(['name' => $text,'storyline_id' => $Item->storyline_id,'parent_id' => $ItemId,'root_parent' => $parentId]);
+            if ($Item->moveToLeftOf($newItem)) {
                 $msg = 'success';
-            }else{
+            } else {
                 $msg = 'failed';
             }
-            
-            return response()->json(['msg' => $msg]);
+        } else {
+            $ItemId = (int) $request->data['id'];
+            $text     = $request->data['text'];
+            $Item = StorylineItem::where('id', '=', $ItemId)->first();
+            $Item->name = $text;
+            if ($Item->save()) {
+                $msg = 'success2';
+            } else {
+                $msg = 'failed';
+            }
         }
+        return response()->json(['msg' => $msg]);
     }
+
+    public function delete(Request $request) {
+            $ItemId = (int) $request->id;
+            $Item = StorylineItem::where('id', '=', $ItemId)->first();
+            if ($Item->delete()) {
+                $msg = 'success2';
+            } else {
+                $msg = 'failed';
+            }
+        }
 
 }
