@@ -58,23 +58,21 @@ var tree_id = "#tree";
 <script>
 $(document).ready(function () {
     //Delete Node Action
-    $(tree_id).on("delete_node.jstree", function (e, data) {  
-          console.log(data.node.id);
-          deleteNode(data.node.id);
+    $(tree_id).on("delete_node.jstree", function (e, data) {
+        console.log(data.node.id);
+        deleteNode(data.node.id);
     });
 
     //Rename Node Action
     $(tree_id).on("rename_node.jstree", function (e, data) {
         var ref = data.node;
         renameNode(ref);
-
     });
 
     //Move Node Action
     $(tree_id).on("move_node.jstree", function (e, data) {
         var ref = data.node;
         moveNode(ref);
-
     });
 
     //Delete Node

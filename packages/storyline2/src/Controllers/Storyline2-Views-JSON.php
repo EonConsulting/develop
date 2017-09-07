@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class Storyline2ViewsJSON extends BaseController {
 
     /**
-     * 
+     *
      * @param Course $course
      * @return type
      */
@@ -32,7 +32,7 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
+     *
      * @param type $items
      * @return type
      */
@@ -52,7 +52,7 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
+     *
      * @param type $items
      * @return type
      */

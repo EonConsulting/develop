@@ -181,6 +181,7 @@ $user-box-height: 70px;
     align-self: auto;
 }
 
+
 //mixins
 .bg-col-1 {background: $colour1;} .bg-col-2 {background: $colour2;} .bg-col-3 {background: $colour3;} .bg-col-4 {background: $colour4;}
 .bg-col-1-dark {background: darken($colour1,20%);} .bg-col-2-dark {background: darken($colour2,20%);} .bg-col-3-dark {background: darken($colour3,20%)} .bg-col-4-dark {background: darken($colour4,20%);}
@@ -205,3 +206,7 @@ $user-box-height: 70px;
 .btn-info {background: $colour1;} .btn-info:hover {background: darken($colour1,20%)}
 .btn-warning {background: $colour4;} .btn-warning:hover {background: darken($colour4,20%)}
 .btn-danger {background: $colour2;} .btn-danger:hover {background: darken($colour2,20%)}
+
+.modal-content {
+    z-index: 2000;
+}

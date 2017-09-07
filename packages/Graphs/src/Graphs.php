@@ -50,11 +50,7 @@ if ($this.hasClass("clicked-once")) {
 
 }
 
-
-
-
-
-     
+  
     }
 
         public function fixed() {

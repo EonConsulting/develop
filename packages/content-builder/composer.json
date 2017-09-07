@@ -10,7 +10,7 @@
     ],
     "autoload": {
       "psr-4": {
-        "EONConsulting\\content-builder\\": "src/"
+        "EONConsulting\\ContentBuilder\\": "src/"
       }
     },
     "require": {}

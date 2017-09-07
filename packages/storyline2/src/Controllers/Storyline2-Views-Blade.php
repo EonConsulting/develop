@@ -13,11 +13,20 @@ use EONConsulting\Storyline2\Models\Course;
 
 class Storyline2ViewsBlade extends BaseController {
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function index() {
 
     }
 
-
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function view() {
         $breadcrumbs = [
           'title' => 'View [Course Name] Storyline' //pass $course as param and load name here
@@ -26,6 +35,11 @@ class Storyline2ViewsBlade extends BaseController {
         return view('eon.storyline2::student.view', ['breadcrumbs' => $breadcrumbs]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function edit() {
         $breadcrumbs = [
           'title' => 'Edit [Course Name] Storyline' //pass $course as param and load name here

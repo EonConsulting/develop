@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace EONConsulting\ContentBuilder;
 
 use Illuminate\Support\ServiceProvider;
 
