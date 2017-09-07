@@ -8290,4 +8290,8 @@ a:active {
   background: #96271a;
 }
 
+.modal-content {
+  z-index: 2000;
+}
+
 /*# sourceMappingURL=app.css.map */

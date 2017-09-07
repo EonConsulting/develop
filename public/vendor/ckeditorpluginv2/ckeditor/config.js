@@ -6,7 +6,7 @@
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
+	//config.uiColor = '#AADC6E';
     config.allowedContent = true;
     config.removeFormatAttributes = '';
     // Define changes to default configuration here.
@@ -19,18 +19,19 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
         { name: 'links' },
         { name: 'insert' },
-        { name: 'tools' },
-        { name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+        /*{ name: 'tools' },*/
+        { name: 'document',	   groups: [ 'mode'/*, 'document', 'doctools' */] },
         { name: 'others' },
         '/',
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+        { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align'/*, 'bidi'*/ ] },
         { name: 'styles' },
         { name: 'colors' },
     ];
 
     //Configure the Default Sizes of CK Editor Plugin
     config.width = '100%';
+    config.height = '0px';
 
     // Remove some buttons provided by the standard plugins, which are
     // not needed in the Standard(s) toolbar.
@@ -41,4 +42,8 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Simplify the dialog windows.
     config.removeDialogTabs = 'image:advanced;link:advanced';
+
+    config.skin = 'flat';
+    
+    config.FormatOutput = false;
 };

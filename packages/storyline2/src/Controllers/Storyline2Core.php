@@ -20,7 +20,13 @@ class Storyline2Core extends BaseController {
     public function index() {
 
     }
-
+    
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
     public function rename_storyline_item(Request $request) {
         if (is_array($request->data)) {
             $ItemId = (int) $request->data['id'];
