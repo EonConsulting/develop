@@ -78,12 +78,12 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function rename(Request $request) {
         if ($request->data['text'] === 'New node') {
-            $ItemId   = (int) $request->data['parent'];
-            $text     = $request->data['original']['text'];
-            $parentId = (int)$request->data['parents'][1];    
+            $ItemId = (int) $request->data['parent'];
+            $text = $request->data['original']['text'];
+            $parentId = (int) $request->data['parents'][1];
             //dd($text);
             $Item = StorylineItem::where('id', '=', $ItemId)->first();
-            $newItem = StorylineItem::create(['name' => $text,'storyline_id' => $Item->storyline_id,'parent_id' => $ItemId,'root_parent' => $parentId]);
+            $newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $ItemId, 'root_parent' => $parentId]);
             if ($Item->moveToLeftOf($newItem)) {
                 $msg = 'success';
             } else {
@@ -91,7 +91,7 @@ class Storyline2ViewsJSON extends BaseController {
             }
         } else {
             $ItemId = (int) $request->data['id'];
-            $text     = $request->data['text'];
+            $text = $request->data['text'];
             $Item = StorylineItem::where('id', '=', $ItemId)->first();
             $Item->name = $text;
             if ($Item->save()) {
@@ -103,14 +103,38 @@ class Storyline2ViewsJSON extends BaseController {
         return response()->json(['msg' => $msg]);
     }
 
-    public function delete(Request $request) {
-            $ItemId = (int) $request->id;
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function move(Request $request) {
+            $parentId = (int) $request->data['parent'];
+            $ItemId = (int) $request->data['id'];
             $Item = StorylineItem::where('id', '=', $ItemId)->first();
-            if ($Item->delete()) {
-                $msg = 'success2';
+            $Item->parent_id = $parentId;
+            //$newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $ItemId, 'root_parent' => $parentId]);
+            if ($Item->save()) {
+                $msg = 'success';
             } else {
                 $msg = 'failed';
             }
+        return response()->json(['msg' => $msg]);
+    }
+
+    /**
+     * 
+     * @param Request $request
+     */
+    public function delete(Request $request) {
+        $ItemId = (int) $request->id;
+        $Item = StorylineItem::where('id', '=', $ItemId)->first();
+        if ($Item->delete()) {
+            $msg = 'success2';
+        } else {
+            $msg = 'failed';
         }
+        return response()->json(['msg' => $msg]);
+    }
 
 }
