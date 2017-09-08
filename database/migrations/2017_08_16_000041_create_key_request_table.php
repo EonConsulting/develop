@@ -19,26 +19,28 @@ class CreateKeyRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('request_id');
-            $table->unsignedInteger('user_id');
-            $table->string('title');
-            $table->text('notes')->nullable()->default(null);
-            $table->text('admin')->nullable()->default(null);
-            $table->smallInteger('state')->nullable()->default(null);
-            $table->tinyInteger('lti')->nullable()->default(null);
-            $table->text('json')->nullable()->default(null);
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('request_id');
+                $table->unsignedInteger('user_id');
+                $table->string('title');
+                $table->text('notes')->nullable()->default(null);
+                $table->text('admin')->nullable()->default(null);
+                $table->smallInteger('state')->nullable()->default(null);
+                $table->tinyInteger('lti')->nullable()->default(null);
+                $table->text('json')->nullable()->default(null);
 
-            $table->index(["user_id"], 'key_request_fk_1');
-            $table->timestamps();
+                $table->index(["user_id"], 'key_request_fk_1');
+                $table->timestamps();
 
 
-            $table->foreign('user_id', 'key_request_fk_1')
-                ->references('user_id')->on('lti_user')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-        });
+                $table->foreign('user_id', 'key_request_fk_1')
+                    ->references('user_id')->on('lti_user')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            });
+        }
     }
 
     /**

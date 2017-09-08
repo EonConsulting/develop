@@ -19,13 +19,15 @@ class CreateRolesPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('role_id');
-            $table->unsignedInteger('permission_id');
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('role_id');
+                $table->unsignedInteger('permission_id');
 
-            $table->index(["permission_id"], 'roles_permissions_permission_id_foreign');
-        });
+                $table->index(["permission_id"], 'roles_permissions_permission_id_foreign');
+            });
+        }
     }
 
     /**

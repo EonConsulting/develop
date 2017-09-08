@@ -11,15 +11,25 @@ class ApplicationTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lk_application_type')->insert(
+        $table = 'lk_application_type';
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table($table)->truncate();
+
+        DB::table($table)->insert(
             [
                 'description' => 'Self-Study',
                 'sequence' => 2
-            ],
+            ]
+        );
+
+        DB::table($table)->insert(
             [
                 'description' => 'Course based',
                 'sequence' => 1
             ]
         );
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

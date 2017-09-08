@@ -11,15 +11,25 @@ class AccessTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lk_access_type')->insert(
+        $table = 'lk_access_type';
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table($table)->truncate();
+
+        DB::table($table)->insert(
             [
                 'description' => 'Internal Use',
                 'sequence' => 1
-            ],
+            ]
+        );
+
+        DB::table($table)->insert(
             [
                 'description' => 'Open to public',
                 'sequence' => 2
             ]
         );
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

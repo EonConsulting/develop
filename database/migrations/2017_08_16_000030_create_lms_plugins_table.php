@@ -19,17 +19,19 @@ class CreateLmsPluginsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('plugin_id');
-            $table->string('plugin_path');
-            $table->bigInteger('version');
-            $table->string('title')->nullable()->default(null);
-            $table->text('json')->nullable()->default(null);
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('plugin_id');
+                $table->string('plugin_path');
+                $table->bigInteger('version');
+                $table->string('title')->nullable()->default(null);
+                $table->text('json')->nullable()->default(null);
 
-            $table->unique(["plugin_path"], 'plugin_path');
-            $table->timestamps();
-        });
+                $table->unique(["plugin_path"], 'plugin_path');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

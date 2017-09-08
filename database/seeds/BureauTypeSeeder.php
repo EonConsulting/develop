@@ -11,15 +11,25 @@ class BureauTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lk_bureau_type')->insert(
+        $table = 'lk_bureau_type';
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table($table)->truncate();
+
+        DB::table($table)->insert(
             [
                 'description' => 'Bureau of Market Research',
                 'sequence' => 1
-            ],
+            ]
+        );
+
+        DB::table($table)->insert(
             [
                 'description' => 'SA Business Review',
                 'sequence' => 2
             ]
         );
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
