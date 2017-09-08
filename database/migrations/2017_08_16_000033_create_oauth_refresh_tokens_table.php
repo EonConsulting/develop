@@ -1,4 +1,5 @@
 <?php
+namespace App\Database\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,7 +21,7 @@ class CreateOauthRefreshTokensTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnodDB';
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('access_token_id', 100);
             $table->tinyInteger('revoked');

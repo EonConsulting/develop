@@ -19,17 +19,19 @@ class CreateLtiNonceTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->char('nonce', 128);
-            $table->unsignedInteger('key_id');
-            $table->unsignedInteger('entity_version')->default('0');
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->char('nonce', 128);
+                $table->unsignedInteger('key_id');
+                $table->unsignedInteger('entity_version');
+                $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
-            $table->index(["nonce"], 'nonce_indx_1');
+                $table->index(["nonce"], 'nonce_indx_1');
 
-            $table->unique(["key_id", "nonce"], 'key_id');
-        });
+                $table->unique(["key_id", "nonce"], 'key_id');
+            });
+        }
     }
 
     /**

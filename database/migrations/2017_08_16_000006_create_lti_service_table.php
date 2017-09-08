@@ -19,19 +19,21 @@ class CreateLtiServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('service_id');
-            $table->char('service_sha256', 64);
-            $table->text('service_key');
-            $table->unsignedInteger('key_id');
-            $table->string('format')->nullable()->default(null);
-            $table->text('json')->nullable()->default(null);
-            $table->unsignedInteger('entity_version')->default('0');
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('service_id');
+                $table->char('service_sha256', 64);
+                $table->text('service_key');
+                $table->unsignedInteger('key_id');
+                $table->string('format')->nullable()->default(null);
+                $table->text('json')->nullable()->default(null);
+                $table->unsignedInteger('entity_version')->default('0');
 
-            $table->unique(["key_id", "service_sha256"], 'key_id');
-            $table->timestamps();
-        });
+                $table->unique(["key_id", "service_sha256"], 'key_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
