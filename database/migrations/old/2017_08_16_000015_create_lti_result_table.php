@@ -19,29 +19,31 @@ class CreateLtiResultTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('result_id');
-            $table->unsignedInteger('link_id');
-            $table->unsignedInteger('user_id');
-            $table->text('result_url')->nullable()->default(null);
-            $table->text('sourcedid')->nullable()->default(null);
-            $table->unsignedInteger('service_id')->nullable()->default(null);
-            $table->string('ipaddr', 64)->nullable()->default(null);
-            $table->float('grade')->nullable()->default(null);
-            $table->text('note')->nullable()->default(null);
-            $table->float('server_grade')->nullable()->default(null);
-            $table->text('json')->nullable()->default(null);
-            $table->unsignedInteger('entity_version')->default('0');
-            $table->timestamp('retrieved_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('result_id');
+                $table->unsignedInteger('link_id');
+                $table->unsignedInteger('user_id');
+                $table->text('result_url')->nullable()->default(null);
+                $table->text('sourcedid')->nullable()->default(null);
+                $table->unsignedInteger('service_id')->nullable()->default(null);
+                $table->string('ipaddr', 64)->nullable()->default(null);
+                $table->float('grade')->nullable()->default(null);
+                $table->text('note')->nullable()->default(null);
+                $table->float('server_grade')->nullable()->default(null);
+                $table->text('json')->nullable()->default(null);
+                $table->unsignedInteger('entity_version')->default('0');
+                $table->timestamp('retrieved_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
-            $table->index(["user_id"], 'lti_result_ibfk_2');
+                $table->index(["user_id"], 'lti_result_ibfk_2');
 
-            $table->index(["service_id"], 'lti_result_ibfk_3');
+                $table->index(["service_id"], 'lti_result_ibfk_3');
 
-            $table->unique(["link_id", "user_id"], 'link_id');
-            $table->timestamps();
-        });
+                $table->unique(["link_id", "user_id"], 'link_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

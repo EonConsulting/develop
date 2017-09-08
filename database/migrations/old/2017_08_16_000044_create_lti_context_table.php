@@ -19,29 +19,31 @@ class CreateLtiContextTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('context_id');
-            $table->char('context_sha256', 64);
-            $table->string('context_key');
-            $table->unsignedInteger('key_id');
-            $table->text('title')->nullable()->default(null);
-            $table->text('json')->nullable()->default(null);
-            $table->text('settings')->nullable()->default(null);
-            $table->text('settings_url')->nullable()->default(null);
-            $table->unsignedInteger('entity_version')->default('0');
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('context_id');
+                $table->char('context_sha256', 64);
+                $table->string('context_key');
+                $table->unsignedInteger('key_id');
+                $table->text('title')->nullable()->default(null);
+                $table->text('json')->nullable()->default(null);
+                $table->text('settings')->nullable()->default(null);
+                $table->text('settings_url')->nullable()->default(null);
+                $table->unsignedInteger('entity_version')->default('0');
 
-            $table->index(["context_key"], 'lti_context_ibfk_1');
+                $table->index(["context_key"], 'lti_context_ibfk_1');
 
-            $table->unique(["key_id", "context_sha256"], 'key_id');
-            $table->timestamps();
+                $table->unique(["key_id", "context_sha256"], 'key_id');
+                $table->timestamps();
 
 
-            $table->foreign('key_id', 'key_id')
-                ->references('key_id')->on('lti_key')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-        });
+                $table->foreign('key_id', 'key_id')
+                    ->references('key_id')->on('lti_key')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+            });
+        }
     }
 
     /**

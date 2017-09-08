@@ -17,8 +17,7 @@ class CreateCourseMetadataTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('course_id');
-            $table->string('lk_table', 150);
-            $table->integer('lk_table_id');
+            $table->integer('metadata_store_id');
             $table->string('value', 150);
             $table->timestamps();
             

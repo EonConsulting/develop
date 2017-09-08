@@ -19,17 +19,19 @@ class CreatePermissionGroupItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('permission_group_id');
-            $table->unsignedInteger('group_id');
-            $table->unsignedInteger('permission_id');
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('permission_group_id');
+                $table->unsignedInteger('group_id');
+                $table->unsignedInteger('permission_id');
 
-            $table->index(["group_id"], 'permission_group_items_group_id_foreign');
+                $table->index(["group_id"], 'permission_group_items_group_id_foreign');
 
-            $table->index(["permission_id"], 'permission_group_items_permission_id_foreign');
-            $table->timestamps();
-        });
+                $table->index(["permission_id"], 'permission_group_items_permission_id_foreign');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
