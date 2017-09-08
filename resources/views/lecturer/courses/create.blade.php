@@ -8,14 +8,15 @@ Create a Course
 
 <div class="container-fluid">
     <div class="row">
+        <form method="POST" class="form-horizontal">
+        
         <div class="col-md-6">
             <div class="dashboard-card shadow">
                 <div class="dashboard-card-heading">
                     <label>Course Information</label>
                 </div>
                 <div class="container-fluid">
-                    <form method="POST" class="form-horizontal">
-                        <input type="hidden" name="_token" id="login-token"/>
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label>Module Title</label>
@@ -46,11 +47,7 @@ Create a Course
                                 <label>Featured Image</label>
                                 <!--<upload-form></upload-form>-->
                             </div>
-                            <div class="col-md-3 pull-right">
-                                <button class="btn btn-primary btn-block" type="submit">Save</button>
-                            </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -63,74 +60,86 @@ Create a Course
                 <div id="meta-tabs" class="container-fluid">	
                     <ul  class="nav nav-pills">
                         <li class="active">
-                            <a href="#tab-required" data-toggle="tab">Required</a>
+                            <a href="#tab-general" data-toggle="tab">General</a>
                         </li>
                         <li>
-                            <a href="#tab-material" data-toggle="tab">Material</a>
-                        </li>
-                        <li>
-                            <a href="#3a" data-toggle="tab">Functionality</a>
-                        </li>
-                        <li>
-                            <a href="#4a" data-toggle="tab">Location</a>
+                            <a href="#tab-location" data-toggle="tab">Location</a>
                         </li>
                     </ul>
 
                     <div class="tab-content clearfix">
-                        <div class="tab-pane active" id="tab-required">
+                        <div class="tab-pane active" id="tab-general">
                             <div class="form-group">
-                                <label>Option 1</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>Qualification Type</label>
+                                <select class="form-control" name="qualification_type" id="qualification_type">
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Option 2</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>Course Difficulty</label>
+                                <select class="form-control" name="content_difficulty_type" id="content_difficulty_type">
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Option 3</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>Pedagogical Type</label>
+                                <select class="form-control" name="pedagogical_type" id="pedagogical_type">
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Discipline Type</label>
+                                <select class="form-control" name="discipline_type" id="discipline_type">
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Duration Type</label>
+                                <select class="form-control" name="duration_type" id="duration_type">
+                                </select>
+                            </div>
+
                         </div>
-                        <div class="tab-pane" id="tab-material">
+                        <div class="tab-pane" id="tab-location">
                             <div class="form-group">
-                                <label>Option 4</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>College</label>
+                                <select class="form-control" name="college_type" id="college_type">
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Option 5</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>School</label>
+                                <select class="form-control" name="school_type" id="school_type">
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Option 6</label>
-                                <select class="form-control">
-                                    <option>1</option>
+                                <label>Department</label>
+                                <select class="form-control" name="department_type" id="department_type">
                                 </select>
                             </div>
-                        </div>
-                        <div class="tab-pane" id="3a">
-                            content to go here
-                        </div>
-                        <div class="tab-pane" id="4a">
-                            content to go here
+
+                            <div class="form-group">
+                                <label>Centre</label>
+                                <select class="form-control" name="centre_type" id="centre_type">
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Institute</label>
+                                <select class="form-control" name="institute_type" id="institute_type">
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3 pull-right">
+                    <button class="btn btn-primary btn-block" type="submit">Save</button>
+                </div>
             </div>
         </div>
+        
+        </form>
     </div>
 </div>
 
@@ -140,30 +149,8 @@ Create a Course
 <script src="{{url('/js/app.js')}}"></script>
 <!--<script src="{{url('/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>-->
 <script>
-/*export default {
-    mounted() {
-        console.log('Component ready.', window.Laravel.csrfToken);
+    $(document).ready(function(){
         $('#login-token').val(window.Laravel.csrfToken);
-    },
-    data() {
-        return {
-            course_title: '',
-            course_slug: '',
-            course_summary: '',
-            token: ''
-        }
-    },
-    methods: {
-        slug(str) {
-            return str
-                    .toLowerCase()
-                    .replace(/[^\w ]+/g, '')
-                    .replace(/ +/g, '-');
-        },
-        make_course_slug() {
-            this.course_slug = this.slug(this.course_title);
-        }
-    }
-}*/
+    });
 </script>
 @endsection
