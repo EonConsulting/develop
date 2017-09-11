@@ -94,6 +94,13 @@
                             </a>
                         </li>
 
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('courses.show') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                My Modules
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             <?php endif; ?>
