@@ -20,7 +20,15 @@ class CreateCourseController extends Controller {
             ],
         ];
 
-        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
+        // get the metadata store array
+        $metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
+        $all_metadata_types = array_column($metadata_store, 'metadata_type');
+        $metadata_types = array_unique($all_metadata_types);
+
+        return view('lecturer.courses.create', [
+            'breadcrumbs' => $breadcrumbs, 'metadata_store' => $metadata_store,
+            'metadata_types' => $metadata_types
+        ]);
     }
 
     public function store(Request $request) {

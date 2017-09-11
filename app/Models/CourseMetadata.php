@@ -8,6 +8,6 @@ class CourseMetadata extends Model {
 
     protected $table = 'course_metadata';
     protected $primaryKey = 'id';
-    protected $fillable = ['course_id', 'lk_table', 'lk_table_id', 'value'];
+    protected $fillable = ['course_id', 'metadata_store_id', 'value'];
 
 }
