@@ -20,15 +20,7 @@ class CreateCourseController extends Controller {
             ],
         ];
 
-        // get the metadata store array
-        $metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
-        $all_metadata_types = array_column($metadata_store, 'metadata_type');
-        $metadata_types = array_unique($all_metadata_types);
-
-        return view('lecturer.courses.create', [
-            'breadcrumbs' => $breadcrumbs, 'metadata_store' => $metadata_store,
-            'metadata_types' => $metadata_types
-        ]);
+        return view('lecturer.courses.create', [ 'breadcrumbs' => $breadcrumbs ]);
     }
 
     public function store(Request $request) {
@@ -120,6 +112,15 @@ class CreateCourseController extends Controller {
             session()->flash('error_message', 'Unable to save course, please try again');
             return redirect()->route('courses');
         }
+    }
+    
+    public function fill_metadata_store(Request $request)
+    {
+        // get the metadata store array
+        $metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
+        //$all_metadata_types = array_column($metadata_store, 'metadata_type');
+        //$metadata_types = array_unique($all_metadata_types);
+        return response()->json($metadata_store);
     }
 
 }

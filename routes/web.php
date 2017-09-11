@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
         Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
         Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
+        Route::get('/create/metadata', ['as' => 'courses.create', 'uses' => 'CreateCourseController@fill_metadata_store']);
         Route::get('/{course}', ['as' => 'courses.single', 'uses' => 'CourseController@show']);
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);

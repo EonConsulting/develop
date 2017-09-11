@@ -66,15 +66,13 @@ Create a Course
                     <p>Please choose metadata items</p>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label>Metadata Store</label>
-                            <select>
+                            <select id="metadata_store_list" class="form-control">
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label>Metadata Item</label>
-                            <input class="form-control" id="meta_store_value"></select>
+                            <div id="metadata_forms"></div>
                         </div>
                     </div>
                 </div>
@@ -86,6 +84,8 @@ Create a Course
 @endsection
 
 @section('custom-scripts')
+<!-- lodash -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 <script src="{{url('/js/app.js')}}"></script>
 <script>
 $(document).ready(function () {
@@ -94,9 +94,49 @@ $(document).ready(function () {
 </script>
 <script>
     $(document).ready(function () {
-        $(function () {
-            $('#metadata_store').jstree();
+        // some vars for re-use
+        var dataSet = null;
+
+        // main ajax method for select
+        $.ajax({
+            method: "GET",
+            url: global_conf.subdir + '/lecturer/courses/create/metadata',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            statusCode: {
+                200: function (data) {
+                    dataSet = data;
+                    // using lodash to get the metadata types
+                    var mtypes = _.groupBy(data, "metadata_type");
+                    $.each(mtypes, function (idx, obj) {
+                        var option = new Option(idx, obj.metadata_type);
+                        $("#metadata_store_list").append($(option));
+                    });
+                },
+                400: function () {
+                },
+                500: function () {
+                }
+            }
+        }).error(function (data) {
         });
+
+        // and now some magic when u click on the select
+        $("#metadata_store_list").on("click", function () {
+            buildForm($(this).val());
+        });
+
+        // re-usable form builder
+        function buildForm(mtype)
+        {
+            $("#metadata_forms").html('');
+
+            var _fields = _.filter(dataSet, _.iteratee({'metadata_type': mtype}));
+            $.each(_fields, function (idx, obj) {
+                $("#metadata_forms").html(obj.description);
+            });
+        }
     });
 </script>
 @endsection
