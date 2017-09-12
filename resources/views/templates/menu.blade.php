@@ -85,21 +85,6 @@
                                 All
                             </a>
                         </li>
-                        
-                        <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('courses') }}">
-                                <i class="fa fa-circle-o left-menu-icon"></i>
-                                My Modules
-                            </a>
-                        </li>
-
-
-                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('courses.create') }}">
-                                <i class="fa fa-circle-o left-menu-icon"></i>
-                                Create
-                            </a>
-                        </li>
 
                         <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('courses.show') }}">
@@ -108,6 +93,12 @@
                             </a>
                         </li>
 
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('courses.create') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Create
+                            </a>
+                        </li>
                     </ul>
                 </div>
             <?php endif; ?>
