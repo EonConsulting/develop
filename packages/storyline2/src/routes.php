@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
 
          Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2JSONrename');
          Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2JSONdelete');
+         Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2JSONmove');
 
         //Add more routes
     });

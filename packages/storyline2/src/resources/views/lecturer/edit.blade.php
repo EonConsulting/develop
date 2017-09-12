@@ -98,7 +98,7 @@ $(document).ready(function () {
 
     //Move node
     function moveNode(data) {
-        var actionUrl = "{{{ url('') }}}" + "/storyline2/delete";
+        var actionUrl = "{{{ url('') }}}" + "/storyline2/move";
         $.ajax({
             type: "POST",
             url: actionUrl,
