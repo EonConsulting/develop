@@ -57,7 +57,7 @@ class DefaultController extends LTIBaseController {
      * @param type $storylineItem
      */
     public function save_progress($request, $StudentProgress, $storylineItem) {
-        $StudentProgress->student = (int) $request->get('student');
+        $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_item_id = $storylineItem;
         $StudentProgress->storyline_id = (int) $request->get('storyline');
