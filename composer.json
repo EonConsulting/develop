@@ -7,7 +7,7 @@
     "minimum-stability": "dev",
     "homepage": "https://dev.unisaonline.net",
     "require": {
-        "php": "7.1.8",
+        "php": "7.0.10",
         "IMSGlobal/LTI": "^3.0.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "creativeorange/gravatar": "~1.0",
