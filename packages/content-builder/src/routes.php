@@ -15,7 +15,13 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
     Route::match(['get', 'post'],'/save', 'ContentBuilderCore@save')->name('eon.contentbuilder.save');
 
+    Route::match(['get', 'post'],'/update/{course_id}', 'ContentBuilderCore@update')->name('eon.contentbuilder.update');
+
+    Route::match(['get', 'post'],'/edit/{course_id}', 'ContentBuilderCore@edit')->name('eon.contentbuilder.edit');
+
     Route::match(['get', 'post'],'/store', 'ContentBuilderCore@store')->name('eon.contentbuilder.store');
+
+    Route::match(['get', 'post'], '/view/{course_id}', 'ContentBuilderCore@view')->name('eon.contentbuilder.view');
 
     Route::match(['get', 'post'],'/categories', 'ContentBuilderCategories@index')->name('eon.contentbuilder.categories');
 

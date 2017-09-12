@@ -8,7 +8,7 @@ class Content extends Model {
 
     protected $table = 'content';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'body', 'tags', 'creator_id'];
+    protected $fillable = ['title', 'body', 'tags', 'creator_id','description'];
 
     public function creator() {
         return $this->belongsTo(User::class, 'creator_id', 'id');

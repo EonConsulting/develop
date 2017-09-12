@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Category;
 
+
 class ContentBuilderCategories extends Controller {
 
    

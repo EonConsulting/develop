@@ -27,8 +27,6 @@ class CreateContentCategoriesTable extends Migration
 
             $table->timestamps();
 
-            
-
             $table->foreign('content_id', 'content_ibfk_1')
                 ->references('id')->on('content')
                 ->onDelete('cascade')
