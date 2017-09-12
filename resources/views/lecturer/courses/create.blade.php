@@ -123,19 +123,29 @@ $(document).ready(function () {
         });
 
         // and now some magic when u click on the select
-        $("#metadata_store_list").on("click", function () {
+        $("#metadata_store_list").on("change", function () {
             buildForm($(this).val());
         });
 
         // re-usable form builder
         function buildForm(mtype)
         {
-            $("#metadata_forms").html('');
+            var form = $("#metadata_forms");
+            form.html('');
+            form.append('<form method="POST" id="metadata_form_body" class="form-inline">');
 
-            var _fields = _.filter(dataSet, _.iteratee({'metadata_type': mtype}));
-            $.each(_fields, function (idx, obj) {
-                $("#metadata_forms").html(obj.description);
+            var fields = _.filter(dataSet, _.iteratee({'metadata_type': mtype}));
+            console.log(fields);
+            $.each(fields, function (idx, obj) {
+                form.append('<div class="row">');
+                form.append('<label for="check_' + obj.id + '" >' + obj.description + '</label>');
+                form.append('<input type="checkbox" class="form-control" id="check_' + obj.id + '" >');
+                form.append('<input type="text" class="form-control" id="value_' + obj.id + '" >');
+                form.append('</div>');
             });
+            
+            form.append('<button class="btn btn-info" id="btnSaveMetadata">Save</button>');
+            form.append('</form>');
         }
     });
 </script>
