@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 class ContentBuilderServiceProvider extends ServiceProvider
 {
+
+    protected $defer = false;
     /**
      * Bootstrap the application services.
      *
@@ -13,6 +15,7 @@ class ContentBuilderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        include __DIR__.'/routes.php';
         //
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'eon.content-builder');
@@ -20,6 +23,7 @@ class ContentBuilderServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/assets' => base_path('public/vendor/content-builder'),
         ]);
+
     }
 
     /**

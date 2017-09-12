@@ -41,8 +41,10 @@
                             <?php endforeach;?>
                         </td>
                         <td>
-                            <a href="{{ route('eon.contentbuilder.categories.update') }}" class="btn btn-info btn-sm">Update</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <button type="button" class="btn btn-info btn-sm edit-btn" id="<?php echo $category->id ?>" data-toggle="modal" data-target="#saveModal">
+                                Edit
+                            </button>
+                            <a href="{{ url('content/categories/delete').'/'.$category->id }}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
 
                     </tr>
@@ -102,6 +104,70 @@
 
 @endsection
 
+@section('exterior-content')
+    <!-- Modal -->
+    <div id="saveModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Category</h4>
+                </div>
+                
+                <form action="">
+                    <div class="modal-body">
+                        
+                        <input id="form-category-id" type="hidden" name="id" value="">
+
+                        <div class="form-group">
+                            <label for="description">Name</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tags">Tags</label>
+                            <input form="save" name="tags" class="form-control" id="tags" placeholder="Tags">
+                        </div>
+                        
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="btnsbmit" class="btn btn-primary"><i class="fa fa-save"></i><span> Save</span></button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>     
+        
+@endsection
+
 @section('custom-scripts')
-    
+
+    <script>
+
+
+        $('.edit-btn').click(function() {
+
+            console.log("Edit clicked")
+            
+            var id = $(this).attr('id'); //get category id from btn id attribute
+
+            $("#form-category-id").val(id); //change hidden input value to id above
+            
+            $category = $.getJSON("{{ url('/get-categories/') }}/"+id, function(result){
+                console.log('success');
+            });
+
+            /*var name = result['name'];
+            var tags = result['tags'];*/
+
+        });
+
+    </script>           
+                       
+
 @endsection
