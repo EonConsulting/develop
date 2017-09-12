@@ -283,7 +283,7 @@ Lecture
         var id = $('.prev').attr("id");
         var courseId = $('.prev').attr("course");
         var storyline = $('.prev').attr("storyline");
-        var student = '{{auth()->user()->name}}';
+        var student = '{{auth()->user()->id}}';
         $.ajax({
             url: '/student/progression',
             type: "POST",

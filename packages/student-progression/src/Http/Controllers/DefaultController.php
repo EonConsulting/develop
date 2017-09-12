@@ -20,7 +20,6 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function storeProgress(Request $request) {
-
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
         $progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
