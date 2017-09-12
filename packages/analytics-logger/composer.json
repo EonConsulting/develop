@@ -1,0 +1,18 @@
+{
+    "name": "eonconsulting/analytics-logger",
+    "description": "An endpoint for handling HTTP requests.",
+    "require-dev": {},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dario",
+            "email": "dario.alfredo@eon.co.za"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "EONConsulting\\AnalyticsLogger\\": "src/"
+        }
+    }
+}
