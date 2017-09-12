@@ -13,3 +13,5 @@ _notes/
 /storage/framework/sessions/*
 /storage/logs/
 /bin
+/npm-debug.log
+/package-lock.json
