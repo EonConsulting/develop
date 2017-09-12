@@ -35,3 +35,4 @@ class CreateGraphsTable extends Migration
         Schema::dropIfExists('lti_graphs');
     }
 }
+

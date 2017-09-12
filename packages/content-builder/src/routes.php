@@ -4,7 +4,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
     /**
      * ------------------------------------
-     * Storyline Builder Core Routes
+     * Content Builder Core Routes
      * ------------------------------------
      */
 
@@ -15,11 +15,21 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
     Route::match(['get', 'post'],'/save', 'ContentBuilderCore@save')->name('eon.contentbuilder.save');
 
+    Route::match(['get', 'post'],'/update/{course_id}', 'ContentBuilderCore@update')->name('eon.contentbuilder.update');
+
+    Route::match(['get', 'post'],'/edit/{course_id}', 'ContentBuilderCore@edit')->name('eon.contentbuilder.edit');
+
     Route::match(['get', 'post'],'/store', 'ContentBuilderCore@store')->name('eon.contentbuilder.store');
+
+    Route::match(['get', 'post'], '/view/{course_id}', 'ContentBuilderCore@view')->name('eon.contentbuilder.view');
 
     Route::match(['get', 'post'],'/categories', 'ContentBuilderCategories@index')->name('eon.contentbuilder.categories');
 
-    Route::match(['get', 'post'],'/update-category', 'ContentBuilderCategories@update')->name('eon.contentbuilder.categories.update');
+    Route::post('/categories/update', 'ContentBuilderCategories@update')->name('eon.contentbuilder.categories.update');
+
+    Route::get('/categories/{$category_id}', 'ContentBuilderCategories@json')->name('eon.contentbuilder.categories.get');
+
+    Route::match(['get', 'post'], '/categories/delete/{$category_id}', 'ContentBuilderCategories@delete')->name('eon.contentbuilder.categories.delete');
 
 
 });

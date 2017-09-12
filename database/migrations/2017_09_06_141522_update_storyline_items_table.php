@@ -15,8 +15,7 @@ class UpdateStorylineItemsTable extends Migration
     {
         Schema::table('storyline_items', function($table) {
 
-            //$table->unsignedInteger("content_id")->nullable()->default(null);
-            
+            $table->unsignedInteger("content_id")->nullable()->default(null);
             $table->foreign('content_id', 'content_ibfk_2')
                 ->references('id')->on('content');
         });

@@ -112,7 +112,7 @@
 @endsection
 
 @section('content')
-    {{  Form::open(array('url'=>action('\EONConsulting\ContentBuilder\Controllers\ContentBuilderCore@save'),'method'=>'post','id'=>'save'))}}
+    {{  Form::open(array('url'=>url('content/update/'.$content->id),'method'=>'post','id'=>'save'))}}
 
     @if (session('error_message'))
         <div class="alert alert-danger">
@@ -145,7 +145,7 @@
                     <div class="info-bar-name">
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon2">Title</span>
-                            <input type="text" class="form-control" name="title" placeholder="Content Title" value=""/>
+                            <input type="text" class="form-control" name="title" placeholder="Content Title" value="{{ $content->title }}"/>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
         <div class="content-editor">
             <div class="contentBoxHeight">
                 <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="editor">
-                    Initial editor content.
+                    {{ $content->body }}
                 </textarea>
 
                 <input type="hidden" id="data" name="data" />
@@ -190,7 +190,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Additional Information</h4>
+                    <h4 class="modal-title">Modal Header</h4>
                 </div>
 
                 <div class="modal-body">
@@ -198,7 +198,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" form="save" class="form-control" name="description">
+                        <input type="text" form="save" class="form-control" name="description" value="{{ $content->description }}">
                     </div>
 
                     <div class="form-group">
@@ -210,7 +210,7 @@
 
                         <div>
                             <label style="font-weight: 400;">
-                                <input form="save" type="checkbox" name="categories[]" value="<?php echo $category->id; ?>">
+                                <input form="save" type="checkbox" name="categories[]" value="<?php echo $category->id; ?>" <?php if($category->checked) echo "checked"; ?>>
                                 <?php echo $category->name; ?>
                             </label>
                         </div>
@@ -220,7 +220,7 @@
 
                     <div class="form-group">
                         <label for="tags">Tags</label>
-                        <input form="save" type="text" name="tags" class="form-control" id="tags" placeholder="Tags">
+                        <input form="save" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="{{ $content->tags }}">
                     </div>
 
                 

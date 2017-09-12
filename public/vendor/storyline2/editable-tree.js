@@ -2,29 +2,31 @@
 //console.log(url);
 
 $.getJSON(url,
-    function(data) {
-        console.log(data);
+        function (data) {
+            console.log(data);
 
-        renderTree(data);
+            renderTree(data);
 
-        treeToJSON();
-    }
+            treeToJSON();
+        }
 );
 
 function renderTree(tree_data) {
     console.log(tree_data);
 
     $(tree_id).jstree({
-        "core" : {
-            "animation" : 0,
-            "check_callback" : true,
-            "themes" : { 'name': 'proton', 'icons': false },
-            "data" : tree_data
+        "core": {
+            "animation": 0,
+            "check_callback": true,
+            "themes": {'name': 'proton', 'icons': false},
+            "data": tree_data
         },
-        "plugins" : ["contextmenu","dnd","search","state","types","wholerow"]
+        "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
 }
+
+
 
 function treeToJSON(){
 
@@ -33,14 +35,11 @@ function treeToJSON(){
 
 }
 
-
 //detect when node is clicked, ie. selected node changes
 $(tree_id).on("changed.jstree", function (e, data) {
     console.log("Node selected");
 });
 
-
-//detect changes in the tree structure
 $(tree_id).on("create_node.jstree", function (e, data) {
     console.log("Node created");
 });
@@ -64,3 +63,4 @@ $(tree_id).on("cut.jstree", function (e, data) {
 $(tree_id).on("paste.jstree", function (e, data) {
     console.log("paste pasted");
 });
+

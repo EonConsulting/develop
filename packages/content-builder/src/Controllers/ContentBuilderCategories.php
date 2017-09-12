@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Category;
 
+
 class ContentBuilderCategories extends Controller {
 
    
@@ -38,15 +39,45 @@ class ContentBuilderCategories extends Controller {
             return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
 
         }
-
-        
         
     }
 
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $category_id
+     * @return void
+     */
+    public function json($category_id){
 
-    public function update(){
+        if($category_id === "all"){
+            $result = Category::all();
+        } else {
+            $result = Category::find($category_id);   
+        }
+
+        return json_encode($result);
+
+    }
+
+
+    /*public function update(Request $request){
         
+    }*/
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $catgory_id
+     * @return void
+     */
+    public function delete($catgory_id){
+
+        Category::delete($category_id);
+
+        return redirect()->route('eon.contentbuilder.categories');
+
     }
 
 

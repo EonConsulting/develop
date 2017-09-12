@@ -1,3 +1,4 @@
+
 <?php
 use \Illuminate\Support\Facades\Schema;
 use \Illuminate\Database\Schema\Blueprint;
@@ -102,5 +103,6 @@ class RolesPermissionsDB extends Migration  {
         Schema::dropIfExists('users_roles');
         Schema::dropIfExists('roles_permissions');
     }
+
 
 }
