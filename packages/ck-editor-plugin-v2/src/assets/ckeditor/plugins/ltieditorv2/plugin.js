@@ -13,7 +13,7 @@
  *
  */
 
- console.log("Subdir is set to: " + config["subdir"]);
+console.log("Subdir is set to: " + config["subdir"]);
 ( function() {
     var iframeWindow = null;
     CKEDITOR.plugins.add( 'ltieditorv2',

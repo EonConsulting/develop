@@ -32,7 +32,7 @@ class CourseStorylineController extends DBCourseStorylineBase
      */
     public function index(Course $course)
     {
-		$breadcrumbs = [
+            $breadcrumbs = [
             'title' => 'Modules',
             'href' => route('courses'),
             'child' => [

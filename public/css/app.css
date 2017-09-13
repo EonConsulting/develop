@@ -8156,6 +8156,22 @@ a:active {
   background: #fb7217;
 }
 
+.bg-col-1-dark {
+  background: #006e89;
+}
+
+.bg-col-2-dark {
+  background: #96271a;
+}
+
+.bg-col-3-dark {
+  background: #004023;
+}
+
+.bg-col-4-dark {
+  background: #a94503;
+}
+
 .txt-col-1 {
   color: #00c0ef;
 }
@@ -8240,6 +8256,38 @@ a:active {
 
 .panel > .list-group:first-child .list-group-item:first-child, .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
   border-radius: 0%;
+}
+
+.btn-success {
+  background: #00a65a;
+}
+
+.btn-success:hover {
+  background: #004023;
+}
+
+.btn-info {
+  background: #00c0ef;
+}
+
+.btn-info:hover {
+  background: #006e89;
+}
+
+.btn-warning {
+  background: #fb7217;
+}
+
+.btn-warning:hover {
+  background: #a94503;
+}
+
+.btn-danger {
+  background: #dd4b39;
+}
+
+.btn-danger:hover {
+  background: #96271a;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -58,7 +58,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                
+
                     {{  Form::open( array('url' => action('Content\ContentBuilderController@store'), 'files'=>true,'method'=>'post','id'=>'save') )  }}
 
                     @if (session('error_message'))
@@ -88,7 +88,11 @@
                     </div>
 
                     <br />
-                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">&lt;p&gt;Initial editor content.&lt;/p&gt;</textarea>
+                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">
+                        &lt;p&gt;Initial editor content.&lt;/p&gt;
+
+                        <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'></script>
+                    </textarea>
                     <input type="hidden" id="data" name="data" />
                     <br />
                     <button type="submit" id="btnsbmit" class="btn btn-primary btn-sm">Save Content</button>
@@ -113,6 +117,7 @@
     </script>
 
     <script>
+
         $(function(){
 
             var editor = CKEDITOR.replace('ltieditorv2inst', {
@@ -128,11 +133,35 @@
                             this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset-print.css")}}');
                             this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/materialize.css")}}' );
                             this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/economics.css")}}');
-                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons');
+                            this.document.appendStyleSheet('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+                            var ckeditor_head = window.frames[0].document.head;
+                            var script = document.createElement( 'script' );
+                            script.type = 'text/javascript';
+                            script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG";
+                            //$("#someElement").append( script );
+
+                            ckeditor_head.append(script);
+
                         }
                     }
                 }
             );
+
+
+            /*$iframe = window.frames[0];
+            console.log($iframe.document.body.innerHTML);
+
+            var ckeditor_frame = $('#cke_86').find('.cke_wysiwyg_frame');
+            console.log(ckeditor_frame.innerHTML);
+
+            var ckeditor_head = ckeditor_frame.contents().find("head");
+            console.log(ckeditor_head.contents());
+
+            ckeditor_head.append($("<script/>", {
+                src: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
+                type: "text/javascript"
+            }));*/
 
 
 //            CKEDITOR.on('instanceReady',
@@ -163,5 +192,6 @@
             });
 
         });
+
     </script>
 @endsection

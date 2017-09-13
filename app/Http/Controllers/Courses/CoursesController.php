@@ -23,4 +23,10 @@ class CoursesController extends Controller {
         return $courses;
     }
 
+    public function show()
+    {
+        $courseCreator = Course::where('creator_id', auth()->user()->id)->get();
+
+        return view('lecturer.courses.show', ['createdCourse' => $courseCreator]);
+    }
 }
