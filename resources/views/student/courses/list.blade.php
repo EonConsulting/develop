@@ -93,9 +93,6 @@
             <div class="search-area">
 
                 <form id="search-form">
-                    <span style="position: relative;">
-                        <label for="search">Search</label>
-                    </span>
                     <div class="search-input">
                         <input class="form-control typeahead" name="term">
                     </div>
