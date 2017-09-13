@@ -156,56 +156,56 @@ return [
 
     'providers' => [
 
-        /*
-         * Laravel Framework Service Providers...
-         */
-        Illuminate\Auth\AuthServiceProvider::class,
-        Illuminate\Broadcasting\BroadcastServiceProvider::class,
-        Illuminate\Bus\BusServiceProvider::class,
-        Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Cookie\CookieServiceProvider::class,
-        Illuminate\Database\DatabaseServiceProvider::class,
-        Illuminate\Encryption\EncryptionServiceProvider::class,
-        Illuminate\Filesystem\FilesystemServiceProvider::class,
-        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-        Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
-        Illuminate\Notifications\NotificationServiceProvider::class,
-        Illuminate\Pagination\PaginationServiceProvider::class,
-        Illuminate\Pipeline\PipelineServiceProvider::class,
-        Illuminate\Queue\QueueServiceProvider::class,
-        Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-        Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
-        Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,
+            /*
+             * Laravel Framework Service Providers...
+             */
+            Illuminate\Auth\AuthServiceProvider::class,
+            Illuminate\Broadcasting\BroadcastServiceProvider::class,
+            Illuminate\Bus\BusServiceProvider::class,
+            Illuminate\Cache\CacheServiceProvider::class,
+            Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+            Illuminate\Cookie\CookieServiceProvider::class,
+            Illuminate\Database\DatabaseServiceProvider::class,
+            Illuminate\Encryption\EncryptionServiceProvider::class,
+            Illuminate\Filesystem\FilesystemServiceProvider::class,
+            Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+            Illuminate\Hashing\HashServiceProvider::class,
+            Illuminate\Mail\MailServiceProvider::class,
+            Illuminate\Notifications\NotificationServiceProvider::class,
+            Illuminate\Pagination\PaginationServiceProvider::class,
+            Illuminate\Pipeline\PipelineServiceProvider::class,
+            Illuminate\Queue\QueueServiceProvider::class,
+            Illuminate\Redis\RedisServiceProvider::class,
+            Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+            Illuminate\Session\SessionServiceProvider::class,
+            Illuminate\Translation\TranslationServiceProvider::class,
+            Illuminate\Validation\ValidationServiceProvider::class,
+            Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
-         */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
-        Spatie\Fractal\FractalServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Creativeorange\Gravatar\GravatarServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+            /*
+             * Package Service Providers...
+             */
+            Laravel\Tinker\TinkerServiceProvider::class,
+            Barryvdh\Debugbar\ServiceProvider::class,
+            Laravel\Passport\PassportServiceProvider::class,
+            Spatie\Fractal\FractalServiceProvider::class,
+            Collective\Html\HtmlServiceProvider::class,
+            Creativeorange\Gravatar\GravatarServiceProvider::class,
+            Intervention\Image\ImageServiceProvider::class,
 
-        \EONConsulting\LaravelLTI\LaravelLTIServiceProvider::class,
-        \EONConsulting\RolesPermissions\RolesPermissionsServiceProvider::class,
-        \EONConsulting\AppStore\AppStoreServiceProvider::class,
-        \EONConsulting\FileManager\FileManagerServiceProvider::class,
-        \EONConsulting\Storyline\Core\StorylineCoreServiceProvider::class,
-        \EONConsulting\Storyline\Nav\StorylineNavServiceProvider::class,
-        \EONConsulting\Storyline\Menu\StorylineMenuServiceProvider::class,
-        \EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
-        \EONConsulting\Storyline\MindMap\StorylineMindMapServiceProvider::class,
-        \EONConsulting\CKEditorPluginV2\CKEditorPluginV2ServiceProvider::class,
-        \EONConsulting\ImgProcessor\ImgProcessorServiceProvider::class,
-        \EONConsulting\CKEditorPlugin\CKEditorPluginServiceProvider::class,
-        \EONConsulting\Graphs\GraphsServiceProvider::class,
+            \EONConsulting\LaravelLTI\LaravelLTIServiceProvider::class,
+            \EONConsulting\RolesPermissions\RolesPermissionsServiceProvider::class,
+            \EONConsulting\AppStore\AppStoreServiceProvider::class,
+            \EONConsulting\FileManager\FileManagerServiceProvider::class,
+            \EONConsulting\Storyline\Core\StorylineCoreServiceProvider::class,
+            \EONConsulting\Storyline\Nav\StorylineNavServiceProvider::class,
+            \EONConsulting\Storyline\Menu\StorylineMenuServiceProvider::class,
+            \EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
+            \EONConsulting\Storyline\MindMap\StorylineMindMapServiceProvider::class,
+            \EONConsulting\CKEditorPluginV2\CKEditorPluginV2ServiceProvider::class,
+            \EONConsulting\ImgProcessor\ImgProcessorServiceProvider::class,
+            \EONConsulting\CKEditorPlugin\CKEditorPluginServiceProvider::class,
+            \EONConsulting\Graphs\GraphsServiceProvider::class,
 //        \EONConsulting\PHPSaasWrapper\src\PHPSaasWrapperServiceProvider::class,
         //\EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
         \EONConsulting\MindMap\MindMapServiceProvider::class,
@@ -218,6 +218,7 @@ return [
 
         \EONConsulting\Storyline2\Storyline2ServiceProvider::class,
         \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
+        \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
         /*
          * Application Service Providers...
