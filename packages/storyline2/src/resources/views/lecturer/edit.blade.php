@@ -50,11 +50,16 @@
 @section('custom-scripts')
 
 <script>
-    var url = "{{{ url('') }}}" + "/storyline2/json-render/"; //add storyline_id: .../json-render/storyline_id
-    var tree_id = "#tree";
+    
+    $(window).on('load', function () {     
+      var url = "{{{ url('') }}}" + "/storyline2/json-render"; //add storyline_id: .../json-render/storyline_id
+      var tree_id = "#tree";
+ });
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{ url('vendor/storyline2/editable-tree.js')}}"></script>
+
+
 
 @endsection

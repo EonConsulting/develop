@@ -36,7 +36,7 @@ class DefaultController extends LTIBaseController {
             $message = 'true';
             $story = $storyId;
         } else {
-            $record = $StudentProgress::whereStudent($request->get('student'))->orderBy('updated_at', 'desc')->first();
+            $record = $StudentProgress::whereStudentId($request->get('student_id'))->orderBy('updated_at', 'desc')->first();
             $check = $this->check_record($record, $StorylineItem, $request, $StudentProgress);
             $story = $check;
             $message = '';
@@ -57,7 +57,7 @@ class DefaultController extends LTIBaseController {
      * @param type $storylineItem
      */
     public function save_progress($request, $StudentProgress, $storylineItem) {
-        $StudentProgress->student = $request->get('student');
+        $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_item_id = $storylineItem;
         $StudentProgress->storyline_id = (int) $request->get('storyline');

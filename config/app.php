@@ -217,7 +217,11 @@ return [
         \EONConsulting\Storyline\Table\StorylineTableServiceProvider::class,
 
         \EONConsulting\Storyline2\Storyline2ServiceProvider::class,
+<<<<<<< HEAD
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
+=======
+        \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
+>>>>>>> d3eeb36eb3584fb8d884a56d13e91149c140701d
 
         /*
          * Application Service Providers...
