@@ -48,16 +48,13 @@
     44 => 'EONConsulting\\Storyline\\TagCloud\\StorylineTagCloudServiceProvider',
     45 => 'EONConsulting\\Storyline\\Table\\StorylineTableServiceProvider',
     46 => 'EONConsulting\\Storyline2\\Storyline2ServiceProvider',
-<<<<<<< HEAD
-    47 => 'EONConsulting\\AnalyticsLogger\\AnalyticsLoggerServiceProvider',
-=======
     47 => 'EONConsulting\\Student\\Progression\\StudentProgressionServiceProvider',
->>>>>>> d3eeb36eb3584fb8d884a56d13e91149c140701d
-    48 => 'App\\Providers\\AppServiceProvider',
-    49 => 'App\\Providers\\AuthServiceProvider',
-    50 => 'App\\Providers\\EventServiceProvider',
-    51 => 'App\\Providers\\RouteServiceProvider',
-    52 => 'App\\Providers\\ViewComposerServiceProvider',
+    48 => 'EONConsulting\\AnalyticsLogger\\AnalyticsLoggerServiceProvider',
+    49 => 'App\\Providers\\AppServiceProvider',
+    50 => 'App\\Providers\\AuthServiceProvider',
+    51 => 'App\\Providers\\EventServiceProvider',
+    52 => 'App\\Providers\\RouteServiceProvider',
+    53 => 'App\\Providers\\ViewComposerServiceProvider',
   ),
   'eager' => 
   array (
@@ -94,16 +91,13 @@
     30 => 'EONConsulting\\Storyline\\TagCloud\\StorylineTagCloudServiceProvider',
     31 => 'EONConsulting\\Storyline\\Table\\StorylineTableServiceProvider',
     32 => 'EONConsulting\\Storyline2\\Storyline2ServiceProvider',
-<<<<<<< HEAD
-    33 => 'EONConsulting\\AnalyticsLogger\\AnalyticsLoggerServiceProvider',
-=======
     33 => 'EONConsulting\\Student\\Progression\\StudentProgressionServiceProvider',
->>>>>>> d3eeb36eb3584fb8d884a56d13e91149c140701d
-    34 => 'App\\Providers\\AppServiceProvider',
-    35 => 'App\\Providers\\AuthServiceProvider',
-    36 => 'App\\Providers\\EventServiceProvider',
-    37 => 'App\\Providers\\RouteServiceProvider',
-    38 => 'App\\Providers\\ViewComposerServiceProvider',
+    34 => 'EONConsulting\\AnalyticsLogger\\AnalyticsLoggerServiceProvider',
+    35 => 'App\\Providers\\AppServiceProvider',
+    36 => 'App\\Providers\\AuthServiceProvider',
+    37 => 'App\\Providers\\EventServiceProvider',
+    38 => 'App\\Providers\\RouteServiceProvider',
+    39 => 'App\\Providers\\ViewComposerServiceProvider',
   ),
   'deferred' => 
   array (
