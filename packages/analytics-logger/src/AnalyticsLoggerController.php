@@ -11,5 +11,7 @@ class AnalyticsLoggerController extends Controller
     protected function index(Request $request)
     {
         $this->request = $request;
+
+        dd('Response is: '. $this->request->all());
     }
 }

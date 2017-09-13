@@ -136,17 +136,27 @@
 @section('custom-scripts')
 
 <script src="{{url('js/typeahead.bundle.js')}}"></script>
+<script src="{{url('js/analytics/tincan.js')}}"></script>
 
 {{--Typeahead--}}
 <script>
 
-var url = '';
+    var url = '';
 
 $(document).ready(function () {
     $(".typeahead").typeahead({}).on("input", function (e) {
+        let guid = function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        };
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+
         var termChars = e.target.value;
         if (termChars.length >= 3) {
-            //var url = '/lti/courses/search/?from=0&size=10&term=' + termChars;
             url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
             setTerm(url);
         }
@@ -157,7 +167,7 @@ $(document).ready(function () {
     }
 
     $(document).keypress(function (e) {
-        if (e.which == 13) {
+        if (e.which === 13) {
             window.location.href = url;
         }
     });
@@ -191,6 +201,32 @@ $(document).ready(function () {
              suggestion: courses.title*/
         }
     });
+
+    var tincan = new TinCan (
+        {
+            recordStores: [
+                {
+                    endpoint: "{!! url('analytics/logger') !!}",
+                    username: "<Test User>",
+                    password: "<Test User's Password>",
+                    allowFail: false
+                }
+            ]
+        }
+    );
+    tincan.sendStatement(
+        {
+            actor: {
+                mbox: "{{ auth()->user()->email }}"
+            },
+            verb: {
+                id: "http://activitystrea.ms/schema/1.0/search"
+            },
+            target: {
+                id: "{!! url('/lti/courses/search') !!}"
+            }
+        }
+    );
 
     $('input.typeahead').keypress(function (e) {
         if (e.which === 13) {
