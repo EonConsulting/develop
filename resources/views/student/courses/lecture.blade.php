@@ -324,7 +324,8 @@ Lecture
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {      
+                    if (data.msg === 'true') {     
+                        alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else {
                         alert('Please complete current Learning Objective before moving to the Next one!');
