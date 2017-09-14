@@ -16,7 +16,9 @@ class AnalyticsLoggerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/assets' => public_path('vendor/analytics-logger'),
-        ], 'public');
+            __DIR__ . '/migrations' => $this->app->databasepath() . '/migrations'], 'migrations');
+
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 
     /**
