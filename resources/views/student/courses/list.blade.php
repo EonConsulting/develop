@@ -141,42 +141,7 @@
     var url = '';
 
 $(document).ready(function () {
-    var tincan = new TinCan (
-        {
-            recordStores: [
-                {
-                    endpoint: "{!! url('analytics/logger') !!}",
-                    username: "{{ auth()->user()->name }}",
-                    password: null,
-                    allowFail: false
-                }
-            ]
-        }
-    );
-    tincan.sendStatement(
-        {
-            actor: {
-                mbox: "{{ auth()->user()->email }}"
-            },
-            verb: {
-                id: "http://activitystrea.ms/schema/1.0/search"
-            },
-            target: {
-                id: "{!! url('/lti/courses/search') !!}"
-            }
-        }
-    );
     $(".typeahead").typeahead({}).on("input", function (e) {
-        var guid = function () {
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4();
-        };
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
-
         var termChars = e.target.value;
         if (termChars.length >= 3) {
             url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
@@ -227,6 +192,33 @@ $(document).ready(function () {
     $('input.typeahead').keypress(function (e) {
         if (e.which === 13) {
             $('#search')[0].click();
+
+            //Log searched
+            var tincan = new TinCan (
+                {
+                    recordStores: [
+                        {
+                            endpoint: "{!! url('analytics/logger') !!}",
+                            username: "{{ auth()->user()->name }}",
+                            password: null,
+                            allowFail: false
+                        }
+                    ]
+                }
+            );
+            tincan.sendStatement(
+                {
+                    actor: {
+                        mbox: "{{ auth()->user()->email }}"
+                    },
+                    verb: {
+                        id: "http://activitystrea.ms/schema/1.0/search"
+                    },
+                    target: {
+                        id: "{!! url('/lti/courses/search') !!}"
+                    }
+                }
+            );
         }
     });
 });
