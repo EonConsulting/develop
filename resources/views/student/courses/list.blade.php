@@ -141,8 +141,33 @@
     var url = '';
 
 $(document).ready(function () {
+    var tincan = new TinCan (
+        {
+            recordStores: [
+                {
+                    endpoint: "{!! url('analytics/logger') !!}",
+                    username: "{{ auth()->user()->name }}",
+                    password: null,
+                    allowFail: false
+                }
+            ]
+        }
+    );
+    tincan.sendStatement(
+        {
+            actor: {
+                mbox: "{{ auth()->user()->email }}"
+            },
+            verb: {
+                id: "http://activitystrea.ms/schema/1.0/search"
+            },
+            target: {
+                id: "{!! url('/lti/courses/search') !!}"
+            }
+        }
+    );
     $(".typeahead").typeahead({}).on("input", function (e) {
-        let guid = function () {
+        var guid = function () {
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
                 s4() + '-' + s4() + s4() + s4();
         };
@@ -198,32 +223,6 @@ $(document).ready(function () {
              suggestion: courses.title*/
         }
     });
-
-    var tincan = new TinCan (
-        {
-            recordStores: [
-                {
-                    endpoint: "{!! url('analytics/logger') !!}",
-                    username: "<Test User>",
-                    password: "<Test User's Password>",
-                    allowFail: false
-                }
-            ]
-        }
-    );
-    tincan.sendStatement(
-        {
-            actor: {
-                mbox: "{{ auth()->user()->email }}"
-            },
-            verb: {
-                id: "http://activitystrea.ms/schema/1.0/search"
-            },
-            target: {
-                id: "{!! url('/lti/courses/search') !!}"
-            }
-        }
-    );
 
     $('input.typeahead').keypress(function (e) {
         if (e.which === 13) {
