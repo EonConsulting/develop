@@ -35,13 +35,17 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          * ---------------------------------------------
          */
 
-         //Render JSON Route
-         //Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2JSONrender');
-         Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
+        //RESTful routes
+        Route::resource('/items', 'ContentBuilderCategories');
 
-         Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2JSONrename');
-         Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2JSONdelete');
-         Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2JSONmove');
+        //Render JSON Route
+        Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2JSONrender');
+        Route::get('/show_items/{storyline}', 'Storyline2ViewsJSON@show_items')->name('storyline2.JSON.items');
+        //Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
+        Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2JSONmove');
+        Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2JSONrename');
+        Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2JSONdelete');
+        Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2JSONcreate');
 
         //Add more routes
     });

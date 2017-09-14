@@ -139,8 +139,6 @@
 
         function refreshTable(){
 
-            $('#category_table').empty();
-
             $.ajax({
                 method: "GET",
                 url: "{{ url('content/categories') }}/all",
@@ -167,7 +165,6 @@
             });
 
             
-
         }
 
 
@@ -203,6 +200,7 @@
                 $html += "</tr>";
             });
 
+            $('#category_table').empty();
             $('#category_table').append( $html );
 
         }

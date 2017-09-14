@@ -66,6 +66,13 @@ class ContentBuilderCategories extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $category
+     * @return void
+     */
     public function update(Request $request, $category){
 
         $category = Category::find($category);
