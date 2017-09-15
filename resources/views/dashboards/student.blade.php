@@ -410,18 +410,66 @@ $(document).ready(function () {
                 {
                     "course_id": "FBN1501",
                     "metric": "FA",
-                    "metric_item_id": "",
+                    "metric_item_id": "FA-ALL",
                     "your_results": [],
                     "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": []
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
                 },
                 {
                     "course_id": "FBN1502",
                     "metric": "FA",
-                    "metric_item_id": "",
+                    "metric_item_id": "FA-ALL",
                     "your_results": [],
                     "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": []
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "EX",
+                    "metric_item_id": "EX-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "SA",
+                    "metric_item_id": "SA-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
                 },
                 {
                     "course_id": "FBN1501",
@@ -566,8 +614,7 @@ $(document).ready(function () {
                     "your_results": [55],
                     "class_average": [66],
                     "your_average": []
-                },
-                
+                }
             ];
             // bind some events so that we
             // can simulate remote data store
