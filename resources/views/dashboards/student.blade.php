@@ -595,41 +595,23 @@ $(document).ready(function () {
                     datasets: [
                         {
                             label: 'Your Results',
-                            backgroundColor: 'rgba(0, 166, 90, 0)',
-                            borderColor: 'rgba(0, 166, 90, 1)',
-                            borderWidth: 2,
-                            fillColor: 'rgba(0, 166, 90, 0.9)',
-                            strokeColor: 'rgba(0, 166, 90, 0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(0, 166, 90,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
                             data: data.your_results
                         },
                         {
                             label: 'Your Average',
-                            backgroundColor: 'rgba(130, 201, 169, 0)',
-                            borderColor: 'rgba(130, 201, 169, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(221, 75, 57,0.9)',
-                            strokeColor: 'rgba(221, 75, 57,0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(221, 75, 57,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
                             data: data.your_average
                         },
                         {
                             label: 'Class Average',
-                            backgroundColor: 'rgba(220, 220, 220, 0)',
-                            borderColor: 'rgba(220, 220, 220, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(0, 192, 239,1)',
-                            strokeColor: 'rgba(0, 192, 239,1)',
-                            pointColor: 'rgba(0, 192, 239,1)',
-                            pointStrokeColor: 'rgba(0, 192, 239,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
                             data: data.class_average
                         }
                     ]
