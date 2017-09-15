@@ -213,7 +213,7 @@ Lecture
 @section('custom-scripts')
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
-{{--<script src="{{url('/js/mtree.js')}}"></script>--}}
+
 {{--<script>--}}
 {{--$(document).ready(function() {--}}
 {{--var mtree = $('ul.mtree');--}}
@@ -236,9 +236,10 @@ Lecture
                         }
                     });
                 })
-                jQuery("#navigation").on("click", "li.jstree-node a", function () {
+                /**jQuery("#navigation").on("click", "li.jstree-node a", function () {
                     document.location.href = this;
                 });
+                **/
                 //Add A Class to Open First Item in Tree
                 $('ul.course-nav li:first-child').addClass('jstree-open');
 </script>
@@ -307,15 +308,18 @@ Lecture
         });
     }
 
-    $(document).ready(function () {
+ $(document).ready(function () {   
+        $('a').attr('href','#');    
     
-        $(".jstree-anchor").click(function (e) {
+        $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
             e.preventDefault();
+            
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
+            alert(id);
             $.ajax({
                 url: '/student/progression',
                 type: "POST",
@@ -326,10 +330,10 @@ Lecture
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
-                        //alert(data.story);
+                        alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else if(data.msg === 'error'){
-                        alert('Please complete current Learning Objective before moving to the Next one!');
+                        alert('Please complete current Learning Objective before moving to the Next one!');                        
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }
                 },
