@@ -50,6 +50,9 @@ Create a Course
                                 <!--<upload-form></upload-form>-->
                             </div>
                         </div>
+                        <div class="pull-right">
+                            <input class="btn btn-success" type="submit" value="Submit" />
+                        </div>
                     </div>
                 </div>
             </div>
