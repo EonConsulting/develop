@@ -25,14 +25,14 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function render() {
 
-/*
-        $var = $course::find(20);
-        $storyline = $var->latest_storyline();
-        $items = $var['items'];
-*/
+        /*
+          $var = $course::find(20);
+          $storyline = $var->latest_storyline();
+          $items = $var['items'];
+         */
 
         $storyline = Storyline::find(47);
-        
+
         $items = $storyline['items'];
 
         return $this->items_to_tree($items);
@@ -44,12 +44,11 @@ class Storyline2ViewsJSON extends BaseController {
      * @param [type] $storyline
      * @return void
      */
-    public function show_items($storyline){
-        
+    public function show_items($storyline) {
+
         $result = Storyline::find($storyline);
 
         return $this->items_to_tree($result->items);
-
     }
 
     /**
@@ -97,11 +96,10 @@ class Storyline2ViewsJSON extends BaseController {
      * @param Request $request
      * @return type
      */
-
     public function rename(Request $request) {
 
         $data = $request->json()->all();
-        
+
         $ItemId = (int) $data['id'];
         $text = $data['text'];
 
@@ -113,12 +111,11 @@ class Storyline2ViewsJSON extends BaseController {
         } else {
             $msg = 'failed';
         }
-        
+
         return response()->json(['msg' => $msg]);
     }
 
-
-    public function create(Request $request){
+    public function create(Request $request) {
 
         $data = $request->json()->all();
 
@@ -140,8 +137,7 @@ class Storyline2ViewsJSON extends BaseController {
             $msg = 'failed';
         }
 
-        return response()->json(['msg' => $msg,'id' => $newItem->id]);
-
+        return response()->json(['msg' => $msg, 'id' => $newItem->id]);
     }
 
     /**
@@ -155,15 +151,27 @@ class Storyline2ViewsJSON extends BaseController {
 
         $parentId = (int) $data['parent'];
         $ItemId = (int) $data['id'];
-
+        dd($ItemId);
         $Item = StorylineItem::where('id', '=', $ItemId)->first();
         $Item->parent_id = $parentId;
-        
-        if ($Item->save()) {
-            $msg = 'success';
-        } else {
-            $msg = 'failed';
+
+        if (empty($ItemId)) {
+            if ($Item->makeLastChildOf($parentId)) {
+                $msg = 'success';
+            } else {
+                $msg = 'failed';
+            }
         }
+
+
+        if (!empty($ItemId)) {
+            if ($Item->save()) {
+                $msg = 'success';
+            } else {
+                $msg = 'failed';
+            }
+        }
+        
         return response()->json(['msg' => $msg]);
     }
 
