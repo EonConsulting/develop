@@ -12,6 +12,9 @@ use Illuminate\Routing\Controller as BaseController;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
+use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 class Storyline2ViewsBlade extends BaseController {
 
@@ -60,28 +63,25 @@ class Storyline2ViewsBlade extends BaseController {
             ]);
 
             $storyline->save();
-
             $storyline_id = $storyline->id;
 
-           /* $storyline_item = new StorylineItem([
-                'parent_id' => null,
+            $storyline_item = new StorylineItem([
                 'storyline_id' => $storyline_id,
-                
+                'name' => 'Start Here'
+            ]);
 
+            $storyline_item->save();
 
-                
-                'course_id' => $course->id,
-                'creator_id' => auth()->user()->id,
-                'version' => 1
-            ]);*/
+            $storyline->items()->save($storyline_item);
 
             $course->storylines()->save($storyline);
-
             
         }
+
+        $categories = Category::all();
        
 
-        return view('eon.storyline2::lecturer.edit', ['storyline_id' => $storyline_id, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.storyline2::lecturer.edit', ['storyline_id' => $storyline_id, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
     }
 
 }

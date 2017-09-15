@@ -13,6 +13,7 @@ use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
+use EONConsulting\ContentBuilder\Models\Content;
 
 
 class Storyline2Core extends BaseController {
@@ -40,6 +41,27 @@ class Storyline2Core extends BaseController {
 
             return response()->json(['msg' => $msg]);
         }
+    }
+
+    public function get_content($item){
+
+        $storyline_item = StorylineItem::find($item);
+
+        if ($storyline_item['content_id'] == null)
+        {
+            $result = [
+                "found" => false
+            ];
+
+        } else {
+            $result = [
+                "found" => true,
+                "content" => Content::find((int) $storyline_item['content_id'])
+            ];
+        }
+
+        return json_encode($result);
+
     }
 
 }

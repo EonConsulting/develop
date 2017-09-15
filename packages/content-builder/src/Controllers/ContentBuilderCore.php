@@ -118,6 +118,17 @@ class ContentBuilderCore extends Controller {
      */
 
 
+     public function show($content){
+
+        if($content === "all"){
+            $result = Content::all();  
+        } else {
+            $result = Content::find($content);
+        }
+
+        return json_encode($result);
+     }
+
 
     /**
      * @param Request $request
