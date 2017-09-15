@@ -179,21 +179,18 @@ class Storyline2ViewsJSON extends BaseController {
 
         //If the parent we are moving to doesn't have any decendents,  just move it now
         if ($parent->isLeaf()) {
-            if ($node->makeChildOf($parent)) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
+            $node->makeChildOf($parent);
         }
         //This takes care of it we are moving it into the last position
         if (is_null($moveTo)) {
-            if ($node->makeLastChildOf($parent)) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
+           $node->makeLastChildOf($parent);               
         }
 
+        if ($node->moveToLeftOf($moveTo)) {
+            $msg = 'success';
+        } else {
+            $msg = 'failed';
+        }
 
         return response()->json(['msg' => $msg]);
     }
