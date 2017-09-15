@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 class Storyline extends Model {
 
     protected $table = 'storylines';
@@ -19,13 +20,11 @@ class Storyline extends Model {
 
     public function items() {
         return $this->hasMany(StorylineItem::class, 'storyline_id', 'id')
-            ->orderBy('level', 'ASC')
-            ->orderBy('position', 'ASC');
+                        ->orderBy('level', 'ASC')
+                        ->orderBy('position', 'ASC');
     }
 
-//    public function items() {
-//        return $this->hasMany(StorylineItem::class, 'storyline_id', 'id')->orderBy('level', 'ASC');
-//    }
-
-
+    public function metadata() {
+        return $this->hasMany(StorylineMetadata::class, 'storyline_id', 'id');
+    }
 }

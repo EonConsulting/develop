@@ -10,18 +10,24 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
+    "buble": "^0.15.2",
+    "css-loader": "^0.28.7",
     "jquery": "^3.1.1",
+    "laravel-elixir": "^6.0.0-15",
+    "laravel-elixir-webpack-official": "^1.0.10",
     "laravel-mix": "^0.8.1",
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
-    "laravel-elixir": "^6.0.0-15"
+    "vue-loader": "^13.0.4",
+    "vue-template-compiler": "^2.4.2"
   },
   "dependencies": {
     "chart.js": "^2.6.0",
-    "cross-env": "^3.2.3",
+    "composer": "^0.14.2",
+    "cross-env": "^3.2.4",
     "vue-ckeditor": "^1.0.0",
-    "vue-ckeditor2": "^1.0.3",
-    "vue-resource": "^1.2.1",
+    "vue-ckeditor2": "^1.11.0",
+    "vue-resource": "^1.3.4",
     "vuedraggable": "^2.14.1"
   }
 }

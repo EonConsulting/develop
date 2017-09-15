@@ -24,11 +24,11 @@ class RolesPermissionsServiceProvider extends ServiceProvider {
             __DIR__.'/assets' => public_path('vendor/roles'),
         ], 'public');
 
-        Permission::get()->map(function ($permission) {
+        /*Permission::get()->map(function ($permission) {
             Gate::define($permission->name, function ($user) use ($permission) {
                 return $user->hasPermissionTo($user->last_department_id, $permission) || $user->hasPermissionTo($user->last_department_id, 'Super Admin');
             });
-        });
+        });*/
 
         Blade::directive('role', function ($role) {
             return "<?php if (auth()->check() && auth()->user()->hasRole({$role})): ?>";

@@ -9,15 +9,24 @@
 namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use EONConsulting\Storyline2\Models\Course;
+//use EONConsulting\Storyline2\Models\Course;
+use App\Models\Course;
+use App\Models\Storyline;
+use App\Models\StorylineItem;
 
 class Storyline2ViewsJSON extends BaseController {
 
-    public function render() {
+    public function render(Course $course) {
 
         //TODO: get course tree and use instead of the following demo array
 
         //hardcoded for design
+        
+        $storyline = $course->latest_storyline();
+        //$items = $storyline->items;
+        dd($storyline);
+        //return response()->json($example_course);
+        exit();
         $example_course = [
             [
                 'id' => '0',
