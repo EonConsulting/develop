@@ -5,4 +5,4 @@
  * Time: 10:25 AM
  */
 
-Route::put('analytics/logger/statements/', 'EONConsulting\AnalyticsLogger\AnalyticsLoggerController@index');
+Route::put('analytics/log/statements/', 'EONConsulting\AnalyticsLogger\AnalyticsLoggerController@index');
