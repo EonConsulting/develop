@@ -11,9 +11,9 @@ namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 //use EONConsulting\Storyline2\Models\Course;
-use App\Models\Course;
-use App\Models\Storyline;
-use App\Models\StorylineItem;
+use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 
 class Storyline2ViewsJSON extends BaseController {
@@ -24,6 +24,7 @@ class Storyline2ViewsJSON extends BaseController {
      * @return type
      */
     public function render() {
+
 /*
         $var = $course::find(20);
         $storyline = $var->latest_storyline();
@@ -104,7 +105,7 @@ class Storyline2ViewsJSON extends BaseController {
         $ItemId = (int) $data['id'];
         $text = $data['text'];
 
-        $Item = StorylineItem::where('id', '=', $ItemId);
+        $Item = StorylineItem::find($ItemId);
         $Item->name = $text;
 
         if ($Item->save()) {

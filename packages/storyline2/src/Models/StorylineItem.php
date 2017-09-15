@@ -11,7 +11,7 @@ class StorylineItem extends Node {
 
     protected $table = 'storyline_items';
     protected $primaryKey = 'id';
-    protected $fillable = ['parent_id', 'storyline_id', 'level', 'name', 'description', 'file_name', 'file_url'];
+    protected $fillable = ['parent_id', 'storyline_id', 'level', 'name', 'description', 'file_name', 'file_url','content_id'];
     //Set Scope for Storyline Construction
     protected $scoped = ['storyline_id'];
     protected static $holdCurrentStoryLineId;
@@ -40,6 +40,11 @@ class StorylineItem extends Node {
 
     public static function currentStoryLine($storyline_id) {
         self::$holdCurrentStoryLineId = $storyline_id;
+    }
+
+    public function content() {
+        //return $this->hasMany(Storyline::class, 'course_id', 'id');
+        return $this->hasOne(Content::class, 'content_id', 'id');
     }
 
     protected $parentColumn = 'parent_id';

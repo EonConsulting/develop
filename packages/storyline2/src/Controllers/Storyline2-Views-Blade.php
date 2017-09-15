@@ -10,6 +10,8 @@ namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 
 class Storyline2ViewsBlade extends BaseController {
 
@@ -47,7 +49,37 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
 
-        $storyline_id = $course->latest_storyline()->id;
+        if (count($course->latest_storyline()))
+        {
+            $storyline_id = $course->latest_storyline()->id;
+        } else {
+            $storyline = new Storyline([
+                'course_id' => $course->id,
+                'creator_id' => auth()->user()->id,
+                'version' => 1
+            ]);
+
+            $storyline->save();
+
+            $storyline_id = $storyline->id;
+
+           /* $storyline_item = new StorylineItem([
+                'parent_id' => null,
+                'storyline_id' => $storyline_id,
+                
+
+
+                
+                'course_id' => $course->id,
+                'creator_id' => auth()->user()->id,
+                'version' => 1
+            ]);*/
+
+            $course->storylines()->save($storyline);
+
+            
+        }
+       
 
         return view('eon.storyline2::lecturer.edit', ['storyline_id' => $storyline_id, 'breadcrumbs' => $breadcrumbs]);
     }
