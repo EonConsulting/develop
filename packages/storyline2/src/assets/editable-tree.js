@@ -1,4 +1,4 @@
-var url = base_url + "/storyline2/show_items/55"; //add storyline_id: .../json-render/storyline_id
+ //add storyline_id: .../json-render/storyline_id
 var tree_id = "#tree";
 
 $( document ).ready(function(){

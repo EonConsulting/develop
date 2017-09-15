@@ -23,10 +23,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          */
 
         //Student Routes
-        Route::get('/view', 'Storyline2ViewsBlade@view')->name('storyline2studentsingle');
+        Route::get('/view', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
 
         //Lecturer Routes
-        Route::get('/edit', 'Storyline2ViewsBlade@edit')->name('storyline2lectureredit');
+        Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->name('storyline2.lecturer.edit');
 
 
         /*
@@ -39,13 +39,13 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::resource('/items', 'ContentBuilderCategories');
 
         //Render JSON Route
-        Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2JSONrender');
+        Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2.JSON.render');
         Route::get('/show_items/{storyline}', 'Storyline2ViewsJSON@show_items')->name('storyline2.JSON.items');
         //Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
-        Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2JSONmove');
-        Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2JSONrename');
-        Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2JSONdelete');
-        Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2JSONcreate');
+        Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2.JSON.move');
+        Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2.JSON.rename');
+        Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2.JSON.delete');
+        Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2.JSON.create');
 
         //Add more routes
     });
