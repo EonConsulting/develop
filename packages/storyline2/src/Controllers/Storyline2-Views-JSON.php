@@ -25,14 +25,14 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function render() {
 
-/*
-        $var = $course::find(20);
-        $storyline = $var->latest_storyline();
-        $items = $var['items'];
-*/
+        /*
+          $var = $course::find(20);
+          $storyline = $var->latest_storyline();
+          $items = $var['items'];
+         */
 
         $storyline = Storyline::find(47);
-        
+
         $items = $storyline['items'];
 
         return $this->items_to_tree($items);
@@ -44,12 +44,11 @@ class Storyline2ViewsJSON extends BaseController {
      * @param [type] $storyline
      * @return void
      */
-    public function show_items($storyline){
-        
+    public function show_items($storyline) {
+
         $result = Storyline::find($storyline);
 
         return $this->items_to_tree($result->items);
-
     }
 
     /**
@@ -97,11 +96,10 @@ class Storyline2ViewsJSON extends BaseController {
      * @param Request $request
      * @return type
      */
-
     public function rename(Request $request) {
 
         $data = $request->json()->all();
-        
+
         $ItemId = (int) $data['id'];
         $text = $data['text'];
 
@@ -113,12 +111,11 @@ class Storyline2ViewsJSON extends BaseController {
         } else {
             $msg = 'failed';
         }
-        
+
         return response()->json(['msg' => $msg]);
     }
 
-
-    public function create(Request $request){
+    public function create(Request $request) {
 
         $data = $request->json()->all();
 
@@ -140,8 +137,23 @@ class Storyline2ViewsJSON extends BaseController {
             $msg = 'failed';
         }
 
-        return response()->json(['msg' => $msg,'id' => $newItem->id]);
+        return response()->json(['msg' => $msg, 'id' => $newItem->id]);
+    }
 
+    /**
+     * 
+     * @param type $decendants
+     * @param type $position
+     * @return type
+     */
+    private function findPosition($decendants, $position) {
+        $i = 0;
+        foreach ($decendants as $decendant) {
+            if ($i == $position) {
+                return $decendant;
+            }
+            $i++;
+        }
     }
 
     /**
@@ -152,18 +164,34 @@ class Storyline2ViewsJSON extends BaseController {
     public function move(Request $request) {
 
         $data = $request->json()->all();
-
         $parentId = (int) $data['parent'];
+        $old_parent = (int) $data['original']['parent'];
+
         $ItemId = (int) $data['id'];
 
         $Item = StorylineItem::where('id', '=', $ItemId)->first();
         $Item->parent_id = $parentId;
-        
-        if ($Item->save()) {
+
+        $parent = StorylineItem::find($parentId);
+        //$decendants = $parent->getImmediateDescendants();
+        $moveTo = $parentId;
+        $node = StorylineItem::find($ItemId);
+
+        //If the parent we are moving to doesn't have any decendents,  just move it now
+        if ($parent->isLeaf()) {
+            $node->makeChildOf($parent);
+        }
+        //This takes care of it we are moving it into the last position
+        if (is_null($moveTo)) {
+           $node->makeLastChildOf($parent);               
+        }
+
+        if ($node->moveToLeftOf($moveTo)) {
             $msg = 'success';
         } else {
             $msg = 'failed';
         }
+
         return response()->json(['msg' => $msg]);
     }
 
