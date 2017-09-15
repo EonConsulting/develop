@@ -327,7 +327,7 @@ Lecture
                     if (data.msg === 'true') {     
                         alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                    } else {
+                    } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }

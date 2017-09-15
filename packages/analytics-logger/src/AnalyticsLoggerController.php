@@ -12,6 +12,8 @@ class AnalyticsLoggerController extends Controller
     {
         $this->request = $request;
 
-        dd('Response is: '. $this->request->all());
+        $payload = $this->request->all();
+
+        return response()->json($payload);
     }
 }
