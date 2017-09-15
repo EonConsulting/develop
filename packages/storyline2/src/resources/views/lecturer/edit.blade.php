@@ -212,7 +212,7 @@ Storyline Student Single
                             <div class="info-bar-name">
                                 <div class="input-group">
                                     <span class="input-group-addon" id="basic-addon2">Title</span>
-                                    <input type="text" class="form-control" name="title" placeholder="Content Title" value=""/>
+                                    <input id="content-title" type="text" class="form-control" name="title" placeholder="Content Title" value=""/>
                                 </div>
                             </div>
 
@@ -222,8 +222,7 @@ Storyline Student Single
                                     <i class="fa fa-save"></i>
                                     <span class="hidden-xs"> Save</span>
                                 </button>
-
-                                <button type="button" id="btnsbmit" class="btn btn-danger"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete</span></button>
+                                
                             </div>
 
                         </div> <!-- row end -->
@@ -251,6 +250,61 @@ Storyline Student Single
 
 {{ csrf_field() }}
 
+@endsection
+
+@section('exterior-content')
+<!-- Modal -->
+<div id="saveModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>We need a bit more information from you before we can save this content</p>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input id="content-description" type="text" class="form-control" name="description" value="">
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label for="categories[]">Categories</label>
+                    </div>
+
+                    <?php foreach($categories as $category): ?>
+
+                    <div>
+                        <label style="font-weight: 400;">
+                            <input type="checkbox" name="categories[]" value="<?php echo $category->id; ?>" >
+                            <?php echo $category->name; ?>
+                        </label>
+                    </div>
+
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="">
+                </div>
+
+            
+            </div>
+
+            <div class="modal-footer">
+                <button id="btnsbmit" class="btn btn-primary"><i class="fa fa-save"></i><span> Save</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>     
+    
 @endsection
 
 @section('custom-scripts')

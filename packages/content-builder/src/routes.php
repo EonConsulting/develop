@@ -8,8 +8,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
      * ------------------------------------
      */
 
+     
     //Core Routes
-    Route::match(['get', 'post'],'/', 'ContentBuilderCore@index')->name('eon.contentbuilder');
+    Route::get('/', 'ContentBuilderCore@index')->name('eon.contentbuilder');
+
+    Route::get('/{content}', 'ContentBuilderCore@show')->name('content.show');
 
     Route::match(['get', 'post'],'/create', 'ContentBuilderCore@create')->name('eon.contentbuilder.create');
 
