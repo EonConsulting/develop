@@ -425,6 +425,54 @@ $(document).ready(function () {
                 },
                 {
                     "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 55, 63, 45, 56, 80, 50, 65, 57, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "ASS",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [62, 75, 58, 65, 59, 85, 60, 55, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [76, 66, 63, 49, 56, 60, 70, 55, 62, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "EX",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 58, 62, 85, 59, 65, 66, 75, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [42, 66, 55, 59, 56, 60, 40, 45, 62, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "SA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [82, 63, 72, 65, 59, 65, 60, 81, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
                     "metric": "FA",
                     "metric_item_id": "FA1",
                     "your_results": [62],
