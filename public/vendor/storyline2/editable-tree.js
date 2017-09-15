@@ -68,6 +68,8 @@ function treeToJSON(){
 
 }
 
+
+
 //detect when node is clicked, ie. selected node changes
 /*$(tree_id).on("changed.jstree", function (e, data) {
     console.log("Node selected");
@@ -96,8 +98,6 @@ $(tree_id).on("cut.jstree", function (e, data) {
 $(tree_id).on("paste.jstree", function (e, data) {
     console.log("paste pasted");
 });*/
-
-
 
 
 //Create Node
@@ -159,7 +159,7 @@ function deleteNode(data) {
 
             },
             500: function () { //server kakked
-
+                
             }
         }
     }).error(function (req, status, error) {
