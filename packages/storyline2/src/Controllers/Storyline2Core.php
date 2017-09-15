@@ -64,4 +64,36 @@ class Storyline2Core extends BaseController {
 
     }
 
+    public function save_content(Request $request, $item){
+
+        $data = $request->json()->all();
+        
+        $content = new Content([
+            'title' => $data['title'],
+            'body' => $request->get('data'),
+            'tags' => $request->get('tags'),
+            'creator_id' => auth()->user()->id,
+            'description' => $request->get('description')
+        ]);
+
+        $content->save();
+        
+        $categories = $request->get('categories');
+        
+        foreach($categories as $k => $category_id) {
+            $temp = Category::find($category_id);
+            $content->categories()->save($temp);
+        }
+
+        $item = StorylineItem::find($item);
+
+        $item->content()->save($content);
+
+        $item->save();
+
+        return 200;
+
+
+    }
+
 }

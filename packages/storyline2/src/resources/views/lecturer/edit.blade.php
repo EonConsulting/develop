@@ -222,7 +222,7 @@ Storyline Student Single
                                     <i class="fa fa-save"></i>
                                     <span class="hidden-xs"> Save</span>
                                 </button>
-                                
+
                             </div>
 
                         </div> <!-- row end -->
@@ -267,12 +267,14 @@ Storyline Student Single
             <div class="modal-body">
                 <p>We need a bit more information from you before we can save this content</p>
 
+                <input type="hidden" id="item-id" value="">
+
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input id="content-description" type="text" class="form-control" name="description" value="">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="categories">
                     <div>
                         <label for="categories[]">Categories</label>
                     </div>
@@ -403,4 +405,63 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     });
 
 </script>
+
+<script>
+
+    $( document ).ready(function(){
+    
+        $("#btnsbmit").on("click", function(){
+            console.log("Save Clicked");
+            save_content_to_item();
+        });
+    
+    });
+
+    
+    function save_content_to_item(){
+        var cats = $("#categories input:checkbox:checked").map(function(){
+            return $(this).val();
+        }).get();
+
+        $()
+
+        var data = {
+            "title": $("#content-title").val(),
+            "description": $("#content-description").val(),
+            "categories": cats,
+            "tags": $("#content-tags").val(),
+            "item_id": $("#item-id").val()
+        };
+
+        actionUrl = base_url + "/storyline2/save-item-content/" + data["item-id"];
+
+        $.ajax({
+            method: "POST",
+            url: actionUrl,
+            contentType: 'json',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+
+                },
+                400: function () { //bad request
+    
+                },
+                500: function () { //server kakked
+    
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
+
+    }
+
+
+</script>
+
 @endsection
