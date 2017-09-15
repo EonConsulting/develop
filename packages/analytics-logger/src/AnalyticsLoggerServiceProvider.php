@@ -28,6 +28,6 @@ class AnalyticsLoggerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->app->make('EONConsulting\AnalyticsLogger\AnalyticsLoggerController');
+        $this->app->make('EONConsulting\AnalyticsLogger\AnalyticsLoggerController');
     }
 }

@@ -202,8 +202,8 @@ Lecture
         </div>
         <div class="col-md-9">
             <iframe src="{{ url("")."/".$storyline_item->file_url }}" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
-            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
-            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
+            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow" id="{{$previous}}" course="{{$course->id}}" storyline="{{$navitem->storyline_id}}"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
+            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right" id="{{$next}}" course="{{$course->id}}" storyline="{{$navitem->storyline_id}}"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
 
         </div>
     </div>
@@ -308,6 +308,7 @@ Lecture
     }
 
     $(document).ready(function () {
+    
         $(".jstree-anchor").click(function (e) {
             e.stopPropagation();
             e.preventDefault();
@@ -325,7 +326,7 @@ Lecture
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
-                        alert(data.story);
+                        //alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');
@@ -338,6 +339,69 @@ Lecture
                 }
             });
         });
+        
+        $(".subtopic-left").click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();            
+            var id = $(this).attr("id");           
+            var courseId = $(this).attr("course");
+            var storyline = $(this).attr("storyline");
+            var student = '{{auth()->user()->id}}';
+            $.ajax({
+                url: '/student/progression',
+                type: "POST",
+                asyn: false,
+                data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg === 'true') {     
+                        //alert(data.story);
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                    } else if(data.msg === 'error'){
+                        alert('Please complete current Learning Objective before moving to the Next one!');
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    // location.reload();
+                }
+            });
+        });
+      
+      $(".subtopic-right").click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();            
+            var id = $(this).attr("id");           
+            var courseId = $(this).attr("course");
+            var storyline = $(this).attr("storyline");
+            var student = '{{auth()->user()->id}}';
+            $.ajax({
+                url: '/student/progression',
+                type: "POST",
+                asyn: false,
+                data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg === 'true') {     
+                        //alert(data.story);
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                    } else if(data.msg === 'error'){
+                        alert('Please complete current Learning Objective before moving to the Next one!');
+                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    // location.reload();
+                }
+            });
+        });
+        
 
     });
 </script>

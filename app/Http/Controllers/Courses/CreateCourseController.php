@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models;
+use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,14 +24,25 @@ class CreateCourseController extends Controller {
     }
 
     public function store(Request $request) {
-        // get course info
         $title = $request->get('title', '');
         $description = $request->get('description', '');
         $tags = $request->get('tags', '');
         $featured_images = $request->file('featured_image');
+        $course = new Course;
+
+        $course->title = $title;
+        $course->description = $description;
+        $course->tags = $tags;
+        $course->creator_id = $request->user()->id;
+
+        $course->save();
+
+        session()->flash('success_message', 'Course saved.');
+        return redirect()->route('courses');
 
         // put all the metadata
-        $meta_array = [
+        // MH: to implement after storyline2 rewrite
+        /*$meta_array = [
             array(
                 "lk_table" => "lk_qualification_type",
                 "lk_table_id" => $request->get("qualification_type", 0)
@@ -111,7 +122,7 @@ class CreateCourseController extends Controller {
 
             session()->flash('error_message', 'Unable to save course, please try again');
             return redirect()->route('courses');
-        }
+        } */
     }
     
     public function fill_metadata_store(Request $request)

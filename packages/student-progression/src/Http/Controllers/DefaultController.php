@@ -24,12 +24,15 @@ class DefaultController extends LTIBaseController {
         $StorylineItem = new StorylineItem();
         $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
         if (!empty($progress->id)) {
-            $ItemArray = $this->topics($StorylineItem, $progress->parent);
+            $ItemArray = $this->topics($StorylineItem, $progress->root);
             $current = $this->save_progress($StudentProgress, $request->get('id'),$progress->id,$ItemArray);
             $StorylineItem = $StudentProgress::find($progress->id);
             if($current === 'true'){
                 $message = 'true';                
                 $story = $request->get('id');
+            }elseif($current === 'current'){
+                $message = 'true';
+                $story = $StorylineItem->current;
             }else{
                 $message = 'error';
                 $story = $StorylineItem->furthest;
@@ -38,7 +41,7 @@ class DefaultController extends LTIBaseController {
         } else {
             $ItemId = $this->save($StudentProgress, $request);
             $progress = $StudentProgress::find($ItemId);
-            $ItemArray = $this->topics($StorylineItem, $progress->parent);
+            $ItemArray = $this->topics($StorylineItem, $progress->root);
             $furthest = $ItemArray[1];
             $progress->furthest = $furthest;
             $progress->save();
@@ -54,24 +57,37 @@ class DefaultController extends LTIBaseController {
         return \Response::json($response);
     }
 
+    /**
+     * 
+     * @param type $StudentProgress
+     * @param type $current
+     * @param type $progressId
+     * @param type $ItemArray
+     * @return string
+     */
     public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {        
         $Progress = $StudentProgress::find($progressId);
         $currentIndex = array_search($current, $ItemArray);
         $furthestIndex = array_search($Progress->furthest, $ItemArray);
-        $array = array_diff($ItemArray, [$Progress->parent,$Progress->current,$Progress->furthest]);
+        $array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
         if ($currentIndex > $furthestIndex) {
             return 'false';
         } elseif($currentIndex == $furthestIndex){ 
             $Progress->current = $Progress->furthest;
             $Progress->furthest = $ItemArray[$furthestIndex+1];
-            if ($Progress->save()) {
-                return 'true';
-            }
-        }else{
+            $Progress->save();
+            return 'current';
+        }elseif($currentIndex < $furthestIndex){
          return 'true';   
         }
     }
 
+    /**
+     * 
+     * @param type $StudentProgress
+     * @param type $request
+     * @return type
+     */
     public function save($StudentProgress, $request) {
         $StorylineItem = StorylineItem::whereId($request->get('id'))->first();
         $StudentProgress->student_id = (int) $request->get('student');
@@ -79,7 +95,7 @@ class DefaultController extends LTIBaseController {
         $StudentProgress->storyline_id = (int) $request->get('storyline');
         $StudentProgress->furthest = (int) $StorylineItem->id;
         $StudentProgress->current = (int) $StorylineItem->id;
-        $StudentProgress->parent = (int) $StorylineItem->id;
+        $StudentProgress->root = (int) $StorylineItem->id;
         if ($StudentProgress->save()) {
             return $StudentProgress->id;
         }
@@ -98,13 +114,6 @@ class DefaultController extends LTIBaseController {
             $children[] = $descendant->id;
         }
         return $children;
-    }
-
-   
-    public function check_level($StudentProgress, $id) {
-        $progress = $StudentProgress::whereStorylineItemId($id)->first();
-
-        return $progress;
     }
 
 }
