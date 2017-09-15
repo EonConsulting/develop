@@ -283,7 +283,7 @@ Lecture
         var id = $('.prev').attr("id");
         var courseId = $('.prev').attr("course");
         var storyline = $('.prev').attr("storyline");
-        var student = '{{auth()->user()->name}}';
+        var student = '{{auth()->user()->id}}';
         $.ajax({
             url: '/student/progression',
             type: "POST",
@@ -314,7 +314,7 @@ Lecture
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
-            var student = '{{auth()->user()->name}}';
+            var student = '{{auth()->user()->id}}';
             $.ajax({
                 url: '/student/progression',
                 type: "POST",
@@ -324,9 +324,10 @@ Lecture
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {      
+                    if (data.msg === 'true') {     
+                        alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                    } else {
+                    } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }

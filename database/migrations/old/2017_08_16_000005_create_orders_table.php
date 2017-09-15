@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnodDB';
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('currency_id', 191);
             $table->string('fx_purchased', 191);

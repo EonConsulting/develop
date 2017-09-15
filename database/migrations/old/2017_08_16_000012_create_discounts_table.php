@@ -20,10 +20,10 @@ class CreateDiscountsTable extends Migration
     public function up()
     {
         Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnodDB';
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('order_id', 191);
-            $table->string('order_dicount', 191);
+            $table->string('order_discounts', 191);
             $table->decimal('discounted_amount', 13, 2);
             $table->decimal('balance_amount', 13, 2);
 
