@@ -22,6 +22,69 @@ Storyline Student Single
         width: 0px;
     }*/
 
+
+    /**
+     *----------------------------------------------------------------------
+     * Page Layout Flex Boxes
+     *----------------------------------------------------------------------
+     */
+
+    .page-container {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+    .page-container-tree {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        min-width: 250px !important;
+        width: 250px;
+        overflow-y: auto;
+    }
+
+    .page-container-editor {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+    }
+
+
+    /**
+     *----------------------------------------------------------------------
+     * Edit side flex boxes
+     *----------------------------------------------------------------------
+     */
+
+
     .content-container {
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -128,9 +191,9 @@ Storyline Student Single
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="page-container">
 
-        <div class="col-md-3">
+        <div class="page-container-tree">
 
             <div id="tree">
 
@@ -138,8 +201,8 @@ Storyline Student Single
 
         </div><!--End col-md-3 -->
 
-        <div class="col-md-9" style="height: 100%;">
-            <div class="content-container" style="height: 100%;">
+        <div class="page-container-editor">
+            <div class="content-container">
 
                 <div class="content-info">
 
