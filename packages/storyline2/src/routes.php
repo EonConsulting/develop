@@ -43,7 +43,8 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::get('/show_items/{storyline}', 'Storyline2ViewsJSON@show_items')->name('storyline2.JSON.items');
 
         Route::get('/item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
-        
+        Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');
+
         //Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
         Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2.JSON.move');
         Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2.JSON.rename');

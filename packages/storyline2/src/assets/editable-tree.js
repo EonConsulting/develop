@@ -31,6 +31,7 @@
      //Select Node Action
      $(tree_id).on("changed.jstree", function (e, data) {
          getContent(data.node);
+
      });
  
  })
@@ -114,9 +115,12 @@
  //Get Content
  function getContent(data) {
  
+    if (!data) return;
      var item_id = data['id'];
      actionUrl = base_url + "/storyline2/item-content/" + item_id;
- 
+    
+     $("#item-id").val(item_id);
+
      $.ajax({
          method: "GET",
          url: actionUrl,
