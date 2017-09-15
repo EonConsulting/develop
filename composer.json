@@ -7,10 +7,6 @@
     "minimum-stability": "dev",
     "homepage": "https://dev.unisaonline.net",
     "require": {
-<<<<<<< HEAD
-        "php": "7.1.9",
-=======
->>>>>>> 24af34fc0f90d65ec3cf0f97c26174c6c2bc2c0d
         "IMSGlobal/LTI": "^3.0.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "creativeorange/gravatar": "~1.0",
@@ -55,12 +51,9 @@
             "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
             "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
             "EONConsulting\\Storyline2\\": "packages/storyline2/src",
-<<<<<<< HEAD
-            "EONConsulting\\ContentBuilder\\": "packages/content-builder/src"
-=======
+            "EONConsulting\\ContentBuilder\\": "packages/content-builder/src",
             "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
             "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src"
->>>>>>> 24af34fc0f90d65ec3cf0f97c26174c6c2bc2c0d
         },
         "files": [
             "packages/laravel-lti/src/functions.php",
