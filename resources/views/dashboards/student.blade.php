@@ -64,19 +64,15 @@ Student Dashboard
                             <br>
                             <label for="metric-type-filter">Metric</label>
                             <select class="form-control" id="metric-type-filter">
-                                <option>Current Average</option>
-                                <option>Formal Assessment</option>
-                                <option>Assignment</option>
-                                <option>Exam</option>
-                                <option>Self Assessment</option>
+                                <option value="CA">Current Average</option>
+                                <option value="FA">Formal Assessment</option>
+                                <option value="ASS">Assignment</option>
+                                <option value="EX">Exam</option>
+                                <option value="SA">Self Assessment</option>
                             </select>
                             <br>
-                            <label for="metric-item-filter">Assignment/Assessment</label>
+                            <label for="metric-item-filter">Item</label>
                             <select class="form-control" id="metric-item-filter">
-                                <option>Assignment 1</option>
-                                <option>Assignment 2</option>
-                                <option>Assignment 3</option>
-                                <option>Assignment 4</option>
                             </select>
                         </div>
                     </div> <!-- end col-md-4 -->
@@ -184,91 +180,91 @@ Student Dashboard
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <script type="text/javascript">
-    //--------------------------
-    //-STUDENT TIMELINE CODE--------
-    //--------------------------
-    $(document).ready(function () {
-        $('#student-timeline').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
+//--------------------------
+//-STUDENT TIMELINE CODE--------
+//--------------------------
+$(document).ready(function () {
+    $('#student-timeline').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        height: 500,
+        defaultDate: '2018-08-12',
+        navLinks: true, // can click day/week names to navigate views
+        editable: false,
+        eventLimit: true, // allow "more" link when too many events
+        events: [
+            {
+                title: 'FBN101 Test',
+                start: '2018-08-01',
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
             },
-            height: 500,
-            defaultDate: '2018-08-12',
-            navLinks: true, // can click day/week names to navigate views
-            editable: false,
-            eventLimit: true, // allow "more" link when too many events
-            events: [
-                {
-                    title: 'FBN101 Test',
-                    start: '2018-08-01',
-                    backgroundColor: '#00a65a', //Success (green)
-                    borderColor: '#00a65a' //Success (green)
-                },
-                {
-                    title: 'New Student Welcome',
-                    start: '2018-08-07',
-                    end: '2018-08-10'
-                },
-                {
-                    id: 999,
-                    title: 'FBN102 Exam',
-                    start: '2018-08-09T16:00:00',
-                    backgroundColor: '#dd4b39', //red
-                    borderColor: '#dd4b39' //red
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2018-08-16T16:00:00'
-                },
-                {
-                    title: 'Student Conference',
-                    start: '2018-08-11',
-                    end: '2018-08-13'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2018-08-12T10:30:00',
-                    end: '2018-08-12T12:30:00',
-                    backgroundColor: '#00a65a', //Success (green)
-                    borderColor: '#00a65a' //Success (green)
-                },
-                {
-                    title: 'FBN101 Exam',
-                    start: '2018-08-12T12:00:00',
-                    backgroundColor: '#dd4b39', //red
-                    borderColor: '#dd4b39' //red
-                },
-                {
-                    title: 'FNB104 Test',
-                    start: '2018-08-12T14:30:00'
-                },
-                {
-                    title: 'FBN105 Test',
-                    start: '2018-08-12T17:30:00'
-                },
-                {
-                    title: 'FBN103 Exam',
-                    start: '2018-08-12T20:00:00',
-                    backgroundColor: '#dd4b39', //red
-                    borderColor: '#dd4b39' //red
-                },
-                {
-                    title: 'FBN102 Test',
-                    start: '2018-08-13T07:00:00',
-                    backgroundColor: '#00a65a', //Success (green)
-                    borderColor: '#00a65a' //Success (green)
-                },
-                {
-                    title: 'MyUnisa',
-                    url: 'http://unisa.ac.za/',
-                    start: '2018-08-28'
-                }
-            ]
-        });
+            {
+                title: 'New Student Welcome',
+                start: '2018-08-07',
+                end: '2018-08-10'
+            },
+            {
+                id: 999,
+                title: 'FBN102 Exam',
+                start: '2018-08-09T16:00:00',
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2018-08-16T16:00:00'
+            },
+            {
+                title: 'Student Conference',
+                start: '2018-08-11',
+                end: '2018-08-13'
+            },
+            {
+                title: 'Meeting',
+                start: '2018-08-12T10:30:00',
+                end: '2018-08-12T12:30:00',
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
+            },
+            {
+                title: 'FBN101 Exam',
+                start: '2018-08-12T12:00:00',
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
+            },
+            {
+                title: 'FNB104 Test',
+                start: '2018-08-12T14:30:00'
+            },
+            {
+                title: 'FBN105 Test',
+                start: '2018-08-12T17:30:00'
+            },
+            {
+                title: 'FBN103 Exam',
+                start: '2018-08-12T20:00:00',
+                backgroundColor: '#dd4b39', //red
+                borderColor: '#dd4b39' //red
+            },
+            {
+                title: 'FBN102 Test',
+                start: '2018-08-13T07:00:00',
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
+            },
+            {
+                title: 'MyUnisa',
+                url: 'http://unisa.ac.za/',
+                start: '2018-08-28'
+            }
+        ]
     });
+});
     </script>
 
     <script type="text/javascript">
@@ -279,12 +275,99 @@ Student Dashboard
 
             var courses = [
                 {
+                    "course_id": "ALL",
+                    "description": "Current Average"
+                },
+                {
                     "course_id": "FBN1501",
                     "description": "FBN1501 - Business Numerical Skills A"
                 },
                 {
                     "course_id": "FBN1502",
                     "description": "FBN1502 - Business Numerical Skills B"
+                }
+            ];
+
+            var metric_items = [
+                {
+                    "metric_item_id": "FA-ALL",
+                    "metric": "FA",
+                    "description": "Formal Assessment Average"
+                },
+                {
+                    "metric_item_id": "FA1",
+                    "metric": "FA",
+                    "description": "Formal Assessment 1"
+                },
+                {
+                    "metric_item_id": "FA2",
+                    "metric": "FA",
+                    "description": "Formal Assessment 2"
+                },
+                {
+                    "metric_item_id": "FA3",
+                    "metric": "FA",
+                    "description": "Formal Assessment 3"
+                },
+                {
+                    "metric_item_id": "ASS-ALL",
+                    "metric": "ASS",
+                    "description": "Assignment Average"
+                },
+                {
+                    "metric_item_id": "ASS1",
+                    "metric": "ASS",
+                    "description": "Assignment 1"
+                },
+                {
+                    "metric_item_id": "ASS2",
+                    "metric": "ASS",
+                    "description": "Assignment 2"
+                },
+                {
+                    "metric_item_id": "ASS3",
+                    "metric": "ASS",
+                    "description": "Assignment 3"
+                },
+                {
+                    "metric_item_id": "EX-ALL",
+                    "metric": "EX",
+                    "description": "Exam Average"
+                },
+                {
+                    "metric_item_id": "EX1",
+                    "metric": "EX",
+                    "description": "Exam 1"
+                },
+                {
+                    "metric_item_id": "EX2",
+                    "metric": "EX",
+                    "description": "Exam 2"
+                },
+                {
+                    "metric_item_id": "EX3",
+                    "metric": "EX",
+                    "description": "Exam 3"
+                },
+                {
+                    "metric_item_id": "SA-ALL",
+                    "metric": "SA",
+                    "description": "Self Assessment Average"
+                },
+                {
+                    "metric_item_id": "SA1",
+                    "metric": "SA",
+                    "description": "Self Assessment 1"
+                },
+                {
+                    "metric_item_id": "SA2",
+                    "metric": "SA",
+                    "description": "Self Assessment 2"
+                },
+                {
+                    "metric_item_id": "SA3",
+                    "metric": "SA",
+                    "description": "Self Assessment 3"
                 }
             ];
 
@@ -312,12 +395,47 @@ Student Dashboard
             var results = [
                 {
                     "course_id": "FBN1501",
-                    "your_results": [68, 59, 60, 72, 56, 55, 61, 49, 66, 72, 76, 52],
+                    "metric": "CA",
+                    "metric_item_id": "",
+                    "your_results": [],
                     "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": [68, 64, 62.3, 64.75, 63, 62, 60, 62, 63, 64, 65, 63]
+                    "your_average": []
                 },
                 {
                     "course_id": "FBN1502",
+                    "metric": "CA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "FA",
                     "your_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
                     "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
                     "your_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
@@ -327,29 +445,73 @@ Student Dashboard
             // can simulate remote data store
             // bind some events so that we
             // can simulate remote data store
-            $("#course-filter").on("change", function () {
+            var selected_course;
+            var selected_metric;
+            
+            // event for change on metrics
+            $("#metric-type-filter").on("change", function () {
                 var self = $(this);
+                selected_metric = self.val();
+                updateMetricItems(selected_metric);
+
+                console.log("mtf: course_id:" + selected_course + " metric:" + selected_metric);
                 // lodash methods for rendering graph
-                var courses = _.filter(results, _.iteratee({'course_id': self.val()}));
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric}));
+                console.log(courses);
                 renderGraph(_.head(courses));
 
                 // lodash methods for rendering progression
-                var prog = _.filter(progression, _.iteratee({'course_id': self.val()}));
+                var prog = _.filter(progression, _.iteratee({'course_id': selected_course}));
                 renderProgression(_.head(prog));
+            });
+            
+            $("#course-filter").on("change", function () {
+                var self = $(this);
+                selected_course = $(this).val();
+                // trigger the metric type filter change event
+                $("#metric-type-filter").trigger("change");
             });
             // and lets just select the first record on page load
             $("#course-filter").trigger("change");
 
+            // event for change on metric items
+            $("#metric-item-filter").on("change", function () {
+                var self = $(this);
+                // lodash methods for rendering graph
+                console.log("if: course_id:" + selected_course + " metric:" + selected_metric + " metric_item_id:" + self.val());
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric, 'metric_item_id': self.val()}));
+                renderGraph(_.head(courses));
+            });
+
+            function updateMetricItems(metric_type)
+            {
+                var select = $("#metric-item-filter");
+                select.empty();
+                var items = _.filter(metric_items, _.iteratee({'metric': metric_type}));
+                $.each(items, function (idx, obj) {
+                    var option = new Option(obj.description, obj.metric_item_id);
+                    select.append($(option));
+                });
+            }
+
             function renderGraph(data) {
+                console.log("rg:" + data.your_results.count + ":" + data.your_average.count + ":" + data.class_average.count);
                 // MH: this is a workaround to trash the canvas
                 // .destroy() does not work :(
                 $('#student-results').remove();
                 $('#student-results-container').append('<canvas id="student-results"><canvas>');
                 
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Result'];
+                if (data.your_results.length > 1 || data.your_average.length > 1 || data.class_average.length > 1)
+                {
+                    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                }
+
                 var areaChartCanvas = $('#student-results').get(0).getContext('2d');
 
                 var areaChartData = {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: labels,
                     datasets: [
                         {
                             label: 'Your Results',
@@ -445,7 +607,7 @@ Student Dashboard
 
                 // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
                 var areaChart = new Chart(areaChartCanvas, {
-                    type: "line",
+                    type: "bar",
                     data: areaChartData,
                     options: areaChartOptions
                 });
