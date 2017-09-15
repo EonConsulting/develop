@@ -25,11 +25,15 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
     Route::match(['get', 'post'],'/categories', 'ContentBuilderCategories@index')->name('eon.contentbuilder.categories');
 
-    Route::post('/categories/update', 'ContentBuilderCategories@update')->name('eon.contentbuilder.categories.update');
+    //-----------------------------------------------------------------------------------------------------------------------
+
+    /*Route::post('/categories/update', 'ContentBuilderCategories@update')->name('eon.contentbuilder.categories.update');
 
     Route::get('/categories/{$category_id}', 'ContentBuilderCategories@json')->name('eon.contentbuilder.categories.get');
 
-    Route::match(['get', 'post'], '/categories/delete/{$category_id}', 'ContentBuilderCategories@delete')->name('eon.contentbuilder.categories.delete');
+    Route::get('/categories/delete/{$category_id}', 'ContentBuilderCategories@delete')->name('eon.contentbuilder.categories.delete');*/
+
+    Route::resource('/categories', 'ContentBuilderCategories');
 
 
 });

@@ -11,9 +11,9 @@ namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 //use EONConsulting\Storyline2\Models\Course;
-use App\Models\Course;
-use App\Models\Storyline;
-use App\Models\StorylineItem;
+use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 
 class Storyline2ViewsJSON extends BaseController {
@@ -23,12 +23,33 @@ class Storyline2ViewsJSON extends BaseController {
      * @param Course $course
      * @return type
      */
-    public function render(Course $course) {
+    public function render() {
+
+/*
         $var = $course::find(20);
         $storyline = $var->latest_storyline();
-        $items = $storyline->items;
+        $items = $var['items'];
+*/
+
+        $storyline = Storyline::find(47);
+        
+        $items = $storyline['items'];
 
         return $this->items_to_tree($items);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $storyline
+     * @return void
+     */
+    public function show_items($storyline){
+        
+        $result = Storyline::find($storyline);
+
+        return $this->items_to_tree($result->items);
+
     }
 
     /**
@@ -76,31 +97,51 @@ class Storyline2ViewsJSON extends BaseController {
      * @param Request $request
      * @return type
      */
+
     public function rename(Request $request) {
-        if ($request->data['text'] === 'New node') {
-            $ItemId = (int) $request->data['parent'];
-            $text = $request->data['original']['text'];
-            $parentId = (int) $request->data['parents'][1];
-            //dd($text);
-            $Item = StorylineItem::where('id', '=', $ItemId)->first();
-            $newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $ItemId, 'root_parent' => $parentId]);
-            if ($Item->moveToLeftOf($newItem)) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
+
+        $data = $request->json()->all();
+        
+        $ItemId = (int) $data['id'];
+        $text = $data['text'];
+
+        $Item = StorylineItem::find($ItemId);
+        $Item->name = $text;
+
+        if ($Item->save()) {
+            $msg = 'success2';
         } else {
-            $ItemId = (int) $request->data['id'];
-            $text = $request->data['text'];
-            $Item = StorylineItem::where('id', '=', $ItemId)->first();
-            $Item->name = $text;
-            if ($Item->save()) {
-                $msg = 'success2';
-            } else {
-                $msg = 'failed';
-            }
+            $msg = 'failed';
         }
+        
         return response()->json(['msg' => $msg]);
+    }
+
+
+    public function create(Request $request){
+
+        $data = $request->json()->all();
+
+        $parent_id = (int) $data['parent'];
+        $text = $data['original']['text'];
+
+        $root_i = count($data['parents']) - 1;
+
+        $root_parent = (int) $data['parents'][$root_i];
+        //dd($text);
+
+        $Item = StorylineItem::where('id', '=', $parent_id)->first();
+
+        $newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $parent_id, 'root_parent' => $root_parent]);
+
+        if ($Item->moveToLeftOf($newItem)) {
+            $msg = 'success';
+        } else {
+            $msg = 'failed';
+        }
+
+        return response()->json(['msg' => $msg,'id' => $newItem->id]);
+
     }
 
     /**
@@ -109,16 +150,20 @@ class Storyline2ViewsJSON extends BaseController {
      * @return type
      */
     public function move(Request $request) {
-            $parentId = (int) $request->data['parent'];
-            $ItemId = (int) $request->data['id'];
-            $Item = StorylineItem::where('id', '=', $ItemId)->first();
-            $Item->parent_id = $parentId;
-            //$newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $ItemId, 'root_parent' => $parentId]);
-            if ($Item->save()) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
+
+        $data = $request->json()->all();
+
+        $parentId = (int) $data['parent'];
+        $ItemId = (int) $data['id'];
+
+        $Item = StorylineItem::where('id', '=', $ItemId)->first();
+        $Item->parent_id = $parentId;
+        
+        if ($Item->save()) {
+            $msg = 'success';
+        } else {
+            $msg = 'failed';
+        }
         return response()->json(['msg' => $msg]);
     }
 
@@ -127,7 +172,11 @@ class Storyline2ViewsJSON extends BaseController {
      * @param Request $request
      */
     public function delete(Request $request) {
-        $ItemId = (int) $request->id;
+
+        $data = $request->json()->all();
+
+        $ItemId = (int) $data[0];
+
         $Item = StorylineItem::where('id', '=', $ItemId)->first();
         if ($Item->delete()) {
             $msg = 'success2';

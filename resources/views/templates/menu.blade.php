@@ -86,6 +86,12 @@
                             </a>
                         </li>
 
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('courses.show') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                My Modules
+                            </a>
+                        </li>
 
                         <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('courses.create') }}">
@@ -93,7 +99,6 @@
                                 Create
                             </a>
                         </li>
-
                     </ul>
                 </div>
             <?php endif; ?>
@@ -117,8 +122,8 @@
                             <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a></li>
                         <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder.create') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.contentbuilder.create') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a></li>
-                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder.categories') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.contentbuilder.categories') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
  
                     </ul>
                 </div>

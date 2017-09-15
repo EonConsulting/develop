@@ -19,15 +19,17 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->string('name', 191);
-            $table->string('slug', 191);
+        if (!Schema::hasTable($this->set_schema_table)) {
+            Schema::create($this->set_schema_table, function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('id');
+                $table->string('name', 191);
+                $table->string('slug', 191);
 
-            $table->unique(["name"], 'roles_name_unique');
-            $table->timestamps();
-        });
+                $table->unique(["name"], 'roles_name_unique');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

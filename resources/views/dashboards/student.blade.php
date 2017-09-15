@@ -21,10 +21,10 @@ Student Dashboard
         font-weight: 700;
     }
 
-     .btn-cal-key {
-         width: 100%;
-         font-weight: 700;
-     }
+    .btn-cal-key {
+        width: 100%;
+        font-weight: 700;
+    }
 
 </style>
 @endsection
@@ -41,58 +41,6 @@ Student Dashboard
             </div>
         </div>
     </div>
-
-    <!--    <div class="row">
-
-            <div class="col-md-3">
-                <div class="nofitication-card shadow">
-                    <div class="notification-card-icon bg-col-1">
-                        <i class="fa fa-envelope-o"></i>
-                    </div>
-                    <div class="notification-card-text">
-                        <h1>Emails</h1>
-                        <p>123</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="nofitication-card shadow">
-                    <div class="notification-card-icon bg-col-2">
-                        <i class="fa fa-flag-o"></i>
-                    </div>
-                    <div class="notification-card-text">
-                        <h1>Bookmarks</h1>
-                        <p>410</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="nofitication-card shadow">
-                    <div class="notification-card-icon bg-col-3">
-                        <i class="fa fa-files-o"></i>
-                    </div>
-                    <div class="notification-card-text">
-                        <h1>Uploads</h1>
-                        <p>23</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="nofitication-card shadow">
-                    <div class="notification-card-icon bg-col-4">
-                        <i class="fa fa-envelope-o"></i>
-                    </div>
-                    <div class="notification-card-text">
-                        <h1>Messages</h1>
-                        <p>200</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>-->
 
     <div class="row">
 
@@ -116,19 +64,15 @@ Student Dashboard
                             <br>
                             <label for="metric-type-filter">Metric</label>
                             <select class="form-control" id="metric-type-filter">
-                                <option>Current Average</option>
-                                <option>Formal Assessment</option>
-                                <option>Assignment</option>
-                                <option>Exam</option>
-                                <option>Self Assessment</option>
+                                <option value="CA">Current Average</option>
+                                <option value="FA">Formal Assessment</option>
+                                <option value="ASS">Assignment</option>
+                                <option value="EX">Exam</option>
+                                <option value="SA">Self Assessment</option>
                             </select>
                             <br>
-                            <label for="metric-item-filter">Assignment/Assessment</label>
+                            <label for="metric-item-filter">Item</label>
                             <select class="form-control" id="metric-item-filter">
-                                <option>Assignment 1</option>
-                                <option>Assignment 2</option>
-                                <option>Assignment 3</option>
-                                <option>Assignment 4</option>
                             </select>
                         </div>
                     </div> <!-- end col-md-4 -->
@@ -170,8 +114,7 @@ Student Dashboard
 
                     <div class="col-md-8">
                         <h3>Results</h3>
-                        <div class="container-fluid" style="height: 300px;">
-
+                        <div class="container-fluid" id="student-results-container" style="height: 300px;">
                             <canvas id="student-results"></canvas>
                         </div>
                     </div><!-- end col-md-8 -->
@@ -183,8 +126,6 @@ Student Dashboard
         </div>
 
     </div>
-
-
 
     <div class="row">
         <div class="col-md-12 sp-top-15 sp-bot-15 basic-clearfix">
@@ -203,40 +144,42 @@ Student Dashboard
 
                         <div class="col-md-2">
                             <h4>Timeline Key</h3>
-                            <div>
-                                <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
-                                <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
-                                <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
-                                <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
-                                <p><div class="btn btn-primary btn-cal-key">Other</div></p>
-                            </div>
+                                <div>
+                                    <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
+                                    <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
+                                    <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
+                                    <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
+                                    <p><div class="btn btn-primary btn-cal-key">Other</div></p>
+                                </div>
                         </div>
                     </div>
                 </div> <!--end row>
 
 
             </div> <!-- end card -->
-        </div> <!-- end col-md-12 -->
-    </div> <!-- end row -->
+            </div> <!-- end col-md-12 -->
+        </div> <!-- end row -->
 
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-</div>
+    </div>
 
-@endsection
+    @endsection
 
-@section('custom-scripts')
-<!-- Sparkline -->
-<script src="{{url('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-<!-- Student timeline -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    @section('custom-scripts')
+    <!-- lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <!-- Sparkline -->
+    <script src="{{url('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <!-- Student timeline -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 //--------------------------
 //-STUDENT TIMELINE CODE--------
 //--------------------------
@@ -322,203 +265,370 @@ $(document).ready(function () {
         ]
     });
 });
-</script>
+    </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        //--------------------------
-        //-STUDENT DATASET--------
-        //--------------------------
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //--------------------------
+            //-STUDENT DATASET--------
+            //--------------------------
 
-        var courses = [
-            {
-                "course_id": "FBN1501",
-                "description": "FBN1501 - Business Numerical Skills A"
-            },
-            {
-                "course_id": "FBN1502",
-                "description": "FBN1502 - Business Numerical Skills B"
-            }
-        ];
-
-        var progression = [
-            {
-                "course_id": "FBN1501",
-                "progress": {
-                    "videos": "35",
-                    "ebooks": "45",
-                    "articles": "50",
-                    "study_guide": "72"
-                }
-            },
-            {
-                "course_id": "FBN1502",
-                "progress": {
-                    "videos": "45",
-                    "ebooks": "75",
-                    "articles": "60",
-                    "study_guide": "52"
-                }
-            }
-        ];
-
-        var results = [
-            {
-                "course_id": "FBN1501",
-                "your_results": [68, 59, 60, 72, 56, 55, 61, 49, 66, 72, 76, 52],
-                "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                "your_average": [68, 64, 62.3, 64.75, 63, 62, 60, 62, 63, 64, 65, 63]
-            },
-            {
-                "course_id": "FBN1502",
-                "your_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                "your_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
-            }
-        ];
-        // bind some events so that we
-        // can simulate remote data store
-        $("#course-filter").on("change", function () {
-            var self = $(this);
-            $.each(results, function(index, obj){
-                if (obj.course_id === self.val())
+            var courses = [
                 {
-                    renderGraph(obj);
+                    "course_id": "ALL",
+                    "description": "Current Average"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "description": "FBN1501 - Business Numerical Skills A"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "description": "FBN1502 - Business Numerical Skills B"
                 }
-            });
-            $.each(progression, function(index, obj){
-               if (obj.course_id === self.val())
-               {
-                   renderProgression(obj);
-               }
-            });
-        });
+            ];
 
-        // and lets just select the first record on page load
-        $("#course-filter").trigger("change"); // val("val2").change();
+            var metric_items = [
+                {
+                    "metric_item_id": "FA-ALL",
+                    "metric": "FA",
+                    "description": "Formal Assessment Average"
+                },
+                {
+                    "metric_item_id": "FA1",
+                    "metric": "FA",
+                    "description": "Formal Assessment 1"
+                },
+                {
+                    "metric_item_id": "FA2",
+                    "metric": "FA",
+                    "description": "Formal Assessment 2"
+                },
+                {
+                    "metric_item_id": "FA3",
+                    "metric": "FA",
+                    "description": "Formal Assessment 3"
+                },
+                {
+                    "metric_item_id": "ASS-ALL",
+                    "metric": "ASS",
+                    "description": "Assignment Average"
+                },
+                {
+                    "metric_item_id": "ASS1",
+                    "metric": "ASS",
+                    "description": "Assignment 1"
+                },
+                {
+                    "metric_item_id": "ASS2",
+                    "metric": "ASS",
+                    "description": "Assignment 2"
+                },
+                {
+                    "metric_item_id": "ASS3",
+                    "metric": "ASS",
+                    "description": "Assignment 3"
+                },
+                {
+                    "metric_item_id": "EX-ALL",
+                    "metric": "EX",
+                    "description": "Exam Average"
+                },
+                {
+                    "metric_item_id": "EX1",
+                    "metric": "EX",
+                    "description": "Exam 1"
+                },
+                {
+                    "metric_item_id": "EX2",
+                    "metric": "EX",
+                    "description": "Exam 2"
+                },
+                {
+                    "metric_item_id": "EX3",
+                    "metric": "EX",
+                    "description": "Exam 3"
+                },
+                {
+                    "metric_item_id": "SA-ALL",
+                    "metric": "SA",
+                    "description": "Self Assessment Average"
+                },
+                {
+                    "metric_item_id": "SA1",
+                    "metric": "SA",
+                    "description": "Self Assessment 1"
+                },
+                {
+                    "metric_item_id": "SA2",
+                    "metric": "SA",
+                    "description": "Self Assessment 2"
+                },
+                {
+                    "metric_item_id": "SA3",
+                    "metric": "SA",
+                    "description": "Self Assessment 3"
+                }
+            ];
 
-        function renderGraph(data) {
-            var areaChartCanvas = $('#student-results').get(0).getContext('2d');
-
-            var areaChartData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [
-                    {
-                        label: 'Your Results',
-                        backgroundColor: 'rgba(0, 166, 90, 0)',
-                        borderColor: 'rgba(0, 166, 90, 1)',
-                        borderWidth: 2,
-                        fillColor: 'rgba(0, 166, 90, 0.9)',
-                        strokeColor: 'rgba(0, 166, 90, 0.8)',
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(0, 166, 90,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: data.your_results
-                    },
-                    {
-                        label: 'Your Average',
-                        backgroundColor: 'rgba(130, 201, 169, 0)',
-                        borderColor: 'rgba(130, 201, 169, 1)',
-                        borderWidth: 1,
-                        fillColor: 'rgba(221, 75, 57,0.9)',
-                        strokeColor: 'rgba(221, 75, 57,0.8)',
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(221, 75, 57,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: data.your_average
-                    },
-                    {
-                        label: 'Class Average',
-                        backgroundColor: 'rgba(220, 220, 220, 0)',
-                        borderColor: 'rgba(220, 220, 220, 1)',
-                        borderWidth: 1,
-                        fillColor: 'rgba(0, 192, 239,1)',
-                        strokeColor: 'rgba(0, 192, 239,1)',
-                        pointColor: 'rgba(0, 192, 239,1)',
-                        pointStrokeColor: 'rgba(0, 192, 239,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: data.class_average
+            var progression = [
+                {
+                    "course_id": "FBN1501",
+                    "progress": {
+                        "videos": "35",
+                        "ebooks": "45",
+                        "articles": "50",
+                        "study_guide": "72"
                     }
-                ]
-            };
-
-
-            var areaChartOptions = {
-                //Boolean - If we should show the scale at all
-                showScale: true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: false,
-                //String - Colour of the grid lines
-                scaleGridLineColor: 'rgba(0,0,0,.05)',
-                //Number - Width of the grid lines
-                scaleGridLineWidth: 1,
-                //Boolean - Whether to show horizontal lines (except X axis)
-                scaleShowHorizontalLines: true,
-                //Boolean - Whether to show vertical lines (except Y axis)
-                scaleShowVerticalLines: true,
-                //Boolean - Whether the line is curved between points
-                bezierCurve: true,
-                //Number - Tension of the bezier curve between points
-                bezierCurveTension: 0.3,
-                //Boolean - Whether to show a dot for each point
-                pointDot: true,
-                //Number - Radius of each point dot in pixels
-                pointDotRadius: 1,
-                //Number - Pixel width of point dot stroke
-                pointDotStrokeWidth: 1,
-                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-                pointHitDetectionRadius: 20,
-                //Boolean - Whether to show a stroke for datasets
-                datasetStroke: true,
-                //Number - Pixel width of dataset stroke
-                datasetStrokeWidth: 2,
-                //Boolean - Whether to fill the dataset with a color
-                datasetFill: true,
-                //String - A legend template
-                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-                //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                maintainAspectRatio: false,
-                //Boolean - whether to make the chart responsive to window resizing
-                responsive: true,
-
-                scales: {
-                    yAxes: [{
-                            display: true,
-                            ticks: {
-                                beginAtZero: true,
-                                max: 100  // minimum value will be 0.
-                            }
-                        }]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "progress": {
+                        "videos": "45",
+                        "ebooks": "75",
+                        "articles": "60",
+                        "study_guide": "52"
+                    }
                 }
-            };
+            ];
 
-            // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
-            var areaChart = new Chart(areaChartCanvas, {
-                type: "line",
-                data: areaChartData,
-                options: areaChartOptions
+            var results = [
+                {
+                    "course_id": "FBN1501",
+                    "metric": "CA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "CA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "FA",
+                    "your_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                }
+            ];
+            // bind some events so that we
+            // can simulate remote data store
+            // bind some events so that we
+            // can simulate remote data store
+            var selected_course;
+            var selected_metric;
+            
+            // event for change on metrics
+            $("#metric-type-filter").on("change", function () {
+                var self = $(this);
+                selected_metric = self.val();
+                updateMetricItems(selected_metric);
+
+                console.log("mtf: course_id:" + selected_course + " metric:" + selected_metric);
+                // lodash methods for rendering graph
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric}));
+                console.log(courses);
+                renderGraph(_.head(courses));
+
+                // lodash methods for rendering progression
+                var prog = _.filter(progression, _.iteratee({'course_id': selected_course}));
+                renderProgression(_.head(prog));
             });
-        }
+            
+            $("#course-filter").on("change", function () {
+                var self = $(this);
+                selected_course = $(this).val();
+                // trigger the metric type filter change event
+                $("#metric-type-filter").trigger("change");
+            });
+            // and lets just select the first record on page load
+            $("#course-filter").trigger("change");
 
-        function renderProgression(data)
-        {
-            // set progress bar width and values
-            $("#progress_videos").attr('aria-valuenow', data.progress.videos).css('width', data.progress.videos + '%');
-            $("#progress_videos").html(data.progress.videos + '%');
-            
-            $("#progress_ebooks").attr('aria-valuenow', data.progress.ebooks).css('width', data.progress.ebooks + '%');
-            $("#progress_ebooks").html(data.progress.ebooks + '%');
-            
-            $("#progress_articles").attr('aria-valuenow', data.progress.articles).css('width', data.progress.articles + '%');
-            $("#progress_articles").html(data.progress.articles + '%');
-            
-            $("#progress_study_guide").attr('aria-valuenow', data.progress.study_guide).css('width', data.progress.study_guide + '%');
-            $("#progress_study_guide").html(data.progress.study_guide + '%');
-        }
-    });
-</script>
+            // event for change on metric items
+            $("#metric-item-filter").on("change", function () {
+                var self = $(this);
+                // lodash methods for rendering graph
+                console.log("if: course_id:" + selected_course + " metric:" + selected_metric + " metric_item_id:" + self.val());
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric, 'metric_item_id': self.val()}));
+                renderGraph(_.head(courses));
+            });
 
-@endsection
+            function updateMetricItems(metric_type)
+            {
+                var select = $("#metric-item-filter");
+                select.empty();
+                var items = _.filter(metric_items, _.iteratee({'metric': metric_type}));
+                $.each(items, function (idx, obj) {
+                    var option = new Option(obj.description, obj.metric_item_id);
+                    select.append($(option));
+                });
+            }
+
+            function renderGraph(data) {
+                console.log("rg:" + data.your_results.count + ":" + data.your_average.count + ":" + data.class_average.count);
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#student-results').remove();
+                $('#student-results-container').append('<canvas id="student-results"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Result'];
+                if (data.your_results.length > 1 || data.your_average.length > 1 || data.class_average.length > 1)
+                {
+                    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                }
+
+                var areaChartCanvas = $('#student-results').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Your Results',
+                            backgroundColor: 'rgba(0, 166, 90, 0)',
+                            borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 2,
+                            fillColor: 'rgba(0, 166, 90, 0.9)',
+                            strokeColor: 'rgba(0, 166, 90, 0.8)',
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(0, 166, 90,1)',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: data.your_results
+                        },
+                        {
+                            label: 'Your Average',
+                            backgroundColor: 'rgba(130, 201, 169, 0)',
+                            borderColor: 'rgba(130, 201, 169, 1)',
+                            borderWidth: 1,
+                            fillColor: 'rgba(221, 75, 57,0.9)',
+                            strokeColor: 'rgba(221, 75, 57,0.8)',
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(221, 75, 57,1)',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: data.your_average
+                        },
+                        {
+                            label: 'Class Average',
+                            backgroundColor: 'rgba(220, 220, 220, 0)',
+                            borderColor: 'rgba(220, 220, 220, 1)',
+                            borderWidth: 1,
+                            fillColor: 'rgba(0, 192, 239,1)',
+                            strokeColor: 'rgba(0, 192, 239,1)',
+                            pointColor: 'rgba(0, 192, 239,1)',
+                            pointStrokeColor: 'rgba(0, 192, 239,1)',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: data.class_average
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+
+            function renderProgression(data)
+            {
+                // set progress bar width and values
+                $("#progress_videos").attr('aria-valuenow', data.progress.videos).css('width', data.progress.videos + '%');
+                $("#progress_videos").html(data.progress.videos + '%');
+
+                $("#progress_ebooks").attr('aria-valuenow', data.progress.ebooks).css('width', data.progress.ebooks + '%');
+                $("#progress_ebooks").html(data.progress.ebooks + '%');
+
+                $("#progress_articles").attr('aria-valuenow', data.progress.articles).css('width', data.progress.articles + '%');
+                $("#progress_articles").html(data.progress.articles + '%');
+
+                $("#progress_study_guide").attr('aria-valuenow', data.progress.study_guide).css('width', data.progress.study_guide + '%');
+                $("#progress_study_guide").html(data.progress.study_guide + '%');
+            }
+        });
+    </script>
+
+    @endsection

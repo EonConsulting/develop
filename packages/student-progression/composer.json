@@ -1,22 +1,17 @@
 {
-  "name": "student/progression",
-  "description": "Laravel 5 package for writing and reading files",
-  "keywords": ["Laravel", "pregression"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Reginald Bossman",
-      "email": "reggiestain@gmail.com"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "EONConsulting\\Student\\Progression\\": "src/"
-    }
-
-  },
-  "minimum-stability":"dev",
-  "require": {
-    "illuminate/support":"~5"
-  }
+    "name": "eonconsulting/student/progression",
+    "description": "Laravel 5 package for writing and reading files",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Reginald Bossman",
+            "email": "reggiestain@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EONConsulting\\Student\\Progression\\": "src/"
+        }
+    },
+    "require": {}
 }

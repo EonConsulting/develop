@@ -15,33 +15,17 @@ class ContentBuilderCategories extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function index(Request $request) {
+    public function index() {
 
-        if ($request->all())
-        {
-            $category = new Category([
-                'name' => $request->get('name'),
-                'tags' => $request->get('tags')
-            ]);
-    
-            $category->save();
-    
-            return redirect()->route('eon.contentbuilder.categories');
+        $breadcrumbs = [
+            'title' => 'Content Categories'
+        ];
 
-        } else {
-            
-            $breadcrumbs = [
-                'title' => 'Content Categories'
-            ];
+        $categories = Category::all();
 
-            $categories = Category::all();
-
-            return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
-
-        }
+        return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
         
     }
-
 
     /**
      * Undocumented function
@@ -49,22 +33,60 @@ class ContentBuilderCategories extends Controller {
      * @param [type] $category_id
      * @return void
      */
-    public function json($category_id){
+    public function show($category){
 
-        if($category_id === "all"){
-            $result = Category::all();
+        if($category === "all"){
+            $result = Category::all();  
         } else {
-            $result = Category::find($category_id);   
+            $result = Category::find($category);
         }
 
         return json_encode($result);
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request){
 
-    /*public function update(Request $request){
-        
-    }*/
+        $data = $request->json()->all();
+
+        $category = new Category([
+            'name' => $data['name'],
+            'tags' => $data['tags']
+        ]);
+
+        $category->save();
+
+        return 200;
+
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $category
+     * @return void
+     */
+    public function update(Request $request, $category){
+
+        $category = Category::find($category);
+
+        $data = $request->json()->all();
+
+        $category->name = $data['name'];
+        $category->tags = $data['tags'];
+
+        $category->save();
+
+        return 200;
+
+    }
 
     /**
      * Undocumented function
@@ -72,11 +94,11 @@ class ContentBuilderCategories extends Controller {
      * @param [type] $catgory_id
      * @return void
      */
-    public function delete($catgory_id){
+    public function destroy($category_id){
 
-        Category::delete($category_id);
+        Category::destroy($category_id);
 
-        return redirect()->route('eon.contentbuilder.categories');
+        return 200;
 
     }
 

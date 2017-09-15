@@ -74,8 +74,10 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
 Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
     Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function() {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
+        Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
         Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
         Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
+        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']);
         Route::get('/{course}', ['as' => 'courses.single', 'uses' => 'CourseController@show']);
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);
@@ -83,7 +85,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
-        Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+        //Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
 
 
         // Feed POst Route from Web Pack

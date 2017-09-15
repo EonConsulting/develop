@@ -165,6 +165,12 @@ class ContentBuilderCore extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $content_id
+     * @return void
+     */
     public function delete($content_id){
         
         //TODO: Finish this
@@ -174,7 +180,13 @@ class ContentBuilderCore extends Controller {
 
     }
 
-
+    /**
+     * Undocumented function
+     *
+     * @param [type] $category_id
+     * @param [type] $keywords
+     * @return void
+     */
     public function search($category_id,$keywords){
         
     
