@@ -32,7 +32,8 @@ class CourseStorylineController extends DBCourseStorylineBase
      */
     public function index(Course $course)
     {
-            $breadcrumbs = [
+        // MH: replaced by storyline2 package
+            /* $breadcrumbs = [
             'title' => 'Modules',
             'href' => route('courses'),
             'child' => [
@@ -45,6 +46,8 @@ class CourseStorylineController extends DBCourseStorylineBase
         ];
 
         return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
+             * 
+             */
     }
     /**
      * @param Request $request
