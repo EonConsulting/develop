@@ -40,12 +40,16 @@ class Storyline2ViewsBlade extends BaseController {
      *
      * @return void
      */
-    public function edit() {
+    public function edit($course) {
         $breadcrumbs = [
           'title' => 'Edit [Course Name] Storyline' //pass $course as param and load name here
         ];
 
-        return view('eon.storyline2::lecturer.edit', ['breadcrumbs' => $breadcrumbs]);
+        $course = Course::find($course);
+
+        $storyline_id = $course->latest_storyline()->id;
+
+        return view('eon.storyline2::lecturer.edit', ['storyline_id' => $storyline_id, 'breadcrumbs' => $breadcrumbs]);
     }
 
 }

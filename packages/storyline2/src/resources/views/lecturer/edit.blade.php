@@ -28,7 +28,6 @@ Storyline Student Single
 
 @section('content')
 <div class="container-fluid">
-
     <div class="row">
 
         <div class="col-md-3">
@@ -55,6 +54,7 @@ Storyline Student Single
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script>
 var base_url = "{{{ url('') }}}";
+var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 </script>
 <script src="{{ url('vendor/storyline2/editable-tree.js')}}"></script>
 
