@@ -10,8 +10,8 @@ namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use EONConsulting\Storyline2\Models\Course;
-use App\Models\Storyline;
-use App\Models\StorylineItem;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 
 
