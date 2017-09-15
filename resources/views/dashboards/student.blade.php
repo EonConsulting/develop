@@ -396,6 +396,20 @@ $(document).ready(function () {
                 {
                     "course_id": "FBN1501",
                     "metric": "CA",
+                    "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
+                    "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "CA",
+                    "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
+                    "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
                     "metric_item_id": "",
                     "your_results": [],
                     "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
@@ -403,7 +417,7 @@ $(document).ready(function () {
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "CA",
+                    "metric": "FA",
                     "metric_item_id": "",
                     "your_results": [],
                     "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
@@ -434,12 +448,78 @@ $(document).ready(function () {
                     "your_average": []
                 },
                 {
-                    "course_id": "FBN1502",
-                    "metric": "FA",
-                    "your_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
-                }
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                
             ];
             // bind some events so that we
             // can simulate remote data store
