@@ -309,7 +309,7 @@ Lecture
     }
 
  $(document).ready(function () {   
-        $('a').attr('href','#');       
+        //$('a').attr('href','');       
         $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
             e.preventDefault();           
