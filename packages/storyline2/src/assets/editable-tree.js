@@ -30,8 +30,8 @@
  
      //Select Node Action
      $(tree_id).on("changed.jstree", function (e, data) {
-         getContent(data.node);
-
+        console.log("Selected Node");
+        getContent(data.node); 
      });
  
  })
@@ -108,6 +108,7 @@
          $("#content-title").val(data['title']);
          $("#content-description").val(data['description']);
          $("#content-tags").val(data['tags']);
+
      }
  
  }

@@ -14,6 +14,7 @@ use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Models\Category;
 
 
 class Storyline2Core extends BaseController {
@@ -70,15 +71,15 @@ class Storyline2Core extends BaseController {
         
         $content = new Content([
             'title' => $data['title'],
-            'body' => $request->get('data'),
-            'tags' => $request->get('tags'),
+            'body' => $data['body'],
+            'tags' => $data['tags'],
             'creator_id' => auth()->user()->id,
-            'description' => $request->get('description')
+            'description' => $data['description']
         ]);
 
         $content->save();
         
-        $categories = $request->get('categories');
+        $categories = $data['categories'];
         
         foreach($categories as $k => $category_id) {
             $temp = Category::find($category_id);
@@ -87,12 +88,11 @@ class Storyline2Core extends BaseController {
 
         $item = StorylineItem::find($item);
 
-        $item->content()->save($content);
+        $item->content_id = $content->id;
 
         $item->save();
 
         return 200;
-
 
     }
 

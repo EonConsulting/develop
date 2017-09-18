@@ -100,14 +100,14 @@ class ContentBuilderCore extends Controller {
      *
      * @return void
      */
-    public function create() {
+    public function new() {
         $breadcrumbs = [
             'title' => 'Content Builder',
         ];
 
         $categories = Category::all();
 
-        return view('eon.content-builder::create', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::new', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
     }
 
 

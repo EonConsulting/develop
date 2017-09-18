@@ -30,7 +30,14 @@
  
      //Select Node Action
      $(tree_id).on("changed.jstree", function (e, data) {
-         getContent(data.node);
+
+        $("#content-title").val("");
+        $("#content-description").val("");
+        $("#content-tags").val("");
+        var body = editor.setData("");
+        
+        var ref = data.node;
+        getContent(ref);
 
      });
  
@@ -103,11 +110,18 @@
  
  
  function populateContentForm(data){
- 
-     if(data['found'] == true){
-         $("#content-title").val(data['title']);
-         $("#content-description").val(data['description']);
-         $("#content-tags").val(data['tags']);
+
+    var course_data = jQuery.parseJSON(data);
+
+    console.log(course_data);
+    
+
+    if(course_data.found == true){
+         console.log("Found!");
+         $("#content-title").val(course_data.content.title);
+         $("#content-description").val(course_data.content.description);
+         $("#content-tags").val(course_data.content.tags);
+         var body = editor.setData(course_data.content.body);
      }
  
  }
@@ -115,7 +129,6 @@
  //Get Content
  function getContent(data) {
  
-    if (!data) return;
      var item_id = data['id'];
      actionUrl = base_url + "/storyline2/item-content/" + item_id;
     
