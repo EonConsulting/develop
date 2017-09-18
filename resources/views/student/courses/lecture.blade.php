@@ -286,7 +286,7 @@ Lecture
         var storyline = $('.prev').attr("storyline");
         var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '/student/progression',
+            url: '{{url('')}}/student/progression',
             type: "POST",
             asyn: false,
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -318,7 +318,7 @@ Lecture
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -348,7 +348,7 @@ Lecture
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -379,7 +379,7 @@ Lecture
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
