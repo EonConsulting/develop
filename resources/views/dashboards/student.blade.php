@@ -396,17 +396,127 @@ $(document).ready(function () {
                 {
                     "course_id": "FBN1501",
                     "metric": "CA",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": []
+                    "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
+                    "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08]
                 },
                 {
                     "course_id": "FBN1502",
                     "metric": "CA",
-                    "metric_item_id": "",
+                    "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
+                    "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "FA",
+                    "metric_item_id": "FA-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "FA",
+                    "metric_item_id": "FA-ALL",
                     "your_results": [],
                     "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "EX",
+                    "metric_item_id": "EX-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA-ALL",
+                    "your_results": [],
+                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
+                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "SA",
+                    "metric_item_id": "SA-ALL",
+                    "your_results": [],
+                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 55, 63, 45, 56, 80, 50, 65, 57, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "ASS",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [62, 75, 58, 65, 59, 85, 60, 55, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [76, 66, 63, 49, 56, 60, 70, 55, 62, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "EX",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [52, 58, 62, 85, 59, 65, 66, 75, 58, 55, 61, 70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [42, 66, 55, 59, 56, 60, 40, 45, 62, 75, 51, 80],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1502",
+                    "metric": "SA",
+                    "metric_item_id": "",
+                    "your_results": [],
+                    "class_average": [82, 63, 72, 65, 59, 65, 60, 81, 58, 55, 61, 70],
                     "your_average": []
                 },
                 {
@@ -434,11 +544,76 @@ $(document).ready(function () {
                     "your_average": []
                 },
                 {
-                    "course_id": "FBN1502",
-                    "metric": "FA",
-                    "your_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "ASS",
+                    "metric_item_id": "ASS3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "EX",
+                    "metric_item_id": "EX3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA1",
+                    "your_results": [62],
+                    "class_average": [70],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA2",
+                    "your_results": [72],
+                    "class_average": [83],
+                    "your_average": []
+                },
+                {
+                    "course_id": "FBN1501",
+                    "metric": "SA",
+                    "metric_item_id": "SA3",
+                    "your_results": [55],
+                    "class_average": [66],
+                    "your_average": []
                 }
             ];
             // bind some events so that we
@@ -515,41 +690,23 @@ $(document).ready(function () {
                     datasets: [
                         {
                             label: 'Your Results',
-                            backgroundColor: 'rgba(0, 166, 90, 0)',
-                            borderColor: 'rgba(0, 166, 90, 1)',
-                            borderWidth: 2,
-                            fillColor: 'rgba(0, 166, 90, 0.9)',
-                            strokeColor: 'rgba(0, 166, 90, 0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(0, 166, 90,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
                             data: data.your_results
                         },
                         {
                             label: 'Your Average',
-                            backgroundColor: 'rgba(130, 201, 169, 0)',
-                            borderColor: 'rgba(130, 201, 169, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(221, 75, 57,0.9)',
-                            strokeColor: 'rgba(221, 75, 57,0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(221, 75, 57,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
                             data: data.your_average
                         },
                         {
                             label: 'Class Average',
-                            backgroundColor: 'rgba(220, 220, 220, 0)',
-                            borderColor: 'rgba(220, 220, 220, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(0, 192, 239,1)',
-                            strokeColor: 'rgba(0, 192, 239,1)',
-                            pointColor: 'rgba(0, 192, 239,1)',
-                            pointStrokeColor: 'rgba(0, 192, 239,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
                             data: data.class_average
                         }
                     ]

@@ -213,7 +213,7 @@ Lecture
 @section('custom-scripts')
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
-{{--<script src="{{url('/js/mtree.js')}}"></script>--}}
+
 {{--<script>--}}
 {{--$(document).ready(function() {--}}
 {{--var mtree = $('ul.mtree');--}}
@@ -236,9 +236,10 @@ Lecture
                         }
                     });
                 })
-                jQuery("#navigation").on("click", "li.jstree-node a", function () {
+                /**jQuery("#navigation").on("click", "li.jstree-node a", function () {
                     document.location.href = this;
                 });
+                **/
                 //Add A Class to Open First Item in Tree
                 $('ul.course-nav li:first-child').addClass('jstree-open');
 </script>
@@ -285,7 +286,7 @@ Lecture
         var storyline = $('.prev').attr("storyline");
         var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '/student/progression',
+            url: '{{url('')}}/student/progression',
             type: "POST",
             asyn: false,
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -307,17 +308,20 @@ Lecture
         });
     }
 
-    $(document).ready(function () {
+ $(document).ready(function () {   
+        $('a').attr('href','#');    
     
-        $(".jstree-anchor").click(function (e) {
+        $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
             e.preventDefault();
+            
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
+            alert(id);
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -326,10 +330,10 @@ Lecture
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
-                        //alert(data.story);
+                        alert(data.story);
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     } else if(data.msg === 'error'){
-                        alert('Please complete current Learning Objective before moving to the Next one!');
+                        alert('Please complete current Learning Objective before moving to the Next one!');                        
                         window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                     }
                 },
@@ -348,7 +352,7 @@ Lecture
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -379,7 +383,7 @@ Lecture
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
