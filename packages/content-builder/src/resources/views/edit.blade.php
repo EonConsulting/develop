@@ -249,26 +249,19 @@
     </script>
 
     <script>
-        // resize the editor(s) while the instance is ready
-        
-
-        $(function(){
-
+       $(function(){           
             var editor = CKEDITOR.replace('ltieditorv2inst', {
                         extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                         allowedContent: true,
                         fullPage: false,
-                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                        
+                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',                       
                 }
             );
-
-            editor.on('instanceReady', function()
-            {
+            
+            editor.on('instanceReady', function(){
                 var writer = editor.dataProcessor.writer;
                 writer.indentationChars = '';
                 writer.lineBreakChars = '';
-
                 editor.dataProcessor.writer.setRules( 'p',
                 {
                     indent : false,
@@ -278,8 +271,7 @@
                     breakAfterClose : false
                 });
             });
-
-
+            
             editor.Height = '100%';
 
             {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}

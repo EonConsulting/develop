@@ -63,6 +63,7 @@ Storyline Student Single
         min-width: 250px !important;
         width: 250px;
         overflow-y: auto;
+        overflow-x: auto;
     }
 
     .page-container-editor {
@@ -190,7 +191,7 @@ Storyline Student Single
 
 
 @section('content')
-<div class="container-fluid">
+<div>
     <div class="page-container">
 
         <div class="page-container-tree">
@@ -333,11 +334,11 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
 <script>
     // resize the editor(s) while the instance is ready
-    
+    var editor = {};
 
     $(function(){
 
-        var editor = CKEDITOR.replace('ltieditorv2inst', {
+        editor = CKEDITOR.replace('ltieditorv2inst', {
                     extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                     allowedContent: true,
                     fullPage: false,
@@ -362,24 +363,12 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             });
         });
 
+        
 
         editor.Height = '100%';
 
         {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
 
-
-        $(document).on("click", "#btnsbmit", function(event){
-
-            var data = editor.getData();
-            
-            $('#data').val(data);
-
-            console.log(data);
-
-            $('#save').submit();
-
-            //console.log(data);
-        });
 
     });
 
@@ -409,37 +398,41 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 <script>
 
     $( document ).ready(function(){
-    
         $("#btnsbmit").on("click", function(){
             console.log("Save Clicked");
             save_content_to_item();
         });
-    
     });
 
     
     function save_content_to_item(){
+
+        var body = editor.getData();
+
         var cats = $("#categories input:checkbox:checked").map(function(){
             return $(this).val();
         }).get();
 
-        $()
+        var item_id = $("#item-id").val();
+        console.log(item_id);
 
         var data = {
             "title": $("#content-title").val(),
             "description": $("#content-description").val(),
+            "body": body,
             "categories": cats,
-            "tags": $("#content-tags").val(),
-            "item_id": $("#item-id").val()
+            "tags": $("#content-tags").val()
         };
 
-        actionUrl = base_url + "/storyline2/save-item-content/" + data["item-id"];
+        console.log(data);
+
+        actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
 
         $.ajax({
             method: "POST",
             url: actionUrl,
             contentType: 'json',
-            data: data,
+            data: JSON.stringify(data),
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
             },

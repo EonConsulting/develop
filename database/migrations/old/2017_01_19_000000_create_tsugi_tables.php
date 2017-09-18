@@ -69,7 +69,7 @@ class CreateTsugiTables extends Migration {
         Schema::create('lti_domain', function (Blueprint $table) {
             $table->integer('key_id')->unsigned()->unique();
             $table->integer('context_id')->unsigned()->nullable()->unique()->index();
-            $table->string('domain')->nullable()->unique();
+            $table->longText('domain')->nullable()->unique();
             $table->integer('port')->nullable();
             $table->text('consumer_key')->nullable();
             $table->text('secret')->nullable();
@@ -125,15 +125,13 @@ class CreateTsugiTables extends Migration {
             $table->timestamps();
         });
 
-        if (!Schema::hasTable('lti_nonce')) {
-            Schema::create('lti_nonce', function (Blueprint $table) {
-                $table->char('nonce')->index();
-                $table->integer('key_id')->unique()->index();
-                $table->integer('entity_version');
+        Schema::create('lti_nonce', function (Blueprint $table) {
+            $table->char('nonce')->index();
+            $table->integer('key_id')->unique()->index();
+            $table->integer('entity_version');
 
-                $table->timestamps();
-            });
-        }
+            $table->timestamps();
+        });
 
         Schema::create('lti_result', function (Blueprint $table) {
             $table->increments('result_id');
@@ -153,19 +151,17 @@ class CreateTsugiTables extends Migration {
             $table->timestamps();
         });
 
-        if (!Schema::hasTable('lti_service')) {
-            Schema::create('lti_service', function (Blueprint $table) {
-                $table->increments('service_id');
-                $table->char('service_sha256')->unique();
-                $table->text('service_key');
-                $table->integer('key_id')->unsigned()->unique();
-                $table->text('format')->nullable();
-                $table->text('json')->nullable();
-                $table->integer('entity_version');
+        Schema::create('lti_service', function (Blueprint $table) {
+            $table->increments('service_id');
+            $table->char('service_sha256')->unique();
+            $table->text('service_key');
+            $table->integer('key_id')->unsigned()->unique();
+            $table->text('format')->nullable();
+            $table->text('json')->nullable();
+            $table->integer('entity_version');
 
-                $table->timestamps();
-            });
-        }
+            $table->timestamps();
+        });
 
         Schema::create('lti_user', function (Blueprint $table) {
             $table->increments('user_id');
@@ -288,21 +284,21 @@ class CreateTsugiTables extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('blob_file');
-        Schema::dropIfExists('key_request');
-        Schema::dropIfExists('lms_plugins');
-        Schema::dropIfExists('lti_context');
-        Schema::dropIfExists('lti_domain');
-        Schema::dropIfExists('lti_key');
-        Schema::dropIfExists('lti_link');
-        Schema::dropIfExists('lti_membership');
-        Schema::dropIfExists('lti_nonce');
-        Schema::dropIfExists('lti_result');
-        Schema::dropIfExists('lti_service');
-        Schema::dropIfExists('lti_user');
-        Schema::dropIfExists('mail_bulk');
-        Schema::dropIfExists('mail_sent');
-        Schema::dropIfExists('profile');
+        Schema::drop('blob_file');
+        Schema::drop('key_request');
+        Schema::drop('lms_plugins');
+        Schema::drop('lti_context');
+        Schema::drop('lti_domain');
+        Schema::drop('lti_key');
+        Schema::drop('lti_link');
+        Schema::drop('lti_membership');
+        Schema::drop('lti_nonce');
+        Schema::drop('lti_result');
+        Schema::drop('lti_service');
+        Schema::drop('lti_user');
+        Schema::drop('mail_bulk');
+        Schema::drop('mail_sent');
+        Schema::drop('profile');
     }
 
 }

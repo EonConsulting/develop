@@ -15,7 +15,11 @@ class Content extends Model {
     }
 
     public function categories() {
-        return $this->belongsToMany('EONConsulting\ContentBuilder\Models\Category', 'content_categories')->withTimestamps();;
+        return $this->belongsToMany('EONConsulting\ContentBuilder\Models\Category', 'content_categories')->withTimestamps();
+    }
+
+    public function storyline_items() {
+        return $this->hasMany('EONConsulting\Storyline2\Models\StorylineItem', 'content_id')->withTimestamps();
     }
     
 }

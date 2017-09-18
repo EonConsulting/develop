@@ -44,7 +44,7 @@ class StorylineItem extends Node {
 
     public function content() {
         //return $this->hasMany(Storyline::class, 'course_id', 'id');
-        return $this->hasOne(Content::class, 'content_id', 'id');
+        return $this->belongsTo('EONConsulting\ContentBuilder\Models\Content')->withTimestamps();
     }
 
     protected $parentColumn = 'parent_id';
