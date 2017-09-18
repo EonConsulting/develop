@@ -294,7 +294,7 @@ Lecture
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
+                if (data.msg === 'true') {                  
                     //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
                     //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                 } else {
@@ -309,17 +309,14 @@ Lecture
     }
 
  $(document).ready(function () {   
-        $('a').attr('href','#');    
-    
+        $('a').attr('href','#');       
         $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
-            e.preventDefault();
-            
+            e.preventDefault();           
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
-            alert(id);
             $.ajax({
                 url: '/student/progression',
                 type: "POST",
@@ -329,12 +326,11 @@ Lecture
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {     
-                        alert(data.story);
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                    if (data.msg === 'true') {  
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');                        
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -362,10 +358,10 @@ Lecture
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
                         //alert(data.story);
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -393,10 +389,10 @@ Lecture
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
                         //alert(data.story);
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
