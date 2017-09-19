@@ -151,25 +151,14 @@ class Storyline2ViewsJSON extends BaseController {
 
         $parentId = (int) $data['parent'];
         $ItemId = (int) $data['id'];
-        dd($ItemId);
+        
         $Item = StorylineItem::where('id', '=', $ItemId)->first();
         $Item->parent_id = $parentId;
 
-        if (empty($ItemId)) {
-            if ($Item->makeLastChildOf($parentId)) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
-        }
-
-
-        if (!empty($ItemId)) {
-            if ($Item->save()) {
-                $msg = 'success';
-            } else {
-                $msg = 'failed';
-            }
+        if ($Item->save()) {
+            $msg = 'success2';
+        } else {
+            $msg = 'failed';
         }
         
         return response()->json(['msg' => $msg]);
