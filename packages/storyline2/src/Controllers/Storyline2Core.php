@@ -70,11 +70,18 @@ class Storyline2Core extends BaseController {
 
     }
 
-    public function attach_to_item($content, $item){
+    public function attach_content_to_item($content, $item){
+
+        $this_content = (array) Content::find($content)->toArray();
+
+        $new_content = new Content($this_content);
+        $new_content->save();
 
         $storyline_item = StorylineItem::find($item);
-        $storyline_item->content_id = $content;
-        $storyline_item->save;
+        $storyline_item->content_id = $new_content->id;
+        $storyline_item->save();
+
+        return response()->json(["id" => $item]);
 
     }
 
