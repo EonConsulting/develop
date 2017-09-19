@@ -541,22 +541,21 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         $("#validation").hide();
 
         $("#btnsbmit").on("click", function(){
-            console.log("Save Clicked");
             save_content_to_item();
         });
 
         $(".content-import-btn").on("click", function(){
 
+            $content_id = $(this).data("content-id");
+            $item_id = $("#item-id").attr('value');
 
+            import_content($content_id,$item_id);
         });
 
     });
 
 
-    function import_content(){
-        
-
-    }
+    
     
     function save_content_to_item(){
 
@@ -569,7 +568,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         }).get();
 
         var item_id = $("#item-id").val();
-        console.log(item_id);
 
         var data = {
             "title": $("#content-title").val(),
@@ -625,7 +623,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             for (var k in invalid) {
                 
                 error = error + "<strong>" + k + "</strong>, "
-                console.log(k + " not filled");
 
             }   
 
@@ -636,9 +633,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             $("#validation").show();
 
         }
-
-
-        
 
 
     }
