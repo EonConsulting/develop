@@ -15,6 +15,9 @@ use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
+use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 class Storyline2ViewsJSON extends BaseController {
 

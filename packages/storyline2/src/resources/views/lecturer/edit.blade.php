@@ -18,6 +18,18 @@ Storyline Student Single
         width: 0px;
     }
 
+    /*.jstree-anchor {
+        color: #FFF !important;
+    }*/
+
+    .jstree-wholerow-hovered {
+        background: #FB7217 !important;
+    }
+
+    .jstree-wholerow-clicked {
+        background: #FB7217 !important;
+    }
+
     /*.jstree-icon:empty {
         width: 0px;
     }*/
@@ -48,6 +60,7 @@ Storyline Student Single
         -webkit-align-items: flex-start;
         -ms-flex-align: start;
         align-items: flex-start;
+        margin-top: -15px;
     }
 
     .page-container-tree {
@@ -117,7 +130,7 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        padding-bottom: 15px;
+        background: #FFF;
     }
 
     .content-editor {
@@ -186,6 +199,92 @@ Storyline Student Single
     .contentBoxHeight {height: 100%;}
     .cke_resizer {display: none;}
 
+
+    .form-title {
+
+        border-width: 0px 0px 1px 0px;
+        border-style: solid;
+        border-color: #FFF;
+
+        padding: 5px;
+        margin: 5px;
+
+        background: none;
+        width: 100%;
+
+    }
+
+    .form-title:focus {
+        border-width: 0px 0px 1px 0px;
+        border-style: solid;
+        border-color: #FB7217;
+        outline: none;
+        color: #FB7217;
+
+    }
+
+    .form-title::placeholder {
+
+        color: #c3c3c3;
+        font-style: italic;
+
+    }
+
+    .title-bar-button {
+        height: 43px;
+        float: right;
+        background: $666;
+        color: #FFF;
+        border: none;
+        padding: 0px 15px 0px 15px;
+    }
+
+    .title-bar-button-save {
+        background: #00a65a;
+    }
+
+    .title-bar-button-save:hover {
+        background: #008347;
+    }
+
+    .title-bar-button-import {
+        background: #00c0ef;
+    }
+
+    .title-bar-button-import:hover {
+        background: #0098bd;
+    }
+
+    .content-entry {
+        width: 250px;
+        height: 150px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        float: left;
+        padding: 10px;
+        position: relative;
+    }
+
+
+    .content-entry h3 {
+        font-size: 16px;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        font-weight: 700;
+        color: #FB7217;
+    }
+
+    .content-entry p {
+        font-size: 10px;
+    }
+
+    .content-entry button {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+    }
+
 </style>
 @endsection
 
@@ -207,27 +306,29 @@ Storyline Student Single
 
                 <div class="content-info">
 
-                    <div class="container-fluid">
                         <div class="info-bar-container">
 
                             <div class="info-bar-name">
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon2">Title</span>
-                                    <input id="content-title" type="text" class="form-control" name="title" placeholder="Content Title" value=""/>
+                                <div>
+                                    <input id="content-title" type="text" class="form-title" name="title" placeholder="Content Title" value=""/>
                                 </div>
                             </div>
 
                             <div class="info-bar-buttons" style="text-align: right;">
                                 <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#saveModal">
+                                <button type="button" class="title-bar-button title-bar-button-save" data-toggle="modal" data-target="#saveModal">
                                     <i class="fa fa-save"></i>
                                     <span class="hidden-xs"> Save</span>
+                                </button>
+
+                                <button type="button" class="title-bar-button title-bar-button-import" data-toggle="modal" data-target="#importModal">
+                                    <i class="fa fa-save"></i>
+                                    <span class="hidden-xs"> Import</span>
                                 </button>
 
                             </div>
 
                         </div> <!-- row end -->
-                    </div>
 
                 </div>
             
@@ -262,13 +363,14 @@ Storyline Student Single
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Save Content</h4>
             </div>
 
             <div class="modal-body">
                 <p>We need a bit more information from you before we can save this content</p>
 
                 <input type="hidden" id="item-id" value="">
+                <input type="hidden" id="content-id" value="">
 
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -284,7 +386,7 @@ Storyline Student Single
 
                     <div>
                         <label style="font-weight: 400;">
-                            <input type="checkbox" name="categories[]" value="<?php echo $category->id; ?>" >
+                            <input type="checkbox" name="categories[]" class="cat_check" id="cat<?php echo $category->id; ?>" value="<?php echo $category->id; ?>" >
                             <?php echo $category->name; ?>
                         </label>
                     </div>
@@ -295,6 +397,10 @@ Storyline Student Single
                 <div class="form-group">
                     <label for="tags">Tags</label>
                     <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="">
+                </div>
+
+                <div class="validation alert alert-warning" role="alert" id="validation">
+
                 </div>
 
             
@@ -308,6 +414,39 @@ Storyline Student Single
     </div>
 </div>     
     
+
+<div id="importModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Import Content</h4>
+            </div>
+
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+
+                <?php foreach($contents as $content): ?>
+
+                    <div class="content-entry shadow">
+                        <h3><?php echo $content->title; ?></h3>
+                        <p><?php echo $content->description; ?></p>
+                        <button class="content-import-btn" data-content-id="<?php echo $content->id; ?>">Import</button>
+                    </div>
+
+
+                <?php endforeach; ?>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary"><i class="fa fa-save"></i><span> Cancel</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>     
 @endsection
 
 @section('custom-scripts')
@@ -378,7 +517,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 77) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 47) + "px");
 
     });
 
@@ -389,7 +528,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 77) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 47) + "px");
 
     });
 
@@ -398,14 +537,30 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 <script>
 
     $( document ).ready(function(){
+
+        $("#validation").hide();
+
         $("#btnsbmit").on("click", function(){
             console.log("Save Clicked");
             save_content_to_item();
         });
+
+        $(".content-import-btn").on("click", function(){
+
+
+        });
+
     });
 
+
+    function import_content(){
+        
+
+    }
     
     function save_content_to_item(){
+
+        $("#validation").hide();
 
         var body = editor.getData();
 
@@ -421,35 +576,69 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             "description": $("#content-description").val(),
             "body": body,
             "categories": cats,
-            "tags": $("#content-tags").val()
+            "tags": $("#content-tags").val(),
+            "id": $("#content-id").val()
         };
-
-        console.log(data);
-
-        actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
-
-        $.ajax({
-            method: "POST",
-            url: actionUrl,
-            contentType: 'json',
-            data: JSON.stringify(data),
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-
-                },
-                400: function () { //bad request
     
-                },
-                500: function () { //server kakked
-    
-                }
+        var validate = true;
+        var invalid = {};
+
+        for (var k in data) {
+            if(k!= "id" && data[k].length < 1){
+                validate = false;
+                invalid[k] = data[k];
             }
-        }).error(function (req, status, error) {
-            alert(error);
-        });
+        }
+
+        
+        if(validate == true) {
+
+            actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
+
+            $.ajax({
+                method: "POST",
+                url: actionUrl,
+                contentType: 'json',
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        $('#saveModal').modal('hide');
+                    },
+                    400: function () { //bad request
+        
+                    },
+                    500: function () { //server kakked
+        
+                    }
+                }
+            }).error(function (req, status, error) {
+                alert(error);
+            });
+
+        } else {
+            
+            var error = "The following field are required: "
+
+            for (var k in invalid) {
+                
+                error = error + "<strong>" + k + "</strong>, "
+                console.log(k + " not filled");
+
+            }   
+
+            error = error + "please fill them in and try again."
+
+            $("#validation").html(error);
+
+            $("#validation").show();
+
+        }
+
+
+        
 
 
     }

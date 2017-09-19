@@ -51,6 +51,7 @@ class Storyline2ViewsBlade extends BaseController {
         ];
 
         $course = Course::find($course);
+        $contents = Content::all();
 
         if (count($course->latest_storyline()))
         {
@@ -81,7 +82,13 @@ class Storyline2ViewsBlade extends BaseController {
         $categories = Category::all();
        
 
-        return view('eon.storyline2::lecturer.edit', ['storyline_id' => $storyline_id, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.storyline2::lecturer.edit', [
+            'contents' => $contents,
+            'storyline_id' => $storyline_id,
+            'categories' => $categories,
+            'breadcrumbs' => $breadcrumbs
+        ]);
+
     }
 
 }
