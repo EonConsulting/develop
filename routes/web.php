@@ -41,13 +41,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/builders/page', ['as' => 'builders.page', 'uses' => 'Builders\\PageBuilderController@index']);
     Route::get('/builders/storyline', ['as' => 'builders.storyline', 'uses' => 'Builders\\StorylineBuilderController@index']);
-    Route::put('analytics/log/statement', function (
-        \Illuminate\Http\Request $request,
-        EONConsulting\AnalyticsLogger\AnalyticsLog $logger
-    ) {
-        $payload = $request->all();
-        $logger->save($payload);
-    });
 });
 
 /*

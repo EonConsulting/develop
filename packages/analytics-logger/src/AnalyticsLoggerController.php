@@ -10,11 +10,15 @@ class AnalyticsLoggerController extends Controller
     private $request;
     private $logger;
 
-    protected function index(Request $request, Logger $logger)
+    public function __construct(Request $request, Logger $logger)
     {
         $this->request = $request;
         $this->logger = $logger;
+    }
 
+    public function store(Request $request)
+    {
+        $this->request = $request;
         $payload = $this->request->all();
 
         $this->logger['payload'] = json_encode($payload);
