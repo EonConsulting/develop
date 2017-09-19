@@ -55,9 +55,14 @@ class Storyline2Core extends BaseController {
             ];
 
         } else {
+            $content = Content::find((int) $storyline_item['content_id']);
+
+            
+
             $result = [
                 "found" => true,
-                "content" => Content::find((int) $storyline_item['content_id'])
+                "content" => $content,
+                "categories" => $content->categories
             ];
         }
 
@@ -65,33 +70,63 @@ class Storyline2Core extends BaseController {
 
     }
 
+    public function attach_to_item($content, $item){
+
+        $storyline_item = StorylineItem::find($item);
+        $storyline_item->content_id = $content;
+        $storyline_item->save;
+
+    }
+
     public function save_content(Request $request, $item){
 
         $data = $request->json()->all();
         
-        $content = new Content([
-            'title' => $data['title'],
-            'body' => $data['body'],
-            'tags' => $data['tags'],
-            'creator_id' => auth()->user()->id,
-            'description' => $data['description']
-        ]);
+        if($data['id'] === ""){
 
-        $content->save();
-        
-        $categories = $data['categories'];
-        
-        foreach($categories as $k => $category_id) {
-            $temp = Category::find($category_id);
-            $content->categories()->save($temp);
+            $content = new Content([
+                'title' => $data['title'],
+                'body' => $data['body'],
+                'tags' => $data['tags'],
+                'creator_id' => auth()->user()->id,
+                'description' => $data['description']
+            ]);
+            
+            $content->save();
+
+            $categories = $data['categories'];
+            
+            foreach($categories as $k => $category_id) {
+                $temp = Category::find($category_id);
+                $content->categories()->save($temp);
+            }
+
+            $item = StorylineItem::find($item);
+            
+            $item->content_id = $content->id;
+    
+            $item->save();
+
+        } else {
+            $content_id = (int) $data['id'];
+
+            $content = Content::find($content_id);
+
+            
+            $content->title = $data['title'];
+            $content->body = $data['body'];
+            $content->tags = $data['tags'];
+            $content->creator_id = auth()->user()->id;
+            $content->description = $data['description'];
+
+            $content->save();
+
+            $categories = $data['categories'];
+
+            $content->categories()->sync($categories);
+
         }
-
-        $item = StorylineItem::find($item);
-
-        $item->content_id = $content->id;
-
-        $item->save();
-
+        
         return 200;
 
     }

@@ -30,7 +30,9 @@
  
      //Select Node Action
      $(tree_id).on("changed.jstree", function (e, data) {
-
+        
+        $(".cat_check").prop('checked', false);
+        $("#content-id").val("");
         $("#content-title").val("");
         $("#content-description").val("");
         $("#content-tags").val("");
@@ -114,14 +116,20 @@
     var course_data = jQuery.parseJSON(data);
 
     console.log(course_data);
-    
 
     if(course_data.found == true){
-         console.log("Found!");
-         $("#content-title").val(course_data.content.title);
-         $("#content-description").val(course_data.content.description);
-         $("#content-tags").val(course_data.content.tags);
-         var body = editor.setData(course_data.content.body);
+
+        $("#content-id").val(course_data.content.id);
+        $("#content-title").val(course_data.content.title);
+        $("#content-description").val(course_data.content.description);
+        $("#content-tags").val(course_data.content.tags);
+        var body = editor.setData(course_data.content.body);
+
+        for (index = 0; index < course_data.categories.length; ++index) {
+            cat_id = "#cat" + course_data.categories[index].id;
+            console.log(cat_id);
+            $(cat_id).prop('checked', true);
+        }
      }
  
  }
