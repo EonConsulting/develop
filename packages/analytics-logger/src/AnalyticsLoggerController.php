@@ -16,9 +16,8 @@ class AnalyticsLoggerController extends Controller
         $this->logger = $logger;
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $this->request = $request;
         $payload = $this->request->all();
 
         $this->logger['payload'] = json_encode($payload);
