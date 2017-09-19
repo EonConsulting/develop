@@ -249,7 +249,8 @@
     </script>
 
     <script>
-       $(function(){           
+       $(function(){
+           
             var editor = CKEDITOR.replace('ltieditorv2inst', {
                         extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                         allowedContent: true,

@@ -307,8 +307,7 @@ Lecture
         });
     }
 
-    $(document).ready(function () {
-    
+    $(document).ready(function () {   
         $(".jstree-anchor").click(function (e) {
             e.stopPropagation();
             e.preventDefault();
