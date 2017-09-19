@@ -156,8 +156,13 @@ class Storyline2ViewsJSON extends BaseController {
         $ItemId = (int) $data['id'];
         
         $Item = StorylineItem::where('id', '=', $ItemId)->first();
+        $parent = StorylineItem::find($parentId);
         $Item->parent_id = $parentId;
-
+         //dd($data);
+        if($parentId == 0){
+           $Item->parent_id = (int) $data['original']['parent']; 
+        }
+       
         if ($Item->save()) {
             $msg = 'success2';
         } else {
