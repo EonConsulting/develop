@@ -21,7 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-      return view('welcome');
+    return view('welcome');
 });
 
 Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
@@ -41,6 +41,13 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/builders/page', ['as' => 'builders.page', 'uses' => 'Builders\\PageBuilderController@index']);
     Route::get('/builders/storyline', ['as' => 'builders.storyline', 'uses' => 'Builders\\StorylineBuilderController@index']);
+    Route::put('analytics/log/statement', function (
+        \Illuminate\Http\Request $request,
+        EONConsulting\AnalyticsLogger\AnalyticsLog $logger
+    ) {
+        $payload = $request->all();
+        $logger->save($payload);
+    });
 });
 
 /*

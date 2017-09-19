@@ -214,6 +214,21 @@ Lecture
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
 
+{{--Analytics--}}
+<script src="{{ url('js/analytics/tincan.js') }}"></script>
+<script>
+    let value = {
+        'endpoint': "{{ url('analytics/log') }}",
+        'username': '{{ auth()->user()->name }}',
+        'actorMbox': '{{ auth()->user()->email }}',
+        'id': '{{ auth()->user()->id }}',
+        'verbId': "{!! url('xapi/activities/course') !!}",
+        'targetId': "{!! Request::url() !!}",
+        'targetObjectType': 'viewed',
+    };
+</script>
+<script src="{{ url('js/analytics/analytics-logger.js') }}"></script>
+
 {{--<script>--}}
 {{--$(document).ready(function() {--}}
 {{--var mtree = $('ul.mtree');--}}
