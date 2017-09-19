@@ -19,8 +19,7 @@ $( document ).ready(function(){
 
     //Move Node Action
     $(tree_id).on("move_node.jstree", function (e, data) {
-        var ref = data.node;
-        moveNode(ref);
+        moveNode(data);
     });
 
     //Create Node Action
