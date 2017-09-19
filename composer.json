@@ -50,9 +50,9 @@
             "EONConsulting\\MindMap\\": "packages/MindMap/src/",
             "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
             "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
-            "EONConsulting\\Storyline2\\": "packages/storyline2/src",
-            "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
-            "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src"
+            "EONConsulting\\Storyline2\\": "packages/storyline2/src/",
+            "EONConsulting\\Student\\Progression\\": "packages/student-progression/src/",
+            "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src/"
         },
         "files": [
             "packages/laravel-lti/src/functions.php",
