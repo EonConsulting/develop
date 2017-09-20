@@ -11,6 +11,7 @@
         padding: 15px;
         height: 280px;
         position: relative;
+        overflow: hidden;
     }
 
     .course-card h1 {
