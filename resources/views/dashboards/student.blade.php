@@ -53,16 +53,16 @@ Student Dashboard
 
                 <div class="row sp-top-15 sp-bot-15 basic-clearfix">
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="container-fluid">
                             <h3>Filters</h3>
-                            <label for="course-filter">Course</label>
+                            <label for="course-filter">Module</label>
                             <select class="form-control" id="course-filter">
                                 <option value="FBN1501">FBN1501 - Business Numerical Skills A</option>
                                 <option value="FBN1502">FBN1502 - Business Numerical Skills B</option>
                             </select>
                             <br>
-                            <label for="metric-type-filter">Metric</label>
+                            <label for="metric-type-filter">Assessment</label>
                             <select class="form-control" id="metric-type-filter">
                                 <option value="CA">Current Average</option>
                                 <option value="FA">Formal Assessment</option>
@@ -71,46 +71,11 @@ Student Dashboard
                                 <option value="SA">Self Assessment</option>
                             </select>
                             <br>
-                            <label for="metric-item-filter">Item</label>
+                            <label for="metric-item-filter">Type</label>
                             <select class="form-control" id="metric-item-filter">
                             </select>
                         </div>
                     </div> <!-- end col-md-4 -->
-
-                    <div class="col-md-2">
-                        <h3>Progession</h3>
-                        <div class="container-fluid sp-top-15 sp-bot-15">
-
-                            Videos
-                            <div class="progress">
-                                <div class="progress-bar bg-col-1" id="progress_videos" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    70%
-                                </div>
-                            </div>
-
-                            E-Books
-                            <div class="progress">
-                                <div class="progress-bar bg-col-2" id="progress_ebooks" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    25%
-                                </div>
-                            </div>
-
-                            Articles
-                            <div class="progress">
-                                <div class="progress-bar bg-col-3" id="progress_articles" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    40%
-                                </div>
-                            </div>
-                            Study Guide
-                            <div class="progress">
-                                <div class="progress-bar bg-col-4" id="progress_study_guide" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    35%
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                     <div class="col-md-8">
                         <h3>Results</h3>
@@ -125,6 +90,51 @@ Student Dashboard
             </div>
         </div>
 
+    </div>
+    
+    <div class="row">
+
+        <div class="col-md-12 sp-top-15">
+            <div class="dashboard-card shadow top-bdr-4">
+
+                <div class="dashboard-card-heading">
+                    Course Progression
+                </div>
+
+                <div class="row sp-top-15 sp-bot-15 basic-clearfix">
+
+                    <div class="col-md-3">
+                        <h3>Videos</h3>
+                        <div class="container-fluid" id="video-progression-container" style="height: 300px;">
+                            <canvas id="video-progression"></canvas>
+                        </div>
+                    </div> <!-- end col-md-4 -->
+
+                    <div class="col-md-3">
+                        <h3>E-Books</h3>
+                        <div class="container-fluid" id="ebook-progression-container" style="height: 300px;">
+                            <canvas id="ebook-progression"></canvas>
+                        </div>
+                    </div><!-- end col-md-8 -->
+                    
+                    <div class="col-md-3">
+                        <h3>Articles</h3>
+                        <div class="container-fluid" id="article-progression-container" style="height: 300px;">
+                            <canvas id="article-progression"></canvas>
+                        </div>
+                    </div><!-- end col-md-8 -->
+                    
+                    <div class="col-md-3">
+                        <h3>Study Guide</h3>
+                        <div class="container-fluid" id="study-guide-progression-container" style="height: 300px;">
+                            <canvas id="study-guide-progression"></canvas>
+                        </div>
+                    </div><!-- end col-md-8 -->
+
+                </div>
+                
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -375,19 +385,51 @@ $(document).ready(function () {
                 {
                     "course_id": "FBN1501",
                     "progress": {
-                        "videos": "35",
-                        "ebooks": "45",
-                        "articles": "50",
-                        "study_guide": "72"
+                        "videos": {
+                            "class_progress": [35],
+                            "my_progress": [22],
+                            "course_timeline": [32]
+                        },
+                        "ebooks": {
+                            "class_progress": [45],
+                            "my_progress": [52],
+                            "course_timeline": [42]
+                        },
+                        "articles": {
+                            "class_progress": [65],
+                            "my_progress": [67],
+                            "course_timeline": [60]
+                        },
+                        "study_guide": {
+                            "class_progress": [44],
+                            "my_progress": [55],
+                            "course_timeline": [45]
+                        }
                     }
                 },
                 {
                     "course_id": "FBN1502",
                     "progress": {
-                        "videos": "45",
-                        "ebooks": "75",
-                        "articles": "60",
-                        "study_guide": "52"
+                        "videos": {
+                            "class_progress": [22],
+                            "my_progress": [32],
+                            "course_timeline": [46]
+                        },
+                        "ebooks": {
+                            "class_progress": [33],
+                            "my_progress": [29],
+                            "course_timeline": [45]
+                        },
+                        "articles": {
+                            "class_progress": [51],
+                            "my_progress": [39],
+                            "course_timeline": [36]
+                        },
+                        "study_guide": {
+                            "class_progress": [49],
+                            "my_progress": [39],
+                            "course_timeline": [51]
+                        }
                     }
                 }
             ];
@@ -629,15 +671,16 @@ $(document).ready(function () {
                 selected_metric = self.val();
                 updateMetricItems(selected_metric);
 
-                console.log("mtf: course_id:" + selected_course + " metric:" + selected_metric);
                 // lodash methods for rendering graph
                 var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric}));
-                console.log(courses);
-                renderGraph(_.head(courses));
+                renderResultsGraph(_.head(courses));
 
                 // lodash methods for rendering progression
                 var prog = _.filter(progression, _.iteratee({'course_id': selected_course}));
-                renderProgression(_.head(prog));
+                renderVideoProgressionGraph(_.head(prog));
+                renderEbookProgressionGraph(_.head(prog));
+                renderArticleProgressionGraph(_.head(prog));
+                renderStudyGuideProgressionGraph(_.head(prog));
             });
             
             $("#course-filter").on("change", function () {
@@ -653,9 +696,8 @@ $(document).ready(function () {
             $("#metric-item-filter").on("change", function () {
                 var self = $(this);
                 // lodash methods for rendering graph
-                console.log("if: course_id:" + selected_course + " metric:" + selected_metric + " metric_item_id:" + self.val());
                 var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric, 'metric_item_id': self.val()}));
-                renderGraph(_.head(courses));
+                renderResultsGraph(_.head(courses));
             });
 
             function updateMetricItems(metric_type)
@@ -669,8 +711,7 @@ $(document).ready(function () {
                 });
             }
 
-            function renderGraph(data) {
-                console.log("rg:" + data.your_results.count + ":" + data.your_average.count + ":" + data.class_average.count);
+            function renderResultsGraph(data) {
                 // MH: this is a workaround to trash the canvas
                 // .destroy() does not work :(
                 $('#student-results').remove();
@@ -770,20 +811,384 @@ $(document).ready(function () {
                 });
             }
 
-            function renderProgression(data)
-            {
-                // set progress bar width and values
-                $("#progress_videos").attr('aria-valuenow', data.progress.videos).css('width', data.progress.videos + '%');
-                $("#progress_videos").html(data.progress.videos + '%');
+            function renderVideoProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#video-progression').remove();
+                $('#video-progression-container').append('<canvas id="video-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#video-progression').get(0).getContext('2d');
 
-                $("#progress_ebooks").attr('aria-valuenow', data.progress.ebooks).css('width', data.progress.ebooks + '%');
-                $("#progress_ebooks").html(data.progress.ebooks + '%');
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.class_progress
+                        },
+                        {
+                            label: 'My Progress',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.course_timeline
+                        }
+                    ]
+                };
 
-                $("#progress_articles").attr('aria-valuenow', data.progress.articles).css('width', data.progress.articles + '%');
-                $("#progress_articles").html(data.progress.articles + '%');
 
-                $("#progress_study_guide").attr('aria-valuenow', data.progress.study_guide).css('width', data.progress.study_guide + '%');
-                $("#progress_study_guide").html(data.progress.study_guide + '%');
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderEbookProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#ebook-progression').remove();
+                $('#ebook-progression-container').append('<canvas id="ebook-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#ebook-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.class_progress
+                        },
+                        {
+                            label: 'My Progress',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderArticleProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#article-progression').remove();
+                $('#article-progression-container').append('<canvas id="article-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#article-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.class_progress
+                        },
+                        {
+                            label: 'My Progress',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderStudyGuideProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#study-guide-progression').remove();
+                $('#study-guide-progression-container').append('<canvas id="study-guide-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#study-guide-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.class_progress
+                        },
+                        {
+                            label: 'My Progress',
+                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
             }
         });
     </script>
