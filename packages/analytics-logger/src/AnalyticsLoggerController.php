@@ -3,22 +3,25 @@ namespace EONConsulting\AnalyticsLogger;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use EONConsulting\AnalyticsLogger\AnalyticsLog as Log;
+use EONConsulting\AnalyticsLogger\AnalyticsLog as Logger;
 
 class AnalyticsLoggerController extends Controller
 {
     private $request;
-    private $log;
+    private $logger;
 
-    protected function index(Request $request, Log $log)
+    public function __construct(Request $request, Logger $logger)
     {
         $this->request = $request;
-        $this->log = $log;
+        $this->logger = $logger;
+    }
 
+    public function store()
+    {
         $payload = $this->request->all();
 
-        $this->log['payload'] = json_encode($payload);
+        $this->logger['payload'] = json_encode($payload);
 
-        $this->log->save();
+        $this->logger->save();
     }
 }

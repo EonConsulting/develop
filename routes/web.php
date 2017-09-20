@@ -21,7 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-      return view('welcome');
+    return view('welcome');
 });
 
 Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);

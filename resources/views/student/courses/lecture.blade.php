@@ -214,6 +214,21 @@ Lecture
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
 
+{{--Analytics--}}
+<script src="{{ url('js/analytics/tincan.js') }}"></script>
+<script>
+    let value = {
+        'endpoint': "{{ url('analytics/log') }}",
+        'username': '{{ auth()->user()->name }}',
+        'actorMbox': '{{ auth()->user()->email }}',
+        'id': '{{ auth()->user()->id }}',
+        'verbId': "{!! url('xapi/activities/course') !!}",
+        'targetId': "{!! Request::url() !!}",
+        'targetObjectType': 'viewed',
+    };
+</script>
+<script src="{{ url('js/analytics/analytics-logger.js') }}"></script>
+
 {{--<script>--}}
 {{--$(document).ready(function() {--}}
 {{--var mtree = $('ul.mtree');--}}
@@ -294,7 +309,7 @@ Lecture
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {                  
+                if (data.msg === 'true') {
                     //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
                     //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
                 } else {
@@ -309,10 +324,12 @@ Lecture
     }
 
  $(document).ready(function () {   
-        //$('a').attr('href','');       
+        $('a').attr('href','#');    
+    
         $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
-            e.preventDefault();           
+            e.preventDefault();
+            
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
@@ -326,7 +343,7 @@ Lecture
                     $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {  
+                    if (data.msg === 'true') {     
                         window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
                         alert('Please complete current Learning Objective before moving to the Next one!');                        
