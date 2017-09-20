@@ -25,7 +25,7 @@ $( document ).ready(function(){
 
     //Create Node Action
     $(tree_id).on("create_node.jstree", function (e, data) {
-        createNode(data);
+      createNode(data);
     });
 
     //Select Node Action

@@ -1,7 +1,7 @@
 //add storyline_id: .../json-render/storyline_id
 var tree_id = "#tree";
 
-$( document ).ready(function(){
+$(document).ready(function () {
 
     refreshTree();
 
@@ -38,7 +38,7 @@ $( document ).ready(function(){
         $("#content-tags").val("");
 
         var body = editor.setData("");
-        
+
         var ref = data.node;
         getContent(ref);
 
@@ -46,19 +46,19 @@ $( document ).ready(function(){
 
 })
 
-function refreshTree(){
+function refreshTree() {
     $.getJSON(url,
-        function (data) {
-            console.log(data);
-    
-            drawTree(data);
-    
-            treeToJSON();
-        }
+            function (data) {
+                console.log(data);
+
+                drawTree(data);
+
+                treeToJSON();
+            }
     );
 }
- 
- 
+
+
 function drawTree(tree_data) {
     console.log(tree_data);
 
@@ -73,44 +73,44 @@ function drawTree(tree_data) {
     });
 
 }
- 
- 
- 
- function treeToJSON(){
- 
-     var v =$(tree_id).jstree(true).get_json('#', { 'flat': true });
-     console.log(v);
- 
- }
+
+
+
+function treeToJSON() {
+
+    var v = $(tree_id).jstree(true).get_json('#', {'flat': true});
+    console.log(v);
+
+}
 
 //detect when node is clicked, ie. selected node changes
 
 /*
-$(tree_id).on("create_node.jstree", function (e, data) {
-    console.log("Node created");
-});
+ $(tree_id).on("create_node.jstree", function (e, data) {
+ console.log("Node created");
+ });
+ 
+ $(tree_id).on("rename_node.jstree", function (e, data) {
+ console.log("Node renamed");
+ });
+ 
+ $(tree_id).on("delete_node.jstree", function (e, data) {
+ console.log("Node deleted");
+ });
+ 
+ $(tree_id).on("move_node.jstree", function (e, data) {
+ console.log("Node moved");
+ });
+ 
+ $(tree_id).on("cut.jstree", function (e, data) {
+ console.log("Node cut");
+ });
+ 
+ $(tree_id).on("paste.jstree", function (e, data) {
+ console.log("paste pasted");
+ });*/
 
-$(tree_id).on("rename_node.jstree", function (e, data) {
-    console.log("Node renamed");
-});
-
-$(tree_id).on("delete_node.jstree", function (e, data) {
-    console.log("Node deleted");
-});
-
-$(tree_id).on("move_node.jstree", function (e, data) {
-    console.log("Node moved");
-});
-
-$(tree_id).on("cut.jstree", function (e, data) {
-    console.log("Node cut");
-});
-
-$(tree_id).on("paste.jstree", function (e, data) {
-    console.log("paste pasted");
-});*/
-
-function import_content($content_id,$item_id){
+function import_content($content_id, $item_id) {
 
     console.log("import_content called");
 
@@ -130,7 +130,7 @@ function import_content($content_id,$item_id){
                 var id = data.id;
 
                 console.log(id);
-                
+
                 getContent({"id": id});
             },
             400: function () { //bad request
@@ -145,14 +145,14 @@ function import_content($content_id,$item_id){
     });
 
 }
- 
-function populateContentForm(data){
+
+function populateContentForm(data) {
 
     console.log("populateContentForm called");
 
     var course_data = jQuery.parseJSON(data);
 
-    if(course_data.found == true){
+    if (course_data.found == true) {
 
         $("#content-id").val(course_data.content.id);
         $("#content-title").val(course_data.content.title);
@@ -224,7 +224,7 @@ function createNode(data) {
                     alert('Create failed, please try again.');
                 } else {
                     data.instance.set_id(node, return_data.id);
-                    data.instance.edit(return_data.id); 
+                    data.instance.edit(return_data.id);
                 }
             },
             400: function () { //bad request
@@ -278,11 +278,19 @@ function deleteNode(data) {
 //Move node
 function moveNode(data) {
     var actionUrl = base_url + "/storyline2/move";
-
+    seen = [];
     $.ajax({
         method: "POST",
         url: actionUrl,
-        data: JSON.stringify(data),
+        data: JSON.stringify(data, function (key, val) {
+            if (val != null && typeof val == "object") {
+                if (seen.indexOf(val) >= 0) {
+                    return;
+                }
+                seen.push(val);
+            }
+            return val;
+        }),
         dataType: 'json',
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')

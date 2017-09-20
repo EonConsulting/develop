@@ -143,42 +143,6 @@ class Storyline2ViewsJSON extends BaseController {
         return response()->json(['msg' => $msg, 'id' => $newItem->id]);
     }
 
-    /**
-     * 
-     * @param Request $request
-     * @return type
-     */
-    public function move(Request $request) {
-
-        $data = $request->json()->all();
-
-        $parentId = (int) $data['parent'];
-        $ItemId = (int) $data['id'];
-
-        $Item = StorylineItem::where('id', '=', $ItemId)->first();
-        $parent = StorylineItem::find($parentId);
-        $Item->parent_id = $parentId;
-        dd($data);
-        if ($parentId == 0) {
-            $Item->parent_id = (int) $data['original']['parent'];
-        }
-
-        if ($parent == $old_parent) {
-            if ($position > $old_position) {
-                $position = $position + 1;
-            }
-        }
-
-
-        if ($Item->save()) {
-            $msg = 'success2';
-        } else {
-            $msg = 'failed';
-        }
-
-        return response()->json(['msg' => $msg]);
-    }
-
     private function findPosition($decendants, $position) {
         $i = 0;
         foreach ($decendants as $decendant) {
@@ -187,6 +151,68 @@ class Storyline2ViewsJSON extends BaseController {
             }
             $i++;
         }
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function move(Request $request) {
+
+        $data = $request->json()->all();
+        //dd($data['position']);
+        $parentId = (int) $data['node']['parent'];
+        $ItemId = (int) $data['node']['id'];
+        $old_parent = (int) $data['old_parent'];
+        $position = (int) $data['position'];
+        $old_position = (int) $data['old_position'];
+
+        if ($parentId == $old_parent) {
+            if ($position > $old_position) {
+                $position = $position + 1;
+            }
+        }
+        
+        if ($parentId == 0) {
+            $parentId = (int) $data['node']['original']['parent'];
+        }
+
+        $parent = StorylineItem::find($parentId);
+        $decendants = $parent->getImmediateDescendants();
+        $moveTo = $this->findPosition($decendants, $position);
+        $node = StorylineItem::find($ItemId);
+           
+        //If the parent we are moving to doesn't have any decendents,  just move it now
+        if ($parent->isLeaf()) {
+            if ($node->makeChildOf($parent)) {
+                $msg = 'success2';
+                dd('child');
+            } else {
+                $msg = 'failed';
+            }
+        }
+
+        //This takes care of it we are moving it into the last position
+        if (is_null($moveTo)) {
+            if ($node->makeLastChildOf($parent)) {
+                $msg = 'success2';
+                dd('last');
+            } else {
+                $msg = 'failed';
+            }
+        }
+        
+        if ($moveTo) {
+            if ($node->makeChildOf($parent)) {
+                $msg = 'success2';
+                
+            } else {
+                $msg = 'failed';
+            }
+        }
+        
+        return response()->json(['msg' => $msg]);
     }
 
     /**
