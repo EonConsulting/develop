@@ -745,7 +745,7 @@ $(document).ready(function () {
                         },
                         {
                             label: 'Class Average',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.class_average
@@ -840,7 +840,7 @@ $(document).ready(function () {
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.videos.course_timeline
@@ -935,7 +935,7 @@ $(document).ready(function () {
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.ebooks.course_timeline
@@ -1030,7 +1030,7 @@ $(document).ready(function () {
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.articles.course_timeline
@@ -1125,7 +1125,7 @@ $(document).ready(function () {
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.study_guide.course_timeline
