@@ -15,6 +15,7 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 
 class Storyline2Core extends BaseController {
@@ -70,16 +71,28 @@ class Storyline2Core extends BaseController {
 
     }
 
-    public function attach_content_to_item($content, $item){
+    public function attach_content_to_item($content, $item, $action){
 
-        $this_content = (array) Content::find($content)->toArray();
+        if($action === "copy"){
 
-        $new_content = new Content($this_content);
-        $new_content->save();
+            $this_content = Content::find($content)->toArray();
+            
+            $new_content = new Content($this_content);
+            $new_content->cloned_id = $content;
+            $new_content->save();
+    
+            $storyline_item = StorylineItem::find($item);
+            $storyline_item->content_id = $new_content->id;
+            $storyline_item->save();
 
-        $storyline_item = StorylineItem::find($item);
-        $storyline_item->content_id = $new_content->id;
-        $storyline_item->save();
+        } elseif($action === "link") {
+
+            $storyline_item = StorylineItem::find($item);
+            $storyline_item->content_id = $content;
+            $storyline_item->save();
+
+        }
+        
 
         return response()->json(["id" => $item]);
 

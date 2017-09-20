@@ -110,11 +110,11 @@ $(tree_id).on("paste.jstree", function (e, data) {
     console.log("paste pasted");
 });*/
 
-function import_content($content_id,$item_id){
+function import_content($content_id,$item_id,$action){
 
     console.log("import_content called");
 
-    actionUrl = base_url + "/storyline2/add-item-content/" + $content_id + "/" + $item_id;
+    actionUrl = base_url + "/storyline2/add-item-content/" + $content_id + "/" + $item_id + "/" + $action;
 
     $.ajax({
         method: "POST",

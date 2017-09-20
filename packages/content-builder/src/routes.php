@@ -25,7 +25,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
         Route::match(['get', 'post'], '/view/{course_id}', 'ContentBuilderCore@view')->name('eon.contentbuilder.view');
 
-        Route::match(['get', 'post'],'/categories', 'ContentBuilderCategories@index')->name('eon.contentbuilder.categories');
+        //Route::match(['get', 'post'],'/categories', 'ContentBuilderCategories@index')->name('eon.contentbuilder.categories');
 
         Route::get('/{content}', 'ContentBuilderCore@show')->name('content.show');
 

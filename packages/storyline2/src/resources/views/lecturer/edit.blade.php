@@ -263,6 +263,7 @@ Storyline Student Single
         float: left;
         padding: 10px;
         position: relative;
+        background: #FFF;
     }
 
 
@@ -281,9 +282,23 @@ Storyline Student Single
     .content-entry button {
         position: absolute;
         bottom: 10px;
-        right: 10px;
         font-size: 12px;
     }
+
+    .content-link-btn {
+        right: 10px;
+    }
+
+    .content-copy-btn {
+        left: 10px;
+    }
+
+    .import-list {
+        max-height: 500px;
+        overflow-y: auto;
+        background: #F9FAF7;
+    }
+
 
 </style>
 @endsection
@@ -425,14 +440,16 @@ Storyline Student Single
                 <h4 class="modal-title">Import Content</h4>
             </div>
 
-            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+            <div class="modal-body import-list">
 
                 <?php foreach($contents as $content): ?>
 
                     <div class="content-entry shadow">
                         <h3><?php echo $content->title; ?></h3>
                         <p><?php echo $content->description; ?></p>
-                        <button class="content-import-btn" data-content-id="<?php echo $content->id; ?>">Import</button>
+
+                        <button class="content-link-btn content-action" data-action="link" data-content-id="<?php echo $content->id; ?>">Link</button>
+                        <button class="content-copy-btn content-action" data-action="copy" data-content-id="<?php echo $content->id; ?>">Copy</button>
                     </div>
 
 
@@ -544,12 +561,13 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             save_content_to_item();
         });
 
-        $(".content-import-btn").on("click", function(){
+        $(".content-action").on("click", function(){
 
             $content_id = $(this).data("content-id");
             $item_id = $("#item-id").attr('value');
+            $action = $(this).data("action");
 
-            import_content($content_id,$item_id);
+            import_content($content_id,$item_id,$action);
         });
 
     });
