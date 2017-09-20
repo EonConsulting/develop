@@ -649,24 +649,22 @@ Student Dashboard
                 var areaChartData = {
                     labels: data.labels,
                     datasets: [
+
                         {
                             label: 'Your Results',
-                            backgroundColor: 'rgba(0, 166, 90, 1)',
-                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
                             borderWidth: 0,
                             data: data.your_results
                         },
                         {
                             label: 'Your Average',
-                            backgroundColor: 'rgba(120, 198, 162, 1)',
-                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            backgroundColor: 'rgba(251, 158, 96, 1)',
                             borderWidth: 0,
                             data: data.your_average
                         },
                         {
                             label: 'Class Average',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
-                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             borderWidth: 0,
                             data: data.class_average
                         }
@@ -746,21 +744,21 @@ Student Dashboard
                     datasets: [
                         {
                             label: 'Class Progress',
-                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            backgroundColor: 'rgba(0, 192, 239, 1)',
                             //borderColor: 'rgba(0, 192, 239, 1)',
                             borderWidth: 0,
                             data: data.progress.videos.class_progress
                         },
                         {
                             label: 'My Progress',
-                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            backgroundColor: 'rgba(111, 215, 241, 1)',
                             //borderColor: 'rgba(221, 75, 57, 1)',
                             borderWidth: 0,
                             data: data.progress.videos.my_progress
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.videos.course_timeline
@@ -841,21 +839,21 @@ Student Dashboard
                     datasets: [
                         {
                             label: 'Class Progress',
-                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            backgroundColor: 'rgba(221, 75, 57, 1)',
                             //borderColor: 'rgba(0, 192, 239, 1)',
                             borderWidth: 0,
                             data: data.progress.ebooks.class_progress
                         },
                         {
                             label: 'My Progress',
-                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            backgroundColor: 'rgba(226, 145, 135, 1)',
                             //borderColor: 'rgba(221, 75, 57, 1)',
                             borderWidth: 0,
                             data: data.progress.ebooks.my_progress
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.ebooks.course_timeline
@@ -943,14 +941,14 @@ Student Dashboard
                         },
                         {
                             label: 'My Progress',
-                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            backgroundColor: 'rgba(91, 211, 157, 1)',
                             //borderColor: 'rgba(221, 75, 57, 1)',
                             borderWidth: 0,
                             data: data.progress.articles.my_progress
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.articles.course_timeline
@@ -1031,21 +1029,21 @@ Student Dashboard
                     datasets: [
                         {
                             label: 'Class Progress',
-                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
                             //borderColor: 'rgba(0, 192, 239, 1)',
                             borderWidth: 0,
                             data: data.progress.study_guide.class_progress
                         },
                         {
                             label: 'My Progress',
-                            backgroundColor: 'rgba(120, 198, 162, 1)',
+                            backgroundColor: 'rgba(251, 158, 96, 1)',
                             //borderColor: 'rgba(221, 75, 57, 1)',
                             borderWidth: 0,
                             data: data.progress.study_guide.my_progress
                         },
                         {
                             label: 'Course Timeline',
-                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
                             //borderColor: 'rgba(0, 166, 90, 1)',
                             borderWidth: 0,
                             data: data.progress.study_guide.course_timeline
