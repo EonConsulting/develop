@@ -62,17 +62,14 @@ Student Dashboard
                                 <option value="FBN1502">FBN1502 - Business Numerical Skills B</option>
                             </select>
                             <br>
-                            <label for="metric-type-filter">Assessment</label>
-                            <select class="form-control" id="metric-type-filter">
-                                <option value="CA">Current Average</option>
-                                <option value="FA">Formal Assessment</option>
-                                <option value="ASS">Assignment</option>
-                                <option value="EX">Exam</option>
-                                <option value="SA">Self Assessment</option>
+                            <label for="assessment-filter">Assessment</label>
+                            <select class="form-control" id="assessment-filter">
+                                <option value="SA">Summative Assessment</option>
+                                <option value="FA">Formative Assessment</option>
                             </select>
                             <br>
-                            <label for="metric-item-filter">Type</label>
-                            <select class="form-control" id="metric-item-filter">
+                            <label for="assessment-type-filter">Type</label>
+                            <select class="form-control" id="assessment-type-filter">
                             </select>
                         </div>
                     </div> <!-- end col-md-4 -->
@@ -190,10 +187,10 @@ Student Dashboard
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <script type="text/javascript">
-//--------------------------
-//-STUDENT TIMELINE CODE--------
-//--------------------------
-$(document).ready(function () {
+    //--------------------------
+    //-STUDENT TIMELINE CODE--------
+    //--------------------------
+    $(document).ready(function () {
     $('#student-timeline').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -285,10 +282,6 @@ $(document).ready(function () {
 
             var courses = [
                 {
-                    "course_id": "ALL",
-                    "description": "Current Average"
-                },
-                {
                     "course_id": "FBN1501",
                     "description": "FBN1501 - Business Numerical Skills A"
                 },
@@ -298,86 +291,56 @@ $(document).ready(function () {
                 }
             ];
 
-            var metric_items = [
+            var assessment_types = [
                 {
-                    "metric_item_id": "FA-ALL",
-                    "metric": "FA",
-                    "description": "Formal Assessment Average"
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "description": "ALL"
                 },
                 {
-                    "metric_item_id": "FA1",
-                    "metric": "FA",
-                    "description": "Formal Assessment 1"
+                    "assessment_type_id": "SA-MCQ",
+                    "assessment": "SA",
+                    "description": "MCQ"
                 },
                 {
-                    "metric_item_id": "FA2",
-                    "metric": "FA",
-                    "description": "Formal Assessment 2"
+                    "assessment_type_id": "SA-VEN",
+                    "assessment": "SA",
+                    "description": "Venue Based"
                 },
                 {
-                    "metric_item_id": "FA3",
-                    "metric": "FA",
-                    "description": "Formal Assessment 3"
+                    "assessment_type_id": "SA-POR",
+                    "assessment": "SA",
+                    "description": "Portfolio"
                 },
                 {
-                    "metric_item_id": "ASS-ALL",
-                    "metric": "ASS",
-                    "description": "Assignment Average"
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "description": "ALL"
                 },
                 {
-                    "metric_item_id": "ASS1",
-                    "metric": "ASS",
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
                     "description": "Assignment 1"
                 },
                 {
-                    "metric_item_id": "ASS2",
-                    "metric": "ASS",
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
                     "description": "Assignment 2"
                 },
                 {
-                    "metric_item_id": "ASS3",
-                    "metric": "ASS",
-                    "description": "Assignment 3"
+                    "assessment_type_id": "FA-POR",
+                    "assessment": "FA",
+                    "description": "Portfolio"
                 },
                 {
-                    "metric_item_id": "EX-ALL",
-                    "metric": "EX",
-                    "description": "Exam Average"
+                    "assessment_type_id": "FA-SA1",
+                    "assessment": "FA",
+                    "description": "Self-Assessment 1"
                 },
                 {
-                    "metric_item_id": "EX1",
-                    "metric": "EX",
-                    "description": "Exam 1"
-                },
-                {
-                    "metric_item_id": "EX2",
-                    "metric": "EX",
-                    "description": "Exam 2"
-                },
-                {
-                    "metric_item_id": "EX3",
-                    "metric": "EX",
-                    "description": "Exam 3"
-                },
-                {
-                    "metric_item_id": "SA-ALL",
-                    "metric": "SA",
-                    "description": "Self Assessment Average"
-                },
-                {
-                    "metric_item_id": "SA1",
-                    "metric": "SA",
-                    "description": "Self Assessment 1"
-                },
-                {
-                    "metric_item_id": "SA2",
-                    "metric": "SA",
-                    "description": "Self Assessment 2"
-                },
-                {
-                    "metric_item_id": "SA3",
-                    "metric": "SA",
-                    "description": "Self Assessment 3"
+                    "assessment_type_id": "FA-SA2",
+                    "assessment": "FA",
+                    "description": "Self-Assessment 2"
                 }
             ];
 
@@ -437,225 +400,183 @@ $(document).ready(function () {
             var results = [
                 {
                     "course_id": "FBN1501",
-                    "metric": "CA",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "labels": [],
                     "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
                     "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08]
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08, 60]
                 },
                 {
-                    "course_id": "FBN1502",
-                    "metric": "CA",
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "labels": [],
                     "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
                     "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "FA",
-                    "metric_item_id": "FA-ALL",
-                    "your_results": [],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08, 65]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "FA",
-                    "metric_item_id": "FA-ALL",
-                    "your_results": [],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "ASS",
-                    "metric_item_id": "ASS-ALL",
-                    "your_results": [],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "labels": [],
+                    "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
+                    "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08, 52.5]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "ASS",
-                    "metric_item_id": "ASS-ALL",
-                    "your_results": [],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "labels": [],
+                    "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
+                    "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08, 72.1]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "EX",
-                    "metric_item_id": "EX-ALL",
-                    "your_results": [],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-MCQ",
+                    "labels": ["MCQ1", "MCQ2", "MCQ3", "MCQ4", "MCQ5", "MCQ6"],
+                    "your_results": [80, 56, 45, 51, 59, 76],
+                    "class_average": [65, 59, 65, 60, 75, 58],
+                    "your_average": [60, 76, 75, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "EX",
-                    "metric_item_id": "EX-ALL",
-                    "your_results": [],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-MCQ",
+                    "labels": ["MCQ7", "MCQ8", "MCQ9", "MCQ10", "MCQ11", "MCQ12"],
+                    "your_results": [60, 62, 55, 71, 59, 76],
+                    "class_average": [55, 61, 54, 50, 75, 58],
+                    "your_average": [50, 72, 45, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "SA",
-                    "metric_item_id": "SA-ALL",
-                    "your_results": [],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "your_average": [55, 59, 55, 50, 56, 55, 51, 59, 56, 72, 43, 42]
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-VEN",
+                    "labels": ["VEN1", "VEN2", "VEN3", "VEN4", "VEN5", "VEN6"],
+                    "your_results": [80, 56, 45, 51, 59, 76],
+                    "class_average": [65, 59, 65, 60, 75, 58],
+                    "your_average": [60, 76, 75, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "SA",
-                    "metric_item_id": "SA-ALL",
-                    "your_results": [],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [75, 79, 75, 60, 76, 75, 71, 79, 76, 52, 53, 52]
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-VEN",
+                    "labels": ["VEN7", "VEN8", "VEN9", "VEN10", "VEN11", "VEN12"],
+                    "your_results": [60, 62, 55, 71, 59, 76],
+                    "class_average": [55, 61, 54, 50, 75, 58],
+                    "your_average": [50, 72, 45, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "ASS",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [52, 55, 63, 45, 56, 80, 50, 65, 57, 75, 51, 80],
-                    "your_average": []
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-POR",
+                    "labels": ["POR1", "POR2", "POR3", "POR4", "POR5", "POR6"],
+                    "your_results": [80, 56, 45, 51, 59, 76],
+                    "class_average": [65, 59, 65, 60, 75, 58],
+                    "your_average": [60, 76, 75, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "ASS",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [62, 75, 58, 65, 59, 85, 60, 55, 58, 55, 61, 70],
-                    "your_average": []
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-POR",
+                    "labels": ["POR7", "POR8", "POR9", "POR10", "POR11", "POR12"],
+                    "your_results": [59, 58, 51, 50, 80, 64],
+                    "class_average": [71, 84, 78, 65, 74, 52],
+                    "your_average": [50, 72, 45, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "EX",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [76, 66, 63, 49, 56, 60, 70, 55, 62, 75, 51, 80],
-                    "your_average": []
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS1",
+                    "labels": ["Result"],
+                    "your_results": [80],
+                    "class_average": [65],
+                    "your_average": [60]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "EX",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [52, 58, 62, 85, 59, 65, 66, 75, 58, 55, 61, 70],
-                    "your_average": []
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS1",
+                    "labels": ["Result"],
+                    "your_results": [58],
+                    "class_average": [84],
+                    "your_average": [72]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "SA",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [42, 66, 55, 59, 56, 60, 40, 45, 62, 75, 51, 80],
-                    "your_average": []
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS2",
+                    "labels": ["Result"],
+                    "your_results": [60],
+                    "class_average": [75],
+                    "your_average": [60]
                 },
                 {
                     "course_id": "FBN1502",
-                    "metric": "SA",
-                    "metric_item_id": "",
-                    "your_results": [],
-                    "class_average": [82, 63, 72, 65, 59, 65, 60, 81, 58, 55, 61, 70],
-                    "your_average": []
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS2",
+                    "labels": ["Result"],
+                    "your_results": [79],
+                    "class_average": [65],
+                    "your_average": [72]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "FA",
-                    "metric_item_id": "FA1",
-                    "your_results": [62],
-                    "class_average": [70],
-                    "your_average": []
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-POR",
+                    "labels": ["Result"],
+                    "your_results": [65],
+                    "class_average": [73],
+                    "your_average": [69]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-POR",
+                    "labels": ["Result"],
+                    "your_results": [73],
+                    "class_average": [85],
+                    "your_average": [72]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "FA",
-                    "metric_item_id": "FA2",
-                    "your_results": [72],
-                    "class_average": [83],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "FA",
-                    "metric_item_id": "FA3",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA1",
+                    "labels": ["Result"],
                     "your_results": [55],
-                    "class_average": [66],
-                    "your_average": []
+                    "class_average": [76],
+                    "your_average": [61]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA1",
+                    "labels": ["Result"],
+                    "your_results": [63],
+                    "class_average": [75],
+                    "your_average": [65]
                 },
                 {
                     "course_id": "FBN1501",
-                    "metric": "ASS",
-                    "metric_item_id": "ASS1",
-                    "your_results": [62],
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA2",
+                    "labels": ["Result"],
+                    "your_results": [65],
+                    "class_average": [64],
+                    "your_average": [69]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA2",
+                    "labels": ["Result"],
+                    "your_results": [61],
                     "class_average": [70],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "ASS",
-                    "metric_item_id": "ASS2",
-                    "your_results": [72],
-                    "class_average": [83],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "ASS",
-                    "metric_item_id": "ASS3",
-                    "your_results": [55],
-                    "class_average": [66],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "EX",
-                    "metric_item_id": "EX1",
-                    "your_results": [62],
-                    "class_average": [70],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "EX",
-                    "metric_item_id": "EX2",
-                    "your_results": [72],
-                    "class_average": [83],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "EX",
-                    "metric_item_id": "EX3",
-                    "your_results": [55],
-                    "class_average": [66],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "SA",
-                    "metric_item_id": "SA1",
-                    "your_results": [62],
-                    "class_average": [70],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "SA",
-                    "metric_item_id": "SA2",
-                    "your_results": [72],
-                    "class_average": [83],
-                    "your_average": []
-                },
-                {
-                    "course_id": "FBN1501",
-                    "metric": "SA",
-                    "metric_item_id": "SA3",
-                    "your_results": [55],
-                    "class_average": [66],
-                    "your_average": []
+                    "your_average": [85]
                 }
             ];
             // bind some events so that we
@@ -663,16 +584,16 @@ $(document).ready(function () {
             // bind some events so that we
             // can simulate remote data store
             var selected_course;
-            var selected_metric;
+            var selected_assessment;
             
             // event for change on metrics
-            $("#metric-type-filter").on("change", function () {
+            $("#assessment-filter").on("change", function () {
                 var self = $(this);
-                selected_metric = self.val();
-                updateMetricItems(selected_metric);
+                selected_assessment = self.val();
+                updateAssessmentTypes(selected_assessment);
 
                 // lodash methods for rendering graph
-                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric}));
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'assessment': selected_assessment}));
                 renderResultsGraph(_.head(courses));
 
                 // lodash methods for rendering progression
@@ -686,27 +607,27 @@ $(document).ready(function () {
             $("#course-filter").on("change", function () {
                 var self = $(this);
                 selected_course = $(this).val();
-                // trigger the metric type filter change event
-                $("#metric-type-filter").trigger("change");
+                // trigger the assessment filter change event
+                $("#assessment-filter").trigger("change");
             });
             // and lets just select the first record on page load
             $("#course-filter").trigger("change");
 
             // event for change on metric items
-            $("#metric-item-filter").on("change", function () {
+            $("#assessment-type-filter").on("change", function () {
                 var self = $(this);
                 // lodash methods for rendering graph
-                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'metric': selected_metric, 'metric_item_id': self.val()}));
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'assessment': selected_assessment, 'assessment_type_id': self.val()}));
                 renderResultsGraph(_.head(courses));
             });
 
-            function updateMetricItems(metric_type)
+            function updateAssessmentTypes(a_type)
             {
-                var select = $("#metric-item-filter");
+                var select = $("#assessment-type-filter");
                 select.empty();
-                var items = _.filter(metric_items, _.iteratee({'metric': metric_type}));
+                var items = _.filter(assessment_types, _.iteratee({'assessment': a_type}));
                 $.each(items, function (idx, obj) {
-                    var option = new Option(obj.description, obj.metric_item_id);
+                    var option = new Option(obj.description, obj.assessment_type_id);
                     select.append($(option));
                 });
             }
@@ -718,16 +639,15 @@ $(document).ready(function () {
                 $('#student-results-container').append('<canvas id="student-results"><canvas>');
                 
                 // pull a switch-a-roo on the labels and axis count
-                var labels = ['Result'];
-                if (data.your_results.length > 1 || data.your_average.length > 1 || data.class_average.length > 1)
+                if (data && data.labels.length < 1)
                 {
-                    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                 }
 
                 var areaChartCanvas = $('#student-results').get(0).getContext('2d');
 
                 var areaChartData = {
-                    labels: labels,
+                    labels: data.labels,
                     datasets: [
 
                         {
