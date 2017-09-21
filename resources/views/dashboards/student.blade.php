@@ -68,7 +68,7 @@ Student Dashboard
                                 <option value="FA">Formative Assessment</option>
                             </select>
                             <br>
-                            <label for="assessment-type-filter">Type</label>
+                            <label for="assessment-type-filter">Assessment Type</label>
                             <select class="form-control" id="assessment-type-filter">
                             </select>
                         </div>
@@ -403,36 +403,36 @@ Student Dashboard
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
-                    "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08, 60]
+                    "your_results": [55, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [52, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1501",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08, 65]
+                    "your_results": [85, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [82, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [85, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [82, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08, 52.5]
+                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 62],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
+                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 52.5]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [55, 49, 65, 80, 56, 45, 51, 59, 76, 62, 63, 62],
-                    "class_average": [52, 73, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 48.75, 60.67, 60.80, 61, 61.08, 72.1]
+                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 62],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
+                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 72.1]
                 },
                 {
                     "course_id": "FBN1501",
@@ -456,37 +456,37 @@ Student Dashboard
                     "course_id": "FBN1501",
                     "assessment": "SA",
                     "assessment_type_id": "SA-VEN",
-                    "labels": ["VEN1", "VEN2", "VEN3", "VEN4", "VEN5", "VEN6"],
-                    "your_results": [80, 56, 45, 51, 59, 76],
-                    "class_average": [65, 59, 65, 60, 75, 58],
-                    "your_average": [60, 76, 75, 71, 79, 76]
+                    "labels": ["VEN1", "VEN2"],
+                    "your_results": [59, 76],
+                    "class_average": [75, 58],
+                    "your_average": [79, 76]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-VEN",
-                    "labels": ["VEN7", "VEN8", "VEN9", "VEN10", "VEN11", "VEN12"],
-                    "your_results": [60, 62, 55, 71, 59, 76],
-                    "class_average": [55, 61, 54, 50, 75, 58],
-                    "your_average": [50, 72, 45, 71, 79, 76]
+                    "labels": ["VEN3", "VEN4"],
+                    "your_results": [60, 62],
+                    "class_average": [55, 61],
+                    "your_average": [50, 72]
                 },
                 {
                     "course_id": "FBN1501",
                     "assessment": "SA",
                     "assessment_type_id": "SA-POR",
-                    "labels": ["POR1", "POR2", "POR3", "POR4", "POR5", "POR6"],
-                    "your_results": [80, 56, 45, 51, 59, 76],
-                    "class_average": [65, 59, 65, 60, 75, 58],
-                    "your_average": [60, 76, 75, 71, 79, 76]
+                    "labels": ["POR1", "POR2", "POR3", "POR4"],
+                    "your_results": [80, 56, 45, 51],
+                    "class_average": [65, 59, 65, 60],
+                    "your_average": [60, 76, 75, 71]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-POR",
-                    "labels": ["POR7", "POR8", "POR9", "POR10", "POR11", "POR12"],
-                    "your_results": [59, 58, 51, 50, 80, 64],
-                    "class_average": [71, 84, 78, 65, 74, 52],
-                    "your_average": [50, 72, 45, 71, 79, 76]
+                    "labels": ["POR5", "POR6", "POR7", "POR8"],
+                    "your_results": [51, 50, 80, 64],
+                    "class_average": [78, 65, 74, 52],
+                    "your_average": [45, 71, 79, 76]
                 },
                 {
                     "course_id": "FBN1501",
