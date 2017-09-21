@@ -88,8 +88,8 @@ Student Dashboard
                             <br>
                             <label for="assessment-filter">Assessment</label>
                             <select class="form-control" id="assessment-filter">
-                                <option value="SA">Summative Assessment</option>
                                 <option value="FA">Formative Assessment</option>
+                                <option value="SA">Summative Assessment</option>
                             </select>
                             <br>
                             <label for="assessment-type-filter">Assessment Type</label>
