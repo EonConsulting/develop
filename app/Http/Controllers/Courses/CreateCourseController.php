@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models;
+use App\Models\Course;
+use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
