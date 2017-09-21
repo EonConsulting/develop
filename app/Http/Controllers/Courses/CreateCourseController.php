@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models;
+use App\Models\Course;
+use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -121,7 +122,7 @@ class CreateCourseController extends Controller {
             $entities = $request->input('entities');
             // get the metadata store array
             //$metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
-            $metadata_store = Models\MetadataStore::where('entities', 'like', '%' . $entities . '%')
+            $metadata_store = MetadataStore::where('entities', 'like', '%' . $entities . '%')
                ->orderBy('metadata_type', 'ASC')
                ->get();
             //$all_metadata_types = array_column($metadata_store, 'metadata_type');
