@@ -26,6 +26,30 @@ Student Dashboard
         font-weight: 700;
     }
 
+    .main-chart {
+        border-width: 0px 1px 0px 0px;
+        border-style: solid;
+        border-color: #DBDBDB;
+        background: #FFF;
+        
+    }
+
+    .progress-charts {
+        background: #F9F9F9;
+    }
+    
+    .progress-charts h2 {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    .progress-charts h3 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
 </style>
 @endsection
 
@@ -98,35 +122,43 @@ Student Dashboard
                     Course Progression
                 </div>
 
-                <div class="row sp-top-15 sp-bot-15 basic-clearfix">
+                <div class="basic-clearfix">
 
-                    <div class="col-md-3">
-                        <h3>Videos</h3>
-                        <div class="container-fluid" id="video-progression-container" style="height: 300px;">
-                            <canvas id="video-progression"></canvas>
-                        </div>
-                    </div> <!-- end col-md-4 -->
+                    <div class="progress-charts basic-clearfix">
 
-                    <div class="col-md-3">
-                        <h3>E-Books</h3>
-                        <div class="container-fluid" id="ebook-progression-container" style="height: 300px;">
-                            <canvas id="ebook-progression"></canvas>
+                        <div class="col-md-3 main-chart">
+                            <h2>Study Guide</h2>
+                            <div class="container-fluid" id="study-guide-progression-container" style="height: 300px;">
+                                <canvas id="study-guide-progression"></canvas>
+                            </div>
+                        </div><!-- end col-md-8 -->
+
+                        <div class="col-md-9">
+                             <div class="row basic-clearfix">
+                                <div class="col-md-4">
+                                    <h3>Videos</h3>
+                                    <div class="container-fluid" id="video-progression-container" style="height: 300px;">
+                                        <canvas id="video-progression"></canvas>
+                                    </div>
+                                </div> <!-- end col-md-4 -->
+
+                                <div class="col-md-4">
+                                    <h3>E-Books</h3>
+                                    <div class="container-fluid" id="ebook-progression-container" style="height: 300px;">
+                                        <canvas id="ebook-progression"></canvas>
+                                    </div>
+                                </div><!-- end col-md-8 -->
+                                
+                                <div class="col-md-4">
+                                    <h3>Articles</h3>
+                                    <div class="container-fluid" id="article-progression-container" style="height: 300px;">
+                                        <canvas id="article-progression"></canvas>
+                                    </div>
+                                </div><!-- end col-md-8 -->
+
+                            </div>
                         </div>
-                    </div><!-- end col-md-8 -->
-                    
-                    <div class="col-md-3">
-                        <h3>Articles</h3>
-                        <div class="container-fluid" id="article-progression-container" style="height: 300px;">
-                            <canvas id="article-progression"></canvas>
-                        </div>
-                    </div><!-- end col-md-8 -->
-                    
-                    <div class="col-md-3">
-                        <h3>Study Guide</h3>
-                        <div class="container-fluid" id="study-guide-progression-container" style="height: 300px;">
-                            <canvas id="study-guide-progression"></canvas>
-                        </div>
-                    </div><!-- end col-md-8 -->
+                    </div>
 
                 </div>
                 

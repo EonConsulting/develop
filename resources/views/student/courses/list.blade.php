@@ -88,6 +88,7 @@
 @endsection
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -139,7 +140,7 @@
 {{--Typeahead--}}
 <script>
 
-    var url = '';
+var url = '';
 
 $(document).ready(function () {
     $(".typeahead").typeahead({}).on("input", function (e) {
