@@ -50,6 +50,15 @@ Student Dashboard
         font-weight: 700;
     }
 
+   /* .timeline {
+        padding-right: 280px;
+    }
+
+    .timeline-key {
+        width: 280px;
+        float: right;
+    }*/
+
 </style>
 @endsection
 
@@ -176,20 +185,19 @@ Student Dashboard
 
                 <div class="row basic-clearfix sp-top-15 sp-bot-15">
                     <div class="container-fluid">
-                        <div class="col-md-10">
+                        <div class="col-lg-9 col-md-8 col-xs-12">
                             <div id="student-timeline"></div>
                         </div>
 
-
-                        <div class="col-md-2">
+                        <div class="col-lg-3 col-md-4 col-xs-12">
                             <h4>Timeline Key</h3>
-                                <div>
-                                    <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
-                                    <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
-                                    <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
-                                    <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
-                                    <p><div class="btn btn-primary btn-cal-key">Other</div></p>
-                                </div>
+                            <div>
+                                <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
+                                <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
+                                <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
+                                <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
+                                <p><div class="btn btn-primary btn-cal-key">Other</div></p>
+                            </div>
                         </div>
                     </div>
                 </div> <!--end row>
