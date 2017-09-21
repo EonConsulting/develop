@@ -8,7 +8,7 @@ class Content extends Model {
 
     protected $table = 'content';
     protected $primaryKey = 'id';
-    protected $fillable = ['title', 'body', 'tags', 'creator_id','description'];
+    protected $fillable = ['title', 'body', 'tags', 'creator_id','description','cloned_id'];
 
     public function creator() {
         return $this->belongsTo(User::class, 'creator_id', 'id');
@@ -21,5 +21,6 @@ class Content extends Model {
     public function storyline_items() {
         return $this->hasMany('EONConsulting\Storyline2\Models\StorylineItem', 'content_id')->withTimestamps();
     }
-    
+
+
 }

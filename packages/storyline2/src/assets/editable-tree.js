@@ -19,8 +19,7 @@ $( document ).ready(function(){
 
     //Move Node Action
     $(tree_id).on("move_node.jstree", function (e, data) {
-        var ref = data.node;
-        moveNode(ref);
+        moveNode(data);
     });
 
     //Create Node Action
@@ -30,19 +29,23 @@ $( document ).ready(function(){
 
     //Select Node Action
     $(tree_id).on("changed.jstree", function (e, data) {
+        $("#item-id").val(data.node.id);
 
-    $("#content-title").val("");
-    $("#content-description").val("");
-    $("#content-tags").val("");
-    var body = editor.setData("");
-    
-    var ref = data.node;
-    getContent(ref);
+        $(".cat_check").prop('checked', false);
+        $("#content-id").val("");
+        $("#content-title").val("");
+        $("#content-description").val("");
+        $("#content-tags").val("");
+
+        var body = editor.setData("");
+        
+        var ref = data.node;
+        getContent(ref);
 
     });
 
 })
- 
+
 function refreshTree(){
     $.getJSON(url,
         function (data) {
@@ -54,8 +57,8 @@ function refreshTree(){
         }
     );
 }
-
-
+ 
+ 
 function drawTree(tree_data) {
     console.log(tree_data);
 
@@ -73,15 +76,14 @@ function drawTree(tree_data) {
  
  
  
-function treeToJSON(){
-
-    var v =$(tree_id).jstree(true).get_json('#', { 'flat': true });
-    console.log(v);
-
-}
+ function treeToJSON(){
+ 
+     var v =$(tree_id).jstree(true).get_json('#', { 'flat': true });
+     console.log(v);
+ 
+ }
 
 //detect when node is clicked, ie. selected node changes
-
 
 /*
 $(tree_id).on("create_node.jstree", function (e, data) {
@@ -107,32 +109,75 @@ $(tree_id).on("cut.jstree", function (e, data) {
 $(tree_id).on("paste.jstree", function (e, data) {
     console.log("paste pasted");
 });*/
- 
+
+function import_content($content_id,$item_id,$action){
+
+    console.log("import_content called");
+
+    actionUrl = base_url + "/storyline2/add-item-content/" + $content_id + "/" + $item_id + "/" + $action;
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                $('#importModal').modal('hide');
+
+                var id = data.id;
+
+                console.log(id);
+                
+                getContent({"id": id});
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+
+}
  
 function populateContentForm(data){
 
-var course_data = jQuery.parseJSON(data);
+    console.log("populateContentForm called");
 
-console.log(course_data);
+    var course_data = jQuery.parseJSON(data);
 
+    if(course_data.found == true){
 
-if(course_data.found == true){
-        console.log("Found!");
+        $("#content-id").val(course_data.content.id);
         $("#content-title").val(course_data.content.title);
         $("#content-description").val(course_data.content.description);
         $("#content-tags").val(course_data.content.tags);
         var body = editor.setData(course_data.content.body);
+
+        for (index = 0; index < course_data.categories.length; ++index) {
+            cat_id = "#cat" + course_data.categories[index].id;
+            console.log(cat_id);
+            $(cat_id).prop('checked', true);
+        }
+
     }
 
 }
- 
- //Get Content
+
+//Get Content
 function getContent(data) {
- 
+
+    console.log("getContent called");
+
     var item_id = data['id'];
+    console.log(item_id);
     actionUrl = base_url + "/storyline2/item-content/" + item_id;
-    
-    $("#item-id").val(item_id);
 
     $.ajax({
         method: "GET",
@@ -156,12 +201,12 @@ function getContent(data) {
         alert(error);
     });
 
-    
- 
+
+
 }
- 
- //Create Node
- function createNode(data) {
+
+//Create Node
+function createNode(data) {
     var node = $.extend(true, {}, data.node);
     var actionUrl = base_url + "/storyline2/create";
 
@@ -193,12 +238,12 @@ function getContent(data) {
         alert(error);
     });
 
-    
- 
- }
- 
- //Delete Node
- function deleteNode(data) {
+
+
+}
+
+//Delete Node
+function deleteNode(data) {
     var actionUrl = base_url + "/storyline2/delete";
 
     $.ajax({
@@ -227,11 +272,11 @@ function getContent(data) {
     }).error(function (req, status, error) {
         alert(error);
     });
- 
- }
- 
- //Move node
- function moveNode(data) {
+
+}
+
+//Move node
+function moveNode(data) {
     var actionUrl = base_url + "/storyline2/move";
 
     $.ajax({
@@ -260,11 +305,11 @@ function getContent(data) {
     }).error(function (req, status, error) {
         alert(error);
     });
- 
- }
- 
- //Rename Node
- function renameNode(data) {
+
+}
+
+//Rename Node
+function renameNode(data) {
     var actionUrl = base_url + "/storyline2/rename";
 
 
@@ -294,4 +339,4 @@ function getContent(data) {
     }).error(function (req, status, error) {
         alert(error);
     });
- }
+}

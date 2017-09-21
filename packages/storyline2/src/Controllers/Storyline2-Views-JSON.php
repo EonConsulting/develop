@@ -10,7 +10,6 @@
 namespace EONConsulting\Storyline2\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-//use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;

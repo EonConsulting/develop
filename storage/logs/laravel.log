@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2017-09-15 08:48:40] local.ERROR: BadMethodCallException: Call to undefined method Baum\Extensions\Query\Builder::save() in /home/vagrant/Code/unisa/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:2445
 Stack trace:
 #0 /home/vagrant/Code/unisa/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1254): Illuminate\Database\Query\Builder->__call('save', Array)
@@ -6927,3 +6928,5 @@ Stack trace:
 #47 C:\wamp64\www\develop\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #48 C:\wamp64\www\develop\server.php(21): require_once('C:\\wamp64\\www\\d...')
 #49 {main}  
+=======
+>>>>>>> 6373112df90f003754fda60ece850334e194d512

@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          */
 
         //RESTful routes
-        Route::resource('/items', 'ContentBuilderCategories');
+        //Route::resource('/items', 'ContentBuilderCategories');
 
         //Render JSON Route
         Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2.JSON.render');
@@ -41,7 +41,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
 
         Route::get('/item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
         Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');
-        Route::post('/add-item-content/{content}/{item}', 'Storyline2Core@attach_content_to_item')->name('storyline2.item.content.add');
+        Route::post('/add-item-content/{content}/{item}/{action}', 'Storyline2Core@attach_content_to_item')->name('storyline2.item.content.add');
 
         //Route::match(['get', 'post'], '/json-render','Storyline2ViewsJSON@render')->name('storyline2JSONrender');
         Route::match(['get', 'post'], '/move','Storyline2ViewsJSON@move')->name('storyline2.JSON.move');
