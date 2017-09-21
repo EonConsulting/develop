@@ -41,57 +41,51 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                     src: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ckeditorstore',
                                                     width: '100%',
                                                     height: '100%',
-                                                    onContentLoad: function () {                                                        
+                                                    onContentLoad: function () {
                                                         // We Access the DOM Instance of the Iframe
                                                         var iframe = document.getElementById(this._.frameId);
-                                                        var iframeWindow = iframe.contentWindow;
-                                                        //Still in this context we get the attribute of the selected item
-                                                        iframeWindow.$('.appitem').each(function () {
-                                                       
-                                                            var $this = $(this);                                        
-                                                            $this.on("click", function () {
-                                                                 alert();
-                                                                var context_id = $(this).data('context');                                                                
-                                                                $.ajax({
-                                                                    url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id,
-                                                                    type: 'GET',
-                                                                    success: function (launchvars) {
-                                                                        //Production
-                                                                        //var url        = '/e-content/ajaxresponse/' +context_id;
-                                                                        var url = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id;
-                                                                        var div = new CKEDITOR.dom.element('div');
-                                                                        var appframe = new CKEDITOR.dom.element('iframe');
-                                                                        console.log('appframe', appframe);
-                                                                        //Set Iframe Attributes
-                                                                        div.setAttributes({
-                                                                            'class': 'appframe'
-                                                                        });
-                                                                        appframe.setAttributes({
-                                                                            'width': '100%',
-                                                                            'height': 750,
-                                                                            'type': 'text/html',
-                                                                            'src': url,
-                                                                            'allowtransparency': 'true',
-                                                                            'frameborder': 0,
-                                                                            'class': 'ckeditorframev2',
-                                                                            'scrolling': 'no'
-                                                                        });
+                                                        var varStoresNameIframe = $(iframe).contents().find('.appitem');                                                       
+                                                        $(varStoresNameIframe).click(function () {
+                                                              var context_id = $(this).data('context');
+                                                            $.ajax({
+                                                                url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id,
+                                                                type: 'GET',
+                                                                success: function (launchvars) {
+                                                                    //Production
+                                                                    //var url        = '/e-content/ajaxresponse/' +context_id;
+                                                                    var url = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id;
+                                                                    var div = new CKEDITOR.dom.element('div');
+                                                                    var appframe = new CKEDITOR.dom.element('iframe');
+                                                                    console.log('appframe', appframe);
+                                                                    //Set Iframe Attributes
+                                                                    div.setAttributes({
+                                                                        'class': 'appframe'
+                                                                    });
+                                                                    appframe.setAttributes({
+                                                                        'width': '100%',
+                                                                        'height': 750,
+                                                                        'type': 'text/html',
+                                                                        'src': url,
+                                                                        'allowtransparency': 'true',
+                                                                        'frameborder': 0,
+                                                                        'class': 'ckeditorframev2',
+                                                                        'scrolling': 'no'
+                                                                    });
 
-                                                                        // $(appframe).on('load', function() {
-                                                                        //     console.log('appframe2', appframe);
-                                                                        //     $(appframe).height($(appframe).contents().find("html").height());
-                                                                        //     // appframe.style.height = appframe.contentWindow.document.body.scrollHeight + 'px';
-                                                                        //     // $(appframe).setAttribute('height', $(appframe).contentWindow.document.body.scrollHeight + 'px');
-                                                                        // });
-                                                                        // $(appframe).load();
-                                                                       editor.insertElement(div, div.append(appframe));
-                                                                  //Insert Element and Exit Dialog Window
-                                                                        CKEDITOR.dialog.getCurrent().hide();
-                                                                    },
-                                                                })
-
-                                                            });
+                                                                    // $(appframe).on('load', function() {
+                                                                    //     console.log('appframe2', appframe);
+                                                                    //     $(appframe).height($(appframe).contents().find("html").height());
+                                                                    //     // appframe.style.height = appframe.contentWindow.document.body.scrollHeight + 'px';
+                                                                    //     // $(appframe).setAttribute('height', $(appframe).contentWindow.document.body.scrollHeight + 'px');
+                                                                    // });
+                                                                    // $(appframe).load();
+                                                                    editor.insertElement(div, div.append(appframe));
+                                                                    //Insert Element and Exit Dialog Window
+                                                                    CKEDITOR.dialog.getCurrent().hide();
+                                                                },
+                                                            })
                                                         });
+                                                        
                                                     }
 
                                                 }]
