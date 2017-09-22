@@ -221,7 +221,7 @@ Lecture
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Import Content</h4>
+                    <h4 class="modal-title">Topic Progress Alert</h4>
                 </div>
 
                 <div class="modal-body">
@@ -459,7 +459,7 @@ Lecture
     });
 
     function progress_error(url){
-        
+
         $(document).on('hide.bs.modal','#errorModal', function () {
             window.location.href = url;
         });
