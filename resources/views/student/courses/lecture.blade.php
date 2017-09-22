@@ -212,6 +212,34 @@ Lecture
 </div>
 @endsection
 
+@section('exterior-content')
+
+    <div id="errorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Import Content</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="error-message">
+                        Please complete current learning objective before moving to the next one. You will now be taken to your furthest progress.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>
+                </div>
+            </div>
+
+        </div>
+    </div>  
+
+@endsection
+
 @section('custom-scripts')
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
@@ -347,8 +375,9 @@ Lecture
                     if (data.msg === 'true') {     
                         window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
-                        alert('Please complete current Learning Objective before moving to the Next one!');                        
-                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');                        
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -358,6 +387,8 @@ Lecture
             });
         });
         
+
+
         $(".subtopic-left").click(function (e) {
             e.stopPropagation();
             e.preventDefault();            
@@ -378,8 +409,10 @@ Lecture
                         //alert(data.story);
                         window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
-                        alert('Please complete current Learning Objective before moving to the Next one!');
-                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -407,10 +440,12 @@ Lecture
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
                         //alert(data.story);
-                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
                     } else if(data.msg === 'error'){
-                        alert('Please complete current Learning Objective before moving to the Next one!');
-                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -422,5 +457,16 @@ Lecture
         
 
     });
+
+    function progress_error(url){
+        
+        $(document).on('hide.bs.modal','#errorModal', function () {
+            window.location.href = url;
+        });
+
+        $("#errorModal").modal("show");
+
+    }
+
 </script>
 @endsection

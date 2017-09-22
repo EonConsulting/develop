@@ -40,6 +40,8 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         </div>
 
+        @yield('exterior-content')
+
         @include('templates.default-scripts')
 
         @yield('custom-scripts')
