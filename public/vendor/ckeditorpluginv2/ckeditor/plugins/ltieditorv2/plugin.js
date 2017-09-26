@@ -44,7 +44,7 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                     onContentLoad: function () {
                                                         // We Access the DOM Instance of the Iframe
                                                         var iframe = document.getElementById(this._.frameId);
-                                                        var varStoresNameIframe = $(iframe).contents().find('.appitem');                                                       
+                                                        var varStoresNameIframe = $(iframe).contents().find('.appitem'); 
                                                         $(varStoresNameIframe).click(function () {
                                                               var context_id = $(this).data('context');
                                                             $.ajax({
