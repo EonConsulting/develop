@@ -46,9 +46,9 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                         var iframe = document.getElementById(this._.frameId);
                                                         var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                                                         $(iframeDoc).ready(function (event) {
-                                                          // you can manipulate the iframe content further:                                 
-                                                         var varStoresNameIframe = $(iframe).contents().find('.appitem');
-                                                         $(varStoresNameIframe).click(function () {
+                                                          alert('iframe ready');
+                                                          $(iframeDoc).find('.appitem').click(function(event) {
+                                                           //$(varStoresNameIframe).click(function () {
                                                             var context_id = $(this).data('context');
                                                             $.ajax({
                                                                 url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id,

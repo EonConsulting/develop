@@ -122,6 +122,7 @@
                     </header>
                 </div>
 
+
                 <div class="filters">
                     <h1>Sort</h1>
                     <div class="form-group">
@@ -224,6 +225,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
             <div class="clearfix"></div>
