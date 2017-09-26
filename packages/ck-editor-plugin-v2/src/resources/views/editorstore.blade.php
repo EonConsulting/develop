@@ -122,7 +122,6 @@
                     </header>
                 </div>
 
-
                 <div class="filters">
                     <h1>Sort</h1>
                     <div class="form-group">
@@ -204,8 +203,6 @@
 
                 </div>
 
-
-
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
                 <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="app-entry shadow pull-left">
@@ -227,7 +224,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
             <div class="clearfix"></div>

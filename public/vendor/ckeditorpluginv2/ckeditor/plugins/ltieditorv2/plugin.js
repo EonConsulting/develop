@@ -44,9 +44,12 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                     onContentLoad: function () {
                                                         // We Access the DOM Instance of the Iframe
                                                         var iframe = document.getElementById(this._.frameId);
-                                                        var varStoresNameIframe = $(iframe).contents().find('.appitem'); 
-                                                        $(varStoresNameIframe).click(function () {
-                                                              var context_id = $(this).data('context');
+                                                        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                                                        $(iframeDoc).ready(function (event) {
+                                                          // you can manipulate the iframe content further:                                 
+                                                         var varStoresNameIframe = $(iframe).contents().find('.appitem');
+                                                         $(varStoresNameIframe).click(function () {
+                                                            var context_id = $(this).data('context');
                                                             $.ajax({
                                                                 url: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ajaxresponse/' + context_id,
                                                                 type: 'GET',
@@ -85,7 +88,9 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                                 },
                                                             })
                                                         });
-                                                        
+                                                        });
+                                     
+
                                                     }
 
                                                 }]
