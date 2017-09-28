@@ -196,7 +196,7 @@
         <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
             <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
-                    <i class="fa fa-user-circle fa-lg left-menu-icon"></i>
+                    <i class="fa fa-database fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
                         Data Maintenance
                     </span>
