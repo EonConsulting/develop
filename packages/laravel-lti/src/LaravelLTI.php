@@ -142,6 +142,20 @@ class LaravelLTI {
     public function is_instructor($user = false, $context_id = false) {
         return $this->is_x($user, $context_id, 'Instructor');
     }
+    
+   /**
+    * 
+    * @param type $user
+    * @param type $context_id
+    * @return type
+    */
+    public function is_admin($user = false, $context_id = false) {
+        return $this->is_x($user, $context_id, 'Administrator');
+    }
+    
+    public function is_mentor($user = false, $context_id = false) {
+        return $this->is_x($user, $context_id, 'Mentor');
+    }
 
     public function is_lti($user = false) {
         return $user->hasLtiLinks($user->id);
