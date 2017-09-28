@@ -54,15 +54,15 @@
 
 <div class="left-menu">
     <ul>           
-            <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
-                <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards') }}">
-                    <i class="fa fa-braille fa-lg left-menu-icon"></i>
-                    <span class="menu_collapse">
-                        Dashboard
-                    </span>
-                </a>
-            </li>
-            
+        <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
+            <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards') }}">
+                <i class="fa fa-braille fa-lg left-menu-icon"></i>
+                <span class="menu_collapse">
+                    Dashboard
+                </span>
+            </a>
+        </li>
+
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
             <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                 <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
@@ -142,79 +142,79 @@
                 </div>
             </li>
         <?php endif; ?>
-            
-         <?php if (laravel_lti()->is_admin(auth()->user())) : ?>    
-        <!-- TODO: If role == admin the show this menu item -->
-        <li class="left-menu-tree {{ (Route::currentRouteName() == 'eon.admin.groups' || Route::currentRouteName() == 'eon.admin.permissions' || Route::currentRouteName() == 'eon.admin.roles' || Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
-            <a href="#" class="accordian">
-                <i class="fa fa-user-circle fa-lg left-menu-icon"></i>
-                <span class="menu_collapse">
-                    Roles and Permissions
-                </span>
-                <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
-            </a>
 
-            <div class="left-menu-sub hidden">
-                <ul>
+        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>    
+            <!-- TODO: If role == admin the show this menu item -->
+            <li class="left-menu-tree {{ (Route::currentRouteName() == 'eon.admin.groups' || Route::currentRouteName() == 'eon.admin.permissions' || Route::currentRouteName() == 'eon.admin.roles' || Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
+                <a href="#" class="accordian">
+                    <i class="fa fa-user-circle fa-lg left-menu-icon"></i>
+                    <span class="menu_collapse">
+                        Roles and Permissions
+                    </span>
+                    <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
+                </a>
 
-                    <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.admin.groups') }}">
-                            <i class="fa fa-circle-o left-menu-icon"></i>
-                            Groups
-                        </a>
-                    </li>
+                <div class="left-menu-sub hidden">
+                    <ul>
 
-
-                    <li class="{{ (Route::currentRouteName() == 'eon.admin.permissions') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.admin.permissions') }}">
-                            <i class="fa fa-circle-o left-menu-icon"></i>
-                            Permissions
-                        </a>
-                    </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.groups') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Groups
+                            </a>
+                        </li>
 
 
-                    <li class="{{ (Route::currentRouteName() == 'eon.admin.roles') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.admin.roles') }}">
-                            <i class="fa fa-circle-o left-menu-icon"></i>
-                            Roles
-                        </a>
-                    </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.permissions') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.permissions') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Permissions
+                            </a>
+                        </li>
 
 
-                    <li class="{{ (Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.admin.roles.users') }}">
-                            <i class="fa fa-circle-o left-menu-icon"></i>
-                            Users
-                        </a>
-                    </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.roles') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.roles') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Roles
+                            </a>
+                        </li>
 
-                </ul>
-            </div>
 
-        </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.roles.users') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Users
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </li>
         <?php endif; ?>
         <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
             <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
-                <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards') }}">
-                    <i class="fa fa-database fa-lg left-menu-icon"></i>
+                <a href="#" class="accordian">
+                    <i class="fa fa-user-circle fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
                         Data Maintenance
                     </span>
-                     <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
+                    <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
                 </a>
-             <div class="left-menu-sub hidden">
-                <ul>
+                <div class="left-menu-sub hidden">
+                    <ul>
 
-                    <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.admin.groups') }}">
-                            <i class="fa fa-circle-o left-menu-icon"></i>
-                            Metadata
-                        </a>
-                    </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.groups') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Metadata
+                            </a>
+                        </li>
 
 
-                </ul>
-            </div>    
+                    </ul>
+                </div>    
             </li>
         <?php endif; ?>
     </ul>
