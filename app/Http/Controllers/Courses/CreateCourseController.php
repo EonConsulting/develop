@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models;
+use App\Models\Course;
+use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class CreateCourseController extends Controller {
             ],
         ];
 
-        return view('lecturer.courses.create', [ 'breadcrumbs' => $breadcrumbs ]);
+        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
     }
 
     public function store(Request $request) {
@@ -113,14 +114,22 @@ class CreateCourseController extends Controller {
             return redirect()->route('courses');
         }
     }
-    
-    public function fill_metadata_store(Request $request)
-    {
-        // get the metadata store array
-        $metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
-        //$all_metadata_types = array_column($metadata_store, 'metadata_type');
-        //$metadata_types = array_unique($all_metadata_types);
-        return response()->json($metadata_store);
+
+    public function fill_metadata_store(Request $request) {
+
+        if ($request->ajax()) {
+            // which entities should we use?
+            $entities = $request->input('entities');
+            // get the metadata store array
+            //$metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
+            $metadata_store = MetadataStore::where('entities', 'like', '%' . $entities . '%')
+               ->orderBy('metadata_type', 'ASC')
+               ->get();
+            //$all_metadata_types = array_column($metadata_store, 'metadata_type');
+            //$metadata_types = array_unique($all_metadata_types);
+            //dd(DB::getQueryLog());
+            return response()->json($metadata_store);
+        }
     }
 
 }

@@ -55,7 +55,7 @@
     <div class="left-menu">
         <ul>
             <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
-                <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards')}}">
+                <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards') }}">
                     <i class="fa fa-braille fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
                         Dashboard

@@ -5,7 +5,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
 
         @include('templates.pagehead')
@@ -39,6 +39,8 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
 
         </div>
+
+        @yield('exterior-content')
 
         @include('templates.default-scripts')
 

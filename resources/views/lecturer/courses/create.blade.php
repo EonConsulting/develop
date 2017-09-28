@@ -11,7 +11,7 @@ Create a Course
 
 <div class="container-fluid">
     <div class="row">
-        <form method="POST" class="form-horizontal">
+        <form method="POST" id="frmCreateCourse" name="frmCreateCourse" class="form-horizontal">
             <div class="col-md-12">
                 <div class="dashboard-card shadow">
                     <div class="dashboard-card-heading">
@@ -19,6 +19,7 @@ Create a Course
                     </div>
                     <div class="container-fluid">
                         {{ csrf_field() }}
+                        <input type="hidden" name="metadata_payload" id="metadata_payload" />
                         <div class="form-group">
                             <div class="col-md-8">
                                 <label>Module Title</label>
@@ -53,6 +54,9 @@ Create a Course
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 pull-right">
+                <button class="btn btn-info" id="btnSubmit">Save</button>
+            </div>
         </form>
     </div>
 
@@ -63,15 +67,15 @@ Create a Course
                     <label>Meta Information</label>
                 </div>
                 <div class="container-fluid">	
-                    <p>Please choose metadata items</p>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <select id="metadata_store_list" class="form-control">
+                    <div class="col-md-4">
+                        <p>Please choose metadata items</p>
+                        <div class="form-group">
+                            <select id="metadata_store_list" size="15" class="form-control">
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
+                    <div class="col-md-8">
+                        <div class="form-group">
                             <div id="metadata_forms"></div>
                         </div>
                     </div>
@@ -96,6 +100,7 @@ $(document).ready(function () {
     $(document).ready(function () {
         // some vars for re-use
         var dataSet = null;
+        var metaSet = [];
 
         // main ajax method for select
         $.ajax({
@@ -104,9 +109,13 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            data: {
+                "entities": "storyline"
+            },
             statusCode: {
                 200: function (data) {
                     dataSet = data;
+                    console.log(dataSet);
                     // using lodash to get the metadata types
                     var mtypes = _.groupBy(data, "metadata_type");
                     $.each(mtypes, function (idx, obj) {
@@ -132,21 +141,46 @@ $(document).ready(function () {
         {
             var form = $("#metadata_forms");
             form.html('');
-            form.append('<form method="POST" id="metadata_form_body" class="form-inline">');
+            form.append('<form id="metadata_form_body" class="form-horizontal">');
 
             var fields = _.filter(dataSet, _.iteratee({'metadata_type': mtype}));
-            console.log(fields);
             $.each(fields, function (idx, obj) {
-                form.append('<div class="row">');
-                form.append('<label for="check_' + obj.id + '" >' + obj.description + '</label>');
-                form.append('<input type="checkbox" class="form-control" id="check_' + obj.id + '" >');
-                form.append('<input type="text" class="form-control" id="value_' + obj.id + '" >');
-                form.append('</div>');
+                form.append('<div class="form-group">'
+                        + '<label for="check_' + obj.id + '" >' + obj.description + '</label>'
+                        + '<input type="checkbox" data-id="' + obj.id + '" class="form-control" id="meta_check_' + obj.id + '" >'
+                        + '<input type="text" data-id="' + obj.id + '" class="form-control" id="meta_value_' + obj.id + '" >'
+                        + '</div>');
             });
-            
-            form.append('<button class="btn btn-info" id="btnSaveMetadata">Save</button>');
+
             form.append('</form>');
+
+            // bind the click events on all checkboxes
+            $("input[id^='meta_check_']").on("click", function () {
+                var self = $(this);
+                var id = self.data("id");
+                if (self.prop("checked")) {
+                    // set the object checkbox and value in case someone dbl-checks
+                    var value = $("input[id^='meta_value_" + id + "']").val();
+                    metaSet.push({"id": id, "value": value});
+                } else
+                {
+                    _.pullAllBy(metaSet, [{"id": id}], "id");
+                }
+
+                console.log(metaSet);
+            });
+            // bind the change event on all input texts
+            $("input[id^='meta_value_']").on("change", function () {
+                alert("value input changed");
+            });
         }
+        
+        // submit the form after populating the metadata hidden input
+        $("#btnSubmit").on("click", function(){
+            // stringify the payload and json_decode on server side
+            $("#metadata_payload").val(JSON.stringify(metaSet));
+            $("#frmCreateCourse").submit();
+        });
     });
 </script>
 @endsection
