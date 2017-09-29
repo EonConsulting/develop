@@ -27,10 +27,10 @@ class DashboardLTIController extends LTIBaseController {
                 break;
             case "Instructor":
                 $breadcrumbs = [
-                    'title' => 'Instructor Dashboard'
+                    'title' => 'Lecturer Dashboard'
                 ];
 
-                return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
+                return view('dashboards.lecturer', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
             case "Learner":
                 $breadcrumbs = [

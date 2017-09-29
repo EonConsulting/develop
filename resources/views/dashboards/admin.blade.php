@@ -2,7 +2,7 @@
 
 
 @section('page-title')
-Student Dashboard
+Administrator Dashboard
 @endsection
 
 
