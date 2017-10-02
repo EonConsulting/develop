@@ -186,7 +186,6 @@ class Storyline2ViewsJSON extends BaseController {
         if ($parent->isLeaf()) {
             if ($node->makeChildOf($parent)) {
                 $msg = 'success2';
-                dd('child');
             } else {
                 $msg = 'failed';
             }
@@ -196,7 +195,6 @@ class Storyline2ViewsJSON extends BaseController {
         if (is_null($moveTo)) {
             if ($node->makeLastChildOf($parent)) {
                 $msg = 'success2';
-                dd('last');
             } else {
                 $msg = 'failed';
             }
@@ -204,8 +202,7 @@ class Storyline2ViewsJSON extends BaseController {
         
         if ($moveTo) {
             if ($node->makeChildOf($parent)) {
-                $msg = 'success2';
-                
+                $msg = 'success2';               
             } else {
                 $msg = 'failed';
             }

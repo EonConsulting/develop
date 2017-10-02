@@ -204,8 +204,6 @@
 
                 </div>
 
-
-
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
                 <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="app-entry shadow pull-left">
