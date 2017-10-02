@@ -41,6 +41,7 @@ Storyline Student Single
      *----------------------------------------------------------------------
      */
 
+    
     .page-container {
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -325,7 +326,7 @@ Storyline Student Single
 
                             <div class="info-bar-name">
                                 <div>
-                                    <input id="content-title" type="text" class="form-title" name="title" placeholder="Content Title" value=""/>
+                                    <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                                 </div>
                             </div>
 
@@ -350,7 +351,7 @@ Storyline Student Single
 
                 <div class="content-editor">
                     <div class="contentBoxHeight">
-                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="editor">
+                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="editor" data-toggle="popover" data-placement="left" data-content="">
                             
                         </textarea>
 
@@ -364,6 +365,7 @@ Storyline Student Single
     </div><!--End row -->
 
 </div><!--End container-fluid -->
+
 
 {{ csrf_field() }}
 
@@ -389,10 +391,10 @@ Storyline Student Single
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input id="content-description" type="text" class="form-control" name="description" value="">
+                    <input id="content-description" type="text" class="form-control" name="description" value="" data-toggle="popover" data-placement="left" data-content="">
                 </div>
 
-                <div class="form-group" id="categories">
+                <div class="form-group" id="categories" data-toggle="popover" data-placement="left" data-content="">
                     <div>
                         <label for="categories[]">Categories</label>
                     </div>
@@ -411,7 +413,7 @@ Storyline Student Single
 
                 <div class="form-group">
                     <label for="tags">Tags</label>
-                    <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="">
+                    <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="" data-toggle="popover" data-placement="left" data-content="">
                 </div>
 
                 <div class="validation alert alert-warning" role="alert" id="validation">
@@ -470,6 +472,7 @@ Storyline Student Single
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
 
 <script>
 var base_url = "{{{ url('') }}}";
@@ -495,11 +498,10 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     $(function(){
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
-                    extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                    allowedContent: true,
-                    fullPage: false,
-                    mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                    
+                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                allowedContent: true,
+                fullPage: false,
+                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
             }
         );
 
@@ -517,14 +519,9 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 breakBeforeClose : false,
                 breakAfterClose : false
             });
-        });
-
-        
+        });  
 
         editor.Height = '100%';
-
-        {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
-
 
     });
 
@@ -572,21 +569,241 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     });
 
+    var valid = {
+        "title_length": false,
+        "title_unique": false,
+        "description": false,
+        "tags": false,
+        "content": false,
+        "categories": false
+    };
 
-    
-    
-    function save_content_to_item(){
+    //Delete Node Action
+    $(tree_id).on("delete_node.jstree", function (e, data) {
+        console.log(data.node.id);
+        deleteNode(data.node.id);
+    });
 
-        $("#validation").hide();
+    //Rename Node Action
+    $(tree_id).on("rename_node.jstree", function (e, data) {
+        var ref = data.node;
+        renameNode(ref);
+    });
+
+    //Move Node Action
+    $(tree_id).on("move_node.jstree", function (e, data) {
+        moveNode(data);
+    });
+
+    //Create Node Action
+    $(tree_id).on("create_node.jstree", function (e, data) {
+        createNode(data);
+    });
+
+    //Select Node Action
+    $(tree_id).on("changed.jstree", function (e, data) {
+        $("#item-id").val(data.node.id);
+
+        $(".cat_check").prop('checked', false);
+        $("#content-id").val("");
+        $("#content-title").val("");
+        $("#content-description").val("");
+        $("#content-tags").val("");
+
+        var body = editor.setData("");
+
+        var ref = data.node;
+        getContent(ref);
+
+        for (var item in valid){
+            item = false;
+        }
+
+        $("#content-title").popover("hide");
+        $("#content-body").popover("hide");
+        $("#content-description").popover("hide");
+        $("#categories").popover("hide");
+        $("#content-tags").popover("hide");
+
+    });
+
+    //--form validation----------------------------------------------------
+
+   
+
+
+    //update events
+    $("#content-title").change(function(){
+        validate_title();
+    });
+
+    $("#content-description").change(function(){
+        validate_description();
+    });
+
+    $("#ltieditorv2inst").change(function(){
+        validate_content();
+    });
+
+    $("#categories input:checkbox").change(function(){
+        validate_categories();
+    });
+
+    $("#content-tags").change(function(){
+        validate_tags();
+    });
+
+
+    function validate_all(){
+        validate_title();
+        validate_description();
+        validate_categories();
+        validate_body();
+        validate_tags();
+    }
+
+
+    //check title is at least 4 characters long and unique
+    function validate_title(){
+
+        var element = $("#content-title");
+        var title = element.val();
+
+        if(title.length < 4){
+
+            console.log("Title not long enough.")
+            valid["title_length"] = false;
+            show_error(element,"This title isn't long enough. Please enter a title that is at least 4 characters long.");
+
+        } else {
+
+            valid["title_length"] = true;
+
+            var actionUrl = base_url + "/content/content-title-exists";
+
+            $.ajax({
+                method: "POST",
+                url: actionUrl,
+                contentType: 'json',
+                data: JSON.stringify({"title": title}),
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        
+                        if(data && data.exists === true){
+                            valid["title_unique"] = false;
+                            console.log("Title not unique.");
+                            show_error(element,"This title already exists. Please enter a unique title.");
+                        } else {
+                            valid["title_unique"] = true;
+                            console.log("name doesn't exist");
+                            element.popover("hide");
+                        }
+
+                    },
+                    400: function () { //bad request
+        
+                    },
+                    500: function () { //server kakked
+        
+                    }
+                }
+            }).error(function (req, status, error) {
+                alert(error);
+            });
+
+        }
+        
+    }
+
+    //check that at least one category has been chosen
+    function validate_categories(){
+
+        var element = $('#categories');
+        var cats = $("#categories input:checkbox:checked").map(function(){
+            return $(this).val();
+        }).get();
+
+        if(cats.length < 1){
+            valid["categories"] = false;
+            show_error(element,"Please select at least one category.");
+        } else {
+            valid["categories"] = true;
+            element.popover("hide");
+        }
+
+    }
+
+    //check if body is the same as any other
+    function validate_body(){
+
+        var element = $('#ltieditorv2inst');
+        var body = editor.getData();
+
+        if(body.length < 4){
+            valid["content"] = false;
+            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
+        } else {
+            valid["content"] = true;
+            element.popover("hide");
+        }
+
+    }
+
+    //check if description is longer than 4 characters
+    function validate_description(){
+
+        var element = $("#content-description");
+        var description = element.val()
+
+        if(description.length < 4){
+            valid["description"] = false;
+            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
+        } else {
+            valid["description"] = true;
+            element.popover("hide");
+        }
+
+    }
+
+    //check if tags has been filled in
+    function validate_tags(){
+
+        var element = $("#content-tags");
+        var tags = element.val()
+
+        if(tags.length < 4){
+            valid["tags"] = false;
+            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
+        } else {
+            valid["tags"] = true;
+            element.popover("hide");
+        }
+
+    }
+
+    function check_for_id(){
+        var id = $("#content-id").val();
+        return id;
+    }
+
+    //pop up error
+    function show_error(element,message){
+        element.attr('data-content', message);
+        element.popover("show");
+    }
+
+    //get content information from form
+    function get_content_details(){
 
         var body = editor.getData();
 
         var cats = $("#categories input:checkbox:checked").map(function(){
             return $(this).val();
         }).get();
-
-        var item_id = $("#item-id").val();
-
+    
         var data = {
             "title": $("#content-title").val(),
             "description": $("#content-description").val(),
@@ -595,19 +812,37 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             "tags": $("#content-tags").val(),
             "id": $("#content-id").val()
         };
-    
-        var validate = true;
-        var invalid = {};
 
-        for (var k in data) {
-            if(k!= "id" && data[k].length < 1){
-                validate = false;
-                invalid[k] = data[k];
+        var item_id = $("#item-id").val();
+
+        return data;
+
+    }
+
+    function validation(){
+
+        for(var item in valid){
+            if(item === false){
+                return false;
             }
         }
 
+        return true;
+
+    }
+
+
+    function save_content_to_item(){
+
+        $("#validation").hide();
+
+        var data = get_content_details();
+
+        debugger;
         
-        if(validate == true) {
+        validate_all();
+
+        if(validation() === true) {
 
             actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
 
@@ -636,22 +871,13 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         } else {
             
-            var error = "The following field are required: "
-
-            for (var k in invalid) {
-                
-                error = error + "<strong>" + k + "</strong>, "
-
-            }   
-
-            error = error + "please fill them in and try again."
+            var error = "There are problems with the content you are trying to save. Please fix them and try again.";
 
             $("#validation").html(error);
 
             $("#validation").show();
 
         }
-
 
     }
 

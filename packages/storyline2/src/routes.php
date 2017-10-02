@@ -13,6 +13,9 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
 
         //Core Routes
         Route::get('/', 'Storyline2Core@index')->name('storyline2');
+
+        
+       
         /*
          * ---------------------------------------------
          * Storyline 2 - Views - Blade - Routes

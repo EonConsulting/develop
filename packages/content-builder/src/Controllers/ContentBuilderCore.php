@@ -11,13 +11,24 @@ use Illuminate\Support\Facades\DB;
 class ContentBuilderCore extends Controller {
 
 
-    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function index() {
 
         $content = Content::all();
+        $content_squashed = [];
 
         foreach($content as $k => $item){
             $content[$k]->tags = $this->get_tags($item);
+            
+            if($item->clone_id === null){
+                
+                $content_squashed[$item->id] = $item;
+
+            }
         }
 
         $categories = Category::all();
@@ -29,6 +40,13 @@ class ContentBuilderCore extends Controller {
         return view('eon.content-builder::store', ['content' => $content, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $content_id
+     * @return void
+     */
     public function view($content_id) {
 
         $content = Content::find($content_id);
@@ -47,6 +65,12 @@ class ContentBuilderCore extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $content_id
+     * @return void
+     */
     public function edit($content_id){
 
         $content = Content::find($content_id);
@@ -79,6 +103,12 @@ class ContentBuilderCore extends Controller {
     }
     
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $course
+     * @return void
+     */
     public function get_tags($course) {
 
         $tags = explode(',',$course->tags);
@@ -95,6 +125,7 @@ class ContentBuilderCore extends Controller {
 
         return array_count_values($tags);
     }
+
     /**
      * Undocumented function
      *
@@ -118,7 +149,13 @@ class ContentBuilderCore extends Controller {
      */
 
 
-     public function show($content){
+    /**
+     * Undocumented function
+     *
+     * @param [type] $content
+     * @return void
+     */
+    public function show($content){
 
         if($content === "all"){
             $result = Content::all();  
@@ -126,8 +163,9 @@ class ContentBuilderCore extends Controller {
             $result = Content::find($content);
         }
 
-        return json_encode($result);
-     }
+        return response()->json($result);
+
+    }
 
 
     /**
@@ -157,6 +195,13 @@ class ContentBuilderCore extends Controller {
        
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $content_id
+     * @return void
+     */
     public function update(Request $request, $content_id){
 
         $content = Content::find($content_id);
@@ -217,7 +262,7 @@ class ContentBuilderCore extends Controller {
      * @return mixed
      *
      */
-    protected function new_file_request($request) {
+    protected function new_file_request(Request $request) {
         $file_name = $request->get('file_name');
         if (str_word_count($file_name) > 1) {
             $new_file_name = preg_replace('/\s+/', '_', $file_name);
@@ -225,6 +270,31 @@ class ContentBuilderCore extends Controller {
         } else {
             return $file_name;
         }
+    }
+
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $title
+     * @return void
+     */
+    public function title_exists(Request $request){
+
+        $data = $request->json()->all();
+
+        $title = $data['title'];
+
+        $exists = Content::where('title', $title)->exists();
+
+        if($exists){
+            $result = ['exists' => true];
+        } else {
+            $result = ['exists' => false];
+        }
+
+        return response()->json($result);
+
     }
 
 }

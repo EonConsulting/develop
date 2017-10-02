@@ -5,45 +5,6 @@ $(document).ready(function () {
 
     refreshTree();
 
-    //Delete Node Action
-    $(tree_id).on("delete_node.jstree", function (e, data) {
-        console.log(data.node.id);
-        deleteNode(data.node.id);
-    });
-
-    //Rename Node Action
-    $(tree_id).on("rename_node.jstree", function (e, data) {
-        var ref = data.node;
-        renameNode(ref);
-    });
-
-    //Move Node Action
-    $(tree_id).on("move_node.jstree", function (e, data) {
-        moveNode(data);
-    });
-
-    //Create Node Action
-    $(tree_id).on("create_node.jstree", function (e, data) {
-        createNode(data);
-    });
-
-    //Select Node Action
-    $(tree_id).on("changed.jstree", function (e, data) {
-        $("#item-id").val(data.node.id);
-
-        $(".cat_check").prop('checked', false);
-        $("#content-id").val("");
-        $("#content-title").val("");
-        $("#content-description").val("");
-        $("#content-tags").val("");
-
-        var body = editor.setData("");
-
-        var ref = data.node;
-        getContent(ref);
-
-    });
-
 })
 
 function refreshTree() {

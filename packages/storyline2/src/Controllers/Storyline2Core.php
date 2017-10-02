@@ -45,6 +45,12 @@ class Storyline2Core extends BaseController {
         }
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $item
+     * @return void
+     */
     public function get_content($item){
 
         $storyline_item = StorylineItem::find($item);
@@ -71,15 +77,32 @@ class Storyline2Core extends BaseController {
 
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $content
+     * @param [type] $item
+     * @param [type] $action
+     * @return void
+     */
     public function attach_content_to_item($content, $item, $action){
+
+        $result = ["id" => $item];
 
         if($action === "copy"){
 
-            $this_content = Content::find($content)->toArray();
+            $this_content = Content::find($content);
             
-            $new_content = new Content($this_content);
+            $new_content = new Content($this_content->toArray());
+            $new_content->title = "";
             $new_content->cloned_id = $content;
             $new_content->save();
+
+            foreach($this_content->categories as $k => $category) {
+                $temp = Category::find($category->id);
+                $new_content->categories()->save($temp);
+            }
     
             $storyline_item = StorylineItem::find($item);
             $storyline_item->content_id = $new_content->id;
@@ -94,10 +117,18 @@ class Storyline2Core extends BaseController {
         }
         
 
-        return response()->json(["id" => $item]);
+        return response()->json($result);
 
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $item
+     * @return void
+     */
     public function save_content(Request $request, $item){
 
         $data = $request->json()->all();
@@ -150,5 +181,6 @@ class Storyline2Core extends BaseController {
         return 200;
 
     }
-
+    
+    
 }

@@ -17,7 +17,8 @@ class UpdateStorylineItemsTable extends Migration
 
             $table->unsignedInteger("content_id")->nullable()->default(null);
             $table->foreign('content_id', 'content_ibfk_2')
-                ->references('id')->on('content');
+                ->references('id')->on('content')
+                ->onDelete('set null');
         });
     }
 
