@@ -128,7 +128,7 @@ Student Dashboard
             <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Course Progression
+                    Module Progression
                 </div>
 
                 <div class="basic-clearfix">
@@ -443,36 +443,36 @@ Student Dashboard
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [55, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
-                    "class_average": [52, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
-                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
+                    "your_results": [0, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1501",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [85, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
-                    "class_average": [82, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
-                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
+                    "your_results": [0, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 62],
-                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
-                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 52.5]
+                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 0],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
+                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 0]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 62],
-                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
-                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 72.1]
+                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 0],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
+                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 0]
                 },
                 {
                     "course_id": "FBN1501",
