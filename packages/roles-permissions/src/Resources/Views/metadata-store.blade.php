@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                             @foreach($metadatas as $index => $metadata)
-                                <tr class="clickable-row" data-href="{{ route('eon.admin.roles.single', $metadata->id) }}" data-roleid="{{ $metadata->id }}">
+                                <tr class="" data-href="{{ route('eon.admin.roles.single', $metadata->id) }}" data-roleid="{{ $metadata->id }}">
                                     <a href="">
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $metadata->metadata_type }}</td>
@@ -106,13 +106,12 @@
               });
             });
             
-            $(".edit-metadata").click(function(event){
-               event.preventDefault();
+            $(".edit-metadata").click(function(){
                $("#metaModal").modal();
                var id = $(this).attr('data-roleid');               
                var url = '{{ route("eon.admin.metadata.edit",":id") }}';
                url = url.replace(':id', id);
-               //alert(url);
+               alert(url);
                $.ajax({
                 url: url,
                 type: "GET",
@@ -120,8 +119,7 @@
                 beforeSend: function () {
                     $('.data-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
-                success: function (data, textStatus, jqXHR)
-                {
+                success: function (data, textStatus, jqXHR){
                     $(".meta-title").text('Edit Metadata');
                     $(".meta-submit").text('Submit');
                     $(".data-info").html(data);
