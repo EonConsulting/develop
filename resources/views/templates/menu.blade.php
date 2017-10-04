@@ -206,7 +206,7 @@
                     <ul>
 
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.admin.groups') }}">
+                            <a href="{{ route('eon.admin.metadata') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
                                 Metadata
                             </a>
