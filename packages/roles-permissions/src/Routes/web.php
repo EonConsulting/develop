@@ -6,7 +6,7 @@
  * Time: 5:31 PM
  */
 
-Route::group(['middleware' => ['web', 'auth', 'instructor'], 'prefix' => '/admin', 'namespace' => 'EONConsulting\\RolesPermissions\\Http\\Controllers\\'], function() {
+Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/admin', 'namespace' => 'EONConsulting\\RolesPermissions\\Http\\Controllers\\'], function() {
     Route::group(['namespace' => 'Admin\\Roles\\'], function() {
         Route::get('/groups', ['as' => 'eon.admin.groups', 'uses' => 'GroupsController@index']);
         Route::get('/groups/create', ['as' => 'eon.admin.groups.create', 'uses' => 'GroupsController@create']);
@@ -42,5 +42,6 @@ Route::group(['middleware' => ['web', 'auth', 'instructor'], 'prefix' => '/admin
         Route::get('/metadata/create', ['as' => 'eon.admin.metadata.create', 'uses' => 'MetadataController@create']);
         Route::post('/metadata/save', ['as' => 'eon.admin.metadata.save', 'uses' => 'MetadataController@save']);
         Route::get('/metadata/edit/{id}', ['as' => 'eon.admin.metadata.edit', 'uses' => 'MetadataController@edit']);
+        Route::post('/metadata/update/{id}', ['as' => 'eon.admin.metadata.update', 'uses' => 'MetadataController@update']);
     });
 });

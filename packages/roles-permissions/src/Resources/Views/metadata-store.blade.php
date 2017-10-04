@@ -84,7 +84,9 @@
 
             $("#meta-store").click(function(){
                $("#metaModal").modal();
-               var url = '{{ route('eon.admin.metadata.create') }}';
+               var action = '{{ route("eon.admin.metadata.save") }}';
+               $('#saveMeta').attr('action', action);                         
+               var url = '{{ route("eon.admin.metadata.create") }}';
                $.ajax({
                 url: url,
                 type: "GET",
@@ -108,10 +110,12 @@
             
             $(".edit-metadata").click(function(){
                $("#metaModal").modal();
-               var id = $(this).attr('data-roleid');               
+               var id = $(this).attr('data-roleid');
+               var action = '{{ route("eon.admin.metadata.update",":id") }}';
+               action = action.replace(':id', id);
+               $('#saveMeta').attr('action', action);                             
                var url = '{{ route("eon.admin.metadata.edit",":id") }}';
                url = url.replace(':id', id);
-               alert(url);
                $.ajax({
                 url: url,
                 type: "GET",
@@ -122,6 +126,7 @@
                 success: function (data, textStatus, jqXHR){
                     $(".meta-title").text('Edit Metadata');
                     $(".meta-submit").text('Submit');
+                    $('#saveMeta').attr("id","updateMeta");
                     $(".data-info").html(data);
                     
                 },
@@ -133,6 +138,36 @@
             });
             
             $(document).on('submit', '#saveMeta', function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = $(this).attr("action");
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    asyn: false,
+                    data: formData,
+                    beforeSend: function () {
+                        $('.meta-submit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR){
+                       	       if($.isEmptyObject(data.error)){
+                                   printSuccessMsg (data.success);
+                                   setTimeout(function(){                                      
+                                       location.reload();
+                                   },3000);
+	                        }else{                                     
+	                	printErrorMsg(data.error);
+	                }
+                        $('.meta-submit').text("Submit");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
+            });
+            
+            $(document).on('submit', '#updateMeta', function (event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
                 var url = $(this).attr("action");

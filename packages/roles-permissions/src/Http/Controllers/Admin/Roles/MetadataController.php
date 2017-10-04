@@ -56,16 +56,27 @@ class MetadataController extends Controller {
 
         return response()->json(['error' => $validator->errors()->all()]);
     }
+    
+    public function update(Request $request,$id) {
+            
+        $validator = Validator::make($request->all(), [
+                    'metadata_type' => 'required',
+                    'description' => 'required',
+        ]);
 
-    public function update(User $user, Role $role, Group $group) {
-        $obj = DB::table('users_roles')->where('user_id', $user->id)->where('role_id', $role->id)->where('group_id', $group->id)->first();
-        if ($obj) {
-            DB::table('users_roles')->where('user_id', $user->id)->where('role_id', $role->id)->where('group_id', $group->id)->delete();
-        } else {
-            DB::table('users_roles')->insert(['user_id' => $user->id, 'role_id' => $role->id, 'group_id' => request()->get('group_id')]);
+        if ($validator->passes()) {
+            $Metadata = MetadataStore::find($id);
+            $Metadata->metadata_type = $request->get('metadata_type');
+            $Metadata->description = $request->get('description');
+            $Metadata->classification = $request->get('classification');
+            $Metadata->sequence = $request->get('sequence');
+            $Metadata->save();
+            return response()->json(['success'=>'Metadata has been updated successfully.']);
         }
 
-        return response()->json(['success' => true]);
+        return response()->json(['error' => $validator->errors()->all()]);
     }
+
+    
 
 }
