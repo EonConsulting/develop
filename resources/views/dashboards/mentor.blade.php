@@ -836,7 +836,7 @@ $(document).ready(function () {
                 }
             ];
 
-            
+
             // bind some events so that we
             // can simulate remote data store
             // bind some events so that we
@@ -923,7 +923,6 @@ $(document).ready(function () {
                         break;
                 }
 
-                console.log(studtrends);
                 renderTrendsGraph(studtrends);
             });
             $("#student-trend-filter").trigger("change");
@@ -933,25 +932,31 @@ $(document).ready(function () {
                 var r = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
                 return r * boost_factor; // this is to boost entries for certain periods
             }
-            
+
+            function getDayName(dateStr, locale)
+            {
+                console.log("date is:" + dateStr);
+                var date = new Date(dateStr);
+                return date.toLocaleDateString(locale, {weekday: 'long'});
+            }
+
             function generateRandomDataset(value, period)
             {
                 var labels = [];
-                var logins =[];
+                var logins = [];
                 var videos = [];
                 var ebooks = [];
                 var articles = [];
                 var assessments = [];
                 var boost_factor = 1;
                 var hours_of_interest = [8, 9, 18, 19, 20, 21, 22];
-                var days_of_interest = [];
-                        
-                switch (period){
+                var days_of_interest = [3, 7, 14, 21, 25];
+
+                switch (period) {
                     case "hours":
-                        
-                        for (x=0; x < value; x++)
+                        for (x = 0; x < value; x++)
                         {
-                            (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1; 
+                            (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1;
                             labels.push(x + "h00");
                             logins.push(generateRandomNumber(3, 120, boost_factor));
                             videos.push(generateRandomNumber(3, 120, boost_factor));
@@ -961,28 +966,38 @@ $(document).ready(function () {
                         }
                         break;
                     case "days":
+                        for (x = value; x > 0; x--)
+                        {
+                            (_.indexOf(days_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1;
+                            labels.push(getDayName(new Date().getDate() - x, "en-US"));
+                            logins.push(generateRandomNumber(3, 120, boost_factor));
+                            videos.push(generateRandomNumber(3, 120, boost_factor));
+                            ebooks.push(generateRandomNumber(3, 120, boost_factor));
+                            articles.push(generateRandomNumber(3, 120, boost_factor));
+                            assessments.push(generateRandomNumber(3, 120, boost_factor));
+                        }
                         break;
                     case "months":
                         break;
                 }
-                
+
                 var ds =
-                {
-                    //"course_id": "FBN1501",
-                    //"assessment": "SA",
-                    //"assessment_type_id": "SA-ALL",
-                    "student_id": selected_student,
-                    "labels": labels,
-                    "logins": logins,
-                    "videos": videos,
-                    "ebooks": ebooks,
-                    "articles": articles,
-                    "assessments": assessments
-                };
-                
+                        {
+                            //"course_id": "FBN1501",
+                            //"assessment": "SA",
+                            //"assessment_type_id": "SA-ALL",
+                            "student_id": selected_student,
+                            "labels": labels,
+                            "logins": logins,
+                            "videos": videos,
+                            "ebooks": ebooks,
+                            "articles": articles,
+                            "assessments": assessments
+                        };
+
                 return ds;
             }
-            
+
             function updateAssessmentTypes(a_type)
             {
                 var select = $("#assessment-type-filter");
