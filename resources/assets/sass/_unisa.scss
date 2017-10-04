@@ -166,6 +166,21 @@ $user-box-height: 70px;
 
 .dashboard-card-bottom-link {text-align: center; padding: 5px 0px 10px 0px;}
 
+//content-builder-styles
+.content-card {width: 300px; background: #FFF; padding: 15px; margin: 0px 20px 20px 0px; float: left;}
+.content-card-header {font-size: 16px; height: 58px; overflow: hidden; font-weight: 700; color: $unisa-orange; margin: 0px -15px 0px -15px; padding: 0px 15px 5px 15px; border-width: 0px 0px 1px 0px; border-style: solid; border-color: $light-gray; }
+.content-card-body {height: 150px; overflow: hidden; margin: 15px 0px 15px 0px; font-size: 12px;}
+.content-card-footer {margin: 0px -15px -15px -15px; padding: 15px; background: #f8f8f8; font-size: 24px; border-width: 1px 0px 0px 0px; border-style: solid; border-color: $light-gray;}
+.content-card-footer a {color: gray;}
+.content-card-footer a {color: #606060;}
+
+.content-card-footer-leftbutton {padding: 0px 15px 0px 0px;}
+.content-card-footer-rightbutton {padding: 0px 0px 0px 15px; float: right;}
+
+//view content styles
+.content-page {background: #FFF; padding: 30px; max-width: 1120px;}
+
+
 //Footer area
 .main-footer {
     padding: 15px; background: #FFF;
@@ -180,6 +195,7 @@ $user-box-height: 70px;
     -ms-flex-item-align: auto;
     align-self: auto;
 }
+
 
 //mixins
 .bg-col-1 {background: $colour1;} .bg-col-2 {background: $colour2;} .bg-col-3 {background: $colour3;} .bg-col-4 {background: $colour4;}
@@ -205,3 +221,7 @@ $user-box-height: 70px;
 .btn-info {background: $colour1;} .btn-info:hover {background: darken($colour1,20%)}
 .btn-warning {background: $colour4;} .btn-warning:hover {background: darken($colour4,20%)}
 .btn-danger {background: $colour2;} .btn-danger:hover {background: darken($colour2,20%)}
+
+.modal-content {
+    z-index: 2000;
+}

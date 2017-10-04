@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
-        Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+        //Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
 
 
         // Feed POst Route from Web Pack
@@ -97,10 +97,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 
 
     });
-    Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
+
+    /*Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
         Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
         Route::post('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@store']);
-    });
+    });*/
 });
 
 /*

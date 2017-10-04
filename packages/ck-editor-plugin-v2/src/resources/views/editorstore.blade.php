@@ -201,11 +201,6 @@
                     </div>
 
                 </div>
-
-            </div>
-
-
-
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
                 <div ng-repeat="tool in tools| filter:query | orderBy: orderList" class="app-entry shadow pull-left">
@@ -219,7 +214,7 @@
                         </div>
                         <div>
                             <div class="btn-entry-container basic-clearfix">
-                                <a data-context="<% tool.context_id %>" class="appitem btn-entry btn-entry-view" role="button" title="Insert">
+                                <a data-context="<% tool.context_id %>" id="reggie" class="appitem btn-entry btn-entry-view" role="button" title="Insert">
                                     <span class="glyphicon glyphicon-open"></span> Insert
                                 </a>
                             </div>
@@ -245,6 +240,5 @@
             return $(this).height() + 20;
         })));
     });
-
 </script>
-@endsection
+

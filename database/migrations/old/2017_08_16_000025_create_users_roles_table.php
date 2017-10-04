@@ -19,18 +19,16 @@ class CreateUsersRolesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable($this->set_schema_table)) {
-            Schema::create($this->set_schema_table, function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('user_id');
-                $table->unsignedInteger('role_id');
-                $table->unsignedInteger('group_id')->default('0');
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('user_id');
+            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('group_id')->default('0');
 
-                $table->index(["role_id"], 'users_roles_role_id_foreign');
+            $table->index(["role_id"], 'users_roles_role_id_foreign');
 
-                $table->index(["group_id"], 'users_roles_group_id_foreign');
-            });
-        }
+            $table->index(["group_id"], 'users_roles_group_id_foreign');
+        });
     }
 
     /**

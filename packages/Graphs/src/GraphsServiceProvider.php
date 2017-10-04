@@ -1,4 +1,6 @@
-<?php namespace EONConsulting\Graphs;
+<?php
+
+namespace EONConsulting\Graphs;
 
 use Illuminate\Support\ServiceProvider;
 

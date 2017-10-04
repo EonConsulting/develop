@@ -14,8 +14,8 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 ini_set('display_errors', 0);
 
 // Development
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 /*============================ General Settings =======================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html
@@ -32,10 +32,8 @@ $config['authentication'] = function () {
 /*============================ License Key ============================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_licenseKey
 
-//$config['licenseName'] = 'system.dev';
-$config['licenseName'] = 'dev.unisaonline.net';
-//$config['licenseKey']  = 'G8C8-R49N-FFYB-BGRH-DD1L-AZ82-7W1D';
-$config['licenseKey']  = 'M5C5-AUBS-8HDL-N9NT-2EYZ-U49F-U54L';
+$config['licenseName'] = env('CKFINDER_LICENSE_NAME', 'localhost');
+$config['licenseKey']  = env('CKFINDER_LICENSE_KEY', '72AG-H77D-7DR5-HFF3-73D3-VAB2-9MBD');
 
 /*============================ CKFinder Internal Directory ============================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_privateDir
@@ -68,10 +66,8 @@ $config['images'] = array(
 $config['backends'][] = array(
     'name'         => 'default',
     'adapter'      => 'local',
-//    'baseUrl'      => '/ckfinder/userfiles/',
-    'baseUrl'      => 'EON/system/public/vendor/storyline/core/',
-    //'root'         => '/home/vagrant/Code/develop/public/EON/system/public/vendor/storyline/core/',
-    'root'         => '/var/www/html/laravel/public/EON/system/public/vendor/storyline/core/', // Can be used to explicitly set the CKFinder user files directory.
+    'baseUrl'      => '/ckfinder/userfiles/',
+//  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,
     'filesystemEncoding' => 'UTF-8',
@@ -86,7 +82,7 @@ $config['resourceTypes'][] = array(
     'name'              => 'Files', // Single quotes not allowed.
     'directory'         => 'files',
     'maxSize'           => 0,
-    'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,html,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,svg,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
+    'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
     'deniedExtensions'  => '',
     'backend'           => 'default'
 );
@@ -95,7 +91,7 @@ $config['resourceTypes'][] = array(
     'name'              => 'Images',
     'directory'         => 'images',
     'maxSize'           => 0,
-    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,svg',
+    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
     'deniedExtensions'  => '',
     'backend'           => 'default'
 );
@@ -141,7 +137,7 @@ $config['forceAscii'] = false;
 $config['xSendfile'] = false;
 
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_debug
-$config['debug'] = true;
+$config['debug'] = false;
 
 /*==================================== Plugins ========================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_plugins

@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 class StorylineBuilderController extends Controller {
 
     public function index() {
-		
-		
+
         return view('lecturer.builders.storyline');
+        
     }
 
 }
