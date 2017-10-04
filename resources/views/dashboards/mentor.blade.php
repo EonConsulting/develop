@@ -109,6 +109,15 @@ Mentor Dashboard
                             <label for="assessment-type-filter">Assessment Type</label>
                             <select class="form-control" id="assessment-type-filter">
                             </select>
+                            <label for="student-trend-filter">Period</label>
+                            <select class="form-control" id="student-trend-filter">
+                                <option value="today">Today</option>
+                                <option value="week">Week</option>
+                                <option value="month">Month</option>
+                                <option value="3-month">3 Month</option>
+                                <option value="6-month">6 Month</option>
+                                <option value="year">Year</option>
+                            </select>
                         </div>
                     </div> <!-- end col-md-4 -->
 
@@ -188,18 +197,8 @@ Mentor Dashboard
                     <div class="progress-charts basic-clearfix">
 
                         <h3>Student Trends</h3>
-                        <div class="col-md-6">
-                            <label for="student-trend-filter">Period</label>
-                            <select class="form-control" id="student-trend-filter">
-                                <option value="today">Today</option>
-                                <option value="week">Week</option>
-                                <option value="month">Month</option>
-                                <option value="3-month">3 Month</option>
-                                <option value="6-month">6 Month</option>
-                                <option value="year">Year</option>
-                            </select>
-                        </div>
-                        <div class="container-fluid" id="student-trends-container" style="height: 300px;">
+
+                        <div class="container-fluid" id="student-trends-container" style="height: 400px;">
                             <canvas id="student-trends"></canvas>
                         </div>
 
@@ -837,21 +836,7 @@ $(document).ready(function () {
                 }
             ];
 
-            var trends = [
-                {
-                    "course_id": "FBN1501",
-                    "assessment": "SA",
-                    "assessment_type_id": "SA-ALL",
-                    "student_id": "ALL",
-                    "period": "today",
-                    "labels": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
-                    "logins": [0, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
-                    "videos": [0, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
-                    "ebooks": [0, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0],
-                    "articles": [],
-                    "assessments": []
-                }
-            ];
+            
             // bind some events so that we
             // can simulate remote data store
             // bind some events so that we
@@ -907,14 +892,97 @@ $(document).ready(function () {
                 var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'assessment': selected_assessment, 'assessment_type_id': self.val()}));
                 renderResultsGraph(_.head(courses));
             });
-            
-            $("#student-trend-filter").on("change", function() {
-                var self = $(this);
-                
-                var studtrends = _.filter(trends, _.iteratee({'period': self.val()}));
-                renderTrendsGraph(_.head(studtrends));
-            });
 
+            $("#student-trend-filter").on("change", function () {
+                var self = $(this);
+
+                var studtrends = [];
+                //var studtrends = _.filter(trends, _.iteratee({'period': self.val()}));
+                switch (self.val())
+                {
+                    case "today":
+                        studtrends = generateRandomDataset(24, "hours");
+                        break;
+                    case "week":
+                        studtrends = generateRandomDataset(7, "days");
+                        break;
+                    case "month":
+                        studtrends = generateRandomDataset(30, "days");
+                        break;
+                    case "3-month":
+                        studtrends = generateRandomDataset(3, "months");
+                        break;
+                    case "6-month":
+                        studtrends = generateRandomDataset(6, "months");
+                        break;
+                    case "year":
+                        studtrends = generateRandomDataset(12, "months");
+                        break;
+                    default:
+                        studtrends = generateRandomDataSet(24, "hours");
+                        break;
+                }
+
+                console.log(studtrends);
+                renderTrendsGraph(studtrends);
+            });
+            $("#student-trend-filter").trigger("change");
+
+            function generateRandomNumber(minimum, maximum, boost_factor)
+            {
+                var r = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+                return r * boost_factor; // this is to boost entries for certain periods
+            }
+            
+            function generateRandomDataset(value, period)
+            {
+                var labels = [];
+                var logins =[];
+                var videos = [];
+                var ebooks = [];
+                var articles = [];
+                var assessments = [];
+                var boost_factor = 1;
+                var hours_of_interest = [8, 9, 18, 19, 20, 21, 22];
+                var days_of_interest = [];
+                        
+                switch (period){
+                    case "hours":
+                        
+                        for (x=0; x < value; x++)
+                        {
+                            (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1; 
+                            labels.push(x + "h00");
+                            logins.push(generateRandomNumber(3, 120, boost_factor));
+                            videos.push(generateRandomNumber(3, 120, boost_factor));
+                            ebooks.push(generateRandomNumber(3, 120, boost_factor));
+                            articles.push(generateRandomNumber(3, 120, boost_factor));
+                            assessments.push(generateRandomNumber(3, 120, boost_factor));
+                        }
+                        break;
+                    case "days":
+                        break;
+                    case "months":
+                        break;
+                }
+                
+                var ds =
+                {
+                    //"course_id": "FBN1501",
+                    //"assessment": "SA",
+                    //"assessment_type_id": "SA-ALL",
+                    "student_id": selected_student,
+                    "labels": labels,
+                    "logins": logins,
+                    "videos": videos,
+                    "ebooks": ebooks,
+                    "articles": articles,
+                    "assessments": assessments
+                };
+                
+                return ds;
+            }
+            
             function updateAssessmentTypes(a_type)
             {
                 var select = $("#assessment-type-filter");
@@ -1402,7 +1470,7 @@ $(document).ready(function () {
                     options: areaChartOptions
                 });
             }
-            
+
             function renderTrendsGraph(data) {
                 // MH: this is a workaround to trash the canvas
                 // .destroy() does not work :(
@@ -1414,10 +1482,6 @@ $(document).ready(function () {
                 {
                     data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 }
-                else
-                {
-                    data.labels = [];
-                }
 
                 var areaChartCanvas = $('#student-trends').get(0).getContext('2d');
 
@@ -1427,31 +1491,41 @@ $(document).ready(function () {
 
                         {
                             label: 'Logins',
+                            fill: false,
                             backgroundColor: 'rgba(251, 114, 23, 1)',
+                            borderColor: 'rgba(251, 114, 23, 1)',
                             borderWidth: 0,
                             data: data.logins
                         },
                         {
                             label: 'Videos',
+                            fill: false,
                             backgroundColor: 'rgba(251, 158, 96, 1)',
+                            borderColor: 'rgba(251, 158, 96, 1)',
                             borderWidth: 0,
                             data: data.videos
                         },
                         {
                             label: 'E-Books',
-                            backgroundColor: 'rgba(251, 158, 96, 1)',
+                            fill: false,
+                            backgroundColor: 'rgba(158, 251, 46, 1)',
+                            borderColor: 'rgba(158, 251, 46, 1)',
                             borderWidth: 0,
                             data: data.ebooks
                         },
                         {
                             label: 'Articles',
-                            backgroundColor: 'rgba(251, 158, 96, 1)',
+                            fill: false,
+                            backgroundColor: 'rgba(51, 158, 216, 1)',
+                            borderColor: 'rgba(51, 158, 216, 1)',
                             borderWidth: 0,
                             data: data.articles
                         },
                         {
                             label: 'Self-Assessments',
+                            fill: false,
                             backgroundColor: 'rgba(200, 200, 200, 1)',
+                            borderColor: 'rgba(200, 200, 200, 1)',
                             borderWidth: 0,
                             data: data.assessments
                         }
@@ -1502,7 +1576,7 @@ $(document).ready(function () {
                                 display: true,
                                 ticks: {
                                     beginAtZero: true,
-                                    max: 100  // minimum value will be 0.
+                                    //max: 100  // minimum value will be 0.
                                 }
                             }]
                     }
