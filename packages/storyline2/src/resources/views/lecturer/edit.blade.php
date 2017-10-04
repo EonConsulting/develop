@@ -604,8 +604,8 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     //Create Node Action
     $(tree_id).on("create_node.jstree", function (e, data) {
-        console.log(data);
-        //createNode(data);
+        var ref =  data.node;
+        createNode(ref);
     });
 
     //Select Node Action
