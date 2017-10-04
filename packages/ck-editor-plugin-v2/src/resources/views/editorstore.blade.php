@@ -1,12 +1,12 @@
 @extends('ckeditorpluginv2::layouts.master')
 
 @section('custom-styles')
-    <link href="{{ url ('/css/app.css')}}" rel="stylesheet"/>
-    <link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-    <script src="{{url('/js/ng.js')}}"></script>
+<link href="{{ url('/css/app.css')}}" rel="stylesheet"/>
+<link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+<script src="{{url('/js/ng.js')}}"></script>
 
-    <style>
+<style>
 
     body {display: block;}
 
@@ -58,155 +58,152 @@
         .pull-bottom-left {position: absolute; bottom: 0px; left: 10px;}
     }
 
-        @media (min-width: 768px ) {
-            .row {
-                position: relative;
-            }
-
-            .pull-bottom-left {
-                position: absolute;
-                bottom: 0px;
-                left: 10px;
-            }
+    @media (min-width: 768px ) {
+        .row {
+            position: relative;
         }
-    </style>
+
+        .pull-bottom-left {
+            position: absolute;
+            bottom: 0px;
+            left: 10px;
+        }
+    }
+</style>
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <div class="row">
-            @if (session('error_message'))
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        {{ session('error_message') }}
-                    </div>
-                </div>
-            @endif
-
-            @if (session('success_message'))
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        {{ session('success_message') }}
-                    </div>
-                </div>
-            @endif
-
-            @if($errors->count() > 0)
-                <div class="col-md-12">
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Insert an App</h3>
+    <div class="row">
+        @if (session('error_message'))
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                {{ session('error_message')}}
             </div>
-            <div id="tools" ng-app="tools" ng-controller="ToolsListCtrl">
-                <div class="col-md-12">
-                    <header class="header basic-clearfix">
+        </div>
+        @endif
 
-                        <div class="row">
-                            <div class="search-bar">
-                                <div class="form-group">
-                                    <input placeholder="Search by name or type" class="form-control" type="text" id="query" ng-model="query"/>
-                                </div>
+        @if (session('success_message'))
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                {{ session('success_message')}}
+            </div>
+        </div>
+        @endif
+
+        @if($errors->count() > 0)
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                <div>{{ $error}}</div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Insert an App</h3>
+        </div>
+        <div id="tools" ng-app="tools" ng-controller="ToolsListCtrl">
+            <div class="col-md-12">
+                <header class="header basic-clearfix">
+
+                    <div class="row">
+                        <div class="search-bar">
+                            <div class="form-group">
+                                <input placeholder="Search by name or type" class="form-control" type="text" id="query" ng-model="query"/>
                             </div>
-
-                        </div>
-                    </header>
-                </div>
-
-
-                <div class="filters">
-                    <h1>Sort</h1>
-                    <div class="form-group">
-                        <!--<select class="form-control" ng-model="orderList">
-                            <option value="name">Sort By Title</option>
-                            <option value="description">Sort By Type</option>
-                            <option value="">Oldest</option>
-                        </select>-->
-                        <div class="radio">
-                            <input id="radio1" name="sort" type="radio" value="name" ng-model="orderList">
-                            <label for="radio1">
-                                Sort by Title
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="radio2" name="sort" type="radio" value="description" ng-model="orderList">
-                            <label for="radio2">
-                                Sort By Type
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="radio3" name="sort" type="radio" value="oldest" ng-model="orderList">
-                            <label for="radio3">
-                                Oldest
-                            </label>
                         </div>
 
                     </div>
-                    <hr>
+                </header>
+            </div>
 
-                    <h1>Categories</h1>
-                    <div class="form-group">
 
-                        <div class="radio">
-                            <input id="radio4" name="category" type="radio" value="all" ng-model="category">
-                            <label for="radio4">
-                                All Categories
-                            </label>
-                        </div>
+            <div class="filters">
+                <h1>Sort</h1>
+                <div class="form-group">
+                    <!--<select class="form-control" ng-model="orderList">
+                        <option value="name">Sort By Title</option>
+                        <option value="description">Sort By Type</option>
+                        <option value="">Oldest</option>
+                    </select>-->
+                    <div class="radio">
+                        <input id="radio1" name="sort" type="radio" value="name" ng-model="orderList">
+                        <label for="radio1">
+                            Sort by Title
+                        </label>
+                    </div>
 
-                        <div class="radio">
-                            <input id="radio5" name="category" type="radio" value="community" ng-model="category">
-                            <label for="radio5">
-                                Community
-                            </label>
-                        </div>
+                    <div class="radio">
+                        <input id="radio2" name="sort" type="radio" value="description" ng-model="orderList">
+                        <label for="radio2">
+                            Sort By Type
+                        </label>
+                    </div>
 
-                        <div class="radio">
-                            <input id="radio6" name="category" type="radio" value="content" ng-model="category">
-                            <label for="radio6">
-                                Content
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="radio7" name="category" type="radio" value="math" ng-model="category">
-                            <label for="radio7">
-                                Math
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="radio8" name="category" type="radio" value="media" ng-model="category">
-                            <label for="radio8">
-                                Media
-                            </label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="radio9" name="category" type="radio" value="open_access" ng-model="category">
-                            <label for="radio9">
-                                Open Access
-                            </label>
-                        </div>
-
+                    <div class="radio">
+                        <input id="radio3" name="sort" type="radio" value="oldest" ng-model="orderList">
+                        <label for="radio3">
+                            Oldest
+                        </label>
                     </div>
 
                 </div>
+                <hr>
 
+                <h1>Categories</h1>
+                <div class="form-group">
+
+                    <div class="radio">
+                        <input id="radio4" name="category" type="radio" value="all" ng-model="category">
+                        <label for="radio4">
+                            All Categories
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio5" name="category" type="radio" value="community" ng-model="category">
+                        <label for="radio5">
+                            Community
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio6" name="category" type="radio" value="content" ng-model="category">
+                        <label for="radio6">
+                            Content
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio7" name="category" type="radio" value="math" ng-model="category">
+                        <label for="radio7">
+                            Math
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio8" name="category" type="radio" value="media" ng-model="category">
+                        <label for="radio8">
+                            Media
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <input id="radio9" name="category" type="radio" value="open_access" ng-model="category">
+                        <label for="radio9">
+                            Open Access
+                        </label>
+                    </div>
+
+                </div>
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
-                <div ng-repeat="tool in tools | filter:query | orderBy: orderList" class="app-entry shadow pull-left">
+                <div ng-repeat="tool in tools| filter:query | orderBy: orderList" class="app-entry shadow pull-left">
                     <div>
                         <div class="app-logo">
                             <img src="<% tool.logo_url %>" alt="" class="img img-responsive">
@@ -225,26 +222,23 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-            <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-        </div> <!-- /row -->
+    </div> <!-- /row -->
 
-    </div> <!-- /container -->
+</div> <!-- /container -->
 @endsection
 
 @section('custom-scripts')
-    {{--<script src="/vendor/appstore/js/jquery.min.js"></script>--}}
-    {{--<script src="/vendor/appstore/js/bootstrap.min.js"></script>--}}
-    <script>
+{{-- < script src = "/vendor/appstore/js/jquery.min.js" > < /script>--}}
+{{-- < script src = "/vendor/appstore/js/bootstrap.min.js" > < /script>--}}
+<script>
 
-        $(document).ready(function () {
-            $(".thumbnail").height(Math.max.apply(null, $(".thumbnail").map(function () {
-                return $(this).height() + 20;
-            })));
-        });
+            $(document).ready(function () {
+        $(".thumbnail").height(Math.max.apply(null, $(".thumbnail").map(function () {
+            return $(this).height() + 20;
+        })));
+    });
+</script>
 
-    </script>
-@endsection

@@ -2,7 +2,7 @@
 
 
 @section('page-title')
-Student Dashboard
+Administrator Dashboard
 @endsection
 
 
@@ -128,7 +128,7 @@ Student Dashboard
             <div class="dashboard-card shadow top-bdr-4">
 
                 <div class="dashboard-card-heading">
-                    Module Progression
+                    Course Progression
                 </div>
 
                 <div class="basic-clearfix">
@@ -238,76 +238,76 @@ Student Dashboard
             right: 'month,basicWeek,basicDay'
         },
         height: 500,
-        defaultDate: '2018-10-12',
+        defaultDate: '2018-08-12',
         navLinks: true, // can click day/week names to navigate views
         editable: false,
         eventLimit: true, // allow "more" link when too many events
         events: [
             {
                 title: 'FBN101 Test',
-                start: '2018-10-01',
+                start: '2018-08-01',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'New Student Welcome',
-                start: '2018-10-07',
-                end: '2018-10-10'
+                start: '2018-08-07',
+                end: '2018-08-10'
             },
             {
                 id: 999,
                 title: 'FBN102 Exam',
-                start: '2018-10-09T16:00:00',
+                start: '2018-08-09T16:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 id: 999,
                 title: 'Repeating Event',
-                start: '2018-10-16T16:00:00'
+                start: '2018-08-16T16:00:00'
             },
             {
                 title: 'Student Conference',
-                start: '2018-10-11',
-                end: '2018-10-13'
+                start: '2018-08-11',
+                end: '2018-08-13'
             },
             {
                 title: 'Meeting',
-                start: '2018-10-12T10:30:00',
-                end: '2018-10-12T12:30:00',
+                start: '2018-08-12T10:30:00',
+                end: '2018-08-12T12:30:00',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'FBN101 Exam',
-                start: '2018-10-12T12:00:00',
+                start: '2018-08-12T12:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 title: 'FNB104 Test',
-                start: '2018-10-12T14:30:00'
+                start: '2018-08-12T14:30:00'
             },
             {
                 title: 'FBN105 Test',
-                start: '2018-10-12T17:30:00'
+                start: '2018-08-12T17:30:00'
             },
             {
                 title: 'FBN103 Exam',
-                start: '2018-10-12T20:00:00',
+                start: '2018-08-12T20:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 title: 'FBN102 Test',
-                start: '2018-10-13T07:00:00',
+                start: '2018-08-13T07:00:00',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'MyUnisa',
                 url: 'http://unisa.ac.za/',
-                start: '2018-10-28'
+                start: '2018-08-28'
             }
         ]
     });
@@ -443,36 +443,36 @@ Student Dashboard
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [0, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
-                    "class_average": [0, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
-                    "your_average": [0, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
+                    "your_results": [55, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [52, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [57, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1501",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [0, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
-                    "class_average": [0, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
-                    "your_average": [0, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
+                    "your_results": [85, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [82, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [87, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "labels": [],
-                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 0],
-                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
-                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 0]
+                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 62],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
+                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 52.5]
                 },
                 {
                     "course_id": "FBN1502",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "labels": [],
-                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 0],
-                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
-                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 0]
+                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 62],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 70],
+                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 72.1]
                 },
                 {
                     "course_id": "FBN1501",

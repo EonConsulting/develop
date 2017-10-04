@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\LTI\Dashboards;
 
+use Illuminate\Http\Request;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 
 class DashboardLTIController extends LTIBaseController {
@@ -15,26 +16,41 @@ class DashboardLTIController extends LTIBaseController {
             'parent_title' => 'Instructor', //leave empty if none
         );
 
+        $UserRole = laravel_lti()->get_user_lti_type(auth()->user());
 
+        switch ($UserRole) {
+            case "Administrator":
+                $breadcrumbs = [
+                    'title' => 'Administrator Dashboard'
+                ];
+                return view('dashboards.admin', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            case "Instructor":
+                $breadcrumbs = [
+                    'title' => 'Lecturer Dashboard'
+                ];
 
-        if(laravel_lti()->is_learner(auth()->user())) {
-
-            $breadcrumbs = [
+                return view('dashboards.lecturer', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            case "Learner":
+                $breadcrumbs = [
                 'title' => 'Student Dashboard'
             ];
 
             return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
-
-        } elseif (laravel_lti()->is_instructor(auth()->user())) {
-
-            $breadcrumbs = [
-                'title' => 'Lecturer Dashboard'
+                break;
+            
+            case "Mentor":
+                $breadcrumbs = [
+                'title' => 'Mentor Dashboard'
             ];
 
-            return view('dashboards.lecturer', $data, ['breadcrumbs' => $breadcrumbs]);
-
-        }
-
+            return view('dashboards.mentor', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            default:
+                echo "Your favorite color is neither red, blue, nor green!";
+        } 
+       
     }
 
 }

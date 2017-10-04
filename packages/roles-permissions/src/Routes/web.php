@@ -38,5 +38,9 @@ Route::group(['middleware' => ['web', 'auth', 'instructor'], 'prefix' => '/admin
         Route::get('/users/{user}', ['as' => 'eon.admin.roles.users.single', 'uses' => 'UsersController@show']);
         Route::post('/users/{user}/{role}/{department}', ['as' => 'eon.admin.roles.users.role-priovided', 'uses' => 'UsersController@update']);
         Route::post('/users/--user--/--role--/--department--', ['as' => 'eon.admin.roles.users.role', 'uses' => 'UsersController@update']);
+        Route::get('/metadata', ['as' => 'eon.admin.metadata', 'uses' => 'MetadataController@index']);
+        Route::get('/metadata/create', ['as' => 'eon.admin.metadata.create', 'uses' => 'MetadataController@create']);
+        Route::post('/metadata/save', ['as' => 'eon.admin.metadata.save', 'uses' => 'MetadataController@save']);
+        Route::get('/metadata/edit/{id}', ['as' => 'eon.admin.metadata.edit', 'uses' => 'MetadataController@edit']);
     });
 });

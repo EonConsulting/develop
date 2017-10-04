@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "minimum-stability": "dev",
-    "homepage": "https://dev.unisaonline.net",
+    "homepage": "http://unisa.local",
     "require": {
         "IMSGlobal/LTI": "^3.0.0",
         "barryvdh/laravel-debugbar": "^2.3",
