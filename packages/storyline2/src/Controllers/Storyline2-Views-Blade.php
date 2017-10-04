@@ -47,9 +47,7 @@ class Storyline2ViewsBlade extends BaseController {
      * @return void
      */
     public function edit($course) {
-        $breadcrumbs = [
-          'title' => 'Edit [Course Name] Storyline' //pass $course as param and load name here
-        ];
+        
 
         $course = Course::find($course);
         $contents = Content::all();
@@ -81,7 +79,10 @@ class Storyline2ViewsBlade extends BaseController {
         }
 
         $categories = Category::all();
-       
+
+        $breadcrumbs = [
+            'title' => 'Edit ' . $course['title'] . ' Storyline' //pass $course as param and load name here
+          ];
 
         return view('eon.storyline2::lecturer.edit', [
             'contents' => $contents,

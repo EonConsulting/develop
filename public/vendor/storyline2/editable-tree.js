@@ -21,7 +21,7 @@ function refreshTree() {
 
 
 function drawTree(tree_data) {
-    console.log(tree_data);
+    //console.log(tree_data);
 
     $(tree_id).jstree({
         "core": {
@@ -163,13 +163,11 @@ function getContent(data) {
         alert(error);
     });
 
-
-
 }
 
 //Create Node
 function createNode(data) {
-    var node = $.extend(true, {}, data.node);
+    var node = $.extend(true, {}, data);
     var actionUrl = base_url + "/storyline2/create";
 
     $.ajax({
@@ -240,30 +238,20 @@ function deleteNode(data) {
 //Move node
 function moveNode(data) {
     var actionUrl = base_url + "/storyline2/move";
-    seen = [];
+    //seen = [];
+    var node = data;
+    
     $.ajax({
         method: "POST",
         url: actionUrl,
-        data: JSON.stringify(data, function (key, val) {
-            if (val != null && typeof val == "object") {
-                if (seen.indexOf(val) >= 0) {
-                    return;
-                }
-                seen.push(val);
-            }
-            return val;
-        }),
+        data: JSON.stringify(node),
         dataType: 'json',
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
         },
         statusCode: {
             200: function (data) { //success
-                if (data.msg === 'failed') {
-                    alert('Rename failed, please try again.');
-                } else {
-                    refreshTree();
-                }
+                console.log(data.msg);
             },
             400: function () { //bad request
 

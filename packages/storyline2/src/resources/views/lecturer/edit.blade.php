@@ -592,12 +592,20 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     //Move Node Action
     $(tree_id).on("move_node.jstree", function (e, data) {
-        moveNode(data);
+        console.log(data);
+        var ref = {
+            node: data.node,
+            position: data.position,
+            old_position: data.old_position
+        };
+        console.log(ref);
+        moveNode(ref);
     });
 
     //Create Node Action
     $(tree_id).on("create_node.jstree", function (e, data) {
-        createNode(data);
+        console.log(data);
+        //createNode(data);
     });
 
     //Select Node Action
@@ -628,9 +636,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     });
 
     //--form validation----------------------------------------------------
-
-   
-
 
     //update events
     $("#content-title").change(function(){

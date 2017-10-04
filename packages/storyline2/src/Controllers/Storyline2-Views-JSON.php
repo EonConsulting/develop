@@ -48,10 +48,35 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function show_items($storyline) {
 
-        $result = Storyline::find($storyline);
+        $result = Storyline::find($storyline)->items;
 
-        return $this->items_to_tree($result->items);
+        return response()->json($this->nest($this->items_to_tree($result)));
     }
+    
+
+    public function nest($items) { 
+        $new = array(); 
+
+        while(list($id, $item) = each($items)) { 
+            
+            $temp = $item;
+             
+            if($item['rgt'] - $item['lft'] != 1) { 
+                $temp['children'] = $this->nest($items, true); 
+            } 
+
+            $new[] = $temp;
+
+            $next_id = key($items); 
+
+            if($next_id && $items[$next_id]['parent_id'] != $item['parent_id']) { 
+                return $new; 
+            } 
+        } 
+
+        return $new; 
+    }  
+
 
     /**
      *
@@ -62,36 +87,20 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach ($items as $node) {
-            $map[] = [
-                'id' => $node['id'],
-                'parent' => ($node['parent_id'] === null ? '#' : $node['parent_id']),
-                'text' => $node['name']
-            ];
-        }
-
-        return json_encode($map);
-    }
-
-    /**
-     *
-     * @param type $items
-     * @return type
-     */
-    public function tree_to_items($items) {
-
-        $map = [];
-
         foreach ($items as $k => $node) {
-            $map[] = [
-                'id' => $node['id'],
-                'parent_id' => ($node['parent'] === '#' ? null : $node['parent_id']),
-                'name' => $node['text']
+
+            $map[$k] = [
+                'id' => (string) $node['id'],
+                'text' => $node['name'],
+                'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
+                'rgt' => $node['_rgt'],
+                'lft' => $node['_lft']
             ];
         }
 
-        return json_encode($map);
+        return $map;
     }
+
 
     /**
      * 
@@ -160,51 +169,27 @@ class Storyline2ViewsJSON extends BaseController {
     public function move(Request $request) {
 
         $data = $request->json()->all();
-        //dd($data['position']);
         $parentId = (int) $data['node']['parent'];
-        $ItemId = (int) $data['node']['id'];
-        $old_parent = (int) $data['old_parent'];
+        $itemId = (int) $data['node']['id'];
         $position = (int) $data['position'];
         $old_position = (int) $data['old_position'];
-
-        if ($parentId == $old_parent) {
-            if ($position > $old_position) {
-                $position = $position + 1;
-            }
-        }
-        
-        if ($parentId == 0) {
-            $parentId = (int) $data['node']['original']['parent'];
-        }
-
         $parent = StorylineItem::find($parentId);
         $decendants = $parent->getImmediateDescendants();
-        $moveTo = $this->findPosition($decendants, $position);
-        $node = StorylineItem::find($ItemId);
-           
-        //If the parent we are moving to doesn't have any decendents,  just move it now
-        if ($parent->isLeaf()) {
-            if ($node->makeChildOf($parent)) {
-                $msg = 'success2';
-            } else {
-                $msg = 'failed';
-            }
-        }
+        $num_children = count($decendants);
+        $node = StorylineItem::find($itemId);
 
-        //This takes care of it we are moving it into the last position
-        if (is_null($moveTo)) {
-            if ($node->makeLastChildOf($parent)) {
-                $msg = 'success2';
-            } else {
-                $msg = 'failed';
-            }
-        }
-        
-        if ($moveTo) {
-            if ($node->makeChildOf($parent)) {
-                $msg = 'success2';               
-            } else {
-                $msg = 'failed';
+        if($num_children === 0 || $position === 0){
+            $msg = $node->makeFirstChildOf($parent) ? "Made First Child of Parent" : "Failure";
+        } else {
+
+            if($position === $num_children-1){
+                $msg = $node->makeLastChildOf($parent) ? "Made Last Child of Parent" : "Failure";
+            }else {
+                $msg = $node->makeLastChildOf($parent);
+
+                $decendants = $parent->getImmediateDescendants();
+                $msg = $node->moveToLeftOf($decendants[$position]) ? "Moved To Position ".$position : "Failure";
+
             }
         }
         
