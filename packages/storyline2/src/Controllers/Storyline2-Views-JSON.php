@@ -57,25 +57,38 @@ class Storyline2ViewsJSON extends BaseController {
     public function nest($items) { 
         $new = array(); 
 
+        //list assigns values to $id, and $item
+        //each returns a key value pair from the array $items, and steps to the next item
         while(list($id, $item) = each($items)) { 
             
             $temp = $item;
              
+            //if this is true, item has children
             if($item['rgt'] - $item['lft'] != 1) { 
                 $temp['children'] = $this->nest($items, true); 
             } 
 
             $new[] = $temp;
 
-            $next_id = key($items); 
+            //key() returns the position of the current internal counter
+            $next_id = key($items);
 
+            //check if next child is a sibling, if not, return new
             if($next_id && $items[$next_id]['parent_id'] != $item['parent_id']) { 
-                return $new; 
-            } 
-        } 
+                usort($new,'self::compare');
+                return $new;
+            }
+        }
 
-        return $new; 
+        usort($new, array($this, "self::compare"));
+        return $new;
     }  
+
+
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
+    }
 
 
     /**
