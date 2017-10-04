@@ -8,6 +8,58 @@ Lecturer Dashboard
 
 @section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
+
+<style>
+
+    .progress {
+        height: 30px;
+    }
+
+    .progress-bar {
+        padding-top: 4px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .btn-cal-key {
+        width: 100%;
+        font-weight: 700;
+    }
+
+    .main-chart {
+        border-width: 0px 1px 0px 0px;
+        border-style: solid;
+        border-color: #DBDBDB;
+        background: #FFF;
+        
+    }
+
+    .progress-charts {
+        background: #F9F9F9;
+    }
+    
+    .progress-charts h2 {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    .progress-charts h3 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+   /* .timeline {
+        padding-right: 280px;
+    }
+
+    .timeline-key {
+        width: 280px;
+        float: right;
+    }*/
+
+</style>
 @endsection
 
 
@@ -16,13 +68,12 @@ Lecturer Dashboard
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-12" style="margin-bottom: 15px;">
+        <div class="col-md-12">
             <div class="beta-notice">
                 Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
             </div>
         </div>
     </div>
-
 
     <div class="row">
 
@@ -35,15 +86,14 @@ Lecturer Dashboard
 
                 <div class="row sp-top-15 sp-bot-15 basic-clearfix">
 
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="container-fluid">
                             <h3>Filters</h3>
-                            <label for="course-filter">Course</label>
+                            <label for="course-filter">Module</label>
                             <select class="form-control" id="course-filter">
                                 <option value="FBN1501">FBN1501 - Business Numerical Skills A</option>
                                 <option value="FBN1502">FBN1502 - Business Numerical Skills B</option>
                             </select>
-                            <br>
                             <label for="student-filter">Student</label>
                             <select class="form-control" id="student-filter">
                                 <option value="ALL">ALL</option>
@@ -51,60 +101,16 @@ Lecturer Dashboard
                                 <option value="S2">5678 - Student 2</option>
                                 <option value="S3">5679 - Student 3</option>
                             </select>
-                            <br>
-                            <label for="metric-type-filter">Metric</label>
-                            <select class="form-control" id="metric-type-filter">
-                                <option>Current Average</option>
-                                <option>Formal Assessment</option>
-                                <option>Assignment</option>
-                                <option>Exam</option>
-                                <option>Self Assessment</option>
+                            <label for="assessment-filter">Assessment</label>
+                            <select class="form-control" id="assessment-filter">
+                                <option value="FA">Formative Assessment</option>
+                                <option value="SA">Summative Assessment</option>
                             </select>
-                            <br>
-                            <label for="metric-item-filter">Assignment/Assessment</label>
-                            <select class="form-control" id="metric-item-filter">
-                                <option>Assignment 1</option>
-                                <option>Assignment 2</option>
-                                <option>Assignment 3</option>
-                                <option>Assignment 4</option>
+                            <label for="assessment-type-filter">Assessment Type</label>
+                            <select class="form-control" id="assessment-type-filter">
                             </select>
                         </div>
                     </div> <!-- end col-md-4 -->
-
-                    <div class="col-md-2">
-                        <h3>Progession</h3>
-                        <div class="container-fluid sp-top-15 sp-bot-15">
-
-                            Videos
-                            <div class="progress">
-                                <div class="progress-bar bg-col-1" id="progress_videos" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    70%
-                                </div>
-                            </div>
-
-                            E-Books
-                            <div class="progress">
-                                <div class="progress-bar bg-col-2" id="progress_ebooks" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    25%
-                                </div>
-                            </div>
-
-                            Articles
-                            <div class="progress">
-                                <div class="progress-bar bg-col-3" id="progress_articles" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    40%
-                                </div>
-                            </div>
-                            Study Guide
-                            <div class="progress">
-                                <div class="progress-bar bg-col-4" id="progress_study_guide" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                    35%
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
 
                     <div class="col-md-8">
                         <h3>Results</h3>
@@ -120,6 +126,59 @@ Lecturer Dashboard
         </div>
 
     </div>
+    
+    <div class="row">
+
+        <div class="col-md-12 sp-top-15">
+            <div class="dashboard-card shadow top-bdr-4">
+
+                <div class="dashboard-card-heading">
+                    Module Progression
+                </div>
+
+                <div class="basic-clearfix">
+
+                    <div class="progress-charts basic-clearfix">
+
+                        <div class="col-md-3 main-chart">
+                            <h2>Study Guide</h2>
+                            <div class="container-fluid" id="study-guide-progression-container" style="height: 300px;">
+                                <canvas id="study-guide-progression"></canvas>
+                            </div>
+                        </div><!-- end col-md-8 -->
+
+                        <div class="col-md-9">
+                             <div class="row basic-clearfix">
+                                <div class="col-md-4">
+                                    <h3>Videos</h3>
+                                    <div class="container-fluid" id="video-progression-container" style="height: 300px;">
+                                        <canvas id="video-progression"></canvas>
+                                    </div>
+                                </div> <!-- end col-md-4 -->
+
+                                <div class="col-md-4">
+                                    <h3>E-Books</h3>
+                                    <div class="container-fluid" id="ebook-progression-container" style="height: 300px;">
+                                        <canvas id="ebook-progression"></canvas>
+                                    </div>
+                                </div><!-- end col-md-8 -->
+                                
+                                <div class="col-md-4">
+                                    <h3>Articles</h3>
+                                    <div class="container-fluid" id="article-progression-container" style="height: 300px;">
+                                        <canvas id="article-progression"></canvas>
+                                    </div>
+                                </div><!-- end col-md-8 -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12 sp-top-15 sp-bot-15 basic-clearfix">
@@ -131,20 +190,19 @@ Lecturer Dashboard
 
                 <div class="row basic-clearfix sp-top-15 sp-bot-15">
                     <div class="container-fluid">
-                        <div class="col-md-10">
+                        <div class="col-lg-9 col-md-8 col-xs-12">
                             <div id="student-timeline"></div>
                         </div>
 
-
-                        <div class="col-md-2">
+                        <div class="col-lg-3 col-md-4 col-xs-12">
                             <h4>Timeline Key</h3>
-                                <div>
-                                    <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
-                                    <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
-                                    <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
-                                    <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
-                                    <p><div class="btn btn-primary btn-cal-key">Other</div></p>
-                                </div>
+                            <div>
+                                <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
+                                <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
+                                <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
+                                <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
+                                <p><div class="btn btn-primary btn-cal-key">Other</div></p>
+                            </div>
                         </div>
                     </div>
                 </div> <!--end row>
@@ -158,29 +216,26 @@ Lecturer Dashboard
 
     </div>
 
-
     @endsection
 
     @section('custom-scripts')
     <!-- lodash -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-
     <!-- Sparkline -->
     <script src="{{url('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- SlimScroll 1.3.0 -->
     <script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
     <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-    <!-- Instructor timeline -->
+    <!-- Student timeline -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
-
     <script type="text/javascript">
-//--------------------------
-//-STUDENT TIMELINE CODE--------
-//--------------------------
-$(document).ready(function () {
+    //--------------------------
+    //-STUDENT TIMELINE CODE--------
+    //--------------------------
+    $(document).ready(function () {
     $('#student-timeline').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -188,76 +243,76 @@ $(document).ready(function () {
             right: 'month,basicWeek,basicDay'
         },
         height: 500,
-        defaultDate: '2018-08-12',
+        defaultDate: '2018-10-12',
         navLinks: true, // can click day/week names to navigate views
         editable: false,
         eventLimit: true, // allow "more" link when too many events
         events: [
             {
                 title: 'FBN101 Test',
-                start: '2018-08-01',
+                start: '2018-10-01',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'New Student Welcome',
-                start: '2018-08-07',
-                end: '2018-08-10'
+                start: '2018-10-07',
+                end: '2018-10-10'
             },
             {
                 id: 999,
                 title: 'FBN102 Exam',
-                start: '2018-08-09T16:00:00',
+                start: '2018-10-09T16:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 id: 999,
                 title: 'Repeating Event',
-                start: '2018-08-16T16:00:00'
+                start: '2018-10-16T16:00:00'
             },
             {
                 title: 'Student Conference',
-                start: '2018-08-11',
-                end: '2018-08-13'
+                start: '2018-10-11',
+                end: '2018-10-13'
             },
             {
                 title: 'Meeting',
-                start: '2018-08-12T10:30:00',
-                end: '2018-08-12T12:30:00',
+                start: '2018-10-12T10:30:00',
+                end: '2018-10-12T12:30:00',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'FBN101 Exam',
-                start: '2018-08-12T12:00:00',
+                start: '2018-10-12T12:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 title: 'FNB104 Test',
-                start: '2018-08-12T14:30:00'
+                start: '2018-10-12T14:30:00'
             },
             {
                 title: 'FBN105 Test',
-                start: '2018-08-12T17:30:00'
+                start: '2018-10-12T17:30:00'
             },
             {
                 title: 'FBN103 Exam',
-                start: '2018-08-12T20:00:00',
+                start: '2018-10-12T20:00:00',
                 backgroundColor: '#dd4b39', //red
                 borderColor: '#dd4b39' //red
             },
             {
                 title: 'FBN102 Test',
-                start: '2018-08-13T07:00:00',
+                start: '2018-10-13T07:00:00',
                 backgroundColor: '#00a65a', //Success (green)
                 borderColor: '#00a65a' //Success (green)
             },
             {
                 title: 'MyUnisa',
                 url: 'http://unisa.ac.za/',
-                start: '2018-08-28'
+                start: '2018-10-28'
             }
         ]
     });
@@ -281,227 +336,583 @@ $(document).ready(function () {
                 }
             ];
 
+            var assessment_types = [
+                {
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "description": "ALL"
+                },
+                {
+                    "assessment_type_id": "SA-MCQ",
+                    "assessment": "SA",
+                    "description": "MCQ"
+                },
+                {
+                    "assessment_type_id": "SA-VEN",
+                    "assessment": "SA",
+                    "description": "Venue Based"
+                },
+                {
+                    "assessment_type_id": "SA-POR",
+                    "assessment": "SA",
+                    "description": "Portfolio"
+                },
+                {
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "description": "ALL"
+                },
+                {
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
+                    "description": "Assignment 1"
+                },
+                {
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
+                    "description": "Assignment 2"
+                },
+                {
+                    "assessment_type_id": "FA-POR",
+                    "assessment": "FA",
+                    "description": "Portfolio"
+                },
+                {
+                    "assessment_type_id": "FA-SA1",
+                    "assessment": "FA",
+                    "description": "Self-Assessment 1"
+                },
+                {
+                    "assessment_type_id": "FA-SA2",
+                    "assessment": "FA",
+                    "description": "Self-Assessment 2"
+                }
+            ];
+
             var progression = [
                 {
                     "course_id": "FBN1501",
                     "student_id": "ALL",
                     "progress": {
-                        "videos": "55",
-                        "ebooks": "50",
-                        "articles": "60",
-                        "study_guide": "53"
+                        "videos": {
+                            "class_progress": [35],
+                            "my_progress": [22],
+                            "course_timeline": [32]
+                        },
+                        "ebooks": {
+                            "class_progress": [45],
+                            "my_progress": [52],
+                            "course_timeline": [42]
+                        },
+                        "articles": {
+                            "class_progress": [65],
+                            "my_progress": [67],
+                            "course_timeline": [60]
+                        },
+                        "study_guide": {
+                            "class_progress": [44],
+                            "my_progress": [55],
+                            "course_timeline": [45]
+                        }
                     }
                 },
                 {
                     "course_id": "FBN1501",
                     "student_id": "S1",
                     "progress": {
-                        "videos": "35",
-                        "ebooks": "45",
-                        "articles": "50",
-                        "study_guide": "72"
-                    }
-                },
-                {
-                    "course_id": "FBN1501",
-                    "student_id": "S2",
-                    "progress": {
-                        "videos": "75",
-                        "ebooks": "75",
-                        "articles": "60",
-                        "study_guide": "32"
-                    }
-                },
-                {
-                    "course_id": "FBN1501",
-                    "student_id": "S3",
-                    "progress": {
-                        "videos": "42",
-                        "ebooks": "90",
-                        "articles": "20",
-                        "study_guide": "22"
+                        "videos": {
+                            "class_progress": [25],
+                            "my_progress": [58],
+                            "course_timeline": [43]
+                        },
+                        "ebooks": {
+                            "class_progress": [51],
+                            "my_progress": [38],
+                            "course_timeline": [52]
+                        },
+                        "articles": {
+                            "class_progress": [61],
+                            "my_progress": [57],
+                            "course_timeline": [70]
+                        },
+                        "study_guide": {
+                            "class_progress": [34],
+                            "my_progress": [35],
+                            "course_timeline": [51]
+                        }
                     }
                 },
                 {
                     "course_id": "FBN1502",
                     "student_id": "ALL",
                     "progress": {
-                        "videos": "62",
-                        "ebooks": "55",
-                        "articles": "90",
-                        "study_guide": "76"
+                        "videos": {
+                            "class_progress": [22],
+                            "my_progress": [32],
+                            "course_timeline": [46]
+                        },
+                        "ebooks": {
+                            "class_progress": [33],
+                            "my_progress": [29],
+                            "course_timeline": [45]
+                        },
+                        "articles": {
+                            "class_progress": [51],
+                            "my_progress": [39],
+                            "course_timeline": [36]
+                        },
+                        "study_guide": {
+                            "class_progress": [49],
+                            "my_progress": [39],
+                            "course_timeline": [51]
+                        }
                     }
                 },
                 {
                     "course_id": "FBN1502",
                     "student_id": "S1",
                     "progress": {
-                        "videos": "45",
-                        "ebooks": "75",
-                        "articles": "60",
-                        "study_guide": "52"
-                    }
-                },
-                {
-                    "course_id": "FBN1502",
-                    "student_id": "S2",
-                    "progress": {
-                        "videos": "55",
-                        "ebooks": "80",
-                        "articles": "30",
-                        "study_guide": "12"
-                    }
-                },
-                {
-                    "course_id": "FBN1502",
-                    "student_id": "S3",
-                    "progress": {
-                        "videos": "85",
-                        "ebooks": "29",
-                        "articles": "30",
-                        "study_guide": "72"
+                        "videos": {
+                            "class_progress": [32],
+                            "my_progress": [52],
+                            "course_timeline": [66]
+                        },
+                        "ebooks": {
+                            "class_progress": [43],
+                            "my_progress": [39],
+                            "course_timeline": [65]
+                        },
+                        "articles": {
+                            "class_progress": [41],
+                            "my_progress": [49],
+                            "course_timeline": [46]
+                        },
+                        "study_guide": {
+                            "class_progress": [69],
+                            "my_progress": [59],
+                            "course_timeline": [61]
+                        }
                     }
                 }
             ];
 
             var results = [
+                // ALL FBN1501
                 {
                     "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
                     "student_id": "ALL",
-                    "student_results": [],
-                    "class_average": [52, 76, 53, 69, 46, 70, 40, 65, 72, 55, 41, 55],
-                    "student_average": []
+                    "labels": [],
+                    "your_results": [0, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1501",
-                    "student_id": "S1",
-                    "student_results": [68, 59, 60, 72, 56, 55, 61, 49, 66, 72, 76, 52],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "student_average": [68, 64, 62.3, 64.75, 63, 62, 60, 62, 63, 64, 65, 63]
-                },
-                {
-                    "course_id": "FBN1501",
-                    "student_id": "S2",
-                    "student_results": [88, 69, 70, 82, 66, 75, 71, 59, 76, 82, 86, 62],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "student_average": [88, 76, 75.3, 74.75, 63, 72, 70, 72, 73, 74, 75, 73]
-                },
-                {
-                    "course_id": "FBN1501",
-                    "student_id": "S3",
-                    "student_results": [58, 79, 50, 62, 46, 75, 51, 39, 56, 62, 66, 42],
-                    "class_average": [62, 66, 63, 59, 56, 60, 40, 55, 62, 75, 51, 80],
-                    "student_average": [58, 74, 52.3, 54.75, 53, 72, 50, 52, 53, 54, 55, 53]
-                },
-                {
-                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
                     "student_id": "ALL",
-                    "student_results": [],
-                    "class_average": [59, 73, 55, 45, 62, 60, 80, 55, 48, 77, 61, 62],
-                    "student_average": []
+                    "labels": [],
+                    "your_results": [0, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
+                },
+                // ALL FBN1502
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "ALL",
+                    "labels": [],
+                    "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 0],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
+                    "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 0]
                 },
                 {
                     "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "ALL",
+                    "labels": [],
+                    "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 0],
+                    "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
+                    "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 0]
+                },
+                // STUDENT ALL FBN1501
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
                     "student_id": "S1",
-                    "student_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "student_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
                     "student_id": "S2",
-                    "student_results": [50, 44, 60, 55, 51, 40, 85, 54, 71, 57, 58, 57],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "student_average": [52, 44.67, 54.75, 54, 51.67, 83.71, 53.75, 55.67, 55.80, 56, 55.08]
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                // STUDENT ALL FBN1502
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
                     "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
                     "student_id": "S3",
-                    "student_results": [55, 59, 65, 60, 56, 45, 71, 59, 76, 62, 63, 62],
-                    "class_average": [52, 63, 62, 65, 59, 65, 60, 75, 58, 55, 61, 70],
-                    "student_average": [57, 59.67, 59.75, 59, 56.67, 58.71, 58.75, 60.67, 60.80, 61, 61.08]
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                // STUDENT S1 SA's
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-MCQ",
+                    "labels": ["MCQ1", "MCQ2", "MCQ3", "MCQ4", "MCQ5", "MCQ6"],
+                    "your_results": [80, 56, 45, 51, 59, 76],
+                    "class_average": [65, 59, 65, 60, 75, 58],
+                    "your_average": [60, 76, 75, 71, 79, 76]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-MCQ",
+                    "labels": ["MCQ7", "MCQ8", "MCQ9", "MCQ10", "MCQ11", "MCQ12"],
+                    "your_results": [60, 62, 55, 71, 59, 76],
+                    "class_average": [55, 61, 54, 50, 75, 58],
+                    "your_average": [50, 72, 45, 71, 79, 76]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-VEN",
+                    "labels": ["VEN1", "VEN2"],
+                    "your_results": [59, 76],
+                    "class_average": [75, 58],
+                    "your_average": [79, 76]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-VEN",
+                    "labels": ["VEN3", "VEN4"],
+                    "your_results": [60, 62],
+                    "class_average": [55, 61],
+                    "your_average": [50, 72]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-POR",
+                    "labels": ["POR1", "POR2", "POR3", "POR4"],
+                    "your_results": [80, 56, 45, 51],
+                    "class_average": [65, 59, 65, 60],
+                    "your_average": [60, 76, 75, 71]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-POR",
+                    "labels": ["POR5", "POR6", "POR7", "POR8"],
+                    "your_results": [51, 50, 80, 64],
+                    "class_average": [78, 65, 74, 52],
+                    "your_average": [45, 71, 79, 76]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS1",
+                    "labels": ["Result"],
+                    "your_results": [80],
+                    "class_average": [65],
+                    "your_average": [60]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS1",
+                    "labels": ["Result"],
+                    "your_results": [58],
+                    "class_average": [84],
+                    "your_average": [72]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS2",
+                    "labels": ["Result"],
+                    "your_results": [60],
+                    "class_average": [75],
+                    "your_average": [60]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ASS2",
+                    "labels": ["Result"],
+                    "your_results": [79],
+                    "class_average": [65],
+                    "your_average": [72]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-POR",
+                    "labels": ["Result"],
+                    "your_results": [65],
+                    "class_average": [73],
+                    "your_average": [69]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-POR",
+                    "labels": ["Result"],
+                    "your_results": [73],
+                    "class_average": [85],
+                    "your_average": [72]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA1",
+                    "labels": ["Result"],
+                    "your_results": [55],
+                    "class_average": [76],
+                    "your_average": [61]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA1",
+                    "labels": ["Result"],
+                    "your_results": [63],
+                    "class_average": [75],
+                    "your_average": [65]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA2",
+                    "labels": ["Result"],
+                    "your_results": [65],
+                    "class_average": [64],
+                    "your_average": [69]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-SA2",
+                    "labels": ["Result"],
+                    "your_results": [61],
+                    "class_average": [70],
+                    "your_average": [85]
                 }
             ];
             // bind some events so that we
             // can simulate remote data store
+            // bind some events so that we
+            // can simulate remote data store
+            var selected_course;
+            var selected_student;
+            var selected_assessment;
+            
+            // event for change on metrics
+            $("#assessment-filter").on("change", function () {
+                var self = $(this);
+                selected_assessment = self.val();
+                updateAssessmentTypes(selected_assessment);
+
+                // lodash methods for rendering graph
+                var courses = _.filter(results, _.iteratee({
+                    'course_id': selected_course, 
+                    'student_id': selected_student, 
+                    'assessment': selected_assessment}
+                ));
+        
+                renderResultsGraph(_.head(courses));
+
+                // lodash methods for rendering progression
+                var prog = _.filter(progression, _.iteratee({'course_id': selected_course}));
+                renderVideoProgressionGraph(_.head(prog));
+                renderEbookProgressionGraph(_.head(prog));
+                renderArticleProgressionGraph(_.head(prog));
+                renderStudyGuideProgressionGraph(_.head(prog));
+            });
+            
+            // event for change of student name
+            $("#student-filter").on("change", function(){
+                var self = $(this);
+                selected_student = self.val();
+                // trigger the assessment filter change event
+                $("#assessment-filter").trigger("change");
+            });
+            
             $("#course-filter").on("change", function () {
-                changeCourseAndStudent($(this), $("#student-filter"));
+                var self = $(this);
+                selected_course = self.val();
+                // trigger the student filter change event
+                $("#student-filter").trigger("change");
             });
             // and lets just select the first record on page load
             $("#course-filter").trigger("change");
 
-            // bind some events so that we
-            // can simulate remote data store
-            $("#student-filter").on("change", function () {
-                changeCourseAndStudent($("#course-filter"), $(this));
+            // event for change on assessment-type items
+            $("#assessment-type-filter").on("change", function () {
+                var self = $(this);
+                // lodash methods for rendering graph
+                var courses = _.filter(results, _.iteratee({'course_id': selected_course, 'assessment': selected_assessment, 'assessment_type_id': self.val()}));
+                renderResultsGraph(_.head(courses));
             });
 
-            function changeCourseAndStudent(courseElement, studentElement)
+            function updateAssessmentTypes(a_type)
             {
-                // lodash methods for rendering graph
-                var courses = _.filter(results, _.iteratee({'course_id': courseElement.val(), 'student_id': studentElement.val()}));
-                renderGraph(_.head(courses), _.head(courses)["student_id"] === "ALL");
-
-                // lodash methods for rendering progression
-                var prog = _.filter(progression, _.iteratee({'course_id': courseElement.val(), 'student_id': studentElement.val()}));
-                renderProgression(_.head(prog));
+                var select = $("#assessment-type-filter");
+                select.empty();
+                var items = _.filter(assessment_types, _.iteratee({'assessment': a_type}));
+                $.each(items, function (idx, obj) {
+                    var option = new Option(obj.description, obj.assessment_type_id);
+                    select.append($(option));
+                });
             }
 
-            // we need this var to store the canvas object
-            // and to destroy it between paints or else hovers
-            // begin to ghost old charts
-            var areaChart = null;
-            function renderGraph(data, isALL) {
+            function renderResultsGraph(data) {
                 // MH: this is a workaround to trash the canvas
                 // .destroy() does not work :(
                 $('#student-results').remove();
                 $('#student-results-container').append('<canvas id="student-results"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                if (data && data.labels.length < 1)
+                {
+                    data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                }
+
                 var areaChartCanvas = $('#student-results').get(0).getContext('2d');
 
                 var areaChartData = {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: data.labels,
                     datasets: [
+
                         {
                             label: 'Student Results',
-                            backgroundColor: 'rgba(0, 166, 90, 0)',
-                            borderColor: 'rgba(0, 166, 90, 1)',
-                            borderWidth: 2,
-                            fillColor: 'rgba(0, 166, 90, 0.9)',
-                            strokeColor: 'rgba(0, 166, 90, 0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(0, 166, 90,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
-                            data: data.student_results
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            borderWidth: 0,
+                            data: data.your_results
                         },
                         {
                             label: 'Student Average',
-                            backgroundColor: 'rgba(130, 201, 169, 0)',
-                            borderColor: 'rgba(130, 201, 169, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(221, 75, 57,0.9)',
-                            strokeColor: 'rgba(221, 75, 57,0.8)',
-                            pointColor: '#3b8bba',
-                            pointStrokeColor: 'rgba(221, 75, 57,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(60,141,188,1)',
-                            data: data.student_average
+                            backgroundColor: 'rgba(251, 158, 96, 1)',
+                            borderWidth: 0,
+                            data: data.your_average
                         },
                         {
                             label: 'Class Average',
-                            backgroundColor: 'rgba(220, 220, 220, 0)',
-                            borderColor: (isALL) ? 'rgba(22, 22, 22, 1)' : 'rgba(220, 220, 220, 1)',
-                            borderWidth: 1,
-                            fillColor: 'rgba(0, 192, 239,1)',
-                            strokeColor: 'rgba(0, 192, 239,1)',
-                            pointColor: 'rgba(0, 192, 239,1)',
-                            pointStrokeColor: 'rgba(0, 192, 239,1)',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
+                            borderWidth: 0,
                             data: data.class_average
                         }
                     ]
                 };
+
 
                 var areaChartOptions = {
                     //Boolean - If we should show the scale at all
@@ -554,26 +965,390 @@ $(document).ready(function () {
 
                 // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
                 var areaChart = new Chart(areaChartCanvas, {
-                    type: "line",
+                    type: "bar",
                     data: areaChartData,
                     options: areaChartOptions
                 });
             }
 
-            function renderProgression(data)
-            {
-                // set progress bar width and values
-                $("#progress_videos").attr('aria-valuenow', data.progress.videos).css('width', data.progress.videos + '%');
-                $("#progress_videos").html(data.progress.videos + '%');
+            function renderVideoProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#video-progression').remove();
+                $('#video-progression-container').append('<canvas id="video-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#video-progression').get(0).getContext('2d');
 
-                $("#progress_ebooks").attr('aria-valuenow', data.progress.ebooks).css('width', data.progress.ebooks + '%');
-                $("#progress_ebooks").html(data.progress.ebooks + '%');
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 192, 239, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.class_progress
+                        },
+                        {
+                            label: 'Student Progress',
+                            backgroundColor: 'rgba(111, 215, 241, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.videos.course_timeline
+                        }
+                    ]
+                };
 
-                $("#progress_articles").attr('aria-valuenow', data.progress.articles).css('width', data.progress.articles + '%');
-                $("#progress_articles").html(data.progress.articles + '%');
 
-                $("#progress_study_guide").attr('aria-valuenow', data.progress.study_guide).css('width', data.progress.study_guide + '%');
-                $("#progress_study_guide").html(data.progress.study_guide + '%');
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderEbookProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#ebook-progression').remove();
+                $('#ebook-progression-container').append('<canvas id="ebook-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#ebook-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(221, 75, 57, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.class_progress
+                        },
+                        {
+                            label: 'Student Progress',
+                            backgroundColor: 'rgba(226, 145, 135, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.ebooks.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderArticleProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#article-progression').remove();
+                $('#article-progression-container').append('<canvas id="article-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#article-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(0, 166, 90, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.class_progress
+                        },
+                        {
+                            label: 'Student Progress',
+                            backgroundColor: 'rgba(91, 211, 157, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.articles.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
+            }
+            
+            function renderStudyGuideProgressionGraph(data) {
+                // MH: this is a workaround to trash the canvas
+                // .destroy() does not work :(
+                $('#study-guide-progression').remove();
+                $('#study-guide-progression-container').append('<canvas id="study-guide-progression"><canvas>');
+                
+                // pull a switch-a-roo on the labels and axis count
+                var labels = ['Progress'];
+                var areaChartCanvas = $('#study-guide-progression').get(0).getContext('2d');
+
+                var areaChartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Class Progress',
+                            backgroundColor: 'rgba(251, 114, 23, 1)',
+                            //borderColor: 'rgba(0, 192, 239, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.class_progress
+                        },
+                        {
+                            label: 'Student Progress',
+                            backgroundColor: 'rgba(251, 158, 96, 1)',
+                            //borderColor: 'rgba(221, 75, 57, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.my_progress
+                        },
+                        {
+                            label: 'Course Timeline',
+                            backgroundColor: 'rgba(200, 200, 200, 1)',
+                            //borderColor: 'rgba(0, 166, 90, 1)',
+                            borderWidth: 0,
+                            data: data.progress.study_guide.course_timeline
+                        }
+                    ]
+                };
+
+
+                var areaChartOptions = {
+                    //Boolean - If we should show the scale at all
+                    showScale: true,
+                    //Boolean - Whether grid lines are shown across the chart
+                    scaleShowGridLines: false,
+                    //String - Colour of the grid lines
+                    scaleGridLineColor: 'rgba(0,0,0,.05)',
+                    //Number - Width of the grid lines
+                    scaleGridLineWidth: 1,
+                    //Boolean - Whether to show horizontal lines (except X axis)
+                    scaleShowHorizontalLines: true,
+                    //Boolean - Whether to show vertical lines (except Y axis)
+                    scaleShowVerticalLines: true,
+                    //Boolean - Whether the line is curved between points
+                    bezierCurve: true,
+                    //Number - Tension of the bezier curve between points
+                    bezierCurveTension: 0.3,
+                    //Boolean - Whether to show a dot for each point
+                    pointDot: true,
+                    //Number - Radius of each point dot in pixels
+                    pointDotRadius: 1,
+                    //Number - Pixel width of point dot stroke
+                    pointDotStrokeWidth: 1,
+                    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                    pointHitDetectionRadius: 20,
+                    //Boolean - Whether to show a stroke for datasets
+                    datasetStroke: true,
+                    //Number - Pixel width of dataset stroke
+                    datasetStrokeWidth: 2,
+                    //Boolean - Whether to fill the dataset with a color
+                    datasetFill: true,
+                    //String - A legend template
+                    legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                    //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                    maintainAspectRatio: false,
+                    //Boolean - whether to make the chart responsive to window resizing
+                    responsive: true,
+
+                    scales: {
+                        yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 100  // minimum value will be 0.
+                                }
+                            }]
+                    }
+                };
+
+                // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+                var areaChart = new Chart(areaChartCanvas, {
+                    type: "bar",
+                    data: areaChartData,
+                    options: areaChartOptions
+                });
             }
         });
     </script>
