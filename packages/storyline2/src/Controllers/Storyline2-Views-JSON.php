@@ -84,12 +84,10 @@ class Storyline2ViewsJSON extends BaseController {
         return $new;
     }  
 
-
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
         return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
-
 
     /**
      *
