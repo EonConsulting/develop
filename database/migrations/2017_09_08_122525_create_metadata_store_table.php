@@ -17,8 +17,8 @@ class CreateMetadataStoreTable extends Migration {
             $table->increments('id');
             $table->string('metadata_type', 255);
             $table->string('description', 255);
-            $table->string('classification', 150)->default('');
-            $table->integer('sequence');
+            $table->string('classification', 150)->nullable();
+            $table->integer('sequence')->nullable();
             $table->timestamps();
         });
     }
