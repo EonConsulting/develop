@@ -149,17 +149,17 @@ class Storyline2ViewsJSON extends BaseController {
         $root_parent = (int) $data['parents'][$root_i];
         //dd($text);
 
-        $Item = StorylineItem::where('id', '=', $parent_id)->first();
+        $parent = StorylineItem::where('id', '=', $parent_id)->first(); //parent
 
-        $newItem = StorylineItem::create(['name' => $text, 'storyline_id' => $Item->storyline_id, 'parent_id' => $parent_id, 'root_parent' => $root_parent]);
+        $new = StorylineItem::create(['name' => $text, 'storyline_id' => $parent->storyline_id, 'parent_id' => $parent_id, 'root_parent' => $root_parent]);
 
-        if ($Item->moveToLeftOf($newItem)) {
+        if ($new->makeChildOf($parent)) {
             $msg = 'success';
         } else {
             $msg = 'failed';
         }
 
-        return response()->json(['msg' => $msg, 'id' => $newItem->id]);
+        return response()->json(['msg' => $msg, 'id' => $new->id]);
     }
 
     private function findPosition($decendants, $position) {

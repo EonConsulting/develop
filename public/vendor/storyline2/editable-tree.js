@@ -167,13 +167,13 @@ function getContent(data) {
 
 //Create Node
 function createNode(data) {
-    var node = $.extend(true, {}, data);
+    //var node = $.extend(true, {}, data);
     var actionUrl = base_url + "/storyline2/create";
 
     $.ajax({
         method: "POST",
         url: actionUrl,
-        data: JSON.stringify(node),
+        data: JSON.stringify(data),
         contentType: 'json',
         headers: {
             'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
@@ -183,8 +183,11 @@ function createNode(data) {
                 if (return_data.msg === 'failed') {
                     alert('Create failed, please try again.');
                 } else {
-                    data.instance.set_id(node, return_data.id);
-                    data.instance.edit(return_data.id);
+
+                    $(tree_id).jstree(true).set_id(data, return_data.id);
+                    $(tree_id).jstree(true).edit(return_data.id);
+                    //data.instance.set_id(node, return_data.id);
+                    //data.instance.edit(return_data.id);
                 }
             },
             400: function () { //bad request
