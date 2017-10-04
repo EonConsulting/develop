@@ -109,12 +109,24 @@
 
             <!-- TODO: If role == instructor/admin the show this menu item -->
             <li class="{{ (Route::currentRouteName() == 'content.builder') ? 'left-menu-active' : '' }}">
-                <a href="{{ route('content.builder') }}">
+                <a href="#" class="accordian">
                     <i class="fa fa-book fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
                         Content Builder
                     </span>
+                    <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
                 </a>
+                <div class="left-menu-sub hidden">
+                    <ul>
+                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder.new') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.contentbuilder.new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+ 
+                    </ul>
+                </div>
             </li>
 
 
@@ -128,16 +140,16 @@
                     <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
                 </a>
                 <div class="left-menu-sub hidden">
-                <ul>
-                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.laravellti.appstore') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Apps</a></li>
-                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore.install') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.laravellti.install') }}"><i class="fa fa-circle-o left-menu-icon"></i>Add Apps</a></li>
-                    <li class="{{ (Route::currentRouteName() == 'eon.laravellti.cats') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.laravellti.cats') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
-                    <li class="{{ (Route::currentRouteName() == 'eeon.laravellti.cats.create') ? 'left-menu-active' : '' }}">
-                        <a href="{{ route('eon.laravellti.cats.create') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create</a></li>
-                </ul>
+                    <ul>
+                        <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.laravellti.appstore') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Apps</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore.install') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.laravellti.install') }}"><i class="fa fa-circle-o left-menu-icon"></i>Add Apps</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.laravellti.cats') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.laravellti.cats') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+                        <li class="{{ (Route::currentRouteName() == 'eeon.laravellti.cats.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.laravellti.cats.create') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create</a></li>
+                    </ul>
                 </div>
             </li>
 

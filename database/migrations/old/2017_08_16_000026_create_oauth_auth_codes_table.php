@@ -1,5 +1,4 @@
 <?php
-//namespace App\Database\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,18 +19,15 @@ class CreateOauthAuthCodesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable($this->set_schema_table)) {
-            Schema::create($this->set_schema_table, function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('id');
-                $table->integer('user_id');
-                $table->integer('client_id');
-                $table->text('scopes')->nullable()->default(null);
-                $table->tinyInteger('revoked');
-                $table->dateTime('expires_at')->nullable()->default(null);
-            });
-        }
-
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnodDB';
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('client_id');
+            $table->text('scopes')->nullable()->default(null);
+            $table->tinyInteger('revoked');
+            $table->dateTime('expires_at')->nullable()->default(null);
+        });
     }
 
     /**
