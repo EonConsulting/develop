@@ -21,7 +21,7 @@
                             <th class="col-md-1">#</th>
                             <th class="col-md-5">Title</th>
                             <th class="col-md-2">Instructor</th>
-                            <th class="col-md-2">Manage</th>
+                            <th class="col-md-2">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,7 +30,10 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $course->title }}</td>
                                 <td>{{ $course->creator->name }}</td>
-                                <td><a href="{{ route('courses.single', $course->id) }}" class="btn btn-success btn-xs">Manage</a></td>
+                                <td>
+                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs">Storyline</a>
+                                    <a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs">Notify</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
