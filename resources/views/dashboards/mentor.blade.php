@@ -907,7 +907,7 @@ $(document).ready(function () {
                         studtrends = generateRandomDataset(7, "days");
                         break;
                     case "month":
-                        studtrends = generateRandomDataset(30, "days");
+                        studtrends = generateRandomDataset(1, "months");
                         break;
                     case "3-month":
                         studtrends = generateRandomDataset(3, "months");
@@ -935,9 +935,14 @@ $(document).ready(function () {
 
             function getDayName(dateStr, locale)
             {
-                console.log("date is:" + dateStr);
                 var date = new Date(dateStr);
                 return date.toLocaleDateString(locale, {weekday: 'long'});
+            }
+            
+            function getShortDate(dateStr, locale)
+            {
+                var date = new Date(dateStr);
+                return date.toLocaleDateString(locale, {month: 'short', day: 'numeric'});
             }
 
             function generateRandomDataset(value, period)
@@ -950,34 +955,45 @@ $(document).ready(function () {
                 var assessments = [];
                 var boost_factor = 1;
                 var hours_of_interest = [8, 9, 18, 19, 20, 21, 22];
-                var days_of_interest = [3, 7, 14, 21, 25];
+                var days_of_week_interest = [3, 4];
+                var days_of_month_interest = [7, 14, 21, 28, 31, 40, 49, 60, 75, 90, 120, 160, 180, 200, 228, 256, 280, 300, 320, 340];
 
                 switch (period) {
                     case "hours":
                         for (x = 0; x < value; x++)
                         {
-                            (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1;
+                            (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
                             labels.push(x + "h00");
-                            logins.push(generateRandomNumber(3, 120, boost_factor));
-                            videos.push(generateRandomNumber(3, 120, boost_factor));
-                            ebooks.push(generateRandomNumber(3, 120, boost_factor));
-                            articles.push(generateRandomNumber(3, 120, boost_factor));
-                            assessments.push(generateRandomNumber(3, 120, boost_factor));
+                            logins.push(generateRandomNumber(3, 40, boost_factor));
+                            videos.push(generateRandomNumber(3, 40, boost_factor));
+                            ebooks.push(generateRandomNumber(3, 40, boost_factor));
+                            articles.push(generateRandomNumber(3, 40, boost_factor));
+                            assessments.push(generateRandomNumber(3, 40, boost_factor));
                         }
                         break;
                     case "days":
                         for (x = value; x > 0; x--)
                         {
-                            (_.indexOf(days_of_interest, x) > 0) ? boost_factor = 7 : boost_factor = 1;
-                            labels.push(getDayName(new Date().getDate() - x, "en-US"));
-                            logins.push(generateRandomNumber(3, 120, boost_factor));
-                            videos.push(generateRandomNumber(3, 120, boost_factor));
-                            ebooks.push(generateRandomNumber(3, 120, boost_factor));
-                            articles.push(generateRandomNumber(3, 120, boost_factor));
-                            assessments.push(generateRandomNumber(3, 120, boost_factor));
+                            (_.indexOf(days_of_week_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                            labels.push(getDayName(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                            logins.push(generateRandomNumber(3, 40, boost_factor));
+                            videos.push(generateRandomNumber(3, 40, boost_factor));
+                            ebooks.push(generateRandomNumber(3, 40, boost_factor));
+                            articles.push(generateRandomNumber(3, 40, boost_factor));
+                            assessments.push(generateRandomNumber(3, 40, boost_factor));
                         }
                         break;
                     case "months":
+                        for (x = value * 30; x > 0; x--)
+                        {
+                            (_.indexOf(days_of_month_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                            labels.push(getShortDate(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                            logins.push(generateRandomNumber(3, 40, boost_factor));
+                            videos.push(generateRandomNumber(3, 40, boost_factor));
+                            ebooks.push(generateRandomNumber(3, 40, boost_factor));
+                            articles.push(generateRandomNumber(3, 40, boost_factor));
+                            assessments.push(generateRandomNumber(3, 40, boost_factor));
+                        }
                         break;
                 }
 
