@@ -43,5 +43,6 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
         Route::post('/metadata/save', ['as' => 'eon.admin.metadata.save', 'uses' => 'MetadataController@save']);
         Route::get('/metadata/edit/{id}', ['as' => 'eon.admin.metadata.edit', 'uses' => 'MetadataController@edit']);
         Route::post('/metadata/update/{id}', ['as' => 'eon.admin.metadata.update', 'uses' => 'MetadataController@update']);
+        Route::get('/metadata/delete/{id}', ['as' => 'eon.admin.metadata.delete', 'uses' => 'MetadataController@delete']);
     });
 });
