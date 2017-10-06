@@ -76,6 +76,14 @@ class MetadataController extends Controller {
 
         return response()->json(['error' => $validator->errors()->all()]);
     }
+    
+    public function delete($id) {
+        $Metadata = MetadataStore::find($id);
+        if($Metadata->delete()){
+           return response()->json(['success'=>'Metadata has been delete successfully.']); 
+        }
+        return response()->json(['error' => 'An error occured, please try again.']);
+    }
 
     
 
