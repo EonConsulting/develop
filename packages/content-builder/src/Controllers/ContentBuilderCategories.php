@@ -23,6 +23,8 @@ class ContentBuilderCategories extends Controller {
 
         $categories = Category::all();
 
+        //dd($categories);
+
         return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
         
     }
@@ -41,7 +43,9 @@ class ContentBuilderCategories extends Controller {
             $result = Category::find($category);
         }
 
-        return json_encode($result);
+        //dd($result);
+
+        return response()->json($result);
 
     }
 
