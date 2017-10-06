@@ -1,5 +1,5 @@
 
-    <div class="form-group">
+ <div class="form-group">
         {{ Form::label('metadata_type', 'Metadata Type') }}
         {{ Form::text('metadata_type', $metadata->metadata_type, array('class' => 'form-control')) }}
     </div>

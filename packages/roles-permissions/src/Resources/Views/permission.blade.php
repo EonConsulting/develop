@@ -40,7 +40,7 @@
                 $('#response').addClass('text-default').removeClass('hidden').removeClass('text-danger').removeClass('text-success').html('<br />Saving...');
 
                 $.ajax({
-                    url: '/admin/permissions/' + permission_id,
+                    url: '{{ url() }}/admin/permissions/' + permission_id,
                     type: 'POST',
                     data: {_token: _token, name: val},
                     success: function(res) {
