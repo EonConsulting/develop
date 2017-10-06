@@ -39,7 +39,7 @@
                 $('#response').addClass('text-default').removeClass('hidden').removeClass('text-danger').removeClass('text-success').html('<br />Saving...');
 
                 $.ajax({
-                    url: '/admin/groups/create',
+                    url: '{{ url() }}/admin/groups/create',
                     type: 'POST',
                     data: {_token: _token, name: val},
                     success: function(res) {
