@@ -309,14 +309,6 @@ Storyline Student Single
 <div>
     <div class="page-container">
 
-        <div class="page-container-tree">
-
-            <div id="tree">
-
-            </div>
-
-        </div><!--End col-md-3 -->
-
         <div class="page-container-editor">
             <div class="content-container">
 
@@ -450,8 +442,7 @@ Storyline Student Single
                         <h3><?php echo $content->title; ?></h3>
                         <p><?php echo $content->description; ?></p>
 
-                        <button class="content-link-btn content-action" data-action="link" data-content-id="<?php echo $content->id; ?>">Link</button>
-                        <button class="content-copy-btn content-action" data-action="copy" data-content-id="<?php echo $content->id; ?>">Copy</button>
+                        <button class="content-copy-btn content-action" data-content-id="<?php echo $content->id; ?>">Copy</button>
                     </div>
 
 
@@ -460,7 +451,7 @@ Storyline Student Single
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-primary"><i class="fa fa-save"></i><span> Cancel</span></button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#importModal"><i class="fa fa-save"></i><span> Cancel</span></button>
             </div>
         </div>
 
@@ -469,17 +460,12 @@ Storyline Student Single
 @endsection
 
 @section('custom-scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-<script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
 
 <script>
 var base_url = "{{{ url('') }}}";
-var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 </script>
-
-<script src="{{ url('vendor/storyline2/editable-tree.js')}}"></script>
 
     
 <script>
@@ -490,6 +476,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         toolbar: [[ 'LTIButton' ]]
     };
 </script>
+
 
 <script>
     // resize the editor(s) while the instance is ready
@@ -550,6 +537,8 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
 <script>
 
+    
+
     $( document ).ready(function(){
 
         $("#validation").hide();
@@ -561,11 +550,15 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         $(".content-action").on("click", function(){
 
             $content_id = $(this).data("content-id");
-            $item_id = $("#item-id").attr('value');
-            $action = $(this).data("action");
 
-            import_content($content_id,$item_id,$action);
+            getContent($content_id);
         });
+
+        var content_id = "{{ $content_id }}";
+
+        if(content_id !== "new"){
+            getContent(parseInt(content_id));
+        }
 
     });
 
@@ -578,62 +571,60 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         "categories": false
     };
 
-    //Delete Node Action
-    $(tree_id).on("delete_node.jstree", function (e, data) {
-        console.log(data.node.id);
-        deleteNode(data.node.id);
-    });
+    function populateContentForm(data) {
 
-    //Rename Node Action
-    $(tree_id).on("rename_node.jstree", function (e, data) {
-        var ref = data.node;
-        renameNode(ref);
-    });
+        console.log("populateContentForm called");
 
-    //Move Node Action
-    $(tree_id).on("move_node.jstree", function (e, data) {
-        console.log(data);
-        var ref = {
-            node: data.node,
-            position: data.position,
-            old_position: data.old_position
-        };
-        console.log(ref);
-        moveNode(ref);
-    });
+        var course_data = data;
 
-    //Create Node Action
-    $(tree_id).on("create_node.jstree", function (e, data) {
-        var ref =  data.node;
-        createNode(ref);
-    });
+        $("#content-id").val(course_data.id);
+        $("#content-title").val(course_data.title);
+        $("#content-description").val(course_data.description);
+        $("#content-tags").val(course_data.tags);
 
-    //Select Node Action
-    $(tree_id).on("changed.jstree", function (e, data) {
-        $("#item-id").val(data.node.id);
+        console.log(course_data.body);
+        editor.setData(course_data.body);
 
-        $(".cat_check").prop('checked', false);
-        $("#content-id").val("");
-        $("#content-title").val("");
-        $("#content-description").val("");
-        $("#content-tags").val("");
-
-        var body = editor.setData("");
-
-        var ref = data.node;
-        getContent(ref);
-
-        for (var item in valid){
-            item = false;
+        for (index = 0; index < course_data.categories.length; ++index) {
+            cat_id = "#cat" + course_data.categories[index].id;
+            console.log(cat_id);
+            $(cat_id).prop('checked', true);
         }
 
-        $("#content-title").popover("hide");
-        $("#content-body").popover("hide");
-        $("#content-description").popover("hide");
-        $("#categories").popover("hide");
-        $("#content-tags").popover("hide");
+    }
 
-    });
+    //Get Content
+    function getContent(content) {
+
+        //console.log("getContent called");
+        //console.log(item_id);
+
+        actionUrl = base_url + "/content/show/" + content;
+
+        $.ajax({
+            method: "GET",
+            url: actionUrl,
+            contentType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    populateContentForm(data);
+                    $('#importModal').modal('hide');
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
+    }
 
     //--form validation----------------------------------------------------
 
@@ -847,7 +838,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         if(validation() === true) {
 
-            actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
+            actionUrl = base_url + "/content/store";
 
             $.ajax({
                 method: "POST",

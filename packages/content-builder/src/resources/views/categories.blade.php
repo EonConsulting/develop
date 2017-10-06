@@ -147,10 +147,10 @@
                 statusCode: {
                     200: function (data) { //success
                         
-                        $json = JSON.parse(data);
+                        //$json = data;
 
                         //console.log(data);
-                        drawTable($json);
+                        drawTable(data);
                     },
                     400: function () { //bad request
 
@@ -346,7 +346,6 @@
 
         //$(this).data("id") 
 
-    </script>           
-                       
+    </script>                  
 
 @endsection

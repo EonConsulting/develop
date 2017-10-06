@@ -98,10 +98,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 
     });
 
-    /*Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
-        Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
-        Route::post('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@store']);
-    });*/
 });
 
 /*

@@ -76,7 +76,7 @@
                     </div>
                     <div class="content-card-footer">
                         <a href="{{ url('content/view/'.$item->id) }}" class="content-card-footer-leftbutton"><i class="fa fa-eye"></i></a>
-                        <a href="{{ url('content/edit/'.$item->id) }}" class="content-card-footer-leftbutton"><i class="fa fa-pencil"></i></a>
+                        <a href="{{ url('content/update/'.$item->id) }}" class="content-card-footer-leftbutton"><i class="fa fa-pencil"></i></a>
                         <a href="#" class="content-card-footer-rightbutton"><i class="fa fa-trash"></i></a>
                     </div>
                 </div>

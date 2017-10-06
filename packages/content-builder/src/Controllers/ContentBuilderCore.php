@@ -131,14 +131,28 @@ class ContentBuilderCore extends Controller {
      *
      * @return void
      */
-    public function new() {
+    public function update($content) {
         $breadcrumbs = [
             'title' => 'Content Builder',
         ];
 
         $categories = Category::all();
+        $contents = Content::all();
 
-        return view('eon.content-builder::new', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        if($content !== "new"){
+            $content_id = $content;
+        } else {
+            $content_id = "new";
+        }
+        
+
+        return view('eon.content-builder::new2', [
+            'contents'  => $contents,
+            'content_id' => $content_id,
+            'categories' => $categories,
+            'breadcrumbs' => $breadcrumbs]
+        );
+
     }
 
 
@@ -161,6 +175,7 @@ class ContentBuilderCore extends Controller {
             $result = Content::all();  
         } else {
             $result = Content::find($content);
+            $result->categories = $result->categories()->get();
         }
 
         return response()->json($result);
@@ -195,6 +210,31 @@ class ContentBuilderCore extends Controller {
        
     }
 
+    public function store(Request $request){
+
+        $data = $request->json()->all();
+
+        $content = new Content([
+            'title' => $data['title'],
+            'body' => $data['body'],
+            'tags' => $data['tags'],
+            'creator_id' => auth()->user()->id,
+            'description' => $data['description']
+        ]);
+        
+        $content->save();
+        
+        $categories = $data['categories'];
+
+        foreach($categories as $k => $category_id) {
+            $temp = Category::find($category_id);
+            $content->categories()->save($temp);
+        }
+
+        return 200;
+
+    }
+
     /**
      * Undocumented function
      *
@@ -202,7 +242,7 @@ class ContentBuilderCore extends Controller {
      * @param [type] $content_id
      * @return void
      */
-    public function update(Request $request, $content_id){
+ /*   public function update(Request $request, $content_id){
 
         $content = Content::find($content_id);
         
@@ -219,7 +259,7 @@ class ContentBuilderCore extends Controller {
 
         return redirect()->route('eon.contentbuilder');
 
-    }
+    }*/
 
     /**
      * Undocumented function
