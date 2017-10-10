@@ -130,7 +130,7 @@
             </li>
         <?php endif; ?>
 
-        <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
+        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
             <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
@@ -153,9 +153,7 @@
                     </ul>
                 </div>
             </li>
-        <?php endif; ?>
-
-        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>    
+            
             <!-- TODO: If role == admin the show this menu item -->
             <li class="left-menu-tree {{ (Route::currentRouteName() == 'eon.admin.groups' || Route::currentRouteName() == 'eon.admin.permissions' || Route::currentRouteName() == 'eon.admin.roles' || Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
@@ -176,7 +174,6 @@
                             </a>
                         </li>
 
-
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.permissions') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.permissions') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
@@ -184,14 +181,12 @@
                             </a>
                         </li>
 
-
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.roles') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.roles') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
                                 Roles
                             </a>
                         </li>
-
 
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.roles.users') }}">
@@ -204,8 +199,7 @@
                 </div>
 
             </li>
-        <?php endif; ?>
-        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
+       
             <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-database fa-lg left-menu-icon"></i>
@@ -223,7 +217,6 @@
                                 Metadata
                             </a>
                         </li>
-
 
                     </ul>
                 </div>    

@@ -31,11 +31,9 @@
     <script>
         $(document).ready(function($) {
             var _token = $('#tok').val();
-
             $(document).on('change', '#txt_role', function() {
                 var val = $(this).val();
                 console.log('val', val);
-
                 $('#response').addClass('text-default').removeClass('hidden').removeClass('text-danger').removeClass('text-success').html('<br />Saving...');
 
                 $.ajax({
