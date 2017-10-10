@@ -43,8 +43,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
         @yield('exterior-content')
         @include('templates.default-scripts')
 
-        @yield('custom-scripts')
-
+        @stack('custom-scripts')
 
        
     </body>
