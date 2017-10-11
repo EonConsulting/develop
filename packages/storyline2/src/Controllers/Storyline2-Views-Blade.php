@@ -49,7 +49,7 @@ class Storyline2ViewsBlade extends BaseController {
 
         //dd($items);
 
-        $items = $this->makeList($items);
+        $items = $this->makeList($items[0]['children']);
 
         $breadcrumbs = [
           'title' => 'View [Course Name] Storyline' //pass $course as param and load name here
@@ -60,7 +60,7 @@ class Storyline2ViewsBlade extends BaseController {
 
     public function makeList($list)
     {
-        $result = '<ul>';
+        $result = '<ol>';
 
         foreach ($list as $item)
         {
@@ -71,7 +71,7 @@ class Storyline2ViewsBlade extends BaseController {
             }
             $result = $result . '</li>';
         }
-        $result = $result . '</ul>';
+        $result = $result . '</ol>';
 
         return $result;
     }

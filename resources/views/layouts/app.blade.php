@@ -28,7 +28,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
                 @include('templates.header')
             </div>
 
-            <div data-simplebar class="content-area">
+            <div data-simplebar class="content-area" id="content-area">
                 <div style="height: 15px;"></div>
                 @yield('content')
             </div>

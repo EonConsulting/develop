@@ -28,7 +28,7 @@
         -webkit-align-items: flex-start;
         -ms-flex-align: start;
         align-items: flex-start;
-        
+        margin-top: -15px;
     }
 
     .flex-menu {
@@ -41,8 +41,8 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 250px;
-        overflow-y: scroll;
+        width: 300px;
+        overflow-y: auto;
         overflow-x: auto;
     }
 
@@ -58,7 +58,7 @@
         align-self: stretch;
         overflow-y: auto;
         overflow-x: auto;
-        padding-left: 50px;
+        padding: 15px;
     }
     
 
@@ -75,17 +75,42 @@
 
     }
 
+    .item-tree li {
+        list-style-type: dot;
+        display: block;
+    }
+
+    .item-tree li:before {
+        content: counters(item, ".") " ";
+        counter-increment: item;
+    }
+
     .item-tree ul {
         list-style-type: none;
+        padding-left: 0px;
+    }
 
-
+    .item-tree ol {
+        counter-reset: item;
+        padding-left: 0px;
     }
 
     .item-tree ul li {
-
-
-
+        padding-left: 5px;
     }
+
+    .item-tree ul li ul{
+        padding-left: 5px; 
+    }
+
+    .item-tree ol li {
+        padding-left: 10px;
+    }
+
+    .item-tree ol li ul{
+        padding-left: 10px; 
+    }
+
 
 
 </style>
@@ -95,7 +120,7 @@
 
 @section('content')
 
-<div class="flex-container">
+<div class="flex-container" id="containter">
 
     <div class="flex-menu">
         
@@ -134,8 +159,12 @@
 
 @section('custom-scripts')
 
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+
 <script>
     $( document ).ready(function(){
+
+        resizeArea();
 
         $(".menu-btn").on("click", function() {
 
@@ -147,6 +176,16 @@
         });
 
     });
+
+
+    $(window).resize(function(){
+        resizeArea();
+    });
+
+    function resizeArea(){
+        var areaHeight = $("#content-area").height();
+        $("#containter").height(areaHeight);
+    }
 
     function pupulateContent(data){
 

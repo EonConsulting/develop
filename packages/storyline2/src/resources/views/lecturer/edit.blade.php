@@ -322,7 +322,7 @@ Storyline Student Single
 
                 <div class="content-info">
 
-                        <div class="info-bar-container">
+                        <div class="info-bar-container" id="info-bar">
 
                             <div class="info-bar-name">
                                 <div>
@@ -526,23 +526,23 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     });
 
     CKEDITOR.on('instanceReady', function() { 
-        var textEditHeight      = $(".cktextarea").height();
+        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 47) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
 
     });
 
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
-        var textEditHeight      = $(".cktextarea").height();
+        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 47) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
 
     });
 
