@@ -842,6 +842,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         $("#validation").hide();
 
         var data = get_content_details();
+        var item_id = $("#item-id").attr('value');
         
         validate_all();
 
