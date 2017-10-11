@@ -48,41 +48,33 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function show_items($storyline) {
 
-        $result = Storyline::find($storyline)->items;
+        $result = $this->items_to_tree(Storyline::find($storyline)->items);
+        usort($result, [$this, "self::compare"]);
 
-        return response()->json($this->nest($this->items_to_tree($result)));
+        return response()->json($this->createTree($result));
     }
-    
 
-    public function nest($items) { 
-        $new = array(); 
 
-        //list assigns values to $id, and $item
-        //each returns a key value pair from the array $items, and steps to the next item
-        while(list($id, $item) = each($items)) { 
-            
-            $temp = $item;
-             
-            //if this is true, item has children
-            if($item['rgt'] - $item['lft'] != 1) { 
-                $temp['children'] = $this->nest($items, true); 
-            } 
 
-            $new[] = $temp;
+    public function createTree($items, $left = 0, $right = null) {
+        $tree = [];
+        foreach ($items as $k => $item) {
+            if ($item['lft'] === $left + 1 && (is_null($right) || $item['rgt'] < $right)) {
+                
+                $temp = $items[$k];
+                
+                if($item['rgt'] - $item['lft'] != 1){
+                    $temp['children'] = $this->createTree($items, $item['lft'], $item['rgt']);
+                }
 
-            //key() returns the position of the current internal counter
-            $next_id = key($items);
-
-            //check if next child is a sibling, if not, return new
-            if($next_id && $items[$next_id]['parent_id'] != $item['parent_id']) { 
-                usort($new,'self::compare');
-                return $new;
+                $tree[] = $temp;
+                
+                $left = $item['rgt'];
             }
         }
+        return $tree;
+    }
 
-        usort($new, array($this, "self::compare"));
-        return $new;
-    }  
 
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
@@ -100,7 +92,7 @@ class Storyline2ViewsJSON extends BaseController {
 
         foreach ($items as $k => $node) {
 
-            $map[$k] = [
+            $map[] = [
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
@@ -142,12 +134,11 @@ class Storyline2ViewsJSON extends BaseController {
         $data = $request->json()->all();
 
         $parent_id = (int) $data['parent'];
-        $text = $data['original']['text'];
 
+        $text = $data['original']['text'];
         $root_i = count($data['parents']) - 1;
 
         $root_parent = (int) $data['parents'][$root_i];
-        //dd($text);
 
         $parent = StorylineItem::where('id', '=', $parent_id)->first(); //parent
 
@@ -159,7 +150,15 @@ class Storyline2ViewsJSON extends BaseController {
             $msg = 'failed';
         }
 
-        return response()->json(['msg' => $msg, 'id' => $new->id]);
+        $response = [
+            "Data Received" => $data,
+            "Parent" => $parent,
+            "New Node" => $new,
+            "msg" => $msg,
+            "id" => $new->id
+        ];
+
+        return response()->json($response);
     }
 
     private function findPosition($decendants, $position) {

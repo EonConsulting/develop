@@ -7,6 +7,36 @@
 
 @section('custom-css')
 
+<style>
+
+    
+    .item-tree {
+
+
+
+    }
+
+    .item-tree a {
+
+
+
+    }
+
+    .item-tree ul {
+        list-style-type: none;
+
+
+    }
+
+    .item-tree ul li {
+
+
+
+    }
+
+
+</style>
+    
 @endsection
 
 
@@ -16,32 +46,10 @@
     <div class="row">
 
         <div class="col-md-3">
-
-            <ul>
-                <li>Introduction</li>
-                <li>Topic
-                    <ul>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                    </ul>
-                </li>
-                <li>Topic
-                    <ul>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                        <li>Sub Topic</li>
-                    </ul>
-                </li>
-                <li>Topic</li>
-                <li>Topic</li>
-                <li>Topic</li>
-            </ul>
-
+            
+            <div class="item-tree">
+                <?php echo $items; ?>
+            </div>
 
         </div><!--End col-md-3 -->
 
@@ -54,6 +62,14 @@
 </div><!--End container-fluid -->
 
 @endsection
+
+
+
+@section('exterior-content')
+
+@endsection
+
+
 
 @section('custom-scripts')
 

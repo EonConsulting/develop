@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
+use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
 class Storyline2ViewsBlade extends BaseController {
 
@@ -33,12 +34,51 @@ class Storyline2ViewsBlade extends BaseController {
      *
      * @return void
      */
-    public function view() {
+    public function view($course) {
+
+        $SL2JSON = new Storyline2JSON;
+
+        $course = Course::find($course);
+        $storyline_id = $course->latest_storyline()->id;
+
+        $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
+
+        usort($items, array($this, "self::compare"));
+
+        $items = $SL2JSON->createTree($items);
+
+        //dd($items);
+
+        $items = $this->makeList($items);
+
         $breadcrumbs = [
           'title' => 'View [Course Name] Storyline' //pass $course as param and load name here
         ];
 
-        return view('eon.storyline2::student.view', ['breadcrumbs' => $breadcrumbs]);
+        return view('eon.storyline2::student.view', ['items' => $items, 'breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function makeList($list)
+    {
+        $result = '<ul>';
+
+        foreach ($list as $item)
+        {
+            $result = $result . '<li><a href="#">'.$item['text'].'</a>';
+            if (isset($item['children']))
+            {
+                $result = $result . $this->makeList($item['children']);
+            }
+            $result = $result . '</li>';
+        }
+        $result = $result . '</ul>';
+
+        return $result;
+    }
+
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
     /**
