@@ -43,4 +43,6 @@
 
 @section('custom-scripts')
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+
+
 @endsection

@@ -64,7 +64,7 @@ class Storyline2ViewsBlade extends BaseController {
 
         foreach ($list as $item)
         {
-            $result = $result . '<li><a href="#">'.$item['text'].'</a>';
+            $result = $result . '<li><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a>';
             if (isset($item['children']))
             {
                 $result = $result . $this->makeList($item['children']);
