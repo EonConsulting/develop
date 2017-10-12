@@ -52,26 +52,39 @@ class Storyline2ViewsBlade extends BaseController {
         $items = $this->makeList($items[0]['children']);
 
         $breadcrumbs = [
-          'title' => 'View [Course Name] Storyline' //pass $course as param and load name here
+          'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
         ];
 
         return view('eon.storyline2::student.view', ['items' => $items, 'breadcrumbs' => $breadcrumbs]);
     }
 
-    public function makeList($list)
+    public function makeList($list, $number = '')
     {
-        $result = '<ol>';
+        $result = '<ul>';
+        $count = 0;
 
         foreach ($list as $item)
         {
-            $result = $result . '<li><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a>';
+            $count++;
+
             if (isset($item['children']))
-            {
-                $result = $result . $this->makeList($item['children']);
+            {   
+                $result = $result . '<li>' . '<span class="toggle-expand pull-left"> <i class="fa fa-chevron-right"></i> </span>';
+                $result = $result . '<span>' . $number. (string) $count . ')  </span>';
+                $result = $result . '<span><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a></span>';
+
+                $result = $result . $this->makeList($item['children'], $number . (string) $count . '.');
+            } else {
+                $result = $result . '<li>' . '<span class="toggle-expand pull-left"> </span>';
+                $result = $result . '<span>' . $number. (string) $count . ')  </span>';
+                $result = $result . '<span><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a></span>';
             }
+
+            
+
             $result = $result . '</li>';
         }
-        $result = $result . '</ol>';
+        $result = $result . '</ul>';
 
         return $result;
     }

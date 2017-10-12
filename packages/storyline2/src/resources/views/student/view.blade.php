@@ -62,55 +62,44 @@
     }
     
 
-
+    .flex-menu h4 {
+        font-size: 20px;
+        color: #919191;
+        margin: 15px 15px 5px 15px;
+    }
 
     .item-tree {
 
-
     }
 
-    .item-tree a {
-
-
-
+    .item-tree a:focus {
+        color: #fb7217;
+        text-decoration: none;
     }
 
     .item-tree li {
-        list-style-type: dot;
         display: block;
-    }
-
-    .item-tree li:before {
-        content: counters(item, ".") " ";
-        counter-increment: item;
+        padding-top: 8px;
     }
 
     .item-tree ul {
-        list-style-type: none;
-        padding-left: 0px;
-    }
-
-    .item-tree ol {
-        counter-reset: item;
         padding-left: 0px;
     }
 
     .item-tree ul li {
-        padding-left: 5px;
+        padding-left: 15px;
     }
 
-    .item-tree ul li ul{
-        padding-left: 5px; 
+    .toggle-expand {
+        width: 18px;
+        min-height: 10px;
+        color: #b7b7b7;
+        text-align: center;
     }
 
-    .item-tree ol li {
-        padding-left: 10px;
+    .active-menu {
+        font-weight: 700;
     }
-
-    .item-tree ol li ul{
-        padding-left: 10px; 
-    }
-
 
 
 </style>
@@ -124,7 +113,9 @@
 
     <div class="flex-menu">
         
-        <div class="item-tree">
+        <h4>Navigation Menu</h4>
+
+        <div class="item-tree" id="content_tree">
             <?php echo $items; ?>
         </div>
 
@@ -134,9 +125,10 @@
 
         <div class="content-page shadow">
 
+            <!--
             <h3 id="title" style="margin: 0px;"></h3>
 
-            <hr>
+            <hr>-->
             
             <div id="body"></div>
     
@@ -159,7 +151,7 @@
 
 @section('custom-scripts')
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
     $( document ).ready(function(){
@@ -170,12 +162,28 @@
 
             console.log("clicked");
 
+            $(".menu-btn").removeClass('active-menu');
+            $(this).addClass('active-menu');
+
             var item_id = $(this).data("item-id");
             getContent(item_id);
 
         });
 
+        $('#content_tree').find('a').parent().parent().children('ul').toggle();
+
+        var item_id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data("item-id");
+        $('#content_tree').find('ul:first').children('li:first').find('a:first').addClass('active-menu');
+        getContent(item_id);
+
+        $('.toggle-expand').on('click', function(e){
+            $(this).parent().children('ul').toggle();
+            $(this).children('i').toggleClass('fa-chevron-down');
+            $(this).children('i').toggleClass('fa-chevron-right');
+        });
+
     });
+
 
 
     $(window).resize(function(){
@@ -191,8 +199,10 @@
 
         var course_data = jQuery.parseJSON(data);
 
-        $("#title").html(course_data.content.title);
+        //$("#title").html(course_data.content.title);
         $("#body").html(course_data.content.body);
+
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
  
     }
 
