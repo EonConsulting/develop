@@ -8,8 +8,5 @@ class StudentProgress extends Model {
 
     protected $table = 'student_progress';
     protected $primaryKey = 'id';
-    protected $fillable = ['student', 'course_id', 'storyline_item'];
-
-
-
+    protected $fillable = ['student_id', 'course_id', 'storyline_id', 'current', 'root', 'furthest' ];
 }

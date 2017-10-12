@@ -120,8 +120,6 @@ Lecturer Dashboard
                     </div><!-- end col-md-8 -->
 
                 </div>
-
-
             </div>
         </div>
 

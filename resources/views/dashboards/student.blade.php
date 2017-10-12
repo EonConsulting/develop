@@ -93,6 +93,8 @@ Student Dashboard
     <!-- this must always be loaded first -->
     @include('dashboards.widgets.core')
     
+    @include('dashboards.widgets.filters')
+    
     @include('dashboards.widgets.results')
     
     @include('dashboards.widgets.progression')
