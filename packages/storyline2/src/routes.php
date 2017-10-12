@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          */
 
         //Student Routes
-        Route::get('/view', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
+        Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
 
         //Lecturer Routes
         Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->name('storyline2.lecturer.edit');
