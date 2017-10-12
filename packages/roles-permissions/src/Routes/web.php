@@ -38,11 +38,19 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
         Route::get('/users/{user}', ['as' => 'eon.admin.roles.users.single', 'uses' => 'UsersController@show']);
         Route::post('/users/{user}/{role}/{department}', ['as' => 'eon.admin.roles.users.role-priovided', 'uses' => 'UsersController@update']);
         Route::post('/users/--user--/--role--/--department--', ['as' => 'eon.admin.roles.users.role', 'uses' => 'UsersController@update']);
-        Route::get('/metadata', ['as' => 'eon.admin.metadata', 'uses' => 'MetadataController@index']);
-        Route::get('/metadata/create', ['as' => 'eon.admin.metadata.create', 'uses' => 'MetadataController@create']);
-        Route::post('/metadata/save', ['as' => 'eon.admin.metadata.save', 'uses' => 'MetadataController@save']);
-        Route::get('/metadata/edit/{id}', ['as' => 'eon.admin.metadata.edit', 'uses' => 'MetadataController@edit']);
-        Route::post('/metadata/update/{id}', ['as' => 'eon.admin.metadata.update', 'uses' => 'MetadataController@update']);
-        Route::get('/metadata/delete/{id}', ['as' => 'eon.admin.metadata.delete', 'uses' => 'MetadataController@delete']);
+        
+        Route::get('/metadata-item', ['as' => 'eon.admin.metadata-item', 'uses' => 'MetadataController@itemIndex']);
+        Route::get('/metadata-item/create', ['as' => 'eon.admin.metadata-item.create', 'uses' => 'MetadataController@createItem']);
+        Route::post('/metadata-item/save', ['as' => 'eon.admin.metadata-item.save', 'uses' => 'MetadataController@save']);
+        Route::get('/metadata-item/edit/{id}', ['as' => 'eon.admin.metadata-item.edit', 'uses' => 'MetadataController@editItem']);
+        Route::post('/metadata-item/update/{id}', ['as' => 'eon.admin.metadata-item.update', 'uses' => 'MetadataController@updateItem']);
+        Route::get('/metadata-item/delete/{id}', ['as' => 'eon.admin.metadata-item.delete', 'uses' => 'MetadataController@deleteItem']);
+        
+        Route::get('/metadata-type', ['as' => 'eon.admin.metadata-type', 'uses' => 'MetadataController@typeIndex']);
+        Route::get('/metadata-type/create', ['as' => 'eon.admin.metadata-type.create', 'uses' => 'MetadataController@createType']);
+        Route::post('/metadata-type/save', ['as' => 'eon.admin.metadata-type.save', 'uses' => 'MetadataController@saveType']);
+        Route::get('/metadata-type/edit/{id}', ['as' => 'eon.admin.metadata-type.edit', 'uses' => 'MetadataController@editType']);
+        Route::post('/metadata-type/update/{id}', ['as' => 'eon.admin.metadata-type.update', 'uses' => 'MetadataController@updateType']);
+        Route::get('/metadata-type/delete/{id}', ['as' => 'eon.admin.metadata-type.delete', 'uses' => 'MetadataController@deleteType']);
     });
 });
