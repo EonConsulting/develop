@@ -23,8 +23,16 @@ use Validator;
 class MetadataController extends Controller {
 
     public function index() {
+        
+        $breadcrumbs = [
+            'title' => 'Data Maintenance',
+            'child' => [
+                'title' => 'Metadata'
+            ]
+        ];
+        
         $Metadata = MetadataStore::get();
-        return view('eon.roles::metadata-store', ['metadatas' => $Metadata]);
+        return view('eon.roles::metadata-store', ['metadatas' => $Metadata], ['breadcrumbs' => $breadcrumbs]);
     }
 
     public function create() {
