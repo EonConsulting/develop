@@ -47,23 +47,54 @@
 </div>
 
 <!-- side menu -->
-
 <div class="left-menu">
-
-</div>
-
-<div class="left-menu">
-    <ul>           
-        <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
-            <a href="{{ ($lti == true) ? route('lti.dashboards') : route('home.dashboards') }}">
+    <ul>    
+        <li class="{{ (Route::currentRouteName() == 'lti.dashboards' || Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
+            <a href="{{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? '#' : route('home.dashboards') }}" {{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? "class=accordian" : "" }}>
                 <i class="fa fa-braille fa-lg left-menu-icon"></i>
                 <span class="menu_collapse">
                     Dashboard
                 </span>
+
+                <?php if (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())): ?>
+                    <span class='pull-right'><i class='toggle fa fa-plus'></i></span>
+                <?php endif; ?>
             </a>
+
+            <?php if (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())): ?>
+                <div class="left-menu-sub {{ (Route::currentRouteName() == 'lti.dashboards' || Route::currentRouteName() == 'home.dashboards') ? '' : 'hidden' }}">
+                    <ul>
+
+                        <li class="{{ (Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('lti.dashboards.lecturer-stud-analysis') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Student Analysis
+                            </a>
+                        </li>
+
+                        <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('lti.dashboards.lecturer-course-analysis') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Course Analysis
+                            </a>
+                        </li>
+                        <?php endif; ?>
+
+                        <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('lti.dashboards.lecturer-assess-analysis') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Assessment Analysis
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
         </li>
 
-            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.show' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+        <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                 <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                     <i class="fa fa-edit fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -75,25 +106,25 @@
                     <?php endif; ?>
                 </a>
 
-                <?php if (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_learner(auth()->user())): ?>
-                    <div class="left-menu-sub {{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.show' || Route::currentRouteName() == 'courses.create') ? '' : 'hidden' }}">
+                <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+                    <div class="left-menu-sub hidden">
                         <ul>
 
-                            <li>
+                            <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
                                 <a href="{{ route('courses') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     All
                                 </a>
                             </li>
 
-                            <li>
+                            <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                                 <a href="{{ route('courses.show') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     My Modules
                                 </a>
                             </li>
 
-                            <li>
+                            <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                                 <a href="{{ route('courses.create') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     Create
@@ -102,7 +133,7 @@
                         </ul>
                     </div>
                 <?php endif; ?>
-          
+            <?php endif; ?>
         </li>
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
@@ -126,7 +157,7 @@
                         <li>
                             <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a>
                         </li>
- 
+
                     </ul>
                 </div>
             </li>
@@ -155,7 +186,7 @@
                     </ul>
                 </div>
             </li>
-            
+
             <!-- TODO: If role == admin the show this menu item -->
             <li class="left-menu-tree {{ (Route::currentRouteName() == 'eon.admin.groups' || Route::currentRouteName() == 'eon.admin.permissions' || Route::currentRouteName() == 'eon.admin.roles' || Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
