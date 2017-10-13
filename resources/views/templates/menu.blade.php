@@ -63,7 +63,7 @@
             </a>
         </li>
 
-            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.show' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                 <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                     <i class="fa fa-edit fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -76,24 +76,24 @@
                 </a>
 
                 <?php if (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_learner(auth()->user())): ?>
-                    <div class="left-menu-sub hidden">
+                    <div class="left-menu-sub {{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.show' || Route::currentRouteName() == 'courses.create') ? '' : 'hidden' }}">
                         <ul>
 
-                            <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
+                            <li>
                                 <a href="{{ route('courses') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     All
                                 </a>
                             </li>
 
-                            <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <li>
                                 <a href="{{ route('courses.show') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     My Modules
                                 </a>
                             </li>
 
-                            <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <li>
                                 <a href="{{ route('courses.create') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     Create
@@ -107,7 +107,7 @@
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'content.builder') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-book fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -115,14 +115,17 @@
                     </span>
                     <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
                 </a>
-                <div class="left-menu-sub hidden">
+                <div class="left-menu-sub {{ (Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? '' : 'hidden' }}">
                     <ul>
-                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a></li>
-                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder.new') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a></li>
-                        <li class="{{ (Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+                        <li>
+                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a>
+                        </li>
  
                     </ul>
                 </div>

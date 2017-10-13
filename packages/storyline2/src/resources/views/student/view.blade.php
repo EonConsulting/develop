@@ -239,11 +239,9 @@
 @endsection
 
 
-
 @section('exterior-content')
 
 @endsection
-
 
 
 @section('custom-scripts')
@@ -380,6 +378,11 @@
             next.show();
         }
         
+        button.parent().parent().children('ul').show();
+        button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-right');
+        button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-down');
+        button.parent().parent().children('.toggle-expand').children('i').addClass('fa-caret-down');
+
         //update breadcrumb GUI
         $("#content-navbar-title").html(breadcrumb);
 

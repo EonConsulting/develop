@@ -39,15 +39,17 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                     type: 'iframe',
                                                     //src:  '/e-content/ckeditorstore',
                                                     src: ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + '/ckeditorstore',
-                                                    width: '100%',
-                                                    height: '100%',
+                                                    width: 1000,
+                                                    height: 600,
                                                     onContentLoad: function () {
                                                         // We Access the DOM Instance of the Iframe
                                                         var iframe = document.getElementById(this._.frameId);
                                                         var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                                                         $(iframeDoc).ready(function (event) {
-                                                          alert('iframe ready');
-                                                          $(iframeDoc).find('.appitem').click(function(event) {
+                                                            //debugger;
+                                                          //alert('iframe ready');
+                                                          //$(iframeDoc).find('.appitem').click(function(event) {
+                                                          $(iframeDoc).on('click', '.appitem', function(event) {
                                                            //$(varStoresNameIframe).click(function () {
                                                             var context_id = $(this).data('context');
                                                             $.ajax({
@@ -66,7 +68,7 @@ console.log("Subdir is set to: " + config["subdir"]);
                                                                     });
                                                                     appframe.setAttributes({
                                                                         'width': '100%',
-                                                                        'height': 750,
+                                                                        'height': 1000,
                                                                         'type': 'text/html',
                                                                         'src': url,
                                                                         'allowtransparency': 'true',
