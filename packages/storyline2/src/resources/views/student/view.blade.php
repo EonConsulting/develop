@@ -154,6 +154,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
+    
+    window.onload = function () {
+        $('a.active-menu').trigger('click');
+        saveProgress();
+    };
+    
+     function saveProgress() {
+        var id = $('a.active-menu').attr("data-item-id");
+        var courseId = '{{ $course->id }}';
+        var storyline = '{{ $storylineId }}';
+        var student = '{{auth()->user()->id}}';
+        $.ajax({
+            url: '{{url('')}}/student/progression',
+            type: "POST",
+            data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            beforeSend: function () {
+                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.msg === 'true') {
+                    //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
+                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                } else {
+                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                // location.reload();
+            }
+        });
+    }
+    
+    
+
     $( document ).ready(function(){
 
         resizeArea();
@@ -181,6 +216,7 @@
             $(this).children('i').toggleClass('fa-chevron-down');
             $(this).children('i').toggleClass('fa-chevron-right');
         });
+        
 
     });
 
@@ -240,5 +276,7 @@
     
     
 </script>
+
+
 
 @endsection

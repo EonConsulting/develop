@@ -42,7 +42,7 @@ class DefaultController extends LTIBaseController {
             $ItemId = $this->save($StudentProgress, $request);
             $progress = $StudentProgress::find($ItemId);
             $ItemArray = $this->topics($StorylineItem, $progress->root);
-            $furthest = $ItemArray[1];
+            $furthest = $ItemArray[0];
             $progress->furthest = $furthest;
             $progress->save();
             $message = 'false';

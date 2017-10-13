@@ -40,7 +40,7 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
-
+       
         $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
 
         usort($items, array($this, "self::compare"));
@@ -55,7 +55,7 @@ class Storyline2ViewsBlade extends BaseController {
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
         ];
 
-        return view('eon.storyline2::student.view', ['items' => $items, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.storyline2::student.view', ['items' => $items,'breadcrumbs' => $breadcrumbs,'course'=>$course,'storylineId'=>$storyline_id]);
     }
 
     public function makeList($list, $number = '')
