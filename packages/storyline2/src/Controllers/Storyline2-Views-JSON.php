@@ -55,26 +55,40 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
 
-
-    public function createTree($items, $left = 0, $right = null) {
+    public function createTree($items, $left = 0, $right = null, $i = 0, &$order = 0) {
         $tree = [];
-        foreach ($items as $k => $item) {
-            if ($item['lft'] === $left + 1 && (is_null($right) || $item['rgt'] < $right)) {
+
+        for($i; $i < count($items); $i++) {
+            $temp = $items[$i];
+
+            if ($temp['lft'] === $left + 1 && (is_null($right) || $temp['rgt'] < $right)) {
                 
-                $temp = $items[$k];
-                
-                if($item['rgt'] - $item['lft'] != 1){
-                    $temp['children'] = $this->createTree($items, $item['lft'], $item['rgt']);
+                $temp['order'] = $order;
+                $order++;
+
+                if($i === 0 ){
+                    $temp['prev'] = '#'; 
+                } else {
+                    $temp['prev'] = $items[$i-1]['id'];
+                }
+
+                if($i === count($items)-1){
+                    $temp['next'] = '#';
+                } else {
+                    $temp['next'] = $items[$i+1]['id'];
+                }
+
+                if($temp['rgt'] - $temp['lft'] != 1){
+                    $temp['children'] = $this->createTree($items, $temp['lft'], $temp['rgt'], $i+1, $order);
                 }
 
                 $tree[] = $temp;
                 
-                $left = $item['rgt'];
+                $left = $temp['rgt'];
             }
         }
         return $tree;
     }
-
 
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
