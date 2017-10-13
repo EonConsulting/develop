@@ -281,6 +281,15 @@
             }
         });
     }
+    
+      function progress_error(url){
+
+        $(document).on('hide.bs.modal','#errorModal', function () {
+            window.location.href = url;
+        });
+
+        $("#errorModal").modal("show");
+    }
 
     $(document).ready(function(){
 
@@ -289,7 +298,34 @@
         $(".menu-btn").on("click", function() {
             var button = $(this);
             var item_id = $(this).data("item-id");
-            getContent(item_id, button);
+            var courseId = '{{ $course->id }}';
+            var storyline = '{{ $storylineId }}';
+            var student = '{{auth()->user()->id}}';
+            
+            $.ajax({
+                url: '{{url('')}}/student/progression',
+                type: "POST",
+                data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg === 'true') {     
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                         getContent(item_id, button);
+                       } else if(data.msg === 'error'){
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');                        
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    // location.reload();
+                }
+            });
+       
+           
         });
 
         $(document).on("click", ".bread-btn", function() {
