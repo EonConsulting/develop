@@ -76,7 +76,7 @@ Student Dashboard
     </div>
     
     @push('custom-scripts')
-    <!-- DO NOT MOVE !!!! Because of stacking order, these JS scripts need to load before the widgets -->
+    <!-- DO NOT MOVE !!!! Because of hoisting, these JS scripts need to load before the widgets -->
     <!-- lodash -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <!-- Sparkline -->
@@ -101,6 +101,6 @@ Student Dashboard
 
     @include('dashboards.widgets.timeline')
 
-    @endsection
+@endsection
 
     

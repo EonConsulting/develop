@@ -547,93 +547,243 @@ class WidgetCore {
         {
             var select = $("#assessment-type-filter");
             select.empty();
-            var items = _.filter(this.assessment_types, _.iteratee({'assessment': a_type}));
+            var items = _.filter(instance.assessment_types, _.iteratee({'assessment': a_type}));
             $.each(items, function (idx, obj) {
                 var option = new Option(obj.description, obj.assessment_type_id);
                 select.append($(option));
             });
         }
         
+        generateRandomNumber(minimum, maximum, boost_factor)
+        {
+            var r = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+            return r * boost_factor; // this is to boost entries for certain periods
+        }
+
+        getDayName(dateStr, locale)
+        {
+            var date = new Date(dateStr);
+            return date.toLocaleDateString(locale, {weekday: 'long'});
+        }
+            
+        getShortDate(dateStr, locale)
+        {
+            var date = new Date(dateStr);
+            return date.toLocaleDateString(locale, {month: 'short', day: 'numeric'});
+        }
+
+        generateRandomDataset(value, period)
+        {
+            var labels = [];
+            var logins = [];
+            var videos = [];
+            var ebooks = [];
+            var articles = [];
+            var assessments = [];
+            var boost_factor = 1;
+            var hours_of_interest = [8, 9, 18, 19, 20, 21, 22];
+            var days_of_week_interest = [3, 4];
+            var days_of_month_interest = [7, 14, 21, 28, 31, 40, 49, 60, 75, 90, 120, 160, 180, 200, 228, 256, 280, 300, 320, 340];
+
+            switch (period) {
+                case "hours":
+                    for (var x = 0; x < value; x++)
+                    {
+                        (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        labels.push(x + "h00");
+                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                    }
+                    break;
+                case "days":
+                    for (x = value; x > 0; x--)
+                    {
+                        (_.indexOf(days_of_week_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        labels.push(instance.getDayName(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                    }
+                    break;
+                case "months":
+                    for (x = value * 30; x > 0; x--)
+                    {
+                        (_.indexOf(days_of_month_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        labels.push(instance.getShortDate(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                    }
+                    break;
+            }
+
+            var ds =
+                    {
+                        //"course_id": "FBN1501",
+                        //"assessment": "SA",
+                        //"assessment_type_id": "SA-ALL",
+                        "student_id": instance.selected_student,
+                        "labels": labels,
+                        "logins": logins,
+                        "videos": videos,
+                        "ebooks": ebooks,
+                        "articles": articles,
+                        "assessments": assessments
+                    };
+
+            return ds;
+        }
+        
         // events for changes on filters
-       
         setupBindings(plugin)
         {
-            // do special things if we have to
-            // otherwise just be a pain and re-run
-            switch (plugin)
-            {
-                case "results":
-                    break;
-                case "progression":
-                    break;
-                case "timeline":
-                    break;
-            }
-            
             if (!instance._initialized)
             {
-                $("#assessment-filter").on("change", function () {
-                    var self = $(this);
-                    instance.selected_assessment = self.val();
-                    instance.updateAssessmentTypes(instance.selected_assessment);
-
-                    // lodash methods for rendering graph
-                    switch(instance.role)
-                    {
-                        case "Learner":
-                            var courses = _.filter(instance.results, _.iteratee({
-                                'course_id': instance.selected_course, 
-                                'assessment': instance.selected_assessment}
-                            ));
-                            break;
-                        case "Lecturer":
-                        case "Instructor":
-                            var courses = _.filter(instance.results, _.iteratee({
-                                'course_id': instance.selected_course, 
-                                'student_id': instance.selected_student, 
-                                'assessment': instance.selected_assessment}
-                            ));
-                            break;
-                    }
-                    instance.renderResultsGraph(_.head(courses));
-
-                    // lodash methods for rendering progression
-                    var prog = _.filter(instance.progression, _.iteratee({'course_id': instance.selected_course}));
-                    // these methods exist in other plugins but they
-                    // need to be triggered in the event they exist
-                    instance.renderVideoProgressionGraph(_.head(prog));
-                    instance.renderEbookProgressionGraph(_.head(prog));
-                    instance.renderArticleProgressionGraph(_.head(prog));
-                    instance.renderStudyGuideProgressionGraph(_.head(prog));
-                });
-
-                $("#course-filter").on("change", function () {
-                    var self = $(this);
-                    instance.selected_course = $(this).val();
-                    // trigger the assessment filter change event
-                    $("#assessment-filter").trigger("change");
-                });
-                // and lets just select the first record on page load
-                $("#course-filter").trigger("change");
-
-                // event for change on metric items
-                $("#assessment-type-filter").on("change", function () {
-                    var self = $(this);
-                    // lodash methods for rendering graph
-                    var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
-                        'assessment': instance.selected_assessment, 
-                        'assessment_type_id': self.val()}
-                        )
-                    );
-                    instance.renderResultsGraph(_.head(courses));
-                });
+                instance.bindAssessmentFilter();
+                instance.bindStudentFilter();
+                instance.bindCourseFilter();
+                instance.bindAssessmentTypeFilter();
+                instance.bindEngagementFilter();
             }
             instance._initialized = true;
+        }
+        
+        bindAssessmentFilter()
+        {
+            $("#assessment-filter").on("change", function () {
+                var self = $(this);
+                instance.selected_assessment = self.val();
+                instance.updateAssessmentTypes(instance.selected_assessment);
+                // lodash methods for rendering graph
+                switch(instance.role)
+                {
+                    case "Learner":
+                        var courses = _.filter(instance.results, _.iteratee({
+                            'course_id': instance.selected_course, 
+                            'assessment': instance.selected_assessment}
+                        ));
+                        break;
+                    case "Mentor":
+                    case "Instructor":
+                        var courses = _.filter(instance.results, _.iteratee({
+                            'course_id': instance.selected_course, 
+                            'student_id': instance.selected_student, 
+                            'assessment': instance.selected_assessment}
+                        ));
+                        break;
+                }
+                instance.renderResultsGraph(_.head(courses));
+
+                // lodash methods for rendering progression
+                var prog = _.filter(instance.progression, _.iteratee({'course_id': instance.selected_course}));
+                // these methods exist in other plugins but they
+                // need to be triggered in the event they exist
+                instance.renderVideoProgressionGraph(_.head(prog));
+                instance.renderEbookProgressionGraph(_.head(prog));
+                instance.renderArticleProgressionGraph(_.head(prog));
+                instance.renderStudyGuideProgressionGraph(_.head(prog));
+            });
+        }
+        
+        bindStudentFilter()
+        {
+            // event for change of student name
+            $("#student-filter").on("change", function(){
+                var self = $(this);
+                instance.selected_student = self.val();
+                $("#assessment-filter").trigger("change");
+            });
+        }
+        
+        bindCourseFilter()
+        {
+            $("#course-filter").on("change", function () {
+                var self = $(this);
+                instance.selected_course = $(this).val();
+
+                // be economical with the triggers
+                switch(instance.role)
+                {
+                    case "Learner":
+                        // trigger the assessment filter change event
+                        $("#assessment-filter").trigger("change");
+                        break;
+                    case "Instructor":
+                    case "Mentor":
+                        // trigger the student filter change event
+                        $("#student-filter").trigger("change");
+                        break;
+                }
+            });
+            // and lets just select the first record on page load
+            $("#course-filter").trigger("change");
+        }
+        
+        bindAssessmentTypeFilter()
+        {
+            // event for change on metric items
+            $("#assessment-type-filter").on("change", function () {
+                var self = $(this);
+                // lodash methods for rendering graph
+                var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
+                    'assessment': instance.selected_assessment, 
+                    'assessment_type_id': self.val()}
+                    )
+                );
+                instance.renderResultsGraph(_.head(courses));
+            });
+        }
+        
+        bindEngagementFilter()
+        {
+            $("#student-engagement-filter").on("change", function () {
+                var self = $(this);
+
+                var studtrends = [];
+                //var studtrends = _.filter(trends, _.iteratee({'period': self.val()}));
+                switch (self.val())
+                {
+                    case "today":
+                        studtrends = instance.generateRandomDataset(24, "hours");
+                        break;
+                    case "week":
+                        studtrends = instance.generateRandomDataset(7, "days");
+                        break;
+                    case "month":
+                        studtrends = instance.generateRandomDataset(1, "months");
+                        break;
+                    case "3-month":
+                        studtrends = instance.generateRandomDataset(3, "months");
+                        break;
+                    case "6-month":
+                        studtrends = instance.generateRandomDataset(6, "months");
+                        break;
+                    case "year":
+                        studtrends = instance.generateRandomDataset(12, "months");
+                        break;
+                    default:
+                        studtrends = instance.generateRandomDataSet(24, "hours");
+                        break;
+                }
+
+                instance.renderEngagementGraph(studtrends);
+            });
+            $("#student-engagement-filter").trigger("change");
         }
         
         renderResultsGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#student-results').length <= 0) return;
+            
             $('#student-results').remove();
             $('#student-results-container').append('<canvas id="student-results"><canvas>');
 
@@ -731,6 +881,9 @@ class WidgetCore {
         renderVideoProgressionGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#video-progression').length <= 0) return;
+            
             $('#video-progression').remove();
             $('#video-progression-container').append('<canvas id="video-progression"><canvas>');
 
@@ -826,6 +979,9 @@ class WidgetCore {
         renderEbookProgressionGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#ebook-progression').length <= 0) return;
+            
             $('#ebook-progression').remove();
             $('#ebook-progression-container').append('<canvas id="ebook-progression"><canvas>');
 
@@ -921,6 +1077,9 @@ class WidgetCore {
         renderArticleProgressionGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#article-progression').length <= 0) return;
+            
             $('#article-progression').remove();
             $('#article-progression-container').append('<canvas id="article-progression"><canvas>');
 
@@ -1016,6 +1175,9 @@ class WidgetCore {
         renderStudyGuideProgressionGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#study-guide-progression').length <= 0) return;
+            
             $('#study-guide-progression').remove();
             $('#study-guide-progression-container').append('<canvas id="study-guide-progression"><canvas>');
 
@@ -1107,6 +1269,128 @@ class WidgetCore {
                 options: areaChartOptions
             });
         };
+        
+        renderEngagementGraph(data) {
+            // MH: this is a workaround to trash the canvas
+            // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#student-engagement').length <= 0) return;
+            
+            $('#student-engagement').remove();
+            $('#student-engagement-container').append('<canvas id="student-engagement"><canvas>');
+
+            // pull a switch-a-roo on the labels and axis count
+            if (data && data.labels.length < 1)
+            {
+                data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            }
+
+            var areaChartCanvas = $('#student-engagement').get(0).getContext('2d');
+
+            var areaChartData = {
+                labels: data.labels,
+                datasets: [
+
+                    {
+                        label: 'Logins',
+                        fill: false,
+                        backgroundColor: 'rgba(251, 114, 23, 1)',
+                        borderColor: 'rgba(251, 114, 23, 1)',
+                        borderWidth: 0,
+                        data: data.logins
+                    },
+                    {
+                        label: 'Videos',
+                        fill: false,
+                        backgroundColor: 'rgba(251, 158, 96, 1)',
+                        borderColor: 'rgba(251, 158, 96, 1)',
+                        borderWidth: 0,
+                        data: data.videos
+                    },
+                    {
+                        label: 'E-Books',
+                        fill: false,
+                        backgroundColor: 'rgba(158, 251, 46, 1)',
+                        borderColor: 'rgba(158, 251, 46, 1)',
+                        borderWidth: 0,
+                        data: data.ebooks
+                    },
+                    {
+                        label: 'Articles',
+                        fill: false,
+                        backgroundColor: 'rgba(51, 158, 216, 1)',
+                        borderColor: 'rgba(51, 158, 216, 1)',
+                        borderWidth: 0,
+                        data: data.articles
+                    },
+                    {
+                        label: 'Self-Assessments',
+                        fill: false,
+                        backgroundColor: 'rgba(200, 200, 200, 1)',
+                        borderColor: 'rgba(200, 200, 200, 1)',
+                        borderWidth: 0,
+                        data: data.assessments
+                    }
+                ]
+            };
+
+
+            var areaChartOptions = {
+                //Boolean - If we should show the scale at all
+                showScale: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: false,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - Whether the line is curved between points
+                bezierCurve: true,
+                //Number - Tension of the bezier curve between points
+                bezierCurveTension: 0.3,
+                //Boolean - Whether to show a dot for each point
+                pointDot: true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius: 1,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth: 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius: 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke: true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth: 2,
+                //Boolean - Whether to fill the dataset with a color
+                datasetFill: true,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                //max: 100  // minimum value will be 0.
+                            }
+                        }]
+                }
+            };
+
+            // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+            var areaChart = new Chart(areaChartCanvas, {
+                type: "line",
+                data: areaChartData,
+                options: areaChartOptions
+            });
+        }
     }
 </script>
 @endpush

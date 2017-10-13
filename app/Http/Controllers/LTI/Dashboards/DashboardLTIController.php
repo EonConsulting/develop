@@ -27,10 +27,10 @@ class DashboardLTIController extends LTIBaseController {
                 break;
             case "Instructor":
                 $breadcrumbs = [
-                    'title' => 'Lecturer Dashboard'
+                    'title' => 'Lecturer - Student Analysis Dashboard'
                 ];
 
-                return view('dashboards.lecturer', $data, ['breadcrumbs' => $breadcrumbs]);
+                return view('dashboards.lecturer-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
             case "Learner":
                 $breadcrumbs = [
@@ -45,12 +45,36 @@ class DashboardLTIController extends LTIBaseController {
                 'title' => 'Mentor Dashboard'
             ];
 
-            return view('dashboards.mentor', $data, ['breadcrumbs' => $breadcrumbs]);
+            return view('dashboards.mentor-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
             default:
                 echo "Your favorite color is neither red, blue, nor green!";
         } 
        
+    }
+    
+    public function lecturer_stud_analysis(){
+        $breadcrumbs = [
+                    'title' => 'Lecturer - Student Analysis Dashboard'
+                ];
+
+        return view('dashboards.lecturer-stud-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+    
+    public function lecturer_course_analysis(){
+        $breadcrumbs = [
+                    'title' => 'Lecturer - Course Analysis Dashboard'
+                ];
+
+        return view('dashboards.lecturer-course-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+    
+    public function lecturer_assess_analysis(){
+        $breadcrumbs = [
+                    'title' => 'Lecturer - Assessment Analysis Dashboard'
+                ];
+
+        return view('dashboards.lecturer-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
     }
 
 }
