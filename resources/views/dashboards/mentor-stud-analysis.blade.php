@@ -2,7 +2,7 @@
 
 
 @section('page-title')
-Student Dashboard
+Mentor Dashboard
 @endsection
 
 
@@ -74,7 +74,7 @@ Student Dashboard
             </div>
         </div>
     </div>
-    
+
     @push('custom-scripts')
     <!-- DO NOT MOVE !!!! Because of hoisting, these JS scripts need to load before the widgets -->
     <!-- lodash -->
@@ -89,18 +89,12 @@ Student Dashboard
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     @endpush
-
+    
     <!-- this must always be loaded first -->
     @include('dashboards.widgets.core')
     
     @include('dashboards.widgets.filters')
     
-    @include('dashboards.widgets.results')
-    
-    @include('dashboards.widgets.progression')
-
-    @include('dashboards.widgets.timeline')
+    @include('dashboards.widgets.engagement')
 
 @endsection
-
-    

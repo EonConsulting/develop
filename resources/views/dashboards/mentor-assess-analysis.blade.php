@@ -2,7 +2,7 @@
 
 
 @section('page-title')
-Student Dashboard
+Mentor Dashboard
 @endsection
 
 
@@ -31,13 +31,13 @@ Student Dashboard
         border-style: solid;
         border-color: #DBDBDB;
         background: #FFF;
-        
+
     }
 
     .progress-charts {
         background: #F9F9F9;
     }
-    
+
     .progress-charts h2 {
         text-align: center;
         font-size: 20px;
@@ -50,14 +50,14 @@ Student Dashboard
         font-weight: 700;
     }
 
-   /* .timeline {
-        padding-right: 280px;
-    }
-
-    .timeline-key {
-        width: 280px;
-        float: right;
-    }*/
+    /* .timeline {
+         padding-right: 280px;
+     }
+ 
+     .timeline-key {
+         width: 280px;
+         float: right;
+     }*/
 
 </style>
 @endsection
@@ -92,15 +92,13 @@ Student Dashboard
 
     <!-- this must always be loaded first -->
     @include('dashboards.widgets.core')
-    
+
     @include('dashboards.widgets.filters')
-    
+
     @include('dashboards.widgets.results')
-    
+
     @include('dashboards.widgets.progression')
 
     @include('dashboards.widgets.timeline')
 
 @endsection
-
-    
