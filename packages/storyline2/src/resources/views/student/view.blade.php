@@ -177,6 +177,10 @@
         display: none;
     }
 
+    .content-page {
+        margin-bottom: 15px;
+    }
+
 </style>
     
 @endsection
@@ -201,17 +205,17 @@
         <div class="content-navbar">
 
             <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn" data-item-id="">
+                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
                     <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
                 </a>
             </div>
 
             <div class="content-navbar-bread">
-                <span id="content-navbar-title"></span>
+                <span class="content-navbar-title"></span>
             </div>
 
             <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn" data-item-id="">
+                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
                     <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -219,16 +223,29 @@
         </div>
 
         <div class="content-page shadow">
-
-
-            <!--
-            <h3 id="title" style="margin: 0px;"></h3>
-
-            <hr>
-            -->
             
             <div id="body"></div>
     
+        </div>
+
+        <div class="content-navbar">
+
+            <div class="content-navbar-back">
+                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                </a>
+            </div>
+
+            <div class="content-navbar-bread">
+                <span class="content-navbar-title"></span>
+            </div>
+
+            <div class="content-navbar-next">
+                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+
         </div>
 
     </div><!--End col-md-9 -->
@@ -329,7 +346,7 @@
             }
         }
 
-        var prev = $('#prev-btn');
+        var prev = $('.prev-btn');
         if(button.data('prev-id') === '#'){
             prev.data('item-id','');
             prev.hide();
@@ -338,7 +355,7 @@
             prev.show();
         }
 
-        var next = $('#next-btn');
+        var next = $('.next-btn');
         if(button.data('next-id') === '#'){
             next.data('item-id','');
             next.hide();
@@ -353,7 +370,7 @@
         button.parent().parent().children('.toggle-expand').children('i').addClass('fa-caret-down');
 
         //update breadcrumb GUI
-        $("#content-navbar-title").html(breadcrumb);
+        $(".content-navbar-title").html(breadcrumb);
 
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
