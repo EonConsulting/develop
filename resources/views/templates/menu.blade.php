@@ -97,7 +97,7 @@
 
         </li>
 
-        <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+        <?php // if (laravel_lti()->is_instructor(auth()->user())): ?>
             <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
                 <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                     <i class="fa fa-edit fa-lg left-menu-icon"></i>
@@ -137,7 +137,7 @@
                         </ul>
                     </div>
                 <?php endif; ?>
-            <?php endif; ?>
+            <?php //endif; ?>
         </li>
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
