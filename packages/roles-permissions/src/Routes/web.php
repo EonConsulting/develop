@@ -7,6 +7,7 @@
  */
 
 Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/admin', 'namespace' => 'EONConsulting\\RolesPermissions\\Http\\Controllers\\'], function() {
+    
     Route::group(['namespace' => 'Admin\\Roles\\'], function() {
         Route::get('/groups', ['as' => 'eon.admin.groups', 'uses' => 'GroupsController@index']);
         Route::get('/groups/create', ['as' => 'eon.admin.groups.create', 'uses' => 'GroupsController@create']);
