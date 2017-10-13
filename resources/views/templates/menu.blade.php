@@ -66,7 +66,11 @@
                     <ul>
 
                         <li class="{{ (Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('lti.dashboards.lecturer-stud-analysis') }}">
+                            <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
+                                <a href="{{ route('lti.dashboards.lecturer-stud-analysis') }}">
+                            <?php elseif (laravel_lti()->is_mentor(auth()->user())): ?>
+                                <a href="{{ route('lti.dashboards.mentor-stud-analysis') }}">    
+                            <?php endif; ?>
                                 <i class="fa fa-circle-o left-menu-icon"></i>
                                 Student Analysis
                             </a>

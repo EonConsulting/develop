@@ -34,47 +34,62 @@ class DashboardLTIController extends LTIBaseController {
                 break;
             case "Learner":
                 $breadcrumbs = [
-                'title' => 'Student Dashboard'
-            ];
+                    'title' => 'Student Dashboard'
+                ];
 
-            return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
+                return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
-            
+
             case "Mentor":
                 $breadcrumbs = [
-                'title' => 'Mentor Dashboard'
-            ];
+                    'title' => 'Mentor - Student Analysis Dashboard'
+                ];
 
-            return view('dashboards.mentor-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
+                return view('dashboards.mentor-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
             default:
                 echo "Your favorite color is neither red, blue, nor green!";
-        } 
-       
+        }
     }
-    
-    public function lecturer_stud_analysis(){
+
+    public function lecturer_stud_analysis() {
         $breadcrumbs = [
-                    'title' => 'Lecturer - Student Analysis Dashboard'
-                ];
+            'title' => 'Lecturer - Student Analysis Dashboard'
+        ];
 
         return view('dashboards.lecturer-stud-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
     }
-    
-    public function lecturer_course_analysis(){
+
+    public function lecturer_course_analysis() {
         $breadcrumbs = [
-                    'title' => 'Lecturer - Course Analysis Dashboard'
-                ];
+            'title' => 'Lecturer - Course Analysis Dashboard'
+        ];
 
         return view('dashboards.lecturer-course-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
     }
-    
-    public function lecturer_assess_analysis(){
+
+    public function lecturer_assess_analysis() {
         $breadcrumbs = [
-                    'title' => 'Lecturer - Assessment Analysis Dashboard'
-                ];
+            'title' => 'Lecturer - Assessment Analysis Dashboard'
+        ];
 
         return view('dashboards.lecturer-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+    
+    public function mentor_stud_analysis() {
+        $breadcrumbs = [
+            'title' => 'Mentor - Student Analysis Dashboard'
+        ];
+
+        return view('dashboards.mentor-stud-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+    
+    public function mentor_assess_analysis() {
+        $breadcrumbs = [
+            'title' => 'Mentor - Assessment Analysis Dashboard'
+        ];
+
+        return view('dashboards.mentor-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
     }
 
 }
