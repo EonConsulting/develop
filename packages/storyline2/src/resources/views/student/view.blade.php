@@ -68,10 +68,6 @@
         margin: 15px 15px 5px 15px;
     }
 
-    .item-tree {
-
-    }
-
     .item-tree a:focus {
         color: #fb7217;
         text-decoration: none;
@@ -95,12 +91,91 @@
         min-height: 10px;
         color: #b7b7b7;
         text-align: center;
+        font-size: 18px;
+        margin-top: -4px;
     }
 
     .active-menu {
         font-weight: 700;
     }
 
+
+    /*
+     * 
+     * Content Navbar
+     *
+     */
+
+    .content-navbar {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+
+        max-width: 1120px;
+        margin-bottom: 15px;
+    }
+
+    .content-navbar-back {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        width: 20px;
+    }
+
+    .content-navbar-bread {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        padding-left: 15px;
+    }
+
+    .content-navbar-next {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        width: 20px;
+    }
+
+    .bread-seperator {
+        color: #b7b7b7;
+    }
+
+    .arrow-btn {
+        display: none;
+    }
 
 </style>
     
@@ -123,12 +198,34 @@
 
     <div class="flex-content">
 
+        <div class="content-navbar">
+
+            <div class="content-navbar-back">
+                <a href="#" id="prev-btn" class="arrow-btn" data-item-id="">
+                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                </a>
+            </div>
+
+            <div class="content-navbar-bread">
+                <span id="content-navbar-title"></span>
+            </div>
+
+            <div class="content-navbar-next">
+                <a href="#" id="next-btn" class="arrow-btn" data-item-id="">
+                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
         <div class="content-page shadow">
+
 
             <!--
             <h3 id="title" style="margin: 0px;"></h3>
 
-            <hr>-->
+            <hr>
+            -->
             
             <div id="body"></div>
     
@@ -154,7 +251,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
-    
+  
     window.onload = function () {
         $('a.active-menu').trigger('click');
         saveProgress();
@@ -186,40 +283,48 @@
             }
         });
     }
-    
-    
 
-    $( document ).ready(function(){
+    $(document).ready(function(){
 
         resizeArea();
 
         $(".menu-btn").on("click", function() {
-
-            console.log("clicked");
-
-            $(".menu-btn").removeClass('active-menu');
-            $(this).addClass('active-menu');
-
+            var button = $(this);
             var item_id = $(this).data("item-id");
-            getContent(item_id);
-
+            getContent(item_id, button);
         });
 
-        $('#content_tree').find('a').parent().parent().children('ul').toggle();
+        $(document).on("click", ".bread-btn", function() {
+            var button = $('#'+$(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            getContent(item_id, button);
+        });
 
-        var item_id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data("item-id");
-        $('#content_tree').find('ul:first').children('li:first').find('a:first').addClass('active-menu');
-        getContent(item_id);
+        $(document).on("click", ".arrow-btn", function() {
+            var button = $('#'+$(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            getContent(item_id, button);
+        });
 
+        //$('.arrow-btn').hide();
+
+        //hide all subtrees
+        $('#content_tree').find('a').parent().parent().children('ul').toggle(); 
+
+        //load first page
+        var first = $('#content_tree').find('ul:first').children('li:first').find('a:first');
+        var item_id = first.data("item-id");
+        getContent(item_id, first);
+
+        //expand or collapse on caret click
         $('.toggle-expand').on('click', function(e){
             $(this).parent().children('ul').toggle();
-            $(this).children('i').toggleClass('fa-chevron-down');
-            $(this).children('i').toggleClass('fa-chevron-right');
+            $(this).children('i').toggleClass('fa-caret-down');
+            $(this).children('i').toggleClass('fa-caret-right');
         });
         
 
     });
-
 
 
     $(window).resize(function(){
@@ -231,19 +336,61 @@
         $("#containter").height(areaHeight);
     }
 
-    function pupulateContent(data){
+    function pupulateContent(data,button){
 
-        var course_data = jQuery.parseJSON(data);
+        //highlight clicked button
+        $(".menu-btn").removeClass('active-menu');
+        button.addClass('active-menu');
 
-        //$("#title").html(course_data.content.title);
-        $("#body").html(course_data.content.body);
+        //create breadcrumbs
+        var breadcrumb = button.html();
 
+        if(button.data('parent-id') !== '#') {
+
+            var current_node = button;
+
+            while(current_node.data('parent-id') !== '#'){
+                
+                var current_node = $('#' + current_node.data('parent-id'));
+
+                temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
+                temp = temp + current_node.html();
+                temp = temp + '</a>';
+
+                breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
+
+            }
+        }
+
+        var prev = $('#prev-btn');
+        if(button.data('prev-id') === '#'){
+            prev.data('item-id','');
+            prev.hide();
+        } else {
+            prev.data('item-id',button.data('prev-id'));
+            prev.show();
+        }
+
+        var next = $('#next-btn');
+        if(button.data('next-id') === '#'){
+            next.data('item-id','');
+            next.hide();
+        } else {
+            next.data('item-id',button.data('next-id'));
+            next.show();
+        }
+        
+        //update breadcrumb GUI
+        $("#content-navbar-title").html(breadcrumb);
+
+        //var course_data = jQuery.parseJSON(data);
+        $("#body").html(data.content.body);
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
- 
+        
     }
 
     //Get Content
-    function getContent(item_id) {
+    function getContent(item_id,button) {
 
         console.log("getContent called");
 
@@ -258,7 +405,9 @@
             },
             statusCode: {
                 200: function (data) { //success
-                    pupulateContent(data);
+                    if(data["found"] === true){
+                        pupulateContent(data,button);
+                    }
                 },
                 400: function () { //bad request
 

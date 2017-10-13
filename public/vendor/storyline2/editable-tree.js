@@ -44,33 +44,6 @@ function treeToJSON() {
 
 }
 
-//detect when node is clicked, ie. selected node changes
-
-/*
- $(tree_id).on("create_node.jstree", function (e, data) {
- console.log("Node created");
- });
- 
- $(tree_id).on("rename_node.jstree", function (e, data) {
- console.log("Node renamed");
- });
- 
- $(tree_id).on("delete_node.jstree", function (e, data) {
- console.log("Node deleted");
- });
- 
- $(tree_id).on("move_node.jstree", function (e, data) {
- console.log("Node moved");
- });
- 
- $(tree_id).on("cut.jstree", function (e, data) {
- console.log("Node cut");
- });
- 
- $(tree_id).on("paste.jstree", function (e, data) {
- console.log("paste pasted");
- });*/
-
 
 function import_content($content_id,$item_id,$action){
 
@@ -112,18 +85,18 @@ function populateContentForm(data) {
 
     console.log("populateContentForm called");
 
-    var course_data = jQuery.parseJSON(data);
+    //var course_data = jQuery.parseJSON(data);
 
-    if (course_data.found == true) {
+    if (data.found == true) {
 
-        $("#content-id").val(course_data.content.id);
-        $("#content-title").val(course_data.content.title);
-        $("#content-description").val(course_data.content.description);
-        $("#content-tags").val(course_data.content.tags);
-        var body = editor.setData(course_data.content.body);
+        $("#content-id").val(data.content.id);
+        $("#content-title").val(data.content.title);
+        $("#content-description").val(data.content.description);
+        $("#content-tags").val(data.content.tags);
+        var body = editor.setData(data.content.body);
 
-        for (index = 0; index < course_data.categories.length; ++index) {
-            cat_id = "#cat" + course_data.categories[index].id;
+        for (index = 0; index < data.categories.length; ++index) {
+            cat_id = "#cat" + data.categories[index].id;
             console.log(cat_id);
             $(cat_id).prop('checked', true);
         }

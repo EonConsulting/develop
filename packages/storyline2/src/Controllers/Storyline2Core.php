@@ -64,16 +64,15 @@ class Storyline2Core extends BaseController {
         } else {
             $content = Content::find((int) $storyline_item['content_id']);
 
-            
-
             $result = [
                 "found" => true,
                 "content" => $content,
                 "categories" => $content->categories
             ];
+            
         }
 
-        return json_encode($result);
+        return response()->json($result);
 
     }
 

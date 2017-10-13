@@ -42,9 +42,7 @@ class Storyline2ViewsBlade extends BaseController {
         $storyline_id = $course->latest_storyline()->id;
        
         $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
-
         usort($items, array($this, "self::compare"));
-
         $items = $SL2JSON->createTree($items);
 
         //dd($items);
@@ -66,21 +64,15 @@ class Storyline2ViewsBlade extends BaseController {
         foreach ($list as $item)
         {
             $count++;
+            $children = isset($item['children']);
 
-            if (isset($item['children']))
-            {   
-                $result = $result . '<li>' . '<span class="toggle-expand pull-left"> <i class="fa fa-chevron-right"></i> </span>';
-                $result = $result . '<span>' . $number. (string) $count . ')  </span>';
-                $result = $result . '<span><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a></span>';
-
-                $result = $result . $this->makeList($item['children'], $number . (string) $count . '.');
-            } else {
-                $result = $result . '<li>' . '<span class="toggle-expand pull-left"> </span>';
-                $result = $result . '<span>' . $number. (string) $count . ')  </span>';
-                $result = $result . '<span><a href="#" class="menu-btn" data-item-id="'. $item['id'] .'">'.$item['text'].'</a></span>';
-            }
-
-            
+            $result = $result . '<li>';
+            $result = $result . '<span class="toggle-expand pull-left">';
+            $result = $result . ($children ? '<i class="fa fa-caret-right"></i>' : '');//if has children
+            $result = $result . '</span>';
+            $result = $result . '<span>' . $number. (string) $count . ')  </span>';
+            $result = $result . '<span><a href="#" class="menu-btn" id="' . $item['id'] . '" data-parent-id="' . (($number === '') ? '#' : $item['parent_id']) . '" data-item-id="'. $item['id'] .'" data-prev-id="' . $item['prev'] . '" data-next-id="' . $item['next'] . '">'.$item['text'].'</a></span>';
+            $result = $result . ($children ? $this->makeList($item['children'], $number . (string) $count . '.') : ''); //if has children
 
             $result = $result . '</li>';
         }
@@ -101,7 +93,6 @@ class Storyline2ViewsBlade extends BaseController {
      */
     public function edit($course) {
         
-
         $course = Course::find($course);
         $contents = Content::all();
 
