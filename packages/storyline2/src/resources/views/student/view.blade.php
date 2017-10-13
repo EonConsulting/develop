@@ -140,6 +140,7 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+        width: 20px;
     }
 
     .content-navbar-bread {
@@ -165,10 +166,15 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+        width: 20px;
     }
 
     .bread-seperator {
         color: #b7b7b7;
+    }
+
+    .arrow-btn {
+        display: none;
     }
 
 </style>
@@ -195,7 +201,9 @@
         <div class="content-navbar">
 
             <div class="content-navbar-back">
-                <span><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></span>
+                <a href="#" id="prev-btn" class="arrow-btn" data-item-id="">
+                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                </a>
             </div>
 
             <div class="content-navbar-bread">
@@ -203,7 +211,9 @@
             </div>
 
             <div class="content-navbar-next">
-                <span><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></span>
+                <a href="#" id="next-btn" class="arrow-btn" data-item-id="">
+                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                </a>
             </div>
 
         </div>
@@ -255,10 +265,18 @@
         });
 
         $(document).on("click", ".bread-btn", function() {
-            var button = $("#" + $(this).data('item-id'));
+            var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
             getContent(item_id, button);
         });
+
+        $(document).on("click", ".arrow-btn", function() {
+            var button = $('#'+$(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            getContent(item_id, button);
+        });
+
+        //$('.arrow-btn').hide();
 
         //hide all subtrees
         $('#content_tree').find('a').parent().parent().children('ul').toggle(); 
@@ -311,6 +329,24 @@
                 breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
 
             }
+        }
+
+        var prev = $('#prev-btn');
+        if(button.data('prev-id') === '#'){
+            prev.data('item-id','');
+            prev.hide();
+        } else {
+            prev.data('item-id',button.data('prev-id'));
+            prev.show();
+        }
+
+        var next = $('#next-btn');
+        if(button.data('next-id') === '#'){
+            next.data('item-id','');
+            next.hide();
+        } else {
+            next.data('item-id',button.data('next-id'));
+            next.show();
         }
         
         //update breadcrumb GUI
