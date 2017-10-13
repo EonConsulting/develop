@@ -5,15 +5,23 @@ let instance = null;
 
 class WidgetCore {
 
-        constructor(){
+        constructor(role){
             if(!instance){
                 instance = this;
             }
             
+            this._role = role;
             return instance;
         }
         
         // properties in getter - setter notation
+        get role(){
+            return this._role;
+        }
+        set role(value){
+            this.role = value;
+        }
+        
         get initialized(){
             return this._initialized;
         }
@@ -26,6 +34,13 @@ class WidgetCore {
         }
         set selected_course(value) {
             this._selected_course = value;
+        }
+        
+        get selected_student() {
+            return this._selected_student;
+        }
+        set selected_student(value) {
+            this._selected_student = value;
         }
 
         get selected_assessment() {
@@ -106,10 +121,12 @@ class WidgetCore {
         
         get results() {
             return [
+                // ALL FBN1501
                 {
                     "course_id": "FBN1501",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
+                    "student_id": "ALL",
                     "labels": [],
                     "your_results": [0, 49, 65, 80, 56, 45, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 73, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
@@ -119,15 +136,18 @@ class WidgetCore {
                     "course_id": "FBN1501",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
+                    "student_id": "ALL",
                     "labels": [],
                     "your_results": [0, 59, 65, 60, 56, 45, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 63, 62, 65, 59, 65, 0, 0, 0, 0, 0, 0],
                     "your_average": [0, 59.67, 59.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
+                // ALL FBN1502
                 {
                     "course_id": "FBN1502",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
+                    "student_id": "ALL",
                     "labels": [],
                     "your_results": [0, 0, 0, 0, 0, 0, 71, 59, 76, 62, 63, 0],
                     "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
@@ -137,11 +157,135 @@ class WidgetCore {
                     "course_id": "FBN1502",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
+                    "student_id": "ALL",
                     "labels": [],
                     "your_results": [0, 0, 0, 0, 0, 0, 51, 59, 76, 62, 63, 0],
                     "class_average": [0, 0, 0, 0, 0, 0, 60, 75, 58, 55, 61, 0],
                     "your_average": [0, 0, 0, 0, 0, 0, 48.75, 60.67, 60.80, 61, 61.08, 0]
                 },
+                // STUDENT ALL FBN1501
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                // STUDENT ALL FBN1502
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "FA",
+                    "assessment_type_id": "FA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S1",
+                    "labels": [],
+                    "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S2",
+                    "labels": [],
+                    "your_results": [0, 53, 70, 83, 61, 51, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 66, 48, 50, 69, 65, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment": "SA",
+                    "assessment_type_id": "SA-ALL",
+                    "student_id": "S3",
+                    "labels": [],
+                    "your_results": [0, 73, 67, 89, 46, 64, 0, 0, 0, 0, 0, 0],
+                    "class_average": [0, 45, 46, 48, 41, 41, 0, 0, 0, 0, 0, 0],
+                    "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
+                },
+                // STUDENT S1 SA's
                 {
                     "course_id": "FBN1501",
                     "assessment": "SA",
@@ -293,6 +437,7 @@ class WidgetCore {
             return [
                 {
                     "course_id": "FBN1501",
+                    "student_id": "ALL",
                     "progress": {
                         "videos": {
                             "class_progress": [35],
@@ -317,7 +462,34 @@ class WidgetCore {
                     }
                 },
                 {
+                    "course_id": "FBN1501",
+                    "student_id": "S1",
+                    "progress": {
+                        "videos": {
+                            "class_progress": [25],
+                            "my_progress": [58],
+                            "course_timeline": [43]
+                        },
+                        "ebooks": {
+                            "class_progress": [51],
+                            "my_progress": [38],
+                            "course_timeline": [52]
+                        },
+                        "articles": {
+                            "class_progress": [61],
+                            "my_progress": [57],
+                            "course_timeline": [70]
+                        },
+                        "study_guide": {
+                            "class_progress": [34],
+                            "my_progress": [35],
+                            "course_timeline": [51]
+                        }
+                    }
+                },
+                {
                     "course_id": "FBN1502",
+                    "student_id": "ALL",
                     "progress": {
                         "videos": {
                             "class_progress": [22],
@@ -338,6 +510,32 @@ class WidgetCore {
                             "class_progress": [49],
                             "my_progress": [39],
                             "course_timeline": [51]
+                        }
+                    }
+                },
+                {
+                    "course_id": "FBN1502",
+                    "student_id": "S1",
+                    "progress": {
+                        "videos": {
+                            "class_progress": [32],
+                            "my_progress": [52],
+                            "course_timeline": [66]
+                        },
+                        "ebooks": {
+                            "class_progress": [43],
+                            "my_progress": [39],
+                            "course_timeline": [65]
+                        },
+                        "articles": {
+                            "class_progress": [41],
+                            "my_progress": [49],
+                            "course_timeline": [46]
+                        },
+                        "study_guide": {
+                            "class_progress": [69],
+                            "my_progress": [59],
+                            "course_timeline": [61]
                         }
                     }
                 }
@@ -380,7 +578,23 @@ class WidgetCore {
                     instance.updateAssessmentTypes(instance.selected_assessment);
 
                     // lodash methods for rendering graph
-                    var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 'assessment': instance.selected_assessment}));
+                    switch(instance.role)
+                    {
+                        case "Learner":
+                            var courses = _.filter(instance.results, _.iteratee({
+                                'course_id': instance.selected_course, 
+                                'assessment': instance.selected_assessment}
+                            ));
+                            break;
+                        case "Lecturer":
+                        case "Instructor":
+                            var courses = _.filter(instance.results, _.iteratee({
+                                'course_id': instance.selected_course, 
+                                'student_id': instance.selected_student, 
+                                'assessment': instance.selected_assessment}
+                            ));
+                            break;
+                    }
                     instance.renderResultsGraph(_.head(courses));
 
                     // lodash methods for rendering progression

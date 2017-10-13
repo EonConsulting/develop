@@ -21,7 +21,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // this will instantiate a version of WidgetCore
-        let wc = new WidgetCore();
+        let wc = new WidgetCore("<?php echo laravel_lti()->get_role(auth()->user()) ?>");
         wc.setupBindings("results");
     });
 </script>

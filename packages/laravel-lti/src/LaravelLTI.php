@@ -160,6 +160,20 @@ class LaravelLTI {
     public function is_lti($user = false) {
         return $user->hasLtiLinks($user->id);
     }
+    
+    public function get_role($user = false, $context_id = false, $type = 'Learner')
+    {
+        if(!$user) {
+            // user not found
+            return false;
+        }
+        
+        if($context_id == false) {
+            return $this->get_user_lti_type($user);
+        } else {
+            return $this->get_user_lti_type($user, $context_id);
+        }
+    }
 
     private function is_x($user = false, $context_id = false, $type = 'Learner') {
         if(!$user) {
