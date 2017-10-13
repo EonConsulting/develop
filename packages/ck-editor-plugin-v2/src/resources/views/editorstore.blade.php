@@ -126,11 +126,7 @@
             <div class="filters">
                 <h1>Sort</h1>
                 <div class="form-group">
-                    <!--<select class="form-control" ng-model="orderList">
-                        <option value="name">Sort By Title</option>
-                        <option value="description">Sort By Type</option>
-                        <option value="">Oldest</option>
-                    </select>-->
+
                     <div class="radio">
                         <input id="radio1" name="sort" type="radio" value="name" ng-model="orderList">
                         <label for="radio1">
@@ -201,6 +197,8 @@
                     </div>
 
                 </div>
+            </div>
+
             <div class="applist">
                 <p><span>Results: <% tools.length %></span></p>
                 <div ng-repeat="tool in tools| filter:query | orderBy: orderList" class="app-entry shadow pull-left">
@@ -242,3 +240,4 @@
     });
 </script>
 
+@endsection
