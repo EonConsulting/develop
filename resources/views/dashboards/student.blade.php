@@ -75,7 +75,7 @@ Student Dashboard
         </div>
     </div>
     
-    @push('custom-scripts')
+    @push('hoisted-scripts')
     <!-- DO NOT MOVE !!!! Because of hoisting, these JS scripts need to load before the widgets -->
     <!-- lodash -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
