@@ -210,10 +210,16 @@
                 <div class="left-menu-sub hidden">
                     <ul>
 
-                        <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.admin.metadata') }}">
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.metadata-item') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.metadata-item') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
-                                Metadata
+                                Metadata Items
+                            </a>
+                        </li>
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.metadata-type') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.metadata-type') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Metadata Types
                             </a>
                         </li>
 

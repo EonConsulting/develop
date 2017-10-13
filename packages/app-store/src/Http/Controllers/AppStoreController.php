@@ -23,6 +23,8 @@ class AppStoreController extends LTIBaseController {
     function index() {
 
         $domains = laravel_lti()->get_domains();
+        
+        exit();
 
         $breadcrumbs = [
             "title" => "App Store",

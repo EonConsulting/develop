@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <input type="hidden" id="tok" value="{{ csrf_token() }}" />
             <div class="panel panel-default">
-                <div class="panel-heading">Metadata Store <a href="#" id="meta-store" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Metada store..."></div><div class="clearfix"></div></div>
+                <div class="panel-heading">Metadata Item <a href="#" id="meta-store" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Metada store..."></div><div class="clearfix"></div></div>
                 <table class="panel-body table table-hover table-striped" id="meta-table">
                     <thead>
                         <tr>
@@ -51,8 +51,9 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-            <form id="saveMeta" action="{{ route('eon.admin.metadata.save') }}">
+            <form id="saveMeta" action="{{ route('eon.admin.metadata-item.save') }}">
                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title meta-title"></h4>
                 </div>
 
@@ -74,6 +75,27 @@
 
     </div>
 </div>
+
+<!-- Modal -->
+<div id="msgModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body modal-info">
+                
+                
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 @endsection
 
@@ -84,9 +106,9 @@
 
         $("#meta-store").click(function () {
             $("#metaModal").modal();
-            var action = '{{ route("eon.admin.metadata.save") }}';
+            var action = '{{ route("eon.admin.metadata-item.save") }}';
             $('#saveMeta').attr('action', action);
-            var url = '{{ route("eon.admin.metadata.create") }}';
+            var url = '{{ route("eon.admin.metadata-item.create") }}';
             $.ajax({
                 url: url,
                 type: "GET",
@@ -111,10 +133,10 @@
         $(".edit-metadata").click(function () {
             $("#metaModal").modal();
             var id = $(this).attr('data-roleid');
-            var action = '{{ route("eon.admin.metadata.update",":id") }}';
+            var action = '{{ route("eon.admin.metadata-item.update",":id") }}';
             action = action.replace(':id', id);
             $('#saveMeta').attr('action', action);
-            var url = '{{ route("eon.admin.metadata.edit",":id") }}';
+            var url = '{{ route("eon.admin.metadata-item.edit",":id") }}';
             url = url.replace(':id', id);
             $.ajax({
                 url: url,
@@ -139,7 +161,7 @@
 
         $(".remove-metadata").click(function () {
             var id = $(this).attr('data-roleid');
-            var url = '{{ route("eon.admin.metadata.delete",":id") }}';
+            var url = '{{ route("eon.admin.metadata-item.delete",":id") }}';
             url = url.replace(':id', id);
             var r = confirm("Are you sure");
             if (r == true) {
@@ -148,12 +170,20 @@
                 type: "GET",
                 asyn: false,
                 success: function (data, textStatus, jqXHR) {
-                      if ($.isEmptyObject(data.error)) {
-                        alert(data.success);                        
-                    } else {
-                        alert(data.error);
-                    }
-                },
+                        if ($.isEmptyObject(data.error)) {
+                            $(".modal-info").html("<div class='alert alert-success modal-msg'>"+data.success+"</div>");
+                            modalMsg();
+                            setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                        } else {
+                            $(".modal-info").html("<div class='alert alert-danger modal-msg'>"+data.error+"</div>");
+                            modalMsg();
+                            setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                        }
+                    },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
                     location.reload();
@@ -237,6 +267,10 @@
             $(".print-error-msg").find("ul").append('<li>' + msg + '</li>');
 
         }
+        
+        function modalMsg() {
+            $("#msgModal").modal();
+        }
 
         $('.clickable-row').on('click', '.remove-group', function (e) {
             e.preventDefault();
@@ -274,6 +308,7 @@
             window.document.location = $(this).data("href");
         });
     });
+    
     function search() {
         // Declare variables
         var input, filter, table, tr, td, i;
