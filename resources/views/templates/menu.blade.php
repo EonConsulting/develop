@@ -138,7 +138,7 @@
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'content.builder') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-book fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -146,21 +146,24 @@
                     </span>
                     <span class="pull-right"><i class="toggle fa fa-plus"></i></span>
                 </a>
-                <div class="left-menu-sub hidden">
+                <div class="left-menu-sub {{ (Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? '' : 'hidden' }}">
                     <ul>
-                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a></li>
-                        <li class="{{ (Route::currentRouteName() == 'eon.contentbuilder.new') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a></li>
-                        <li class="{{ (Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a></li>
+                        <li>
+                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>Categories</a>
+                        </li>
 
                     </ul>
                 </div>
             </li>
         <?php endif; ?>
 
-        <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
+        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
             <li class="{{ (Route::currentRouteName() == 'eon.laravellti.appstore') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
@@ -183,9 +186,7 @@
                     </ul>
                 </div>
             </li>
-        <?php endif; ?>
 
-        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>    
             <!-- TODO: If role == admin the show this menu item -->
             <li class="left-menu-tree {{ (Route::currentRouteName() == 'eon.admin.groups' || Route::currentRouteName() == 'eon.admin.permissions' || Route::currentRouteName() == 'eon.admin.roles' || Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
@@ -206,7 +207,6 @@
                             </a>
                         </li>
 
-
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.permissions') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.permissions') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
@@ -214,14 +214,12 @@
                             </a>
                         </li>
 
-
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.roles') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.roles') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
                                 Roles
                             </a>
                         </li>
-
 
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.roles.users') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.roles.users') }}">
@@ -234,8 +232,7 @@
                 </div>
 
             </li>
-        <?php endif; ?>
-        <?php if (laravel_lti()->is_admin(auth()->user())) : ?>
+       
             <li class="{{ (Route::currentRouteName() == 'lti.dashboards') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-database fa-lg left-menu-icon"></i>
@@ -247,13 +244,18 @@
                 <div class="left-menu-sub hidden">
                     <ul>
 
-                        <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
-                            <a href="{{ route('eon.admin.metadata') }}">
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.metadata-item') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.metadata-item') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
-                                Metadata
+                                Metadata Items
                             </a>
                         </li>
-
+                        <li class="{{ (Route::currentRouteName() == 'eon.admin.metadata-type') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('eon.admin.metadata-type') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Metadata Types
+                            </a>
+                        </li>
 
                     </ul>
                 </div>    
