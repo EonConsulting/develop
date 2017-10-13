@@ -45,8 +45,8 @@ class Storyline2ViewsBlade extends BaseController {
         usort($items, array($this, "self::compare"));
         $items = $SL2JSON->createTree($items);
 
-        dd($items);
-        
+        //dd($items);
+
         $items = $this->makeList($items[0]['children']);
 
         $breadcrumbs = [
