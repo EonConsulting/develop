@@ -146,15 +146,17 @@ class Storyline2ViewsJSON extends BaseController {
     public function create(Request $request) {
 
         $data = $request->json()->all();
-
+       
         $parent_id = (int) $data['parent'];
 
         $text = $data['original']['text'];
-        $root_i = count($data['parents']) - 1;
+        $root_i = count($data['parents']) - 2;
 
         $root_parent = (int) $data['parents'][$root_i];
 
         $parent = StorylineItem::where('id', '=', $parent_id)->first(); //parent
+
+        //dd($root_parent);
 
         $new = StorylineItem::create(['name' => $text, 'storyline_id' => $parent->storyline_id, 'parent_id' => $parent_id, 'root_parent' => $root_parent]);
 
@@ -168,6 +170,8 @@ class Storyline2ViewsJSON extends BaseController {
             "Data Received" => $data,
             "Parent" => $parent,
             "New Node" => $new,
+            "Root Parent Index" => $root_i,
+            "Root Parent" => $root_parent,
             "msg" => $msg,
             "id" => $new->id
         ];
