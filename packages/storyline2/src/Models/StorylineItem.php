@@ -11,7 +11,7 @@ class StorylineItem extends Node {
 
     protected $table = 'storyline_items';
     protected $primaryKey = 'id';
-    protected $fillable = ['parent_id', 'storyline_id', 'level', 'name', 'description', 'file_name', 'file_url','content_id'];
+    protected $fillable = ['parent_id', 'storyline_id', 'root_parent', 'level', 'name', 'description', 'file_name', 'file_url','content_id'];
     //Set Scope for Storyline Construction
     protected $scoped = ['storyline_id'];
     protected static $holdCurrentStoryLineId;
