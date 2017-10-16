@@ -3,15 +3,18 @@
         <div class="dashboard-card shadow top-bdr-4">
 
             <div class="dashboard-card-heading">
-                Module Results
+                Student Assessment
             </div>
 
-            <div class="row sp-top-15 sp-bot-15 basic-clearfix">
-                <div class="col-md-8">
-                    <div class="container-fluid" id="student-results-container" style="height: 300px;">
-                        <canvas id="student-results"></canvas>
+            <div class="basic-clearfix">
+                <div class="progress-charts basic-clearfix">
+                    <div class="container-fluid">
+
+                        <div class="container-fluid" id="student-assessment-container" style="height: 400px;">
+                            <canvas id="student-assessment"></canvas>
+                        </div>
                     </div>
-                </div><!-- end col-md-8 -->
+                </div>
             </div>
         </div>
     </div>
