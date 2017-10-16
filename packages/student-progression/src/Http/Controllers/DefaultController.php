@@ -74,7 +74,13 @@ class DefaultController extends LTIBaseController {
             return 'false';
         } elseif($currentIndex == $furthestIndex){ 
             $Progress->current = $Progress->furthest;
-            $Progress->furthest = $ItemArray[$furthestIndex+1];
+            end($ItemArray);
+            $lastIndex = key($ItemArray);
+            if($lastIndex == $furthestIndex){
+               $Progress->furthest = $ItemArray[$furthestIndex]; 
+            }else{
+            $Progress->furthest = $ItemArray[$furthestIndex+1]; 
+            }
             $Progress->save();
             return 'current';
         }elseif($currentIndex < $furthestIndex){
@@ -115,8 +121,7 @@ class DefaultController extends LTIBaseController {
         $Item = $StorylineItem::where('storyline_id',(int)$storylineId)->get();
 
         foreach ($Item as $descendant) {
-            $children[] = $descendant->id;
-            
+            $children[] = $descendant->id;           
         }
        
       return  $children;
