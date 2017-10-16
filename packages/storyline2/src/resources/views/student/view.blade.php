@@ -335,8 +335,7 @@
 
         $(".menu-btn").on("click", function() {
             var button = $(this);
-            var item_id = $(this).data("item-id");
-            alert(item_id);
+            var item_id = $(this).data("item-id");           
             var courseId = '{{ $course->id }}';
             var storyline = '{{ $storylineId }}';
             var student = '{{auth()->user()->id}}';
