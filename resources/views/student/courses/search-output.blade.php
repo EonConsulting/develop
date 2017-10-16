@@ -52,6 +52,23 @@
         .btn-course-view {float: left;}
 
         .btn-course-delete {padding: 15px 15px 15px 0px; float: right; color: #dd4b39;}
+
+        .result-entry {
+            padding: 10px 0px 10px 0px;
+            margin: 0px 0px 10px 15px;
+            border-width: 0px 0px 1px 0px;
+            border-style: solid;
+            border-color: #d6d6d6;
+            max-width: 1120px;
+        }
+
+        .result-entry h1 {
+            font-size: 16px;
+            margin: 0px;
+        }
+
+
+
     </style>
 
 @endsection
@@ -60,7 +77,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="container-fluid" style="margin-bottom: 20px">
+                <div class="container-fluid" style="margin-bottom: 20px;" >
                     <form class="search" action="{{ action('LTI\Courses\CourseLectureLTIController@search') }}">
 
                         <span>
@@ -77,17 +94,20 @@
                 <?php if(!($finalOutput['total'] === 0)): ?>
 
                 @foreach($finalOutput['results'] as $output)
-                    <div class="course-card shadow">
+                    <div class="result-entry">
                         <div class="">
                             <div class="caption">
-                                <h1>{!! $output['title'] !!}</h1><br />
+                                <a href="{{ route('lti.courses.single', $output['id']) }}"><h1>{!! $output['title'] !!}</h1></a>
                                 <p>{!! $output['description'] !!}</p>
                             </div>
-                            <div class="btn-course-container">
-                                <a href="{{ route('lti.courses.single', $output['id']) }}" class="btn-course btn-course-view" role="button">
-                                    <span class="glyphicon glyphicon-blackboard"></span> View
-                                </a>
+                            <div class="tags">
+                                <?php $tags = explode(',',$output['tags']); ?>
+
+                                @foreach($tags as $tag)
+                                    <span class="label label-default">{{ $tag }}</span>
+                                @endforeach
                             </div>
+                            
                         </div>
                     </div>
                 @endforeach

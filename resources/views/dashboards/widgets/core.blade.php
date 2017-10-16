@@ -1521,7 +1521,7 @@ class WidgetCore {
 
             var areaChartCanvas = $('#student-assessment').get(0).getContext('2d');
             
-            data.labels = new array();
+            data.labels = [];
             $.each(data, function(idx, obj){
                 _.concat(data.labels, obj.description);
             });
