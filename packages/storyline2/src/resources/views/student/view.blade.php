@@ -355,7 +355,7 @@
                         progress_error();
                         setTimeout(function () {
                             $("#errorModal").modal("toggle");
-                            getContent(data.story, button);
+                            //getContent(item_id, button);
                         }, 3000);
                     }
                 },
