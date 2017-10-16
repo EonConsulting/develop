@@ -1523,7 +1523,7 @@ class WidgetCore {
             
             data.labels = [];
             $.each(data, function(idx, obj){
-                _.concat(data.labels, obj.description);
+                data.labels = _.concat(data.labels, obj.description);
             });
 
             var areaChartData = {
