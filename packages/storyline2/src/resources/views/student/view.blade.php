@@ -258,6 +258,32 @@
 
 @section('exterior-content')
 
+@section('exterior-content')
+
+    <div id="errorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Topic Progress Alert</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="error-message">
+                        Please complete current learning objective before moving to the next one. You will now be taken to your furthest progress.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>-->                 
+                </div>
+            </div>
+
+        </div>
+    </div>  
+
 @endsection
 
 
@@ -268,12 +294,12 @@
 <script>
   
     window.onload = function () {
-        $('a.active-menu').trigger('click');
+       // $('a.active-menu').trigger('click');
         saveProgress();
     };
     
      function saveProgress() {
-        var id = $('a.active-menu').attr("data-item-id");
+        var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
         var storyline = '{{ $storylineId }}';
         var student = '{{auth()->user()->id}}';
@@ -299,12 +325,7 @@
         });
     }
     
-      function progress_error(url){
-
-        $(document).on('hide.bs.modal','#errorModal', function () {
-            window.location.href = url;
-        });
-
+      function progress_error(){
         $("#errorModal").modal("show");
     }
 
@@ -315,6 +336,7 @@
         $(".menu-btn").on("click", function() {
             var button = $(this);
             var item_id = $(this).data("item-id");
+            alert(item_id);
             var courseId = '{{ $course->id }}';
             var storyline = '{{ $storylineId }}';
             var student = '{{auth()->user()->id}}';
@@ -331,9 +353,11 @@
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                          getContent(item_id, button);
                        } else if(data.msg === 'error'){
-                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
-                        //alert('Please complete current Learning Objective before moving to the Next one!');                        
-                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
+                        progress_error();
+                        setTimeout(function () {
+                            $("#errorModal").modal("toggle");
+                            getContent(data.story, button);
+                        }, 3000);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

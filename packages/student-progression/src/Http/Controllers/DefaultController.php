@@ -5,8 +5,7 @@ namespace EONConsulting\Student\Progression\Http\Controllers;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Storyline;
+use EONConsulting\Storyline2\Models\Course;
 use App\Models\StorylineItem;
 use App\Models\StudentProgress;
 
@@ -24,12 +23,12 @@ class DefaultController extends LTIBaseController {
         $StorylineItem = new StorylineItem();
         $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
         if (!empty($progress->id)) {
-            $ItemArray = $this->topics($StorylineItem, $progress->root);
+            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
             $current = $this->save_progress($StudentProgress, $request->get('id'),$progress->id,$ItemArray);
             $StorylineItem = $StudentProgress::find($progress->id);
             if($current === 'true'){
                 $message = 'true';                
-                $story = $request->get('id');
+                $story = $progress->furthest;
             }elseif($current === 'current'){
                 $message = 'true';
                 $story = $StorylineItem->current;
@@ -39,10 +38,10 @@ class DefaultController extends LTIBaseController {
             }
             
         } else {
-            $ItemId = $this->save($StudentProgress, $request);
+            $ItemId = $this->save($StudentProgress,$StorylineItem, $request);
             $progress = $StudentProgress::find($ItemId);
-            $ItemArray = $this->topics($StorylineItem, $progress->storylineId);
-            $furthest = $ItemArray[0];
+            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
+            $furthest = $ItemArray[1];
             $progress->furthest = $furthest;
             $progress->save();
             $message = 'false';
@@ -65,9 +64,10 @@ class DefaultController extends LTIBaseController {
      * @param type $ItemArray
      * @return string
      */
-    public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {        
+    public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {    
+
         $Progress = $StudentProgress::find($progressId);
-        $currentIndex = array_search($current, $ItemArray);
+        $currentIndex = array_search($current, $ItemArray);        
         $furthestIndex = array_search($Progress->furthest, $ItemArray);
         $array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
         if ($currentIndex > $furthestIndex) {
@@ -80,6 +80,7 @@ class DefaultController extends LTIBaseController {
         }elseif($currentIndex < $furthestIndex){
          return 'true';   
         }
+        
     }
 
     /**
@@ -88,14 +89,17 @@ class DefaultController extends LTIBaseController {
      * @param type $request
      * @return type
      */
-    public function save($StudentProgress, $request) {
-        $StorylineItem = StorylineItem::whereId($request->get('id'))->first();
+    public function save($StudentProgress, $StorylineItem, $request) {
+        $ItemId = (int) $request->get('id');     
+        $Item = $StorylineItem::find($ItemId);    
+        
         $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_id = (int) $request->get('storyline');
-        $StudentProgress->furthest = (int) $StorylineItem->id;
-        $StudentProgress->current = (int) $StorylineItem->id;
-        $StudentProgress->root = (int) $StorylineItem->id;
+        
+        $StudentProgress->furthest = (int) $Item->id;
+        $StudentProgress->current = (int) $Item->id;
+        $StudentProgress->root = (int) $Item->id;
         if ($StudentProgress->save()) {
             return $StudentProgress->id;
         }
@@ -108,12 +112,15 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function topics($StorylineItem, $storylineId) {
-        $Item = $StorylineItem::whereId($storylineId)->first();
+        $Item = $StorylineItem::where('storyline_id',(int)$storylineId)->get();
 
-        foreach ($Item->getDescendantsAndSelf() as $descendant) {
+        foreach ($Item as $descendant) {
             $children[] = $descendant->id;
+            
         }
-        return $children;
+       
+      return  $children;
+    
     }
 
 }
