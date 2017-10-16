@@ -43,8 +43,9 @@ $lti = laravel_lti()->is_lti(auth()->user());
         @yield('exterior-content')
         @include('templates.default-scripts')
 
+        @stack('hoisted-scripts')
+        
         @yield('custom-scripts')
-
 
        
     </body>
