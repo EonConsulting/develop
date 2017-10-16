@@ -1,4 +1,4 @@
-@push('custom-scripts')
+@push('hoisted-scripts')
 <script type='text/javascript'>
 // singleton
 let instance = null;
@@ -115,6 +115,113 @@ class WidgetCore {
                     "assessment_type_id": "FA-SA2",
                     "assessment": "FA",
                     "description": "Self-Assessment 2"
+                }
+            ];
+        };
+        
+        get assessments() {
+            return [
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "student_id": "ALL",
+                    "description": "SA-ALL",
+                    "value": "70"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 1",
+                    "value": "35"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 2",
+                    "value": "90"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 3",
+                    "value": "66"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 1",
+                    "value": "65"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 2",
+                    "value": "50"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 3",
+                    "value": "76"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 1",
+                    "value": "49"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 2",
+                    "value": "81"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 3",
+                    "value": "56"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "student_id": "ALL",
+                    "description": "FA-ALL",
+                    "value": "57"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
+                    "description": "Formal Assessment 1",
+                    "value": "72"
+                },
+                {
+                    "course_id": "FBN1501",
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
+                    "description": "Formal Assessmet 2",
+                    "value": "66"
                 }
             ];
         };
@@ -642,13 +749,13 @@ class WidgetCore {
         }
         
         // events for changes on filters
-        setupBindings(plugin)
+        setupBindings()
         {
             if (!instance._initialized)
             {
                 instance.bindAssessmentFilter();
                 instance.bindStudentFilter();
-                instance.bindCourseFilter();
+                instance.bindModuleFilter();
                 instance.bindAssessmentTypeFilter();
                 instance.bindEngagementFilter();
             }
@@ -684,11 +791,21 @@ class WidgetCore {
                 // lodash methods for rendering progression
                 var prog = _.filter(instance.progression, _.iteratee({'course_id': instance.selected_course}));
                 // these methods exist in other plugins but they
-                // need to be triggered in the event they exist
+                // need to be triggered in the event they exist in scope
                 instance.renderVideoProgressionGraph(_.head(prog));
                 instance.renderEbookProgressionGraph(_.head(prog));
                 instance.renderArticleProgressionGraph(_.head(prog));
                 instance.renderStudyGuideProgressionGraph(_.head(prog));
+                
+                // lodash methods for rendering assessment
+                var ass = _.filter(instance.assessments, _.iteratee({
+                        'course_id': instance.selected_course,
+                        'student_id': instance.selected_student}
+                    )
+                );
+                // these methods exist in other plaugins but they
+                // need to be triggered in the event they exist in scope
+                instance.renderAssessmentGraph(ass);
             });
         }
         
@@ -702,9 +819,9 @@ class WidgetCore {
             });
         }
         
-        bindCourseFilter()
+        bindModuleFilter()
         {
-            $("#course-filter").on("change", function () {
+            $("#module-filter").on("change", function () {
                 var self = $(this);
                 instance.selected_course = $(this).val();
 
@@ -723,7 +840,7 @@ class WidgetCore {
                 }
             });
             // and lets just select the first record on page load
-            $("#course-filter").trigger("change");
+            $("#module-filter").trigger("change");
         }
         
         bindAssessmentTypeFilter()
@@ -1387,6 +1504,95 @@ class WidgetCore {
             // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
             var areaChart = new Chart(areaChartCanvas, {
                 type: "line",
+                data: areaChartData,
+                options: areaChartOptions
+            });
+        }
+        
+        renderAssessmentGraph(data) {
+        debugger;
+            // MH: this is a workaround to trash the canvas
+            // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#student-assessment').length <= 0) return;
+            
+            $('#student-assessment').remove();
+            $('#student-assessment-container').append('<canvas id="student-assessment"><canvas>');
+
+            var areaChartCanvas = $('#student-assessment').get(0).getContext('2d');
+            
+            data.labels = new array();
+            $.each(data, function(idx, obj){
+                _.concat(data.labels, obj.description);
+            });
+
+            var areaChartData = {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: data.description,
+                        fill: false,
+                        backgroundColor: 'rgba(251, 114, 23, 1)',
+                        borderColor: 'rgba(251, 114, 23, 1)',
+                        borderWidth: 0,
+                        data: data.value
+                    }
+                ]
+            };
+
+
+            var areaChartOptions = {
+                //Boolean - If we should show the scale at all
+                showScale: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: false,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - Whether the line is curved between points
+                bezierCurve: true,
+                //Number - Tension of the bezier curve between points
+                bezierCurveTension: 0.3,
+                //Boolean - Whether to show a dot for each point
+                pointDot: true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius: 1,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth: 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius: 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke: true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth: 2,
+                //Boolean - Whether to fill the dataset with a color
+                datasetFill: true,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                //max: 100  // minimum value will be 0.
+                            }
+                        }]
+                }
+            };
+
+            // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+            var areaChart = new Chart(areaChartCanvas, {
+                type: "polararea",
                 data: areaChartData,
                 options: areaChartOptions
             });

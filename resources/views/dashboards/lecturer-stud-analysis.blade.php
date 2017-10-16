@@ -96,5 +96,7 @@ Lecturer Dashboard
     @include('dashboards.widgets.filters')
     
     @include('dashboards.widgets.engagement')
+    
+    @include('dashboards.widgets.assessment')
 
 @endsection

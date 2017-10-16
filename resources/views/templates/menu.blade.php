@@ -50,7 +50,7 @@
 <div class="left-menu">
     <ul>    
         <li class="{{ (Route::currentRouteName() == 'lti.dashboards' || Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
-            <a href="{{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? '#' : route('home.dashboards') }}" {{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? "class=accordian" : "" }}>
+            <a href="{{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? '#' : route('lti.dashboards') }}" {{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? "class=accordian" : "" }}>
                 <i class="fa fa-braille fa-lg left-menu-icon"></i>
                 <span class="menu_collapse">
                     Dashboard

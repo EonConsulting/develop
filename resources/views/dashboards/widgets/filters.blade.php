@@ -10,8 +10,8 @@
 
                 <div class="col-md-12">
                     <div class="container-fluid">
-                        <label for="course-filter">Module</label>
-                        <select class="form-control" id="course-filter">
+                        <label for="module-filter">Module</label>
+                        <select class="form-control" id="module-filter">
                             <option value="FBN1501">FBN1501 - Business Numerical Skills A</option>
                             <option value="FBN1502">FBN1502 - Business Numerical Skills B</option>
                         </select>

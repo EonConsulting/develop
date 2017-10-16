@@ -30,12 +30,12 @@
     </div>
 </div>
 
-@push('custom-scripts')
+@section('custom-scripts')
 <script type="text/javascript">
     $(document).ready(function () {
         // this will instantiate a version of WidgetCore
         let wc = new WidgetCore("<?php echo laravel_lti()->get_role(auth()->user()) ?>");
-        wc.setupBindings("engagement");
+        wc.setupBindings();
     });
 </script>
-@endpush
+@endsection
