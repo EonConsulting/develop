@@ -278,6 +278,7 @@
 
                 <div class="modal-footer">
                     <!--<button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>-->                 
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
@@ -352,11 +353,7 @@
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                          getContent(item_id, button);
                        } else if(data.msg === 'error'){
-                        progress_error();
-                        setTimeout(function () {
-                            $("#errorModal").modal("toggle");
-                            //getContent(item_id, button);
-                        }, 3000);
+                        progress_error();                      
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
