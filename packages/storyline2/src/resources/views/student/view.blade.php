@@ -299,7 +299,7 @@
         saveProgress();
     };
     
-     function saveProgress() {
+    function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
         var storyline = '{{ $storylineId }}';
