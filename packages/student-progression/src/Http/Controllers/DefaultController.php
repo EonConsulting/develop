@@ -1,11 +1,8 @@
 <?php
-
 namespace EONConsulting\Student\Progression\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
@@ -159,6 +156,13 @@ class DefaultController extends LTIBaseController {
 
         return $map;
     }
+    
+    /**
+     * 
+     * @param type $a
+     * @param type $b
+     * @return int
+     */
     
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
