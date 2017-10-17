@@ -44,10 +44,11 @@ class DefaultController extends LTIBaseController {
             }
             
         } else {
-            $ItemId = $this->save($StudentProgress,$StorylineItem, $request);
-            $progress = $StudentProgress::find($ItemId);
             $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
-            $progress->furthest = $ItemArray[2];
+            $ItemId = $this->save($StudentProgress,$StorylineItem, $request,$ItemArray);
+            $progress = $StudentProgress::find($ItemId);
+            
+            $progress->furthest = 2;
             $progress->save();
             $message = 'false';
             $story = $ItemId;
@@ -73,23 +74,23 @@ class DefaultController extends LTIBaseController {
 
         $Progress = $StudentProgress::find($progressId);
         $currentIndex = array_search($current, $ItemArray);        
-        $furthestIndex = array_search($Progress->furthest, $ItemArray);
+        $furthestIndex = array_search($ItemArray[$Progress->furthest], $ItemArray);
         //$array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
-        //dd($ItemArray[$currentIndex],$ItemArray[$furthestIndex]);
-        if ($ItemArray[$currentIndex] > $ItemArray[$furthestIndex]) {
+        //dd($currentIndex,$furthestIndex);
+        if ($currentIndex > $furthestIndex) {
             return 'false';
-        } elseif($ItemArray[$currentIndex] == $ItemArray[$furthestIndex]){ 
+        } elseif($currentIndex == $furthestIndex){ 
             $Progress->current = $Progress->furthest;
             end($ItemArray);
             $lastIndex = key($ItemArray);
-            if($ItemArray[$lastIndex] === $ItemArray[$furthestIndex]){
-               $Progress->furthest = $ItemArray[$furthestIndex]; 
+            if($lastIndex === $furthestIndex){
+               $Progress->furthest = $furthestIndex; 
             }else{
-            $Progress->furthest = $ItemArray[$furthestIndex+1]; 
+            $Progress->furthest = $furthestIndex+1; 
             }
             $Progress->save();
             return 'current';
-        }elseif($ItemArray[$currentIndex] < $ItemArray[$furthestIndex]){
+        }elseif($currentIndex < $furthestIndex){
          return 'true';   
         }
         
@@ -101,17 +102,17 @@ class DefaultController extends LTIBaseController {
      * @param type $request
      * @return type
      */
-    public function save($StudentProgress, $StorylineItem, $request) {
+    public function save($StudentProgress, $StorylineItem, $request, $ItemArray) {
         $ItemId = (int) $request->get('id');     
         $Item = $StorylineItem::find($ItemId);    
         
         $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_id = (int) $request->get('storyline');
-        
-        $StudentProgress->furthest = (int) $Item->id;
-        $StudentProgress->current = (int) $Item->id;
-        $StudentProgress->root = (int) $Item->id;
+        $Index = array_search((int) $Item->id, $ItemArray);
+        $StudentProgress->furthest = $Index;
+        $StudentProgress->current = $Index;
+        $StudentProgress->root =  $Index;
         if ($StudentProgress->save()) {
             return $StudentProgress->id;
         }
@@ -130,7 +131,7 @@ class DefaultController extends LTIBaseController {
         foreach ($result as $descendant) {
             $children[] = $descendant['id'];           
         }
-  
+   
      return  $children;
  
     
