@@ -6,7 +6,8 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\Storyline2\Models\Course;
-use App\Models\StorylineItem;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
 
 //use EONConsulting\Storyline\Table\Csv;
@@ -123,20 +124,44 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function topics($StorylineItem, $storylineId) {
-        $Item = $StorylineItem::where('storyline_id',(int)$storylineId)->get();
-        /*
-         foreach ($Item->getDescendantsAndSelf() as $descendant) {
-            $children[] = $descendant->id;
-        }
-         * 
-         */
-
-        foreach ($Item as $descendant) {
-            $children[] = $descendant->id;           
-        }
+        $result = $this->items_to_tree(Storyline::find($storylineId)->items);
+        usort($result, [$this, "self::compare"]);
         
-      return  $children;
+        foreach ($result as $descendant) {
+            $children[] = $descendant['id'];           
+        }
+  
+     return  $children;
+ 
     
+    }
+    
+    /**
+     *
+     * @param type $items
+     * @return type
+     */
+    public function items_to_tree($items) {
+
+        $map = [];
+
+        foreach ($items as $k => $node) {
+
+            $map[] = [
+                'id' => (string) $node['id'],
+                'text' => $node['name'],
+                'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
+                'rgt' => $node['_rgt'],
+                'lft' => $node['_lft']
+            ];
+        }
+
+        return $map;
+    }
+    
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
 }
