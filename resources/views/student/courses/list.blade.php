@@ -143,6 +143,8 @@
 var url = '';
 
 $(document).ready(function () {
+    // just temporarily commented this out
+    // cause it was screwing up the DEMO - thanks a ton Dario you shit!
     $(".typeahead").typeahead({}).on("input", function (e) {
 
         var termChars = e.target.value;
@@ -153,7 +155,7 @@ $(document).ready(function () {
             setTerm(url);
 
             //Log searched
-            var tincan = new TinCan (
+            /*var tincan = new TinCan (
                 {
                     recordStores: [
                         {
@@ -177,7 +179,7 @@ $(document).ready(function () {
                         id: "{!! url('/lti/courses/search') !!}"
                     }
                 }
-            );
+            ); */
         }
     });
 
