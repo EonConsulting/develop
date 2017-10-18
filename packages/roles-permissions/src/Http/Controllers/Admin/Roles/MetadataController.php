@@ -32,29 +32,33 @@ class MetadataController extends Controller {
             ]
         ];
         
-        $Metadata = MetadataStore::get();
+        $Metadata = MetadataStore::with('metadata_type')->get();
+        
         return view('eon.roles::metadata-item', ['metadatas' => $Metadata], ['breadcrumbs' => $breadcrumbs]);
     }
 
     public function createItem() {
-        return view('eon.roles::metadata-store-create');
+        $metadataType = MetadataType::pluck('name', 'id');
+        
+        return view('eon.roles::metadata-store-create', compact('metadataType'));
     }
     
     public function editItem($id) {
         $Metadata = MetadataStore::find($id);
-        return view('eon.roles::metadata-store-edit',['metadata' => $Metadata]);
+        $metadataType = MetadataType::pluck('name', 'id');
+        return view('eon.roles::metadata-store-edit',['metadata' => $Metadata,'metadataType'=>$metadataType]);
     }
 
     public function saveItem(Request $request) {
 
         $validator = Validator::make($request->all(), [
-                    'metadata_type' => 'required',
+                    'metadata_type_id' => 'required',
                     'description' => 'required',
         ]);
 
         if ($validator->passes()) {
             $crud = new MetadataStore([
-                'metadata_type' => $request->get('metadata_type'),
+                'metadata_type_id' => $request->get('metadata_type_id'),
                 'description' => $request->get('description'),
                 'classification' => $request->get('classification'),
                 'sequence' => $request->get('sequence')
@@ -69,13 +73,13 @@ class MetadataController extends Controller {
     public function updateItem(Request $request,$id) {
             
         $validator = Validator::make($request->all(), [
-                    'metadata_type' => 'required',
+                    'metadata_type_id' => 'required',
                     'description' => 'required',
         ]);
 
         if ($validator->passes()) {
             $Metadata = MetadataStore::find($id);
-            $Metadata->metadata_type = $request->get('metadata_type');
+            $Metadata->metadata_type_id = $request->get('metadata_type_id');
             $Metadata->description = $request->get('description');
             $Metadata->classification = $request->get('classification');
             $Metadata->sequence = $request->get('sequence');

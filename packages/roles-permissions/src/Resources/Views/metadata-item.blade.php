@@ -27,7 +27,7 @@
                         <tr class="" data-href="{{ route('eon.admin.roles.single', $metadata->id) }}" data-roleid="{{ $metadata->id }}">
                     <a href="">
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $metadata->metadata_type }}</td>
+                        <td>{{ $metadata->metadata_type->name }}</td>
                         <td>{{ $metadata->description }}</td>
                         <td>{{ $metadata->classification }}</td>
                         <td>{{ $metadata->sequence }}</td>
@@ -154,7 +154,7 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
-                    location.reload();
+                    //location.reload();
                 }
             });
         });
