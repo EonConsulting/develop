@@ -15,8 +15,8 @@ class ElasticSearchSetupController extends Controller {
 
     }
 
-    public function create_new_index($settings = null, ) {
-        
+    public function create_new_index($settings = null) {
+
     }
 
 }
