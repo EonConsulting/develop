@@ -96,5 +96,9 @@ Mentor Dashboard
     @include('dashboards.widgets.filters')
     
     @include('dashboards.widgets.engagement')
+    
+    @include('dashboards.widgets.assessment')
+    
+    @include('dashboards.widgets.topcontent')
 
 @endsection
