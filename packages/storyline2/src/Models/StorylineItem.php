@@ -8,7 +8,6 @@ use Baum\Node;
 class StorylineItem extends Node {
     //Enable Nested Sets//
     //use NodeTrait;
-
     protected $table = 'storyline_items';
     protected $primaryKey = 'id';
     protected $fillable = ['parent_id', 'storyline_id', 'root_parent', 'level', 'name', 'description', 'file_name', 'file_url','content_id'];
@@ -51,10 +50,9 @@ class StorylineItem extends Node {
     protected $leftColumn = '_lft';
     protected $rightColumn = '_rgt';
     protected $depthColumn = 'level';
-//  //Guard From Mass Assignments
+
     protected $guarded = array('id','_lft', '_rgt', 'nesting');
 
-    protected $orderColumn = 'level';
 
 
 
