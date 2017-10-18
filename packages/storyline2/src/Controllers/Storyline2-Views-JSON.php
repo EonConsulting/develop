@@ -223,6 +223,7 @@ class Storyline2ViewsJSON extends BaseController {
                 $msg = $node->makeLastChildOf($parent);
 
                 $decendants = $parent->getImmediateDescendants();
+
                 $msg = $node->moveToLeftOf($decendants[$position]) ? "Moved To Position ".$position : "Failure";
 
             }
