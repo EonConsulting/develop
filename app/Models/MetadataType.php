@@ -14,7 +14,7 @@ class MetadataType extends Model {
 
     protected $table = 'metadata_types';
     protected $primaryKey = 'id';
-    protected $fillable = ['name','description'];
+    protected $fillable = ['id','name','description'];
 
     
 }
