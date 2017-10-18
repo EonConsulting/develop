@@ -32,7 +32,7 @@ class CKDomainsController extends LTIBaseController {
     public function index() {
 
         $domainslist   = ckeditorpluginv2()->list_domains();
-
+        
         return view('ckeditorpluginv2::editorstore', ['tools' => $domainslist]);
 
     }
