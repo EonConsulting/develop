@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12 sp-top-15">
+    <div class="col-md-6 sp-top-15">
         <div class="dashboard-card shadow top-bdr-4">
 
             <div class="dashboard-card-heading">

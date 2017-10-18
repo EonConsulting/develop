@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
-
 @section('page-title')
 Lecturer Dashboard
 @endsection
-
 
 @section('custom-styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
@@ -98,5 +96,7 @@ Lecturer Dashboard
     @include('dashboards.widgets.engagement')
     
     @include('dashboards.widgets.assessment')
+    
+    @include('dashboards.widgets.topcontent')
 
 @endsection
