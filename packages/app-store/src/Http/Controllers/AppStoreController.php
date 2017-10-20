@@ -43,6 +43,7 @@ class AppStoreController extends LTIBaseController {
     function AngularRest() {
 
         $domains = laravel_lti()->get_domains();
+        
         return $domains;
     }
 

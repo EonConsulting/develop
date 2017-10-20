@@ -1,6 +1,6 @@
 <?php
     Route::group(['middleware' => ['web'], 'prefix' => '/eon/lti', 'namespace' => 'EONConsulting\AppStore\Http\Controllers'], function () {
-        Route::group(['middleware' => ['auth', 'administrator']], function () {
+        Route::group(['middleware' => ['auth']], function () {
 
             // list all of the api's
             Route::match(['get', 'post'], '/appstore', ['as' => 'eon.laravellti.appstore', 'uses' => 'AppStoreController@index']);

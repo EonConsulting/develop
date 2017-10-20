@@ -66,7 +66,7 @@ class Storyline2ViewsJSON extends BaseController {
                 $temp['order'] = $order;
                 $order++;
 
-                if($i < 2 ){ //I say 2 because we don't display the root node, so by saying 2 instead of one, we jump over the root
+                if($i < 2 ){ //I say 2 because we don't display the root node, so by saying 2 instead of 1, we jump over the root
                     $temp['prev'] = '#'; 
                 } else {
                     $temp['prev'] = $items[$i-1]['id'];
@@ -223,6 +223,7 @@ class Storyline2ViewsJSON extends BaseController {
                 $msg = $node->makeLastChildOf($parent);
 
                 $decendants = $parent->getImmediateDescendants();
+
                 $msg = $node->moveToLeftOf($decendants[$position]) ? "Moved To Position ".$position : "Failure";
 
             }
