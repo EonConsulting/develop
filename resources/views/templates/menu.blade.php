@@ -203,14 +203,14 @@
 
                 <div class="left-menu-sub hidden">
                     <ul>
-
+                        <!--
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.groups') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.groups') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
                                 Groups
                             </a>
                         </li>
-
+                         -->
                         <li class="{{ (Route::currentRouteName() == 'eon.admin.permissions') ? 'left-menu-active' : '' }}">
                             <a href="{{ route('eon.admin.permissions') }}">
                                 <i class="fa fa-circle-o left-menu-icon"></i>
