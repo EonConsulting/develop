@@ -93,12 +93,12 @@ Mentor Dashboard
     <!-- this must always be loaded first -->
     @include('dashboards.widgets.core')
     
-    @include('dashboards.widgets.filters')
+    @include('dashboards.widgets.filters', ['size' => 'medium'])
     
-    @include('dashboards.widgets.engagement')
+    @include('dashboards.widgets.assessment', ['size' => 'medium'])
     
-    @include('dashboards.widgets.assessment')
+    @include('dashboards.widgets.topcontent', ['size' => 'medium'])
     
-    @include('dashboards.widgets.topcontent')
+    @include('dashboards.widgets.engagement', ['size' => 'large'])
 
 @endsection
