@@ -1,5 +1,11 @@
 <div class="row">
-    <div class="col-md-12 sp-top-15 sp-bot-15 basic-clearfix">
+    <?php switch($size): case "small": ?>
+        <div class="col-md-3 sp-top-15">
+    <?php break; case "medium": ?>
+        <div class="col-md-6 sp-top-15">
+    <?php break; case "large": default: ?>
+        <div class="col-md-12 sp-top-15">
+    <?php break; endswitch; ?>
         <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
 
             <div class="dashboard-card-heading">

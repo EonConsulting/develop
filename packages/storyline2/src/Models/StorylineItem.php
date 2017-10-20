@@ -22,17 +22,6 @@ class StorylineItem extends Node {
         parent::__construct($attributes);
     }
 
-    //Forget Parent and Children Foreign Keys
-    //Node Belongs to Parent
-//    public function parent() {
-//        return $this->belongsTo(StorylineItem::class, 'parent_id', 'id');
-//    }
-//
-//    //Node has Many Children
-//    public function children() {
-//        return $this->hasMany(StorylineItem::class, 'id', 'parent_id');
-//    }
-
     public function storyline() {
         return $this->belongsTo(Storyline::class, 'storyline_id', 'id');
     }

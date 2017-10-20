@@ -649,109 +649,52 @@ class WidgetCore {
             ];
         };
         
-        get topcourses() {
+        get topics() {
             return [
                 {
                     "course_id": "FBN1501",
-                    "assessment_type_id": "SA-ALL",
-                    "assessment": "SA",
-                    "student_id": "ALL",
-                    "description": "SA-ALL",
-                    "value": "70"
+                    "items": [
+                        "Formulas",
+                        "Interpretation",
+                        "Video - Choice",
+                        "Priorities",
+                        "Formula",
+                        "Variables",
+                        "Laws of operations",
+                        "Activity 1 info",
+                        "Fractions 1",
+                        "Roots"
+                    ]
                 },
                 {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-1",
-                    "assessment": "SA",
-                    "student_id": "S1",
-                    "description": "Self-Assessment 1",
-                    "value": "35"
+                    "course_id": "FBN1502",
+                    "items": [
+                        "x-axis",
+                        "Two x-intercepts",
+                        "One x-intercept",
+                        "No x-intercepts",
+                        "Steps",
+                        "Example",
+                        "Not constant",
+                        "Video",
+                        "Introduction",
+                        "Examples",
+                    ]
                 },
                 {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-2",
-                    "assessment": "SA",
-                    "student_id": "S1",
-                    "description": "Self-Assessment 2",
-                    "value": "90"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-3",
-                    "assessment": "SA",
-                    "student_id": "S1",
-                    "description": "Self-Assessment 3",
-                    "value": "66"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-1",
-                    "assessment": "SA",
-                    "student_id": "S2",
-                    "description": "Self-Assessment 1",
-                    "value": "65"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-2",
-                    "assessment": "SA",
-                    "student_id": "S2",
-                    "description": "Self-Assessment 2",
-                    "value": "50"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-3",
-                    "assessment": "SA",
-                    "student_id": "S2",
-                    "description": "Self-Assessment 3",
-                    "value": "76"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-1",
-                    "assessment": "SA",
-                    "student_id": "S3",
-                    "description": "Self-Assessment 1",
-                    "value": "49"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-2",
-                    "assessment": "SA",
-                    "student_id": "S3",
-                    "description": "Self-Assessment 2",
-                    "value": "81"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "SA-3",
-                    "assessment": "SA",
-                    "student_id": "S3",
-                    "description": "Self-Assessment 3",
-                    "value": "56"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "FA-ALL",
-                    "assessment": "FA",
-                    "student_id": "ALL",
-                    "description": "FA-ALL",
-                    "value": "57"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "FA-ASS1",
-                    "assessment": "FA",
-                    "description": "Formal Assessment 1",
-                    "value": "72"
-                },
-                {
-                    "course_id": "FBN1501",
-                    "assessment_type_id": "FA-ASS2",
-                    "assessment": "FA",
-                    "description": "Formal Assessmet 2",
-                    "value": "66"
+                    "course_id": "ECS1501",
+                    "items": [
+                        "Production Curve -> Assumptions",
+                        "Demand -> Supply Curve",
+                        "Demand -> Preferences -> Preference Curve",
+                        "Supply -> Law of Supply",
+                        "Demand -> Changes -> Quantity",
+                        "Demand -> Technology Impact",
+                        "Supply -> Introduction -> Equation",
+                        "Production Curve -> Efficiency",
+                        "Demand and Supply -> Market Equilibrium -> Shortage",
+                        "Demand and Supply -> Market Equilibrium -> Excess Demand"
+                    ]
                 }
             ];
         };
@@ -945,6 +888,9 @@ class WidgetCore {
                         $("#student-filter").trigger("change");
                         break;
                 }
+                
+                // update the top content if available
+                instance.renderTopContentTable();
             });
             // and lets just select the first record on page load
             $("#module-filter").trigger("change");
@@ -1654,6 +1600,7 @@ class WidgetCore {
             });
             
             var areaChartOptions = {
+                maintainAspectRatio: false,
                 responsive: true,
                 legend: {
                     position: 'right'
@@ -1665,7 +1612,7 @@ class WidgetCore {
                 scale: {
                   ticks: {
                     beginAtZero: true,
-                    max: 100
+                    max: 100,
                   },
                   reverse: false
                 },
@@ -1688,6 +1635,37 @@ class WidgetCore {
               },
               options: areaChartOptions
             });
+        }
+        
+        renderTopContentTable()
+        {
+            var ts = _.filter(instance.topics, _.iteratee({'course_id': instance.selected_course}));
+            var t = _.head(ts);
+            
+            var data = [];
+            for (var x=0; x < 10; x++)
+            {
+                var d = {};
+                d.course = instance.selected_course;
+                d.topic = t.items[x];
+                d.count = instance.generateRandomNumber(10, 100, 0);
+                d.time = instance.generateRandomNumber(0, 100, 0) + " h " + instance.generateRandomNumber(0, 60, 0) + " mins";
+                _.concat(data, d);
+            }
+            
+            $('#topContentTable tbody tr:not(:first)').remove(); 
+            
+            var html = '';
+            for(var i = 0; i < data.length; i++)
+            {
+                html += '<tr><td>' + data[i].course + 
+                        '</td><td>' + data[i].topic + '</td>' +
+                        '</td><td>' + data[i].count + '</td>' +
+                        '</td><td>' + data[i].time + '</td>' +
+                        '</td><td><a href="#" class="btn btn-xs btn-info">View</a></td></tr>';
+            }
+            //$("#topContentTable tbody").append(html);
+            $('#topContentTable tbody tr:not(:first)').append(html);
         }
     }
 </script>
