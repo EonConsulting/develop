@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <input type="hidden" id="tok" value="{{ csrf_token() }}" />
-                <div id="perm-create" class="panel-heading">Permissions <a href="{{ route('eon.admin.permissions.create') }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Permissions.."></div><div class="clearfix"></div></div>
+                <div  class="panel-heading">Permissions <a href="{{ route('eon.admin.permissions.create') }}" id="perm-create" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Permissions.."></div><div class="clearfix"></div></div>
                 <table class="panel-body table table-hover table-striped" id="permissions-table">
                     <thead>
                         <tr>
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         @foreach($permissions as $index => $permission)
-                        <tr class="clickable-row" data-href="{{ route('eon.admin.permissions.single', $permission->id) }}" data-permissionid="{{ $permission->id }}">
+                        <tr class="" data-href="{{ route('eon.admin.permissions.single', $permission->id) }}" data-permissionid="{{ $permission->id }}">
                     <a href="">
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $permission->name }}</td>
@@ -236,7 +236,7 @@
                 $("#msgModal").modal();
             }
 
-
+            
 
             $(".clickable-row").click(function (e) {
                 if (e.target.type != 'button') {
