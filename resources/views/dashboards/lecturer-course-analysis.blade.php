@@ -93,12 +93,8 @@ Lecturer Dashboard
     <!-- this must always be loaded first -->
     @include('dashboards.widgets.core')
     
-    @include('dashboards.widgets.filters')
+    @include('dashboards.widgets.filters', ['size' => 'medium'])
     
-    @include('dashboards.widgets.results')
+    @include('dashboards.widgets.participants', ['size' => 'medium'])
     
-    @include('dashboards.widgets.progression')
-
-    @include('dashboards.widgets.timeline')
-
 @endsection
