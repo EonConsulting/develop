@@ -13,16 +13,18 @@ use App\Http\Controllers\Controller;
 use EONConsulting\RolesPermissions\Http\Requests\StorePermissionRequest;
 use EONConsulting\RolesPermissions\Http\Requests\UpdatePermissionRequest;
 use EONConsulting\RolesPermissions\Models\Permission;
+use Validator;
+use Symfony\Component\HttpFoundation\Request;
 
 class PermissionsController extends Controller {
 
     public function index() {
-        $permissions = Permission::with('roles')->with('users')->get();
+        $permissions = Permission::get();
 
         $breadcrumbs = [
-            'title' => 'Roles and Permissions',
+            'title' => 'Permissions',
             'child' => [
-                'title' => 'Permissions'
+                'title' => 'View'
             ]
         ];
 
@@ -47,47 +49,52 @@ class PermissionsController extends Controller {
 
     public function create() {
 
-        $breadcrumbs = [
-            'title' => 'Roles and Permissions',
-            'child' => [
-                'title' => 'Permissions',
-                'href' => route("eon.admin.permissions"),
-                'child' => [
-                    'title' => 'Create a Permission'
-                ]
-            ]
-        ];
-
-        return view('eon.roles::create-permission', ['breadcrumbs' => $breadcrumbs]);
+        return view('eon.roles::create-permission');
     }
 
     public function store(StorePermissionRequest $request) {
-        $permission = new Permission;
-        $permission->name = $request->name;
-        $permission->slug = str_slug($request->name);
+         $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+        ]);
 
-        $permission->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function update(UpdatePermissionRequest $request, Permission $permission) {
-        $permission->name = $request->name;
-        $permission->slug = str_slug($request->name);
-
-        $permission->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function destroy(Permission $permission) {
-        if($permission->users()->count() > 0) {
-            return response()->json(['success' => false, 'error_messages' => 'There are users linked to that permission.']);
+        if ($validator->passes()) {
+            $crud = new Permission([
+                'name' => $request->get('name')
+            ]);
+            $crud->save();
+            return response()->json(['success'=>'Permission has been added successfully.']);
         }
 
-        $permission->delete();
+        return response()->json(['error' => $validator->errors()->all()]);
+    }
+    
+    public function edit($id) {
+        $Metadata = Permission::find($id);
+        return view('eon.roles::permission-edit',['metadata' => $Metadata]);
+    }
 
-        return response()->json(['success' => true]);
+    public function update(Request $request,$id) {
+            
+        $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+        ]);
+
+        if ($validator->passes()) {
+            $Metadata = Permission::find($id);
+            $Metadata->name = $request->get('name');
+            $Metadata->save();
+            return response()->json(['success'=>'Permission has been updated successfully.']);
+        }
+
+        return response()->json(['error' => $validator->errors()->all()]);
+    }
+
+    public function delete($id) {
+        $Metadata = Permission::find($id);
+        if($Metadata->delete()){
+           return response()->json(['success'=>'Permission has been delete successfully.']); 
+        }
+        return response()->json(['error' => 'An error occured, please try again.']);
     }
 
 }

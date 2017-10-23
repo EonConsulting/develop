@@ -29,11 +29,12 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
 
         Route::get('/permissions', ['as' => 'eon.admin.permissions', 'uses' => 'PermissionsController@index']);
         Route::get('/permissions/create', ['as' => 'eon.admin.permissions.create', 'uses' => 'PermissionsController@create']);
-        Route::post('/permissions/create', ['as' => 'eon.admin.permissions.create', 'uses' => 'PermissionsController@store']);
+        Route::post('/permissions/save', ['as' => 'eon.admin.permissions.store', 'uses' => 'PermissionsController@store']);
         Route::get('/permissions/{permission}', ['as' => 'eon.admin.permissions.single', 'uses' => 'PermissionsController@show']);
         Route::post('/permissions/{permission}', ['as' => 'eon.admin.permissions.single', 'uses' => 'PermissionsController@update']);
-        Route::post('/permissions/{permission}/delete', ['as' => 'eon.admin.permissions.delete', 'uses' => 'PermissionsController@destroy']);
-        Route::post('/permissions/--permission--/delete', ['as' => 'eon.admin.permissions.delete', 'uses' => 'PermissionsController@destroy']);
+        Route::get('/permissions/edit/{id}', ['as' => 'eon.admin.permissions.edit', 'uses' => 'PermissionsController@edit']);
+        Route::post('/permissions/update/{id}', ['as' => 'eon.admin.permissions.update', 'uses' => 'PermissionsController@update']);
+        Route::get('/permissions/delete/{id}', ['as' => 'eon.admin.permissions.delete', 'uses' => 'PermissionsController@delete']);
 
         Route::get('/users', ['as' => 'eon.admin.roles.users', 'uses' => 'UsersController@index']);
         Route::get('/users/{user}', ['as' => 'eon.admin.roles.users.single', 'uses' => 'UsersController@show']);
