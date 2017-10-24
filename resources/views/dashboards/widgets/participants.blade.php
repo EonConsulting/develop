@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="notification-card-text">
                                         <h1>Students</h1>
-                                        <p>725</p>
+                                        <p id="participant_student_count">-</p>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="notification-card-text">
                                         <h1>Mentors</h1>
-                                        <p>25</p>
+                                        <p id="participant_mentor_count">-</p>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="notification-card-text">
                                         <h1>Lecturers</h1>
-                                        <p>6</p>
+                                        <p id="participant_lecturer_count">-</p>
                                     </div>
                                 </div>
                             </div>

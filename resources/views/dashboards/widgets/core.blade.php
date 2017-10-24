@@ -699,6 +699,23 @@ class WidgetCore {
             ];
         };
         
+        get participation(){
+            return [
+                {
+                    "course_id": "FBN1501",
+                    "students": "756",
+                    "mentors": "35",
+                    "lecturers": "5"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "students": "644",
+                    "mentors": "27",
+                    "lecturers": "3"
+                }
+            ];
+        }
+        
         // methods
         updateAssessmentTypes(a_type)
         {
@@ -891,6 +908,7 @@ class WidgetCore {
                 
                 // update the top content if available
                 instance.renderTopContentTable();
+                instance.renderParticipationMetrics();
             });
             // and lets just select the first record on page load
             $("#module-filter").trigger("change");
@@ -1666,6 +1684,19 @@ class WidgetCore {
             }
             //$("#topContentTable tbody").append(html);
             $('#topContentTable tbody tr:not(:first)').append(html);
+        }
+        
+        renderParticipationMetrics()
+        {
+            var mets = _.filter(instance.participation, _.iteratee({'course_id': instance.selected_course}));
+            var m = _.head(mets);
+            
+            if (m)
+            {
+                $("#participant_student_count").html(m.students);
+                $("#participant_mentor_count").html(m.mentors);
+                $("#participant_lecturer_count").html(m.lecturers);
+            }
         }
     }
 </script>
