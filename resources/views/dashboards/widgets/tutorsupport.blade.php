@@ -11,15 +11,25 @@
         <div class="dashboard-card shadow top-bdr-4">
 
             <div class="dashboard-card-heading">
-                Module Results
+                Tutor Support
             </div>
 
-            <div class="row sp-top-15 sp-bot-15 basic-clearfix">
-                <div class="col-md-8">
-                    <div class="container-fluid" id="student-results-container" style="height: 300px;">
-                        <canvas id="student-results"></canvas>
+            <div class="basic-clearfix">
+                <div class="progress-charts basic-clearfix">
+                    <div class="container-fluid">
+                    
+                        <label for="tutor-support-filter">Period</label>
+                        <select class="form-control" id="tutor-support-filter">
+                            <option value="month">Month</option>
+                            <option value="3-month">3 Month</option>
+                            <option value="6-month">6 Month</option>
+                        </select>
+                    
+                        <div class="container-fluid" id="tutor-support-container" style="height: 300px;">
+                            <canvas id="tutor-support"></canvas>
+                        </div>
                     </div>
-                </div><!-- end col-md-8 -->
+                </div>
             </div>
         </div>
     </div>

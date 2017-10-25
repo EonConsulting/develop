@@ -97,4 +97,10 @@ Lecturer Dashboard
     
     @include('dashboards.widgets.participants', ['size' => 'medium'])
     
+    <div class="clearfix"></div>
+    
+    @include('dashboards.widgets.tutorsupport', ['size' => 'medium'])
+    
+    @include('dashboards.widgets.notifications', ['size' => 'medium'])
+    
 @endsection

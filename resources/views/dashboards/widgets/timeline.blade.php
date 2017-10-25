@@ -3,8 +3,10 @@
         <div class="col-md-3 sp-top-15">
     <?php break; case "medium": ?>
         <div class="col-md-6 sp-top-15">
-    <?php break; case "large": default: ?>
-        <div class="col-md-12 sp-top-15">
+    <?php break; case "large": ?>
+        <div class="col-md-9 sp-top-15">
+    <?php break; case "xlarge": default: ?>
+        <div class="col-md-12 sp-top-15">            
     <?php break; endswitch; ?>
         <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
 
