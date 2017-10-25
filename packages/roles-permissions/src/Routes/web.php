@@ -19,13 +19,12 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
 
         Route::get('/roles', ['as' => 'eon.admin.roles', 'uses' => 'RolesController@index']);
         Route::get('/roles/create', ['as' => 'eon.admin.roles.create', 'uses' => 'RolesController@create']);
-        Route::post('/roles/create', ['as' => 'eon.admin.roles.create', 'uses' => 'RolesController@store']);
+        Route::post('/roles/save', ['as' => 'eon.admin.roles.save', 'uses' => 'RolesController@store']);
         Route::get('/roles/{role}', ['as' => 'eon.admin.roles.single', 'uses' => 'RolesController@show']);
         Route::post('/roles/{role}', ['as' => 'eon.admin.roles.single', 'uses' => 'RolesController@update_role']);
-        Route::post('/roles/{role}/delete', ['as' => 'eon.admin.roles.delete', 'uses' => 'RolesController@destroy']);
-        Route::post('/roles/--role--/delete', ['as' => 'eon.admin.roles.delete', 'uses' => 'RolesController@destroy']);
-        Route::post('/roles/{role?}/{permission?}', ['as' => 'eon.admin.roles.permission', 'uses' => 'RolesController@update']);
-        Route::post('/roles/--role--/--permission--', ['as' => 'eon.admin.roles.permission', 'uses' => 'RolesController@update']);
+        Route::delete('/roles/delete/{id}', ['as' => 'eon.admin.roles.delete', 'uses' => 'RolesController@delete']);
+        Route::get('/roles/edit/{id}', ['as' => 'eon.admin.roles.edit', 'uses' => 'RolesController@edit']);
+        Route::post('/roles/update/{id}', ['as' => 'eon.admin.roles.update', 'uses' => 'RolesController@update']);
 
         Route::get('/permissions', ['as' => 'eon.admin.permissions', 'uses' => 'PermissionsController@index']);
         Route::get('/permissions/create', ['as' => 'eon.admin.permissions.create', 'uses' => 'PermissionsController@create']);
@@ -34,7 +33,7 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
         Route::post('/permissions/{permission}', ['as' => 'eon.admin.permissions.single', 'uses' => 'PermissionsController@update']);
         Route::get('/permissions/edit/{id}', ['as' => 'eon.admin.permissions.edit', 'uses' => 'PermissionsController@edit']);
         Route::post('/permissions/update/{id}', ['as' => 'eon.admin.permissions.update', 'uses' => 'PermissionsController@update']);
-        Route::get('/permissions/delete/{id}', ['as' => 'eon.admin.permissions.delete', 'uses' => 'PermissionsController@delete']);
+        Route::delete('/permissions/delete/{id}', ['as' => 'eon.admin.permissions.delete', 'uses' => 'PermissionsController@delete']);
 
         Route::get('/users', ['as' => 'eon.admin.roles.users', 'uses' => 'UsersController@index']);
         Route::get('/users/{user}', ['as' => 'eon.admin.roles.users.single', 'uses' => 'UsersController@show']);
@@ -46,13 +45,13 @@ Route::group(['middleware' => ['web', 'auth', 'administrator'], 'prefix' => '/ad
         Route::post('/metadata-item/save', ['as' => 'eon.admin.metadata-item.save', 'uses' => 'MetadataController@save']);
         Route::get('/metadata-item/edit/{id}', ['as' => 'eon.admin.metadata-item.edit', 'uses' => 'MetadataController@editItem']);
         Route::post('/metadata-item/update/{id}', ['as' => 'eon.admin.metadata-item.update', 'uses' => 'MetadataController@updateItem']);
-        Route::get('/metadata-item/delete/{id}', ['as' => 'eon.admin.metadata-item.delete', 'uses' => 'MetadataController@deleteItem']);
+        Route::delete('/metadata-item/delete/{id}', ['as' => 'eon.admin.metadata-item.delete', 'uses' => 'MetadataController@deleteItem']);
         
         Route::get('/metadata-type', ['as' => 'eon.admin.metadata-type', 'uses' => 'MetadataController@typeIndex']);
         Route::get('/metadata-type/create', ['as' => 'eon.admin.metadata-type.create', 'uses' => 'MetadataController@createType']);
         Route::post('/metadata-type/save', ['as' => 'eon.admin.metadata-type.save', 'uses' => 'MetadataController@saveType']);
         Route::get('/metadata-type/edit/{id}', ['as' => 'eon.admin.metadata-type.edit', 'uses' => 'MetadataController@editType']);
         Route::post('/metadata-type/update/{id}', ['as' => 'eon.admin.metadata-type.update', 'uses' => 'MetadataController@updateType']);
-        Route::get('/metadata-type/delete/{id}', ['as' => 'eon.admin.metadata-type.delete', 'uses' => 'MetadataController@deleteType']);
+        Route::delete('/metadata-type/delete/{id}', ['as' => 'eon.admin.metadata-type.delete', 'uses' => 'MetadataController@deleteType']);
     });
 });

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Models\Course;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class CoursesController extends Controller {
 
@@ -32,5 +34,38 @@ class CoursesController extends Controller {
         ];
 
         return view('lecturer.courses.show', ['createdCourse' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
+    }
+    
+    public function edit(Request $request,$id) {
+        
+        $breadcrumbs = [
+            'title' => 'Modules',
+            'child' => [
+                'title' => 'Edit'
+            ]
+        ];
+        
+        
+            $Course = Course::find($id);
+            
+           return view('lecturer.courses.edit', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs,'course'=>$Course]);
+          
+    }
+    
+    public function update(Request $request,$id) {
+        
+        $validator = Validator::make($request->all(), [
+                    'title' => 'required',                   
+        ]);
+        
+        if ($validator->passes()) {
+            $Course = Course::find($id);
+            $Course->title = $request->get('title');
+            $Course->description = $request->get('description');
+            $Course->tags = $request->get('tags');
+            $Course->save();       
+           return response()->json(['success'=>'Module has been updated successfully.']);
+        }        
+       return response()->json(['error' => $validator->errors()->all()]);      
     }
 }

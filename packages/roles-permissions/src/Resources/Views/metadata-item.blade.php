@@ -167,8 +167,11 @@
             if (r == true) {
                 $.ajax({
                 url: url,
-                type: "GET",
+                type: "DELETE",
                 asyn: false,
+                headers: {
+                        'X-CSRF-Token': _token
+                },
                 success: function (data, textStatus, jqXHR) {
                         if ($.isEmptyObject(data.error)) {
                             $(".modal-info").html("<div class='alert alert-success modal-msg'>"+data.success+"</div>");

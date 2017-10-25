@@ -20,6 +20,7 @@
                         <tr>
                             <th class="col-md-1">#</th>
                             <th class="col-md-5">Title</th>
+                            <th class="col-md-5">Description</th>
                             <th class="col-md-2">Instructor</th>
                             <th class="col-md-2">Actions</th>
                         </tr>
@@ -29,10 +30,12 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $course->title }}</td>
+                                <td>{{ $course->title }}</td>
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
-                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs">Storyline</a>
-                                    <a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs">Notify</a>
+                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs" style="width:60px">Storyline</a>
+                                    <a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>
+                                    <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-primary btn-xs" style="width:60px">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

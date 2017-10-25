@@ -85,6 +85,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
+        Route::get('/edit/{id}', ['as' => 'courses.edit', 'uses' => 'CoursesController@edit']);
+        Route::post('/update/{id}', ['as' => 'courses.update', 'uses' => 'CoursesController@update']);
         //Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
 
 
