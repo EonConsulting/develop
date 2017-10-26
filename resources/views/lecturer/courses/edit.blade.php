@@ -43,7 +43,7 @@ Create a Course
                         <div class="form-group">
                             <div class="col-md-12">
                                 {{ Form::label('tags', 'Tags (Separate by a comma)') }}
-                                {{ Form::textarea('tags', $course->description, array('class' => 'form-control')) }}
+                                {{ Form::text('tags', $course->description, array('class' => 'form-control')) }}
                             </div>
                         </div>
                         <!--<div class="form-group">
