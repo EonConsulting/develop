@@ -31,6 +31,7 @@ class LTIBaseController extends Controller {
      * LTIBaseController constructor.
      */
     public function __construct() {
+        
         if($this->hasLTI) {
             $this->middleware(function ($request, $next) {
 
@@ -86,5 +87,8 @@ class LTIBaseController extends Controller {
             });
         }
     }
+    
+    
+    
 
 }

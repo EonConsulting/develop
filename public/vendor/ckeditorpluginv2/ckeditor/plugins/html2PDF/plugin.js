@@ -1,6 +1,6 @@
 ﻿/**
  * @license Copyright (c) 2017 Peace Ngara. All rights reserved.
- * The Ability to Get Contents of an Editor Instance and Print to PDF
+ * The Ability to Get Contents of an Editor Instance and Print to different Image Types | Screen Capture or PDF
  */
 
 /**
@@ -24,16 +24,16 @@ CKEDITOR.plugins.add( 'html2PDF', {
 
 		// Register the toolbar button.
 		editor.ui.addButton && editor.ui.addButton( 'Html2PDF', {
-			label: 'Save as PDF',
+			label: 'Save Content as PDF',
 			command: pluginName
 			// toolbar: 'document,50'
 		} );
 	}
 } );
-//Execute AJAX Request
+//Perfom a New XML HTTP Request
 CKEDITOR.plugins.html2PDF = {
 	exec: function( editor ) {
-		var urlins = '/html2PDF';
+		var urlins = '/img-processor';
 		CKEDITOR.instances.ltieditorv2inst.updateElement();
 		// var data = editor.$('#ltieditorv2inst').val();
 		CKEDITOR.getFullHTMLContent = function(editor){
@@ -47,15 +47,16 @@ CKEDITOR.plugins.html2PDF = {
 			return cnt;
 		};
 		// var data = editor.value=encodeURIComponent(CKEDITOR.instances.ltieditorv2inst.getData());
-		var rawdata = editor.value=encodeURIComponent(CKEDITOR.getFullHTMLContent(editor));
-
-		var data = editor.dataProcessor.toDataFormat( rawdata );
-
+		//var rawdata = editor.value=encodeURIComponent(CKEDITOR.getFullHTMLContent(editor));
+		//var data = editor.dataProcessor.toDataFormat( rawdata );
+		var data = CKEDITOR.getFullHTMLContent(editor);
 
 		function submit(action, method, values) {
 			var form = $('<form/>', {
 				action: action,
-				method: method
+				method: method,
+				dataType: 'text',
+				contentType: 'application/x-www-form-urlencoded'
 			});
 			$.each(values, function() {
 				form.append($('<input/>', {
@@ -69,7 +70,7 @@ CKEDITOR.plugins.html2PDF = {
 		}
 
 		submit(urlins, 'POST', [
-			{ name: 'data', value: data },
+			{ name: 'content', value: data },
 
 		]);
 	},

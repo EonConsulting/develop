@@ -12,11 +12,12 @@ class AnalyticsLoggerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__.'/routes.php';
-
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->publishes([
             __DIR__.'/assets' => public_path('vendor/analytics-logger'),
-        ], 'public');
+            __DIR__ . '/migrations' => $this->app->databasepath() . '/migrations'], 'migrations');
+
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 
     /**
@@ -26,6 +27,6 @@ class AnalyticsLoggerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->app->make('EONConsulting\AnalyticsLogger\AnalyticsLoggerController');
+        $this->app->make('EONConsulting\AnalyticsLogger\AnalyticsLoggerController');
     }
 }

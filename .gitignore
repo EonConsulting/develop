@@ -15,3 +15,4 @@ _notes/
 /bin
 /npm-debug.log
 /package-lock.json
+/.idea

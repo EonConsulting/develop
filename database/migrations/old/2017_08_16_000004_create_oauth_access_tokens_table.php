@@ -19,23 +19,21 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable($this->set_schema_table)) {
-            Schema::create($this->set_schema_table, function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('id');
-                $table->integer('user_id')->nullable()->default(null);
-                $table->integer('client_id');
-                $table->string('name', 191)->nullable()->default(null);
-                $table->text('scopes')->nullable()->default(null);
-                $table->tinyInteger('revoked');
-                $table->dateTime('expires_at')->nullable()->default(null);
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnodDB';
+            $table->increments('id');
+            $table->integer('user_id')->nullable()->default(null);
+            $table->integer('client_id');
+            $table->string('name', 191)->nullable()->default(null);
+            $table->text('scopes')->nullable()->default(null);
+            $table->tinyInteger('revoked');
+            $table->dateTime('expires_at')->nullable()->default(null);
 
-                $table->index(["client_id"], 'oauth_access_tokens_client_id_index');
+            $table->index(["client_id"], 'oauth_access_tokens_client_id_index');
 
-                $table->index(["user_id"], 'oauth_access_tokens_user_id_index');
-                $table->nullableTimestamps();
-            });
-        }
+            $table->index(["user_id"], 'oauth_access_tokens_user_id_index');
+            $table->nullableTimestamps();
+        });
     }
 
     /**

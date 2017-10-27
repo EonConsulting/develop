@@ -17,7 +17,7 @@ class TestLTIController extends LTIBaseController {
     public function index()
     {
         $domains = laravel_lti()->get_domains();
-        dd($domains);
-//        return view('eon.appstore::store', ['tools' => $domains]);
+       
+      return view('eon.appstore::store', ['tools' => $domains]);
     }
 }

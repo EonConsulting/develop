@@ -18,9 +18,9 @@
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Menu</div>
+                    <div class="panel-heading"><strong>Menu</strong></div>
                     <div class="list-group">
-                        <a href="{{ route('courses.single.storyline', $course->id) }}" class="list-group-item">Storyline</a>
+                        <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="list-group-item">Storyline</a>
                         <a href="{{ route('courses.single.notify', $course->id) }}" class="list-group-item">Notify Users</a>
                         <a href="{{ route('courses.single.content', $course->id) }}" class="list-group-item">Content</a>
                     </div>

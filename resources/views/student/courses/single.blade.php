@@ -71,7 +71,7 @@
                         <?php if($data === null): ?>
                         <span class="btn-course btn-course-view">No Lectures Available</span>
                         <?php else: ?>
-                        <a href="{{ route('lti.courses.single.lectures', $course['id']) }}" class="btn-course btn-course-view">Go to Lectures</a>
+                        <a href="{{ route('storyline2.student.single', $course['id']) }}" class="btn-course btn-course-view">Go to Lectures</a>
                         <?php endif; ?>
                     </div>
                 </div>

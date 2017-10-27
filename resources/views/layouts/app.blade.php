@@ -5,7 +5,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
 
         @include('templates.pagehead')
@@ -28,7 +28,7 @@ $lti = laravel_lti()->is_lti(auth()->user());
                 @include('templates.header')
             </div>
 
-            <div data-simplebar class="content-area">
+            <div data-simplebar class="content-area" id="content-area">
                 <div style="height: 15px;"></div>
                 @yield('content')
             </div>
@@ -40,10 +40,14 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         </div>
 
+        @yield('exterior-content')
         @include('templates.default-scripts')
 
+        @stack('hoisted-scripts')
+        
         @yield('custom-scripts')
 
+       
     </body>
 
 </html>

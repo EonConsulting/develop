@@ -15,10 +15,10 @@ class CreateMetadataStoreTable extends Migration {
         Schema::create('metadata_store', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('metadata_type', 255);
+            $table->integer('metadata_type_id');
             $table->string('description', 255);
-            $table->string('classification', 150)->default('');
-            $table->integer('sequence');
+            $table->string('classification', 150)->nullable();
+            $table->integer('sequence')->nullable();
             $table->timestamps();
         });
     }

@@ -5,9 +5,8 @@
     "license": "MIT",
     "type": "project",
     "minimum-stability": "dev",
-    "homepage": "https://dev.unisaonline.net",
+    "homepage": "http://unisa.local",
     "require": {
-        "php": "7.1.8",
         "IMSGlobal/LTI": "^3.0.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "creativeorange/gravatar": "~1.0",
@@ -52,6 +51,7 @@
             "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
             "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
             "EONConsulting\\Storyline2\\": "packages/storyline2/src",
+            "EONConsulting\\ContentBuilder\\": "packages/content-builder/src",
             "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
             "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src"
         },

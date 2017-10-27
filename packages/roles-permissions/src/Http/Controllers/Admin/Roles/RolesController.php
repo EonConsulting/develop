@@ -14,6 +14,8 @@ use EONConsulting\RolesPermissions\Http\Requests\StoreRoleRequest;
 use EONConsulting\RolesPermissions\Http\Requests\UpdateRoleRequest;
 use EONConsulting\RolesPermissions\Models\Permission;
 use EONConsulting\RolesPermissions\Models\Role;
+use Validator;
+use Symfony\Component\HttpFoundation\Request;
 
 class RolesController extends Controller {
 
@@ -21,9 +23,9 @@ class RolesController extends Controller {
         $roles = Role::with('permissions')->with('users')->get();
 
         $breadcrumbs = [
-            'title' => 'Roles and Permissions',
+            'title' => 'Roles',
             'child' => [
-                'title' => 'Roles',
+                'title' => 'View',
             ]
         ];
 
@@ -50,58 +52,54 @@ class RolesController extends Controller {
     }
 
     public function create() {
-
-        $breadcrumbs = [
-            'title' => 'Roles and Permissions',
-            'child' => [
-                'title' => 'Roles',
-                'href' => route("eon.admin.roles"),
-                'child' => [
-                    'title' => "Create a Role"
-                ]
-            ]
-        ];
-
-        return view('eon.roles::create-role', ['breadcrumbs' => $breadcrumbs]);
+        return view('eon.roles::create-role');
     }
 
     public function store(StoreRoleRequest $request) {
-        $role = new Role;
-        $role->name = $request->name;
-        $role->slug = str_slug($request->name);
+        $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+        ]);
 
-        $role->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function update_role(UpdateRoleRequest $request, Role $role) {
-        $role->name = $request->name;
-        $role->slug = str_slug($request->name);
-
-        $role->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function update(Role $role, Permission $permission) {
-        if($role->hasPermission($permission)) {
-            $role->permissions()->detach($permission);
-        } else {
-            $role->permissions()->attach($permission);
+        if ($validator->passes()) {
+            $Role = new Role([
+                'name' => $request->get('name')
+            ]);
+            
+            $Role->save();
+            return response()->json(['success'=>'Role has been added successfully.']);
         }
 
-        return response()->json(['success' => 'true']);
+        return response()->json(['error' => $validator->errors()->all()]);
+    }
+    
+    public function edit($id) {
+        $Role = Role::find($id);
+        return view('eon.roles::role-edit',['role' => $Role]);
     }
 
-    public function destroy(Role $role) {
-        if($role->users()->count() > 0) {
-            return response()->json(['success' => false, 'error_messages' => 'There are users linked to that role.']);
+    public function update(Request $request,$id) {
+            
+        $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+        ]);
+
+        if ($validator->passes()) {
+            $Role = Role::find($id);
+            $Role->name = $request->get('name');
+            $Role->description = $request->get('description');
+            $Role->save();
+            return response()->json(['success'=>'Role has been updated successfully.']);
         }
 
-        $role->delete();
+        return response()->json(['error' => $validator->errors()->all()]);
+    }
 
-        return response()->json(['success' => true]);
+    public function delete($id) {
+        $Metadata = Role::find($id);
+        if($Metadata->delete()){
+           return response()->json(['success'=>'Role has been delete successfully.']); 
+        }
+        return response()->json(['error' => 'An error occured, please try again.']);
     }
 
 }

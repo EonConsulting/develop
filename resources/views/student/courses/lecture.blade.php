@@ -142,6 +142,8 @@ Lecture
     }
 
 
+
+
 </style>
 @endsection
 
@@ -202,18 +204,61 @@ Lecture
         </div>
         <div class="col-md-9">
             <iframe src="{{ url("")."/".$storyline_item->file_url }}" width="100%" class="composite-embed" id="idIframe" frameBorder="0" style="height: 100%; min-height: 750px;" onload="resizeIframe(this)"></iframe>
-            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
-            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
+            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $previous])}}" class="subtopic-left subtopic-arrow" id="{{$previous}}" course="{{$course->id}}" storyline="{{$navitem->storyline_id}}"><i style="font-size: 24px;" class="fa fa-arrow-left"></i></a>
+            <a href="{{route('lti.courses.single.lectures.item', [$course->id, $next])}}" class="subtopic-right subtopic-arrow pull-right" id="{{$next}}" course="{{$course->id}}" storyline="{{$navitem->storyline_id}}"><i style="font-size: 24px;" class="fa fa-arrow-right"></i></a>
 
         </div>
     </div>
 </div>
 @endsection
 
+@section('exterior-content')
+
+    <div id="errorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Topic Progress Alert</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="error-message">
+                        Please complete current learning objective before moving to the next one. You will now be taken to your furthest progress.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>
+                </div>
+            </div>
+
+        </div>
+    </div>  
+
+@endsection
+
 @section('custom-scripts')
 <script src="{{url('/dist/js/jstree/jstree.min.js')}}"></script>
 {{--<script src='http://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js'></script>--}}
-{{--<script src="{{url('/js/mtree.js')}}"></script>--}}
+
+{{--Analytics--}}
+<script src="{{ url('js/analytics/tincan.js') }}"></script>
+<script>
+    let value = {
+        'endpoint': "{{ url('analytics/log') }}",
+        'username': '{{ auth()->user()->name }}',
+        'actorMbox': '{{ auth()->user()->email }}',
+        'id': '{{ auth()->user()->id }}',
+        'verbId': "{!! url('xapi/activities/course') !!}",
+        'targetId': "{!! Request::url() !!}",
+        'targetObjectType': 'viewed',
+    };
+</script>
+<script src="{{ url('js/analytics/analytics-logger.js') }}"></script>
+
 {{--<script>--}}
 {{--$(document).ready(function() {--}}
 {{--var mtree = $('ul.mtree');--}}
@@ -236,9 +281,10 @@ Lecture
                         }
                     });
                 })
-                jQuery("#navigation").on("click", "li.jstree-node a", function () {
+                /**jQuery("#navigation").on("click", "li.jstree-node a", function () {
                     document.location.href = this;
                 });
+                **/
                 //Add A Class to Open First Item in Tree
                 $('ul.course-nav li:first-child').addClass('jstree-open');
 </script>
@@ -285,7 +331,7 @@ Lecture
         var storyline = $('.prev').attr("storyline");
         var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '/student/progression',
+            url: '{{url('')}}/student/progression',
             type: "POST",
             asyn: false,
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -307,16 +353,18 @@ Lecture
         });
     }
 
-    $(document).ready(function () {
-        $(".jstree-anchor").click(function (e) {
+ $(document).ready(function () {   
+    
+        $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
             e.preventDefault();
+            
             var id = $(this).attr("id");
             var courseId = $(this).attr("course");
             var storyline = $(this).attr("storyline");
             var student = '{{auth()->user()->id}}';
             $.ajax({
-                url: '/student/progression',
+                url: '{{url('')}}/student/progression',
                 type: "POST",
                 asyn: false,
                 data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
@@ -325,11 +373,11 @@ Lecture
                 },
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
-                        alert(data.story);
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                    } else {
-                        alert('Please complete current Learning Objective before moving to the Next one!');
-                        window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    } else if(data.msg === 'error'){
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');                        
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -338,7 +386,87 @@ Lecture
                 }
             });
         });
+        
+
+
+        $(".subtopic-left").click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();            
+            var id = $(this).attr("id");           
+            var courseId = $(this).attr("course");
+            var storyline = $(this).attr("storyline");
+            var student = '{{auth()->user()->id}}';
+            $.ajax({
+                url: '{{url('')}}/student/progression',
+                type: "POST",
+                asyn: false,
+                data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg === 'true') {     
+                        //alert(data.story);
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    } else if(data.msg === 'error'){
+
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    // location.reload();
+                }
+            });
+        });
+      
+      $(".subtopic-right").click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();            
+            var id = $(this).attr("id");           
+            var courseId = $(this).attr("course");
+            var storyline = $(this).attr("storyline");
+            var student = '{{auth()->user()->id}}';
+            $.ajax({
+                url: '{{url('')}}/student/progression',
+                type: "POST",
+                asyn: false,
+                data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
+                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.msg === 'true') {     
+                        //alert(data.story);
+                        window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;
+                    } else if(data.msg === 'error'){
+
+                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //alert('Please complete current Learning Objective before moving to the Next one!');
+                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    // location.reload();
+                }
+            });
+        });
+        
 
     });
+
+    function progress_error(url){
+
+        $(document).on('hide.bs.modal','#errorModal', function () {
+            window.location.href = url;
+        });
+
+        $("#errorModal").modal("show");
+
+    }
+
 </script>
 @endsection

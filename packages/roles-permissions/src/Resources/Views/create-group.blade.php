@@ -39,7 +39,7 @@
                 $('#response').addClass('text-default').removeClass('hidden').removeClass('text-danger').removeClass('text-success').html('<br />Saving...');
 
                 $.ajax({
-                    url: '/admin/groups/create',
+                    url: '{{ route("eon.admin.groups.create") }}',
                     type: 'POST',
                     data: {_token: _token, name: val},
                     success: function(res) {

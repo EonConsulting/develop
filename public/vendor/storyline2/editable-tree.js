@@ -1,52 +1,276 @@
+//add storyline_id: .../json-render/storyline_id
+var tree_id = "#tree";
 
-//console.log(url);
+$(document).ready(function () {
 
-$.getJSON(url,
-    function(data) {
-        console.log(data);
+    refreshTree();
 
-        renderTree(data);
+})
 
-        treeToJSON();
-    }
-);
+function refreshTree() {
+    $.getJSON(url,
+            function (data) {
+                console.log(data);
 
-function renderTree(tree_data) {
-    console.log(tree_data);
+                drawTree(data);
+
+                treeToJSON();
+            }
+    );
+}
+
+
+function drawTree(tree_data) {
+    //console.log(tree_data);
 
     $(tree_id).jstree({
-        "core" : {
-            "animation" : 0,
-            "check_callback" : true,
-            "themes" : { 'name': 'proton', 'icons': false },
-            "data" : tree_data
+        "core": {
+            "animation": 0,
+            "check_callback": true,
+            "themes": {'name': 'proton', 'icons': false},
+            "data": tree_data
         },
-        "plugins" : ["contextmenu","dnd","search","state","types","wholerow"]
+        "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
 }
 
-function treeToJSON(){
 
-    var v = $(tree_id).jstree(true).get_json();
 
-    //TODO: Save to DB using ajax
+function treeToJSON() {
+
+    var v = $(tree_id).jstree(true).get_json('#', {'flat': true});
     console.log(v);
 
 }
 
-//list of events to save after
-var events = [
-    "create_node.jstree",
-    "rename_node.jstree",
-    "delete_node.jstree",
-    "move_node.jstree",
-    "cut.jstree",
-    "paste.jstree"
-];
 
-$.each(events, function(key, value){
-    $(tree_id).on(value, function (e, data) {
-        treeToJSON();
+function import_content($content_id,$item_id,$action){
+
+    console.log("import_content called");
+
+    actionUrl = base_url + "/storyline2/add-item-content/" + $content_id + "/" + $item_id + "/" + $action;
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                $('#importModal').modal('hide');
+
+                var id = data.id;
+
+                console.log(id);
+
+                getContent({"id": id});
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
     });
-});
+
+}
+
+function populateContentForm(data) {
+
+    console.log("populateContentForm called");
+
+    //var course_data = jQuery.parseJSON(data);
+
+    if (data.found == true) {
+
+        $("#content-id").val(data.content.id);
+        $("#content-title").val(data.content.title);
+        $("#content-description").val(data.content.description);
+        $("#content-tags").val(data.content.tags);
+        var body = editor.setData(data.content.body);
+
+        for (index = 0; index < data.categories.length; ++index) {
+            cat_id = "#cat" + data.categories[index].id;
+            console.log(cat_id);
+            $(cat_id).prop('checked', true);
+        }
+
+    }
+
+}
+
+//Get Content
+function getContent(data) {
+
+    console.log("getContent called");
+
+    var item_id = data['id'];
+    console.log(item_id);
+    actionUrl = base_url + "/storyline2/item-content/" + item_id;
+
+    $.ajax({
+        method: "GET",
+        url: actionUrl,
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                populateContentForm(data);
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+
+}
+
+//Create Node
+function createNode(data) {
+    //var node = $.extend(true, {}, data);
+    var actionUrl = base_url + "/storyline2/create";
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        data: JSON.stringify(data),
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (return_data) { //success
+                if (return_data.msg === 'failed') {
+                    alert('Create failed, please try again.');
+                } else {
+
+                    $(tree_id).jstree(true).set_id(data, return_data.id);
+                    $(tree_id).jstree(true).edit(return_data.id);
+                    //data.instance.set_id(node, return_data.id);
+                    //data.instance.edit(return_data.id);
+                }
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+
+
+
+}
+
+//Delete Node
+function deleteNode(data) {
+    var actionUrl = base_url + "/storyline2/delete";
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        data: JSON.stringify(data),
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                if (data.msg === 'failed') {
+                    alert('Rename failed, please try again.');
+                } else {
+                    refreshTree();
+                }
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+
+}
+
+//Move node
+function moveNode(data) {
+    var actionUrl = base_url + "/storyline2/move";
+    //seen = [];
+    var node = data;
+    
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        data: JSON.stringify(node),
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                console.log(data.msg);
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+
+}
+
+//Rename Node
+function renameNode(data) {
+    var actionUrl = base_url + "/storyline2/rename";
+
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        data: JSON.stringify(data),
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                if (data.msg === 'New node') {
+                    alert('Rename failed, please try again.');
+                } else {
+                    refreshTree();
+                }
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+}

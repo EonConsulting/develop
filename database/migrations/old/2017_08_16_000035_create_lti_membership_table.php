@@ -19,23 +19,21 @@ class CreateLtiMembershipTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable($this->set_schema_table)) {
-            Schema::create($this->set_schema_table, function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('membership_id');
-                $table->unsignedInteger('context_id');
-                $table->unsignedInteger('user_id');
-                $table->smallInteger('role')->nullable()->default(null);
-                $table->smallInteger('role_override')->nullable()->default(null);
-                $table->text('json')->nullable()->default(null);
-                $table->unsignedInteger('entity_version')->default('0');
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('membership_id');
+            $table->unsignedInteger('context_id');
+            $table->unsignedInteger('user_id');
+            $table->smallInteger('role')->nullable()->default(null);
+            $table->smallInteger('role_override')->nullable()->default(null);
+            $table->text('json')->nullable()->default(null);
+            $table->unsignedInteger('entity_version')->default('0');
 
-                $table->index(["user_id"], 'lti_membership_ibfk_2');
+            $table->index(["user_id"], 'lti_membership_ibfk_2');
 
-                $table->unique(["context_id", "user_id"], 'context_id');
-                $table->timestamps();
-            });
-        }
+            $table->unique(["context_id", "user_id"], 'context_id');
+            $table->timestamps();
+        });
     }
 
     /**

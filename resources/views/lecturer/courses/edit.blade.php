@@ -1,163 +1,181 @@
 @extends('layouts.app')
 
 @section('page-title')
-    Content Builder - {{ $item->name }}
+Create a Course
 @endsection
 
 @section('custom-styles')
-    {{--    <link href="{{ URL::asset('vendor/ckeditorpluginv2/css/select2.min.css') }}" type="text/css" rel="stylesheet" />--}}
-    <style>
-
-        .cke_button__LTIButton_icon { display:none !important;  }
-        .cke_button__LtiTools_label { display: inline !important }
-
-        body {font-family:arial; background: transparent !important;}
-        .h5, h5 {  font-size: 1.2rem !important;  color:#002a80; }
-        p {  margin-top: 0;  margin-bottom: 1rem;  font-size: 13px;  }
-        .ltickplugin {background: transparent;}
-
-        /* Backgrounds */
-        .unisa-grey     {background: #777777 !important}
-
-        /* Buttons Active */
-
-        .unisa-blue-btn     {background: #172652 !important; border-color: #172652; color:#fff;}
-        .unisa-red-btn      {background: #930010 !important; border-color: #930010; color:#fff;}
-        .unisa-black-btn    {background: #222222 !important; border-color: #222222; color:#fff;}
-        .unisa-orange-btn   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
-        .unisa-grey-btn     {background: #777777 !important; border-color: #777777; color:#fff;}
-
-        /* Borders and Shadows */
-        .unisabdr           {border:1px solid #222222}
-
-        .unisa-blue-btn:hover     {background: #172652 !important; border-color: #172652; color:#fff;}
-        .unisa-red-btn:hover      {background:red;color:#cccccc;}
-        .unisa-black-btn:hover    {background: #222222 !important; border-color: #222222; color:#fff;}
-        .unisa-orange-btn:hover   {background: #F7931D !important; border-color: #F7931D; color:#fff;}
-        .unisa-grey-btn:hover     {background: #777777 !important; border-color: #777777; color:#fff;}
-
-        /* Apps Css */
-        .container{width:100%}
-        .col-xs-3 {width:25%; float:left; position:relative}
-        #app-container {width:100%;}
-        .app-item {padding:10px;}
-        #app-container .app-item .app-contents {background:#fff; border:1px solid #e0e0e0; padding:0px; position: relative;}
-        #app-container .app-item .app-contents .app-logo {padding:10px; border-bottom: 1px dashed #cccccc}
-        #app-container .app-item .app-contents .app-logo img {width:140px; height:70px; border: 0; padding: 0; vertical-align: middle}
-        .img-thumbnail {max-width:100%; display: inline-block; border-radius:0; line-height:1.428571429;}
-        #app-container .app-item .app-contents .app-details{padding:5px 10px;}
-        #app-container .app-item .app-contents .app-details h4 {color:#222222; margin:0; padding:0 0 5px 0; font-size: 12px; text-align:center; border-bottom:1px dashed #cccccc; height:20px;}
-        #app-container .app-item .app-contents .app-details p.app-description {font-size:10px; color: #2e383c; height:38px; overflow: hidden; padding:10px 0}
-    </style>
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
+
+<div class="container-fluid">
+    <div class="row">
+        <form method="POST" id="edit-form" name="frmCreateCourse" class="form-horizontal">
             <div class="col-md-12">
-                <form id="save" method="POST">
-
-                    @if (session('error_message'))
-                        <div class="alert alert-danger">
-                            {{ session('error_message') }}
-                        </div>
-                    @endif
-
-                    @if (session('success_message'))
-                        <div class="alert alert-success">
-                            {{ session('success_message') }}
-                        </div>
-                    @endif
-
-                    @if($errors->count() > 0)
-                        <div class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                            @endforeach
-                        </div>
-                    @endif
-
-                    <label>File Name:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="file_name" placeholder="File name" value="{{ (old('file_name')) ? old('file_name') : $item->name }}"/>
-                        <span class="input-group-addon" id="basic-addon2">.html</span>
+                <div class="dashboard-card shadow">
+                    <div class="dashboard-card-heading">
+                        <label>Course Information</label>
                     </div>
-                    <br />
-                    <label>Content:</label>
-                    <textarea id="ltieditorv2inst" class="ckeditor" name="editor">{!! $html !!}</textarea>
-                    <input type="hidden" id="data" name="data" />
-                    <br />
-                    <button type="button" id="btnsbmit" class="btn">Save Data</button>
-                    {{ csrf_field() }}
-                </form>
+                    <div class="container-fluid">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="metadata_payload" id="metadata_payload" />
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {{ Form::label('title', 'Module Title') }}
+                                {{ Form::hidden('id', $course->id, array('id' => 'form-id')) }}
+                                {{ Form::text('title', $course->title, array('class' => 'form-control')) }}
+                            </div>
+                            <!--<div class="col-md-4">
+                              <label>Module Slug</label>
+                               <div class="input-group">
+                                   <span class="input-group-addon" id="basic-addon3">modules/</span>
+                                   <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled v-model="course_slug">
+                               </div>
+                           </div>-->
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {{ Form::label('description', 'Module Summary') }}
+                                {{ Form::textarea('description', $course->description, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {{ Form::label('tags', 'Tags (Separate by a comma)') }}
+                                {{ Form::text('tags', $course->description, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                          <div class="col-md-4">
+                                <label>Featured Image</label>
+                                <upload-form></upload-form>
+                            </div>
+                        </div>-->
+                        <!-- div class="pull-right">
+                            <input class="btn btn-success" type="submit" value="Submit" />
+                        </div -->
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button class="btn btn-success" id="btnSubmit">Submit</button>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    <!--<div class="row">
+        <div class="col-md-12">
+            <div class="dashboard-card shadow">
+                <div class="dashboard-card-heading">
+                    <label>Meta Information</label>
+                </div>
+                <div class="container-fluid">	
+                    <div class="col-md-4">
+                        <p>Please choose metadata items</p>
+                        <div class="form-group">
+                            <select id="metadata_store_list" size="15" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div id="metadata_forms"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-@endsection
+</div>-->  
+    @endsection
+<div id="msgModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body modal-info">
 
-@section('custom-scripts')
-    <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-    <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('courses') }}" class="btn btn-default">OK</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+    @section('custom-scripts')
+    <!-- lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="{{url('/js/app.js')}}"></script>
     <script>
-        //Dialogue Insertion Point -->
-
-        var config = {
-            extraPlugins: 'dialog',
-            toolbar: [[ 'LTIButton' ]]
-        };
+$(document).ready(function () {
+    $('#login-token').val(window.Laravel.csrfToken);
+});
     </script>
     <script>
-        $(function(){
-
-            var editor = CKEDITOR.replace('ltieditorv2inst', {
-                    extraPlugins: 'ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                    allowedContent: true,
-                    fullPage: true,
-                    mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                    on : {
-                        // maximize the editor on startup
-                        'instanceReady' : function( evt ) {
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset.css')}}');
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/composite-asset-print.css')}}');
-                            this.document.appendStyleSheet(' {{url('/vendor/storyline/core/components/css/materialize.css')}}' );
-                            this.document.appendStyleSheet('{{url('/vendor/storyline/core/components/css/economics.css' )}}');
-                            this.document.appendStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons' );
-                        }
+        $(document).ready(function () {
+            // submit the form after populating the metadata hidden input
+            $("#edit-form").submit(function (e) {
+                e.preventDefault();
+                var id = $("#form-id").val();               
+                var formData = $(this).serialize();
+                var url = '{{ route("courses.update",":id") }}';
+                url = url.replace(':id', id);
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    asyn: false,
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
                     },
-                },
-                config.allowedContent = true
-            );
-
-            editor.config.fullPage = true;
-
-//            CKEDITOR.on('instanceReady',
-//            function (evt) {
-//                var editor = evt.editor;
-//                //editor.execCommand('maximize');
-////                editor.resize("100%", $('#editor-wrapper').height());
-//            });
-
-            {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
-            //            CKEDITOR.instances.ltieditorv2inst.updateElement();
-            //            editor.updateElement();
-
-            //Custom Function to get the Data from the Editor
-            function getData() {
-                return editor.getData();
-            }
-
-            $('#btnsbmit').click(function (event) {
-                var data = getData();
-
-                $('#data').val(JSON.stringify(data));
-
-                console.log(data);
-
-                $('#save').submit();
-
-                console.log(data);
+                    success: function (data, textStatus, jqXHR) {
+                        if ($.isEmptyObject(data.error)) {
+                            $(".modal-info").html("<div class='alert alert-success modal-msg'>" + data.success + "</div>");
+                            modalMsg();
+                        } else {
+                            $(".modal-info").html("<div class='alert alert-danger modal-msg'>" + data.error + "</div>");
+                            modalMsg();
+                        }
+                        $('.btnSubmit').text("Submit");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
+            
+            function printErrorMsg(msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display', 'block');
+            $.each(msg, function (key, value) {
+                $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+            });
+        }
+
+        function printSuccessMsg(msg) {
+            $('.alert-danger').removeClass('alert-danger').addClass('alert-success');
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display', 'block');
+            $(".print-error-msg").find("ul").append('<li>' + msg + '</li>');
+
+        }
+
+        function modalMsg() {
+            $("#msgModal").modal();
+        }
 
         });
     </script>
-@endsection
+    @endsection

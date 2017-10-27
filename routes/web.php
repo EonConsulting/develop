@@ -21,7 +21,7 @@
  */
 Route::get('/', function () {
 //    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-      return view('welcome');
+    return view('welcome');
 });
 
 Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
         Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
         Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
-        Route::get('/create/metadata', ['as' => 'courses.create', 'uses' => 'CreateCourseController@fill_metadata_store']);
+        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']);
         Route::get('/{course}', ['as' => 'courses.single', 'uses' => 'CourseController@show']);
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);
@@ -85,7 +85,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
         Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
-        Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
+        Route::get('/edit/{id}', ['as' => 'courses.edit', 'uses' => 'CoursesController@edit']);
+        Route::post('/update/{id}', ['as' => 'courses.update', 'uses' => 'CoursesController@update']);
+        //Route::get('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@index']);
 
 
         // Feed POst Route from Web Pack
@@ -93,14 +95,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
-
-
-
     });
-    Route::group(['prefix' => '/content', 'namespace' => 'Content'], function() {
-        Route::get('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@index']);
-        Route::post('/builder', ['as' => 'content.builder', 'uses' => 'ContentBuilderController@store']);
-    });
+
 });
 
 /*
@@ -113,6 +109,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
 Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
     Route::group(['namespace' => 'Dashboards'], function() {
         Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
+        Route::match(['get', 'post'], '/lecturer-course-analysis', ['as' => 'lti.dashboards.lecturer-course-analysis', 'uses' => 'DashboardLTIController@lecturer_course_analysis']);
+        Route::match(['get', 'post'], '/lecturer-stud-analysis', ['as' => 'lti.dashboards.lecturer-stud-analysis', 'uses' => 'DashboardLTIController@lecturer_stud_analysis']);
+        Route::match(['get', 'post'], '/lecturer-assess-analysis', ['as' => 'lti.dashboards.lecturer-assess-analysis', 'uses' => 'DashboardLTIController@lecturer_assess_analysis']);
+        Route::match(['get', 'post'], '/mentor-stud-analysis', ['as' => 'lti.dashboards.mentor-stud-analysis', 'uses' => 'DashboardLTIController@mentor_stud_analysis']);
+        Route::match(['get', 'post'], '/mentor-assess-analysis', ['as' => 'lti.dashboards.mentor-assess-analysis', 'uses' => 'DashboardLTIController@mentor_assess_analysis']);
     });
     Route::group(['namespace' => 'Users'], function() {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);

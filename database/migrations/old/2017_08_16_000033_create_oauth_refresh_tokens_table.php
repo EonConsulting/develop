@@ -1,5 +1,4 @@
 <?php
-//namespace App\Database\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,17 +19,15 @@ class CreateOauthRefreshTokensTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable($this->set_schema_table)) {
-            Schema::create($this->set_schema_table, function (Blueprint $table) {
-                $table->engine = 'InnoDB';
-                $table->increments('id');
-                $table->string('access_token_id', 100);
-                $table->tinyInteger('revoked');
-                $table->dateTime('expires_at')->nullable()->default(null);
+        Schema::create($this->set_schema_table, function (Blueprint $table) {
+            $table->engine = 'InnodDB';
+            $table->increments('id');
+            $table->string('access_token_id', 100);
+            $table->tinyInteger('revoked');
+            $table->dateTime('expires_at')->nullable()->default(null);
 
-                $table->index(["access_token_id"], 'oauth_refresh_tokens_access_token_id_index');
-            });
-        }
+            $table->index(["access_token_id"], 'oauth_refresh_tokens_access_token_id_index');
+        });
     }
 
     /**

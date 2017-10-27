@@ -20,6 +20,9 @@ class CreateStudentProgressTable extends Migration
             $table->integer('course_id');
             $table->integer('storyline_id');
             $table->integer('storyline_item_id');
+            $table->integer('current');
+            $table->integer('furthest');
+            $table->integer('root');
             $table->timestamps();           
         });
     }

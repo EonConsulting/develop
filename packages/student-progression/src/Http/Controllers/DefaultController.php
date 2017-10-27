@@ -1,13 +1,10 @@
 <?php
-
 namespace EONConsulting\Student\Progression\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Storyline;
-use App\Models\StorylineItem;
+use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
 
 //use EONConsulting\Storyline\Table\Csv;
@@ -22,31 +19,36 @@ class DefaultController extends LTIBaseController {
     public function storeProgress(Request $request) {
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
-        //$progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
-        $progress = $StudentProgress::whereStudentId($request->get('student'))->orderBy('id', 'asc')->first();
-        if ($progress) {
-            //$level = $this->check_level($StudentProgress,$request);           
-            $topicArray = $this->topics($StorylineItem, $progress->storyline_item_id);
-            $array = array_diff($topicArray, [$progress->storyline_item_id,$request->get('id')]);    
-            $id = array_shift($array);   
-            $id = $this->save_progress($request,$StudentProgress,$id);
-            //$progress = $StudentProgress::whereStorylineItemId($request->get('id'))->first();
-            
-            $story = $id; 
-            
-            $message = 'true';
-    
-        } else {
-            $status = $this->save($StudentProgress, $request);
-            if ($status) {
-                $record = $StudentProgress::find($status)->first();
-                $check = $this->check_record($record, $StorylineItem, $request, $StudentProgress);
-                $message = 'false';
-                $story = $check;
-            } else {
-                $message = 'false';
-                $story = 'null';
+        $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
+        if (!empty($progress->id)) {
+            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
+            $current = $this->save_progress($StudentProgress, $request->get('id'),$progress->id,$ItemArray);
+            $StorylineItem = $StudentProgress::find($progress->id);
+            if($current === 'true'){
+                $message = 'true';                
+                $story = $progress->furthest;
+            }elseif($current === 'current'){
+                $message = 'true';
+                $story = $StorylineItem->current;
+            }elseif($current === 'false'){
+                $message = 'error';
+                $story = $StorylineItem->furthest;
             }
+            
+            else{
+                $message = 'error';
+                $story = $StorylineItem->furthest;
+            }
+            
+        } else {
+            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
+            $ItemId = $this->save($StudentProgress,$StorylineItem, $request,$ItemArray);
+            $progress = $StudentProgress::find($ItemId);
+            
+            $progress->furthest = 2;
+            $progress->save();
+            $message = 'false';
+            $story = $ItemId;
         }
 
         $response = array(
@@ -59,31 +61,55 @@ class DefaultController extends LTIBaseController {
 
     /**
      * 
-     * @param type $request
      * @param type $StudentProgress
-     * @param type $storylineItem
+     * @param type $current
+     * @param type $progressId
+     * @param type $ItemArray
+     * @return string
      */
-    public function save_progress($request, $StudentProgress, $storylineItem) {
-        $level = $this->check_level($StudentProgress, $storylineItem);
-        if($level){
-        return $storylineItem;
-        }else{
-        $StudentProgress->student_id = (int) $request->get('student');
-        $StudentProgress->course_id = (int) $request->get('course');
-        $StudentProgress->storyline_item_id = $storylineItem;
-        $StudentProgress->storyline_id = (int) $request->get('storyline');
-        if($StudentProgress->save()){
-            return $StudentProgress->toryline_item_id;
-        } 
+    public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {    
+
+        $Progress = $StudentProgress::find($progressId);
+        $currentIndex = array_search($current, $ItemArray);        
+        $furthestIndex = array_search($ItemArray[$Progress->furthest], $ItemArray);
+        //$array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
+        //dd($currentIndex,$furthestIndex);
+        if ($currentIndex > $furthestIndex) {
+            return 'false';
+        } elseif($currentIndex == $furthestIndex){ 
+            $Progress->current = $Progress->furthest;
+            end($ItemArray);
+            $lastIndex = key($ItemArray);
+            if($lastIndex === $furthestIndex){
+               $Progress->furthest = $furthestIndex; 
+            }else{
+            $Progress->furthest = $furthestIndex+1; 
+            }
+            $Progress->save();
+            return 'current';
+        }elseif($currentIndex < $furthestIndex){
+         return 'true';   
         }
+        
     }
 
-    public function save($StudentProgress, $request) {
-        $StorylineItem = StorylineItem::whereId($request->get('id'))->first();
+    /**
+     * 
+     * @param type $StudentProgress
+     * @param type $request
+     * @return type
+     */
+    public function save($StudentProgress, $StorylineItem, $request, $ItemArray) {
+        $ItemId = (int) $request->get('id');     
+        $Item = $StorylineItem::find($ItemId);    
+        
         $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_id = (int) $request->get('storyline');
-        $StudentProgress->storyline_item_id = (int) $StorylineItem->id;       
+        $Index = array_search((int) $Item->id, $ItemArray);
+        $StudentProgress->furthest = $Index;
+        $StudentProgress->current = $Index;
+        $StudentProgress->root =  $Index;
         if ($StudentProgress->save()) {
             return $StudentProgress->id;
         }
@@ -96,46 +122,51 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function topics($StorylineItem, $storylineId) {
-        $Item = $StorylineItem::whereId($storylineId)->first();
-
-        foreach ($Item->getDescendantsAndSelf() as $descendant) {
-            $children[] = $descendant->id;
+        $result = $this->items_to_tree(Storyline::find($storylineId)->items);
+        usort($result, [$this, "self::compare"]);
+        
+        foreach ($result as $descendant) {
+            $children[] = $descendant['id'];           
         }
-        return $children;
+   
+     return  $children;
+ 
+    
     }
-
+    
     /**
-     * 
-     * @param type $level
-     * @param type $plusOne
-     * @param type $row
-     * @param type $request
-     * @param type $StudentProgress
-     * @param type $storyId
+     *
+     * @param type $items
      * @return type
      */
-    public function check_level($StudentProgress,$id) {
-        $progress = $StudentProgress::whereStorylineItemId($id)->first();
-        
-        return $progress;
-    }
+    public function items_to_tree($items) {
 
+        $map = [];
+
+        foreach ($items as $k => $node) {
+
+            $map[] = [
+                'id' => (string) $node['id'],
+                'text' => $node['name'],
+                'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
+                'rgt' => $node['_rgt'],
+                'lft' => $node['_lft']
+            ];
+        }
+
+        return $map;
+    }
+    
     /**
      * 
-     * @param type $record
-     * @param type $StorylineItem
-     * @param type $request
-     * @param type $StudentProgress
-     * @return string
+     * @param type $a
+     * @param type $b
+     * @return int
      */
-    public function check_record($record, $StorylineItem, $request, $StudentProgress) {
-        if ($record) {
-            $topicArray = $this->topics($StorylineItem, $record->storyline_item_id);
-            //dd($topicArray[0]);
-            //$this->save_progress($request, $StudentProgress, $topicArray[0]);
-
-            return $topicArray[0];
-        }
+    
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
 }

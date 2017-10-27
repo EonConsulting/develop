@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models;
+use App\Models\Course;
+use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,18 +21,29 @@ class CreateCourseController extends Controller {
             ],
         ];
 
-        return view('lecturer.courses.create', [ 'breadcrumbs' => $breadcrumbs ]);
+        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
     }
 
     public function store(Request $request) {
-        // get course info
         $title = $request->get('title', '');
         $description = $request->get('description', '');
         $tags = $request->get('tags', '');
         $featured_images = $request->file('featured_image');
+        $course = new Course;
+
+        $course->title = $title;
+        $course->description = $description;
+        $course->tags = $tags;
+        $course->creator_id = $request->user()->id;
+
+        $course->save();
+
+        session()->flash('success_message', 'Course saved.');
+        return redirect()->route('courses');
 
         // put all the metadata
-        $meta_array = [
+        // MH: to implement after storyline2 rewrite
+        /*$meta_array = [
             array(
                 "lk_table" => "lk_qualification_type",
                 "lk_table_id" => $request->get("qualification_type", 0)
@@ -111,16 +123,24 @@ class CreateCourseController extends Controller {
 
             session()->flash('error_message', 'Unable to save course, please try again');
             return redirect()->route('courses');
-        }
+        } */
     }
-    
-    public function fill_metadata_store(Request $request)
-    {
-        // get the metadata store array
-        $metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
-        //$all_metadata_types = array_column($metadata_store, 'metadata_type');
-        //$metadata_types = array_unique($all_metadata_types);
-        return response()->json($metadata_store);
+
+    public function fill_metadata_store(Request $request) {
+
+        if ($request->ajax()) {
+            // which entities should we use?
+            $entities = $request->input('entities');
+            // get the metadata store array
+            //$metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
+            $metadata_store = MetadataStore::where('entities', 'like', '%' . $entities . '%')
+               ->orderBy('metadata_type', 'ASC')
+               ->get();
+            //$all_metadata_types = array_column($metadata_store, 'metadata_type');
+            //$metadata_types = array_unique($all_metadata_types);
+            //dd(DB::getQueryLog());
+            return response()->json($metadata_store);
+        }
     }
 
 }
