@@ -11,12 +11,11 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
 class ElasticSearchSetup implements ShouldQueue {
+    
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     // how many times the job should be retried
     public $tries = 1;
-    protected $courses_map;
-    protected $content_map;
-    protected $settings;
 
     /**
      * Create a new job instance.
@@ -24,8 +23,22 @@ class ElasticSearchSetup implements ShouldQueue {
      * @return void
      */
     public function __construct() {
-        // init vars
-        $this->courses_map = [
+        
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle() {
+        $this->setupCourseIndex();
+        $this->setupContentIndex();
+    }
+    
+    function setupCourseIndex()
+    {
+        $courses_map = [
             "courses" => [
                 "dynamic" => "true",
                 "properties" => [
@@ -46,8 +59,32 @@ class ElasticSearchSetup implements ShouldQueue {
                 ]
             ]
         ];
-
-        $this->content_map = [
+        
+        $settings = [
+            "analysis" => [
+                "filter" => [
+                    "type" => "edge_ngram", //edge_ngram or ngram
+                    "min_gram" => 3,
+                    "max_gram" => 20
+                ],
+                "analyzer" => [
+                    "autocomplete" => [
+                        "type" => "custom",
+                        "tokenizer" => "standard",
+                        "filter" => [
+                            "lowercase",
+                            "autocomplete_filter"
+                        ]
+                    ]
+                ]
+            ],
+            "mappings" => $courses_map
+        ];
+    }
+    
+    function setupContentIndex()
+    {
+        $content_map = [
             "content" => [
                 "dynamic" => "true",
                 "properties" => [
@@ -75,8 +112,8 @@ class ElasticSearchSetup implements ShouldQueue {
                 ]
             ]
         ];
-
-        $this->settings = [
+        
+        $settings = [
             "analysis" => [
                 "filter" => [
                     "type" => "edge_ngram", //edge_ngram or ngram
@@ -94,18 +131,8 @@ class ElasticSearchSetup implements ShouldQueue {
                     ]
                 ]
             ],
-            "mappings" => $this->mappings
+            "mappings" => $content_map
         ];
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle() {
-        echo "test";
-        //ProcessPodcast::dispatch($podcast);
     }
     
     public function failed(Exception $exception)

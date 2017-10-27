@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Jobs;
+use App\Jobs\ElasticSearchSetup;
 
 class RunJob extends Command
 {

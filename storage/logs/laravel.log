@@ -24,3 +24,103 @@ Stack trace:
 #2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #3 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #4 {main}  
+[2017-10-27 07:34:30] local.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "jobs" is not defined. in C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php:615
+Stack trace:
+#0 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(212): Symfony\Component\Console\Application->find('jobs')
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  
+[2017-10-27 07:36:28] local.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "jobs" is not defined.
+
+Did you mean this?
+    jobs:runjob in C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php:615
+Stack trace:
+#0 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(212): Symfony\Component\Console\Application->find('jobs')
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  
+[2017-10-27 07:37:17] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'App\Console\Commands\ElasticSearchSetup' not found in C:\Users\michael\Documents\projects\eon\src\eContent\app\Console\Commands\RunJob.php:44
+Stack trace:
+#0 [internal function]: App\Console\Commands\RunJob->handle()
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(29): call_user_func_array(Array, Array)
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(182): Illuminate\Container\Container->call(Array)
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Command\Command.php(274): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(952): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#9 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(231): Symfony\Component\Console\Application->doRunCommand(Object(App\Console\Commands\RunJob), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#10 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 {main}  
+[2017-10-27 07:38:02] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Call to undefined method App\Jobs\ElasticSearchSetup::dispatch() in C:\Users\michael\Documents\projects\eon\src\eContent\app\Console\Commands\RunJob.php:44
+Stack trace:
+#0 [internal function]: App\Console\Commands\RunJob->handle()
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(29): call_user_func_array(Array, Array)
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(182): Illuminate\Container\Container->call(Array)
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Command\Command.php(274): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(952): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#9 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(231): Symfony\Component\Console\Application->doRunCommand(Object(App\Console\Commands\RunJob), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#10 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 {main}  
+[2017-10-27 07:39:03] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Call to undefined method App\Jobs\ElasticSearchSetup::dispatch() in C:\Users\michael\Documents\projects\eon\src\eContent\app\Console\Commands\RunJob.php:45
+Stack trace:
+#0 [internal function]: App\Console\Commands\RunJob->handle()
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(29): call_user_func_array(Array, Array)
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(182): Illuminate\Container\Container->call(Array)
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Command\Command.php(274): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(952): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#9 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(231): Symfony\Component\Console\Application->doRunCommand(Object(App\Console\Commands\RunJob), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#10 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 {main}  
+[2017-10-27 07:39:33] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Call to undefined method App\Jobs\ElasticSearchSetup::dispatch() in C:\Users\michael\Documents\projects\eon\src\eContent\app\Console\Commands\RunJob.php:45
+Stack trace:
+#0 [internal function]: App\Console\Commands\RunJob->handle()
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(29): call_user_func_array(Array, Array)
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#3 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(182): Illuminate\Container\Container->call(Array)
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Command\Command.php(274): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(952): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#9 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(231): Symfony\Component\Console\Application->doRunCommand(Object(App\Console\Commands\RunJob), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#10 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 {main}  
+[2017-10-27 07:42:25] local.ERROR: ErrorException: Undefined property: App\Jobs\ElasticSearchSetup::$mappings in C:\Users\michael\Documents\projects\eon\src\eContent\app\Jobs\ElasticSearchSetup.php:99
+Stack trace:
+#0 C:\Users\michael\Documents\projects\eon\src\eContent\app\Jobs\ElasticSearchSetup.php(99): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(8, 'Undefined prope...', 'C:\\Users\\michae...', 99, Array)
+#1 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Bus\Dispatchable.php(14): App\Jobs\ElasticSearchSetup->__construct()
+#2 C:\Users\michael\Documents\projects\eon\src\eContent\app\Console\Commands\RunJob.php(44): App\Jobs\ElasticSearchSetup::dispatch()
+#3 [internal function]: App\Console\Commands\RunJob->handle()
+#4 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(29): call_user_func_array(Array, Array)
+#5 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(87): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#6 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(31): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Array, Object(Closure))
+#7 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Container\Container.php(539): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Array, Array, NULL)
+#8 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(182): Illuminate\Container\Container->call(Array)
+#9 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Command\Command.php(274): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#10 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Console\Command.php(167): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#11 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(952): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(231): Symfony\Component\Console\Application->doRunCommand(Object(App\Console\Commands\RunJob), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\symfony\console\Application.php(132): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#14 C:\Users\michael\Documents\projects\eon\src\eContent\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(122): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#15 C:\Users\michael\Documents\projects\eon\src\eContent\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#16 {main}  
