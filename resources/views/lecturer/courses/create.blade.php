@@ -19,11 +19,13 @@ Create a Course
                     </div>
                     <div class="container-fluid">
                         {{ csrf_field() }}
-                        <input type="hidden" name="metadata_payload" id="metadata_payload" />
-                        <div class="form-group">
+                        <!--<input type="hidden" name="metadata_payload" id="metadata_payload" />-->
+                        <br>
+                        <div class="error-info"></div>
+                        <div class="form-group">                           
                             <div class="col-md-12">
-                                <label>Module Title</label>
-                                <input type="text" class="form-control" placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
+                                <label>Module Title</label>                                
+                                <input type="text" class="form-control"  placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
                             </div>
                             <!--<div class="col-md-4">
                               <label>Module Slug</label>
@@ -39,10 +41,11 @@ Create a Course
                                 <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label>Tags <small>(Separate by a comma)</small></label>
-                                <input type="text" class="form-control tags"/>
+                                <input type="text" class="form-control tags" name="tags"/>
                             </div>
                         </div>
                         <!--<div class="form-group">
@@ -57,7 +60,7 @@ Create a Course
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button class="btn btn-success" id="btnSubmit">Submit</button>
+                                <button type="submit" class="btn btn-success btnSubmit">Submit</button>
                             </div>
                         </div>
                         <br>
@@ -68,128 +71,171 @@ Create a Course
 
         </form>
     </div>
-
-    <!--<div class="row">
-        <div class="col-md-12">
-            <div class="dashboard-card shadow">
-                <div class="dashboard-card-heading">
-                    <label>Meta Information</label>
-                </div>
-                <div class="container-fluid">	
-                    <div class="col-md-4">
-                        <p>Please choose metadata items</p>
-                        <div class="form-group">
-                            <select id="metadata_store_list" size="15" class="form-control">
-                            </select>
-                        </div>
+</div>
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="dashboard-card shadow">
+            <div class="dashboard-card-heading">
+                <label>Meta Information</label>
+            </div>
+            <div class="container-fluid">	
+                <div class="col-md-4">
+                    <p>Please choose metadata items</p>
+                    <div class="form-group">
+                        <select id="metadata_store_list" size="15" class="form-control">
+                        </select>
                     </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <div id="metadata_forms"></div>
-                        </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div id="metadata_forms"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>-->
+@section('exterior-content')
+<div id="metadataModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form id="saveMetadata" action="{{ route('eon.admin.metadata-item.save') }}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title meta-title"></h4>
+                </div>
 
-    @endsection
+                <div class="modal-body">
+                    <div class="metamsg-info"></div> 
+                    <div class="form-group">
+                        {{ Form::label('metadata_type_id', 'Metadata Type') }}   
+                        {{ Form::select('metadata_type_id', $metadataType, null, array('placeholder' => 'Please select ...','class' => 'form-control metadata-ch')) }}
+                        {{ Form::hidden('course_id',null,array('id' => 'course-id'))}}
+                    </div>
+                        
+                    <div class="form-group metadata-list">
+                       
+                    </div>
+                </div>
 
-    @section('custom-scripts')
-    <!-- lodash -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-    <script src="{{url('/js/app.js')}}"></script>
-    <script>
-$(document).ready(function () {
-    $('#login-token').val(window.Laravel.csrfToken);
-});
-    </script>
-    <script>
-        $(document).ready(function () {
-            // some vars for re-use
-            var dataSet = null;
-            var metaSet = [];
+                <div class="modal-footer meta-footer">
+                    <button type="submit" class="btn btn-success meta-submit">Submit</button>   
+                </div>
+                {{ csrf_field() }}
+            </form>
+        </div>
+    </div>
+</div>   
+<!-- Modal -->
+<div id="msgModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body modal-info">
+                
 
-            // main ajax method for select
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@endsection
+@endsection
+
+@section('custom-scripts')
+<!-- lodash -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>-->
+<!--<script src="{{url('/js/app.js')}}"></script>-->
+<script>
+    $(document).ready(function () {
+        $("#frmCreateCourse").submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            var url = '{{ route("courses.create") }}';
             $.ajax({
-                method: "GET",
-                url: global_conf.subdir + '/lecturer/courses/create/metadata',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                url: url,
+                type: "POST",
+                asyn: false,
+                data: formData,
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
                 },
-                data: {
-                    "entities": "storyline"
-                },
-                statusCode: {
-                    200: function (data) {
-                        dataSet = data;
-                        console.log(dataSet);
-                        // using lodash to get the metadata types
-                        var mtypes = _.groupBy(data, "metadata_type");
-                        $.each(mtypes, function (idx, obj) {
-                            var option = new Option(idx, obj.metadata_type);
-                            $("#metadata_store_list").append($(option));
-                        });
-                    },
-                    400: function () {
-                    },
-                    500: function () {
+                success: function (data, textStatus, jqXHR) {
+                    if ($.isEmptyObject(data.error)) {
+                        $("#metadataModal").modal();
+                        $("#course-id").val(data.course);
+                    } else {
+                        $(".error-info").html("<div class='alert alert-danger alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.error + "</div>");
                     }
+                    $('.btnSubmit').text("Submit");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
                 }
-            }).error(function (data) {
-            });
-
-            // and now some magic when u click on the select
-            $("#metadata_store_list").on("change", function () {
-                buildForm($(this).val());
-            });
-
-            // re-usable form builder
-            function buildForm(mtype)
-            {
-                var form = $("#metadata_forms");
-                form.html('');
-                form.append('<form id="metadata_form_body" class="form-horizontal">');
-
-                var fields = _.filter(dataSet, _.iteratee({'metadata_type': mtype}));
-                $.each(fields, function (idx, obj) {
-                    form.append('<div class="form-group">'
-                            + '<label for="check_' + obj.id + '" >' + obj.description + '</label>'
-                            + '<input type="checkbox" data-id="' + obj.id + '" class="form-control" id="meta_check_' + obj.id + '" >'
-                            + '<input type="text" data-id="' + obj.id + '" class="form-control" id="meta_value_' + obj.id + '" >'
-                            + '</div>');
-                });
-
-                form.append('</form>');
-
-                // bind the click events on all checkboxes
-                $("input[id^='meta_check_']").on("click", function () {
-                    var self = $(this);
-                    var id = self.data("id");
-                    if (self.prop("checked")) {
-                        // set the object checkbox and value in case someone dbl-checks
-                        var value = $("input[id^='meta_value_" + id + "']").val();
-                        metaSet.push({"id": id, "value": value});
-                    } else
-                    {
-                        _.pullAllBy(metaSet, [{"id": id}], "id");
-                    }
-
-                    console.log(metaSet);
-                });
-                // bind the change event on all input texts
-                $("input[id^='meta_value_']").on("change", function () {
-                    alert("value input changed");
-                });
-            }
-
-            // submit the form after populating the metadata hidden input
-            $("#btnSubmit").on("click", function () {
-                // stringify the payload and json_decode on server side
-                $("#metadata_payload").val(JSON.stringify(metaSet));
-                $("#frmCreateCourse").submit();
             });
         });
-    </script>
-    @endsection
+        
+        $(".metadata-ch").change(function () {
+            var id = $(this).val();
+            var url = '{{ route("metadata.list",":id") }}';
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                type: "GET",
+                asyn: false,
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                   $(".metadata-list").html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
+                }
+            });
+        });
+        
+        $("#saveMetadata").submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            var url = '{{ route("courses.storemetadata") }}';
+            $.ajax({
+                url: url,
+                type: "POST",
+                asyn: false,
+                data: formData,
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if(data.success){
+                      $(".metamsg-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                        $('.meta-footer').html("<a href='{{ route('courses.show') }}' class='btn btn-default'>OK</a>");
+                       } else{
+                      $(".metamsg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
+                      $('.btnSubmit').text("Submit");
+                    }
+                    
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
+                }
+            });
+        });
+    });
+</script>
+
+@endsection

@@ -1,5 +1,5 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
 @section('custom-styles')
 <link rel="stylesheet" type="text/css" href="/vendor/roles/css/font-awesome.css" />
 @endsection
@@ -275,41 +275,6 @@
             $("#msgModal").modal();
         }
 
-        $('.clickable-row').on('click', '.remove-group', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var role_id = $(this).data('roleid');
-
-            var url = '{{ route('eon.admin.roles.delete') }}';
-            url = url.replace('--role--', role_id);
-
-            $('.clickable-row[data-roleid="' + role_id + '"]').hide();
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {_token: _token},
-                success: function (res) {
-                    console.log('res', res);
-                    if (res.hasOwnProperty('success')) {
-                        if (res.success) {
-                            $('.clickable-row[data-roleid="' + role_id + '"]').remove();
-                        } else {
-                            $('.clickable-row[data-roleid="' + role_id + '"]').hide();
-                            alert(res.error_messages);
-                        }
-                    }
-                },
-                error: function (res) {
-                    console.log('res', res);
-                    $('.clickable-row[data-roleid="' + role_id + '"]').hide();
-                }
-            });
-        });
-
-        $(".clickable-row").click(function () {
-            window.document.location = $(this).data("href");
-        });
     });
     
     function search() {
