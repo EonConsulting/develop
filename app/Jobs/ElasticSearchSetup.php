@@ -5,14 +5,18 @@ namespace App\Jobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
 class ElasticSearchSetup implements ShouldQueue {
-    
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    use Dispatchable,
+        InteractsWithQueue,
+        Queueable,
+        SerializesModels;
 
     // how many times the job should be retried
     public $tries = 1;
@@ -33,11 +37,10 @@ class ElasticSearchSetup implements ShouldQueue {
      */
     public function handle() {
         $this->setupCourseIndex();
-        $this->setupContentIndex();
+        //$this->setupContentIndex();
     }
-    
-    function setupCourseIndex()
-    {
+
+    function setupCourseIndex() {
         $courses_map = [
             "courses" => [
                 "dynamic" => "true",
@@ -59,7 +62,7 @@ class ElasticSearchSetup implements ShouldQueue {
                 ]
             ]
         ];
-        
+
         $settings = [
             "analysis" => [
                 "filter" => [
@@ -80,10 +83,35 @@ class ElasticSearchSetup implements ShouldQueue {
             ],
             "mappings" => $courses_map
         ];
+
+        // create re-usable client
+        $indexname = "courses";
+        $client = new Client(); // GuzzleHttp\Client
+        
+        // just drop the index in ES in-case it exists
+        $response = $client->delete(config('app.es_uri') . "/" . $indexname);
+        switch ($reponse->getStatusCode()) {
+            case "200":
+                Log::info("DELETE of index " . $course . " successful");
+                break;
+            default:
+                Log::error("DELETE of index " . $course . " failed");
+                break;
+        }
+
+        // now create the index from scratch
+        $result = $client->put(config('app.es_uri' . "/" . $indexname), $settings);
+        switch ($response->getStatusCode())
+        {
+            case "200":
+                Log::info("PUT of index " . $course . " successful");
+            default:
+                Log::error("PUT of index " . $course . " failed");
+                break;
+        }
     }
-    
-    function setupContentIndex()
-    {
+
+    function setupContentIndex() {
         $content_map = [
             "content" => [
                 "dynamic" => "true",
@@ -112,7 +140,7 @@ class ElasticSearchSetup implements ShouldQueue {
                 ]
             ]
         ];
-        
+
         $settings = [
             "analysis" => [
                 "filter" => [
@@ -134,10 +162,9 @@ class ElasticSearchSetup implements ShouldQueue {
             "mappings" => $content_map
         ];
     }
-    
-    public function failed(Exception $exception)
-    {
-        // Send user notification of failure, etc...
+
+    public function failed(\Exception $exception) {
+        Log::critical("Job has failed: " . $exception->getMessage());
     }
 
 }
