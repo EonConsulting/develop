@@ -4,7 +4,7 @@
 
 <div class="form-group">
     {{ Form::label('metadata_type_id', 'Metadata Type') }}   
-    {{ Form::select('metadata_type_id', $metadataType, null, array('placeholder' => 'Please select ...','class' => 'form-control')) }}
+    {{ Form::select('metadata_type_id', $metadataType, null, array('placeholder' => 'Please select ...','class' => 'form-control metadata-ch')) }}
 </div>
 
 <div class="form-group">

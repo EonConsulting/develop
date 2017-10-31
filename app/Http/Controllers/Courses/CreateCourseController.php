@@ -8,6 +8,9 @@ use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\MetadataType;
+use App\Models\CourseMetadata;
+use Validator;
 
 class CreateCourseController extends Controller {
 
@@ -20,110 +23,60 @@ class CreateCourseController extends Controller {
                 'title' => 'Create a Module',
             ],
         ];
+        
+        
+        $metadataType = MetadataType::pluck('description', 'id');
 
-        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
+        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs,'metadataType'=>$metadataType]);
     }
 
     public function store(Request $request) {
-        $title = $request->get('title', '');
-        $description = $request->get('description', '');
-        $tags = $request->get('tags', '');
-        $featured_images = $request->file('featured_image');
-        $course = new Course;
+        $validator = Validator::make($request->all(), [
+                    'title' => 'required',
+        ]);
 
-        $course->title = $title;
-        $course->description = $description;
-        $course->tags = $tags;
-        $course->creator_id = $request->user()->id;
+        if ($validator->passes()) {
+            $Course = new Course([
+                'title' => $request->get('title'),
+                'description' => $request->get('description'),
+                'tags' => $request->get('tags'),         
+                'creator_id' => auth()->user()->id,    
+            ]);
+            
+            $Course->save();
+            return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
+        }
 
-        $course->save();
-
-        session()->flash('success_message', 'Course saved.');
-        return redirect()->route('courses');
-
-        // put all the metadata
-        // MH: to implement after storyline2 rewrite
-        /*$meta_array = [
-            array(
-                "lk_table" => "lk_qualification_type",
-                "lk_table_id" => $request->get("qualification_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_content_difficulty_type",
-                "lk_table_id" => $request->get("content_difficulty_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_pedagogical_type",
-                "lk_table_id" => $request->get("pedagogical_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_discipline_type",
-                "lk_table_id" => $request->get("discipline_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_duration_type",
-                "lk_table_id" => $request->get("duration_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_college_type",
-                "lk_table_id" => $request->get("college_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_school_type",
-                "lk_table_id" => $request->get("school_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_department_type",
-                "lk_table_id" => $request->get("department_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_centre_type",
-                "lk_table_id" => $request->get("centre_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_institute_type",
-                "lk_table_id" => $request->get("institute_type", 0)
-            ),
-        ];
-
-        // begin transaction
-        try {
-            DB::beginTransaction();
-
-            // create course
-            $course = new Course;
-            $course->title = $title;
-            $course->description = $description;
-            $course->tags = $tags;
-            $course->creator_id = $request->user()->id;
-            $course->save();
-
-            if ($course->id > 0) {
-                foreach ($meta_array as $m) {
-                    // check whether it is not 0 so we can save it
-                    if ($m["lk_table_id"] > 0) {
-                        // set course_id and re-use object
-                        $metadata = new StorylineMetadata;
-                        $metadata->course_id = $course->id;
-                        $metadata->lk_table = $m["lk_table"];
-                        $metadata->lk_table_id = $m["lk_table_id"];
-                        $metadata->save();
-                    }
-                }
+        return response()->json(['error' => $validator->errors()->all()]);
+    }
+    
+    public function metadatalist($id) {
+        
+        $Metadata = MetadataStore::where('metadata_type_id', $id)->get();
+        $MetaId = MetadataStore::pluck('id')->all();
+       
+        return view('lecturer.courses.metadatalist',['metaStore' => $Metadata,'MetaId'=>$MetaId]);
+        
+    }
+    
+    public function storemetadata(Request $request) {
+            
+            foreach($request->get('metadata_store_id') as $selected_id){
+                $Metadata = [
+                'course_id' => $request->get('course_id'),
+                'metadata_store_id' => (int) $selected_id,
+                'value' => $request->get('value'),             
+                ];
+                
+               $status = new CourseMetadata($Metadata);
+               $check = $status->save();
             }
-            // transaction successful.
-            DB::commit();
-
-            session()->flash('success_message', 'Course saved.');
-            return redirect()->route('courses');
-        } catch (\Exception $e) {
-
-            // transaction failed.
-            DB::rollback();
-
-            session()->flash('error_message', 'Unable to save course, please try again');
-            return redirect()->route('courses');
-        } */
+      
+            if($check){
+            return response()->json(['success'=>'Metadata has been added successfully.']);            
+            }
+            
+         return response()->json(['error' => 'An error occured, pleas try again']);       
     }
 
     public function fill_metadata_store(Request $request) {
@@ -142,5 +95,7 @@ class CreateCourseController extends Controller {
             return response()->json($metadata_store);
         }
     }
+    
+    
 
 }

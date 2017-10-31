@@ -102,5 +102,3 @@ Student Dashboard
     @include('dashboards.widgets.timeline', ['size' => 'large'])
 
 @endsection
-
-    
