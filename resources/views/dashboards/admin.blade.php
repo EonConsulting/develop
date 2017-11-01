@@ -77,17 +77,10 @@ Administrator Dashboard
     <div class="row">
 
         <div class="col-md-12 sp-top-15">
-            <div class="dashboard-card shadow top-bdr-4">
-
-                <div class="dashboard-card-heading">
-                    System Analytics
-                </div>
-
-                <div class="basic-clearfix">
-                    <div class="progress-charts basic-clearfix">
-                        <div class="container-fluid">
-                            <iframe src="https://dev.unisaonline.net/piwik/" height="768" width="1280"></iframe>
-                        </div>
+            <div class="basic-clearfix">
+                <div class="progress-charts basic-clearfix">
+                    <div class="container-fluid">
+                        <iframe src="https://dev.unisaonline.net/piwik/" height="768" width="1280"></iframe>
                     </div>
                 </div>
             </div>
