@@ -48,7 +48,7 @@ class DashboardLTIController extends LTIBaseController {
                 return view('dashboards.mentor-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
                 break;
             default:
-                echo "Your favorite color is neither red, blue, nor green!";
+                echo "Your user roles are not recognized by eContent LTI";
         }
     }
 

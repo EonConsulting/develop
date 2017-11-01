@@ -14,16 +14,12 @@
                 Student Assessment
             </div>
 
-            <div class="basic-clearfix">
-                <div class="progress-charts basic-clearfix">
-                    <div class="container-fluid">
-
-                        <div class="container-fluid" id="student-assessment-container" style="height: 400px; padding:20px">
-                            <canvas id="student-assessment"></canvas>
-                        </div>
-                    </div>
+            <div class="progress-charts basic-clearfix">
+                <div class="container-fluid" id="student-assessment-container" style="height: 400px; width:400px; padding:20px">
+                    <canvas id="student-assessment"></canvas>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
