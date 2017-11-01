@@ -10,7 +10,7 @@ class MetadataTypeSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $table = "metadata_store";
+        $table = "metadata_types";
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table($table)->truncate();
