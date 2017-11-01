@@ -129,13 +129,6 @@ class MetadataTypeSeeder extends Seeder {
 
         DB::table($table)->insert(
                 [
-                    'name' => 'Costing Type',
-                    'description' => 'Costing Type'
-                ]
-        );
-
-        DB::table($table)->insert(
-                [
                     'name' => 'Coverage Type',
                     'description' => 'Coverage Type'
                 ]
@@ -371,13 +364,6 @@ class MetadataTypeSeeder extends Seeder {
                 [
                     'name' => 'Term Cycle Type',
                     'description' => 'Term Cycle Type'
-                ]
-        );
-
-        DB::table($table)->insert(
-                [
-                    'name' => 'Unit Type',
-                    'description' => 'Unit Type'
                 ]
         );
 
