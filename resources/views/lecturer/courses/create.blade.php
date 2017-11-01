@@ -11,9 +11,17 @@ Create a Course
 
 <div class="container-fluid">
     <div class="row">
-        <form method="POST" id="frmCreateCourse" name="frmCreateCourse" class="form-horizontal">
+        <form method="POST" id="frmCreateCourse" action="{{ route('courses.create') }}" name="frmCreateCourse" class="form-horizontal">
             <div class="col-md-12">
                 <div class="dashboard-card shadow">
+                    <div class="flash-message">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+
+                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                        @endif
+                        @endforeach
+                    </div> <!-- end .flash-message -->
                     <div class="dashboard-card-heading">
                         <label>Course Information</label>
                     </div>
@@ -114,9 +122,9 @@ Create a Course
                         {{ Form::select('metadata_type_id', $metadataType, null, array('placeholder' => 'Please select ...','class' => 'form-control metadata-ch')) }}
                         {{ Form::hidden('course_id',null,array('id' => 'course-id'))}}
                     </div>
-                        
+
                     <div class="form-group metadata-list">
-                       
+
                     </div>
                 </div>
 
@@ -138,7 +146,7 @@ Create a Course
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body modal-info">
-                
+
 
             </div>
             <div class="modal-footer">
@@ -158,7 +166,7 @@ Create a Course
 <!--<script src="{{url('/js/app.js')}}"></script>-->
 <script>
     $(document).ready(function () {
-        $("#frmCreateCourse").submit(function (event) {
+        $("#frmCreateCours").submit(function (event) {
             event.preventDefault();
             var formData = $(this).serialize();
             var url = '{{ route("courses.create") }}';
@@ -185,9 +193,10 @@ Create a Course
                 }
             });
         });
-        
+
         $(".metadata-ch").change(function () {
             var id = $(this).val();
+            $(this).val(id);
             var url = '{{ route("metadata.list",":id") }}';
             url = url.replace(':id', id);
             $.ajax({
@@ -198,7 +207,7 @@ Create a Course
                     $('.btnSubmit').text("Saving.....");
                 },
                 success: function (data, textStatus, jqXHR) {
-                   $(".metadata-list").html(data);
+                    $(".metadata-list").html(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
@@ -206,7 +215,7 @@ Create a Course
                 }
             });
         });
-        
+
         $("#saveMetadata").submit(function (event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -220,14 +229,14 @@ Create a Course
                     $('.btnSubmit').text("Saving.....");
                 },
                 success: function (data, textStatus, jqXHR) {
-                    if(data.success){
-                      $(".metamsg-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
-                        $('.meta-footer').html("<a href='{{ route('courses.show') }}' class='btn btn-default'>OK</a>");
-                       } else{
-                      $(".metamsg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
-                      $('.btnSubmit').text("Submit");
+                    if (data.success) {
+                        $(".metamsg-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                        $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                    } else {
+                        $(".metamsg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                        $('.btnSubmit').text("Submit");
                     }
-                    
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);

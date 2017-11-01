@@ -19,10 +19,10 @@
                         <thead>
                         <tr>
                             <th class="col-md-1">#</th>
-                            <th class="col-md-5">Title</th>
-                            <th class="col-md-5">Description</th>
+                            <th class="col-md-3">Title</th>
+                            <th class="col-md-4">Description</th>
                             <th class="col-md-2">Instructor</th>
-                            <th class="col-md-2">Actions</th>
+                            <th class="col-md-3">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,8 +34,18 @@
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
                                     <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs" style="width:60px">Storyline</a>
-                                    <a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>
-                                    <a href="{{ route('courses.edit', $course->id) }}" class="btn btn-primary btn-xs" style="width:60px">Edit</a>
+                                    <!--<a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>-->
+                                   
+                                    <div class="btn-group">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v fa_custom fa-2x"></i>
+                                    </button>
+                                        <div class="dropdown-menu">
+                                        <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
+                                        <button class="dropdown-item moduleId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Module</button>
+                                        <button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button>
+                                    </div>
+                                    </div> 
                                 </td>
                             </tr>
                         @endforeach
@@ -45,6 +55,31 @@
             </div>
         </div>
     </div>
+@section('exterior-content')
+<div id="formModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form id="saveModule" action="{{ route('course-metadata.update') }}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title data-title"></h4>
+                </div>
+
+                <div class="modal-body edit-data">
+                   
+                </div>
+                <div class="modal-footer meta-footer">
+                    <button type="submit" class="btn btn-success meta-submit">Submit</button>   
+                </div>
+                {{ csrf_field() }}
+            </form>
+        </div>
+    </div>
+</div> 
+
+
+@endsection
 @endsection
 
 @section('custom-scripts')
@@ -53,41 +88,94 @@
 
     <script>
         $(document).ready(function($) {
-            var _token = $('#tok').val();
-
-            $('.clickable-row').on('click', '.manage-course', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var group_id = $(this).data('courseid');
-
-                $('.clickable-row[data-courseid="' + group_id + '"]').hide();
-
-//                $.ajax({
-//                    url: url,
-//                    type: 'POST',
-//                    data: {_token: _token},
-//                    success: function(res) {
-//                        console.log('res', res);
-//                        if(res.hasOwnProperty('success')) {
-//                            if(res.success) {
-//                                $('.clickable-row[data-courseid="' + group_id + '"]').remove();
-//                            } else {
-//                                $('.clickable-row[data-courseid="' + group_id + '"]').show();
-//                                alert(res.error_messages);
-//                            }
-//                        }
-//                    },
-//                    error: function(res) {
-//                        console.log('res', res);
-//                        $('.clickable-row[data-courseid="' + group_id + '"]').show();
-//                    }
-//                });
-            });
-
-            $(".clickable-row").click(function() {
-                window.document.location = $(this).data("href");
+            var _token = $('#tok').val();            
+            $(".dropdown-item").click(function () {
+            var text = $(this).text();
+            var id = $(this).attr('id');
+            var url = '{{ route("courses.edit") }}';          
+            $.ajax({
+                url: url,
+                type: "POST",
+                asyn: false,
+                data: {id:id, text:text},
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                   $("#formModal").modal();                  
+                     if(text === 'Module'){                   
+                     $(".data-title").text('Edit Module');
+                     }else{
+                     $(".data-title").text('Edit Metadata');
+                     $("#saveModule").attr('id','saveMetadata');
+                     }
+                   $(".edit-data").html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
+                }
             });
         });
+        
+         $("#saveModule").submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            var url = '{{ route("courses.update") }}';
+            $.ajax({
+                url: url,
+                type: "POST",
+                asyn: false,
+                data: formData,
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if(data.success){
+                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                       } else{
+                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
+                      $('.btnSubmit').text("Submit");
+                    }                   
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
+                }
+            });
+        });
+        
+        $("#saveMetadata").submit(function (event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            var url = '{{ route("course-metadata.update") }}';
+            $.ajax({
+                url: url,
+                type: "POST",
+                asyn: false,
+                data: formData,
+                beforeSend: function () {
+                    $('.btnSubmit').text("Saving.....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if(data.success){
+                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                       } else{
+                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
+                      $('.btnSubmit').text("Submit");
+                    }                   
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                    location.reload();
+                }
+            });
+        });
+        
+        });
+        
         function search() {
             // Declare variables
             var input, filter, table, tr, td, i;
