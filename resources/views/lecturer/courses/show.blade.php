@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page-title')
-    Course List
+Course List
 @endsection
 
 @section('custom-styles')
@@ -9,55 +9,65 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid" id="app">
-        <div class="row">
-            <div class="col-md-12">
-                <input type="hidden" id="tok" value="{{ csrf_token() }}" />
-                <div class="panel panel-default">
-                    <div class="panel-heading">Modules <a href="{{ route('courses.create') }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Courses.."></div><div class="clearfix"></div></div>
-                    <table class="panel-body table table-hover table-striped" id="courses-table">
-                        <thead>
+<div class="container-fluid" id="app">
+    <div class="row">
+        <div class="col-md-12">
+            <input type="hidden" id="tok" value="{{ csrf_token() }}" />
+            <div class="panel panel-default">
+                <div class="panel-heading">Modules <a href="{{ route('courses.create') }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a><div class="col-md-6 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Courses.."></div><div class="clearfix"></div></div>
+                <table class="panel-body table table-hover table-striped" id="courses-table">
+                    <thead>
                         <tr>
                             <th class="col-md-1">#</th>
                             <th class="col-md-5">Title</th>
                             <th class="col-md-2">Instructor</th>
                             <th class="col-md-2">Actions</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         @foreach($createdCourse as $index => $course)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $course->title }}</td>
-                                <td>{{ $course->creator->name }}</td>
-                                <td>
-                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs">Storyline</a>
-                                    <a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs">Notify</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $course->title }}</td>
+                            <td>{{ $course->creator->name }}</td>
+                            <td>
+                                <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs">Storyline</a>
+                                <!--<a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-default btn-xs"><i class="fa fa-ellipsis-v fa-x"></i></a>-->
+                                <div class="btn-group">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v fa_custom fa-2x"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item notifyId" type="button" id="{{$course->id}}">Notify</button>
+                                        <button class="dropdown-item moduleId" type="button" id="{{$course->id}}">Edit Module</button>
+                                        <button class="dropdown-item metadataId" type="button" id="{{$course->id}}">Edit Metadata</button>
+                                    </div>
+                                </div> 
+                            </td>
+                        </tr>
                         @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('custom-scripts')
 
-    <script src="{{url('/js/app.js') }}"></script>
+<script src="{{url('/js/app.js') }}"></script>
 
-    <script>
-        $(document).ready(function($) {
-            var _token = $('#tok').val();
+<script>
+                    $(document).ready(function ($) {
+                        var _token = $('#tok').val();
 
-            $('.clickable-row').on('click', '.manage-course', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var group_id = $(this).data('courseid');
+                        $('.clickable-row').on('click', '.manage-course', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            var group_id = $(this).data('courseid');
 
-                $('.clickable-row[data-courseid="' + group_id + '"]').hide();
+                            $('.clickable-row[data-courseid="' + group_id + '"]').hide();
 
 //                $.ajax({
 //                    url: url,
@@ -79,31 +89,31 @@
 //                        $('.clickable-row[data-courseid="' + group_id + '"]').show();
 //                    }
 //                });
-            });
+                        });
 
-            $(".clickable-row").click(function() {
-                window.document.location = $(this).data("href");
-            });
-        });
-        function search() {
-            // Declare variables
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("txt_search");
-            filter = input.value.toLowerCase();
-            table = document.getElementById("courses-table");
-            tr = table.getElementsByTagName("tr");
+                        $(".clickable-row").click(function () {
+                            window.document.location = $(this).data("href");
+                        });
+                    });
+                    function search() {
+                        // Declare variables
+                        var input, filter, table, tr, td, i;
+                        input = document.getElementById("txt_search");
+                        filter = input.value.toLowerCase();
+                        table = document.getElementById("courses-table");
+                        tr = table.getElementsByTagName("tr");
 
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
+                        // Loop through all table rows, and hide those who don't match the search query
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[1];
+                            if (td) {
+                                if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
+                                }
+                            }
+                        }
                     }
-                }
-            }
-        }
-    </script>
+</script>
 @endsection

@@ -14,7 +14,7 @@ class AlterCourseMetadataTable extends Migration
     public function up()
     {
         //DB::statement('ALTER TABLE `student_progress` ALTER `storyline_item_id` DROP DEFAULT;');
-        DB::statement('ALTER TABLE `course_metadata` '
+        DB::statement('ALTER TABLE `course_metadata` ADD `metadata_type_id` INT(11) NOT NULL AFTER `course_id`'
                 . 'CHANGE `value` `value` VARCHAR(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;');
     }
     /**
