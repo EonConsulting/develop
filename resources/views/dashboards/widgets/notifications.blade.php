@@ -14,7 +14,7 @@
                 Notifications
             </div>
 
-            <div class="basic-clearfix">
+            <div class="basic-clearfix" style="padding: 15px 0px 15px 0px;">
                 <div class="progress-charts basic-clearfix">
                     <div class="container-fluid">
                         <div class="row">

@@ -1698,16 +1698,16 @@ class WidgetCore {
             // this is a bit of a hack I know
             // just make a color pool for now
             data.colorpool = [
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)',
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)'
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)',
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)'
             ];
             
             // a little song and dance to get the datasources

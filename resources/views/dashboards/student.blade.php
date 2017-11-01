@@ -34,9 +34,9 @@ Student Dashboard
         
     }
 
-    .progress-charts {
+    /*.progress-charts {
         background: #F9F9F9;
-    }
+    }*/
     
     .progress-charts h2 {
         text-align: center;
@@ -97,8 +97,8 @@ Student Dashboard
     
     @include('dashboards.widgets.results', ['size' => 'medium'])
     
-    @include('dashboards.widgets.progression', ['size' => 'large'])
+    @include('dashboards.widgets.progression', ['size' => 'xlarge'])
 
-    @include('dashboards.widgets.timeline', ['size' => 'large'])
+    @include('dashboards.widgets.timeline', ['size' => 'xlarge'])
 
 @endsection
