@@ -30,13 +30,13 @@ Administrator Dashboard
         border-style: solid;
         border-color: #DBDBDB;
         background: #FFF;
-        
+
     }
 
     .progress-charts {
         background: #F9F9F9;
     }
-    
+
     .progress-charts h2 {
         text-align: center;
         font-size: 20px;
@@ -49,14 +49,14 @@ Administrator Dashboard
         font-weight: 700;
     }
 
-   /* .timeline {
-        padding-right: 280px;
-    }
-
-    .timeline-key {
-        width: 280px;
-        float: right;
-    }*/
+    /* .timeline {
+         padding-right: 280px;
+     }
+ 
+     .timeline-key {
+         width: 280px;
+         float: right;
+     }*/
 
 </style>
 @endsection
@@ -83,15 +83,18 @@ Administrator Dashboard
                     System Analytics
                 </div>
 
-                <div class="row sp-top-15 sp-bot-15 basic-clearfix">
-                    <!-- iframe src="{{ url("") }}/piwik" height="400" width="400" / -->
-                    <iframe src="https://dev.unisaonline.net/piwik/" height="400" width="400" / -->
+                <div class="basic-clearfix">
+                    <div class="progress-charts basic-clearfix">
+                        <div class="container-fluid">
+                            <iframe src="https://dev.unisaonline.net/piwik/" height="768" width="1280"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-        
+
     @endsection
 
     @section('custom-scripts')
