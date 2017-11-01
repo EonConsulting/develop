@@ -360,12 +360,6 @@ class MetadataTypeSeeder extends Seeder {
                 ]
         );
 
-        DB::table($table)->insert(
-                [
-                    'name' => 'Term Cycle Type',
-                    'description' => 'Term Cycle Type'
-                ]
-        );
 
         DB::table($table)->insert(
                 [
