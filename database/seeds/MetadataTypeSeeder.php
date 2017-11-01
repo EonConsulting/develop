@@ -71,12 +71,12 @@ class MetadataTypeSeeder extends Seeder {
                 ]
         );
 
-        DB::table($table)->insert(
+        /*DB::table($table)->insert(
                 [
                     'name' => 'Concern Type',
                     'description' => 'Concern Type'
                 ]
-        );
+        );*/
 
         DB::table($table)->insert(
                 [
@@ -120,12 +120,12 @@ class MetadataTypeSeeder extends Seeder {
                 ]
         );
 
-        DB::table($table)->insert(
+        /*DB::table($table)->insert(
                 [
                     'name' => 'Costing Type',
                     'description' => 'Costing Type'
                 ]
-        );
+        );*/
 
         DB::table($table)->insert(
                 [
@@ -248,12 +248,12 @@ class MetadataTypeSeeder extends Seeder {
                 ]
         );
 
-        DB::table($table)->insert(
+        /*DB::table($table)->insert(
                 [
                     'name' => 'Profile Type',
                     'description' => 'Profile Type'
                 ]
-        );
+        );*/
 
         DB::table($table)->insert(
                 [
