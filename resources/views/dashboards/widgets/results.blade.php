@@ -15,7 +15,7 @@
             </div>
 
             <div class="row sp-top-15 sp-bot-15 basic-clearfix">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="container-fluid" id="student-results-container" style="height: 300px;">
                         <canvas id="student-results"></canvas>
                     </div>

@@ -34,9 +34,9 @@ Lecturer Dashboard
         
     }
 
-    .progress-charts {
+    /*.progress-charts {
         background: #F9F9F9;
-    }
+    }*/
     
     .progress-charts h2 {
         text-align: center;
