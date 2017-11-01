@@ -33,7 +33,7 @@
                             <div class="col-md-6">
                                 <div class="nofitication-card shadow" style="margin-bottom: 10px">
                                     <div class="notification-card-icon bg-col-2">
-                                        <i class="fa fa-bullhorn"></i>
+                                        <i class="fa fa-user"></i>
                                     </div>
                                     <div class="notification-card-text">
                                         <h1>Mentors</h1>
@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="nofitication-card shadow" style="margin-bottom: 10px">
                                     <div class="notification-card-icon bg-col-3">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-graduation-cap"></i>
                                     </div>
                                     <div class="notification-card-text">
                                         <h1>Lecturers</h1>

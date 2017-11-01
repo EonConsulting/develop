@@ -222,6 +222,108 @@ class WidgetCore {
                     "assessment": "FA",
                     "description": "Formal Assessmet 2",
                     "value": "66"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "student_id": "ALL",
+                    "description": "SA-ALL",
+                    "value": "60"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 1",
+                    "value": "45"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 2",
+                    "value": "65"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 3",
+                    "value": "56"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 1",
+                    "value": "72"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 2",
+                    "value": "40"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 3",
+                    "value": "46"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 1",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 2",
+                    "value": "61"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 3",
+                    "value": "49"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "student_id": "ALL",
+                    "description": "FA-ALL",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
+                    "description": "Formal Assessment 1",
+                    "value": "52"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
+                    "description": "Formal Assessmet 2",
+                    "value": "54"
                 }
             ];
         };
