@@ -31,7 +31,6 @@ Student Dashboard
         border-style: solid;
         border-color: #DBDBDB;
         background: #FFF;
-        
     }
 
     /*.progress-charts {

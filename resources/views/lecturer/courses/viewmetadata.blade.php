@@ -1,21 +1,28 @@
   
+<div class="meta-entry-container">
 @foreach($MetadataStore as $key=>$resource)
-<div class="tab-pane active col-lg-4" id="{{$resource->id}}"> 
-                     <br>
-                     <br>
-                    <div class="form-group">
-                       <label class="form-checkbox form-normal form-green form-text">
-                      {{ Form::checkbox('metadata_store_id[]', $resource->id) }}
-                      {{ $resource->description }}
-                      {{ Form::text('value[]',null, array('placeholder'=>'Custom Value','class' => 'form-control')) }}
-                     </label>
-                    </div>
+    <div class="meta-entry shadow" id="{{$resource->id}}"> 
+            <div style="overflow-y: auto;">
+                <div class="meta-checkbox">
+                    {{ Form::checkbox('metadata_store_id[]', $resource->id) }}
                 </div>
+
+                <div class="meta-description">
+                    {{ $resource->description }}
+                </div>
+            </div>
+            
+            <div class="meta-value">
+                {{ Form::text('value[]',null, array('placeholder'=>'Custom Value','class' => 'form-control')) }}
+            </div>
+
+    </div>
 @endforeach
-<br>
-<br>
+</div>
+
+
 @if(!$MetadataStore->isEmpty())
-    <div class="col-lg-8" style="margin-top:50px">
+<div class="col-lg-8" style="margin-top:50px">
     <a type="button" class="btn btn-success ">Submit</a>
 </div>
 @else

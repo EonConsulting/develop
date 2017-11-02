@@ -30,8 +30,7 @@ Mentor Dashboard
         border-width: 0px 1px 0px 0px;
         border-style: solid;
         border-color: #DBDBDB;
-        background: #FFF;
-        
+        background: #FFF; 
     }
 
     /*.progress-charts {

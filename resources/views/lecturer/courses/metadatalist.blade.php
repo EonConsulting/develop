@@ -5,19 +5,62 @@ Create a Course
 @endsection
 
 @section('custom-styles')
+
+    <style>
+        #tab .btn {
+            margin-bottom: 5px;
+        }
+
+        .container-fluid {
+            margin: 0px 15px 0px 15px;
+        }
+
+        .meta-entry-container {
+            margin: 30px 0px 30px 0px;
+            overflow-y: auto;
+        }
+
+        .meta-entry {
+            background: #FFF;
+            width: 300px;
+            /*height: 100px;*/
+            float: left;
+            padding: 15px;
+            margin: 0px 15px 15px 0px;
+        }
+
+        .meta-entry input[type=text] {
+            width: 100%;
+        }
+
+        .meta-checkbox {
+            float: left;
+            width: 20px;
+        }
+
+        .meta-description {
+            margin-left: 20px;
+            height: 50px;
+        }
+
+        .meta-value {
+
+        }
+
+
+    </style>
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
-    <div class="row" style="margin-left:20px">
+    <div class="row">
         <div class="span12">
-            <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-</a>
+            <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             <p class="lead">Metadata Type List</p> <br>
-            <div id="tab" class="btn-group" data-toggle="buttons-radio">
+            <div id="tab" data-toggle="buttons-radio">
                 @foreach($MetadataStore as $key=>$resource)
-                <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-info active metatype" data-toggle="tab">{{$resource->name}}</a>
+                <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-default metatype" data-toggle="tab">{{$resource->name}}</a>
                 @endforeach
 
             </div>
@@ -28,30 +71,7 @@ Create a Course
         </div>
     </div> 
 </div>
-<!--<div class="row">
-    <div class="col-md-12">
-        <div class="dashboard-card shadow">
-            <div class="dashboard-card-heading">
-                <label>Meta Information</label>
-            </div>
-            <div class="container-fluid">	
-                <div class="col-md-4">
-                    <p>Please choose metadata items</p>
-                    <div class="form-group">
-                        <select id="metadata_store_list" size="15" class="form-control">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <div id="metadata_forms"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>-->
+
 @section('exterior-content')
 <div id="metadataModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -97,7 +117,11 @@ Create a Course
         
         $(".metatype").click(function () {
             var id = $(this).attr('id');
-             getdata(id);
+
+            $('.metatype').removeClass('active', 1000);
+            $(this).addClass('active', 1000);
+
+            getdata(id);
         });
 
        function getdata(id){

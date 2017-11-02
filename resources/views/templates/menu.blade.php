@@ -49,7 +49,16 @@
 <!-- side menu -->
 <div class="left-menu">
     <ul>    
-        <li class="{{ (Route::currentRouteName() == 'lti.dashboards' || Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
+        <li class="{{ (Route::currentRouteName() == 'lti.dashboards' || 
+                    Route::currentRouteName() == 'home.dashboards' || 
+                    Route::currentRouteName() == 'lti.dashboards.lecturer-stud-analysis' || 
+                    Route::currentRouteName() == 'lti.dashboards.mentor-stud-analysis' || 
+                    Route::currentRouteName() == 'lti.dashboards.lecturer-course-analysis' || 
+                    Route::currentRouteName() == 'lti.dashboards.lecturer-assess-analysis'
+                ) ? 'left-menu-active' : '' }}">
+
+
+
             <a href="{{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? '#' : route('lti.dashboards') }}" {{ (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())) ? "class=accordian" : "" }}>
                 <i class="fa fa-braille fa-lg left-menu-icon"></i>
                 <span class="menu_collapse">
@@ -62,7 +71,13 @@
             </a>
 
             <?php if (laravel_lti()->is_instructor(auth()->user()) || laravel_lti()->is_mentor(auth()->user())): ?>
-                <div class="left-menu-sub {{ (Route::currentRouteName() == 'lti.dashboards' || Route::currentRouteName() == 'home.dashboards') ? '' : 'hidden' }}">
+                <div class="left-menu-sub {{ (Route::currentRouteName() == 'lti.dashboards' ||
+                                            Route::currentRouteName() == 'home.dashboards' ||
+                                            Route::currentRouteName() == 'lti.dashboards.lecturer-stud-analysis' || 
+                                            Route::currentRouteName() == 'lti.dashboards.mentor-stud-analysis' || 
+                                            Route::currentRouteName() == 'lti.dashboards.lecturer-course-analysis' || 
+                                            Route::currentRouteName() == 'lti.dashboards.lecturer-assess-analysis'
+                                        ) ? '' : 'hidden' }}">
                     <ul>
 
                         <li class="{{ (Route::currentRouteName() == 'home.dashboards') ? 'left-menu-active' : '' }}">
@@ -98,7 +113,7 @@
         </li>
 
         <?php // if (laravel_lti()->is_instructor(auth()->user())): ?>
-            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? 'left-menu-active' : '' }}">
                 <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                     <i class="fa fa-edit fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -111,7 +126,7 @@
                 </a>
 
                 <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
-                    <div class="left-menu-sub hidden">
+                    <div class="left-menu-sub {{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? '' : 'hidden' }}">
                         <ul>
 
                             <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
@@ -121,7 +136,7 @@
                                 </a>
                             </li>
 
-                            <li class="{{ (Route::currentRouteName() == 'courses.create') ? 'left-menu-active' : '' }}">
+                            <li class="{{ (Route::currentRouteName() == 'courses.show') ? 'left-menu-active' : '' }}">
                                 <a href="{{ route('courses.show') }}">
                                     <i class="fa fa-circle-o left-menu-icon"></i>
                                     My Modules
