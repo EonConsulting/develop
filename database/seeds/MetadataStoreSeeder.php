@@ -2197,6 +2197,7 @@ class MetadataStoreSeeder extends Seeder {
         // study constraint type --------------------------------------------------->
         $metadata_type_id = "Study Cycle Type";
 
+
         DB::table($table)->insert(
                 [
                     'metadata_type_id' => 47,

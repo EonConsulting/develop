@@ -43,7 +43,7 @@
                                         <div class="dropdown-menu">
                                         <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
                                         <button class="dropdown-item moduleId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Module</button>
-                                        <button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button>
+                                        <a href="{{ route('metadata.list', $course->id) }}"><button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button></a>
                                     </div>
                                     </div> 
                                 </td>
@@ -89,7 +89,7 @@
     <script>
         $(document).ready(function($) {
             var _token = $('#tok').val();            
-            $(".dropdown-item").click(function () {
+            $(".moduleId").click(function () {
             var text = $(this).text();
             var id = $(this).attr('id');
             var url = '{{ route("courses.edit") }}';          
