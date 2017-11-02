@@ -89,7 +89,7 @@
     <script>
         $(document).ready(function($) {
             var _token = $('#tok').val();            
-            $(".dropdown-item").click(function () {
+            $(".moduleId").click(function () {
             var text = $(this).text();
             var id = $(this).attr('id');
             var url = '{{ route("courses.edit") }}';          
