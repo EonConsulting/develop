@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Courses;
 use App\Models\Course;
 //use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\CourseMetadata;
+use App\Models\MetadataStore;
 use Validator;
 
 class CoursesController extends Controller {
@@ -21,7 +24,7 @@ class CoursesController extends Controller {
     }
 
     public function allCourses() {
-        $courses = Course::get();
+        $courses = Course::orderBy('id', 'DESC')->get();
         return $courses;
     }
 
@@ -36,34 +39,38 @@ class CoursesController extends Controller {
         return view('lecturer.courses.show', ['createdCourse' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
     }
     
-    public function edit(Request $request,$id) {
-        
-        $breadcrumbs = [
-            'title' => 'Modules',
-            'child' => [
-                'title' => 'Edit'
-            ]
-        ];
-        
-        
-            $Course = Course::find($id);
-            
-           return view('lecturer.courses.edit', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs,'course'=>$Course]);
-          
+    public function edit(Request $request) {
+            $id = (int)$request->get('id');
+            if($request->get('text') === 'Module'){
+               $data = Course::find($id); 
+               return view('lecturer.courses.edit', ['data' => $data]);
+               
+               }elseif ($request->get('text') === 'Metadata') {
+               
+               $data = DB::table('course_metadata')->where('course_id', $id)->first();
+               $MetaId = CourseMetadata::where('course_id',$id)->pluck('metadata_store_id')->all();
+               
+               $Metadata = MetadataStore::with(['course_metadata'=> function($q) use ($id) {$q->where('course_id', $id);}])
+                                              ->where('metadata_type_id', $data->metadata_type_id)->get();
+                              
+               return view('lecturer.courses.editmetadata', ['data' => $Metadata,'MetaId'=>$MetaId,'course'=>$id]);
+           }  
+           
     }
     
-    public function update(Request $request,$id) {
+    public function update(Request $request) {
         
         $validator = Validator::make($request->all(), [
                     'title' => 'required',                   
         ]);
         
-        if ($validator->passes()) {
-            $Course = Course::find($id);
-            $Course->title = $request->get('title');
-            $Course->description = $request->get('description');
-            $Course->tags = $request->get('tags');
-            $Course->save();       
+        $Course = Course::find((int)$request->get('id')); 
+        if ($validator->passes()) {            
+                $Course->title = $request->get('title');
+                $Course->description = $request->get('description');
+                $Course->tags = $request->get('tags');   
+                $Course->creator_id = $request->get('creator_id');            
+                $Course->save();       
            return response()->json(['success'=>'Module has been updated successfully.']);
         }        
        return response()->json(['error' => $validator->errors()->all()]);      

@@ -18,7 +18,8 @@ class CreateCourseMetadataTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('course_id');
             $table->integer('metadata_store_id');
-            $table->string('value', 150);
+            $table->integer('metadata_type_id');
+            $table->string('value', 150)->nullable();
             $table->timestamps();
             
             $table->foreign('course_id')

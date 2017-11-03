@@ -222,6 +222,108 @@ class WidgetCore {
                     "assessment": "FA",
                     "description": "Formal Assessmet 2",
                     "value": "66"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "student_id": "ALL",
+                    "description": "SA-ALL",
+                    "value": "60"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 1",
+                    "value": "45"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 2",
+                    "value": "65"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 3",
+                    "value": "56"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 1",
+                    "value": "72"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 2",
+                    "value": "40"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 3",
+                    "value": "46"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 1",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 2",
+                    "value": "61"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 3",
+                    "value": "49"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "student_id": "ALL",
+                    "description": "FA-ALL",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
+                    "description": "Formal Assessment 1",
+                    "value": "52"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
+                    "description": "Formal Assessmet 2",
+                    "value": "54"
                 }
             ];
         };
@@ -980,7 +1082,8 @@ class WidgetCore {
                 // update the top content if available
                 instance.renderTopContentTable();
                 instance.renderParticipationMetrics();
-                instance.renderMotificationMetrics();
+                instance.renderNotificationMetrics();
+                instance.renderTimeline();
             });
             // and lets just select the first record on page load
             $("#module-filter").trigger("change");
@@ -1697,16 +1800,16 @@ class WidgetCore {
             // this is a bit of a hack I know
             // just make a color pool for now
             data.colorpool = [
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)',
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)'
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)',
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)'
             ];
             
             // a little song and dance to get the datasources
@@ -1755,6 +1858,90 @@ class WidgetCore {
             });
         }
         
+        renderTimeline()
+        {
+            $('#calendar-timeline').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                height: 500,
+                defaultDate: '2017-11-01',
+                navLinks: true, // can click day/week names to navigate views
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'FBN1502 Test 1',
+                        start: '2017-11-01',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'New Student Welcome',
+                        start: '2017-11-07',
+                        end: '2017-11-10'
+                    },
+                    {
+                        id: 999,
+                        title: 'FBN102 Exam',
+                        start: '2017-11-09T16:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2017-11-16T16:00:00'
+                    },
+                    {
+                        title: 'Student Conference',
+                        start: '2017-11-11',
+                        end: '2017-11-13'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2017-11-12T10:30:00',
+                        end: '2017-11-12T12:30:00',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'FBN101 Exam',
+                        start: '2017-11-12T12:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        title: 'FNB104 Test',
+                        start: '2017-11-12T14:30:00'
+                    },
+                    {
+                        title: 'FBN105 Test',
+                        start: '2017-11-12T17:30:00'
+                    },
+                    {
+                        title: 'FBN103 Exam',
+                        start: '2017-11-12T20:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        title: 'FBN102 Test',
+                        start: '2017-11-13T07:00:00',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'MyUnisa',
+                        url: 'http://unisa.ac.za/',
+                        start: '2017-11-28'
+                    }
+                ]
+            });
+        }
+        
         renderTopContentTable()
         {
             var ts = _.filter(instance.topics, _.iteratee({'course_id': instance.selected_course}));
@@ -1799,7 +1986,7 @@ class WidgetCore {
             }
         }
         
-        renderMotificationMetrics()
+        renderNotificationMetrics()
         {
             var mets = _.filter(instance.notifications, _.iteratee({'course_id': instance.selected_course}));
             var m = _.head(mets);
