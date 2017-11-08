@@ -22,7 +22,7 @@
 
 
 @if(!$MetadataStore->isEmpty())
-<div class="col-lg-8" style="margin-top:50px">
+<div style="margin-bottom: 15px;">
     <a type="button" class="btn btn-success ">Submit</a>
 </div>
 @else
