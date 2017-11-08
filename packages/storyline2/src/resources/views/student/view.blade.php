@@ -331,16 +331,13 @@
     }
 
     $(document).ready(function(){
-
         resizeArea();
-
         $(".menu-btn").on("click", function() {
             var button = $(this);
             var item_id = $(this).data("item-id");           
             var courseId = '{{ $course->id }}';
             var storyline = '{{ $storylineId }}';
-            var student = '{{auth()->user()->id}}';
-            
+            var student = '{{auth()->user()->id}}';            
             $.ajax({
                 url: '{{url('')}}/student/progression',
                 type: "POST",
@@ -358,12 +355,10 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
-                    // location.reload();
+                     location.reload();
                 }
-            });
-       
-           
-        });
+            });                 
+        });        
 
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));

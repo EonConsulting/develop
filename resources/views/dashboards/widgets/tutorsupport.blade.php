@@ -11,15 +11,26 @@
         <div class="dashboard-card shadow top-bdr-4">
 
             <div class="dashboard-card-heading">
-                Student Assessment
+                Tutor Support
             </div>
 
-            <div class="progress-charts basic-clearfix">
-                <div class="container-fluid" id="student-assessment-container" style="height: 400px; width:400px; padding:20px">
-                    <canvas id="student-assessment"></canvas>
+            <div class="basic-clearfix">
+                <div class="progress-charts basic-clearfix">
+                    <div class="container-fluid">
+                    
+                        <label for="tutor-support-filter">Period</label>
+                        <select class="form-control" id="tutor-support-filter">
+                            <option value="month">Month</option>
+                            <option value="3-month">3 Month</option>
+                            <option value="6-month">6 Month</option>
+                        </select>
+                    
+                        <div class="container-fluid" id="tutor-support-container" style="height: 300px;">
+                            <canvas id="tutor-support"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>

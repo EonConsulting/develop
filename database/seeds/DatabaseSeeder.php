@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(MetadataTypeSeeder::class);
+        $this->command->info('metadata_type table seeded!');
         $this->call(MetadataStoreSeeder::class);
         $this->command->info('metadata_store table seeded!');
     }

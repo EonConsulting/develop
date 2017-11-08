@@ -30,13 +30,12 @@ Mentor Dashboard
         border-width: 0px 1px 0px 0px;
         border-style: solid;
         border-color: #DBDBDB;
-        background: #FFF;
-        
+        background: #FFF; 
     }
 
-    .progress-charts {
+    /*.progress-charts {
         background: #F9F9F9;
-    }
+    }*/
     
     .progress-charts h2 {
         text-align: center;
@@ -97,8 +96,8 @@ Mentor Dashboard
     
     @include('dashboards.widgets.assessment', ['size' => 'medium'])
     
-    @include('dashboards.widgets.topcontent', ['size' => 'medium'])
+    @include('dashboards.widgets.topcontent', ['size' => 'xlarge'])
     
-    @include('dashboards.widgets.engagement', ['size' => 'large'])
+    @include('dashboards.widgets.engagement', ['size' => 'xlarge'])
 
 @endsection

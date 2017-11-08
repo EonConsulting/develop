@@ -8,6 +8,9 @@ use App\Models\MetadataStore;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\MetadataType;
+use App\Models\CourseMetadata;
+use Validator;
 
 class CreateCourseController extends Controller {
 
@@ -21,109 +24,98 @@ class CreateCourseController extends Controller {
             ],
         ];
 
-        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs]);
+
+        $metadataType = MetadataType::pluck('description', 'id');
+
+        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs, 'metadataType' => $metadataType]);
     }
 
     public function store(Request $request) {
-        $title = $request->get('title', '');
-        $description = $request->get('description', '');
-        $tags = $request->get('tags', '');
-        $featured_images = $request->file('featured_image');
-        $course = new Course;
+        
+        $validator = Validator::make($request->all(), [
+                    'title' => 'required',
+        ]);
 
-        $course->title = $title;
-        $course->description = $description;
-        $course->tags = $tags;
-        $course->creator_id = $request->user()->id;
+        if ($validator->passes()) {
+            $Course = new Course([
+                'title' => $request->get('title'),
+                'description' => $request->get('description'),
+                'tags' => $request->get('tags'),
+                'creator_id' => auth()->user()->id,
+            ]);
 
-        $course->save();
+            $Course->save();
+            //return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
+            $request->session()->flash('alert-success', 'Module has been added successfully.');
+            // return view('lecturer.courses.metadatalist',['breadcrumbs' => $breadcrumbs,'course'=>$Course->id]);
+            return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
+        }
+        $request->session()->flash('alert-danger', 'Title is required.');
+        return redirect()->route("courses.create");
+    }
 
-        session()->flash('success_message', 'Course saved.');
-        return redirect()->route('courses');
-
-        // put all the metadata
-        // MH: to implement after storyline2 rewrite
-        /*$meta_array = [
-            array(
-                "lk_table" => "lk_qualification_type",
-                "lk_table_id" => $request->get("qualification_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_content_difficulty_type",
-                "lk_table_id" => $request->get("content_difficulty_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_pedagogical_type",
-                "lk_table_id" => $request->get("pedagogical_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_discipline_type",
-                "lk_table_id" => $request->get("discipline_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_duration_type",
-                "lk_table_id" => $request->get("duration_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_college_type",
-                "lk_table_id" => $request->get("college_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_school_type",
-                "lk_table_id" => $request->get("school_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_department_type",
-                "lk_table_id" => $request->get("department_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_centre_type",
-                "lk_table_id" => $request->get("centre_type", 0)
-            ),
-            array(
-                "lk_table" => "lk_institute_type",
-                "lk_table_id" => $request->get("institute_type", 0)
-            ),
+    public function metadatalist($id) {
+         $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Create Metadata',
+            ],
         ];
+        
+        $MetadataStore = MetadataType::get();  
+        $MetaId = MetadataStore::pluck('id')->all();
 
-        // begin transaction
-        try {
-            DB::beginTransaction();
+        return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
+    }
+    
+    public function viewmetadata($id) {
+        $MetadataStore = MetadataStore::where('metadata_type_id',$id)->get();
+        $MetaId = MetadataStore::pluck('id')->all();
+        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
+    }
 
-            // create course
-            $course = new Course;
-            $course->title = $title;
-            $course->description = $description;
-            $course->tags = $tags;
-            $course->creator_id = $request->user()->id;
-            $course->save();
+    public function storemetadata(Request $request) {
+        $value = $request->get('value');
+        foreach ($request->get('metadata_store_id') as $key => $selected_id) {
+            $Metadata = [
+                'course_id' => $request->get('course_id'),
+                'metadata_type_id' => $request->get('metadata_type_id'),
+                'metadata_store_id' => (int) $selected_id,
+                'value' => $value[$key],
+            ];
 
-            if ($course->id > 0) {
-                foreach ($meta_array as $m) {
-                    // check whether it is not 0 so we can save it
-                    if ($m["lk_table_id"] > 0) {
-                        // set course_id and re-use object
-                        $metadata = new StorylineMetadata;
-                        $metadata->course_id = $course->id;
-                        $metadata->lk_table = $m["lk_table"];
-                        $metadata->lk_table_id = $m["lk_table_id"];
-                        $metadata->save();
-                    }
-                }
-            }
-            // transaction successful.
-            DB::commit();
+            $status = new CourseMetadata($Metadata);
+            $check = $status->save();
+        }
 
-            session()->flash('success_message', 'Course saved.');
-            return redirect()->route('courses');
-        } catch (\Exception $e) {
+        if ($check) {
+            return response()->json(['success' => 'Metadata has been added successfully.']);
+        }
 
-            // transaction failed.
-            DB::rollback();
+        return response()->json(['error' => 'An error occured, pleas try again']);
+    }
 
-            session()->flash('error_message', 'Unable to save course, please try again');
-            return redirect()->route('courses');
-        } */
+    public function updatemetadata(Request $request) {
+
+        $value = $request->get('value');
+        foreach ($request->get('metadata_store_id') as $key => $selected_id) {
+            $Metadata = [
+                'course_id' => $request->get('course_id'),
+                'metadata_type_id' => $request->get('metadata_type_id'),
+                'metadata_store_id' => (int) $selected_id,
+                'value' => $value[$key],
+            ];
+
+            $status = new CourseMetadata($Metadata);
+            $check = $status->save();
+        }
+
+        if ($check) {
+            return response()->json(['success' => 'Metadata has been added successfully.']);
+        }
+
+        return response()->json(['error' => 'An error occured, pleas try again']);
     }
 
     public function fill_metadata_store(Request $request) {
@@ -134,8 +126,8 @@ class CreateCourseController extends Controller {
             // get the metadata store array
             //$metadata_store = Models\MetadataStore::all()->sortBy('metadata_type');
             $metadata_store = MetadataStore::where('entities', 'like', '%' . $entities . '%')
-               ->orderBy('metadata_type', 'ASC')
-               ->get();
+                    ->orderBy('metadata_type', 'ASC')
+                    ->get();
             //$all_metadata_types = array_column($metadata_store, 'metadata_type');
             //$metadata_types = array_unique($all_metadata_types);
             //dd(DB::getQueryLog());

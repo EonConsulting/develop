@@ -222,6 +222,108 @@ class WidgetCore {
                     "assessment": "FA",
                     "description": "Formal Assessmet 2",
                     "value": "66"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-ALL",
+                    "assessment": "SA",
+                    "student_id": "ALL",
+                    "description": "SA-ALL",
+                    "value": "60"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 1",
+                    "value": "45"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 2",
+                    "value": "65"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S1",
+                    "description": "Self-Assessment 3",
+                    "value": "56"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 1",
+                    "value": "72"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 2",
+                    "value": "40"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S2",
+                    "description": "Self-Assessment 3",
+                    "value": "46"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-1",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 1",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-2",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 2",
+                    "value": "61"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "SA-3",
+                    "assessment": "SA",
+                    "student_id": "S3",
+                    "description": "Self-Assessment 3",
+                    "value": "49"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ALL",
+                    "assessment": "FA",
+                    "student_id": "ALL",
+                    "description": "FA-ALL",
+                    "value": "63"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS1",
+                    "assessment": "FA",
+                    "description": "Formal Assessment 1",
+                    "value": "52"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "assessment_type_id": "FA-ASS2",
+                    "assessment": "FA",
+                    "description": "Formal Assessmet 2",
+                    "value": "54"
                 }
             ];
         };
@@ -699,6 +801,40 @@ class WidgetCore {
             ];
         };
         
+        get participation(){
+            return [
+                {
+                    "course_id": "FBN1501",
+                    "students": "756",
+                    "mentors": "35",
+                    "lecturers": "5"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "students": "644",
+                    "mentors": "27",
+                    "lecturers": "3"
+                }
+            ];
+        }
+        
+        get notifications(){
+            return [
+                {
+                    "course_id": "FBN1501",
+                    "students": "1250",
+                    "mentors": "350",
+                    "internal": "99"
+                },
+                {
+                    "course_id": "FBN1502",
+                    "students": "1899",
+                    "mentors": "899",
+                    "internal": "250"
+                }
+            ];
+        }
+        
         // methods
         updateAssessmentTypes(a_type)
         {
@@ -729,7 +865,7 @@ class WidgetCore {
             return date.toLocaleDateString(locale, {month: 'short', day: 'numeric'});
         }
 
-        generateRandomDataset(value, period)
+        generateRandomDataset(value, period, min = 5, max = 40, boost = false)
         {
             var labels = [];
             var logins = [];
@@ -746,37 +882,37 @@ class WidgetCore {
                 case "hours":
                     for (var x = 0; x < value; x++)
                     {
-                        (_.indexOf(hours_of_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        (_.indexOf(hours_of_interest, x) > 0 && boost) ? boost_factor = 10 : boost_factor = 1;
                         labels.push(x + "h00");
-                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        logins.push(instance.generateRandomNumber(min, max, boost_factor));
+                        videos.push(instance.generateRandomNumber(min, max, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(min, max, boost_factor));
+                        articles.push(instance.generateRandomNumber(min, max, boost_factor));
+                        assessments.push(instance.generateRandomNumber(min, max, boost_factor));
                     }
                     break;
                 case "days":
                     for (x = value; x > 0; x--)
                     {
-                        (_.indexOf(days_of_week_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        (_.indexOf(days_of_week_interest, x) > 0 && boost) ? boost_factor = 10 : boost_factor = 1;
                         labels.push(instance.getDayName(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
-                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        logins.push(instance.generateRandomNumber(min, max, boost_factor));
+                        videos.push(instance.generateRandomNumber(min, max, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(min, max, boost_factor));
+                        articles.push(instance.generateRandomNumber(min, max, boost_factor));
+                        assessments.push(instance.generateRandomNumber(min, max, boost_factor));
                     }
                     break;
                 case "months":
                     for (x = value * 30; x > 0; x--)
                     {
-                        (_.indexOf(days_of_month_interest, x) > 0) ? boost_factor = 10 : boost_factor = 1;
+                        (_.indexOf(days_of_month_interest, x) > 0 && boost) ? boost_factor = 10 : boost_factor = 1;
                         labels.push(instance.getShortDate(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
-                        logins.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        videos.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        ebooks.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        articles.push(instance.generateRandomNumber(3, 40, boost_factor));
-                        assessments.push(instance.generateRandomNumber(3, 40, boost_factor));
+                        logins.push(instance.generateRandomNumber(min, max, boost_factor));
+                        videos.push(instance.generateRandomNumber(min, max, boost_factor));
+                        ebooks.push(instance.generateRandomNumber(min, max, boost_factor));
+                        articles.push(instance.generateRandomNumber(min, max, boost_factor));
+                        assessments.push(instance.generateRandomNumber(min, max, boost_factor));
                     }
                     break;
             }
@@ -798,6 +934,59 @@ class WidgetCore {
             return ds;
         }
         
+        generateRandomDatasetTutorSupport(value, period, min = 5, max = 40, boost = false)
+        {
+            var labels = [];
+            var students = [];
+            var mentors = [];
+            var lecturers = [];
+            var boost_factor = 1;
+
+            switch (period) {
+                case "hours":
+                    for (var x = 0; x < value; x++)
+                    {
+                        labels.push(x + "h00");
+                        students.push(instance.generateRandomNumber(min, max, boost_factor + 40));
+                        mentors.push(instance.generateRandomNumber(min, max, boost_factor + 2));
+                        lecturers.push(instance.generateRandomNumber(min, max, boost_factor));
+                    }
+                    break;
+                case "days":
+                    for (x = value; x > 0; x--)
+                    {
+                        labels.push(instance.getDayName(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                        students.push(instance.generateRandomNumber(min, max, boost_factor + 40));
+                        mentors.push(instance.generateRandomNumber(min, max, boost_factor + 2));
+                        lecturers.push(instance.generateRandomNumber(min, max, boost_factor));
+                    }
+                    break;
+                case "months":
+                    for (x = value * 30; x > 0; x--)
+                    {
+                        labels.push(instance.getShortDate(new Date().setDate(new Date().getDate()-x+1), "en-US")); // lets include today looking back
+                        students.push(instance.generateRandomNumber(min, max, boost_factor + 40));
+                        mentors.push(instance.generateRandomNumber(min, max, boost_factor + 2));
+                        lecturers.push(instance.generateRandomNumber(min, max, boost_factor));
+                    }
+                    break;
+            }
+
+            var ds =
+                    {
+                        //"course_id": "FBN1501",
+                        //"assessment": "SA",
+                        //"assessment_type_id": "SA-ALL",
+                        "student_id": instance.selected_student,
+                        "labels": labels,
+                        "students": students,
+                        "mentors": mentors,
+                        "lecturers": lecturers
+                    };
+
+            return ds;
+        }
+        
         // events for changes on filters
         setupBindings()
         {
@@ -808,6 +997,7 @@ class WidgetCore {
                 instance.bindModuleFilter();
                 instance.bindAssessmentTypeFilter();
                 instance.bindEngagementFilter();
+                instance.bindTutorSupportFilter();
             }
             instance._initialized = true;
         }
@@ -891,6 +1081,9 @@ class WidgetCore {
                 
                 // update the top content if available
                 instance.renderTopContentTable();
+                instance.renderParticipationMetrics();
+                instance.renderNotificationMetrics();
+                instance.renderTimeline();
             });
             // and lets just select the first record on page load
             $("#module-filter").trigger("change");
@@ -921,31 +1114,59 @@ class WidgetCore {
                 switch (self.val())
                 {
                     case "today":
-                        studtrends = instance.generateRandomDataset(24, "hours");
+                        studtrends = instance.generateRandomDataset(24, "hours", 3, 40, true);
                         break;
                     case "week":
-                        studtrends = instance.generateRandomDataset(7, "days");
+                        studtrends = instance.generateRandomDataset(7, "days", 3, 40, true);
                         break;
                     case "month":
-                        studtrends = instance.generateRandomDataset(1, "months");
+                        studtrends = instance.generateRandomDataset(1, "months", 3, 40, true);
                         break;
                     case "3-month":
-                        studtrends = instance.generateRandomDataset(3, "months");
+                        studtrends = instance.generateRandomDataset(3, "months", 3, 40, true);
                         break;
                     case "6-month":
-                        studtrends = instance.generateRandomDataset(6, "months");
+                        studtrends = instance.generateRandomDataset(6, "months", 3, 40, true);
                         break;
                     case "year":
-                        studtrends = instance.generateRandomDataset(12, "months");
+                        studtrends = instance.generateRandomDataset(12, "months", 3, 40, true);
                         break;
                     default:
-                        studtrends = instance.generateRandomDataSet(24, "hours");
+                        studtrends = instance.generateRandomDataSet(24, "hours", 3, 40, true);
                         break;
                 }
 
                 instance.renderEngagementGraph(studtrends);
             });
             $("#student-engagement-filter").trigger("change");
+        }
+        
+        bindTutorSupportFilter()
+        {
+            $("#tutor-support-filter").on("change", function () {
+                var self = $(this);
+
+                var support = [];
+                //var studtrends = _.filter(trends, _.iteratee({'period': self.val()}));
+                switch (self.val())
+                {
+                    case "month":
+                        support = instance.generateRandomDatasetTutorSupport(1, "months", 12, 15, false);
+                        break;
+                    case "3-month":
+                        support = instance.generateRandomDatasetTutorSupport(3, "months", 12, 15, false);
+                        break;
+                    case "6-month":
+                        support = instance.generateRandomDatasetTutorSupport(6, "months", 12, 15, false);
+                        break;
+                    default:
+                        support = instance.generateRandomDatasetTutorSupport(1, "months", 12, 15, false);
+                        break;
+                }
+
+                instance.renderTutorSupportGraph(support);
+            });
+            $("#tutor-support-filter").trigger("change");
         }
         
         renderResultsGraph(data) {
@@ -1579,16 +1800,16 @@ class WidgetCore {
             // this is a bit of a hack I know
             // just make a color pool for now
             data.colorpool = [
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)',
-                'rgba(251, 114, 23, 1)',
-                'rgba(251, 158, 96, 1)',
-                'rgba(158, 251, 46, 1)',
-                'rgba(51, 158, 216, 1)',
-                'rgba(200, 200, 200, 1)'
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)',
+                'rgba(251, 114, 23, 0.5)',
+                'rgba(251, 158, 96, 0.5)',
+                'rgba(158, 251, 46, 0.5)',
+                'rgba(51, 158, 216, 0.5)',
+                'rgba(200, 200, 200, 0.5)'
             ];
             
             // a little song and dance to get the datasources
@@ -1637,6 +1858,90 @@ class WidgetCore {
             });
         }
         
+        renderTimeline()
+        {
+            $('#calendar-timeline').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                height: 500,
+                defaultDate: '2017-11-01',
+                navLinks: true, // can click day/week names to navigate views
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'FBN1502 Test 1',
+                        start: '2017-11-01',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'New Student Welcome',
+                        start: '2017-11-07',
+                        end: '2017-11-10'
+                    },
+                    {
+                        id: 999,
+                        title: 'FBN102 Exam',
+                        start: '2017-11-09T16:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: '2017-11-16T16:00:00'
+                    },
+                    {
+                        title: 'Student Conference',
+                        start: '2017-11-11',
+                        end: '2017-11-13'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2017-11-12T10:30:00',
+                        end: '2017-11-12T12:30:00',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'FBN101 Exam',
+                        start: '2017-11-12T12:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        title: 'FNB104 Test',
+                        start: '2017-11-12T14:30:00'
+                    },
+                    {
+                        title: 'FBN105 Test',
+                        start: '2017-11-12T17:30:00'
+                    },
+                    {
+                        title: 'FBN103 Exam',
+                        start: '2017-11-12T20:00:00',
+                        backgroundColor: '#dd4b39', //red
+                        borderColor: '#dd4b39' //red
+                    },
+                    {
+                        title: 'FBN102 Test',
+                        start: '2017-11-13T07:00:00',
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'MyUnisa',
+                        url: 'http://unisa.ac.za/',
+                        start: '2017-11-28'
+                    }
+                ]
+            });
+        }
+        
         renderTopContentTable()
         {
             var ts = _.filter(instance.topics, _.iteratee({'course_id': instance.selected_course}));
@@ -1648,9 +1953,9 @@ class WidgetCore {
                 var d = {};
                 d.course = instance.selected_course;
                 d.topic = t.items[x];
-                d.count = instance.generateRandomNumber(10, 100, 0);
-                d.time = instance.generateRandomNumber(0, 100, 0) + " h " + instance.generateRandomNumber(0, 60, 0) + " mins";
-                _.concat(data, d);
+                d.count = instance.generateRandomNumber(10, 100, 1);
+                d.time = instance.generateRandomNumber(0, 100, 1) + "h " + instance.generateRandomNumber(0, 60, 1) + "mins";
+                data.push(d);
             }
             
             $('#topContentTable tbody tr:not(:first)').remove(); 
@@ -1664,8 +1969,141 @@ class WidgetCore {
                         '</td><td>' + data[i].time + '</td>' +
                         '</td><td><a href="#" class="btn btn-xs btn-info">View</a></td></tr>';
             }
-            //$("#topContentTable tbody").append(html);
-            $('#topContentTable tbody tr:not(:first)').append(html);
+            $("#topContentTable tbody").html(html);
+            //$('#topContentTable tbody tr:not(:first)').append(html);
+        }
+        
+        renderParticipationMetrics()
+        {
+            var mets = _.filter(instance.participation, _.iteratee({'course_id': instance.selected_course}));
+            var m = _.head(mets);
+            
+            if (m)
+            {
+                $("#participant_student_count").html(m.students);
+                $("#participant_mentor_count").html(m.mentors);
+                $("#participant_lecturer_count").html(m.lecturers);
+            }
+        }
+        
+        renderNotificationMetrics()
+        {
+            var mets = _.filter(instance.notifications, _.iteratee({'course_id': instance.selected_course}));
+            var m = _.head(mets);
+            
+            if (m)
+            {
+                $("#notification_student_messages").html(m.students);
+                $("#notification_mentor_messages").html(m.mentors);
+                $("#notification_internal_messages").html(m.internal);
+            }
+        }
+        
+        renderTutorSupportGraph(data)
+        {
+            // MH: this is a workaround to trash the canvas
+            // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#tutor-support').length <= 0) return;
+            
+            $('#tutor-support').remove();
+            $('#tutor-support-container').append('<canvas id="tutor-support"><canvas>');
+
+            // pull a switch-a-roo on the labels and axis count
+            if (data && data.labels.length < 1)
+            {
+                data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            }
+
+            var areaChartCanvas = $('#tutor-support').get(0).getContext('2d');
+
+            var areaChartData = {
+                labels: data.labels,
+                datasets: [
+
+                    {
+                        label: 'Mentors',
+                        fill: false,
+                        backgroundColor: 'rgba(251, 114, 23, 1)',
+                        borderColor: 'rgba(251, 114, 23, 1)',
+                        borderWidth: 0,
+                        data: data.mentors
+                    },
+                    {
+                        label: 'Students',
+                        fill: false,
+                        backgroundColor: 'rgba(200, 200, 200, 1)',
+                        borderColor: 'rgba(200, 200, 200, 1)',
+                        borderWidth: 0,
+                        data: data.students
+                    },
+                    {
+                        label: 'Lecturers',
+                        fill: false,
+                        backgroundColor: 'rgba(51, 158, 216, 1)',
+                        borderColor: 'rgba(51, 158, 216, 1)',
+                        borderWidth: 0,
+                        data: data.lecturers
+                    }
+                ]
+            };
+
+
+            var areaChartOptions = {
+                //Boolean - If we should show the scale at all
+                showScale: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: false,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - Whether the line is curved between points
+                bezierCurve: true,
+                //Number - Tension of the bezier curve between points
+                bezierCurveTension: 0.3,
+                //Boolean - Whether to show a dot for each point
+                pointDot: true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius: 1,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth: 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius: 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke: true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth: 2,
+                //Boolean - Whether to fill the dataset with a color
+                datasetFill: true,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                //max: 100  // minimum value will be 0.
+                            }
+                        }]
+                }
+            };
+
+            // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+            var areaChart = new Chart(areaChartCanvas, {
+                type: "line",
+                data: areaChartData,
+                options: areaChartOptions
+            });
         }
     }
 </script>

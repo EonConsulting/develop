@@ -11,12 +11,12 @@
         <div class="dashboard-card shadow top-bdr-4">
 
             <div class="dashboard-card-heading">
-                Course Participation
+                Notifications
             </div>
 
             <div class="basic-clearfix" style="padding: 15px 0px 15px 0px;">
                 <div class="progress-charts basic-clearfix">
-                    <div class="container-fluid basic-clearfix">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="nofitication-card shadow" style="margin-bottom: 10px">
@@ -24,8 +24,8 @@
                                         <i class="fa fa-group"></i>
                                     </div>
                                     <div class="notification-card-text">
-                                        <h1>Students</h1>
-                                        <p id="participant_student_count">-</p>
+                                        <h1>Student Messages</h1>
+                                        <p id="notification_student_messages">-</p>
                                     </div>
                                 </div>
                             </div>
@@ -36,8 +36,8 @@
                                         <i class="fa fa-user"></i>
                                     </div>
                                     <div class="notification-card-text">
-                                        <h1>Mentors</h1>
-                                        <p id="participant_mentor_count">-</p>
+                                        <h1>Mentor Messages</h1>
+                                        <p id="notification_mentor_messages">-</p>
                                     </div>
                                 </div>
                             </div>
@@ -50,8 +50,8 @@
                                         <i class="fa fa-graduation-cap"></i>
                                     </div>
                                     <div class="notification-card-text">
-                                        <h1>Lecturers</h1>
-                                        <p id="participant_lecturer_count">-</p>
+                                        <h1>Internal Messages</h1>
+                                        <p id="notification_internal_messages">-</p>
                                     </div>
                                 </div>
                             </div>

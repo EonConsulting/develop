@@ -34,9 +34,9 @@ Lecturer Dashboard
         
     }
 
-    .progress-charts {
+    /*.progress-charts {
         background: #F9F9F9;
-    }
+    }*/
     
     .progress-charts h2 {
         text-align: center;
@@ -96,5 +96,11 @@ Lecturer Dashboard
     @include('dashboards.widgets.filters', ['size' => 'medium'])
     
     @include('dashboards.widgets.participants', ['size' => 'medium'])
+    
+    <div class="clearfix"></div>
+    
+    @include('dashboards.widgets.tutorsupport', ['size' => 'medium'])
+    
+    @include('dashboards.widgets.notifications', ['size' => 'medium'])
     
 @endsection
