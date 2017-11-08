@@ -238,11 +238,9 @@
 
     <script>
 
-        
         $( document ).ready(function() {
             refreshTable();
         });
-
 
         function refreshTable(){
 
@@ -271,7 +269,6 @@
                 console.log("Get current Data AJAX Broke");
             });
 
-            
         }
 
 
