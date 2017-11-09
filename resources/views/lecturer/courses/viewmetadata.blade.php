@@ -27,8 +27,13 @@
 
 
 @if(!$MetadataStore->isEmpty())
+<<<<<<< HEAD
 <div class="col-lg-8" style="margin-top:50px">
     <button type="submit" class="btn btn-success ">Submit</button>
+=======
+<div style="margin-bottom: 15px;">
+    <a type="button" class="btn btn-success ">Submit</a>
+>>>>>>> 2a530a3e7304a899aade6be19cc021828c2ff8e7
 </div>
 @else
 

@@ -5,6 +5,7 @@ Create a Course
 @endsection
 
 @section('custom-styles')
+    <link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />
 
 <style>
     #tab .btn {
