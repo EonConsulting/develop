@@ -81,21 +81,25 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Content Difficulty Type',
-                    'description' => 'Content Difficulty Type'
+                    'description' => 'Content Difficulty Type',
+                    'area' => 'Content'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Info Type',
-                    'description' => 'Content Info Type'
+                    'description' => 'Content Info Type',
+                    'area' => 'Content'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Progress Type',
-                    'description' => 'Content Progress Type'
+                    'description' => 'Content Progress Type',
+                    'area' => 'Content'
+                    
                 ]
         );
 
@@ -109,14 +113,16 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Content Type',
-                    'description' => 'Content Type'
+                    'description' => 'Content Type',
+                    'area' => 'Content'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Usage Type',
-                    'description' => 'Content Usage Type'
+                    'description' => 'Content Usage Type',
+                    'area' => 'Content'
                 ]
         );
 
@@ -137,7 +143,8 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Coverage Type',
-                    'description' => 'Coverage Type'
+                    'description' => 'Coverage Type',
+                    'area' => 'Content'
                 ]
         );
 
@@ -166,7 +173,8 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Discipline Type',
-                    'description' => 'Discipline Type'
+                    'description' => 'Discipline Type',
+                    'area' => 'Content Storyline'
                 ]
         );
 
@@ -286,7 +294,8 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Revision Type',
-                    'description' => 'Revision Type'
+                    'description' => 'Revision Type',
+                    'area' => 'Content'
                 ]
         );
 

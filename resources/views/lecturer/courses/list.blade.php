@@ -43,7 +43,7 @@
                                         <div class="dropdown-menu">
                                         <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
                                         <button class="dropdown-item moduleId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Module</button>
-                                        <a href="{{ route('metadata.list', $course->id) }}"><button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button></a>
+                                        <a href="{{ route('metadata.edit', $course->id) }}"><button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button></a>
                                     </div>
                                     </div> 
                                 </td>

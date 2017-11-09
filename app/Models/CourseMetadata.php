@@ -10,4 +10,5 @@ class CourseMetadata extends Model {
     protected $primaryKey = 'id';
     protected $fillable = ['course_id','metadata_type_id', 'metadata_store_id', 'value'];
     
+    
 }
