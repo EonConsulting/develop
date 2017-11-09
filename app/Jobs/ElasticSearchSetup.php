@@ -58,6 +58,10 @@ class ElasticSearchSetup implements ShouldQueue {
                     "description" => [
                         "type" => "string",
                         "analyzer" => "autocomplete"
+                    ],
+                    "tags" => [
+                        "type" => "string",
+                        "analyzer" => "autocomplete"
                     ]
                 ]
             ]
@@ -66,9 +70,13 @@ class ElasticSearchSetup implements ShouldQueue {
         $settings = [
             "analysis" => [
                 "filter" => [
-                    "type" => "edge_ngram", //edge_ngram or ngram
+                    "type" => "ngram", //edge_ngram or ngram
                     "min_gram" => 3,
-                    "max_gram" => 20
+                    "max_gram" => 8,
+                    "token_chars" => [
+                        "letter",
+                        "digit"
+                    ]
                 ],
                 "analyzer" => [
                     "autocomplete" => [
@@ -93,7 +101,7 @@ class ElasticSearchSetup implements ShouldQueue {
             // You can set any number of default request options.
             'timeout' => 30,
         ]);
-        
+
         // just drop the index in ES in-case it exists
         try {
             $response = $client->request('DELETE', $indexname);
@@ -151,9 +159,13 @@ class ElasticSearchSetup implements ShouldQueue {
         $settings = [
             "analysis" => [
                 "filter" => [
-                    "type" => "edge_ngram", //edge_ngram or ngram
+                    "type" => "ngram", //edge_ngram or ngram
                     "min_gram" => 3,
-                    "max_gram" => 20
+                    "max_gram" => 8,
+                    "token_chars" => [
+                        "letter",
+                        "digit"
+                    ]
                 ],
                 "analyzer" => [
                     "autocomplete" => [
@@ -168,7 +180,7 @@ class ElasticSearchSetup implements ShouldQueue {
             ],
             "mappings" => $content_map
         ];
-        
+
         // create re-usable client
         $indexname = "content";
         // GuzzleHttp\Client
@@ -178,7 +190,7 @@ class ElasticSearchSetup implements ShouldQueue {
             // You can set any number of default request options.
             'timeout' => 30,
         ]);
-        
+
         // just drop the index in ES in-case it exists
         try {
             $response = $client->request('DELETE', $indexname);
