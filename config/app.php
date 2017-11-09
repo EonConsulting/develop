@@ -222,6 +222,8 @@ return [
         \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
+        \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
