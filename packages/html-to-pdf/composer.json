@@ -1,0 +1,19 @@
+{
+  "name": "eonconsulting/html-to-pdf",
+  "description": "API to push html to and convert it to a pdf.",
+  "type": "package",
+  "authors": [
+    {
+      "name": "Kyle Vorster",
+      "email": "kyle@offsight.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\HtmlToPdf\\": "src/"
+    }
+  },
+  "require": {
+    "mikehaertl/phpwkhtmltopdf": "^2.0@dev"
+  }
+}
