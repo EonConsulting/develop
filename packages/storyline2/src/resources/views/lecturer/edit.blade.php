@@ -256,6 +256,14 @@ Storyline Student Single
         background: #0098bd;
     }
 
+    .title-bar-button-assets {
+        background: #fb7217;
+    }
+
+    .title-bar-button-assets:hover {
+        background: #7c380b;
+    }
+
     .content-entry {
         width: 250px;
         height: 150px;
@@ -340,6 +348,11 @@ Storyline Student Single
                                 <button type="button" class="title-bar-button title-bar-button-import" data-toggle="modal" data-target="#importModal">
                                     <i class="fa fa-save"></i>
                                     <span class="hidden-xs"> Import</span>
+                                </button>
+
+                                <button class="title-bar-button title-bar-button-assets" data-toggle="modal" data-target="#assetsModal">
+                                    <i class="fa fa-cube"></i>
+                                    <span class="hidden-xs"> Assets</span>
                                 </button>
 
                             </div>
@@ -465,7 +478,41 @@ Storyline Student Single
         </div>
 
     </div>
-</div>     
+</div>
+
+<div id="assetsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Import Asset</h4>
+            </div>
+
+            <div class="modal-body import-list">
+
+                <?php foreach($assets as $asset): ?>
+
+                <div class="content-entry shadow">
+                    <h3><?php echo $asset->title; ?></h3>
+                    <p><?php echo $asset->description; ?></p>
+
+                    <button class="content-copy-btn import-asset" data-asset-id="<?php echo $asset->id; ?>">Import</button>
+                </div>
+
+
+                <?php endforeach; ?>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-save"></i><span> Cancel</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -567,7 +614,49 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             import_content($content_id,$item_id,$action);
         });
 
+        $(".import-asset").on("click", function () {
+
+            $asset_id = $(this).data("asset-id");
+
+            importAsset($asset_id);
+        });
+
     });
+
+    function importAsset(asset){
+
+        actionUrl = base_url + "/content/assets/" + asset;
+
+        $.ajax({
+            method: "GET",
+            url: actionUrl,
+            contentType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    if(data['content'] !== null){
+                        CKEDITOR.instances['ltieditorv2inst'].insertHtml('<p>' + data['content'] + '</p>');
+                    }
+                    var html = data['html'];
+                    CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
+
+                    $('#assetsModal').modal('hide');
+
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
+    }
 
     var valid = {
         "title_length": false,

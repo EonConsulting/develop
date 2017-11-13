@@ -173,7 +173,7 @@
                         <?php echo $asset['title']; ?>
                     </div>
                     <div class="results-entry-actions">
-                        <a href="#" class="deleteEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-trash-o"></i></a>
+                        <a href="{{ route('assets.delete', $asset['id']) }}" class="deleteEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-trash-o"></i></a>
                         <a href="#" class="editEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-pencil-square-o"></i></a>
                         <a href="#" class="previewEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-eye"></i></a>
                     </div>
@@ -254,32 +254,11 @@
 
 @endsection
 
+
 @section('exterior-content')
-    <!-- Modal -->
-    <div id="saveModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Category</h4>
-                </div>
-
-                <div class="modal-body">
-                    
-                </div>
-
-                <div class="modal-footer">
-                    
-                </div>
-                
-            </div>
-
-        </div>
-    </div>     
         
 @endsection
+
 
 @section('custom-scripts')
 
@@ -296,72 +275,15 @@
 
             //detect mime and build html----------------------------------------
             if (asset['mime_type'] !== null){
-                $mime = asset['mime_type'].split("/");
-
-                $mimes = {
-                    'image': "<i class='fa fa-file-image-o'></i> Image",
-                    'video': "<i class='fa fa-file-video-o'></i> Video",
-                    'audio': "<i class='fa fa-file-audio-o'></i> Audio",
-                    'text': "<i class='fa fa-file-text-o'></i> Text",
-                    'application': {
-                        'msword': "<i class='fa fa-file-word-o'></i> Word Document",
-                        'vnd.openxmlformats-officedocument.wordprocessingml.document': "<i class='fa fa-file-word-o'></i> Word Document",
-                        'vnd.ms-excel': "<i class='fa fa-file-excel-o'></i> Excel Spreadsheet",
-                        'vnd.openxmlformats-officedocument.spreadsheetml.sheet': "<i class='fa fa-file-excel-o'></i> Excel Spreadsheet",
-                        'vnd.ms-powerpoint': "<i class='fa fa-file-powerpoint-o'></i> Power Point Presentation",
-                        'vnd.openxmlformats-officedocument.presentationml.presentation': "<i class='fa fa-file-powerpoint-o'></i> Power Point Presentation",
-                        'pdf': "<i class='fa fa-file-pdf-o'></i> PDF Document"
-                    }
-                };
-
-
-                $mime_str = '';
-
-                if($mime[0] === 'application'){
-
-                    if($mime[1] in $mimes['application']){
-                        $mime_str = $mimes['application'][$mime[1]];
-                    } else {
-                        $mime_str = "<i class='fa fa-file-o'></i> File"
-                    }
-
-                } else {
-                    $mime_str = $mimes[$mime[0]];
-                }
-
-                $("#a-mime-type").html($mime_str);
-
-                $media_str = '';
-                switch($mime[0]){
-                    case 'image':
-                        $media_str = "<img width='100%' src='{{ url('uploads') }}/" + asset['file_name'] + "' />";
-                        break;
-                    case 'video':
-                        $media_str = "<video width='100%' controls>";
-                        $media_str += "<source src='{{ url('uploads') }}/" + asset['file_name'] + "' type='" + asset['mime_type'] + "'>";
-                        $media_str += "Your browser does not support the video tag.";
-                        $media_str += "</video>";
-                        break;
-                    case 'audio':
-                        $media_str = "<audio controls>";
-                        $media_str += "<source src='{{ url('uploads') }}/" + asset['file_name'] + "' type='" + asset['mime_type'] + "'>";
-                        $media_str += "Your browser does not support the video tag.";
-                        $media_str += "</audio>";
-                        break;
-                    default:
-                        $media_str = "<a href='{{ url('uploads') }}/" + asset['file_name'] + "'><i class='fa fa-download'></i> Download " + "<strong>" + asset['title'] + "</strong>" + "</a>";
-                        break;
-                }
-
-                $("#a-media").html($media_str);
+                $("#a-media").html(asset['html']);
                 $("#a-media-holder").show();
 
             } else {
                 $("#a-media-holder").hide();
-                $("#a-mime-type").html("<i class='fa fa-file-o'></i> Content");
+
             }
 
-
+            $("#a-mime-type").html(asset['icon']);
 
             //build categories html--------------------------------------------
 

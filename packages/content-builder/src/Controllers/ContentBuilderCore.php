@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
 
 class ContentBuilderCore extends Controller {
@@ -30,12 +31,18 @@ class ContentBuilderCore extends Controller {
         }
 
         $categories = Category::all();
+        $assets = Asset::all();
 
         $breadcrumbs = [
             'title' => 'Content Store',
         ];
 
-        return view('eon.content-builder::store', ['content' => $content, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::store', [
+            'content' => $content,
+            'categories' => $categories,
+            'assets' => $assets,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
 
@@ -130,6 +137,7 @@ class ContentBuilderCore extends Controller {
 
         $categories = Category::all();
         $contents = Content::all();
+        $assets = Asset::all();
 
         if($content !== "new"){
             $content_id = $content;
@@ -142,6 +150,7 @@ class ContentBuilderCore extends Controller {
             'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,
+            'assets' => $assets,
             'breadcrumbs' => $breadcrumbs]
         );
 
