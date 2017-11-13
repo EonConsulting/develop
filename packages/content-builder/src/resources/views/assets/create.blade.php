@@ -5,11 +5,20 @@
 @endsection
 
 @section('custom-styles')
-    <link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />
+    <!--<link href="{{url('/vendor/appstore/css/radio-checkbox.css')}}" rel="stylesheet" />-->
 
     <style>
         .asset-form {
-            margin: 0px 15px 0px 15px;
+            margin: 0 15px 0 15px;
+        }
+
+        .category_checkbox {
+            margin-right: 50px;
+            float: left;
+        }
+
+        .checkbox {
+            margin-top: 0;
         }
 
         textarea { resize:vertical; }
@@ -21,40 +30,91 @@
 @section('content')
 
     <div class="asset-form">
+        <form action="{{ url('/content/assets') }}" method="post" enctype='multipart/form-data'>
 
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title">
-        </div>        
-    
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" rows="2" name="description" id="description" ></textarea>
-        </div>
+            {{ csrf_field() }}
 
-        <div class="form-group">
-            <label for="content">Content Block</label>
+            <div class="row">
 
-            <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="content" data-toggle="popover" data-placement="left" data-content=""></textarea>
-        </div>   
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title">
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="file">Upload a file</label>
-            <input type="file" name="file" id="fileToUpload">
-        </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="title">Tags (comma seperated)</label>
+                        <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags">
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="title">Tags (comma seperated)</label>
-            <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags">
-        </div> 
+            </div>
 
-        <div class="form-group">
-            <a href="#" class="btn btn-info" id="submit" value="Save">Save</a>
-        </div>
+            <div class="row">
 
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" rows="2" name="description" id="description" ></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="content">Content Block</label>
+                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="content" data-toggle="popover" data-placement="left" data-content=""></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="file" name="assetFile">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <label for="categories">Categories</label>
+                </div>
+
+                <div class="col-md-12">
+                    <?php foreach($categories as $category): ?>
+                    <div class="category_checkbox">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>"> <?php echo $category['name']; ?>
+                            </label>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-info" value="Save">
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 
-{{ csrf_field() }}
+
 @endsection
 
 
@@ -65,15 +125,48 @@
 
 @section('custom-scripts')            
     <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-
-
+    <script src="{{url('/js/plupload/plupload.full.min.js')}}"></script>
+    
     <script>
     
     $("#submit").on("click", function(){
         save_asset();
     });
+/*
+    var uploader = new plupload.Uploader({
+        browse_button: 'browse', // this can be an id of a DOM element or the DOM element itself
+        url: 'upload.php',
+        multi_selection : false
+    });
+ 
+    uploader.init();
 
+    uploader.bind('FilesAdded', function(up, files) {
+        var html = '';
+        plupload.each(files, function(file) {
+            html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
+        });
+        document.getElementById('filelist').innerHTML += html;
+    });
 
+    uploader.bind('UploadProgress', function(up, file) {
+        document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+    });
+    
+    uploader.bind('FileUploaded', function (up, file, res) {
+        var res1 = res.response.replace('"{', '{').replace('}"', '}');
+        var objResponse = JSON.parse(res1);
+        alert(objResponse.fn);
+    });
+
+    uploader.bind('Error', function(up, err) {
+        document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+    });
+
+    document.getElementById('start-upload').onclick = function() {
+        uploader.start();
+    };
+*/
     var config = {
         extraPlugins: 'dialog',
         toolbar: [[ 'LTIButton' ]]
@@ -111,13 +204,15 @@
 
     });
 
+    
+
     function form_data(){
 
         var data = {
             "title": $('#title').val(),
             "description": $('#description').val(),
             "content": $('#content').val(),
-            "fileToUpload": $('#fileToUpload').files[0],
+            "fileToUpload": $('#fileToUpload').get().files[0],
             "tags": $('#tags').val()
         };
 
@@ -126,7 +221,7 @@
 
     function save_asset(){
 
-        actionUrl = base_url + "/content/assets";
+        actionUrl = "/content/assets";
 
         $data = form_data();
 

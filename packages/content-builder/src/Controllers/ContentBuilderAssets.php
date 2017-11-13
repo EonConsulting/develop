@@ -14,7 +14,7 @@ class ContentBuilderAssets extends Controller {
 
     public function __construct(){
 
-        $this->path = url('assets');
+        $this->path = url('uploads/');
         
     }
 
@@ -22,7 +22,6 @@ class ContentBuilderAssets extends Controller {
     public function index() {
 
         $assets = Asset::all();
-
         $categories = Category::all();
 
         $breadcrumbs = [
@@ -35,35 +34,70 @@ class ContentBuilderAssets extends Controller {
 
     public function create(){
 
+        $categories = Category::all();
+
         $breadcrumbs = [
             'title' => 'Create an Asset'
         ];
 
-        return view('eon.content-builder::assets.create', ['breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::assets.create', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }
 
+
     public function store(Request $request){
-        $data = $request->json()->all();
+
+        $data = $request->all();
+
+        //dd($data);
+
+        if ($request->hasFile('assetFile'))
+        {
+            $file = $request->file('assetFile');
+
+            $extension = $file->getExtension();
+
+
+            switch ($extension){
+                case 'mp3':
+                    break;
+                default:
+
+            }
+
+            $file_path = $file->store($file->getMimeType(),'uploads');
+            $file_mime = $file->getMimeType();
+            $file_size = $file->getClientSize();
+
+        } else {
+            $file_path = null;
+            $file_mime = null;
+            $file_size = null;
+        }
 
         $asset = new Asset([
             'title' => $data['title'],
             'description' => $data['description'],
             'tags' => $data['tags'],
-            'file_name' => $data['file_name'],
-            'mime_type' => $data['mime_type'],
-            'size' => $data['size'],
+            'file_name' => $file_path,
+            'content' => $data['content'],
+            'mime_type' => $file_mime,
+            'size' => $file_size,
             'creator_id' => auth()->user()->id
         ]);
         
         $asset->save();
-        //TODO: Add handling of mimetype and saving of file
 
-        $result = [
-            msg => ''
-        ];
+        $categories = $request->get('categories');
 
-        return response()->json($result);
+        foreach($categories as $k => $category_id) {
+            $temp = Category::find($category_id);
+            $asset->categories()->save($temp);
+        }
+
+        return redirect('content/assets');
+
+
 
     }
 
@@ -76,6 +110,7 @@ class ContentBuilderAssets extends Controller {
         if($asset !== null){
             $result['found'] = true;
             $result['asset'] = $asset;
+            $result['asset']->categories = $result['asset']->categories()->get();
         } else {
             $result['found'] = false;
         }

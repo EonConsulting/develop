@@ -18,7 +18,8 @@
         "laravelcollective/html": "^5.3.0",
         "predis/predis": "^1.1",
         "spatie/laravel-fractal": "^3.5",
-		"gazsp/baum": "~1.1"
+		"gazsp/baum": "~1.1",
+        "doctrine/dbal": "2.5.13"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

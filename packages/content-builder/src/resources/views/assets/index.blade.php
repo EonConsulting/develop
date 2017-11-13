@@ -18,18 +18,32 @@
         .search {padding: 0px 15px 0px 15px;}
 
         .results {padding: 0px 15px 0px 15px;}
-        .results-entry {background: #FFF; padding: 10px; position: relative; overflow-y: auto; font-size: 18px;}
+        .results-entry {background: #FFF; padding: 10px; position: relative; overflow-y: auto; font-size: 18px; margin-bottom: 10px;}
         .results-entry-icon {float: left;}
         .results-entry-title {float: left; padding-left: 10px;}
         .results-entry-actions {float: right;}
         .results-entry-actions a {display: inline-block; width: 20px;}
 
         .preview-title {color: #FB711D; font-size: 20px; font-weight: 700; padding-bottom: 5px;}
-        .preview-meta {color: #999; font-weight: 700; padding-bottom: 5px;}
+        .preview-mime {color: #999; font-weight: 700; padding-bottom: 5px;}
         .preview-tags {padding-bottom: 5px;}
         .preview-description {}
         .preview-description-title {font-weight: 700;}
         .preview-description-body {}
+        .preview-content {padding-top: 15px;}
+        .preview-content-title {font-weight: 700;}
+        .preview-content-body {padding: 10px; background: #FFF; margin-bottom: 15px;}
+
+        .preview-media {padding-top: 15px;}
+        .preview-media-title {font-weight: 700;}
+        .preview-media-body {padding: 10px; background: #FFF; margin-bottom: 15px;}
+
+        #preview-place-holder {
+            text-align: center;
+            padding-top: 50px;
+            font-size: x-large;
+            color: #999;
+        }
 
         .flex-container {
             display: -ms-flexbox;
@@ -50,6 +64,7 @@
             -webkit-align-items: flex-start;
             -ms-flex-align: start;
             align-items: flex-start;
+            margin-top: -15px;
         }
 
         .flex-item:nth-child(1) {
@@ -78,6 +93,8 @@
             align-self: stretch;
 
             flex-basis: 1;
+
+            overflow-y: auto;
         }
 
         .flex-item:nth-child(3) {
@@ -92,6 +109,8 @@
             align-self: stretch;
             padding-right: 15px;
             flex-basis: 1;
+
+            overflow-y: auto;
         }
 
     </style>
@@ -99,7 +118,7 @@
 
 @section('content')
 
-    <div class="flex-container">
+    <div class="flex-container" id="container">
 
         <div class="filters flex-item">
 
@@ -144,64 +163,92 @@
             </div>
             <div class="results">
 
+
+                <?php foreach($assets as $asset): ?>
                 <div class="results-entry shadow">
                     <div class="results-entry-icon">
                         <i class="fa fa-image"></i>
                     </div>
                     <div class="results-entry-title">
-                        Algebra - Quadtratic Function
+                        <?php echo $asset['title']; ?>
                     </div>
                     <div class="results-entry-actions">
-                        <a href="#" id="deleteEntry"><i class="fa fa-trash-o"></i></a>
-                        <a href="#" id="editEntry"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" id="previewEntry"><i class="fa fa-eye"></i></a>
+                        <a href="#" class="deleteEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-trash-o"></i></a>
+                        <a href="#" class="editEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="#" class="previewEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-eye"></i></a>
                     </div>
                 </div>
+                <?php endforeach; ?>
 
             </div>
         </div>
 
         <div class="preview flex-item">
-            <h1>Preview</h1>
-            
-            <div class="preview-title">
-                Algebra - Quadtratic Function
-            </div>
-            
-            <div class="preview-meta">
-                <span class="preview-meta-type">
-                    <i class="fa fa-image"></i> Image
-                </span>
-                <span> | </span>
-                <span class="preview-meta-category">
-                    Categories: Maths
-                </span>
-            </div>
 
-            <div class="preview-tags">
+            <div id="preview-place-holder">
 
-                <span class="label label-default">algebra</span>
-                <span class="label label-default">algebraic</span>
-                <span class="label label-default">math</span>
-                <span class="label label-default">maths</span>
-                <span class="label label-default">quadratic</span>
-                <span class="label label-default">quadratic equation</span>
+                Select an item to preview.
 
             </div>
 
-            <div class="preview-description">
+            <div class="preview-asset hidden" id="preview-asset">
+                <h1>Preview</h1>
 
-                <div class="preview-description-title">
-                Description
+                <div class="preview-title" id="a-title">
+
                 </div>
 
-                <div class="preview-description-body">
-                The quadratic formula expresses the solution of the degree two equation ax2 + bx + c = 0, where a is not zero, in terms of its coefficients a, b and c.
+                <div class="preview-mime" >
+                <span class="preview-mime-type" id="a-mime-type">
+
+                </span>
+                    <span> | </span>
+                    <span class="preview-mime-category" id="a-category">
+
+                </span>
+                </div>
+
+                <div class="preview-tags" id="a-tags">
+
+                </div>
+
+                <div class="preview-description">
+
+                    <div class="preview-description-title">
+                        Description
+                    </div>
+
+                    <div class="preview-description-body" id="a-description">
+
+                    </div>
+
+                </div>
+
+                <div class="preview-content" id="a-content-holder">
+
+                    <div class="preview-content-title">
+                        Content
+                    </div>
+                    <div class="preview-content-body shadow" id="a-content">
+
+                    </div>
+                </div>
+
+                <div class="preview-media" id="a-media-holder">
+
+                    <div class="preview-media-title">
+                        Media
+                    </div>
+                    <div class="preview-media-body shadow" id="a-media">
+
+                    </div>
                 </div>
 
             </div>
 
         </div>
+
+
     
     </div>
 
@@ -238,137 +285,153 @@
 
     <script>
 
-        $( document ).ready(function() {
-            refreshTable();
+        $(document).ready(function() {
+            resizeArea();
         });
 
-        function refreshTable(){
+        function changePreview(asset){
 
-            $.ajax({
-                method: "GET",
-                url: "{{ url('content/categories') }}/all",
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        
-                        //$json = data;
+            $("#a-title").html(asset['title']);
 
-                        //console.log(data);
-                        drawTable(data);
-                    },
-                    400: function () { //bad request
 
-                    },
-                    500: function () { //server kakked
+            //detect mime and build html----------------------------------------
+            if (asset['mime_type'] !== null){
+                $mime = asset['mime_type'].split("/");
 
+                $mimes = {
+                    'image': "<i class='fa fa-file-image-o'></i> Image",
+                    'video': "<i class='fa fa-file-video-o'></i> Video",
+                    'audio': "<i class='fa fa-file-audio-o'></i> Audio",
+                    'text': "<i class='fa fa-file-text-o'></i> Text",
+                    'application': {
+                        'msword': "<i class='fa fa-file-word-o'></i> Word Document",
+                        'vnd.openxmlformats-officedocument.wordprocessingml.document': "<i class='fa fa-file-word-o'></i> Word Document",
+                        'vnd.ms-excel': "<i class='fa fa-file-excel-o'></i> Excel Spreadsheet",
+                        'vnd.openxmlformats-officedocument.spreadsheetml.sheet': "<i class='fa fa-file-excel-o'></i> Excel Spreadsheet",
+                        'vnd.ms-powerpoint': "<i class='fa fa-file-powerpoint-o'></i> Power Point Presentation",
+                        'vnd.openxmlformats-officedocument.presentationml.presentation': "<i class='fa fa-file-powerpoint-o'></i> Power Point Presentation",
+                        'pdf': "<i class='fa fa-file-pdf-o'></i> PDF Document"
                     }
+                };
+
+
+                $mime_str = '';
+
+                if($mime[0] === 'application'){
+
+                    if($mime[1] in $mimes['application']){
+                        $mime_str = $mimes['application'][$mime[1]];
+                    } else {
+                        $mime_str = "<i class='fa fa-file-o'></i> File"
+                    }
+
+                } else {
+                    $mime_str = $mimes[$mime[0]];
                 }
-            }).error(function (data) {
-                console.log("Get current Data AJAX Broke");
+
+                $("#a-mime-type").html($mime_str);
+
+                $media_str = '';
+                switch($mime[0]){
+                    case 'image':
+                        $media_str = "<img width='100%' src='{{ url('uploads') }}/" + asset['file_name'] + "' />";
+                        break;
+                    case 'video':
+                        $media_str = "<video width='100%' controls>";
+                        $media_str += "<source src='{{ url('uploads') }}/" + asset['file_name'] + "' type='" + asset['mime_type'] + "'>";
+                        $media_str += "Your browser does not support the video tag.";
+                        $media_str += "</video>";
+                        break;
+                    case 'audio':
+                        $media_str = "<audio controls>";
+                        $media_str += "<source src='{{ url('uploads') }}/" + asset['file_name'] + "' type='" + asset['mime_type'] + "'>";
+                        $media_str += "Your browser does not support the video tag.";
+                        $media_str += "</audio>";
+                        break;
+                    default:
+                        $media_str = "<a href='{{ url('uploads') }}/" + asset['file_name'] + "'><i class='fa fa-download'></i> Download " + "<strong>" + asset['title'] + "</strong>" + "</a>";
+                        break;
+                }
+
+                $("#a-media").html($media_str);
+                $("#a-media-holder").show();
+
+            } else {
+                $("#a-media-holder").hide();
+                $("#a-mime-type").html("<i class='fa fa-file-o'></i> Content");
+            }
+
+
+
+            //build categories html--------------------------------------------
+
+            $categories_str = 'Catgories: ';
+            $num_cat = 0;
+
+            /*$(".menu_collapse").each(function( index ) {
+                $(this).removeClass("hidden", 1000);
+            });*/
+
+            $.each(asset['categories'], function(index, value){
+                $num_cat++;
+                if($num_cat > 1) {
+                    $categories_str += ", ";
+                }
+                $categories_str +=  value['name'];
             });
+
+            $("#a-category").html($categories_str);
+
+
+            //build tags htm
+            $tags = asset['tags'].split(",");
+            $tags_str = '';
+            $tags.forEach(function(item, index){
+                $tags_str += "<span class='label label-default'>" + item + "</span> ";
+            });
+
+            $("#a-tags").html($tags_str);
+
+
+            //simple
+            $("#a-description").html(asset['description']);
+
+            if(asset['content'] !== null){
+                $("#a-content-holder").show();
+                $("#a-content").html(asset['content']);
+            } else {
+                $("#a-content-holder").hide();
+            }
+
+
+
+
+
+            $("#preview-place-holder").hide();
+            $("#preview-asset").removeClass("hidden");
+
 
         }
-
-
-        function drawTable($data){
-
-
-            $html = "";
-            $.each($data, function(i) {
-
-                //open row
-                $html += "<tr>";
-                
-                //add name
-                $html += "<td>" + $(this)[0].name + "</td>";
-                
-                //add tags
-                $html += "<td>";
-                $tags = $(this)[0]['tags'].split(",");
-                $.each($tags, function(j){
-
-                    $html += "<span class='label label-default'>" + $tags[j] + "</span><span> </span>";
-                });
-                $html += "</td>";
-
-                //add actions
-                $html += "<td>";
-                $html += "<a href='#' class='btn btn-info btn-sm edit-btn' data-id='" + $(this)[0]['id'] + "'data-toggle='modal' data-target='#saveModal'>Edit</a>";
-                $html += "<span> </span>";
-                $html += "<a href='#' class='btn btn-danger btn-sm delete-btn' data-id='" + $(this)[0]['id'] + "'>Delete</a>";
-                $html += "</td>";
-
-                //close row
-                $html += "</tr>";
-            });
-
-            $('#category_table').empty();
-            $('#category_table').append( $html );
-
-        }
-
-        $(document).on( 'click', '.create-btn', function() {
-
-            console.log("Create clicked");
-
-            $data = {"name": $("#create_name").val(), "tags": $("#create_tags").val()};
-
-            $.ajax({
-                method: "POST",
-                url: "{{ url('content/categories') }}",
-                data: JSON.stringify($data),
-                contentType: 'application/json',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        $("#create_name").val("");
-                        $("#create_tags").val("");
-                        refreshTable();
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
-                }
-            }).error(function (data) {
-                console.log("Edit AJAX Broke");
-            });
-
-
-        });
-
 
         
-        $(document).on('click', '.edit-btn', function() {
+        $(document).on('click', '.previewEntry', function() {
 
-            console.log("Edit clicked");
-
-            var id = $(this).data("id"); //get category id from btn id attribute
-            $("#form-category-id").val(id); //change hidden input value to id above
-            //$("#edit-form").attr("action", "{{ url('content/categories/update') }}/"+id)
-
-
-            console.log("Edit " + id);
+            console.log("Preview clicked");
+            var id = $(this).data("asset-id"); //get category id from btn id attribute
+            console.log("Preview " + id);
 
             $.ajax({
                 method: "GET",
-                url: "{{ url('content/categories/') }}/"+id,
+                url: "{{ url('content/assets/') }}/"+id,
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
                 statusCode: {
                     200: function (data) { //success
 
-                        var json = JSON.parse(data);
+                        //var json = JSON.parse(data);
 
-                        $("#cat_name").val(json["name"]);
-                        $("#cat_tags").val(json["tags"]);
+                        changePreview(data);
 
                     },
                     400: function () { //bad request
@@ -385,71 +448,15 @@
 
         });
 
-        
-        $(document).on('click', '.save-btn', function(){
-
-            var id = $("#form-category-id").val();
-            $data = {"name": $("#cat_name").val(), "tags": $("#cat_tags").val()};
-
-            $.ajax({
-                method: "PUT",
-                url: "{{ url('content/categories/') }}/"+id,
-                data: JSON.stringify($data),
-                contentType: 'application/json',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        $('#saveModal').modal('hide');
-                        refreshTable();
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
-                }
-            }).error(function (data) {
-                console.log("Edit AJAX Broke");
-            });
-
+        $(window).resize(function(){
+            resizeArea();
         });
 
+        function resizeArea(){
+            var areaHeight = $("#content-area").height();
+            $("#container").height(areaHeight);
+        }
 
-        $(document).on('click', '.delete-btn',function() {
-            console.log("Delete clicked")            
-            var id = $(this).data("id")  //get category id from btn id attribute
-
-            console.log(id);
-
-            $.ajax({
-                method: "DELETE",
-                url: "{{ url('content/categories/') }}/"+id,
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-
-                        refreshTable();
-                        
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
-                }
-            }).error(function (data) {
-                console.log("Delete AJAX Broke");
-            });
-        });
-
-
-        //$(this).data("id") 
 
     </script>                  
 

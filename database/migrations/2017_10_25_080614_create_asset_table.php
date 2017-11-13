@@ -27,18 +27,13 @@ class CreateAssetTable extends Migration
             $table->string('mime_type', 255)->required();            
             $table->unsignedInteger('size')->nullable()->default(null);
             $table->unsignedInteger('creator_id')->nullable()->default(null);
-            $table->unsignedInteger('category_id')->nullable()->default(null);
             $table->integer('import_count')->default(0);
 
             $table->timestamps();
 
             $table->foreign('creator_id', 'user_ibfk_2')
                 ->references('id')->on('users');
-            
-            $table->foreign('category_id', 'categories_ibfk_2')
-                ->references('id')->on('lk_content_categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+
         });
     }
 

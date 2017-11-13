@@ -3,7 +3,7 @@ namespace EONConsulting\AnalyticsLogger;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use EONConsulting\AnalyticsLogger\AnalyticsLog as Logger;
+use EONConsulting\AnalyticsLogger\Models\AnalyticsLog as Logger;
 
 class AnalyticsLoggerController extends Controller
 {
