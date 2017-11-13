@@ -63,37 +63,60 @@ class CreateCourseController extends Controller {
             ],
         ];
         
-        $MetadataStore = MetadataType::get();  
+        $MetadataStore = MetadataType::get(); 
+        
         $MetaId = MetadataStore::pluck('id')->all();
-
+               
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
     
-    public function viewmetadata($id) {
-        $MetadataStore = MetadataStore::where('metadata_type_id',$id)->get();
+    public function editmetadata($id) {
+         $breadcrumbs = [
+            'title' => 'Modules',
+            'href' => route('courses'),
+            'child' => [
+                'title' => 'Edit Metadata',
+            ],
+        ];
+        
+        $MetadataStore = MetadataType::get(); 
+        
         $MetaId = MetadataStore::pluck('id')->all();
-        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
+               
+        return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
+    }
+    
+    public function viewmetadata($id,$course) {
+        $MetaId = CourseMetadata::where('course_id',$course)->pluck('metadata_store_id','value')->all();       
+        $MetadataStore = MetadataStore::with(['course_metadata'=>function($q) use ($course) {
+        $q->where('course_id',$course);}])->where('metadata_type_id',$id)->get();  
+        
+        //$MetaId = MetadataStore::pluck('id')->all();       
+        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore,'typeId'=>$id]);
     }
 
     public function storemetadata(Request $request) {
-        $value = $request->get('value');
+        
+        if(!empty($request->get('metadata_store_id'))){
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [
                 'course_id' => $request->get('course_id'),
-                'metadata_type_id' => $request->get('metadata_type_id'),
+                'metadata_type_id' => $request->get('metadata_type_id')[$key],
                 'metadata_store_id' => (int) $selected_id,
-                'value' => $value[$key],
+                'value' => $request->get('value')[$key],
             ];
 
             $status = new CourseMetadata($Metadata);
             $check = $status->save();
-        }
-
-        if ($check) {
+            }
+          if ($check) {
             return response()->json(['success' => 'Metadata has been added successfully.']);
+          }
+            return response()->json(['error' => 'An error occured, pleas try again']);
+        }else{
+            return response()->json(['error' => 'Please select Metadata']);
         }
-
-        return response()->json(['error' => 'An error occured, pleas try again']);
+        
     }
 
     public function updatemetadata(Request $request) {
