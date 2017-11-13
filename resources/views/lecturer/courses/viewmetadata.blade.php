@@ -17,14 +17,10 @@
             {{ Form::text('value[]',empty($resource->course_metadata->value)? '' : $resource->course_metadata->value, array('placeholder'=>'Custom Value','class' => 'form-control')) }}
         </div>
 
-
-
-
     </div>
     @endforeach
 
 </div>
-
 
 @if(!$MetadataStore->isEmpty())
 
