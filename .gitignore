@@ -16,3 +16,4 @@ _notes/
 /npm-debug.log
 /package-lock.json
 /.idea
+/public/uploads/*
