@@ -223,7 +223,11 @@
         </div>
 
         <div class="content-page shadow">
-            
+
+            <div style="text-align: right; padding-right: 10px;">
+                <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
+            </div>
+
             <div id="body"></div>
     
         </div>
@@ -350,7 +354,8 @@
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                          getContent(item_id, button);
                        } else if(data.msg === 'error'){
-                        progress_error();                      
+                        //progress_error();
+                        getContent(item_id, button);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
