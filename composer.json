@@ -7,6 +7,7 @@
     "minimum-stability": "dev",
     "homepage": "http://unisa.local",
     "require": {
+        "php": ">=7.0.0",
         "IMSGlobal/LTI": "^3.0.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "creativeorange/gravatar": "~1.0",
@@ -18,7 +19,7 @@
         "laravelcollective/html": "^5.3.0",
         "predis/predis": "^1.1",
         "spatie/laravel-fractal": "^3.5",
-		"gazsp/baum": "~1.1"
+        "gazsp/baum": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

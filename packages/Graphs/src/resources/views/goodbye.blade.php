@@ -13,7 +13,7 @@
                 boundingbox: [-1.5, 2, 1.5, -1],
                 keepaspectratio: true,
                 showcopyright: false,
-                shownavigation: true
+                shownavigation: false
             });
 
             var cerise = {
