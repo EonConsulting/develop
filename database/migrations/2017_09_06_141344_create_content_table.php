@@ -25,7 +25,7 @@ class CreateContentTable extends Migration
             $table->increments('id');
             $table->string('title', 255)->required();
             $table->text('body')->nullable()->nullable()->default(null);
-            $table->string('tags',255)->nullable()->nullable()->default(null);
+            $table->string('tags', 255)->nullable()->nullable()->default(null);
             $table->unsignedInteger("creator_id")->nullable()->default(null);
             
             $table->timestamps();

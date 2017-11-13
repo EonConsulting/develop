@@ -14,10 +14,10 @@ use EONConsulting\Storyline\Menu\StorylineMenu;
 use EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs;
 use EONConsulting\Storyline\TagCloud\StorylineTagCloud;
 
-class CourseLectureItemLTIController extends LTIBaseController {
-
-    public function index(Course $course, StorylineItem $storylineItem) {
-
+class CourseLectureItemLTIController extends LTIBaseController
+{
+    public function index(Course $course, StorylineItem $storylineItem)
+    {
         $slCore = new StorylineCore();
         $data = $slCore->getIndex($course);
 
@@ -104,5 +104,4 @@ class CourseLectureItemLTIController extends LTIBaseController {
             'breadcrumbs' => $breadcrumbs,
         ]);
     }
-
 }

@@ -7,9 +7,10 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CoursesLTIController extends LTIBaseController {
-
-    public function index() {
+class CoursesLTIController extends LTIBaseController
+{
+    public function index()
+    {
         $courses = Course::get();
 
         $breadcrumbs = [
@@ -18,5 +19,4 @@ class CoursesLTIController extends LTIBaseController {
 
         return view('student.courses.list', ['courses' => $courses, 'breadcrumbs' => $breadcrumbs]);
     }
-
 }

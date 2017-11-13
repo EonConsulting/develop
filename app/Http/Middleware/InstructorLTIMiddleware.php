@@ -13,19 +13,28 @@ class InstructorLTIMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-
-        if(!auth()->check())
+    public function handle($request, Closure $next)
+    {
+        if ( ! auth()->check()) {
             return redirect()->to('/');
+        }
 
+        if( ! auth()->user()->hasRole('Instructor'))
+        {
+            return redirect()->to('/');
+        }
+
+        return $next($request);
+
+        /*
         $user = $request->user();
-        if(!$user) {
+        if (!$user) {
             // user not found
             return redirect()->to('/');
         }
 
         $lti = $user->lti;
-        if(count($lti) == 0) {
+        if (count($lti) == 0) {
             // no lti links found
             return redirect()->to('/');
         }
@@ -33,12 +42,15 @@ class InstructorLTIMiddleware
         $lti = $lti[0];
         $role = $lti->roles;
 
-        switch($role) {
+        echo 'instructor: ';
+        dd($role);
+
+        switch ($role) {
             case 'Instructor':
                 return $next($request);
                 break;
         }
 
-        return redirect()->to('/');
+        return redirect()->to('/');*/
     }
 }

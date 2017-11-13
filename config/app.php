@@ -10,9 +10,10 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
-    'name' => env('APP_NAME', 'UNISA'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
      |--------------------------------------------------------------------------
@@ -70,7 +71,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', "http://unisa.app"),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -157,8 +158,8 @@ return [
     'providers' => [
 
         /*
-            * Laravel Framework Service Providers...
-            */
+         * Laravel Framework Service Providers...
+         */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -183,10 +184,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-            * Package Service Providers...
-            */
+         * Package Service Providers...
+         */
         Laravel\Tinker\TinkerServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        //Barryvdh\Debugbar\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -209,7 +210,7 @@ return [
 //        \EONConsulting\PHPSaasWrapper\src\PHPSaasWrapperServiceProvider::class,
         //\EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
         \EONConsulting\MindMap\MindMapServiceProvider::class,
-       // \EONConsulting\StoryCore\StoryCoreServiceProvider::class,
+        // \EONConsulting\StoryCore\StoryCoreServiceProvider::class,
         //\EONConsulting\StoryCore\StoryCoreServiceProvider::class,
         //\EONConsulting\PHPStencil\PHPStencilServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
@@ -222,6 +223,9 @@ return [
         \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
+        \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -232,9 +236,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ViewComposerServiceProvider::class,
 
-
-
-
     ],
 
     /*
@@ -244,7 +245,7 @@ return [
     |
     | This array of class aliases will be registered when this application
     | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they dont hinder performance.
+    | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
 
@@ -284,7 +285,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
         'Fractal' => Spatie\Fractal\FractalFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
@@ -298,7 +299,7 @@ return [
         'StorylineCore' => \EONConsulting\Storyline\Core\Facades\StorylineCore::class,
         'StorylineNav' => \EONConsulting\Storyline\Nav\Facades\StorylineNav::class,
         'StorylineMenu' => \EONConsulting\Storyline\Menu\Facades\StorylineMenu::class,
-        'StorylineBreadcrumbs' => \EONConsulting\Storyline\Breadcrumbs\Facades\StorylineBreadcrumbs::class,
+        //'StorylineBreadcrumbs' => \EONConsulting\Storyline\Breadcrumbs\Facades\StorylineBreadcrumbs::class,
         'StorylineMindMap' => \EONConsulting\Storyline\MindMap\Facades\StorylineMindMap::class,
         'CKEditorV2' => \EONConsulting\CKEditorPluginV2\Facades\CKEditorPluginV2::class,
         'ImgProcessor' => \EONConsulting\ImgProcessor\Facades\ImgProcessor::class,
@@ -306,8 +307,10 @@ return [
         'Graphs' => \Packages\Graphs\src\Facades\Graphs::class,
 //        'PHPSaasWrapper' => \EONConsulting\PHPSaasWrapper\src\Facades\PHPSaasWrapper::class,
         //'StorylineBreadcrumbs' => EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs::class,
-        'MindMap' => \EONConsulting\MindMap\Facades\MindMap::class,
+        //'MindMap' => \EONConsulting\MindMap\Facades\MindMap::class,
         'PHPStencil' => \EONConsulting\PHPStencil\PHPStencil::class,
+
+
     ],
 
 ];

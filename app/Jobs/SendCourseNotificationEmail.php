@@ -24,7 +24,8 @@ class SendCourseNotificationEmail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Course $course, $email) {
+    public function __construct(Course $course, $email)
+    {
         $this->course = $course;
         $this->email = $email;
     }
@@ -34,8 +35,8 @@ class SendCourseNotificationEmail implements ShouldQueue
      *
      * @return void
      */
-    public function handle() {
-
+    public function handle()
+    {
         $course_user = CourseUser::where('course_id', $this->course->id)->where('email', $this->email)->first();
 
         Mail::send(new CourseNotificationEmail($course_user, $this->course));
