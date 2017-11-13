@@ -26,8 +26,8 @@ class ViewComposerServiceProvider extends ServiceProvider
         //
     }
 
-    private function composeNavigation() {
+    private function composeNavigation()
+    {
 //        view()->composer('main.nav-menu', 'App\Http\ViewComposers\NavComposer');
     }
-
 }

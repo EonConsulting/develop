@@ -8,10 +8,10 @@ use App\Models\StorylineItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseLectureItemController {
-
-    public function index(Course $course, StorylineItem $storylineItem) {
-
+class CourseLectureItemController
+{
+    public function index(Course $course, StorylineItem $storylineItem)
+    {
         $data = storyline_core()->getIndex($course);
 
 //        dd($data);
@@ -23,7 +23,7 @@ class CourseLectureItemController {
         $custom_styles = [];
 
         $nav = '';
-        if(function_exists('storyline_nav')) {
+        if (function_exists('storyline_nav')) {
             $nav = storyline_nav()->getNavHTMLFromCourse($course);
             $styles = array_merge($styles, storyline_nav()->getStyles());
             $scripts = array_merge($scripts, storyline_nav()->getScripts());
@@ -31,12 +31,12 @@ class CourseLectureItemController {
         }
         //Peace Additions to J. Harington's Initial Storyline Nav
         $navigation = '';
-        if (function_exists('storyline_nav')){
+        if (function_exists('storyline_nav')) {
             $navigation = storyline_nav()->getNavHTMLFromCourseNORECURSION($course);
         }
 
         $menu = '';
-        if(function_exists('storyline_menu')) {
+        if (function_exists('storyline_menu')) {
             $menu = storyline_menu()->getMenuHTMLFromCourse($course);
         }
 
@@ -45,7 +45,6 @@ class CourseLectureItemController {
         //Get and Make Breadcrumbs
         if (function_exists('storyline_breadcrumbs')) {
             $breadcrumbs = storyline_breadcrumbs()->showCatBreadCrumb($storylineItem->id, $storylineItem->id, $course);
-
         }
         //Get Next Storyline Item uses the Course Model
         //Get Next Storyline Item uses the Course Model
@@ -73,5 +72,4 @@ class CourseLectureItemController {
             'menu' => $menu, 'storyline' => $storyline, 'storyline_item' => $storylineItem,
             'next' => $next, 'previous' => $previous]);
     }
-
 }

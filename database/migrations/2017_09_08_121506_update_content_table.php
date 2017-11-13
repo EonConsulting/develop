@@ -13,10 +13,8 @@ class UpdateContentTable extends Migration
      */
     public function up()
     {
-        Schema::table('content', function($table) {
-            
-                $table->text("description");
-
+        Schema::table('content', function ($table) {
+            $table->text("description");
         });
     }
 
@@ -27,7 +25,7 @@ class UpdateContentTable extends Migration
      */
     public function down()
     {
-        Schema::table('content', function($table) {
+        Schema::table('content', function ($table) {
             $table->dropColumn('description');
         });
     }

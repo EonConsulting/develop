@@ -23,7 +23,7 @@ class CreateStudentProgressTable extends Migration
             $table->integer('current');
             $table->integer('furthest');
             $table->integer('root');
-            $table->timestamps();           
+            $table->timestamps();
         });
     }
 

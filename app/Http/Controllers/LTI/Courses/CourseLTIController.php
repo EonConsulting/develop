@@ -7,13 +7,14 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseLTIController extends LTIBaseController {
-
-    public function index(Course $course) {
+class CourseLTIController extends LTIBaseController
+{
+    public function index(Course $course)
+    {
 //        dd(storyline_core()->getIndex($course));
 
         $data = storyline_core()->getIndex($course);
-        $tagArray  =  explode(',',$course->tags);
+        $tagArray  =  explode(',', $course->tags);
         $WordList  =    storyline_tag_cloud()->generateWordList($tagArray);
 
         $breadcrumbs = [
@@ -31,5 +32,4 @@ class CourseLTIController extends LTIBaseController {
             'breadcrumbs' => $breadcrumbs,
         ]);
     }
-
 }

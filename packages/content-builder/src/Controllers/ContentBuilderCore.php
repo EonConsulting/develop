@@ -16,7 +16,7 @@ class ContentBuilderCore extends Controller {
      */
     public function index() {
 
-        $content = Content::all();
+        $content = Content::with('categories')->get();
         $content_squashed = [];
 
         foreach($content as $k => $item){

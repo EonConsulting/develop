@@ -17,7 +17,6 @@ class CourseLectureController extends CourseLectureLTIController
 
     public function index(Course $course)
     {
-
         $latest_storyline = $course->latest_storyline()->items()->first();
         return redirect()->route('home.courses.single.lectures.item', [$course->id, $latest_storyline->id]);
     }
