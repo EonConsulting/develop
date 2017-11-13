@@ -13,8 +13,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
 
         //Core Routes
         Route::get('/', 'Storyline2Core@index')->name('storyline2');
-
-        
        
         /*
          * ---------------------------------------------
@@ -51,9 +49,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::match(['get', 'post'], '/rename','Storyline2ViewsJSON@rename')->name('storyline2.JSON.rename');
         Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2.JSON.delete');
         Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2.JSON.create');
-
-        
-
         //Add more routes
     });
 });

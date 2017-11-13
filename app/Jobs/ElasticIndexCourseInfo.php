@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Bus\Dispatchable;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-use App\Models\Course;
 
 class ElasticIndexCourseInfo implements ShouldQueue {
 
@@ -86,9 +85,9 @@ class ElasticIndexCourseInfo implements ShouldQueue {
                 ]);
             }
             // just drop the index in ES in-case it exists
-            $indexname = "course";
+            $indexname = "courses";
             try {
-                $response = $this->client->request('POST', $indexname . "/external/" . $entry["id"], ["body" => $entry]);
+                $response = $this->client->request('POST', $indexname . "/external/" . $entry["id"], ["json" => $entry]);
                 switch ($response->getStatusCode()) {
                     case "200":
                         Log::info("POST of item id:" . $entry["id"] . " to index:" . $indexname . " successful");

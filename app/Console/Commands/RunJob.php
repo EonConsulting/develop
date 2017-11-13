@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Jobs\ElasticIndexContent;
 use App\Jobs\ElasticIndexCourseInfo;
 use App\Jobs\ElasticSearchSetup;
 
@@ -41,6 +42,9 @@ class RunJob extends Command
     {
         switch ($this->argument("jobname"))
         {
+            case "ElasticIndexContent":
+                ElasticIndexContent::dispatch();
+                break;
             case "ElasticIndexCourseInfo":
                 ElasticIndexCourseInfo::dispatch();
                 break;

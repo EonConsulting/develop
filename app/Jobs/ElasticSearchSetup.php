@@ -45,9 +45,6 @@ class ElasticSearchSetup implements ShouldQueue {
             "courses" => [
                 "dynamic" => "true",
                 "properties" => [
-                    "suggest" => [
-                        "type" => "completion"
-                    ],
                     "id" => [
                         "type" => "integer"
                     ],
@@ -131,9 +128,6 @@ class ElasticSearchSetup implements ShouldQueue {
             "content" => [
                 "dynamic" => "true",
                 "properties" => [
-                    "suggest" => [
-                        "type" => "completion"
-                    ],
                     "id" => [
                         "type" => "integer"
                     ],
@@ -150,7 +144,8 @@ class ElasticSearchSetup implements ShouldQueue {
                         "analyzer" => "autocomplete"
                     ],
                     "tags" => [
-                        "type" => "string"
+                        "type" => "string",
+                        "analyzer" => "autocomplete"
                     ]
                 ]
             ]
