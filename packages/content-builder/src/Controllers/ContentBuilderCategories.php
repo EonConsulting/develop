@@ -9,11 +9,9 @@ use EONConsulting\ContentBuilder\Models\Category;
 
 class ContentBuilderCategories extends Controller {
 
-   
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
 
@@ -30,10 +28,8 @@ class ContentBuilderCategories extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $category_id
-     * @return void
+     * @param $category
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($category){
 
@@ -50,10 +46,8 @@ class ContentBuilderCategories extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
      * @param Request $request
-     * @return void
+     * @return int
      */
     public function store(Request $request){
 
@@ -71,11 +65,9 @@ class ContentBuilderCategories extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
      * @param Request $request
-     * @param [type] $category
-     * @return void
+     * @param $category
+     * @return int
      */
     public function update(Request $request, $category){
 
@@ -93,10 +85,8 @@ class ContentBuilderCategories extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $catgory_id
-     * @return void
+     * @param $category_id
+     * @return int
      */
     public function destroy($category_id){
 
