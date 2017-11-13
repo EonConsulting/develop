@@ -1,6 +1,6 @@
 <?php
 
-namespace EONConsulting\AnalyticsLogger;
+namespace EONConsulting\AnalyticsLogger\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

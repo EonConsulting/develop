@@ -354,7 +354,7 @@ Lecture
     }
 
  $(document).ready(function () {   
-    
+
         $(document).on("click",".jstree-anchor",function (e) {
             e.stopPropagation();
             e.preventDefault();
@@ -410,7 +410,7 @@ Lecture
                         window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     } else if(data.msg === 'error'){
 
-                        progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
+                        //progress_error("{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story);
                         //alert('Please complete current Learning Objective before moving to the Next one!');
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     }

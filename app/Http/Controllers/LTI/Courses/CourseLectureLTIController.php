@@ -7,10 +7,10 @@ use App\Tools\Elasticsearch\Elasticsearch;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 
-class CourseLectureLTIController extends LTIBaseController {
-
-    public function index(Course $course) {
-
+class CourseLectureLTIController extends LTIBaseController
+{
+    public function index(Course $course)
+    {
         $data = storyline_core()->getIndex($course);
 
         $latest_storyline = $course->latest_storyline()->items()->first();
@@ -26,7 +26,7 @@ class CourseLectureLTIController extends LTIBaseController {
         $custom_styles = [];
 
         $nav = '';
-        if(function_exists('storyline_nav')) {
+        if (function_exists('storyline_nav')) {
 //            $nav = storyline_nav()->getNavHTML();
             $nav = storyline_nav()->getNavHTMLFromCourse($course);
             $styles = array_merge($styles, storyline_nav()->getStyles());
@@ -36,7 +36,7 @@ class CourseLectureLTIController extends LTIBaseController {
 
         $menu = '';
 
-        if(function_exists('storyline_nav')) {
+        if (function_exists('storyline_nav')) {
             $menu = storyline_menu()->getMenuHTMLFromCourse($course);
 //            $styles = array_merge($styles, storyline_menu()->getStyles());
 //            $scripts = array_merge($scripts, storyline_menu()->getScripts());
@@ -135,14 +135,12 @@ class CourseLectureLTIController extends LTIBaseController {
                 return response()
                     ->view('student.courses.search-output', ['finalOutput' => $finalOutput, 'breadcrumbs' => $breadcrumbs], 200);
             }
-
-        } catch(\ErrorException $e) {
+        } catch (\ErrorException $e) {
 
             //echo $e;
 
             //return response()->view('student.courses.search-output', ['finalOutput' => [], 'breadcrumbs' => $breadcrumbs], 200);
             return back();
-
         }
     }
 }
