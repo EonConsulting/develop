@@ -13,19 +13,33 @@ class AdministratorLTIMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-
-        if(!auth()->check())
+    public function handle($request, Closure $next)
+    {
+        if ( ! auth()->check()) {
             return redirect()->to('/');
+        }
+
+        if( ! auth()->user()->hasRole('Administrator'))
+        {
+            return redirect()->to('/');
+        }
+
+        return $next($request);
+
+
+
+        /*
 
         $user = $request->user();
-        if(!$user) {
+
+        if ( ! $user) {
             // user not found
             return redirect()->to('/');
         }
 
         $lti = $user->lti;
-        if(count($lti) == 0) {
+
+        if (count($lti) == 0) {
             // no lti links found
             return redirect()->to('/');
         }
@@ -33,12 +47,12 @@ class AdministratorLTIMiddleware
         $lti = $lti[0];
         $role = $lti->roles;
 
-        switch($role) {
+        switch ($role) {
             case 'Administrator':
                 return $next($request);
                 break;
         }
 
-        return redirect()->to('/');
+        return redirect()->to('/');*/
     }
 }

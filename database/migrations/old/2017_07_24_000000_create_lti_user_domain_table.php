@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLTIUSERDomains extends Migration {
+class CreateLTIUSERDomains extends Migration
+{
 
     /**
      * Run the migrations.
@@ -26,7 +27,7 @@ class CreateLTIUSERDomains extends Migration {
             $table->timestamps();
         });
 
-        Schema::table('lti_users_domains', function(Blueprint $table) {
+        Schema::table('lti_users_domains', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_domain')->onDelete('cascade');
         });
     }
@@ -40,5 +41,4 @@ class CreateLTIUSERDomains extends Migration {
     {
         Schema::drop('lti_users_domains');
     }
-
 }

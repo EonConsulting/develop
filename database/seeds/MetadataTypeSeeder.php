@@ -2,14 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-class MetadataTypeSeeder extends Seeder {
+class MetadataTypeSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         $table = "metadata_types";
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
@@ -81,25 +83,21 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Content Difficulty Type',
-                    'description' => 'Content Difficulty Type',
-                    'area' => 'Content'
+                    'description' => 'Content Difficulty Type'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Info Type',
-                    'description' => 'Content Info Type',
-                    'area' => 'Content'
+                    'description' => 'Content Info Type'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Progress Type',
-                    'description' => 'Content Progress Type',
-                    'area' => 'Content'
-                    
+                    'description' => 'Content Progress Type'
                 ]
         );
 
@@ -113,16 +111,14 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Content Type',
-                    'description' => 'Content Type',
-                    'area' => 'Content'
+                    'description' => 'Content Type'
                 ]
         );
 
         DB::table($table)->insert(
                 [
                     'name' => 'Content Usage Type',
-                    'description' => 'Content Usage Type',
-                    'area' => 'Content'
+                    'description' => 'Content Usage Type'
                 ]
         );
 
@@ -143,8 +139,7 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Coverage Type',
-                    'description' => 'Coverage Type',
-                    'area' => 'Content'
+                    'description' => 'Coverage Type'
                 ]
         );
 
@@ -173,8 +168,7 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Discipline Type',
-                    'description' => 'Discipline Type',
-                    'area' => 'Content Storyline'
+                    'description' => 'Discipline Type'
                 ]
         );
 
@@ -294,8 +288,7 @@ class MetadataTypeSeeder extends Seeder {
         DB::table($table)->insert(
                 [
                     'name' => 'Revision Type',
-                    'description' => 'Revision Type',
-                    'area' => 'Content'
+                    'description' => 'Revision Type'
                 ]
         );
 
@@ -387,5 +380,4 @@ class MetadataTypeSeeder extends Seeder {
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
-
 }

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLtiUserDomainsMeta extends Migration {
+class CreateLtiUserDomainsMeta extends Migration
+{
 
     /**
      * Run the migrations.
@@ -26,7 +27,7 @@ class CreateLtiUserDomainsMeta extends Migration {
             $table->timestamps();
         });
 
-        Schema::table('lti_users_domains_meta', function(Blueprint $table) {
+        Schema::table('lti_users_domains_meta', function (Blueprint $table) {
             $table->foreign('app_id')->references('context_id')->on('lti_domain')->onDelete('cascade');
         });
     }

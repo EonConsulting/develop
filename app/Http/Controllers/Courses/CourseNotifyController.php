@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
-class CourseNotifyController extends Controller {
-
-    public function index(Course $course) {
-
+class CourseNotifyController extends Controller
+{
+    public function index(Course $course)
+    {
         $breadcrumbs = [
             'title' => 'Modules',
             'href' => route('courses'),
@@ -29,10 +29,11 @@ class CourseNotifyController extends Controller {
         return view('lecturer.courses.notify', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
     }
 
-    public function store(Request $request, Course $course) {
+    public function store(Request $request, Course $course)
+    {
         $emails = json_decode($request->all()['emails']);
 
-        for($i = 0; $i < count($emails); $i++) {
+        for ($i = 0; $i < count($emails); $i++) {
             $email = $emails[$i];
             $course_user = CourseUser::firstOrNew([
                 'course_id' => $course->id,
@@ -46,9 +47,9 @@ class CourseNotifyController extends Controller {
         return redirect()->back();
     }
 
-    public function getUsers(Course $course) {
+    public function getUsers(Course $course)
+    {
         $users = $course->users()->pluck('email')->toArray();
         return $users;
     }
-
 }
