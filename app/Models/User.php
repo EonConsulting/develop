@@ -12,27 +12,77 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasPermissionTrait;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    public function lti() {
+    /**
+     * Fetch the user lti.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function lti()
+    {
         return $this->hasMany(UserLTILink::class, 'user_id', 'id');
     }
 
-    public function hasLtiLink($user_id) {
+    /**
+     * @param $user_id
+     * @return bool
+     */
+    public function hasLtiLink($user_id)
+    {
         return (bool) $this->lti->where('lti_user_id', $user_id)->count();
     }
 
-    public function hasLtiLinks($user_id) {
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    public function hasLtiLinks($user_id)
+    {
         return $this->lti->where('lti_user_id', $user_id);
     }
 
-    public function hasLtiContext($context_id) {
+    /**
+     * @param $context_id
+     * @return mixed
+     */
+    public function hasLtiContext($context_id)
+    {
         return $this->lti->where('context_id', $context_id);
     }
 
+    /**
+     * Check if user has role
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role = 'Administrator')
+    {
+        if ( ! $lti = $this->lti->first()) {
+            return false;
+        }
+
+        if($lti->roles == $role) {
+            return true;
+        }
+
+        return false;
+    }
 }

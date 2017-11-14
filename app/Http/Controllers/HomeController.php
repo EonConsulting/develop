@@ -6,10 +6,12 @@
  * Time: 12:55 AM
  */
 namespace App\Http\Controllers;
+
 use EONConsulting\LaravelLTI\Http\Controllers\LTIAuthBaseController;
 use EONConsulting\LaravelLTI\Models\UserLTILink;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 class HomeController extends LTIAuthBaseController
 {
     /**
@@ -26,6 +28,7 @@ class HomeController extends LTIAuthBaseController
      */
     public function index()
     {
+
         //dd($this->user->id);
         switch ($this->get_user_role($this->user)) {
             case 'Instructor':
@@ -53,21 +56,23 @@ class HomeController extends LTIAuthBaseController
      * @param bool $user
      * @return bool
      */
-    protected function get_user_role($user = false) {
-        if(!$user) {
+    protected function get_user_role($user = false)
+    {
+        if (!$user) {
             return false;
         }
-        if(!$this->user->hasLtiLinks($this->user->id)) {
+        if (!$this->user->hasLtiLinks($this->user->id)) {
             return false;
         }
         $lti = $this->user->lti;
         $role = $lti[0]->roles;
-        if(count($role) == 0) {
+        if (count($role) == 0) {
             return false;
         }
         return $role;
     }
-    public function current_user() {
+    public function current_user()
+    {
         $this->user = auth()->user();
         return $this->user->lti[0];
     }

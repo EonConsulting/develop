@@ -12,13 +12,11 @@ class ContentBuilderCore extends Controller {
 
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
 
-        $content = Content::all();
+        $content = Content::with('categories')->get();
         $content_squashed = [];
 
         foreach($content as $k => $item){
@@ -42,10 +40,8 @@ class ContentBuilderCore extends Controller {
 
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content_id
-     * @return void
+     * @param $content_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($content_id) {
 
@@ -66,10 +62,8 @@ class ContentBuilderCore extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content_id
-     * @return void
+     * @param $content_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($content_id){
 
@@ -101,13 +95,11 @@ class ContentBuilderCore extends Controller {
         return view('eon.content-builder::edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }
-    
+
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $course
-     * @return void
+     * @param $course
+     * @return array
      */
     public function get_tags($course) {
 
@@ -126,10 +118,10 @@ class ContentBuilderCore extends Controller {
         return array_count_values($tags);
     }
 
+
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $content
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update($content) {
         $breadcrumbs = [
@@ -164,10 +156,8 @@ class ContentBuilderCore extends Controller {
 
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content
-     * @return void
+     * @param $content
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($content){
 
@@ -210,6 +200,10 @@ class ContentBuilderCore extends Controller {
        
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     public function store(Request $request){
 
         $data = $request->json()->all();

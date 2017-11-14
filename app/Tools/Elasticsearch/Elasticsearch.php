@@ -14,7 +14,7 @@ class Elasticsearch
         $from = $from === null ? 0 : $from;
         $size = $size === null ? 10 : $size;
 
-        $search = config('app.es_uri') . '/u-index/courses/_search?from=' . $from . '&size=' . $size;
+        $search = config('app.es_uri') . '/courses/_search?from=' . $from . '&size=' . $size;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $search);
@@ -22,7 +22,10 @@ class Elasticsearch
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,array(
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($query)
             )

@@ -18,7 +18,13 @@ class ConvertController extends Controller
         \Debugbar::disable();
     }
 
-    public function store(Request $request)
+    /**
+     * Receive html content and convert it to PDF
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return pdf|null
+     */
+    public function store(Request $request) // @TODO add javascript error controller
     {
         if( ! $content = $request->get('html_content'))
         {
