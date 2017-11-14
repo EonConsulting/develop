@@ -5,8 +5,8 @@
         event.preventDefault();
 
         $.AjaxDownloader({
-            url: "/html-to-pdf",
-            data: {
+            url  : "/html-to-pdf",
+            data : {
                 html_content: encodeURIComponent($('div#body').html())
             }
         });

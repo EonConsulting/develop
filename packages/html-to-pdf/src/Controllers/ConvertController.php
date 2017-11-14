@@ -37,19 +37,10 @@ class ConvertController extends Controller
             config('html-to-pdf')
         );
 
-        $html = view('html-to-pdf::pdf-template', [
-            'content' => urldecode($content)
-        ])->render();
+        $html = view('html-to-pdf::pdf-template')->withContent(urldecode($content))->render();
 
         $pdf->addPage($html);
 
-        $content = $pdf->send('store.pdf');
-
-        if ($content === false)
-        {
-            return null;
-        }
-
-        return $content;
+        return $pdf->send('store.pdf');
     }
 }
