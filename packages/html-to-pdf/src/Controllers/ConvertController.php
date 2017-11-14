@@ -18,7 +18,13 @@ class ConvertController extends Controller
         \Debugbar::disable();
     }
 
-    public function store(Request $request)
+    /**
+     * Receive html content and convert it to PDF
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return pdf|null
+     */
+    public function store(Request $request) // @TODO add javascript error controller
     {
         if( ! $content = $request->get('html_content'))
         {
@@ -31,10 +37,19 @@ class ConvertController extends Controller
             config('html-to-pdf')
         );
 
-        $html = view('html-to-pdf::pdf-template')->withContent(urldecode($content))->render();
+        $html = view('html-to-pdf::pdf-template', [
+            'content' => urldecode($content)
+        ])->render();
 
         $pdf->addPage($html);
 
-        return $pdf->send('store.pdf');
+        $content = $pdf->send('store.pdf');
+
+        if ($content === false)
+        {
+            return null;
+        }
+
+        return $content;
     }
 }
