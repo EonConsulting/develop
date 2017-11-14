@@ -15,15 +15,15 @@ class NONLTILearnerMiddleware
      * @return mixed
      */
 
-    public function handle($request, Closure $next) {
-
-
-        if(!auth()->check())
+    public function handle($request, Closure $next)
+    {
+        if (!auth()->check()) {
             return redirect()->to('/');
+        }
 
         $user = $request->user();
 
-        if(!$user) {
+        if (!$user) {
             // user not found
             return redirect()->to('/');
         }

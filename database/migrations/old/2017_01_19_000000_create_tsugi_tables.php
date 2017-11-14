@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTsugiTables extends Migration {
+class CreateTsugiTables extends Migration
+{
 
     /**
      * Run the migrations.
@@ -223,58 +224,57 @@ class CreateTsugiTables extends Migration {
             $table->timestamps();
         });
 
-        Schema::table('blob_file', function(Blueprint $table) {
+        Schema::table('blob_file', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('set null')->onUpdate('cascade');
         });
 
-        Schema::table('key_request', function(Blueprint $table) {
+        Schema::table('key_request', function (Blueprint $table) {
             $table->foreign('user_id')->references('user_id')->on('lti_user')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('mail_bulk', function(Blueprint $table) {
+        Schema::table('mail_bulk', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('user_id')->on('lti_user')->onDelete('no action')->onUpdate('no action');
         });
 
-        Schema::table('mail_sent', function(Blueprint $table) {
+        Schema::table('mail_sent', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('link_id')->references('link_id')->on('lti_link')->onDelete('no action')->onUpdate('no action');
             $table->foreign('user_to')->references('user_id')->on('lti_user')->onDelete('no action')->onUpdate('no action');
             $table->foreign('user_from')->references('user_id')->on('lti_user')->onDelete('no action')->onUpdate('no action');
         });
 
-        Schema::table('lti_context', function(Blueprint $table) {
+        Schema::table('lti_context', function (Blueprint $table) {
             $table->foreign('key_id')->references('key_id')->on('lti_key')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_domain', function(Blueprint $table) {
+        Schema::table('lti_domain', function (Blueprint $table) {
             $table->foreign('key_id')->references('key_id')->on('lti_key')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_link', function(Blueprint $table) {
+        Schema::table('lti_link', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_membership', function(Blueprint $table) {
+        Schema::table('lti_membership', function (Blueprint $table) {
             $table->foreign('context_id')->references('context_id')->on('lti_context')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('user_id')->on('lti_user')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_result', function(Blueprint $table) {
+        Schema::table('lti_result', function (Blueprint $table) {
             $table->foreign('link_id')->references('link_id')->on('lti_link')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('user_id')->on('lti_user')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('service_id')->references('service_id')->on('lti_service')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_service', function(Blueprint $table) {
+        Schema::table('lti_service', function (Blueprint $table) {
             $table->foreign('key_id')->references('key_id')->on('lti_key')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('lti_user', function(Blueprint $table) {
+        Schema::table('lti_user', function (Blueprint $table) {
             $table->foreign('key_id')->references('key_id')->on('lti_key')->onDelete('cascade')->onUpdate('cascade');
         });
-
     }
 
     /**
@@ -300,5 +300,4 @@ class CreateTsugiTables extends Migration {
         Schema::drop('mail_sent');
         Schema::drop('profile');
     }
-
 }

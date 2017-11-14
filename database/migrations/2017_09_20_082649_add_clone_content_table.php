@@ -13,14 +13,12 @@ class AddCloneContentTable extends Migration
      */
     public function up()
     {
-        Schema::table('content', function($table) {
-            
+        Schema::table('content', function ($table) {
             $table->unsignedInteger('cloned_id')->nullable()->default(null);
 
             $table->foreign('cloned_id')
                 ->references('id')->on('content')
                 ->onDelete('set null');
-
         });
     }
 
@@ -31,7 +29,7 @@ class AddCloneContentTable extends Migration
      */
     public function down()
     {
-        Schema::table('content', function($table) {
+        Schema::table('content', function ($table) {
             $table->dropColumn('cloned_id');
         });
     }

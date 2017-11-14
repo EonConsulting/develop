@@ -23,12 +23,10 @@ class Storyline2Core extends BaseController {
     public function index() {
 
     }
-    
+
     /**
-     * Undocumented function
-     *
      * @param Request $request
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function rename_storyline_item(Request $request) {
         if (is_array($request->data)) {
@@ -46,10 +44,8 @@ class Storyline2Core extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $item
-     * @return void
+     * @param $item
+     * @return \Illuminate\Http\JsonResponse
      */
     public function get_content($item){
 
@@ -78,12 +74,10 @@ class Storyline2Core extends BaseController {
 
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content
-     * @param [type] $item
-     * @param [type] $action
-     * @return void
+     * @param $content
+     * @param $item
+     * @param $action
+     * @return \Illuminate\Http\JsonResponse
      */
     public function attach_content_to_item($content, $item, $action){
 
@@ -122,11 +116,9 @@ class Storyline2Core extends BaseController {
 
 
     /**
-     * Undocumented function
-     *
      * @param Request $request
-     * @param [type] $item
-     * @return void
+     * @param $item
+     * @return int
      */
     public function save_content(Request $request, $item){
 

@@ -13,8 +13,7 @@ class UpdateStorylineItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('storyline_items', function($table) {
-
+        Schema::table('storyline_items', function ($table) {
             $table->unsignedInteger("content_id")->nullable()->default(null);
             $table->foreign('content_id', 'content_ibfk_2')
                 ->references('id')->on('content')
@@ -29,7 +28,7 @@ class UpdateStorylineItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('storyline_items', function($table) {
+        Schema::table('storyline_items', function ($table) {
             $table->dropColumn('content_id');
         });
     }

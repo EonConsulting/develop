@@ -46,7 +46,7 @@ class CourseStorylineController extends DBCourseStorylineBase
         ];
 
         return view('lecturer.storylines.single', ['course' => $course, 'breadcrumbs' => $breadcrumbs]);
-             * 
+             *
              */
     }
     /**
@@ -54,13 +54,15 @@ class CourseStorylineController extends DBCourseStorylineBase
      * @param Course $course
      * @return \Illuminate\Contracts\Routing\ResponseFactory|mixed|\Symfony\Component\HttpFoundation\Response
      */
-    public function storeback(Request $request, Course $course){
+    public function storeback(Request $request, Course $course)
+    {
         $this->setNodes($request);
         $this->setstId(Storyline::where('course_id', '=', $course->id)->first());
         return $this->asset_store($request, $course);
     }
 
-     public function store(Request $request, Course $course) {
+    public function store(Request $request, Course $course)
+    {
         //Check If Course has a Storyline and do an Update else Create a New Storyline
         $nodes = $request->all()['parts'];
         $data = json_decode($nodes, true);
@@ -70,11 +72,10 @@ class CourseStorylineController extends DBCourseStorylineBase
             $storyline->course_id = $course->id;
             $storyline->creator_id = $request->user()->id;
             $storyline->save();
-            $this->save_storyline_items($storyline,$data);
+            $this->save_storyline_items($storyline, $data);
         } else {
             $stId->update();
-            $this->save_storyline_items($stId,$data);
-
+            $this->save_storyline_items($stId, $data);
         }
         return response('The Storyline has been Saved', 200);
     }
@@ -106,7 +107,7 @@ class CourseStorylineController extends DBCourseStorylineBase
      */
     public function fetch(Course $course)
     {
-       return $this->asset_fetch($course);
+        return $this->asset_fetch($course);
     }
 
     /**
@@ -137,5 +138,4 @@ class CourseStorylineController extends DBCourseStorylineBase
     {
         return $this->asset_get_storyline($elements, $parentId);
     }
-
 }

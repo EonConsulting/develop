@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
         //RESTful Routes
         Route::resource('/categories', 'ContentBuilderCategories');
-
+        Route::resource('/assets', 'ContentBuilderAssets');
         //Route::get('/categories', 'ContentBuilderCategories@index')->name('categories.index');
         
         //other JSON routes

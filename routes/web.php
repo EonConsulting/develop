@@ -38,7 +38,7 @@ Auth::routes();
  * ---------------------------------------
  */
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/builders/page', ['as' => 'builders.page', 'uses' => 'Builders\\PageBuilderController@index']);
     Route::get('/builders/storyline', ['as' => 'builders.storyline', 'uses' => 'Builders\\StorylineBuilderController@index']);
 });
@@ -48,13 +48,13 @@ Route::group(['middleware' => ['auth']], function() {
  * Home - Non LTI Routes
  * --------------------------------------
  */
-Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
+Route::group(['middleware' => ['auth'],'prefix' => '/home'], function () {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
-    Route::group(['namespace' => 'Users'], function() {
+    Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'home.users.profile', 'uses' => 'ProfileController@index']);
         Route::match(['get', 'post'], '/profile/update', ['as' => 'home.users.profile.update', 'uses' => 'ProfileController@update']);
     });
-    Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function() {
+    Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function () {
         //NON LTI Courses Controller - Create an Instance of the Same Course
         Route::match(['get', 'post'], '/', ['as' => 'home.courses', 'uses' => 'CoursesController@courses']);
         Route::match(['get', 'post'], '/{course}', ['as' => 'home.courses.single', 'uses' => 'CourseController@course']);
@@ -70,11 +70,11 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function() {
 
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
-//Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  TODO::replace-test
-Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
-    Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function() {
+//Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  // TODO::replace-test
+Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function () {
+    Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function () {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
-        Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);       
+        Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
         Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
         Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
         Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
@@ -99,7 +99,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
     });
-
 });
 
 /*
@@ -109,8 +108,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {
  */
 //
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
-Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
-    Route::group(['namespace' => 'Dashboards'], function() {
+Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
+    Route::group(['namespace' => 'Dashboards'], function () {
         Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
         Route::match(['get', 'post'], '/lecturer-course-analysis', ['as' => 'lti.dashboards.lecturer-course-analysis', 'uses' => 'DashboardLTIController@lecturer_course_analysis']);
         Route::match(['get', 'post'], '/lecturer-stud-analysis', ['as' => 'lti.dashboards.lecturer-stud-analysis', 'uses' => 'DashboardLTIController@lecturer_stud_analysis']);
@@ -118,11 +117,11 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
         Route::match(['get', 'post'], '/mentor-stud-analysis', ['as' => 'lti.dashboards.mentor-stud-analysis', 'uses' => 'DashboardLTIController@mentor_stud_analysis']);
         Route::match(['get', 'post'], '/mentor-assess-analysis', ['as' => 'lti.dashboards.mentor-assess-analysis', 'uses' => 'DashboardLTIController@mentor_assess_analysis']);
     });
-    Route::group(['namespace' => 'Users'], function() {
+    Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);
         Route::match(['get', 'post'], '/profile/update', ['as' => 'lti.users.profile.update', 'uses' => 'ProfileLTIController@update']);
     });
-    Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function() {
+    Route::group(['namespace' => 'Courses', 'prefix' => '/courses'], function () {
         Route::match(['get', 'post'], '/', ['as' => 'lti.courses', 'uses' => 'CoursesLTIController@index']);
         Route::match(['get', 'post'], '/{course}', ['as' => 'lti.courses.single', 'uses' => 'CourseLTIController@index']);
         Route::match(['get', 'post'], '/{course}/lectures', ['as' => 'lti.courses.single.lectures', 'uses' => 'CourseLectureLTIController@index']);
@@ -135,8 +134,7 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function() {
  * Other Routes
  * ----------------------------------------------------
  */
-Route::get('/logout', function()
-{
+Route::get('/logout', function () {
     Auth::logout();
     Session::flush();
     return Redirect::to('/home');

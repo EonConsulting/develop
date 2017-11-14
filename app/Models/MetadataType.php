@@ -10,11 +10,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MetadataType extends Model {
+class MetadataType extends Model
+{
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'metadata_types';
-    protected $primaryKey = 'id';
-    protected $fillable = ['id','name','description'];
 
-    
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id','name','description'
+    ];
 }

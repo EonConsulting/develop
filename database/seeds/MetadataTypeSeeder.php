@@ -2,14 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-class MetadataTypeSeeder extends Seeder {
+class MetadataTypeSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         $table = "metadata_types";
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
@@ -378,5 +380,4 @@ class MetadataTypeSeeder extends Seeder {
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
-
 }

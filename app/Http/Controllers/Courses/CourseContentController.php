@@ -7,14 +7,16 @@ use App\Models\StorylineItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseContentController extends Controller {
+class CourseContentController extends Controller
+{
+    public function index(Course $course)
+    {
 
-    public function index(Course $course) {
         $storyline = $course->latest_storyline();
 
-        if(!$storyline) {
+        if (!$storyline) {
             session()->flash('success_message', 'This Storyline has no Content.');
-            return redirect()->back(302,['course' => 'No Storyline Content Available !']);
+            return redirect()->back(302, ['course' => 'No Storyline Content Available !']);
             //view('lecturer.courses.content',['course' => $course, 'storyline' => [], 'items' => [], 'parts' => []]);
         }
 
@@ -36,15 +38,17 @@ class CourseContentController extends Controller {
     }
 
 
-    public function show(Course $course, StorylineItem $storylineItem) {
+    public function show(Course $course, StorylineItem $storylineItem)
+    {
+
+        if (empty($storylineItem->file_url)) {
+            $html = '';
+        }
         
-        if(empty($storylineItem->file_url))
-            
-          $html = ''; 
-        
-        if(!empty($storylineItem->file_url))
-           $html = file_get_contents(public_path($storylineItem->file_url));        
-           $breadcrumbs = [
+        if (!empty($storylineItem->file_url)) {
+            $html = file_get_contents(public_path($storylineItem->file_url));
+        }
+        $breadcrumbs = [
 
             'title' => 'Modules',
             'href' => route('courses'),
@@ -64,18 +68,20 @@ class CourseContentController extends Controller {
         return view('lecturer.courses.edit', ['course' => $course, 'item' => $storylineItem, 'html' => $html, 'breadcrumbs' => $breadcrumbs]);
     }
 
-    public function update(Request $request, Course $course, StorylineItem $storylineItem) {
-        
-         if(empty($storylineItem->file_url))
+    public function update(Request $request, Course $course, StorylineItem $storylineItem)
+    {
+        if (empty($storylineItem->file_url)) {
             return redirect()->route('courses.single.content', [$course->id, $storylineItem->id]);
+        }
          
-         if(!empty($storylineItem->file_url))    
-                 $page = $storylineItem->file_url;
+        if (!empty($storylineItem->file_url)) {
+            $page = $storylineItem->file_url;
+        }
         
-                 $ext = pathinfo($page, PATHINFO_EXTENSION);
-                 $file_name = pathinfo($page, PATHINFO_FILENAME) . '-' . time() . '.' . $ext;
+        $ext = pathinfo($page, PATHINFO_EXTENSION);
+        $file_name = pathinfo($page, PATHINFO_FILENAME) . '-' . time() . '.' . $ext;
 
-         if(!copy(public_path($page), public_path($file_name))) {
+        if (!copy(public_path($page), public_path($file_name))) {
             session()->flash('error_message', 'Page could not save.');
             return response()->back();
         }
@@ -87,5 +93,4 @@ class CourseContentController extends Controller {
         session()->flash('success_message', 'Page updated.');
         return redirect()->route('courses.single.content', [$course->id, $storylineItem->id]);
     }
-
 }

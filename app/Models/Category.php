@@ -4,19 +4,21 @@ use Baum\Node;
 /**
 * Category
 */
-class Category extends Node {
+class Category extends Node
+{
 
   /**
    * Table name.
    *
    * @var string
    */
-  protected $table = 'categories';
-    public function stories() {
+    protected $table = 'categories';
+    public function stories()
+    {
         return $this->hasMany('Story');
     }
 
-  //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
   //
   // Below come the default values for Baum's own Nested Set implementation
@@ -101,5 +103,4 @@ class Category extends Node {
   // Please refer the Laravel documentation for further instructions on how
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
-
 }

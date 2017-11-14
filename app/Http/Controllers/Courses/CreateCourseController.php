@@ -12,9 +12,10 @@ use App\Models\MetadataType;
 use App\Models\CourseMetadata;
 use Validator;
 
-class CreateCourseController extends Controller {
-
-    public function index() {
+class CreateCourseController extends Controller
+{
+    public function index()
+    {
 
         $breadcrumbs = [
             'title' => 'Modules',
@@ -30,8 +31,8 @@ class CreateCourseController extends Controller {
         return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs, 'metadataType' => $metadataType]);
     }
 
-    public function store(Request $request) {
-        
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
                     'title' => 'required',
         ]);
@@ -54,8 +55,9 @@ class CreateCourseController extends Controller {
         return redirect()->route("courses.create");
     }
 
-    public function metadatalist($id) {
-         $breadcrumbs = [
+    public function metadatalist($id)
+    {
+        $breadcrumbs = [
             'title' => 'Modules',
             'href' => route('courses'),
             'child' => [
@@ -63,19 +65,21 @@ class CreateCourseController extends Controller {
             ],
         ];
         
-        $MetadataStore = MetadataType::get();  
+        $MetadataStore = MetadataType::get();
         $MetaId = MetadataStore::pluck('id')->all();
 
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
     
-    public function viewmetadata($id) {
-        $MetadataStore = MetadataStore::where('metadata_type_id',$id)->get();
+    public function viewmetadata($id)
+    {
+        $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
         $MetaId = MetadataStore::pluck('id')->all();
         return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
     }
 
-    public function storemetadata(Request $request) {
+    public function storemetadata(Request $request)
+    {
         $value = $request->get('value');
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [
@@ -96,8 +100,8 @@ class CreateCourseController extends Controller {
         return response()->json(['error' => 'An error occured, pleas try again']);
     }
 
-    public function updatemetadata(Request $request) {
-
+    public function updatemetadata(Request $request)
+    {
         $value = $request->get('value');
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [
@@ -118,8 +122,8 @@ class CreateCourseController extends Controller {
         return response()->json(['error' => 'An error occured, pleas try again']);
     }
 
-    public function fill_metadata_store(Request $request) {
-
+    public function fill_metadata_store(Request $request)
+    {
         if ($request->ajax()) {
             // which entities should we use?
             $entities = $request->input('entities');
@@ -134,5 +138,4 @@ class CreateCourseController extends Controller {
             return response()->json($metadata_store);
         }
     }
-
 }

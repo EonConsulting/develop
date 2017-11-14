@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLTITables extends Migration {
+class CreateLTITables extends Migration
+{
 
     /**
      * Run the migrations.
@@ -139,7 +140,6 @@ class CreateLTITables extends Migration {
 //        Schema::table('lti2_share_key', function(Blueprint $table) {
 //            $table->foreign('resource_link_pk')->references('resource_link_pk')->on('lti2_resource_link')->onDelete('cascade');
 //        });
-
     }
 
     /**
@@ -158,5 +158,4 @@ class CreateLTITables extends Migration {
         Schema::drop('lti2_share_key');
         Schema::drop('users_lti_links');
     }
-
 }

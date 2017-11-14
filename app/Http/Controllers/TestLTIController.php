@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 
-class TestLTIController extends LTIBaseController {
-
+class TestLTIController extends LTIBaseController
+{
     protected $hasLTI = true;
 
     /**
@@ -18,6 +18,6 @@ class TestLTIController extends LTIBaseController {
     {
         $domains = laravel_lti()->get_domains();
        
-      return view('eon.appstore::store', ['tools' => $domains]);
+        return view('eon.appstore::store', ['tools' => $domains]);
     }
 }

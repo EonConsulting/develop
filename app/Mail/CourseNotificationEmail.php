@@ -21,7 +21,8 @@ class CourseNotificationEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(CourseUser $course_user, Course $course) {
+    public function __construct(CourseUser $course_user, Course $course)
+    {
         $this->course = $course;
         $this->course_user = $course_user;
     }

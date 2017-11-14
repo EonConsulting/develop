@@ -4,14 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMetadataStoreTable extends Migration {
+class CreateMetadataStoreTable extends Migration
+{
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         Schema::create('metadata_store', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -28,8 +30,8 @@ class CreateMetadataStoreTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         Schema::dropIfExists('metadata_store');
     }
-
 }

@@ -36,7 +36,6 @@ class CreateContentCategoriesTable extends Migration
                 ->references('id')->on('lk_content_categories')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
         });
     }
 

@@ -6,6 +6,18 @@
 
 @section('custom-styles')
 
+<style>
+    .dropdown-link {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .dropdown-menu {
+        padding: 5px 10px 0px 10px;
+    }
+
+</style>
+
 @endsection
 
 @section('content')
@@ -33,18 +45,18 @@
                                 <td>{{ $course->title }}</td>
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
-                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-xs" style="width:60px">Storyline</a>
+                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-sm">Storyline</a>
                                     <!--<a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>-->
                                    
                                     <div class="btn-group">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v fa_custom fa-2x"></i>
+                                        <i class="fa fa-caret-down"></i>
                                     </button>
                                         <div class="dropdown-menu">
-                                        <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
-                                        <button class="dropdown-item moduleId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Module</button>
-                                        <a href="{{ route('metadata.list', $course->id) }}"><button class="dropdown-item metadataId" type="button" id="{{$course->id}}"><i class="fa fa-edit"></i> Metadata</button></a>
-                                    </div>
+                                            <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
+                                            <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
+                                            <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
+                                        </div>
                                     </div> 
                                 </td>
                             </tr>
