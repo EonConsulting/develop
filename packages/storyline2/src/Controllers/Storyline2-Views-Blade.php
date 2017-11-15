@@ -15,6 +15,7 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Models\Asset;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
@@ -30,9 +31,8 @@ class Storyline2ViewsBlade extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $course
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($course) {
 
@@ -123,6 +123,7 @@ class Storyline2ViewsBlade extends BaseController {
         }
 
         $categories = Category::all();
+        $assets = Asset::all();
 
         $breadcrumbs = [
             'title' => 'Edit ' . $course['title'] . ' Storyline' //pass $course as param and load name here
@@ -132,6 +133,7 @@ class Storyline2ViewsBlade extends BaseController {
             'contents' => $contents,
             'storyline_id' => $storyline_id,
             'categories' => $categories,
+            'assets' => $assets,
             'breadcrumbs' => $breadcrumbs
         ]);
 
