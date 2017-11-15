@@ -62,25 +62,10 @@ Storyline Student Single
         -ms-flex-align: start;
         align-items: flex-start;
         margin-top: -15px;
+        position: relative;
     }
 
     .page-container-tree {
-        -webkit-order: 0;
-        -ms-flex-order: 0;
-        order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
-        -webkit-align-self: stretch;
-        -ms-flex-item-align: stretch;
-        align-self: stretch;
-        min-width: 250px !important;
-        width: 250px;
-        overflow-y: auto;
-        overflow-x: auto;
-    }
-
-    .page-container-editor {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -90,8 +75,43 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
+    #handler {
+        background-color: grey;
+        width:2px;
+        height:100%;
+        z-index:999;
+
+        cursor: e-resize;
+
+        /* hack to ignore the absolute positioning done by jquery ui */
+        position:absolute!important;
+        left: 0 !important;
+        /* removing these makes the handler visible in chrome but makes it not pixel perfectly positioned in FF and IE as can be derived from the yellow borders being invisible */
+    }
+
+
+    .page-container-editor {
+        display: flex;
+        flex-direction: row;
+        /*-webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+        align-self: stretch;*/
+
+        width: 80%;
+        left: 0 !important;
+        position:relative !important;
+
+    }
 
     /**
      *----------------------------------------------------------------------
@@ -119,6 +139,8 @@ Storyline Student Single
         -webkit-align-items: flex-start;
         -ms-flex-align: start;
         align-items: flex-start;
+        flex: 1;
+        border-left: 1px solid yellow;
     }
 
     .content-info {
@@ -309,13 +331,14 @@ Storyline Student Single
     }
 
 
+
 </style>
 @endsection
 
 
 @section('content')
 <div>
-    <div class="page-container">
+    <div class="page-container" id="page-container">
 
         <div class="page-container-tree">
 
@@ -323,9 +346,16 @@ Storyline Student Single
 
             </div>
 
+
         </div><!--End col-md-3 -->
 
         <div class="page-container-editor">
+
+            <div id="handler" class="ui-resizable-handle ui-resizable-w">
+
+            </div>
+
+
             <div class="content-container">
 
                 <div class="content-info">
@@ -516,6 +546,7 @@ Storyline Student Single
 @endsection
 
 @section('custom-scripts')
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
@@ -573,25 +604,25 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     });
 
     CKEDITOR.on('instanceReady', function() { 
-        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
-        var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
-        var ckBottomHeight      = $("#cke_1_bottom").height();
-
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
-
+        resize();
     });
 
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
-        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
+        resize();
+    });
+
+    function resize(){
+        var contentHeight       = $("#content-area").height();
+        var textEditHeight      = contentHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
         $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
-
-    });
+        //$("#page_container").css("background-color", "yellow");
+        $("#page-container").height( (contentHeight) + "px");
+    }
 
 </script>
 
@@ -974,6 +1005,10 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     }
 
+    $(".page-container-editor").resizable({
+        handles: {w : '#handler'},
+        ghost: true
+    });
 
 </script>
 

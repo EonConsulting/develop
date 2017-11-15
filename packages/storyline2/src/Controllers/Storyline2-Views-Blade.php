@@ -94,8 +94,9 @@ class Storyline2ViewsBlade extends BaseController {
         
         $course = Course::find($course);
         $contents = Content::all();
+        $latest_storyline = $course->latest_storyline();
 
-        if (is_array($course->latest_storyline()) && count($course->latest_storyline()))
+        if ($latest_storyline !== null)
         {
             $storyline_id = $course->latest_storyline()->id;
         } else {
