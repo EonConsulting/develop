@@ -87,18 +87,18 @@ class Storyline2ViewsBlade extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $course
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($course) {
         
         $course = Course::find($course);
         $contents = Content::all();
+        $latest_storyline = $course->latest_storyline();
 
-        if (is_array($course->latest_storyline()) && count($course->latest_storyline()))
+        if ($latest_storyline !== null)
         {
-            $storyline_id = $course->latest_storyline()->id;
+            $storyline_id = $latest_storyline->id;
         } else {
             $storyline = new Storyline([
                 'course_id' => $course->id,
