@@ -169,7 +169,13 @@ class ElasticSearchSetup implements ShouldQueue {
                         "filter" => [
                             "lowercase",
                             "autocomplete_filter"
-                        ]
+                        ],
+                        "char_filter" => ["eon_char_filter"]
+                    ]
+                ],
+                "char_filter" => [
+                    "eon_char_filter" => [
+                        "type" => "html_strip"
                     ]
                 ]
             ],
