@@ -7,6 +7,7 @@ Storyline Student Single
 
 @section('custom-styles')
 <link rel="stylesheet" href="{{ url('vendor/jstree-themes/bootstrap/style.css') }}" />
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
 
 <style>
 
@@ -49,7 +50,7 @@ Storyline Student Single
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -57,12 +58,9 @@ Storyline Student Single
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        align-content: stretch;*/
+
         margin-top: -15px;
-        position: relative;
     }
 
     .page-container-tree {
@@ -75,29 +73,16 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+        width: 250px;
+
         overflow-x: hidden;
         overflow-y: auto;
+
+        max-width: 350px;
     }
-
-    #handler {
-        background-color: grey;
-        width:2px;
-        height:100%;
-        z-index:999;
-
-        cursor: e-resize;
-
-        /* hack to ignore the absolute positioning done by jquery ui */
-        position:absolute!important;
-        left: 0 !important;
-        /* removing these makes the handler visible in chrome but makes it not pixel perfectly positioned in FF and IE as can be derived from the yellow borders being invisible */
-    }
-
 
     .page-container-editor {
-        display: flex;
-        flex-direction: row;
-        /*-webkit-order: 0;
+        -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
         -webkit-flex: 1 1 auto;
@@ -105,12 +90,9 @@ Storyline Student Single
         flex: 1 1 auto;
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
-        align-self: stretch;*/
+        align-self: stretch;
 
-        width: 80%;
-        left: 0 !important;
-        position:relative !important;
-
+        width: 70%;
     }
 
     /**
@@ -140,7 +122,6 @@ Storyline Student Single
         -ms-flex-align: start;
         align-items: flex-start;
         flex: 1;
-        border-left: 1px solid yellow;
     }
 
     .content-info {
@@ -338,7 +319,7 @@ Storyline Student Single
 
 @section('content')
 <div>
-    <div class="page-container" id="page-container">
+    <div class="page-container resizer" id="page-container">
 
         <div class="page-container-tree">
 
@@ -350,11 +331,6 @@ Storyline Student Single
         </div><!--End col-md-3 -->
 
         <div class="page-container-editor">
-
-            <div id="handler" class="ui-resizable-handle ui-resizable-w">
-
-            </div>
-
 
             <div class="content-container">
 
@@ -546,7 +522,8 @@ Storyline Student Single
 @endsection
 
 @section('custom-scripts')
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"> </script>
+<script src="{{ url("js/resizer/resizer.js") }}"> </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
@@ -627,6 +604,10 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 </script>
 
 <script>
+
+    const selector = '.resizer';
+
+    let resizer = new Resizer(selector);
 
     $( document ).ready(function(){
 
@@ -1005,10 +986,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     }
 
-    $(".page-container-editor").resizable({
-        handles: {w : '#handler'},
-        ghost: true
-    });
 
 </script>
 

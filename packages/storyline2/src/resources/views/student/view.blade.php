@@ -7,16 +7,18 @@
 
 @section('custom-styles')
 
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+
 <style>
 
-    /*.flex-container {
+    .flex-container {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -24,15 +26,12 @@
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        align-content: stretch;*/
+
         margin-top: -15px;
-        position: relative;
-    }*/
+    }
 
-    /*.flex-menu {
+    .flex-menu {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -42,16 +41,16 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 300px;
+        /*width: 250px;*/
+
+        overflow-x: hidden;
         overflow-y: auto;
-        overflow-x: auto;
 
-    }*/
+        max-width: 350px;
 
-    /*.flex-content {
-        display: flex;
-        flex-direction: row;
+    }
 
+    .flex-content {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -61,22 +60,14 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        height: 100%;
-        width: 80%;
+
+        width: 70%;
+
         overflow-y: auto;
         overflow-x: auto;
         padding: 15px;
+    }
 
-        left: 0;
-        position: relative !important;
-    }*/
-
-    /*.content {
-        border-left: 1px solid yellow;
-        background-color: steelblue;
-        flex : 1;
-        text-align: center;
-    }*/
 
     .flex-menu h4 {
         font-size: 20px;
@@ -194,58 +185,6 @@
     }
 
 
-    #container{
-        /*background-color: black;*/ /* we are not supposed to see any black but we do in Chrome indicating that the handler of the resizable box is not visible(in IE and FF everything works as intended) */
-        display: flex;
-        flex-direction: row;
-        height: 100px;
-        position:relative;
-        margin-top: -15px;
-    }
-
-    #resizable{
-        display: flex; /* a flex box itself so the right panel can take all space not taken by the handler */
-        flex-direction: row;
-        width: 80%;
-        left:0 !important;
-        position:relative !important;
-
-    }
-
-    #left{
-        /*border-right: 1px solid yellow;*/
-        /*background-color: darkred;*/
-        flex : 1;
-    }
-
-    #right{
-        /*border-left: 1px solid yellow;*/
-        /*background-color: steelblue;*/
-        height: 100%
-        flex : 1 1 auto;
-        align-self: stretch;
-        padding: 0px 15px 0px 15px;
-        overflow-y: auto;
-    }
-
-    #handler{
-        width:2px;
-        height: 100%;
-        flex: 0 1 auto;
-        order: 0;
-        background-color: lightgrey;
-        /* hack to ignore the absolute positioning done by jquery ui */
-        position:absolute!important;
-        left:0 !important;
-        cursor: e-resize;
-        align-self: stretch;
-        /* removing these makes the handler visible in chrome but makes it not pixel perfectly positioned in FF and IE as can be derived from the yellow borders being invisible */
-    }
-
-    #handler:hover {
-        background-color: darkgrey;
-    }
-
 </style>
     
 @endsection
@@ -253,9 +192,9 @@
 
 @section('content')
 
-<div class="flex-container" id="container">
+<div class="flex-container resizer">
 
-    <div class="flex-menu" id="left">
+    <div class="flex-menu">
 
         <div class="menu">
             <h4>Navigation Menu</h4>
@@ -268,13 +207,7 @@
 
     </div><!--End col-md-3 -->
 
-    <div class="flex-content" id="resizable">
-
-        <div id="handler" class="ui-resizable-handle ui-resizable-w">
-
-        </div>
-
-        <div class="content" id="right">
+    <div class="flex-content">
             <div class="content-navbar">
 
                 <div class="content-navbar-back">
@@ -324,7 +257,6 @@
                 </div>
 
             </div>
-        </div>
 
     </div><!--End col-md-9 -->
 
@@ -367,7 +299,7 @@
 
 
 @section('custom-scripts')
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"> </script>
+    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -378,11 +310,10 @@
         saveProgress();
     };
 
-    $(".flex-content").resizable({
-        handles: {e : '#handler'},
-        ghost: true
-    });
-    
+    const selector = '.resizer';
+
+    let resizer = new Resizer(selector);
+
     function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
@@ -484,7 +415,7 @@
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $("#container").height(areaHeight);
+        $(".flex-container").height(areaHeight);
     }
 
     function pupulateContent(data,button){
