@@ -94,7 +94,7 @@
                     <div class="category_checkbox">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>" required> <?php echo $category['name']; ?>
+                                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>"> <?php echo $category['name']; ?>
                             </label>
                         </div>
                     </div>
