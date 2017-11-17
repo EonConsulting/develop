@@ -39,14 +39,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title">
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Tags (comma seperated)</label>
-                        <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags">
+                        <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags" required>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" rows="2" name="description" id="description" ></textarea>
+                        <textarea class="form-control" rows="2" name="description" id="description" required></textarea>
                     </div>
                 </div>
 
