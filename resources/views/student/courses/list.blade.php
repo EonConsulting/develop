@@ -96,10 +96,11 @@
 
                 <form id="search-form">
                     <div class="search-input">
-                        <input class="form-control typeahead" name="term">
+                        <input class="form-control" name="searchterm" id="searchterm">
                     </div>
                     <span style="position: relative;">
-                        <a href="" class="btn btn-primary" id="search">Search</a>
+                        <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
+                        <button type="button" class="btn btn-info" id="btnReset">Reset</button>
                     </span>
                 </form>
             </div>
@@ -110,8 +111,9 @@
                 @endif
             </div>
 
-            <?php $count = 0; ?>
-            @foreach($courses as $course)
+            @isset($searchResults)
+            @isset($searchResults['results'])
+            @foreach($searchResults['results'] as $course)
             <div class="course-card shadow">
                 <div class="">
                     <div class="caption">
@@ -126,6 +128,12 @@
                 </div>
             </div>
             @endforeach
+            @endisset
+
+            @empty($searchResults['results'])
+            <div>No results found</div>
+            @endempty
+            @endisset
         </div>
     </div>
 </div>
@@ -134,28 +142,17 @@
 
 @section('custom-scripts')
 
-<script src="{{url('js/typeahead.bundle.js')}}"></script>
 <script src="{{url('js/analytics/tincan.js')}}"></script>
 
-{{--Typeahead--}}
 <script>
-
-var url = '';
 
 $(document).ready(function () {
     // just temporarily commented this out
     // cause it was screwing up the DEMO - thanks a ton Dario you shit!
-    $(".typeahead").typeahead({}).on("input", function (e) {
 
-        var termChars = e.target.value;
-
-        if (termChars.length >= 3) {
-            url = "{!! url('/lti/courses/search/?from=0&size=10&term=') !!}" + termChars;
-
-            setTerm(url);
-
-            //Log searched
-            /*var tincan = new TinCan (
+    function logEvents() {
+        //Log search
+        var tincan = new TinCan(
                 {
                     recordStores: [
                         {
@@ -166,8 +163,8 @@ $(document).ready(function () {
                         }
                     ]
                 }
-            );
-            tincan.sendStatement(
+        );
+        tincan.sendStatement(
                 {
                     actor: {
                         mbox: "{{ auth()->user()->email }}"
@@ -179,49 +176,49 @@ $(document).ready(function () {
                         id: "{!! url('/lti/courses/search') !!}"
                     }
                 }
-            ); */
-        }
-    });
+        );
+    }
+    ;
 
-    function setTerm(url) {
-        $("a").prop("href", url);
+    // set the search term in the search bar on load
+    function GetURLParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
+        }
     }
 
-    $(document).keypress(function (e) {
-        if (e.which === 13) {
-            debugger;
-            window.location.href = url;
-        }
-    });
+    var searchParam = GetURLParameter("searchterm");
+    if (searchParam)
+    {
+        $("#searchterm").val(searchParam);
+    }
 
-    var courseSearch = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        rateLimitWait: 1200,
-        remote: {
-            url: "{!! url('/lti/courses/search/?term=%QUERY') !!}",
-            prepare: function (query, settings) {
-                settings.url = settings.url.replace('%QUERY', query);
-                return settings;
+    $("#searchterm").keypress(function (e) {
+        if (e.which === 13) {
+            var sValue = $(this).val();
+            if (sValue.length >= 3) {
+                window.location.href = "{!! url('/lti/courses?from=0&size=10&searchterm=') !!}" + sValue;
             }
         }
     });
 
-    $('.typeahead').typeahead(null, {
-        highlight: true,
-        minLength: 3,
-        name: 'term',
-        source: courseSearch,
-        display: "title",
-        templates: {
-            empty: [
-                '<div class="noitems">',
-                'Nothing to show',
-                '</div>'
-            ].join('\n')/*,
-             pending: "",
-             suggestion: courses.title*/
+    $("#btnSearch").on("click", function () {
+        var sValue = $("#searchterm").val();
+        if (sValue.length >= 3) {
+            window.location.href = "{!! url('/lti/courses?from=0&size=10&searchterm=') !!}" + sValue;
         }
+    });
+
+    $("#btnReset").on("click", function () {
+        window.location.href = "{!! url('/lti/courses') !!}";
     });
 });
 </script>
