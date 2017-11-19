@@ -1,7 +1,9 @@
 @component('mail::message')
 # Introduction
 
-The body of your message.
+Email: {{ $user->email  }}
+
+Course: {{ $course->title }}
 
 @component('mail::button', ['url' => ''])
 Button Text
