@@ -6,17 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Models\CourseUser as User;
-use App\Models\Course;
+use Illuminate\Notifications\Messages\NexmoMessage;
+use EONConsulting\Storyline2\Models\Course;
 
-class CourseNotified extends Notification
+class CourseNotifier extends Notification
 {
     use Queueable;
 
     /**
-     * @var \App\Models\CourseUser
+     * Types of notifications to be sent
+     *
+     * @var notification_types
      */
-    protected $user;
+    protected $notification_types;
 
     /**
      * @var \App\Models\Course
@@ -28,10 +30,10 @@ class CourseNotified extends Notification
      *
      * @return void
      */
-    public function __construct(User $user, Course $course)
+    public function __construct(Course $course, $notification_types)
     {
-        $this->user = $user;
         $this->course = $course;
+        $this->notification_types = $notification_types;
     }
 
     /**
@@ -42,7 +44,7 @@ class CourseNotified extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return $this->notification_types;
     }
 
     /**
@@ -55,21 +57,20 @@ class CourseNotified extends Notification
     {
         return (new MailMessage)
             ->from('dont-reply@unisaonline.net', 'Unisa Online')
-            ->subject('Welcome to the the Portal')
-            ->markdown('emails.courses.notifications.notify', ['user' => $this->user, 'course' => $this->course]);
+            ->subject('Course Notification')
+            ->markdown('emails.courses.notifications.notify', ['course' => $this->course, 'user' => $notifiable]);
     }
 
     /**
-     * Get the array representation of the notification.
+     * Get the Nexmo / SMS representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return array
+     * @return NexmoMessage
      */
-    public function toArray($notifiable)
+    public function toNexmo($notifiable)
     {
-        return [
-            'user' => $this->user,
-            'course' => $this->course
-        ];
+        return (new NexmoMessage)
+            ->content('Your SMS message content!');
     }
+
 }
