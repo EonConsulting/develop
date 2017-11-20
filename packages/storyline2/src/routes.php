@@ -51,7 +51,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2.JSON.create');
         //Add more routes
 
-        Route::post('/{course}/notify', ['as' => 'storyline2.courses.single.notify', 'uses' => 'CourseNotifyController@store']);
+        Route::post('/notify', ['as' => 'storyline2.courses.single.notify', 'uses' => 'CourseNotifyController@store']);
 
     });
 });
