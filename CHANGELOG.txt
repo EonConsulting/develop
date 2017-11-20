@@ -1,1 +1,7 @@
+v2.0.4 beta
+- Replaced ElasticSearch mechanism for student search
+- Fixed XAPI wiring on Student Search
+- Added XAPI wiring on Topic-to-Topic Navigation
 
+v2.0.3 beta
+-

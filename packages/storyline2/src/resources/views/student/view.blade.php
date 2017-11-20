@@ -347,6 +347,7 @@
             load_content(item_id,button);
         });
 
+
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
