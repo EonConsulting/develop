@@ -21,6 +21,13 @@ class CourseNotifier extends Notification implements ShouldQueue
     protected $notification_types;
 
     /**
+     * Custom message entered by user
+     *
+     * @var message
+     */
+    protected $message;
+
+    /**
      * @var \App\Models\Course
      */
     protected $course;
@@ -30,10 +37,11 @@ class CourseNotifier extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Course $course, $notification_types)
+    public function __construct(Course $course, $notification_types, $message)
     {
         $this->course = $course;
         $this->notification_types = $notification_types;
+        $this->message = $message;
     }
 
     /**
@@ -58,7 +66,11 @@ class CourseNotifier extends Notification implements ShouldQueue
         return (new MailMessage)
             ->from('dont-reply@unisaonline.net', 'Unisa Online')
             ->subject('Course Notification')
-            ->markdown('emails.courses.notifications.notify', ['course' => $this->course, 'user' => $notifiable]);
+            ->markdown('emails.courses.notifications.notify', [
+                'course' => $this->course,
+                'user' => $notifiable,
+                'message' => $this->message
+            ]);
     }
 
     /**
@@ -72,5 +84,6 @@ class CourseNotifier extends Notification implements ShouldQueue
         return (new NexmoMessage)
             ->content('Your SMS message content!');
     }
+
 
 }
