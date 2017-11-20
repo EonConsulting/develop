@@ -264,8 +264,6 @@
 
 @section('exterior-content')
 
-@section('exterior-content')
-
     <div id="errorModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -289,8 +287,31 @@
             </div>
 
         </div>
-    </div>  
+    </div>
 
+    <div id="noContentMessage" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Topic Progress Alert</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="error-message">
+                        The item you are trying to access does not have any content associated with it. If you are the author of this content, please add content to this item.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 
@@ -395,7 +416,7 @@
         var storyline = '{{ $storylineId }}';
         var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '{{url('')}}/student/progression',
+            url: '{{ url('student/progression') }}',
             type: "POST",
             data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
             beforeSend: function () {
@@ -406,8 +427,8 @@
                     //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                     getContent(item_id, button);
                 } else if(data.msg === 'error'){
-                    //progress_error();
-                    getContent(item_id, button);
+                    progress_error();
+                    //getContent(item_id, button);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -436,7 +457,7 @@
                     if(data["found"] === true){
                         pupulateContent(data,button);
                     } else {
-                        alert("The next item has no content.")
+                        $("#noContentMessage").modal("show");
                     }
                 },
                 400: function () { //bad request
