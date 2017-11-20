@@ -67,9 +67,6 @@ Course List
         </div>
     </div>
 
-@endsection
-
-
 @section('exterior-content')
 
     <div id="formModal" class="modal fade" role="dialog">
@@ -110,13 +107,18 @@ Course List
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="usr">Send via Email:</label>
-                            <input type="checkbox" class="form-control" id="email" name="email" value="true">
+                            <label for="email">Send via Email:</label>
+                            <input type="checkbox" class="form-control" id="email" name="options[]" value="mail">
                         </div>
 
                         <div class="form-group">
-                            <label for="usr">Send via Sms:</label>
-                            <input type="checkbox" class="form-control" id="sms" name="sms" value="true">
+                            <label for="sms">Send via Sms:</label>
+                            <input type="checkbox" class="form-control" id="sms" name="options[]" value="nexmo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message"></textarea>
                         </div>
 
                     </div>
@@ -132,83 +134,136 @@ Course List
 
 @endsection
 
+@endsection
+
+
+
+
 
 @section('custom-scripts')
 
-<script src="{{url('/js/app.js') }}"></script>
+    <script src="{{url('/js/app.js') }}"></script>
 
-<script>
-
-    {{-- Set the course ID in the form before opening the modal --}}
-    $('#notificationModal').on('show.bs.modal', function () {
-
-        var course_id = $('.notifyId').data('id');
-
-        $("#notification-form input[name='course_id']").val(course_id);
-    });
+    <script>
 
 
+        {{-- Set the course ID in the form before opening the modal --}}
+        $('#notificationModal').on('show.bs.modal', function () {
+
+            var course_id = $('.notifyId').data('id');
+
+            $("#notification-form input[name='course_id']").val(course_id);
+        });
 
 
-
-
-
-
-                    $(document).ready(function ($) {
-                        var _token = $('#tok').val();
-
-                        $('.clickable-row').on('click', '.manage-course', function (e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            var group_id = $(this).data('courseid');
-
-                            $('.clickable-row[data-courseid="' + group_id + '"]').hide();
-
-//                $.ajax({
-//                    url: url,
-//                    type: 'POST',
-//                    data: {_token: _token},
-//                    success: function(res) {
-//                        console.log('res', res);
-//                        if(res.hasOwnProperty('success')) {
-//                            if(res.success) {
-//                                $('.clickable-row[data-courseid="' + group_id + '"]').remove();
-//                            } else {
-//                                $('.clickable-row[data-courseid="' + group_id + '"]').show();
-//                                alert(res.error_messages);
-//                            }
-//                        }
-//                    },
-//                    error: function(res) {
-//                        console.log('res', res);
-//                        $('.clickable-row[data-courseid="' + group_id + '"]').show();
-//                    }
-//                });
-                        });
-
-                        $(".clickable-row").click(function () {
-                            window.document.location = $(this).data("href");
-                        });
-                    });
-                    function search() {
-                        // Declare variables
-                        var input, filter, table, tr, td, i;
-                        input = document.getElementById("txt_search");
-                        filter = input.value.toLowerCase();
-                        table = document.getElementById("courses-table");
-                        tr = table.getElementsByTagName("tr");
-
-                        // Loop through all table rows, and hide those who don't match the search query
-                        for (i = 0; i < tr.length; i++) {
-                            td = tr[i].getElementsByTagName("td")[1];
-                            if (td) {
-                                if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                                    tr[i].style.display = "";
-                                } else {
-                                    tr[i].style.display = "none";
-                                }
-                            }
+        $(document).ready(function($) {
+            var _token = $('#tok').val();
+            $(".moduleId").click(function () {
+                var text = $(this).text();
+                var id = $(this).attr('id');
+                var url = '{{ route("courses.edit") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    asyn: false,
+                    data: {id:id, text:text},
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        $("#formModal").modal();
+                        if(text === 'Module'){
+                            $(".data-title").text('Edit Module');
+                        }else{
+                            $(".data-title").text('Edit Metadata');
+                            $("#saveModule").attr('id','saveMetadata');
                         }
+                        $(".edit-data").html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
                     }
-</script>
+                });
+            });
+
+            $("#saveModule").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("courses.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    asyn: false,
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                            $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                            $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                        } else{
+                            $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                            $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
+            });
+
+            $("#saveMetadata").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("course-metadata.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    asyn: false,
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                            $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                            $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                        } else{
+                            $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                            $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
+            });
+
+        });
+
+        function search() {
+            // Declare variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("txt_search");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("courses-table");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 @endsection
