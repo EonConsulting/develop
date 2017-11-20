@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-@endsection
+
 
 @section('exterior-content')
 
@@ -108,13 +108,18 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="usr">Send via Email:</label>
-                            <input type="checkbox" class="form-control" id="email" name="email" value="true">
+                            <label for="email">Send via Email:</label>
+                            <input type="checkbox" class="form-control" id="email" name="options[]" value="mail">
                         </div>
 
                         <div class="form-group">
-                            <label for="usr">Send via Sms:</label>
-                            <input type="checkbox" class="form-control" id="sms" name="sms" value="true">
+                            <label for="sms">Send via Sms:</label>
+                            <input type="checkbox" class="form-control" id="sms" name="options[]" value="nexmo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message"></textarea>
                         </div>
 
                     </div>
@@ -129,6 +134,10 @@
     </div>
 
 @endsection
+
+@endsection
+
+
 
 
 @section('custom-scripts')
