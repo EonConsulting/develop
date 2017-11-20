@@ -11,8 +11,22 @@ use App\Notifications\CourseNotifier;
 class CourseNotifyController extends Controller
 {
 
-    public function store(Request $request, Course $course)
+    public function store(Request $request)
     {
+
+        if( ! $course_id = $request->get('course_id'))
+        {
+            session()->flash('error_message', 'Unable to find course!');
+
+            return redirect()->back();
+        }
+
+        if( ! $course = Course::find($course_id))
+        {
+            session()->flash('error_message', 'Unable to find course!');
+
+            return redirect()->back();
+        }
 
         $notification_types = [];
 
