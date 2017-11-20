@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 use EONConsulting\Storyline2\Models\Course;
 
-class CourseNotifier extends Notification
+class CourseNotifier extends Notification implements ShouldQueue
 {
     use Queueable;
 
