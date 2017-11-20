@@ -332,51 +332,31 @@
         });
     }
     
-      function progress_error(){
+    function progress_error(){
         $("#errorModal").modal("show");
     }
 
+
+
     $(document).ready(function(){
         resizeArea();
+
         $(".menu-btn").on("click", function() {
             var button = $(this);
-            var item_id = $(this).data("item-id");           
-            var courseId = '{{ $course->id }}';
-            var storyline = '{{ $storylineId }}';
-            var student = '{{auth()->user()->id}}';            
-            $.ajax({
-                url: '{{url('')}}/student/progression',
-                type: "POST",
-                data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-                beforeSend: function () {
-                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {     
-                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                         getContent(item_id, button);
-                       } else if(data.msg === 'error'){
-                        //progress_error();
-                        getContent(item_id, button);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                     location.reload();
-                }
-            });                 
-        });        
+            var item_id = $(this).data("item-id");
+            load_content(item_id,button);
+        });
 
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            getContent(item_id, button);
+            load_content(item_id, button);
         });
 
         $(document).on("click", ".arrow-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            getContent(item_id, button);
+            load_content(item_id, button);
         });
 
         //$('.arrow-btn').hide();
@@ -409,6 +389,68 @@
         $("#containter").height(areaHeight);
     }
 
+    function load_content(item_id, button){
+        var courseId = '{{ $course->id }}';
+        var storyline = '{{ $storylineId }}';
+        var student = '{{auth()->user()->id}}';
+        $.ajax({
+            url: '{{url('')}}/student/progression',
+            type: "POST",
+            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            beforeSend: function () {
+                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.msg === 'true') {
+                    //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    getContent(item_id, button);
+                } else if(data.msg === 'error'){
+                    //progress_error();
+                    getContent(item_id, button);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                location.reload();
+            }
+        });
+    }
+
+    //Get Content
+    function getContent(item_id,button) {
+
+        console.log("getContent called");
+
+        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
+
+        $.ajax({
+            method: "GET",
+            url: actionUrl,
+            contentType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    if(data["found"] === true){
+                        pupulateContent(data,button);
+                    } else {
+                        alert("The next item has no content.")
+                    }
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
+    }
+
     function pupulateContent(data,button){
 
         //highlight clicked button
@@ -423,7 +465,7 @@
             var current_node = button;
 
             while(current_node.data('parent-id') !== '#'){
-                
+
                 var current_node = $('#' + current_node.data('parent-id'));
 
                 temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
@@ -452,7 +494,7 @@
             next.data('item-id',button.data('next-id'));
             next.show();
         }
-        
+
         button.parent().parent().children('ul').show();
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-right');
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-down');
@@ -464,42 +506,8 @@
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-        
-    }
-
-    //Get Content
-    function getContent(item_id,button) {
-
-        console.log("getContent called");
-
-        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
-
-        $.ajax({
-            method: "GET",
-            url: actionUrl,
-            contentType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-                    if(data["found"] === true){
-                        pupulateContent(data,button);
-                    }
-                },
-                400: function () { //bad request
-
-                },
-                500: function () { //server kakked
-
-                }
-            }
-        }).error(function (req, status, error) {
-            alert(error);
-        });
 
     }
-
     
     
 </script>
