@@ -14,36 +14,26 @@ class CourseNotifyController extends Controller
     public function store(Request $request)
     {
 
-        if( ! $course_id = $request->get('course_id'))
+        if( ! $course = Course::find($request->get('course_id')))
         {
             session()->flash('error_message', 'Unable to find course!');
 
             return redirect()->back();
         }
 
-        if( ! $course = Course::find($course_id))
+        if( ! $notification_types = $request->get('options'))
         {
-            session()->flash('error_message', 'Unable to find course!');
+            session()->flash('error_message', 'No option selected!');
 
             return redirect()->back();
         }
 
-        $notification_types = [];
-
-        if($request->get('email') == 'true')
-        {
-            $notification_types[] = 'mail';
-        }
-
-        if($request->get('sms') == 'true')
-        {
-            $notification_types[] = 'nexmo';
-        }
+        $message = $request->get('message');
 
         foreach($course->users()->get() as $user)
         {
             $user->notify(
-                new CourseNotifier($course, $notification_types)
+                new CourseNotifier($course, $notification_types, $message)
             );
         }
 
