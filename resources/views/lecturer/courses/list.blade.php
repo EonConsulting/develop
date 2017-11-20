@@ -46,7 +46,7 @@
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
                                     <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-sm">Storyline</a>
-                                    <!--<a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>-->
+                                    {{--<a href="{{ route('storyline2.courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>--}}
                                    
                                     <div class="btn-group">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
