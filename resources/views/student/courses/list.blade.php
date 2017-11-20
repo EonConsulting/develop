@@ -99,6 +99,7 @@
                         <input class="form-control" name="searchterm" id="searchterm">
                     </div>
                     <span style="position: relative;">
+                        <hidden name="_token" value="{{ csrf_token() }}" />
                         <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
                         <button type="button" class="btn btn-info" id="btnReset">Reset</button>
                     </span>
@@ -147,10 +148,13 @@
 <script>
 
 $(document).ready(function () {
-    // just temporarily commented this out
+    // 2017-11-01 MH just temporarily commented this out
     // cause it was screwing up the DEMO - thanks a ton Dario you shit!
+    // 
+    // 2017-11-20 After wanting to hunt Dario down and shoot
+    // him in the face with a paintball gun, MH fixed this........forever
 
-    function logEvents() {
+    function logXAPISearchEvent() {
         //Log search
         var tincan = new TinCan(
                 {
@@ -170,15 +174,15 @@ $(document).ready(function () {
                         mbox: "{{ auth()->user()->email }}"
                     },
                     verb: {
-                        id: "http://activitystrea.ms/schema/1.0/search"
+                        id: "http://unisaonline.net/schema/1.0/search"
                     },
                     target: {
                         id: "{!! url('/lti/courses/search') !!}"
                     }
                 }
         );
-    }
-    ;
+    };
+    
 
     // set the search term in the search bar on load
     function GetURLParameter(sParam)
@@ -199,6 +203,7 @@ $(document).ready(function () {
     if (searchParam)
     {
         $("#searchterm").val(searchParam);
+        logXAPISearchEvent();
     }
 
     $("#searchterm").keypress(function (e) {

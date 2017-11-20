@@ -80,6 +80,7 @@ class CoursesLTIController extends LTIBaseController {
             }
         } catch (\ErrorException $e) {
             Log::error("Unable to perform search: " . $e->getMessage());
+            $finalOutput = array();
         }
 
         return view('student.courses.list', ['searchResults' => $finalOutput, 'breadcrumbs' => $breadcrumbs]);
