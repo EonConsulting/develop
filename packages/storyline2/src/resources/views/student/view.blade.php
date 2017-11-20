@@ -354,7 +354,7 @@
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
                          getContent(item_id, button);
                        } else if(data.msg === 'error'){
-                        //progress_error();
+                        progress_error();
                         getContent(item_id, button);
                     }
                 },

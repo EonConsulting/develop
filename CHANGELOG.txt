@@ -1,1 +1,5 @@
+v2.0.4 beta
+- Replaced ElasticSearch mechanism for student search
 
+v2.0.3 beta
+-
