@@ -21,7 +21,7 @@
                     <div class="panel-heading"><strong>Menu</strong></div>
                     <div class="list-group">
                         <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="list-group-item">Storyline</a>
-                        <a href="{{ route('courses.single.notify', $course->id) }}" class="list-group-item">Notify Users</a>
+                        <a href="{{ route('storyline2.courses.single.notify', $course->id) }}" class="list-group-item">Notify Users</a>
                         <a href="{{ route('courses.single.content', $course->id) }}" class="list-group-item">Content</a>
                     </div>
                 </div>
