@@ -182,7 +182,9 @@
     }
 
 </style>
-    
+
+
+    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 @endsection
 
 
@@ -228,7 +230,7 @@
                 <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
             </div>
 
-            <div id="body"></div>
+            <div class="content-body" id="body"></div>
     
         </div>
 
