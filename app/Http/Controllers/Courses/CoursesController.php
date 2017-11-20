@@ -38,7 +38,7 @@ class CoursesController extends Controller
             'title' => 'My Modules'
         ];
 
-        return view('lecturer.courses.show', ['createdCourse' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
+        return view('lecturer.courses.show', ['courses' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
     }
     
     public function edit(Request $request)
