@@ -24,8 +24,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
-
 /*
  * ---------------------------------------
  * Auth::routes();
