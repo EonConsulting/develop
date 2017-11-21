@@ -102,7 +102,8 @@
         $(document).ready(function($) {
             var _token = $('#tok').val();
 
-            $(".moduleId").click(function () {
+            $(".moduleId").click(function (event) {
+                event.preventDefault();
                 var text = $(this).text();
                 var id = $(this).attr('id');
                 var url = '{{ route("courses.edit") }}';
