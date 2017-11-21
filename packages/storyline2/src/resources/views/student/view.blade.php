@@ -352,7 +352,7 @@
                 success: function (data, textStatus, jqXHR) {
                     if (data.msg === 'true') {     
                         //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                         getContent(item_id, button);
+                        getContent(item_id, button);
                        } else if(data.msg === 'error'){
                         progress_error();
                         getContent(item_id, button);
