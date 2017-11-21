@@ -72,6 +72,7 @@ class CreateCourseController extends Controller
         ];
         
         $MetadataStore = MetadataType::get();
+        
         $MetaId = MetadataStore::pluck('id')->all();
 
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
@@ -80,6 +81,7 @@ class CreateCourseController extends Controller
     public function viewmetadata($id)
     {
         $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
+        
         $MetaId = MetadataStore::pluck('id')->all();
         return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
     }
