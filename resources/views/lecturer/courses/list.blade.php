@@ -54,7 +54,7 @@
                                     </button>
                                         <div class="dropdown-menu">
                                             <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
-                                            <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
+                                            <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Edit Module</a>
                                             <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
                                         </div>
                                     </div> 
@@ -67,6 +67,9 @@
             </div>
         </div>
     </div>
+
+@endsection
+
 @section('exterior-content')
 <div id="formModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -88,10 +91,7 @@
             </form>
         </div>
     </div>
-</div> 
-
-
-@endsection
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -100,91 +100,91 @@
 
     <script>
         $(document).ready(function($) {
-            var _token = $('#tok').val();            
+            var _token = $('#tok').val();
+
             $(".moduleId").click(function () {
-            var text = $(this).text();
-            var id = $(this).attr('id');
-            var url = '{{ route("courses.edit") }}';          
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: {id:id, text:text},
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                   $("#formModal").modal();                  
-                     if(text === 'Module'){                   
-                     $(".data-title").text('Edit Module');
-                     }else{
-                     $(".data-title").text('Edit Metadata');
-                     $("#saveModule").attr('id','saveMetadata');
-                     }
-                   $(".edit-data").html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+                var text = $(this).text();
+                var id = $(this).attr('id');
+                var url = '{{ route("courses.edit") }}';
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {id:id, text:text},
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        $("#formModal").modal();
+                        if(text === 'Module'){
+                            $(".data-title").text('Edit Module');
+                        }else{
+                            $(".data-title").text('Edit Metadata');
+                            $("#saveModule").attr('id','saveMetadata');
+                        }
+
+                        $(".edit-data").html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
-        
-         $("#saveModule").submit(function (event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            var url = '{{ route("courses.update") }}';
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: formData,
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if(data.success){
-                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
-                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
-                       } else{
-                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
-                      $('.btnSubmit').text("Submit");
-                    }                   
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+
+            $("#saveModule").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("courses.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                            $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                            $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                        } else{
+                            $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                            $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
-        
-        $("#saveMetadata").submit(function (event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            var url = '{{ route("course-metadata.update") }}';
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: formData,
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if(data.success){
-                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
-                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
-                       } else{
-                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
-                      $('.btnSubmit').text("Submit");
-                    }                   
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+
+            $("#saveMetadata").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("course-metadata.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                          $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                          $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                           } else{
+                          $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                          $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
         
         });
         

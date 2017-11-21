@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MetadataType;
 use App\Models\CourseMetadata;
+use App\Models\ContentTemplates;
 use Validator;
 
 class CreateCourseController extends Controller
@@ -25,10 +26,14 @@ class CreateCourseController extends Controller
             ],
         ];
 
-
+        $templates = ContentTemplates::all();
         $metadataType = MetadataType::pluck('description', 'id');
 
-        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs, 'metadataType' => $metadataType]);
+        return view('lecturer.courses.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'templates' => $templates,
+            'metadataType' => $metadataType
+        ]);
     }
 
     public function store(Request $request)
@@ -43,6 +48,7 @@ class CreateCourseController extends Controller
                 'description' => $request->get('description'),
                 'tags' => $request->get('tags'),
                 'creator_id' => auth()->user()->id,
+                'template_id' => $request->get('template')
             ]);
 
             $Course->save();

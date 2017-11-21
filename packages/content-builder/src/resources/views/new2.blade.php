@@ -490,6 +490,7 @@ var base_url = "{{{ url('') }}}";
     $(function(){
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
+                contentsCss : '{{ url('css/content-templates/default.css') }}',
                 extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,

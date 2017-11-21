@@ -545,6 +545,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     $(function(){
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
+                contentsCss : '{{ url($course->template->file_path) }}',
                 extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,
