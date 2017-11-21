@@ -78,16 +78,14 @@ class CreateCourseController extends Controller
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
     
-    public function viewmetadata($id)
-    {
-        $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
-        
-        $MetaId = MetadataStore::pluck('id')->all();
-        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
+    public function viewmetadata($id){       
+        $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get(); 
+        //$MetaId = CourseMetadata::where('course_id', $id)->pluck('metadata_store_id')->all();       
+            $MetaId = MetadataStore::pluck('id')->all();
+        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore,'id'=>$id]);
     }
 
-    public function storemetadata(Request $request)
-    {
+    public function storemetadata(Request $request){
         $value = $request->get('value');
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [

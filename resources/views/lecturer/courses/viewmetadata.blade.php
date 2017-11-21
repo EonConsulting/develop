@@ -19,11 +19,12 @@
             {{ Form::text('value[]',empty($resource->course_metadata->value)? '' : $resource->course_metadata->value, array('placeholder'=>'Custom Value','class' => 'form-control')) }}
         </div>
 @endforeach
+<input name="metadata_type_id" type="hidden" value="{{ $id}}"/>
 </div>
 
 @if(!$MetadataStore->isEmpty())
 <div class="col-lg-8" style="margin-top:50px">
-    <a type="button" class="btn btn-success ">Submit</a>
+    <a type="button" class="save-meta btn btn-success ">Submit</a>
 </div>
 @else
    
