@@ -4,7 +4,7 @@
     <div class="meta-entry shadow" id="{{$resource->id}}"> 
             <div style="overflow-y: auto;">
                 <div class="meta-checkbox">
-                    {{ Form::checkbox('metadata_store_id[]', $resource->id) }}
+                    {{ Form::checkbox('metadata_store_id[]', $resource->id, in_array($resource->id,$MetaId) ? true : false )}}
                 </div>
 
                 <div class="meta-description">
