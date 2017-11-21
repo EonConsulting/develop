@@ -108,7 +108,7 @@ Course List
 
                         <div class="form-group">
                             <label for="email">Send via Email:</label>
-                            <input type="checkbox" class="form-control" id="email" name="options[]" value="mail">
+                            <input type="checkbox" class="form-control" id="email" name="options[]" value="email">
                         </div>
 
                         <div class="form-group">
