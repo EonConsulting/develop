@@ -21,9 +21,7 @@ use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilde
 class Storyline2ViewsJSON extends BaseController {
 
     /**
-     *
-     * @param Course $course
-     * @return type
+     * @return array
      */
     public function render() {
 
@@ -41,45 +39,63 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $storyline
-     * @return void
+     * @param $storyline
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show_items($storyline) {
 
+
         $result = $this->items_to_tree(Storyline::find($storyline)->items);
         usort($result, [$this, "self::compare"]);
+        $result = $this->createTree($result);
+        $result = $result[0]['children'];
 
-        return response()->json($this->createTree($result));
+        return response()->json($result);
     }
 
-
-    public function createTree($items, $left = 0, $right = null, $i = 0, &$order = 0) {
+    /**
+     * @param $items
+     * @param int $left
+     * @param null $right
+     * @param int $i
+     * @param string $num
+     * @param int $order
+     * @return array
+     */
+    public function createTree($items, $left = 0, $right = null, $i = 0, $num = '', &$order = 0) {
         $tree = [];
+        $count = 0;
 
         for($i; $i < count($items); $i++) {
             $temp = $items[$i];
-
             if ($temp['lft'] === $left + 1 && (is_null($right) || $temp['rgt'] < $right)) {
-                
+                $count++;
                 $temp['order'] = $order;
                 $order++;
 
                 if($i < 2 ){ //I say 2 because we don't display the root node, so by saying 2 instead of 1, we jump over the root
-                    $temp['prev'] = '#'; 
+                    $temp['prev'] = '#';
+                    $temp_num = "";
                 } else {
                     $temp['prev'] = $items[$i-1]['id'];
+                    $temp_num = $num . (string) $count . '.';
                 }
 
                 if($i === count($items)-1){
                     $temp['next'] = '#';
                 } else {
                     $temp['next'] = $items[$i+1]['id'];
+
                 }
 
-                if($temp['rgt'] - $temp['lft'] != 1){
-                    $temp['children'] = $this->createTree($items, $temp['lft'], $temp['rgt'], $i+1, $order);
+                if($num === ''){
+                    $temp['parent_id'] = '#';
+                }
+
+                $temp['num'] = $num . (string) $count . ')';
+
+                if($temp['rgt'] - $temp['lft'] !== 1){
+                    $temp['children'] = $this->createTree($items, $temp['lft'], $temp['rgt'], $i+1, $temp_num, $order);
                 }
 
                 $tree[] = $temp;
@@ -90,15 +106,19 @@ class Storyline2ViewsJSON extends BaseController {
         return $tree;
     }
 
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
         return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
     /**
-     *
-     * @param type $items
-     * @return type
+     * @param $items
+     * @return array
      */
     public function items_to_tree($items) {
 
@@ -120,9 +140,8 @@ class Storyline2ViewsJSON extends BaseController {
 
 
     /**
-     * 
      * @param Request $request
-     * @return type
+     * @return \Illuminate\Http\JsonResponse
      */
     public function rename(Request $request) {
 
@@ -143,6 +162,10 @@ class Storyline2ViewsJSON extends BaseController {
         return response()->json(['msg' => $msg]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request) {
 
         $data = $request->json()->all();
@@ -197,9 +220,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
-     * @return type
+     * @return \Illuminate\Http\JsonResponse
      */
     public function move(Request $request) {
 
@@ -233,8 +255,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function delete(Request $request) {
 

@@ -197,7 +197,11 @@
         <h4>Navigation Menu</h4>
 
         <div class="item-tree" id="content_tree">
-            <?php echo $items; ?>
+
+            {{-- {!! $items !!} --}}
+            <ul>
+            @each('eon.storyline2::partials.items', $items, 'item', 'eon.storyline2::partials.none')
+            </ul>
         </div>
 
     </div><!--End col-md-3 -->
@@ -335,9 +339,6 @@
             url: '{{url('')}}/student/progression',
             type: "POST",
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
             success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
                     //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
