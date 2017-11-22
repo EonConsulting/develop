@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterContent extends Migration
+class AlterMetadataType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AlterContent extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE `content`
-            ADD COLUMN `ingested` TINYINT(1) DEFAULT 0 AFTER `tags`;');
+        DB::statement('ALTER TABLE `metadata_types` CHANGE `area` `area` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;');
     }
 
     /**
@@ -24,6 +23,6 @@ class AlterContent extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE `content` DROP COLUMN `ingested`;');
+        //
     }
 }

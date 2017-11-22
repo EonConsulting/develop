@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMetadataStoreTable extends Migration
+class CreateContentTemplateTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,13 +13,10 @@ class CreateMetadataStoreTable extends Migration
      */
     public function up()
     {
-        Schema::create('metadata_store', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('content_templates', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('metadata_type_id');
-            $table->string('description', 255);
-            $table->string('classification', 150)->nullable();
-            $table->integer('sequence')->nullable();
+            $table->string('name')->required();
+            $table->string('file_path')->required();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateMetadataStoreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('metadata_store');
+        Schema::dropIfExists('content_templates');
     }
 }

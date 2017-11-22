@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateContentTable extends Migration
+class AlterCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class UpdateContentTable extends Migration
      */
     public function up()
     {
-        Schema::table('content', function ($table) {
-            $table->text("description");
+        Schema::table('courses', function ($table) {
+            $table->unsignedInteger('template_id')->default(1);
+            $table->foreign('template_id', 'template_ibfk_1')
+                ->references('id')->on('content_templates');
         });
     }
 
@@ -25,8 +27,8 @@ class UpdateContentTable extends Migration
      */
     public function down()
     {
-        Schema::table('content', function ($table) {
-            $table->dropColumn('description');
+        Schema::table('courses', function ($table) {
+            $table->dropColumn('template_id');
         });
     }
 }

@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Asset;
+use App\Models\ContentTemplates;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
@@ -46,6 +47,7 @@ class Storyline2ViewsBlade extends BaseController {
         $items = $SL2JSON->createTree($items);
 
         //dd($items);
+        $course['template'] = ContentTemplates::find($course->template_id);
 
         $items = $this->makeList($items[0]['children']);
 
@@ -93,12 +95,13 @@ class Storyline2ViewsBlade extends BaseController {
     public function edit($course) {
         
         $course = Course::find($course);
+        $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
 
         if ($latest_storyline !== null)
         {
-            $storyline_id = $course->latest_storyline()->id;
+            $storyline_id = $latest_storyline->id;
         } else {
             $storyline = new Storyline([
                 'course_id' => $course->id,
@@ -130,6 +133,7 @@ class Storyline2ViewsBlade extends BaseController {
           ];
 
         return view('eon.storyline2::lecturer.edit', [
+            'course' => $course,
             'contents' => $contents,
             'storyline_id' => $storyline_id,
             'categories' => $categories,

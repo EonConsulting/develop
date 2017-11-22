@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\LTI\Dashboards;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 
 class DashboardLTIController extends LTIBaseController
@@ -18,6 +19,8 @@ class DashboardLTIController extends LTIBaseController
 
         $UserRole = laravel_lti()->get_user_lti_type(auth()->user());
 
+        Log::debug("Attempting an LTI Login....");
+        Log::debug($UserRole);
 
         switch ($UserRole) {
             case "Administrator":

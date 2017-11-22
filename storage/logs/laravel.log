@@ -250,3 +250,6 @@
 #58 /home/vagrant/Code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #59 {main}
 "} 
+[2017-11-22 00:40:18] local.DEBUG: Attempting an LTI Login....  
+[2017-11-22 00:40:18] local.DEBUG: Learner  
+[2017-11-22 00:40:21] local.ERROR: Unable to perform search: Trying to get property of non-object  
