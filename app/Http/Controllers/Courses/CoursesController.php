@@ -46,7 +46,6 @@ class CoursesController extends Controller
     {
         $id = (int)$request->get('id');
         if ($request->get('text') === 'Edit Module') {
-
             $templates = ContentTemplates::all();
             $data = Course::find($id);
             return view('lecturer.courses.edit', ['data' => $data, 'templates' => $templates]);
@@ -58,8 +57,7 @@ class CoursesController extends Controller
                
             $Metadata = MetadataStore::with(['course_metadata'=> function ($q) use ($id) {
                 $q->where('course_id', $id);
-            }])
-                                              ->where('metadata_type_id', $data->metadata_type_id)->get();
+            }])->where('metadata_type_id', $data->metadata_type_id)->get();
                               
             return view('lecturer.courses.editmetadata', ['data' => $Metadata,'MetaId'=>$MetaId,'course'=>$id]);
         }

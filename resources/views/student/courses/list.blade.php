@@ -4,41 +4,31 @@
 
     .course-card {
         background: #FFF;
-        width: 300px;
-        float: left;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        padding: 15px;
-        height: 280px;
-        position: relative;
-        overflow: hidden;
+        max-width: 1120px;
+        margin-bottom: 15px;
+        padding: 10px;
     }
 
     .course-card h1 {
         display: block;
-        background: #fb7217;
-        font-size: 18px;
-        line-height: 24px;
-        color: #FFF;
-        margin-top: -15px;
+        font-size: 16px;
+        color: #fb7217;
+
+        border-color: #fb7217;
+        border-style: solid;
+        border-width: 0px 0px 1px 0px;
+
+        margin-top: -10px;
         margin-bottom: 5px;
-        margin-left: -15px;
-        margin-right: -15px;
-        padding: 15px;
-        height: 80px;
+        margin-left: -10px;
+        margin-right: -10px;
+
+        padding: 10px;
     }
 
     .course-card p {
         font-size: 12px;
     }
-
-    .btn-course-container {margin: 0px -15px 0px -15px; background: #fcfcfc; position: absolute; bottom: 0; width: 100%; border-width: 1px 0px 0px 0px; border-style: solid; border-color: #e2e2e2;}
-
-    .btn-course {padding: 15px 0px 15px 15px; color: #7d7d7d; font-size: 20px;}
-
-    .btn-course-view {float: left;}
-
-    .btn-course-delete {padding: 15px 15px 15px 0px; float: right; color: #dd4b39;}
 
 
     /*
@@ -99,10 +89,11 @@
                         <input class="form-control" name="searchterm" id="searchterm">
                     </div>
                     <span style="position: relative;">
-                        <hidden name="_token" value="{{ csrf_token() }}" />
                         <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
                         <button type="button" class="btn btn-info" id="btnReset">Reset</button>
                     </span>
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 </form>
             </div>
 
@@ -116,16 +107,34 @@
             @isset($searchResults['results'])
             @foreach($searchResults['results'] as $course)
             <div class="course-card shadow">
-                <div class="">
-                    <div class="caption">
-                        <h1>{!! $course['title'] !!}</h1><br />
-                        <p>{!! $course['description'] !!}</p>
-                    </div>
-                    <div class="btn-course-container">
-                        <a href="{{ route('lti.courses.single', $course['id']) }}" class="btn-course btn-course-view" role="button">
+                <div class="caption">
+                    <h1>
+                        {!! $course['title'] !!}
+
+                        @if($course['has_sl'])
+                        <a href="{{ route('storyline2.student.single', $course['id']) }}" class="pull-right" role="button">
                             <i class="fa fa-eye"></i> View
                         </a>
-                    </div>
+                        @else
+                        <span class="pull-right">No Lecture Available</span>
+                        @endif
+                    </h1>
+                    <p>
+                        @if($course['description'] !== null)
+                            {{ $course['description'] }}
+                        @else
+                            <i>No description.</i>
+                        @endif
+                    </p>
+                    <p>
+                        @if($course['tags'] !== "" && $course['tags'] !== null)
+                            @foreach(explode(',',$course['tags']) as $tag)
+                                <span class="label label-default">{{ $tag }}</span>
+                            @endforeach
+                        @else
+                            <i>No tags.</i>
+                        @endif
+                    </p>
                 </div>
             </div>
             @endforeach
