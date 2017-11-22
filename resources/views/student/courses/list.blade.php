@@ -163,21 +163,24 @@ $(document).ready(function () {
     // 2017-11-20 After wanting to hunt Dario down and shoot
     // him in the face with a paintball gun, MH fixed this........forever
 
-    function logXAPISearchEvent() {
+    function logXAPISearchEvent(searchParam) {
         //Log search
-        var tincan = new TinCan(
-                {
-                    recordStores: [
-                        {
-                            endpoint: "{!! url('analytics/log') !!}",
-                            username: "{{ auth()->user()->name }}",
-                            password: null,
-                            allowFail: false
-                        }
-                    ]
-                }
-        );
-        tincan.sendStatement(
+        var lrs;
+
+        try {
+            lrs = new TinCan.LRS(
+                    {
+                        endpoint: "{!! url('analytics/log') !!}",
+                        username: "{{ auth()->user()->name }}",
+                        password: null,
+                        allowFail: false
+                    }
+            );
+        } catch (ex) {
+            console.log("Failed to setup LRS XAPI object: ", ex);
+        }
+
+        var statement = new TinCan.Statement(
                 {
                     actor: {
                         mbox: "{{ auth()->user()->email }}"
@@ -187,11 +190,38 @@ $(document).ready(function () {
                     },
                     target: {
                         id: "{!! url('/lti/courses/search') !!}"
+                    },
+                    context: {
+                        extensions: {
+                            searchterm: searchParam
+                        }
                     }
                 }
         );
-    };
-    
+
+        lrs.saveStatement(
+                statement,
+                {
+                    callback: function (err, xhr) {
+                        if (err !== null) {
+                            if (xhr !== null) {
+                                console.log("Failed to save statement: " + xhr.responseText + " (" + xhr.status + ")");
+                                // TODO: do something with error, didn't save statement
+                                return;
+                            }
+
+                            console.log("Failed to save statement: " + err);
+                            // TODO: do something with error, didn't save statement
+                            return;
+                        }
+
+                        console.log("Statement saved");
+                        // TOOO: do something with success (possibly ignore)
+                    }
+                }
+        );
+    }
+
 
     // set the search term in the search bar on load
     function GetURLParameter(sParam)
@@ -212,7 +242,8 @@ $(document).ready(function () {
     if (searchParam)
     {
         $("#searchterm").val(searchParam);
-        logXAPISearchEvent();
+        // this ensures that we only log valid searches
+        logXAPISearchEvent(searchParam);
     }
 
     $("#searchterm").keypress(function (e) {

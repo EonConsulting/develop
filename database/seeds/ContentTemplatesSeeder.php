@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class content_templates_seeder extends Seeder
+class ContentTemplatesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,8 @@ class content_templates_seeder extends Seeder
      */
     public function run()
     {
-
+        DB::table("content_templates")->truncate();
+        
         $templates = [
             [
                 'name' => 'Default',

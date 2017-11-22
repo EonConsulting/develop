@@ -3,6 +3,7 @@
 namespace EONConsulting\Storyline2\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use EONConsulting\Storyline2\Models\CourseUser;
 
 class Course extends Model {
 
