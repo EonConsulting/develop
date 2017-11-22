@@ -68,7 +68,8 @@ class Storyline2Core extends BaseController {
 
             $result = [
 
-                "found" => true,                
+                "found" => true, 
+                "topics" => $topicArray,
                 "item" => $item,
                 "content" => $content,
                 "categories" => $content->categories

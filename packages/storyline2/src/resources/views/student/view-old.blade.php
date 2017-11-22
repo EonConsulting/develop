@@ -180,11 +180,6 @@
     .content-page {
         margin-bottom: 15px;
     }
-    .in-active{
-        pointer-events: none;
-        cursor: default;
-        color: #636B6F;
-    }
 
 </style>
 
@@ -325,6 +320,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
+  
+    window.onload = function () {
+       // $('a.active-menu').trigger('click');
+        saveProgress();
+    };
     
     function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
@@ -361,15 +361,14 @@
 
     $(document).ready(function(){
         resizeArea();
-        
+
         $(".menu-btn").on("click", function() {
-            if($(this).attr('req') == ""){             
             var button = $(this);
             var item_id = $(this).data("item-id");
             load_content(item_id,button);
-        }
         });
-        
+
+
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
@@ -458,7 +457,7 @@
                     if(data["found"] === true){
                         pupulateContent(data,button);
                     } else {
-                       // $("#noContentMessage").modal("show");
+                        $("#noContentMessage").modal("show");
                     }
                 },
                 400: function () { //bad request

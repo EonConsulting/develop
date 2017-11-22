@@ -102,9 +102,9 @@ Create a Course
         $(document).on("click",".save-meta",function (event) {
                 event.preventDefault();
                 var courseId = $("input[name=course_id]").val();
-                var typeId = $("input[name=metadata_type_id]").map(function(){return $(this).val();}).get();
+                var typeId = $("input[name=metadata_type_id]").val();
                 var storeId = $("input[name='metadata_store_id[]']").map(function(){return $(this).val();}).get();
-                var value = $("input[name=value]").val();
+                var value = $("input[name='value[]'").map(function(){return $(this).val();}).get();
                 var url = '{{ route("courses.storemetadata") }}';
                 $.ajax({
                     url: url,
@@ -122,14 +122,14 @@ Create a Course
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         alert(errorThrown);
-                        location.reload();
+                        //location.reload();
                     }
                 });
             });
 
        function getdata(id){
-            var url = '{{ route("courses.viewmetadata",":id") }}';
-            url = url.replace(':id', id);
+            var url = "{{ route('courses.viewmetadata',[':id',':course']) }}";
+            url = url.replace(':id/:course', id+'/'+'{{ $course }}');
             $.ajax({
                 url: url,
                 type: "GET",

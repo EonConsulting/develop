@@ -108,11 +108,13 @@ class Storyline2ViewsJSON extends BaseController {
         foreach ($items as $k => $node) {
 
             $map[] = [
+                'required' => $node['required'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
                 'lft' => $node['_lft']
+                
             ];
         }
 
