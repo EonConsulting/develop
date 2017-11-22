@@ -46,14 +46,15 @@
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
                                     <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-sm">Storyline</a>
-                                    <!--<a href="{{ route('courses.single.notify', $course->id) }}" class="btn btn-info btn-xs" style="width:60px">Notify</a>-->
-                                   
+
                                     <div class="btn-group">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-caret-down"></i>
                                     </button>
                                         <div class="dropdown-menu">
-                                            <!--<button class="dropdown-item notifyId" type="button" id="{{$course->id}}"><i class="fa fa-bell"></i>Notify</button>-->
+
+                                            <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Edit Module</a>
+                                            <a href="#" class="notifyId dropdown-link" type="button" data-id="{{$course->id}}" data-toggle="modal" data-target="#notificationModal"><i class="fa fa-envelope"></i> Notify</a>
                                             <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                             <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
                                         </div>
@@ -67,31 +68,74 @@
             </div>
         </div>
     </div>
-@section('exterior-content')
-<div id="formModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <form id="saveModule" action="{{ route('course-metadata.update') }}">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title data-title"></h4>
-                </div>
 
-                <div class="modal-body edit-data">
-                   
-                </div>
-                <div class="modal-footer meta-footer">
-                    <button type="submit" class="btn btn-success meta-submit">Submit</button>   
-                </div>
-                {{ csrf_field() }}
-            </form>
+
+    @section('exterior-content')
+
+    <div id="formModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form id="saveModule" action="{{ route('course-metadata.update') }}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title data-title"></h4>
+                    </div>
+
+                    <div class="modal-body edit-data">
+
+                    </div>
+                    <div class="modal-footer meta-footer">
+                        <button type="submit" class="btn btn-success meta-submit">Submit</button>
+                    </div>
+                    {{ csrf_field() }}
+                </form>
+            </div>
         </div>
     </div>
-</div> 
 
+    <!-- Notification Model -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
 
-@endsection
+                <form action="{{ route('storyline2.courses.single.notify') }}" method="post" id="notification-form">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="course_id" value="" />
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Course Notification</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="email">Send via Email:</label>
+                            <input type="checkbox" class="form-control" id="email" name="options[]" value="mail">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sms">Send via Sms:</label>
+                            <input type="checkbox" class="form-control" id="sms" name="options[]" value="nexmo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send Notifications</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @endsection
 @endsection
 
 @section('custom-scripts')
@@ -99,92 +143,104 @@
     <script src="{{url('/js/app.js') }}"></script>
 
     <script>
+
+
+        {{-- Set the course ID in the form before opening the modal --}}
+        $('#notificationModal').on('show.bs.modal', function () {
+
+            var course_id = $('.notifyId').data('id');
+
+            $("#notification-form input[name='course_id']").val(course_id);
+        });
+
+
         $(document).ready(function($) {
-            var _token = $('#tok').val();            
-            $(".moduleId").click(function () {
-            var text = $(this).text();
-            var id = $(this).attr('id');
-            var url = '{{ route("courses.edit") }}';          
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: {id:id, text:text},
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                   $("#formModal").modal();                  
-                     if(text === 'Module'){                   
-                     $(".data-title").text('Edit Module');
-                     }else{
-                     $(".data-title").text('Edit Metadata');
-                     $("#saveModule").attr('id','saveMetadata');
-                     }
-                   $(".edit-data").html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+            var _token = $('#tok').val();
+
+            $(".moduleId").click(function (event) {
+                event.preventDefault();
+                var text = $(this).text();
+                var id = $(this).attr('id');
+                var url = '{{ route("courses.edit") }}';
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {id:id, text:text},
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        $("#formModal").modal();
+                        if(text === 'Module'){
+                            $(".data-title").text('Edit Module');
+                        }else{
+                            $(".data-title").text('Edit Metadata');
+                            $("#saveModule").attr('id','saveMetadata');
+                        }
+
+                        $(".edit-data").html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
-        
-         $("#saveModule").submit(function (event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            var url = '{{ route("courses.update") }}';
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: formData,
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if(data.success){
-                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
-                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
-                       } else{
-                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
-                      $('.btnSubmit').text("Submit");
-                    }                   
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+
+            $("#saveModule").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("courses.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                            $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                            $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                        } else{
+                            $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                            $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
-        
-        $("#saveMetadata").submit(function (event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            var url = '{{ route("course-metadata.update") }}';
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: formData,
-                beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if(data.success){
-                      $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
-                      $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
-                       } else{
-                      $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");                           
-                      $('.btnSubmit').text("Submit");
-                    }                   
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
-                }
+
+            $("#saveMetadata").submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var url = '{{ route("course-metadata.update") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                          $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                          $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                           } else{
+                          $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                          $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        location.reload();
+                    }
+                });
             });
-        });
         
         });
         

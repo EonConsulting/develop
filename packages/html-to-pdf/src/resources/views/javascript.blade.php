@@ -5,7 +5,7 @@
         event.preventDefault();
 
         $.AjaxDownloader({
-            url  : "/html-to-pdf",
+            url  : "{{ route("html-to-pdf.store") }}",
             data : {
                 html_content: encodeURIComponent($('div#body').html())
             }

@@ -24,8 +24,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lti/courses/search', ['uses' => 'LTI\Courses\CourseLectureLTIController@search']);
-
 /*
  * ---------------------------------------
  * Auth::routes();
@@ -85,8 +83,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function () {
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);
         Route::post('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@update']);
-        Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
-        Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
+        //Route::get('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@index']);
+        //Route::post('/{course}/notify', ['as' => 'courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/{course}/notify/users', ['as' => 'courses.single.notify.users', 'uses' => 'CourseNotifyController@getUsers']);
         Route::post('/edit', ['as' => 'courses.edit', 'uses' => 'CoursesController@edit']);
         Route::post('/update', ['as' => 'courses.update', 'uses' => 'CoursesController@update']);
