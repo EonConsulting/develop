@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
 
 class ContentBuilderCore extends Controller {
 
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
 
@@ -32,20 +31,24 @@ class ContentBuilderCore extends Controller {
         }
 
         $categories = Category::all();
+        $assets = Asset::all();
 
         $breadcrumbs = [
             'title' => 'Content Store',
         ];
 
-        return view('eon.content-builder::store', ['content' => $content, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::store', [
+            'content' => $content,
+            'categories' => $categories,
+            'assets' => $assets,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content_id
-     * @return void
+     * @param $content_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($content_id) {
 
@@ -66,10 +69,8 @@ class ContentBuilderCore extends Controller {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content_id
-     * @return void
+     * @param $content_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($content_id){
 
@@ -101,13 +102,11 @@ class ContentBuilderCore extends Controller {
         return view('eon.content-builder::edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }
-    
+
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $course
-     * @return void
+     * @param $course
+     * @return array
      */
     public function get_tags($course) {
 
@@ -126,10 +125,10 @@ class ContentBuilderCore extends Controller {
         return array_count_values($tags);
     }
 
+
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $content
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update($content) {
         $breadcrumbs = [
@@ -138,6 +137,7 @@ class ContentBuilderCore extends Controller {
 
         $categories = Category::all();
         $contents = Content::all();
+        $assets = Asset::all();
 
         if($content !== "new"){
             $content_id = $content;
@@ -150,6 +150,7 @@ class ContentBuilderCore extends Controller {
             'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,
+            'assets' => $assets,
             'breadcrumbs' => $breadcrumbs]
         );
 
@@ -164,10 +165,8 @@ class ContentBuilderCore extends Controller {
 
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $content
-     * @return void
+     * @param $content
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($content){
 
@@ -210,6 +209,10 @@ class ContentBuilderCore extends Controller {
        
     }
 
+    /**
+     * @param Request $request
+     * @return int
+     */
     public function store(Request $request){
 
         $data = $request->json()->all();

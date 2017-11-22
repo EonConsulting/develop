@@ -15,6 +15,8 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Models\Asset;
+use App\Models\ContentTemplates;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
@@ -30,9 +32,8 @@ class Storyline2ViewsBlade extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $course
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($course) {
 
@@ -40,14 +41,30 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
-       
-        $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
-        usort($items, array($this, "self::compare"));
+
+
+        $items = Storyline::find($storyline_id)->items->toArray();
+        //$items = array_slice($items,1);
+        $items = $SL2JSON->items_to_tree($items);
+        usort($items, [$this, "self::compare"]);
+        //dd($items);
         $items = $SL2JSON->createTree($items);
 
         //dd($items);
 
-        $items = $this->makeList($items[0]['children']);
+        /*
+        $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
+        usort($items, array($this, "self::compare"));
+        $items = $SL2JSON->createTree($items);
+        */
+
+        //dd($items);
+        $course['template'] = ContentTemplates::find($course->template_id);
+
+        //$items = $this->makeList($items[0]['children']);
+        $items = $items[0]['children'];
+
+        //dd($items);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
@@ -87,18 +104,19 @@ class Storyline2ViewsBlade extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * @param $course
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($course) {
         
         $course = Course::find($course);
+        $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
+        $latest_storyline = $course->latest_storyline();
 
-        if (count($course->latest_storyline()))
+        if ($latest_storyline !== null)
         {
-            $storyline_id = $course->latest_storyline()->id;
+            $storyline_id = $latest_storyline->id;
         } else {
             $storyline = new Storyline([
                 'course_id' => $course->id,
@@ -123,15 +141,18 @@ class Storyline2ViewsBlade extends BaseController {
         }
 
         $categories = Category::all();
+        $assets = Asset::all();
 
         $breadcrumbs = [
             'title' => 'Edit ' . $course['title'] . ' Storyline' //pass $course as param and load name here
           ];
 
         return view('eon.storyline2::lecturer.edit', [
+            'course' => $course,
             'contents' => $contents,
             'storyline_id' => $storyline_id,
             'categories' => $categories,
+            'assets' => $assets,
             'breadcrumbs' => $breadcrumbs
         ]);
 

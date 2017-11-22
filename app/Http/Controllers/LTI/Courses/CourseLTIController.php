@@ -12,7 +12,6 @@ class CourseLTIController extends LTIBaseController
     public function index(Course $course)
     {
 //        dd(storyline_core()->getIndex($course));
-
         $data = storyline_core()->getIndex($course);
         $tagArray  =  explode(',', $course->tags);
         $WordList  =    storyline_tag_cloud()->generateWordList($tagArray);

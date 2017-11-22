@@ -10,30 +10,6 @@ Storyline Student Single
 
 <style>
 
-    .jstree-rename-input{
-        color: #000 !important; 
-    }
-
-    .jstree-proton .jstree-themeicon-custom {
-        width: 0px;
-    }
-
-    /*.jstree-anchor {
-        color: #FFF !important;
-    }*/
-
-    .jstree-wholerow-hovered {
-        background: #FB7217 !important;
-    }
-
-    .jstree-wholerow-clicked {
-        background: #FB7217 !important;
-    }
-
-    /*.jstree-icon:empty {
-        width: 0px;
-    }*/
-
 
     /**
      *----------------------------------------------------------------------
@@ -62,22 +38,6 @@ Storyline Student Single
         -ms-flex-align: start;
         align-items: flex-start;
         margin-top: -15px;
-    }
-
-    .page-container-tree {
-        -webkit-order: 0;
-        -ms-flex-order: 0;
-        order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
-        -webkit-align-self: stretch;
-        -ms-flex-item-align: stretch;
-        align-self: stretch;
-        min-width: 250px !important;
-        width: 250px;
-        overflow-y: auto;
-        overflow-x: auto;
     }
 
     .page-container-editor {
@@ -256,6 +216,14 @@ Storyline Student Single
         background: #0098bd;
     }
 
+    .title-bar-button-assets {
+        background: #fb7217;
+    }
+
+    .title-bar-button-assets:hover {
+        background: #7c380b;
+    }
+
     .content-entry {
         width: 250px;
         height: 150px;
@@ -286,10 +254,6 @@ Storyline Student Single
         font-size: 12px;
     }
 
-    .content-link-btn {
-        right: 10px;
-    }
-
     .content-copy-btn {
         left: 10px;
     }
@@ -299,6 +263,8 @@ Storyline Student Single
         overflow-y: auto;
         background: #F9FAF7;
     }
+
+
 
 
 </style>
@@ -332,6 +298,11 @@ Storyline Student Single
                                 <button type="button" class="title-bar-button title-bar-button-import" data-toggle="modal" data-target="#importModal">
                                     <i class="fa fa-save"></i>
                                     <span class="hidden-xs"> Import</span>
+                                </button>
+
+                                <button class="title-bar-button title-bar-button-assets" data-toggle="modal" data-target="#assetsModal">
+                                    <i class="fa fa-cube"></i>
+                                    <span class="hidden-xs"> Assets</span>
                                 </button>
 
                             </div>
@@ -456,7 +427,41 @@ Storyline Student Single
         </div>
 
     </div>
-</div>     
+</div>
+
+<div id="assetsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Import Asset</h4>
+            </div>
+
+            <div class="modal-body import-list">
+
+                <?php foreach($assets as $asset): ?>
+
+                <div class="content-entry shadow">
+                    <h3><?php echo $asset->title; ?></h3>
+                    <p><?php echo $asset->description; ?></p>
+
+                    <button class="content-copy-btn import-asset" data-asset-id="<?php echo $asset->id; ?>">Import</button>
+                </div>
+
+
+                <?php endforeach; ?>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-save"></i><span> Cancel</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -485,6 +490,7 @@ var base_url = "{{{ url('') }}}";
     $(function(){
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
+                contentsCss : '{{ url('templates') }}',
                 extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,
@@ -537,7 +543,6 @@ var base_url = "{{{ url('') }}}";
 
 <script>
 
-    
 
     $( document ).ready(function(){
 
@@ -554,6 +559,13 @@ var base_url = "{{{ url('') }}}";
             getContent($content_id);
         });
 
+        $(".import-asset").on("click", function () {
+
+            $asset_id = $(this).data("asset-id");
+
+            importAsset($asset_id);
+        });
+
         var content_id = "{{ $content_id }}";
 
         if(content_id !== "new"){
@@ -561,6 +573,42 @@ var base_url = "{{{ url('') }}}";
         }
 
     });
+
+    function importAsset(asset){
+
+        actionUrl = base_url + "/content/assets/" + asset;
+
+        $.ajax({
+            method: "GET",
+            url: actionUrl,
+            contentType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    if(data['content'] !== null){
+                        CKEDITOR.instances['ltieditorv2inst'].insertHtml('<p>' + data['content'] + '</p>');
+                    }
+                    var html = data['html'];
+                    CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
+
+                    $('#assetsModal').modal('hide');
+
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
+    }
+
 
     var valid = {
         "title_length": false,

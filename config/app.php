@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'UNISA'),
 
     /*
      |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://dev.unisaonline.net:9200'),
+    'es_uri' => env('ES_URI', 'http://10.0.0.122:9200'),
 
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://develop.app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +187,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        //Barryvdh\Debugbar\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -210,8 +209,6 @@ return [
 //        \EONConsulting\PHPSaasWrapper\src\PHPSaasWrapperServiceProvider::class,
         //\EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbServiceProvider::class,
         \EONConsulting\MindMap\MindMapServiceProvider::class,
-        // \EONConsulting\StoryCore\StoryCoreServiceProvider::class,
-        //\EONConsulting\StoryCore\StoryCoreServiceProvider::class,
         //\EONConsulting\PHPStencil\PHPStencilServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         \EONConsulting\Storyline\TagCloud\StorylineTagCloudServiceProvider::class,
@@ -299,7 +296,6 @@ return [
         'StorylineCore' => \EONConsulting\Storyline\Core\Facades\StorylineCore::class,
         'StorylineNav' => \EONConsulting\Storyline\Nav\Facades\StorylineNav::class,
         'StorylineMenu' => \EONConsulting\Storyline\Menu\Facades\StorylineMenu::class,
-        //'StorylineBreadcrumbs' => \EONConsulting\Storyline\Breadcrumbs\Facades\StorylineBreadcrumbs::class,
         'StorylineMindMap' => \EONConsulting\Storyline\MindMap\Facades\StorylineMindMap::class,
         'CKEditorV2' => \EONConsulting\CKEditorPluginV2\Facades\CKEditorPluginV2::class,
         'ImgProcessor' => \EONConsulting\ImgProcessor\Facades\ImgProcessor::class,
@@ -307,7 +303,6 @@ return [
         'Graphs' => \Packages\Graphs\src\Facades\Graphs::class,
 //        'PHPSaasWrapper' => \EONConsulting\PHPSaasWrapper\src\Facades\PHPSaasWrapper::class,
         //'StorylineBreadcrumbs' => EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs::class,
-        //'MindMap' => \EONConsulting\MindMap\Facades\MindMap::class,
         'PHPStencil' => \EONConsulting\PHPStencil\PHPStencil::class,
 
 

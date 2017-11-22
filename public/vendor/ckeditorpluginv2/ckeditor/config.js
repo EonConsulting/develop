@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
     // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
     // The toolbar groups arrangement, optimized for two toolbar rows.
-    config.toolbarGroups = [
+    /*config.toolbarGroups = [
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
         { name: 'links' },
@@ -31,17 +31,43 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
         { name: 'styles' },
         { name: 'colors' },
+    ];*/
+
+    config.toolbarGroups = [
+        { name: 'tools', groups: [ 'tools' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        { name: 'forms', groups: [ 'forms' ] },
+        { name: 'links', groups: [ 'links' ] },
+        { name: 'insert', groups: [ 'insert' ] },
+        { name: 'others' },
+        '/',
+        { name: 'styles', groups: [ 'styles' ] },
+        { name: 'colors', groups: [ 'colors' ] },
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+
     ];
+
+    config.removeButtons = 'Save,NewPage,Preview,Templates,PasteFromWord,Paste,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Anchor,PageBreak,About';
+
+
+    config.pasteFromWordPromptCleanup = true;
+    config.pasteFromWordRemoveFontStyles = true;
+    config.forcePasteAsPlainText = true;
+    config.ignoreEmptyParagraph = true;
+    config.removeFormatAttributes = true;
 
     //Configure the Default Sizes of CK Editor Plugin
     config.width = '100%';
 
     // Remove some buttons provided by the standard plugins, which are
     // not needed in the Standard(s) toolbar.
-    config.removeButtons = 'Underline,Subscript,Superscript';
+    //config.removeButtons = 'Underline,Subscript,Superscript';
 
     // Set the most common block elements.
-    config.format_tags = 'p;h1;h2;h3;pre';
+    config.format_tags = 'p;h1;h2;h3;h4;pre';
 
     // Simplify the dialog windows.
     config.removeDialogTabs = 'image:advanced;link:advanced';

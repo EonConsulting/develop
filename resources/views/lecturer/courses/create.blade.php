@@ -10,100 +10,81 @@ Create a Course
 @section('content')
 
 <div class="container-fluid">
-    <div class="row">
-        <form method="POST" id="frmCreateCourse" action="{{ route('courses.create') }}" name="frmCreateCourse" class="form-horizontal">
-            <div class="col-md-12">
-                <div class="dashboard-card shadow">
-                    <div class="flash-message">
-                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-
-                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                        @endif
-                        @endforeach
-                    </div> <!-- end .flash-message -->
-                    <div class="dashboard-card-heading">
-                        <label>Course Information</label>
-                    </div>
-                    <div class="container-fluid">
-                        {{ csrf_field() }}
-                        <!--<input type="hidden" name="metadata_payload" id="metadata_payload" />-->
-                        <br>
-                        <div class="error-info"></div>
-                        <div class="form-group">                           
-                            <div class="col-md-12">
-                                <label>Module Title</label>                                
-                                <input type="text" class="form-control"  placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
-                            </div>
-                            <!--<div class="col-md-4">
-                              <label>Module Slug</label>
-                               <div class="input-group">
-                                   <span class="input-group-addon" id="basic-addon3">modules/</span>
-                                   <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled v-model="course_slug">
-                               </div>
-                           </div>-->
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label>Module Summary</label>
-                                <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label>Tags <small>(Separate by a comma)</small></label>
-                                <input type="text" class="form-control tags" name="tags"/>
-                            </div>
-                        </div>
-                        <!--<div class="form-group">
-                          <div class="col-md-4">
-                                <label>Featured Image</label>
-                                <upload-form></upload-form>
-                            </div>
-                        </div>-->
-                        <!-- div class="pull-right">
-                            <input class="btn btn-success" type="submit" value="Submit" />
-                        </div -->
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-success btnSubmit">Submit</button>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-
-            </div>
-
-        </form>
-    </div>
-</div>
-<!--<div class="row">
-    <div class="col-md-12">
+    <form method="POST" id="frmCreateCourse" action="{{ route('courses.create') }}" name="frmCreateCourse" class="form-horizontal">
         <div class="dashboard-card shadow">
+            <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+                @endforeach
+            </div> <!-- end .flash-message -->
             <div class="dashboard-card-heading">
-                <label>Meta Information</label>
+                <label>Course Information</label>
             </div>
-            <div class="container-fluid">	
-                <div class="col-md-4">
-                    <p>Please choose metadata items</p>
-                    <div class="form-group">
-                        <select id="metadata_store_list" size="15" class="form-control">
-                        </select>
+            <div class="container-fluid">
+                {{ csrf_field() }}
+                <!--<input type="hidden" name="metadata_payload" id="metadata_payload" />-->
+                <br>
+
+                <div class="error-info"></div>
+
+                <div>
+
+                    <div class="col-md-8">
+                        <div class="form-group" style="margin-right: 10px;">
+                            <label>Module Title</label>
+                            <input type="text" class="form-control" placeholder="Module Title" name="title" v-model="course_title" @keyup="make_course_slug">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="template">Template</label>
+                            <select class="form-control" name="template" id="">
+
+                                <?php foreach($templates as $template): ?>
+
+                                <option value="<?php echo $template['id']; ?>"><?php echo $template['name']; ?></option>
+
+                                <?php endforeach; ?>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label>Module Summary</label>
+                        <textarea class="form-control" name="description" placeholder="Module Summary" v-model="course_summary" rows="10"></textarea>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <div id="metadata_forms"></div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label>Tags <small>(Separate by a comma)</small></label>
+                        <input type="text" class="form-control tags" name="tags"/>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success btnSubmit">Submit</button>
+                    </div>
+                </div>
+                <br>
             </div>
         </div>
-    </div>
+
+    </form>
 </div>
-</div>-->
+@endsection
+
 @section('exterior-content')
 <div id="metadataModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -157,7 +138,6 @@ Create a Course
     </div>
 </div>
 
-@endsection
 @endsection
 
 @section('custom-scripts')

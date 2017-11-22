@@ -7,6 +7,8 @@
 
 @section('custom-styles')
 
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+
 <style>
 
     .flex-container {
@@ -16,7 +18,7 @@
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -24,10 +26,8 @@
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        align-content: stretch;*/
+
         margin-top: -15px;
     }
 
@@ -35,15 +35,19 @@
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 300px;
+        /*width: 250px;*/
+
+        overflow-x: hidden;
         overflow-y: auto;
-        overflow-x: auto;
+
+        max-width: 350px;
+
     }
 
     .flex-content {
@@ -56,11 +60,14 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+
+        width: 70%;
+
         overflow-y: auto;
         overflow-x: auto;
         padding: 15px;
     }
-    
+
 
     .flex-menu h4 {
         font-size: 20px;
@@ -127,7 +134,7 @@
         align-items: flex-start;
 
         max-width: 1120px;
-        margin-bottom: 15px;
+        margin: 15px 0px 15px 0px;
     }
 
     .content-navbar-back {
@@ -177,80 +184,83 @@
         display: none;
     }
 
-    .content-page {
-        margin-bottom: 15px;
-    }
 
 </style>
-    
+
+
+    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 @endsection
 
 
 @section('content')
 
-<div class="flex-container" id="containter">
+<div class="flex-container resizer">
 
     <div class="flex-menu">
-        
         <h4>Navigation Menu</h4>
 
         <div class="item-tree" id="content_tree">
-            <?php echo $items; ?>
+
+            {{-- {!! $items !!} --}}
+            <ul>
+            @each('eon.storyline2::partials.items', $items, 'item', 'eon.storyline2::partials.none')
+            </ul>
+
         </div>
+
 
     </div><!--End col-md-3 -->
 
     <div class="flex-content">
+            <div class="content-navbar">
 
-        <div class="content-navbar">
+                <div class="content-navbar-back">
+                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
 
-            <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                </a>
+                <div class="content-navbar-bread">
+                    <span class="content-navbar-title"></span>
+                </div>
+
+                <div class="content-navbar-next">
+                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="content-navbar-bread">
-                <span class="content-navbar-title"></span>
-            </div>
+            <div class="content-page shadow">
 
-            <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
+                <div style="text-align: right; padding-right: 10px;">
+                    <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
+                </div>
 
-        </div>
-
-        <div class="content-page shadow">
-
-            <div style="text-align: right; padding-right: 10px;">
-                <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
-            </div>
-
-            <div id="body"></div>
+            <div class="content-body" id="body"></div>
     
         </div>
 
-        <div class="content-navbar">
+            <div class="content-navbar">
 
-            <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                </a>
+                <div class="content-navbar-back">
+                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
+
+                <div class="content-navbar-bread">
+                    <span class="content-navbar-title"></span>
+                </div>
+
+                <div class="content-navbar-next">
+                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+
             </div>
-
-            <div class="content-navbar-bread">
-                <span class="content-navbar-title"></span>
-            </div>
-
-            <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-
-        </div>
 
     </div><!--End col-md-9 -->
 
@@ -259,8 +269,6 @@
 
 @endsection
 
-
-@section('exterior-content')
 
 @section('exterior-content')
 
@@ -287,12 +295,36 @@
             </div>
 
         </div>
-    </div>  
+    </div>
 
+    <div id="noContentMessage" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Topic Progress Alert</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="error-message">
+                        The item you are trying to access does not have any content associated with it. If you are the author of this content, please add content to this item.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection
 
 
 @section('custom-scripts')
+    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -302,7 +334,11 @@
        // $('a.active-menu').trigger('click');
         saveProgress();
     };
-    
+
+    const selector = '.resizer';
+
+    let resizer = new Resizer(selector);
+
     function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
@@ -312,9 +348,6 @@
             url: '{{url('')}}/student/progression',
             type: "POST",
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
             success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
                     //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
@@ -330,51 +363,32 @@
         });
     }
     
-      function progress_error(){
+    function progress_error(){
         $("#errorModal").modal("show");
     }
 
+
+
     $(document).ready(function(){
         resizeArea();
+
         $(".menu-btn").on("click", function() {
             var button = $(this);
-            var item_id = $(this).data("item-id");           
-            var courseId = '{{ $course->id }}';
-            var storyline = '{{ $storylineId }}';
-            var student = '{{auth()->user()->id}}';            
-            $.ajax({
-                url: '{{url('')}}/student/progression',
-                type: "POST",
-                data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-                beforeSend: function () {
-                    $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    if (data.msg === 'true') {     
-                        //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                         getContent(item_id, button);
-                       } else if(data.msg === 'error'){
-                        //progress_error();
-                        getContent(item_id, button);
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                     location.reload();
-                }
-            });                 
-        });        
+            var item_id = $(this).data("item-id");
+            load_content(item_id,button);
+        });
+
 
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            getContent(item_id, button);
+            load_content(item_id, button);
         });
 
         $(document).on("click", ".arrow-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            getContent(item_id, button);
+            load_content(item_id, button);
         });
 
         //$('.arrow-btn').hide();
@@ -404,7 +418,69 @@
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $("#containter").height(areaHeight);
+        $(".flex-container").height(areaHeight);
+    }
+
+    function load_content(item_id, button){
+        var courseId = '{{ $course->id }}';
+        var storyline = '{{ $storylineId }}';
+        var student = '{{auth()->user()->id}}';
+        $.ajax({
+            url: '{{ url('student/progression') }}',
+            type: "POST",
+            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            beforeSend: function () {
+                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.msg === 'true') {
+                    //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                    getContent(item_id, button);
+                } else if(data.msg === 'error'){
+                    progress_error();
+                    //getContent(item_id, button);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                location.reload();
+            }
+        });
+    }
+
+    //Get Content
+    function getContent(item_id,button) {
+
+        console.log("getContent called");
+
+        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
+
+        $.ajax({
+            method: "GET",
+            url: actionUrl,
+            contentType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    if(data["found"] === true){
+                        pupulateContent(data,button);
+                    } else {
+                        $("#noContentMessage").modal("show");
+                    }
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (req, status, error) {
+            alert(error);
+        });
+
     }
 
     function pupulateContent(data,button){
@@ -421,7 +497,7 @@
             var current_node = button;
 
             while(current_node.data('parent-id') !== '#'){
-                
+
                 var current_node = $('#' + current_node.data('parent-id'));
 
                 temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
@@ -450,7 +526,7 @@
             next.data('item-id',button.data('next-id'));
             next.show();
         }
-        
+
         button.parent().parent().children('ul').show();
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-right');
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-down');
@@ -462,42 +538,8 @@
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-        
-    }
-
-    //Get Content
-    function getContent(item_id,button) {
-
-        console.log("getContent called");
-
-        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
-
-        $.ajax({
-            method: "GET",
-            url: actionUrl,
-            contentType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-                    if(data["found"] === true){
-                        pupulateContent(data,button);
-                    }
-                },
-                400: function () { //bad request
-
-                },
-                500: function () { //server kakked
-
-                }
-            }
-        }).error(function (req, status, error) {
-            alert(error);
-        });
 
     }
-
     
     
 </script>
