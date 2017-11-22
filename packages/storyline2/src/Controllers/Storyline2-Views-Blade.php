@@ -98,6 +98,8 @@ class Storyline2ViewsBlade extends BaseController {
         $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
+        
+        
 
         if ($latest_storyline !== null)
         {
@@ -118,7 +120,7 @@ class Storyline2ViewsBlade extends BaseController {
             ]);
 
             $storyline_item->save();
-
+             
             $storyline->items()->save($storyline_item);
 
             $course->storylines()->save($storyline);

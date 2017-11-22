@@ -18,6 +18,7 @@ use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
+
 class Storyline2ViewsJSON extends BaseController {
 
     /**
