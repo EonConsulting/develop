@@ -7,6 +7,8 @@
 
 @section('custom-styles')
 
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+
 <style>
 
     .flex-container {
@@ -16,7 +18,7 @@
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -24,10 +26,8 @@
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        align-content: stretch;*/
+
         margin-top: -15px;
     }
 
@@ -35,15 +35,19 @@
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 300px;
+        /*width: 250px;*/
+
+        overflow-x: hidden;
         overflow-y: auto;
-        overflow-x: auto;
+
+        max-width: 350px;
+
     }
 
     .flex-content {
@@ -56,11 +60,14 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+
+        width: 70%;
+
         overflow-y: auto;
         overflow-x: auto;
         padding: 15px;
     }
-    
+
 
     .flex-menu h4 {
         font-size: 20px;
@@ -127,7 +134,7 @@
         align-items: flex-start;
 
         max-width: 1120px;
-        margin-bottom: 15px;
+        margin: 15px 0px 15px 0px;
     }
 
     .content-navbar-back {
@@ -177,9 +184,6 @@
         display: none;
     }
 
-    .content-page {
-        margin-bottom: 15px;
-    }
 
 </style>
 
@@ -190,69 +194,71 @@
 
 @section('content')
 
-<div class="flex-container" id="containter">
+<div class="flex-container resizer">
 
     <div class="flex-menu">
-        
-        <h4>Navigation Menu</h4>
 
-        <div class="item-tree" id="content_tree">
-            <?php echo $items; ?>
+        <div class="menu">
+            <h4>Navigation Menu</h4>
+
+            <div class="item-tree" id="content_tree">
+                <?php echo $items; ?>
+            </div>
         </div>
+
 
     </div><!--End col-md-3 -->
 
     <div class="flex-content">
+            <div class="content-navbar">
 
-        <div class="content-navbar">
+                <div class="content-navbar-back">
+                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
 
-            <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                </a>
+                <div class="content-navbar-bread">
+                    <span class="content-navbar-title"></span>
+                </div>
+
+                <div class="content-navbar-next">
+                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="content-navbar-bread">
-                <span class="content-navbar-title"></span>
-            </div>
+            <div class="content-page shadow">
 
-            <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="content-page shadow">
-
-            <div style="text-align: right; padding-right: 10px;">
-                <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
-            </div>
+                <div style="text-align: right; padding-right: 10px;">
+                    <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
+                </div>
 
             <div class="content-body" id="body"></div>
     
         </div>
 
-        <div class="content-navbar">
+            <div class="content-navbar">
 
-            <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                </a>
+                <div class="content-navbar-back">
+                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
+
+                <div class="content-navbar-bread">
+                    <span class="content-navbar-title"></span>
+                </div>
+
+                <div class="content-navbar-next">
+                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+
             </div>
-
-            <div class="content-navbar-bread">
-                <span class="content-navbar-title"></span>
-            </div>
-
-            <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-
-        </div>
 
     </div><!--End col-md-9 -->
 
@@ -316,6 +322,7 @@
 
 
 @section('custom-scripts')
+    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -325,7 +332,11 @@
        // $('a.active-menu').trigger('click');
         saveProgress();
     };
-    
+
+    const selector = '.resizer';
+
+    let resizer = new Resizer(selector);
+
     function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
@@ -408,7 +419,7 @@
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $("#containter").height(areaHeight);
+        $(".flex-container").height(areaHeight);
     }
 
     function load_content(item_id, button){

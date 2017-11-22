@@ -27,14 +27,15 @@ function drawTree(tree_data) {
         "core": {
             "animation": 0,
             "check_callback": true,
-            "themes": {'name': 'proton', 'icons': false},
+            "themes": {'name': 'proton', 'icons': false, 'responsive': true},
             "data": tree_data
         },
         "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
-}
 
+
+}
 
 
 function treeToJSON() {

@@ -143,6 +143,10 @@ class Storyline2ViewsJSON extends BaseController {
         return response()->json(['msg' => $msg]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request) {
 
         $data = $request->json()->all();
@@ -197,9 +201,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
-     * @return type
+     * @return \Illuminate\Http\JsonResponse
      */
     public function move(Request $request) {
 
@@ -233,8 +236,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function delete(Request $request) {
 
