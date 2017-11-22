@@ -13,7 +13,7 @@ class AlterStorylineItemsTable extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE `storyline_items` ADD `required` INT(11) NOT NULL AFTER `content_id`;");
+        DB::statement("ALTER TABLE `storyline_items` ADD `required` INT(11) NULL DEFAULT NULL AFTER `content_id`;");
     }
 
     /**

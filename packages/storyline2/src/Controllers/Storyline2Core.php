@@ -59,6 +59,8 @@ class Storyline2Core extends BaseController {
         
         if ($storyline_item['content_id'] == null) {
             $result = [
+                "topics" => $topicArray,
+                "item" => $item,
                 "found" => false
             ];
         } else {
@@ -66,8 +68,7 @@ class Storyline2Core extends BaseController {
 
             $result = [
 
-                "found" => true,
-                "topics" => $topicArray,
+                "found" => true,                
                 "item" => $item,
                 "content" => $content,
                 "categories" => $content->categories
@@ -144,15 +145,15 @@ class Storyline2Core extends BaseController {
             }
 
             $item = StorylineItem::find($item);
-
+            
             $item->content_id = $content->id;
 
-            $item->save();
+            $item->save();                      
+            
         } else {
             $content_id = (int) $data['id'];
 
             $content = Content::find($content_id);
-
 
             $content->title = $data['title'];
             $content->body = $data['body'];
@@ -165,11 +166,29 @@ class Storyline2Core extends BaseController {
             $categories = $data['categories'];
 
             $content->categories()->sync($categories);
+            $this->storeProgress($item,$data);
         }
 
         return 200;
     }
     
+    /**
+     * 
+     * @param type $item
+     * @param type $data
+     */
+    public function storeProgress($item,$data){
+            $item = StorylineItem::find($item);            
+            $item->required = $data['topic'];
+            $item->save();
+    }
+    
+    /**
+     * 
+     * @param type $a
+     * @param type $b
+     * @return int
+     */
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
         return ($a['lft'] < $b['lft']) ? -1 : 1;

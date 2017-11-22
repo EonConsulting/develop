@@ -102,8 +102,15 @@ function populateContentForm(data) {
         }
 
     }
+    //Get student progress topics dropdown
+    getProgressTopics(data);
 
+}
+
+function getProgressTopics(data){
+    document.getElementById("selectNode").innerHTML="<option value='0'>--Choose One--</option>";
     var dropdown = document.getElementById("selectNode");
+    
     var myArray = data.topics;
     // Loop through the array
     for (var i = 0; i < myArray.length; ++i) {
@@ -113,7 +120,6 @@ function populateContentForm(data) {
         }
         dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
     }
-
 }
 
 //Get Content

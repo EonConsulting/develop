@@ -432,10 +432,10 @@ Storyline Student Single
                 <p>Student Progression</p>
 
                 <div id="myDiv" class="form-group">
-                        <label for="selectNode">Select required topic:</label>
-                        <select id="selectNode" class="form-control">
-                            <option>--Choose One--</option>
-                        </select>  
+                    <label for="selectNode">Select required topic:</label>
+                    <select id="selectNode" class="form-control">
+                        <option value="0">--Choose One--</option>
+                    </select>  
                 </div>
 
                 <div class="validation alert alert-warning" role="alert" id="validation">
@@ -616,6 +616,11 @@ var config = {
         $("#btnsbmit").on("click", function () {
             save_content_to_item();
 
+        });
+        
+        $('#selectNode').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
         });
 
         $(".content-action").on("click", function () {
@@ -909,14 +914,16 @@ var config = {
         var cats = $("#categories input:checkbox:checked").map(function () {
             return $(this).val();
         }).get();
-
+        
+       
         var data = {
             "title": $("#content-title").val(),
             "description": $("#content-description").val(),
             "body": body,
             "categories": cats,
             "tags": $("#content-tags").val(),
-            "id": $("#content-id").val()
+            "id": $("#content-id").val(),
+            "topic":$("#selectNode option:selected").val()
         };
 
         var item_id = $("#item-id").val();
@@ -940,7 +947,7 @@ var config = {
 
     function save_content_to_item() {
         $("#validation").hide();
-
+        
         var data = get_content_details();
         var item_id = $("#item-id").attr('value');
 
