@@ -5,6 +5,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'student', 'namespace' => 'EO
 
         //Route::get('/csv/fileupload/{course}/{filetype}','EONConsulting\Storyline\Table\Http\Controllers\DefaultController@getFileuploadView');
         Route::post('/progression', 'DefaultController@storeProgress')->name('student.progression');
+        Route::get('/view-topic/{item}', 'DefaultController@topicView')->name('student.topic.view');
         //Route::match(['post'],'/storeContent','EONConsulting\Storyline\Table\Http\Controllers\DefaultController@storeContent');
     //});
 });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page-title')
-    Storyline Student Single
+Storyline Student Single
 @endsection
 
 
@@ -60,7 +60,7 @@
         overflow-x: auto;
         padding: 15px;
     }
-    
+
 
     .flex-menu h4 {
         font-size: 20px;
@@ -181,15 +181,22 @@
         margin-bottom: 15px;
     }
     .in-active{
-        pointer-events: none;
+        //pointer-events: none;
         cursor: default;
         color: #636B6F;
     }
 
+    .tip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+
 </style>
 
 
-    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
+<link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 @endsection
 
 
@@ -198,11 +205,14 @@
 <div class="flex-container" id="containter">
 
     <div class="flex-menu">
-        
+
         <h4>Navigation Menu</h4>
 
         <div class="item-tree" id="content_tree">
             <?php echo $items; ?>
+        </div>
+        <div class="tooltip">Hover over me
+            <span class="tiptext">Tooltip text</span>
         </div>
 
     </div><!--End col-md-3 -->
@@ -236,7 +246,7 @@
             </div>
 
             <div class="content-body" id="body"></div>
-    
+
         </div>
 
         <div class="content-navbar">
@@ -269,54 +279,54 @@
 
 @section('exterior-content')
 
-    <div id="errorModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+<div id="errorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
+        <!-- Modal content-->
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Topic Progress Alert</h4>
-                </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Topic Progress Alert</h4>
+            </div>
 
-                <div class="modal-body">
-                    <div class="error-message">
-                        Please complete current learning objective before moving to the next one. You will now be taken to your furthest progress.
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>-->                 
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-body">
+                <div class="error-message">
+                    Please complete current learning objective before moving to the next one. You will now be taken to your furthest progress.
                 </div>
             </div>
 
+            <div class="modal-footer">
+                <!--<button class="btn btn-primary" data-toggle="modal" data-target="#errorModal"><i class="fa fa-mail-reply"></i><span> Okay</span></button>-->                 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
     </div>
+</div>
 
-    <div id="noContentMessage" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+<div id="noContentMessage" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
+        <!-- Modal content-->
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Topic Progress Alert</h4>
-                </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Topic Progress Alert</h4>
+            </div>
 
-                <div class="modal-body">
-                    <div class="error-message">
-                        The item you are trying to access does not have any content associated with it. If you are the author of this content, please add content to this item.
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div class="modal-body">
+                <div class="error-message">
+                    The item you are trying to access does not have any content associated with it. If you are the author of this content, please add content to this item.
                 </div>
             </div>
 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
     </div>
+</div>
 @endsection
 
 
@@ -325,214 +335,218 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
-    
-    function saveProgress() {
+
+        function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
-        var courseId = '{{ $course->id }}';
-        var storyline = '{{ $storylineId }}';
-        var student = '{{auth()->user()->id}}';
-        $.ajax({
-            url: '{{url('')}}/student/progression',
-            type: "POST",
-            data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
-            success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
-                    //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
-                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                } else {
-                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                // location.reload();
-            }
-        });
-    }
-    
-    function progress_error(){
-        $("#errorModal").modal("show");
-    }
+                var courseId = '{{ $course->id }}';
+                var storyline = '{{ $storylineId }}';
+                var student = '{{auth()->user()->id}}';
+                $.ajax({
+                url: '{{url('')}}/student/progression',
+                        type: "POST",
+                        data: {course: courseId, id: id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+                        beforeSend: function () {
+                        $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                        if (data.msg === 'true') {
+                        //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
+                        //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        } else {
+                        //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
+                        }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                                // location.reload();
+                        }
+                });
+        }
+
+         function progress_error(){
+         $("#errorModal").modal("show");
+        }
 
 
 
-    $(document).ready(function(){
+        $(document).ready(function(){
         resizeArea();
-        
         $(".menu-btn").on("click", function() {
-            if($(this).attr('req') == ""){             
-            var button = $(this);
-            var item_id = $(this).data("item-id");
-            load_content(item_id,button);
+          if ($(this).attr('req') == ""){
+          var button = $(this);
+          var item_id = $(this).data("item-id");
+          //load_content(item_id, button);
+          view_top(item_id, button);
         }
         });
         
         $(document).on("click", ".bread-btn", function() {
-            var button = $('#'+$(this).data('item-id'));
-            var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+         var button = $('#' + $(this).data('item-id'));
+         var item_id = $(this).data("item-id");
+         load_content(item_id, button);
         });
-
+        
         $(document).on("click", ".arrow-btn", function() {
-            var button = $('#'+$(this).data('item-id'));
-            var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+        var button = $('#' + $(this).data('item-id'));
+        var item_id = $(this).data("item-id");
+        load_content(item_id, button);
         });
-
         //$('.arrow-btn').hide();
 
         //hide all subtrees
-        $('#content_tree').find('a').parent().parent().children('ul').toggle(); 
-
+        $('#content_tree').find('a').parent().parent().children('ul').toggle();
         //load first page
         var first = $('#content_tree').find('ul:first').children('li:first').find('a:first');
         var item_id = first.data("item-id");
         getContent(item_id, first);
-
         //expand or collapse on caret click
         $('.toggle-expand').on('click', function(e){
-            $(this).parent().children('ul').toggle();
-            $(this).children('i').toggleClass('fa-caret-down');
-            $(this).children('i').toggleClass('fa-caret-right');
+        $(this).parent().children('ul').toggle();
+        $(this).children('i').toggleClass('fa-caret-down');
+        $(this).children('i').toggleClass('fa-caret-right');
         });
-        
-
-    });
-
-
-    $(window).resize(function(){
+        });
+        $(window).resize(function(){
         resizeArea();
-    });
-
-    function resizeArea(){
+        });
+        function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $("#containter").height(areaHeight);
-    }
-
-    function load_content(item_id, button){
+                $("#containter").height(areaHeight);
+        }
+        
+        function view_top(item_id, button){
+          $.ajax({
+                url: '{{ url('student/view-topic') }}'+'/'+item_id,
+                type: "GET",
+                beforeSend: function () {
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                if (data.msg === 'true') {
+                //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                getContent(item_id, button);
+                } else if (data === 'true'){
+                           alert();
+                         //progress_error();
+                        //getContent(item_id, button);
+                }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                       // location.reload();
+                }
+        });  
+        }
+        
+        function load_content(item_id, button){
         var courseId = '{{ $course->id }}';
         var storyline = '{{ $storylineId }}';
         var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '{{ url('student/progression') }}',
-            type: "POST",
-            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
+        url: '{{ url('student/progression') }}',
+                type: "POST",
+                data: {course: courseId, id: item_id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+                beforeSend: function () {
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
-            success: function (data, textStatus, jqXHR) {
+                },
+                success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
-                    //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                    getContent(item_id, button);
-                } else if(data.msg === 'error'){
-                    progress_error();
-                    //getContent(item_id, button);
+                //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
+                getContent(item_id, button);
+                } else if (data.msg === 'error'){
+                progress_error();
+                        //getContent(item_id, button);
                 }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
-                location.reload();
-            }
+                       // location.reload();
+                }
         });
-    }
+        }
 
-    //Get Content
-    function getContent(item_id,button) {
+        //Get Content
+       function getContent(item_id, button) {
 
         console.log("getContent called");
-
         actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
-
         $.ajax({
-            method: "GET",
-            url: actionUrl,
-            contentType: 'json',
-            headers: {
+        method: "GET",
+                url: actionUrl,
+                contentType: 'json',
+                headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
+                },
+                statusCode: {
                 200: function (data) { //success
-                    if(data["found"] === true){
-                        pupulateContent(data,button);
-                    } else {
-                       // $("#noContentMessage").modal("show");
-                    }
+                if (data["found"] === true){
+                pupulateContent(data, button);
+                } else {
+                // $("#noContentMessage").modal("show");
+                }
                 },
                 400: function () { //bad request
 
-                },
+                        },
                 500: function () { //server kakked
 
+                 }
                 }
-            }
         }).error(function (req, status, error) {
-            alert(error);
+        alert(error);
         });
+        }
 
-    }
-
-    function pupulateContent(data,button){
+        function pupulateContent(data, button){
 
         //highlight clicked button
         $(".menu-btn").removeClass('active-menu');
         button.addClass('active-menu');
-
         //create breadcrumbs
         var breadcrumb = button.html();
+        if (button.data('parent-id') !== '#') {
 
-        if(button.data('parent-id') !== '#') {
+        var current_node = button;
+        while (current_node.data('parent-id') !== '#'){
 
-            var current_node = button;
-
-            while(current_node.data('parent-id') !== '#'){
-
-                var current_node = $('#' + current_node.data('parent-id'));
-
-                temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
-                temp = temp + current_node.html();
-                temp = temp + '</a>';
-
-                breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
-
-            }
+        var current_node = $('#' + current_node.data('parent-id'));
+        temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
+        temp = temp + current_node.html();
+        temp = temp + '</a>';
+        breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
         }
+       }
 
         var prev = $('.prev-btn');
-        if(button.data('prev-id') === '#'){
-            prev.data('item-id','');
-            prev.hide();
+        if (button.data('prev-id') === '#'){
+        prev.data('item-id', '');
+        prev.hide();
         } else {
-            prev.data('item-id',button.data('prev-id'));
-            prev.show();
+        prev.data('item-id', button.data('prev-id'));
+        prev.show();
         }
 
         var next = $('.next-btn');
-        if(button.data('next-id') === '#'){
-            next.data('item-id','');
-            next.hide();
+        if (button.data('next-id') === '#'){
+        next.data('item-id', '');
+        next.hide();
         } else {
-            next.data('item-id',button.data('next-id'));
-            next.show();
+        next.data('item-id', button.data('next-id'));
+        next.show();
         }
 
         button.parent().parent().children('ul').show();
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-right');
         button.parent().parent().children('.toggle-expand').children('i').removeClass('fa-caret-down');
         button.parent().parent().children('.toggle-expand').children('i').addClass('fa-caret-down');
-
         //update breadcrumb GUI
         $(".content-navbar-title").html(breadcrumb);
-
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
 
-    }
-    
-    
+
 </script>
 
 

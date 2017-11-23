@@ -74,7 +74,7 @@ class Storyline2ViewsBlade extends BaseController {
             $result = $result . ($children ? '<i class="fa fa-caret-right"></i>' : '');//if has children
             $result = $result . '</span>';
             $result = $result . '<span>' . $number. (string) $count . ')  </span>';
-            $result = $result . '<span><a href="#" class="menu-btn '.(empty($item['required'])? '' :'in-active').'" req="'.(empty($item['required'])? '' :'in-active').'" id="' . $item['id'] . '" data-parent-id="' . (($number === '') ? '#' : $item['parent_id']) . '" data-item-id="'. $item['id'] .'" data-prev-id="' . $item['prev'] . '" data-next-id="' . $item['next'] . '">'.$item['text'].'</a></span>';
+            $result = $result . '<span><a href="#" class="menu-btn '.(empty($item['required'])? '' :'in-active').'" '.(empty($item['required'])? '' :'data-toggle="tooltip" data-placement="right"').' title="This topic has been disabled" req="'.(empty($item['required'])? '' :'in-active').'" id="' . $item['id'] . '" data-parent-id="' . (($number === '') ? '#' : $item['parent_id']) . '" data-item-id="'. $item['id'] .'" data-prev-id="' . $item['prev'] . '" data-next-id="' . $item['next'] . '">'.(empty($item['required'])? $item['text'] :'<strike>'.$item['text']).'</strike>'.'</a></span>';
             $result = $result . ($children ? $this->makeList($item['children'], $number . (string) $count . '.') : ''); //if has children
 
             $result = $result . '</li>';

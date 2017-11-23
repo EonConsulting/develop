@@ -6,6 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 
 class AlterStorylineItemsTable extends Migration
 {
+     public $set_schema_table = 'storyline_items';
+
+
     /**
      * Run the migrations.
      *
@@ -13,7 +16,12 @@ class AlterStorylineItemsTable extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE `storyline_items` ADD `required` INT(11) NULL DEFAULT NULL AFTER `content_id`;");
+
+        Schema::table($this->set_schema_table, function (Blueprint $table) {
+            $table->integer('required')->nullable()->default(null);
+        });
+
+
     }
 
     /**
@@ -23,6 +31,8 @@ class AlterStorylineItemsTable extends Migration
      */
     public function down()
     {
-        
+        Schema::table($this->set_schema_table, function (Blueprint $table) {
+            $table->dropColumn('required');
+        });
     }
 }
