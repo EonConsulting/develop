@@ -28,7 +28,6 @@
         -ms-flex-line-pack: stretch;
         align-content: stretch;*/
 
-        margin-top: -15px;
     }
 
     .flex-menu {
@@ -43,7 +42,7 @@
         align-self: stretch;
         /*width: 250px;*/
 
-        overflow-x: hidden;
+        /*overflow-x: hidden;*/
         overflow-y: auto;
 
         max-width: 350px;
@@ -184,6 +183,80 @@
         display: none;
     }
 
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+
+    .tools {
+        margin: -15px 0 0 0;
+        background: #FFF;
+        border-width: 0px 0px 1px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        padding: 5px;
+    }
+
+    .tools .sp {
+        height: 18px;
+        border-width: 0px 1px 0px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        width: 15px;
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .tools .btn {
+        border-radius: 0;
+        border: none;
+        color: #fb7217;
+
+    }
 
 </style>
 
@@ -194,10 +267,23 @@
 
 @section('content')
 
+<div class="tools" id="tools">
+
+    <div class="dropdown" style="display: inline-block;">
+        <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-default btn-dropdown" data-target="#" href="/page.html">
+            {{ $course['title'] }} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            @each('eon.storyline2::partials.dropdown', $items, 'item', 'eon.storyline2::partials.none')
+        </ul>
+    </div>
+
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
+</div>
+
 <div class="flex-container resizer">
 
     <div class="flex-menu">
-        <h4>Navigation Menu</h4>
 
         <div class="item-tree" id="content_tree">
 
@@ -212,33 +298,34 @@
     </div><!--End col-md-3 -->
 
     <div class="flex-content">
-            <div class="content-navbar">
 
-                <div class="content-navbar-back">
-                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                    </a>
-                </div>
+        <div class="content-navbar">
 
-                <div class="content-navbar-bread">
-                    <span class="content-navbar-title"></span>
-                </div>
+            <div class="content-navbar-back">
+                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                </a>
+            </div>
 
-                <div class="content-navbar-next">
-                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>
+            <div class="content-navbar-bread">
+                <span class="content-navbar-title"></span>
+            </div>
+
+            <div class="content-navbar-next">
+                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="content-page shadow">
+
+            <div style="text-align: right; padding-right: 10px;">
 
             </div>
 
-            <div class="content-page shadow">
-
-                <div style="text-align: right; padding-right: 10px;">
-                    <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
-                </div>
-
-            <div class="content-body" id="body"></div>
+        <div class="content-body" id="body"></div>
     
         </div>
 
@@ -335,6 +422,8 @@
         saveProgress();
     };
 
+    //$('.dropdown-toggle').dropdown()
+
     const selector = '.resizer';
 
     let resizer = new Resizer(selector);
@@ -391,6 +480,12 @@
             load_content(item_id, button);
         });
 
+        $(document).on("click", ".dropdown-btn", function() {
+            var button = $('#'+$(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            load_content(item_id, button);
+        });
+
         //$('.arrow-btn').hide();
 
         //hide all subtrees
@@ -418,7 +513,8 @@
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $(".flex-container").height(areaHeight);
+        var toolsHeight = $("#tools").height();
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
     }
 
     function load_content(item_id, button){
