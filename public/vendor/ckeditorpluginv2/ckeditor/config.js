@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
     // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
     // The toolbar groups arrangement, optimized for two toolbar rows.
-   /* config.toolbarGroups = [
+    /*config.toolbarGroups = [
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
         { name: 'links' },
@@ -32,21 +32,6 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'styles' },
         { name: 'colors' },
     ];*/
-
-
-    // Load from a list of definitions.
-    config.stylesSet = [
-        { name: 'Self Assessment', element: 'span', attributes: {'class': 'self_assessment'} },
-        { name: 'Video/Animation', element: 'span', attributes: {'class': 'video'} },
-        { name: 'Graph', element: 'span', attributes: {'class': 'graph'} },
-        { name: 'Text', element: 'span', attributes: {'class': 'text'} },
-        { name: 'Equations', element: 'span', attributes: {'class': 'equation'} },
-        { name: 'Activity', element: 'span', attributes: {'class': 'activity'} },
-        { name: 'Image', element: 'span', attributes: {'class': 'image'} },
-        { name: 'Final Assessment', element: 'span', attributes: {'class': 'final_assessment'} },
-        { name: 'Chain of Events', element: 'span', attributes: {'class': 'chain'} }
-    ];
-
 
     config.toolbarGroups = [
         { name: 'tools', groups: [ 'tools' ] },
@@ -65,11 +50,14 @@ CKEDITOR.editorConfig = function( config ) {
 
     ];
 
-    config.bodyClass = 'content-body';
+    config.removeButtons = 'Save,NewPage,Preview,Templates,PasteFromWord,Paste,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Anchor,PageBreak,About';
 
 
-    config.removeButtons = 'Font,Save,NewPage,Preview,Templates,PasteFromWord,Paste,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Anchor,PageBreak,About';
-
+    config.pasteFromWordPromptCleanup = true;
+    config.pasteFromWordRemoveFontStyles = true;
+    config.forcePasteAsPlainText = true;
+    config.ignoreEmptyParagraph = true;
+    config.removeFormatAttributes = true;
 
     //Configure the Default Sizes of CK Editor Plugin
     config.width = '100%';

@@ -8,6 +8,7 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use EONConsulting\Storyline2\Models\Storyline;
 
 class CoursesLTIController extends LTIBaseController {
 
@@ -56,6 +57,7 @@ class CoursesLTIController extends LTIBaseController {
             $output = json_decode($output);
 
             $hits = $output->hits->hits;
+
             $total = $output->hits->total;
 
             $fromNext = $request->get('from') + $size; //from = 0 then this = 10, 10+1*10=110
@@ -71,17 +73,24 @@ class CoursesLTIController extends LTIBaseController {
             ];
 
             foreach ($hits as $hit) {
+
+                $course = Course::find($hit->_id);
+                $sl = $course->latest_storyline();
+
                 $finalOutput['results'][] = array(
                     "id" => $hit->_id,
                     "title" => $hit->_source->title,
                     "description" => $hit->_source->description,
-                    "tags" => $hit->_source->tags
+                    "tags" => $hit->_source->tags,
+                    "has_sl" => ($sl !== null ? true : false)
                 );
             }
         } catch (\ErrorException $e) {
             Log::error("Unable to perform search: " . $e->getMessage());
             $finalOutput = array();
         }
+
+        //dd($finalOutput);
 
         return view('student.courses.list', ['searchResults' => $finalOutput, 'breadcrumbs' => $breadcrumbs]);
     }
