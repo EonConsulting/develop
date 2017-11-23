@@ -468,31 +468,38 @@ Storyline Student Single
 
     $(document).ready(function(){
         resizeArea();
-        $(".menu-btn").on("click", function() {
-          if ($(this).attr('req') == ""){
-          var button = $(this);
-          var item_id = $(this).data("item-id");
-          //load_content(item_id, button);
-          view_top(item_id, button);
-        }
+        $(document).on("click", ".menu-btn", function() {
+            console.log("bitch");
+            if ($(this).attr('req') == "null"){
+                var button = $(this);
+                var item_id = $(this).data("item-id");
+                //load_content(item_id, button);
+                view_topic(item_id, button);
+            }
         });
         
         $(document).on("click", ".bread-btn", function() {
-         var button = $('#' + $(this).data('item-id'));
-         var item_id = $(this).data("item-id");
-         load_content(item_id, button);
+            var button = $('#' + $(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            load_content(item_id, button);
         });
         
         $(document).on("click", ".arrow-btn", function() {
-        var button = $('#' + $(this).data('item-id'));
-        var item_id = $(this).data("item-id");
-        load_content(item_id, button);
+            var button = $('#' + $(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            load_content(item_id, button);
         });
 
         $(document).on("click", ".dropdown-btn", function() {
-            var button = $('#'+$(this).data('item-id'));
-            var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            var req  = $(this).attr('req');
+            console.log(req);
+            //alert(req);
+            if(req === 'null'){               
+                var button = $('#'+$(this).data('item-id'));
+                var item_id = $(this).data("item-id");
+                //load_content(item_id, button);
+                view_topic(item_id, button);
+            }
         });
 
         //$('.arrow-btn').hide();
@@ -526,7 +533,7 @@ Storyline Student Single
                 $("#containter").height(areaHeight);
         }
         
-        function view_top(item_id, button){
+        function view_topic(item_id, button){
           $.ajax({
                 url: '{{ url('student/view-topic') }}'+'/'+item_id,
                 type: "GET",

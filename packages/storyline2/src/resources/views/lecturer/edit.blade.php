@@ -592,7 +592,7 @@ var config = {
 
     });
 
-<<<<<<< HEAD
+
     CKEDITOR.on('instanceReady', function() { 
         resize();
     });
@@ -613,7 +613,7 @@ var config = {
         //$("#page_container").css("background-color", "yellow");
         $("#page-container").height( (contentHeight) + "px");
     }
-=======
+
     CKEDITOR.on('instanceReady', function () {
         var textEditHeight = $("#content-area").height() - $("#info-bar").height();
         var ckTopHeight = $("#cke_1_top").height();
@@ -634,21 +634,18 @@ var config = {
         $("#cke_1_contents").height((textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
 
     });
->>>>>>> feature/StudentProgress2
+
 
 </script>
 
 <script>
 
-<<<<<<< HEAD
     const selector = '.resizer';
 
     let resizer = new Resizer(selector);
 
     $( document ).ready(function(){
-=======
-    $(document).ready(function () {
->>>>>>> feature/StudentProgress2
+
 
         $("#validation").hide();
 
