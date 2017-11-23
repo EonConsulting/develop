@@ -5,6 +5,9 @@ _notes/
 /bower_components/
 /node_modules/
 .env
+composer.lock
+/.vscode
+/bootstrap/cache/
 /vendor
 /nbproject/*
 /nbproject/private/
