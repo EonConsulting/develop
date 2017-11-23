@@ -42,7 +42,6 @@ class Storyline2ViewsBlade extends BaseController {
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
 
-
         $items = Storyline::find($storyline_id)->items->toArray();
         //$items = array_slice($items,1);
         $items = $SL2JSON->items_to_tree($items);
@@ -54,10 +53,11 @@ class Storyline2ViewsBlade extends BaseController {
 
         /*
         $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
+        
         usort($items, array($this, "self::compare"));
         $items = $SL2JSON->createTree($items);
-        */
 
+        */
         //dd($items);
         $course['template'] = ContentTemplates::find($course->template_id);
 
@@ -88,7 +88,7 @@ class Storyline2ViewsBlade extends BaseController {
             $result = $result . ($children ? '<i class="fa fa-caret-right"></i>' : '');//if has children
             $result = $result . '</span>';
             $result = $result . '<span>' . $number. (string) $count . ')  </span>';
-            $result = $result . '<span><a href="#" class="menu-btn" id="' . $item['id'] . '" data-parent-id="' . (($number === '') ? '#' : $item['parent_id']) . '" data-item-id="'. $item['id'] .'" data-prev-id="' . $item['prev'] . '" data-next-id="' . $item['next'] . '">'.$item['text'].'</a></span>';
+            $result = $result . '<span><a href="#" class="menu-btn '.(empty($item['required'])? '' :'in-active').'" '.(empty($item['required'])? '' :'data-toggle="tooltip" data-placement="right"').' title="This topic has been disabled" req="'.(empty($item['required'])? '' :'in-active').'" id="' . $item['id'] . '" data-parent-id="' . (($number === '') ? '#' : $item['parent_id']) . '" data-item-id="'. $item['id'] .'" data-prev-id="' . $item['prev'] . '" data-next-id="' . $item['next'] . '">'.(empty($item['required'])? $item['text'] :'<strike>'.$item['text']).'</strike>'.'</a></span>';
             $result = $result . ($children ? $this->makeList($item['children'], $number . (string) $count . '.') : ''); //if has children
 
             $result = $result . '</li>';
@@ -113,6 +113,8 @@ class Storyline2ViewsBlade extends BaseController {
         $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
+        
+        
 
         if ($latest_storyline !== null)
         {
@@ -133,7 +135,7 @@ class Storyline2ViewsBlade extends BaseController {
             ]);
 
             $storyline_item->save();
-
+             
             $storyline->items()->save($storyline_item);
 
             $course->storylines()->save($storyline);

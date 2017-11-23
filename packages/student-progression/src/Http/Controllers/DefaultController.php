@@ -134,6 +134,12 @@ class DefaultController extends LTIBaseController {
     
     }
     
+    public function topicView($item){
+        
+       $StorylineItem =  StorylineItem::where('required',$item)->update(['required' => NULL]);
+         
+    }
+    
     /**
      *
      * @param type $items

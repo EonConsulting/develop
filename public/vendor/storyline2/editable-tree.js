@@ -46,7 +46,7 @@ function treeToJSON() {
 }
 
 
-function import_content($content_id,$item_id,$action){
+function import_content($content_id, $item_id, $action) {
 
     console.log("import_content called");
 
@@ -103,12 +103,28 @@ function populateContentForm(data) {
         }
 
     }
+    //Get student progress topics dropdown
+    getProgressTopics(data);
 
+}
+
+function getProgressTopics(data){
+    document.getElementById("selectNode").innerHTML="<option value='0'>--Choose One--</option>";
+    var dropdown = document.getElementById("selectNode");
+    
+    var myArray = data.topics;
+    // Loop through the array
+    for (var i = 0; i < myArray.length; ++i) {
+        // Append the element to the end of Array list
+        if(myArray[i].id == data.item){
+            break;
+        }
+        dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
+    }
 }
 
 //Get Content
 function getContent(data) {
-
     console.log("getContent called");
 
     var item_id = data['id'];
@@ -217,7 +233,7 @@ function moveNode(data) {
     var actionUrl = base_url + "/storyline2/move";
     //seen = [];
     var node = data;
-    
+
     $.ajax({
         method: "POST",
         url: actionUrl,

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: jharing10
@@ -16,12 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
-
+use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON;
 
 class Storyline2Core extends BaseController {
 
     public function index() {
-
+         $result = $this->items_to_tree(Storyline::find($storyline)->items);
+        usort($result, [$this, "self::compare"]);
     }
 
     /**
@@ -47,31 +49,35 @@ class Storyline2Core extends BaseController {
      * @param $item
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get_content($item){
+    public function get_content($item) {
 
         $storyline_item = StorylineItem::find($item);
-
-        if ($storyline_item['content_id'] == null)
-        {
+        //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
+         $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
+         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+         usort($topicArray, [$this, "self::compare"]);
+        
+        if ($storyline_item['content_id'] == null) {
             $result = [
+                "topics" => $topicArray,
+                "item" => $item,
                 "found" => false
             ];
-
         } else {
             $content = Content::find((int) $storyline_item['content_id']);
 
             $result = [
-                "found" => true,
+
+                "found" => true, 
+                "topics" => $topicArray,
+                "item" => $item,
                 "content" => $content,
                 "categories" => $content->categories
             ];
-            
         }
 
         return response()->json($result);
-
     }
-
 
     /**
      * @param $content
@@ -79,52 +85,48 @@ class Storyline2Core extends BaseController {
      * @param $action
      * @return \Illuminate\Http\JsonResponse
      */
-    public function attach_content_to_item($content, $item, $action){
+    public function attach_content_to_item($content, $item, $action) {
 
         $result = ["id" => $item];
 
-        if($action === "copy"){
+        if ($action === "copy") {
 
             $this_content = Content::find($content);
-            
+
             $new_content = new Content($this_content->toArray());
             $new_content->title = "";
             $new_content->cloned_id = $content;
             $new_content->save();
 
-            foreach($this_content->categories as $k => $category) {
+            foreach ($this_content->categories as $k => $category) {
                 $temp = Category::find($category->id);
                 $new_content->categories()->save($temp);
             }
-    
+
             $storyline_item = StorylineItem::find($item);
             $storyline_item->content_id = $new_content->id;
             $storyline_item->save();
-
-        } elseif($action === "link") {
+        } elseif ($action === "link") {
 
             $storyline_item = StorylineItem::find($item);
             $storyline_item->content_id = $content;
             $storyline_item->save();
-
         }
-        
+
 
         return response()->json($result);
-
     }
-
 
     /**
      * @param Request $request
      * @param $item
      * @return int
      */
-    public function save_content(Request $request, $item){
+    public function save_content(Request $request, $item) {
 
         $data = $request->json()->all();
-        
-        if($data['id'] === ""){
+
+        if ($data['id'] === "") {
 
             $content = new Content([
                 'title' => $data['title'],
@@ -133,12 +135,12 @@ class Storyline2Core extends BaseController {
                 'creator_id' => auth()->user()->id,
                 'description' => $data['description']
             ]);
-            
+
             $content->save();
 
             $categories = $data['categories'];
-            
-            foreach($categories as $k => $category_id) {
+
+            foreach ($categories as $k => $category_id) {
                 $temp = Category::find($category_id);
                 $content->categories()->save($temp);
             }
@@ -146,15 +148,14 @@ class Storyline2Core extends BaseController {
             $item = StorylineItem::find($item);
             
             $item->content_id = $content->id;
-    
-            $item->save();
 
+            $item->save();                      
+            
         } else {
             $content_id = (int) $data['id'];
 
             $content = Content::find($content_id);
 
-            
             $content->title = $data['title'];
             $content->body = $data['body'];
             $content->tags = $data['tags'];
@@ -166,12 +167,32 @@ class Storyline2Core extends BaseController {
             $categories = $data['categories'];
 
             $content->categories()->sync($categories);
-
+            $this->storeProgress($item,$data);
         }
-        
-        return 200;
 
+        return 200;
     }
     
+    /**
+     * 
+     * @param type $item
+     * @param type $data
+     */
+    public function storeProgress($item,$data){
+            $item = StorylineItem::find($item);            
+            $item->required = $data['topic'];
+            $item->save();
+    }
     
+    /**
+     * 
+     * @param type $a
+     * @param type $b
+     * @return int
+     */
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
+    }
+
 }
