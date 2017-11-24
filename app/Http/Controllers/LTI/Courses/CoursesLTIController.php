@@ -22,7 +22,7 @@ class CoursesLTIController extends LTIBaseController {
         $size = $request->get('size');
 
         if (empty($searchterm)) {
-           $query = '{
+            $query = '{
                "query": {
                     "match_all": {}
                 }
@@ -75,15 +75,17 @@ class CoursesLTIController extends LTIBaseController {
             foreach ($hits as $hit) {
 
                 $course = Course::find($hit->_id);
-                $sl = $course->latest_storyline();
+                if ($course) {
+                    $sl = $course->latest_storyline();
 
-                $finalOutput['results'][] = array(
-                    "id" => $hit->_id,
-                    "title" => $hit->_source->title,
-                    "description" => $hit->_source->description,
-                    "tags" => $hit->_source->tags,
-                    "has_sl" => ($sl !== null ? true : false)
-                );
+                    $finalOutput['results'][] = array(
+                        "id" => $hit->_id,
+                        "title" => $hit->_source->title,
+                        "description" => $hit->_source->description,
+                        "tags" => $hit->_source->tags,
+                        "has_sl" => ($sl !== null ? true : false)
+                    );
+                }
             }
         } catch (\ErrorException $e) {
             Log::error("Unable to perform search: " . $e->getMessage());
