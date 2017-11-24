@@ -41,15 +41,30 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
-       
+
+
+        $items = Storyline::find($storyline_id)->items->toArray();
+        //$items = array_slice($items,1);
+        $items = $SL2JSON->items_to_tree($items);
+        usort($items, [$this, "self::compare"]);
+        //dd($items);
+        $items = $SL2JSON->createTree($items);
+
+        //dd($items);
+
+        /*
         $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
         usort($items, array($this, "self::compare"));
         $items = $SL2JSON->createTree($items);
+        */
 
         //dd($items);
         $course['template'] = ContentTemplates::find($course->template_id);
 
-        $items = $this->makeList($items[0]['children']);
+        //$items = $this->makeList($items[0]['children']);
+        $items = $items[0]['children'];
+
+        //dd($items);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here

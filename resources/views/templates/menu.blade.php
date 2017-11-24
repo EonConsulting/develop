@@ -157,7 +157,7 @@
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') || Route::currentRouteName() == ('assets.index') || Route::currentRouteName() == ('assets.create') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-book fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">

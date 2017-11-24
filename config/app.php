@@ -31,7 +31,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://10.0.0.112:9200'),
+    'es_uri' => env('ES_URI', 'http://10.0.0.122:9200'),
 
 
     /*

@@ -7,6 +7,8 @@
 
 @section('custom-styles')
 
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+
 <style>
 
     .flex-container {
@@ -16,7 +18,7 @@
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -24,26 +26,27 @@
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
-        margin-top: -15px;
+        align-content: stretch;*/
+
     }
 
     .flex-menu {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 300px;
+        /*width: 250px;*/
+
+        /*overflow-x: hidden;*/
         overflow-y: auto;
-        overflow-x: auto;
+
+        max-width: 350px;
+
     }
 
     .flex-content {
@@ -56,11 +59,14 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
+
+        width: 70%;
+
         overflow-y: auto;
         overflow-x: auto;
         padding: 15px;
     }
-    
+
 
     .flex-menu h4 {
         font-size: 20px;
@@ -127,7 +133,7 @@
         align-items: flex-start;
 
         max-width: 1120px;
-        margin-bottom: 15px;
+        margin: 15px 0px 15px 0px;
     }
 
     .content-navbar-back {
@@ -177,8 +183,79 @@
         display: none;
     }
 
-    .content-page {
-        margin-bottom: 15px;
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+
+    .tools {
+        margin: -15px 0 0 0;
+        background: #FFF;
+        border-width: 0px 0px 1px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        padding: 5px;
+    }
+
+    .tools .sp {
+        height: 18px;
+        border-width: 0px 1px 0px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        width: 15px;
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .tools .btn {
+        border-radius: 0;
+        border: none;
+        color: #fb7217;
+
     }
 
 </style>
@@ -190,15 +267,33 @@
 
 @section('content')
 
-<div class="flex-container" id="containter">
+<div class="tools" id="tools">
+
+    <div class="dropdown" style="display: inline-block;">
+        <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-default btn-dropdown" data-target="#" href="/page.html">
+            {{ $course['title'] }} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+            @each('eon.storyline2::partials.dropdown', $items, 'item', 'eon.storyline2::partials.none')
+        </ul>
+    </div>
+
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
+</div>
+
+<div class="flex-container resizer">
 
     <div class="flex-menu">
-        
-        <h4>Navigation Menu</h4>
 
         <div class="item-tree" id="content_tree">
-            <?php echo $items; ?>
+
+            {{-- {!! $items !!} --}}
+            <ul>
+            @each('eon.storyline2::partials.items', $items, 'item', 'eon.storyline2::partials.none')
+            </ul>
+
         </div>
+
 
     </div><!--End col-md-3 -->
 
@@ -227,32 +322,32 @@
         <div class="content-page shadow">
 
             <div style="text-align: right; padding-right: 10px;">
-                <a href="javascript:void();" id="convert-html-to-pdf">Print PDF</a>
+
             </div>
 
-            <div class="content-body" id="body"></div>
+        <div class="content-body" id="body"></div>
     
         </div>
 
-        <div class="content-navbar">
+            <div class="content-navbar">
 
-            <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
-                    <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
-                </a>
+                <div class="content-navbar-back">
+                    <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                        <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
+
+                <div class="content-navbar-bread">
+                    <span class="content-navbar-title"></span>
+                </div>
+
+                <div class="content-navbar-next">
+                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                        <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+
             </div>
-
-            <div class="content-navbar-bread">
-                <span class="content-navbar-title"></span>
-            </div>
-
-            <div class="content-navbar-next">
-                <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
-                    <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-
-        </div>
 
     </div><!--End col-md-9 -->
 
@@ -316,6 +411,7 @@
 
 
 @section('custom-scripts')
+    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
 <script src="{{url('js/analytics/tincan.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
@@ -326,7 +422,13 @@
        // $('a.active-menu').trigger('click');
         saveProgress();
     };
-    
+
+    //$('.dropdown-toggle').dropdown()
+
+    const selector = '.resizer';
+
+    let resizer = new Resizer(selector);
+
     function saveProgress() {
         var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
         var courseId = '{{ $course->id }}';
@@ -336,9 +438,6 @@
             url: '{{url('')}}/student/progression',
             type: "POST",
             data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
             success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
                     //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
@@ -382,6 +481,12 @@
             load_content(item_id, button);
         });
 
+        $(document).on("click", ".dropdown-btn", function() {
+            var button = $('#'+$(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            load_content(item_id, button);
+        });
+
         //$('.arrow-btn').hide();
 
         //hide all subtrees
@@ -409,7 +514,8 @@
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
-        $("#containter").height(areaHeight);
+        var toolsHeight = $("#tools").height();
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
     }
 
     function load_content(item_id, button){

@@ -17,7 +17,7 @@ class Course extends Model {
 
     public function storylines() {
         //return $this->hasMany(Storyline::class, 'course_id', 'id');
-        return $this->hasOne(Storyline::class, 'course_id', 'id');
+        return $this->hasMany(Storyline::class, 'course_id', 'id');
     }
 
     public function latest_storyline() {
