@@ -135,8 +135,15 @@ class DefaultController extends LTIBaseController {
     }
     
     public function topicView($item,$course){   
+        
         $Items = StorylineItem::where('required',$item)->first(); 
-        $progress = StudentProgress::where([['storyline_item_id', $item],['student_id',auth()->user()->id]])->first(); 
+        if($Items){
+           $ItemId = $Items->id;  
+        }else{
+          $ItemId = 0;   
+        }
+        
+        $progress = StudentProgress::where([['storyline_item_id', $ItemId],['student_id',auth()->user()->id]])->first(); 
         
         if(!empty($Items) && empty($progress)){
            $StudentProgress = new StudentProgress([

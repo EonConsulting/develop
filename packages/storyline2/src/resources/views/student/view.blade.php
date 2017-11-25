@@ -546,7 +546,7 @@ Storyline Student Single
                 if (data.msg === 'true') {
                     console.log(item_id);
                      load_c(item_id, button);
-                    //location.reload();
+                     //location.reload();
                 } else if (data === 'false'){
                          //progress_error();
                         //getContent(item_id, button);
