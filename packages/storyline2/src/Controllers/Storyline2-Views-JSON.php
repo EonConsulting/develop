@@ -46,7 +46,9 @@ class Storyline2ViewsJSON extends BaseController {
     public function show_items($storyline) {
 
 
-        $result = $this->items_to_tree(Storyline::find($storyline)->items);
+        //$result = $this->items_to_tree(Storyline::find($storyline)->items);
+        $result = $this->items_to_tree(Storyline::find($storyline)->with('items.student_progress')->first());
+        
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
         $result = $result[0]['children'];
@@ -125,10 +127,11 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach ($items as $k => $node) {
+        foreach ($items->items as $k => $node) {
 
             $map[] = [
                 'required' => $node['required'],
+                'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],

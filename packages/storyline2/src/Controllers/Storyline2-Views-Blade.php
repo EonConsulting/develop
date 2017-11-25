@@ -41,8 +41,13 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
-
-        $items = Storyline::find($storyline_id)->items->toArray();
+        $userId = auth()->user()->id;
+        //$items = Storyline::find($storyline_id)->items->with('student_progress')->toArray();
+        $items = Storyline::find($storyline_id)->with(['items.student_progress'
+            =>function($q)use ($userId){$q->where('student_id',$userId);}])->first();
+        
+        
+        //exit();
         //$items = array_slice($items,1);
         $items = $SL2JSON->items_to_tree($items);
         usort($items, [$this, "self::compare"]);
@@ -63,8 +68,6 @@ class Storyline2ViewsBlade extends BaseController {
 
         //$items = $this->makeList($items[0]['children']);
         $items = $items[0]['children'];
-
-        //dd($items);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here

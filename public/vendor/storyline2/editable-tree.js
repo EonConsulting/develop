@@ -83,41 +83,37 @@ function import_content($content_id, $item_id, $action) {
 }
 
 function populateContentForm(data) {
-
     console.log("populateContentForm called");
-
     //var course_data = jQuery.parseJSON(data);
-
     if (data.found == true) {
-
         $("#content-id").val(data.content.id);
         $("#content-title").val(data.content.title);
         $("#content-description").val(data.content.description);
         $("#content-tags").val(data.content.tags);
         var body = editor.setData(data.content.body);
-
         for (index = 0; index < data.categories.length; ++index) {
             cat_id = "#cat" + data.categories[index].id;
             console.log(cat_id);
             $(cat_id).prop('checked', true);
         }
-
     }
     //Get student progress topics dropdown
     getProgressTopics(data);
 
 }
 
-function getProgressTopics(data){
-    document.getElementById("selectNode").innerHTML="<option value='0'>--Choose One--</option>";
+function getProgressTopics(data) {
+    document.getElementById("selectNode").innerHTML = "<option value=''>--Choose One--</option>";
     var dropdown = document.getElementById("selectNode");
-    
     var myArray = data.topics;
     // Loop through the array
     for (var i = 0; i < myArray.length; ++i) {
         // Append the element to the end of Array list
-        if(myArray[i].id == data.item){
+        if (myArray[i].id == data.item) {
             break;
+        }
+        if (i == 0) { 
+            myArray.splice(i, 1);
         }
         dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
     }

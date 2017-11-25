@@ -313,7 +313,7 @@ Storyline Student Single
         <div class="content-navbar">
 
             <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
+                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="" req="null">
                     <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
                 </a>
             </div>
@@ -336,7 +336,6 @@ Storyline Student Single
 
             </div>
 
-
             <div class="content-body" id="body"></div>
 
         </div>
@@ -354,7 +353,7 @@ Storyline Student Single
                 </div>
 
                 <div class="content-navbar-next">
-                    <a href="#" id="next-btn" class="arrow-btn next-btn" data-item-id="">
+                    <a href="#" id="next-btn2" class="arrow-btn next-btn" data-item-id="">
                         <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i>
                     </a>
                 </div>
@@ -469,37 +468,36 @@ Storyline Student Single
     $(document).ready(function(){
         resizeArea();
         $(document).on("click", ".menu-btn", function() {
-            console.log("bitch");
-            if ($(this).attr('req') == "null"){
-                var button = $(this);
-                var item_id = $(this).data("item-id");
-                //load_content(item_id, button);
-                view_topic(item_id, button);
-            }
+            var req = $(this).attr('req');
+            var button = $(this);
+            var item_id = $(this).data("item-id");  
+            check_r(req, button, item_id);
+            
         });
         
         $(document).on("click", ".bread-btn", function() {
+            var req = $(this).attr('req');
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            //load_content(item_id, button);
+            check_r(req, button, item_id);
         });
         
-        $(document).on("click", ".arrow-btn", function() {
+        $(document).on("click", ".arrow-btn", function() {           
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            var req = $(this).attr('req');   
+            alert(req);
+            //load_content(item_id, button);
+            check_r(req, button, item_id);
         });
 
         $(document).on("click", ".dropdown-btn", function() {
-            var req  = $(this).attr('req');
-            console.log(req);
-            //alert(req);
-            if(req === 'null'){               
-                var button = $('#'+$(this).data('item-id'));
-                var item_id = $(this).data("item-id");
-                //load_content(item_id, button);
-                view_topic(item_id, button);
-            }
+            var req = $(this).attr('req');
+            var button = $('#' + $(this).data('item-id'));
+            var item_id = $(this).data("item-id");
+            //load_content(item_id, button);
+            check_r(req, button, item_id);           
         });
 
         //$('.arrow-btn').hide();
@@ -522,30 +520,34 @@ Storyline Student Single
         resizeArea();
         });
         
+        function check_r(req, button, item_id){
+            if (req === "null"){
+                view_topic(item_id, button);
+             }
+        }
+        
         function resizeArea(){
         var areaHeight = $("#content-area").height();
 
         var toolsHeight = $("#tools").height();
         $(".flex-container").height(areaHeight - toolsHeight - 11);
         }
-
-        function load_content(item_id, button){
-                $("#containter").height(areaHeight);
-        }
         
-        function view_topic(item_id, button){
-          $.ajax({
-                url: '{{ url('student/view-topic') }}'+'/'+item_id,
+        function view_topic(item_id, button){    
+                 var courseId = '{{ $course->id }}';
+                $.ajax({
+                url: '{{ url('student/view-topic') }}'+'/'+item_id+'/'+courseId,
                 type: "GET",
+                async: true,
                 beforeSend: function () {
                 //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
-                //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                getContent(item_id, button);
-                } else if (data === 'true'){
-                           alert();
+                    console.log(item_id);
+                     load_c(item_id, button);
+                    //location.reload();
+                } else if (data === 'false'){
                          //progress_error();
                         //getContent(item_id, button);
                 }
@@ -555,6 +557,28 @@ Storyline Student Single
                        // location.reload();
                 }
         });  
+        }
+        
+        function load_c(item_id, button){
+        $.ajax({
+                url: "{{ url("") }}/storyline2/item-content/" + item_id,
+                type: "GET",
+                contentType: 'json',
+                headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                success: function (data, textStatus, jqXHR) {
+                if (data["found"] === true){
+                pupulateContent(data, button);
+                } else {
+                // $("#noContentMessage").modal("show");
+                }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                       // location.reload();
+                }
+        });
         }
         
         function load_content(item_id, button){
@@ -583,13 +607,24 @@ Storyline Student Single
                 }
         });
         }
+        
+        function check_required(req){        
+           if(req === 'null'){               
+                var button = $('#'+$(this).data('item-id'));
+                var item_id = $(this).data("item-id");
+                //load_content(item_id, button);
+                view_topic(item_id, button);
+            }
+        }
+        
+        
 
         //Get Content
        function getContent(item_id, button) {
         console.log("getContent called");
-        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
+        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;        
         $.ajax({
-        method: "GET",
+                type: "GET",
                 url: actionUrl,
                 contentType: 'json',
                 headers: {
@@ -616,7 +651,6 @@ Storyline Student Single
         }
 
         function pupulateContent(data, button){
-
         //highlight clicked button
         $(".menu-btn").removeClass('active-menu');
         button.addClass('active-menu');
@@ -628,14 +662,15 @@ Storyline Student Single
         while (current_node.data('parent-id') !== '#'){
 
         var current_node = $('#' + current_node.data('parent-id'));
-        temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
+        temp = '<a href="#" class="bread-btn" req="" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
         temp = temp + current_node.html();
         temp = temp + '</a>';
         breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
-        }
+         }
        }
 
         var prev = $('.prev-btn');
+        console.log(button.data('prev-id'));
         if (button.data('prev-id') === '#'){
         prev.data('item-id', '');
         prev.hide();

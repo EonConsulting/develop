@@ -18,6 +18,7 @@ use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON;
+use App\Models\StudentProgress;
 
 class Storyline2Core extends BaseController {
 
@@ -54,7 +55,7 @@ class Storyline2Core extends BaseController {
         $storyline_item = StorylineItem::find($item);
         //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
          $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
-         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->with('items.student_progress')->first());
          usort($topicArray, [$this, "self::compare"]);
         
         if ($storyline_item['content_id'] == null) {
@@ -65,9 +66,7 @@ class Storyline2Core extends BaseController {
             ];
         } else {
             $content = Content::find((int) $storyline_item['content_id']);
-
             $result = [
-
                 "found" => true, 
                 "topics" => $topicArray,
                 "item" => $item,
@@ -180,9 +179,22 @@ class Storyline2Core extends BaseController {
      */
     public function storeProgress($item,$data){
             $item = StorylineItem::find($item);            
-            $item->required = $data['topic'];
+            $item->required = $data['topic'];           
             $item->save();
+               /*
+               $StudentProgress = new StudentProgress([
+                'student_id' => $user,
+                'course_id' => (int)$data['course'],
+                'storyline_item_id' => $item->storyline_id,
+                'storyline_item_id' => $item
+            ]);
+
+            $StudentProgress->save();
+                * 
+                */
+          
     }
+   
     
     /**
      * 

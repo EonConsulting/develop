@@ -436,20 +436,16 @@ Storyline Student Single
                 </div>
 
                 <p>Student Progression</p>
-
-                <div id="myDiv" class="form-group">
+                    <div class="form-group">
                     <label for="selectNode">Select required topic:</label>
                     <select id="selectNode" class="form-control">
                         <option value="0">--Choose One--</option>
                     </select>  
-                </div>
-
+                    </div>
+                    
                 <div class="validation alert alert-warning" role="alert" id="validation">
 
                 </div>
-
-
-
 
             </div>
 
@@ -533,7 +529,7 @@ Storyline Student Single
 @endsection
 
 @section('custom-scripts')
-<script src="{{ url("js/resizer/resizer.js") }}"> </script>
+<script src="{{ url("js/resizer/resizer.js") }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
@@ -593,25 +589,25 @@ var config = {
     });
 
 
-    CKEDITOR.on('instanceReady', function() { 
+    CKEDITOR.on('instanceReady', function () {
         resize();
     });
 
     // resize the editor(s) while resizing the browser
-    $(window).resize(function(){
+    $(window).resize(function () {
         resize();
     });
 
-    function resize(){
-        var contentHeight       = $("#content-area").height();
-        var textEditHeight      = contentHeight - $("#info-bar").height();
-        var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
-        var ckBottomHeight      = $("#cke_1_bottom").height();
+    function resize() {
+        var contentHeight = $("#content-area").height();
+        var textEditHeight = contentHeight - $("#info-bar").height();
+        var ckTopHeight = $("#cke_1_top").height();
+        var ckContentsHeight = $("#cke_1_contents").height();
+        var ckBottomHeight = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
+        $("#cke_1_contents").height((textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
         //$("#page_container").css("background-color", "yellow");
-        $("#page-container").height( (contentHeight) + "px");
+        $("#page-container").height((contentHeight) + "px");
     }
 
     CKEDITOR.on('instanceReady', function () {
@@ -641,10 +637,9 @@ var config = {
 <script>
 
     const selector = '.resizer';
-
-    let resizer = new Resizer(selector);
-
-    $( document ).ready(function(){
+            let
+    resizer = new Resizer(selector);
+            $(document).ready(function () {
 
 
         $("#validation").hide();
@@ -653,7 +648,7 @@ var config = {
             save_content_to_item();
 
         });
-        
+
         $('#selectNode').on('change', function (e) {
             var optionSelected = $("option:selected", this);
             var valueSelected = this.value;
@@ -950,8 +945,8 @@ var config = {
         var cats = $("#categories input:checkbox:checked").map(function () {
             return $(this).val();
         }).get();
-        
-       
+
+
         var data = {
             "title": $("#content-title").val(),
             "description": $("#content-description").val(),
@@ -959,7 +954,7 @@ var config = {
             "categories": cats,
             "tags": $("#content-tags").val(),
             "id": $("#content-id").val(),
-            "topic":$("#selectNode option:selected").val()
+            "topic": $("#selectNode option:selected").val()  
         };
 
         var item_id = $("#item-id").val();
@@ -983,7 +978,7 @@ var config = {
 
     function save_content_to_item() {
         $("#validation").hide();
-        
+
         var data = get_content_details();
         var item_id = $("#item-id").attr('value');
 
