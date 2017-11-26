@@ -134,8 +134,7 @@ class DefaultController extends LTIBaseController {
     
     }
     
-    public function topicView($item,$course){   
-        
+    public function topicView($item,$course){          
         $Items = StorylineItem::where('required',$item)->first(); 
         if($Items){
            $ItemId = $Items->id;  
@@ -167,6 +166,26 @@ class DefaultController extends LTIBaseController {
         );
        return \Response::json($response);
               
+    }
+    
+    public function nextView($item){
+        $Items = StorylineItem::find($item);
+        if(!empty($Items->required)){
+             $progress = StudentProgress::where([['storyline_item_id', $item],['student_id',auth()->user()->id]])->first(); 
+             if(!empty($progress)){
+               $msg = 'true';  
+              }else{
+               $msg = 'false';   
+              }
+        }else{
+          $msg = 'true';  
+        } 
+        
+        $response = array(
+            'msg' => $msg,
+        );
+        
+        return \Response::json($response);
     }
     
     /**

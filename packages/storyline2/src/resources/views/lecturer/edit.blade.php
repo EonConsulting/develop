@@ -437,7 +437,7 @@ Storyline Student Single
 
                 <p>Student Progression</p>
                     <div class="form-group">
-                    <label for="selectNode">Select required topic:</label>
+                    <label for="selectNode">Set page prerequisite:</label>
                     <select id="selectNode" class="form-control">
                         <option value="0">--Choose One--</option>
                     </select>  

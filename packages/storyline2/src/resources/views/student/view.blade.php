@@ -486,10 +486,11 @@ Storyline Student Single
         $(document).on("click", ".arrow-btn", function() {           
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            var req = $(this).attr('req');   
-            alert(req);
+            view_next(item_id,button);
+            //var req = $(this).attr('req');   
+            //alert(req);
             //load_content(item_id, button);
-            check_r(req, button, item_id);
+            //check_r(req, button, item_id);
         });
 
         $(document).on("click", ".dropdown-btn", function() {
@@ -526,6 +527,31 @@ Storyline Student Single
              }
         }
         
+        function view_next(item_id,button){
+           var courseId = '{{ $course->id }}';
+                $.ajax({
+                url: '{{ url('student/view-next/') }}'+'/'+item_id,
+                type: "GET",
+                beforeSend: function () {
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                if (data.msg === 'true') {
+                    console.log(item_id);
+                    getContent(item_id, button);
+                     //location.reload();
+                } else if (data === 'false'){
+                         //progress_error();
+                        //getContent(item_id, button);
+                }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                       // location.reload();
+                }
+        });   
+        }
+        
         function resizeArea(){
         var areaHeight = $("#content-area").height();
 
@@ -534,7 +560,7 @@ Storyline Student Single
         }
         
         function view_topic(item_id, button){    
-                 var courseId = '{{ $course->id }}';
+                var courseId = '{{ $course->id }}';
                 $.ajax({
                 url: '{{ url('student/view-topic') }}'+'/'+item_id+'/'+courseId,
                 type: "GET",
@@ -545,7 +571,7 @@ Storyline Student Single
                 success: function (data, textStatus, jqXHR) {
                 if (data.msg === 'true') {
                     console.log(item_id);
-                     load_c(item_id, button);
+                    getContent(item_id, button);
                      //location.reload();
                 } else if (data === 'false'){
                          //progress_error();
@@ -558,29 +584,7 @@ Storyline Student Single
                 }
         });  
         }
-        
-        function load_c(item_id, button){
-        $.ajax({
-                url: "{{ url("") }}/storyline2/item-content/" + item_id,
-                type: "GET",
-                contentType: 'json',
-                headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                success: function (data, textStatus, jqXHR) {
-                if (data["found"] === true){
-                pupulateContent(data, button);
-                } else {
-                // $("#noContentMessage").modal("show");
-                }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                       // location.reload();
-                }
-        });
-        }
-        
+       
         function load_content(item_id, button){
         var courseId = '{{ $course->id }}';
         var storyline = '{{ $storylineId }}';
@@ -607,17 +611,6 @@ Storyline Student Single
                 }
         });
         }
-        
-        function check_required(req){        
-           if(req === 'null'){               
-                var button = $('#'+$(this).data('item-id'));
-                var item_id = $(this).data("item-id");
-                //load_content(item_id, button);
-                view_topic(item_id, button);
-            }
-        }
-        
-        
 
         //Get Content
        function getContent(item_id, button) {
