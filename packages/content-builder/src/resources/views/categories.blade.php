@@ -54,27 +54,21 @@
                         Create a New Category
                     </div>
                 
-                    <div class="container-fluid sp-top-15">
-                        <form>
-
-                            <div class="form-group">
-                                <label for="name">Category Name</label><br>
-                                <input type="text" name="name" class="form-conrol" placeholder="Category Name" id="create_name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="name">Tags (comma seperated)</label><br>
-                                <input type="text" name="tags" class="form-conrol" placeholder="Tags" id="create_tags">
-                            </div>
-                            
-                            
-
-                            {{ csrf_field() }}
-                        </form>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-info create-btn" value="Create">
-                        </div>
+                    <div class="container-fluid sp-top-15 sp-bot-15">
                         
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Category Name</label>
+                                <input type="text" class="form-control" id="create_name" placeholder="Category Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="tags">Tags (comma seperated)</label>
+                                <input type="text" class="form-control" id="create_tags" placeholder="Tags">
+                            </div>
+                            {{ csrf_field() }}
+                            
+                        </form>
+                        <button type="submit" class="btn btn-info create-btn">Save</button>
                     </div>
                     
                 </div>
@@ -260,10 +254,10 @@
                 statusCode: {
                     200: function (data) { //success
 
-                        var json = JSON.parse(data);
+                        //var json = JSON.parse(data);
 
-                        $("#cat_name").val(json["name"]);
-                        $("#cat_tags").val(json["tags"]);
+                        $("#cat_name").val(data["name"]);
+                        $("#cat_tags").val(data["tags"]);
 
                     },
                     400: function () { //bad request

@@ -84,6 +84,12 @@ class ContentBuilderAssets extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $asset_id
+     * @return void
+     */
     public function delete($asset_id){
 
         $asset = Asset::find($asset_id);
@@ -98,6 +104,12 @@ class ContentBuilderAssets extends Controller {
     }
 
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @return void
+     */
     public function store(Request $request){
 
         $data = $request->all();
@@ -156,6 +168,12 @@ class ContentBuilderAssets extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function show($id){
 
         $result = [];
@@ -176,6 +194,12 @@ class ContentBuilderAssets extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $asset
+     * @return void
+     */
     public function generate_asset_mime_icon($asset){
 
         if ($asset['file_name'] !== null) {
@@ -206,6 +230,12 @@ class ContentBuilderAssets extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $asset
+     * @return void
+     */
     public function generate_asset_html_block($asset){
 
         $html = '';
@@ -243,6 +273,13 @@ class ContentBuilderAssets extends Controller {
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id){
 
         $asset = Asset::find($id);
