@@ -104,7 +104,7 @@ function populateContentForm(data) {
 
 function getProgressTopics(data) {
     if(data.req){
-       var option = "<option value="+data.req.id+">"+data.req.name+"</option>";
+       var option = "<option value="+data.req.id+">"+data.req.name+"</option><option value=''>--Choose One--</option>";
        }else{
           option =  "<option value=''>--Choose One--</option>";
        }

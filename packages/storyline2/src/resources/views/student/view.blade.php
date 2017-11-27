@@ -597,7 +597,7 @@ Storyline Student Single
                 },
                 success: function (data, textStatus, jqXHR) {
                 $("#content_tree").html(data); 
-                pupulateContent(data, button);
+                  //pupulateContent(data, button);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                 alert(errorThrown);
@@ -631,9 +631,6 @@ Storyline Student Single
                        // location.reload();
                 }
         });
-<<<<<<< HEAD
-        }
-=======
     }
 
     // update XAPI analytics
@@ -700,10 +697,6 @@ Storyline Student Single
     
     //Get Content
     function getContent(item_id,button) {
->>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
-
-        //Get Content
-       function getContent(item_id, button) {
         console.log("getContent called");
         actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;        
         $.ajax({
@@ -715,21 +708,14 @@ Storyline Student Single
                 },
                 statusCode: {
                 200: function (data) { //success
-<<<<<<< HEAD
-                if (data["found"] === true){
-                refresh_items(data,item_id);    
-                
-                } else {
-                // $("#noContentMessage").modal("show");
-                }
-=======
                     if(data["found"] === true){
-                        pupulateContent(data,button);
+                        refresh_items(data,item_id);
+                        pupulateContent(data,button);                       
                         logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
-                        $("#noContentMessage").modal("show");
+                        //$("#noContentMessage").modal("show");
+                        
                     }
->>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
                 },
                 400: function () { //bad request
 
@@ -794,14 +780,7 @@ Storyline Student Single
         }
 
 
-<<<<<<< HEAD
-=======
-    }
     
-    
-    
-    
->>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
 </script>
 
 

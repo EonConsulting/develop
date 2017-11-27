@@ -154,7 +154,8 @@ class Storyline2Core extends BaseController {
             
             $item->content_id = $content->id;
 
-            $item->save();                      
+            $item->save();   
+            //$this->storeProgress($item,$data);
             
         } else {
             $content_id = (int) $data['id'];
@@ -184,7 +185,10 @@ class Storyline2Core extends BaseController {
      * @param type $data
      */
     public function storeProgress($item,$data){
-            $item = StorylineItem::find($item);            
+            $item = StorylineItem::find($item); 
+            if(empty($data['topic'])){
+                $data['topic'] = NULL;
+             }
             $item->required = $data['topic'];           
             $item->save();
                /*
