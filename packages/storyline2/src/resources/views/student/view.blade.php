@@ -424,6 +424,7 @@ Storyline Student Single
 @section('custom-scripts')
     <script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
+<script src="{{url('js/analytics/tincan.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
@@ -630,7 +631,76 @@ Storyline Student Single
                        // location.reload();
                 }
         });
+<<<<<<< HEAD
         }
+=======
+    }
+
+    // update XAPI analytics
+    function logXAPITopicEvent(course_id, storyline_id, storyline_item_id) {
+        //Log search
+        var lrs;
+
+        try {
+            lrs = new TinCan.LRS(
+                    {
+                        endpoint: "{!! url('analytics/log') !!}",
+                        username: "{{ auth()->user()->name }}",
+                        password: null,
+                        allowFail: false
+                    }
+            );
+        } catch (ex) {
+            console.log("Failed to setup LRS XAPI object: ", ex);
+        }
+
+        var statement = new TinCan.Statement(
+                {
+                    actor: {
+                        mbox: "{{ auth()->user()->email }}"
+                    },
+                    verb: {
+                        id: "http://unisaonline.net/schema/1.0/topic"
+                    },
+                    target: {
+                        id: "{!! url('') !!}"
+                    },
+                    context: {
+                        extensions: {
+                            course: course_id,
+                            storyline: storyline_id,
+                            storyline_item: storyline_item_id
+                        }
+                    }
+                }
+        );
+
+        lrs.saveStatement(
+                statement,
+                {
+                    callback: function (err, xhr) {
+                        if (err !== null) {
+                            if (xhr !== null) {
+                                console.log("Failed to save statement: " + xhr.responseText + " (" + xhr.status + ")");
+                                // TODO: do something with error, didn't save statement
+                                return;
+                            }
+
+                            console.log("Failed to save statement: " + err);
+                            // TODO: do something with error, didn't save statement
+                            return;
+                        }
+
+                        console.log("Statement saved");
+                        // TOOO: do something with success (possibly ignore)
+                    }
+                }
+        );
+    }
+    
+    //Get Content
+    function getContent(item_id,button) {
+>>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
 
         //Get Content
        function getContent(item_id, button) {
@@ -645,12 +715,21 @@ Storyline Student Single
                 },
                 statusCode: {
                 200: function (data) { //success
+<<<<<<< HEAD
                 if (data["found"] === true){
                 refresh_items(data,item_id);    
                 
                 } else {
                 // $("#noContentMessage").modal("show");
                 }
+=======
+                    if(data["found"] === true){
+                        pupulateContent(data,button);
+                        logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
+                    } else {
+                        $("#noContentMessage").modal("show");
+                    }
+>>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
                 },
                 400: function () { //bad request
 
@@ -715,6 +794,14 @@ Storyline Student Single
         }
 
 
+<<<<<<< HEAD
+=======
+    }
+    
+    
+    
+    
+>>>>>>> f7233a7860f30fdfefc163403a8eefe79aa5ab72
 </script>
 
 
