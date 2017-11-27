@@ -16,6 +16,7 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
+use App\Models\StudentProgress;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 
@@ -54,6 +55,62 @@ class Storyline2ViewsJSON extends BaseController {
         $result = $result[0]['children'];
 
         return response()->json($result);
+    }
+
+
+    public function getTreeProgess($storyline){
+        
+        $sl = Storyline::find($storyline);
+        $items = $this->items_to_tree($sl);
+
+        $progress = StudentProgress::where([
+            ['storyline_id', '=', $storyline],
+            ['student_id', '=', Auth()->user()->id]
+        ])->first();
+
+        usort($items, [$this, "self::compare"]);
+
+        if($progress === null){
+            $progress = [
+                'furthest' => (int) $items[1]['id']
+            ];
+        }
+        //dd($progress);
+
+        $found = false;
+        $result = [];
+        $visited = [];
+        
+        //dd($items);
+
+        foreach($items as $k => $item){
+
+            $temp = $item;
+
+            if($found === true){
+                if(in_array($item['required'],$visited)){
+                    $temp['enabled'] = true;
+                }else{
+                    $temp['enabled'] = false;
+                }
+            }else{
+                $temp['enabled'] = true;
+                $visited[] = (string) $temp['id'];
+
+                if((int) $item['id'] === (int) $progress['furthest']){
+                    $found = true;
+                }
+            }
+
+            $result[] = $temp;
+
+        }
+
+        $result = $this->createTree($result);
+        $result = $result[0]['children'];
+
+        return $result;
+
     }
 
     /**
@@ -137,7 +194,6 @@ class Storyline2ViewsJSON extends BaseController {
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
                 'lft' => $node['_lft']
-                
             ];
         }
 

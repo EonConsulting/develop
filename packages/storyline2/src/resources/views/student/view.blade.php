@@ -269,6 +269,14 @@ Storyline Student Single
         border-bottom: 1px dotted black;
     }
 
+    .menu-btn-disabled {
+        color: #b2b2b2;
+    }
+
+    .menu-btn-disabled:hover {
+        color: #b2b2b2;
+        cursor: not-allowed;
+    }
 
 </style>
 
@@ -472,7 +480,7 @@ Storyline Student Single
             var req = $(this).attr('req');
             var button = $(this);
             var item_id = $(this).data("item-id");  
-            check_r(req, button, item_id);
+            loadContent(item_id,button);
             
         });
         
@@ -480,26 +488,21 @@ Storyline Student Single
             var req = $(this).attr('req');
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            //load_content(item_id, button);
-            check_r(req, button, item_id);
+            loadContent(item_id,button);
         });
         
         $(document).on("click", ".arrow-btn", function() {           
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            view_next(item_id,button);
-            //var req = $(this).attr('req');   
-            //alert(req);
-            //load_content(item_id, button);
-            //check_r(req, button, item_id);
+            loadContent(item_id,button);
+
         });
 
         $(document).on("click", ".dropdown-btn", function() {
             var req = $(this).attr('req');
             var button = $('#' + $(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            //load_content(item_id, button);
-            check_r(req, button, item_id);           
+            loadContent(item_id,button);
         });
 
         //$('.arrow-btn').hide();
@@ -511,128 +514,45 @@ Storyline Student Single
         getContent(item_id, first);
         //expand or collapse on caret click
         $(document).on('click','.toggle-expand', function(e){
-        $(this).parent().children('ul').toggle();
-        $(this).children('i').toggleClass('fa-caret-down');
-        $(this).children('i').toggleClass('fa-caret-right');
+            $(this).parent().children('ul').toggle();
+            $(this).children('i').toggleClass('fa-caret-down');
+            $(this).children('i').toggleClass('fa-caret-right');
+        });       
+    });
         
-          });       
-        });
+    $(window).resize(function(){
+    resizeArea();
+    });
         
-        $(window).resize(function(){
-        resizeArea();
-        });
         
-        function check_r(req, button, item_id){
-            if (req === "null"){
-                view_topic(item_id, button);
-             }
-        }
-        
-        function view_next(item_id,button){
-           var courseId = '{{ $course->id }}';
-                $.ajax({
-                url: '{{ url('student/view-next/') }}'+'/'+item_id,
-                type: "GET",
-                beforeSend: function () {
-                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
-                    console.log(item_id);
-                    getContent(item_id, button);
-                     //location.reload();
-                } else if (data === 'false'){
-                         //progress_error();
-                        //getContent(item_id, button);
-                }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                       // location.reload();
-                }
-        });   
-        }
-        
-        function resizeArea(){
+    function resizeArea(){
         var areaHeight = $("#content-area").height();
 
         var toolsHeight = $("#tools").height();
         $(".flex-container").height(areaHeight - toolsHeight - 11);
-        }
-        
-        function view_topic(item_id, button){    
-                var courseId = '{{ $course->id }}';
-                $.ajax({
-                url: '{{ url('student/view-topic') }}'+'/'+item_id+'/'+courseId,
-                type: "GET",
-                async: true,
-                beforeSend: function () {
-                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
-                    console.log(item_id);
-                    getContent(item_id, button);
-                     //location.reload();
-                } else if (data === 'false'){
-                         //progress_error();
-                        //getContent(item_id, button);
-                }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                       // location.reload();
-                }
-        });  
-        }
-        
-        function refresh_items(data,item_id){    
-                var courseId = '{{ $course->id }}';
-                $.ajax({
-                url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
-                type: "GET",
-                async: true,
-                beforeSend: function () {
-                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                $("#content_tree").html(data); 
-                  //pupulateContent(data, button);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                       // location.reload();
-                }
-        });  
-        }
-       
-        function load_content(item_id, button){
-                 var courseId = '{{ $course->id }}';
-                 var storyline = '{{ $storylineId }}';
-                 var student = '{{auth()->user()->id}}';
-                 $.ajax({
-                 url: '{{ url('student/progression') }}',
-                 type: "POST",
-                 data: {course: courseId, id: item_id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
-                 beforeSend: function () {
-                  $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                 },
-                   success: function (data, textStatus, jqXHR) {
-                 if (data.msg === 'true') {
-                //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                   getContent(item_id, button);
-                   } else if (data.msg === 'error'){
-                   progress_error();
-                        //getContent(item_id, button);
-                }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                       // location.reload();
-                }
-        });
     }
-
+    
+        
+    function refresh_items(data,item_id){    
+        var courseId = '{{ $course->id }}';
+        $.ajax({
+            url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
+            type: "GET",
+            async: true,
+            beforeSend: function () {
+            //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+            $("#content_tree").html(data); 
+                //pupulateContent(data, button);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+                    // location.reload();
+            }
+        });  
+    }
+       
     // update XAPI analytics
     function logXAPITopicEvent(course_id, storyline_id, storyline_item_id) {
         //Log search
@@ -695,6 +615,28 @@ Storyline Student Single
         );
     }
     
+
+    function loadContent(item_id, button){
+        var courseId = '{{ $course->id }}';
+        var storyline = '{{ $storylineId }}';
+        var student = '{{auth()->user()->id}}';
+        $.ajax({
+            url: '{{ url('student/progression') }}',
+            type: "POST",
+            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            beforeSend: function () {
+                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                getContent(item_id, button);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+        });
+    }
+
     //Get Content
     function getContent(item_id,button) {
         console.log("getContent called");
@@ -725,11 +667,11 @@ Storyline Student Single
                  }
                 }
         }).error(function (req, status, error) {
-        alert(error);
+            alert(error);
         });
-        }
+    }
 
-        function pupulateContent(data, button){
+    function pupulateContent(data, button){
         //highlight clicked button       
         $(".menu-btn").removeClass('active-menu');
         button.addClass('active-menu');
@@ -737,34 +679,34 @@ Storyline Student Single
         var breadcrumb = button.html();
         if (button.data('parent-id') !== '#') {
 
-        var current_node = button;
-        while (current_node.data('parent-id') !== '#'){
+            var current_node = button;
+            while (current_node.data('parent-id') !== '#'){
 
-        var current_node = $('#' + current_node.data('parent-id'));
-        temp = '<a href="#" class="bread-btn" req="" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
-        temp = temp + current_node.html();
-        temp = temp + '</a>';
-        breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
-         }
-       }
+                var current_node = $('#' + current_node.data('parent-id'));
+                temp = '<a href="#" class="bread-btn" req="" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
+                temp = temp + current_node.html();
+                temp = temp + '</a>';
+                breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
+            }
+        }
 
         var prev = $('.prev-btn');
         console.log(button.data('prev-id'));
         if (button.data('prev-id') === '#'){
-        prev.data('item-id', '');
-        prev.hide();
+            prev.data('item-id', '');
+            prev.hide();
         } else {
-        prev.data('item-id', button.data('prev-id'));
-        prev.show();
+            prev.data('item-id', button.data('prev-id'));
+            prev.show();
         }
 
         var next = $('.next-btn');
         if (button.data('next-id') === '#'){
-        next.data('item-id', '');
-        next.hide();
+            next.data('item-id', '');
+            next.hide();
         } else {
-        next.data('item-id', button.data('next-id'));
-        next.show();
+            next.data('item-id', button.data('next-id'));
+            next.show();
         }
 
         button.parent().parent().children('ul').show();
@@ -777,7 +719,7 @@ Storyline Student Single
         $("#body").html(data.content.body);
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        }
+    }
 
 
     
