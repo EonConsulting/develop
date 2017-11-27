@@ -53,6 +53,10 @@ class Storyline2Core extends BaseController {
     public function get_content($item) {
 
         $storyline_item = StorylineItem::find($item);
+        $req = '';
+        if(!empty($storyline_item->required)){
+            $req = $storyline_item = StorylineItem::find($storyline_item->required);
+          }
         //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
          $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
          $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->with('items.student_progress')->first());
@@ -62,6 +66,7 @@ class Storyline2Core extends BaseController {
             $result = [
                 "topics" => $topicArray,
                 "item" => $item,
+                "req" =>$req,
                 "found" => false
             ];
         } else {
@@ -70,6 +75,7 @@ class Storyline2Core extends BaseController {
                 "found" => true, 
                 "topics" => $topicArray,
                 "item" => $item,
+                "req" =>$req,
                 "content" => $content,
                 "categories" => $content->categories
             ];

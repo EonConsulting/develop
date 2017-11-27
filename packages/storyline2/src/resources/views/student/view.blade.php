@@ -313,7 +313,7 @@ Storyline Student Single
         <div class="content-navbar">
 
             <div class="content-navbar-back">
-                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="" req="null">
+                <a href="#" id="prev-btn" class="arrow-btn prev-btn" data-item-id="">
                     <i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i>
                 </a>
             </div>
@@ -509,7 +509,7 @@ Storyline Student Single
         var item_id = first.data("item-id");
         getContent(item_id, first);
         //expand or collapse on caret click
-        $('.toggle-expand').on('click', function(e){
+        $(document).on('click','.toggle-expand', function(e){
         $(this).parent().children('ul').toggle();
         $(this).children('i').toggleClass('fa-caret-down');
         $(this).children('i').toggleClass('fa-caret-right');
@@ -584,24 +584,44 @@ Storyline Student Single
                 }
         });  
         }
-       
-        function load_content(item_id, button){
-        var courseId = '{{ $course->id }}';
-        var storyline = '{{ $storylineId }}';
-        var student = '{{auth()->user()->id}}';
-        $.ajax({
-        url: '{{ url('student/progression') }}',
-                type: "POST",
-                data: {course: courseId, id: item_id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+        
+        function refresh_items(data,item_id){    
+                var courseId = '{{ $course->id }}';
+                $.ajax({
+                url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
+                type: "GET",
+                async: true,
                 beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
                 },
                 success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
+                $("#content_tree").html(data); 
+                pupulateContent(data, button);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                       // location.reload();
+                }
+        });  
+        }
+       
+        function load_content(item_id, button){
+                 var courseId = '{{ $course->id }}';
+                 var storyline = '{{ $storylineId }}';
+                 var student = '{{auth()->user()->id}}';
+                 $.ajax({
+                 url: '{{ url('student/progression') }}',
+                 type: "POST",
+                 data: {course: courseId, id: item_id, storyline: storyline, student: student, _token: "{{ csrf_token() }}"},
+                 beforeSend: function () {
+                  $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                 },
+                   success: function (data, textStatus, jqXHR) {
+                 if (data.msg === 'true') {
                 //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                getContent(item_id, button);
-                } else if (data.msg === 'error'){
-                progress_error();
+                   getContent(item_id, button);
+                   } else if (data.msg === 'error'){
+                   progress_error();
                         //getContent(item_id, button);
                 }
                 },
@@ -626,7 +646,8 @@ Storyline Student Single
                 statusCode: {
                 200: function (data) { //success
                 if (data["found"] === true){
-                pupulateContent(data, button);
+                refresh_items(data,item_id);    
+                
                 } else {
                 // $("#noContentMessage").modal("show");
                 }
@@ -644,7 +665,7 @@ Storyline Student Single
         }
 
         function pupulateContent(data, button){
-        //highlight clicked button
+        //highlight clicked button       
         $(".menu-btn").removeClass('active-menu');
         button.addClass('active-menu');
         //create breadcrumbs
@@ -689,6 +710,7 @@ Storyline Student Single
         $(".content-navbar-title").html(breadcrumb);
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
+        
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
 

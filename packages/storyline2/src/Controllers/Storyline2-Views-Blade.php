@@ -75,6 +75,27 @@ class Storyline2ViewsBlade extends BaseController {
 
         return view('eon.storyline2::student.view', ['items' => $items,'breadcrumbs' => $breadcrumbs,'course'=>$course,'storylineId'=>$storyline_id]);
     }
+    
+    public function refresh_items($course,$item) {
+       $SL2JSON = new Storyline2JSON;
+
+        $course = Course::find($course);
+        $storyline_id = $course->latest_storyline()->id;
+        $userId = auth()->user()->id;
+        //$items = Storyline::find($storyline_id)->items->with('student_progress')->toArray();
+        $items = Storyline::find($storyline_id)->with(['items.student_progress'
+            =>function($q)use ($userId){$q->where('student_id',$userId);}])->first();
+        
+        
+        //exit();
+        //$items = array_slice($items,1);
+        $items = $SL2JSON->items_to_tree($items);
+        usort($items, [$this, "self::compare"]);
+        //dd($items);
+        $items = $SL2JSON->createTree($items); 
+        
+        return view('eon.storyline2::student.refresh', ['items' => $items,'id'=>$item]);
+    }
 
     public function makeList($list, $number = '')
     {

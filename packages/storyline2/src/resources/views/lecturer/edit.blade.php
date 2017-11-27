@@ -439,7 +439,7 @@ Storyline Student Single
                     <div class="form-group">
                     <label for="selectNode">Set page prerequisite:</label>
                     <select id="selectNode" class="form-control">
-                        <option value="0">--Choose One--</option>
+                        <option value="">--Choose One--</option>
                     </select>  
                     </div>
                     

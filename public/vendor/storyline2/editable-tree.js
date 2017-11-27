@@ -103,7 +103,12 @@ function populateContentForm(data) {
 }
 
 function getProgressTopics(data) {
-    document.getElementById("selectNode").innerHTML = "<option value=''>--Choose One--</option>";
+    if(data.req){
+       var option = "<option value="+data.req.id+">"+data.req.name+"</option>";
+       }else{
+          option =  "<option value=''>--Choose One--</option>";
+       }
+    document.getElementById("selectNode").innerHTML = option;
     var dropdown = document.getElementById("selectNode");
     var myArray = data.topics;
     // Loop through the array

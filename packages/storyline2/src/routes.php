@@ -52,6 +52,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         //Add more routes
 
         Route::post('/notify', ['as' => 'storyline2.courses.single.notify', 'uses' => 'CourseNotifyController@store']);
-
+        Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
     });
 });
