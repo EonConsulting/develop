@@ -625,10 +625,11 @@ Storyline Student Single
         var courseId = '{{ $course->id }}';
         var storyline = '{{ $storylineId }}';
         var student = '{{auth()->user()->id}}';
+        var item = '{{auth()->user()->id}}';
         $.ajax({
             url: '{{ url('student/progression') }}',
             type: "POST",
-            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            data: {item: item,course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
             beforeSend: function () {
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },

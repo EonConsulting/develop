@@ -10,13 +10,40 @@ use App\Models\StudentProgress;
 //use EONConsulting\Storyline\Table\Csv;
 
 class DefaultController extends LTIBaseController {
+    
+    public function storeProgress(Request $request) {
+       $progress = StudentProgress::where([['student_id',$request->get('student')],
+                                          ['storyline_item_id',$request->get('item')]])->first();  
+       
+       if(empty($progress)){
+           $StudentProgress = new StudentProgress([
+                'student_id' => $request->get('student'),
+                'storyline_id' => $request->get('item'),
+                'storyline_item_id' => $request->get('storyline')                  
+            ]); 
+          
+           if($StudentProgress->save()){
+               $msg = 'true';
+           }else{
+               $msg = 'false';
+           }
+         }else{
+             $msg = 'false';
+         }
+         
+         $response = array(
+            'msg' => $msg
+        );
+
+        return \Response::json($response);
+    }
 
     /**
      * 
      * @param Request $request
      * @return type
      */
-    public function storeProgress(Request $request) {
+    public function storeProg(Request $request) {
         $StudentProgress = new StudentProgress();
         $StorylineItem = new StorylineItem();
         $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
@@ -41,7 +68,7 @@ class DefaultController extends LTIBaseController {
             }
             
         } else {
-            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
+            $ItemArray = $this->topics($request->get('storyline'));
             $ItemId = $this->save($StudentProgress,$StorylineItem, $request,$ItemArray);
             $progress = $StudentProgress::find($ItemId);
             
@@ -67,6 +94,8 @@ class DefaultController extends LTIBaseController {
      * @param type $ItemArray
      * @return string
      */
+    
+    
     public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {    
 
         $Progress = $StudentProgress::find($progressId);
