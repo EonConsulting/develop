@@ -13,8 +13,9 @@ class RefactorCourseUsers extends Migration
      */
     public function up()
     {
+
         DB::statement('RENAME TABLE `course_users` TO `integrate_course_users`');
-        DB::statement('ALTER TABLE `course_users` DROP COLUMN email, DROP COLUMN `opted_out`, DROP COLUMN `opted_out_date`');
+        DB::statement('ALTER TABLE `integrate_course_users` DROP COLUMN email, DROP COLUMN `opted_out`, DROP COLUMN `opted_out_date`');
     }
 
     /**
