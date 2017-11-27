@@ -278,6 +278,11 @@ Storyline Student Single
         cursor: not-allowed;
     }
 
+    .menu-btn-disabled:focus {
+        color: #b2b2b2;
+        outline: none;
+    }
+
 </style>
 
 
