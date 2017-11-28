@@ -145,12 +145,9 @@
     <script>
 
 
-        {{-- Set the course ID in the form before opening the modal --}}
-        $('#notificationModal').on('show.bs.modal', function () {
-
-            var course_id = $('.notifyId').data('id');
-
-            $("#notification-form input[name='course_id']").val(course_id);
+        $('.notifyId').on('click', function ()
+        {
+            $("#notification-form input[name='course_id']").val($(this).data('id'));
         });
 
 
