@@ -298,7 +298,7 @@ $(document).ready(function () {
                     mbox: "{{ auth()->user()->email }}"
                 },
                 verb: {
-                    id: "http://unisaonline.net/schema/1.0/content_search"
+                    id: "https://unisaonline.net/schema/1.0/content_search"
                 },
                 target: {
                     id: "{!! url('/content/search') !!}"

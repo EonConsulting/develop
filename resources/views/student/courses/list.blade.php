@@ -186,7 +186,7 @@ $(document).ready(function () {
                     mbox: "{{ auth()->user()->email }}"
                 },
                 verb: {
-                    id: "http://unisaonline.net/schema/1.0/course_search"
+                    id: "https://unisaonline.net/schema/1.0/course_search"
                 },
                 target: {
                     id: "{!! url('/lti/courses/search') !!}"
