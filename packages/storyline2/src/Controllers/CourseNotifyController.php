@@ -5,7 +5,6 @@ namespace EONConsulting\Storyline2\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\Storyline2\Models\Course;
-use EONConsulting\Storyline2\Models\CourseUser;
 use App\Notifications\CourseNotifier;
 
 class CourseNotifyController extends Controller
