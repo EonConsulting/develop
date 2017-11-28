@@ -14,7 +14,7 @@ class AddMobileNumberToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('mobile_number');
+            $table->string('mobile_number')->nullable();
         });
     }
 
