@@ -35,6 +35,10 @@ class StorylineItem extends Node {
         return $this->belongsTo('EONConsulting\ContentBuilder\Models\Content')->withTimestamps();
     }
 
+    public function student_progress() {
+        return $this->hasOne(\App\Models\StudentProgress::class, 'storyline_item_id', 'id');
+    }
+    
     protected $parentColumn = 'parent_id';
     protected $leftColumn = '_lft';
     protected $rightColumn = '_rgt';

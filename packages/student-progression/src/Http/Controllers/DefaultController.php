@@ -121,7 +121,7 @@ class DefaultController extends LTIBaseController {
      * @param type $storylineId
      * @return type
      */
-    public function topics($StorylineItem, $storylineId) {
+    public function topics(Request $request) {
         $result = $this->items_to_tree(Storyline::find($storylineId)->items);
         usort($result, [$this, "self::compare"]);
         
@@ -132,6 +132,60 @@ class DefaultController extends LTIBaseController {
      return  $children;
  
     
+    }
+    
+    public function topicView($item,$course){          
+        $Items = StorylineItem::where('required',$item)->first(); 
+        if($Items){
+           $ItemId = $Items->id;  
+        }else{
+          $ItemId = 0;   
+        }
+        
+        $progress = StudentProgress::where([['storyline_item_id', $ItemId],['student_id',auth()->user()->id]])->first(); 
+        
+        if(!empty($Items) && empty($progress)){
+           $StudentProgress = new StudentProgress([
+                'student_id' => auth()->user()->id,
+                'storyline_item_id' => $Items->id,
+                'course_id' => $course,
+                'storyline_id' => $Items->storyline_id
+             ]);
+        
+            if ($StudentProgress->save()) {
+              $msg = 'true';
+             }else{
+              $msg = 'false';
+            }
+           
+          }else{
+              $msg = 'true';  
+         }
+        $response = array(
+            'msg' => $msg,
+        );
+       return \Response::json($response);
+              
+    }
+    
+    public function nextView($item){
+        $Items = StorylineItem::find($item);
+        if(!empty($Items->required)){
+             $progress = StudentProgress::where([['storyline_item_id', $item],['student_id',auth()->user()->id]])->first(); 
+             if(!empty($progress)){
+               $msg = 'true';  
+              }else{
+               $msg = 'false';   
+              }
+        }else{
+          $msg = 'true';  
+        } 
+        
+        $response = array(
+            'msg' => $msg,
+        );
+        
+        return \Response::json($response);
     }
     
     /**

@@ -57,6 +57,7 @@
                                             <a href="#" class="notifyId dropdown-link" type="button" data-id="{{$course->id}}" data-toggle="modal" data-target="#notificationModal"><i class="fa fa-envelope"></i> Notify</a>
                                             <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                             <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
+                                            <a href="#" class="metadataId dropdown-link" id="timelines_{{$course->id}}"><i class="fa fa-pie-chart"></i> Timelines &amp; Progress</a>
                                         </div>
                                     </div> 
                                 </td>

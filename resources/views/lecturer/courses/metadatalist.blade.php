@@ -44,7 +44,7 @@ Create a Course
         }
 
         .meta-value {
-
+            
         }
 
 
@@ -58,11 +58,13 @@ Create a Course
         <div class="span12">
             <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             <p class="lead">Metadata Type List</p> <br>
+            
+            <div class="msg-info"></div>
             <div id="tab" data-toggle="buttons-radio">
                 @foreach($MetadataStore as $key=>$resource)
                 <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-default metatype" data-toggle="tab">{{$resource->name}}</a>
                 @endforeach
-
+                <input name="course_id" type="hidden" value="{{ $course }}"/>
             </div>
             
             <div class="tab-content metadata-content">
@@ -73,34 +75,7 @@ Create a Course
 </div>
 
 @section('exterior-content')
-<div id="metadataModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
 
-        </div>
-    </div>
-</div>   
-<!-- Modal -->
-<div id="msgModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body modal-info">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 @endsection
 @endsection
@@ -123,10 +98,38 @@ Create a Course
 
             getdata(id);
         });
+        
+        $(document).on("click",".save-meta",function (event) {
+                event.preventDefault();
+                var courseId = $("input[name=course_id]").val();
+                var typeId = $("input[name=metadata_type_id]").val();
+                var storeId = $("input[name='metadata_store_id[]']").map(function(){return $(this).val();}).get();
+                var value = $("input[name='value[]'").map(function(){return $(this).val();}).get();
+                var url = '{{ route("courses.storemetadata") }}';
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {course_id:courseId, type_id:typeId, store_id:storeId, value:value},
+                    beforeSend: function () {
+                        $('.btnSubmit').text("Saving.....");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                              if(data.success){
+                                $(".msg-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong>"+data.success+"</div>");
+                              }else{
+                                $(".msg-info").html("<div class='alert alert-danget alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error!</strong>"+data.error+"</div>");                            
+                              }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        //location.reload();
+                    }
+                });
+            });
 
        function getdata(id){
-            var url = '{{ route("courses.viewmetadata",":id") }}';
-            url = url.replace(':id', id);
+            var url = "{{ route('courses.viewmetadata',[':id',':course']) }}";
+            url = url.replace(':id/:course', id+'/'+'{{ $course }}');
             $.ajax({
                 url: url,
                 type: "GET",
@@ -139,7 +142,7 @@ Create a Course
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(errorThrown);
-                    location.reload();
+                    //location.reload();
                 }
             });
        }

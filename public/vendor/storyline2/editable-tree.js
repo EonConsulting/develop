@@ -46,7 +46,7 @@ function treeToJSON() {
 }
 
 
-function import_content($content_id,$item_id,$action){
+function import_content($content_id, $item_id, $action) {
 
     console.log("import_content called");
 
@@ -83,32 +83,49 @@ function import_content($content_id,$item_id,$action){
 }
 
 function populateContentForm(data) {
-
     console.log("populateContentForm called");
-
     //var course_data = jQuery.parseJSON(data);
-
     if (data.found == true) {
-
         $("#content-id").val(data.content.id);
         $("#content-title").val(data.content.title);
         $("#content-description").val(data.content.description);
         $("#content-tags").val(data.content.tags);
         var body = editor.setData(data.content.body);
-
         for (index = 0; index < data.categories.length; ++index) {
             cat_id = "#cat" + data.categories[index].id;
             console.log(cat_id);
             $(cat_id).prop('checked', true);
         }
-
     }
+    //Get student progress topics dropdown
+    getProgressTopics(data);
 
+}
+
+function getProgressTopics(data) {
+    if(data.req){
+       var option = "<option value="+data.req.id+">"+data.req.name+"</option><option value=''>--Choose One--</option>";
+       }else{
+          option =  "<option value=''>--Choose One--</option>";
+       }
+    document.getElementById("selectNode").innerHTML = option;
+    var dropdown = document.getElementById("selectNode");
+    var myArray = data.topics;
+    // Loop through the array
+    for (var i = 0; i < myArray.length; ++i) {
+        // Append the element to the end of Array list
+        if (myArray[i].id == data.item) {
+            break;
+        }
+        if (i == 0) { 
+            myArray.splice(i, 1);
+        }
+        dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
+    }
 }
 
 //Get Content
 function getContent(data) {
-
     console.log("getContent called");
 
     var item_id = data['id'];
@@ -217,7 +234,7 @@ function moveNode(data) {
     var actionUrl = base_url + "/storyline2/move";
     //seen = [];
     var node = data;
-    
+
     $.ajax({
         method: "POST",
         url: actionUrl,

@@ -181,44 +181,44 @@ $(document).ready(function () {
         }
 
         var statement = new TinCan.Statement(
-                {
-                    actor: {
-                        mbox: "{{ auth()->user()->email }}"
-                    },
-                    verb: {
-                        id: "http://unisaonline.net/schema/1.0/search"
-                    },
-                    target: {
-                        id: "{!! url('/lti/courses/search') !!}"
-                    },
-                    context: {
-                        extensions: {
-                            searchterm: searchParam
-                        }
+            {
+                actor: {
+                    mbox: "{{ auth()->user()->email }}"
+                },
+                verb: {
+                    id: "http://unisaonline.net/schema/1.0/course_search"
+                },
+                target: {
+                    id: "{!! url('/lti/courses/search') !!}"
+                },
+                context: {
+                    extensions: {
+                        searchterm: searchParam
                     }
                 }
+            }
         );
 
         lrs.saveStatement(
-                statement,
-                {
-                    callback: function (err, xhr) {
-                        if (err !== null) {
-                            if (xhr !== null) {
-                                console.log("Failed to save statement: " + xhr.responseText + " (" + xhr.status + ")");
-                                // TODO: do something with error, didn't save statement
-                                return;
-                            }
-
-                            console.log("Failed to save statement: " + err);
+            statement,
+            {
+                callback: function (err, xhr) {
+                    if (err !== null) {
+                        if (xhr !== null) {
+                            console.log("Failed to save statement: " + xhr.responseText + " (" + xhr.status + ")");
                             // TODO: do something with error, didn't save statement
                             return;
                         }
 
-                        console.log("Statement saved");
-                        // TOOO: do something with success (possibly ignore)
+                        console.log("Failed to save statement: " + err);
+                        // TODO: do something with error, didn't save statement
+                        return;
                     }
+
+                    console.log("Statement saved");
+                    // TOOO: do something with success (possibly ignore)
                 }
+            }
         );
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Courses;
 use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
 use App\Models\Course;
 use App\Models\MetadataStore;
+use App\Jobs\ElasticIndexCourseInfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,13 +49,18 @@ class CreateCourseController extends Controller
                 'description' => $request->get('description'),
                 'tags' => $request->get('tags'),
                 'creator_id' => auth()->user()->id,
-                'template_id' => $request->get('template')
+                'template_id' => $request->get('template'),
+                'ingested' => 0
             ]);
 
             $Course->save();
             //return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
             $request->session()->flash('alert-success', 'Module has been added successfully.');
             // return view('lecturer.courses.metadatalist',['breadcrumbs' => $breadcrumbs,'course'=>$Course->id]);
+            
+            // here we queue the course for re-index by elastic
+            ElasticIndexCourseInfo::dispatch();
+            
             return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
         }
         $request->session()->flash('alert-danger', 'Title is required.');
@@ -78,21 +84,21 @@ class CreateCourseController extends Controller
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
     
-    public function viewmetadata($id)
-    {
-        $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
-        
-        $MetaId = MetadataStore::pluck('id')->all();
-        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
+    public function viewmetadata($id,$course){       
+        $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get(); 
+        $MetaId = CourseMetadata::where('course_id', $course)->pluck('metadata_store_id')->all();
+        //$MetaId = MetadataStore::pluck('id')->all();            
+        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore,'id'=>$id]);
     }
 
-    public function storemetadata(Request $request)
-    {
+    public function storemetadata(Request $request){
+        $CourseMetadata = CourseMetadata::where([['course_id', $request->get('course_id')],['metadata_type_id',$request->get('type_id')]])->first();
+        if(empty($CourseMetadata)){  
         $value = $request->get('value');
-        foreach ($request->get('metadata_store_id') as $key => $selected_id) {
+        foreach ($request->get('store_id') as $key => $selected_id) {
             $Metadata = [
                 'course_id' => $request->get('course_id'),
-                'metadata_type_id' => $request->get('metadata_type_id'),
+                'metadata_type_id' => (int) $request->get('type_id'),
                 'metadata_store_id' => (int) $selected_id,
                 'value' => $value[$key],
             ];
@@ -104,8 +110,8 @@ class CreateCourseController extends Controller
         if ($check) {
             return response()->json(['success' => 'Metadata has been added successfully.']);
         }
-
         return response()->json(['error' => 'An error occured, pleas try again']);
+        }
     }
 
     public function updatemetadata(Request $request)

@@ -72,6 +72,7 @@ class CreateIntegrateTables extends Migration {
             `student_result` decimal(5,2) NOT NULL,
             `class_result` decimal(5,2) NOT NULL,
             `source_system` varchar(75) NOT NULL,
+            `ingested` tinyint(1) NOT NULL DEFAULT `0`,
             `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`)
