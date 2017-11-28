@@ -7,6 +7,7 @@ use EONConsulting\RolesPermissions\Traits\HasPermissionTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use EONConsulting\Storyline2\Models\Course;
 
 class User extends Authenticatable
 {
@@ -68,6 +69,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Fetch course users for this model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'integrate_course_users', 'user_id', 'course_id');
+    }
+
+    /**
      * Check if user has role
      *
      * @param string $role
@@ -84,5 +95,15 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForNexmo()
+    {
+        return $this->mobile_number;
     }
 }
