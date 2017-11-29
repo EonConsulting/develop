@@ -25,7 +25,7 @@ class Storyline2ViewsJSON extends BaseController {
     /**
      * @return array
      */
-    public function render() {
+    public function render($storyline_id) {
 
         /*
           $var = $course::find(20);
@@ -33,7 +33,7 @@ class Storyline2ViewsJSON extends BaseController {
           $items = $var['items'];
          */
 
-        $storyline = Storyline::find(47);
+        $storyline = Storyline::find(storyline_id);
 
         $items = $storyline['items'];
 
@@ -46,10 +46,17 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function show_items($storyline) {
 
+        echo ($storyline);
+        $sl = Storyline::find($storyline);
+        $sl['items'] = StorylineItem::where("storyline_id", $storyline)->get();
+
+        //dd($items);
 
         //$result = $this->items_to_tree(Storyline::find($storyline)->items);
-        $result = $this->items_to_tree(Storyline::find($storyline)->with('items.student_progress')->first());
+        $result = $this->items_to_tree($sl);
         
+        //dd($result);
+
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
         $result = $result[0]['children'];
