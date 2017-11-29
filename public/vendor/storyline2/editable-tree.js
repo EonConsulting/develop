@@ -33,8 +33,6 @@ function drawTree(tree_data) {
         "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
-
-
 }
 
 

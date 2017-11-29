@@ -646,7 +646,6 @@ var config = {
 
         $("#btnsbmit").on("click", function () {
             save_content_to_item();
-
         });
 
         $('#selectNode').on('change', function (e) {

@@ -42,18 +42,8 @@ class Storyline2ViewsBlade extends BaseController {
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
         $userId = auth()->user()->id;
-        
-        //$items = Storyline::find($storyline_id)->items->with('student_progress')->toArray();
-        /*$items = Storyline::find($storyline_id)->with(['items.student_progress'
-            =>function($q)use ($userId){$q->where('student_id',$userId);}])->first();*/
-
-        //$items = Storyline::find($storyline_id)->items->toArray();
+    
         $items = $SL2JSON->getTreeProgess($storyline_id);
-
-        /*$items = $SL2JSON->items_to_tree($items);
-        usort($items, [$this, "self::compare"]);
-        $items = $SL2JSON->createTree($items);
-        $items = $items[0]['children'];*/
 
         $course['template'] = ContentTemplates::find($course->template_id);
 
@@ -125,8 +115,6 @@ class Storyline2ViewsBlade extends BaseController {
         $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
-        
-        
 
         if ($latest_storyline !== null)
         {
@@ -141,14 +129,40 @@ class Storyline2ViewsBlade extends BaseController {
             $storyline->save();
             $storyline_id = $storyline->id;
 
-            $storyline_item = new StorylineItem([
+            $root_item = new StorylineItem([
                 'storyline_id' => $storyline_id,
-                'name' => 'Start Here'
+                'name' => 'Root'
             ]);
 
-            $storyline_item->save();
-             
-            $storyline->items()->save($storyline_item);
+            $root_item->save();
+            $root_id = $root_item->id;
+
+            //$parent = StorylineItem::where('id', '=', $parent_id)->first(); //parent
+            
+            //dd($root_parent);
+                
+            for($i = 0; $i < 3; $i++){
+
+                $new_details = [
+                    'name' => "Topic " . ($i + 1),
+                    'storyline_id' => $storyline_id,
+                    'parent_id' => $root_id,
+                    'root_parent' => $root_id
+                ];
+
+                $new =  new StorylineItem($new_details);
+
+                $new->save();
+                
+                if ($new->makeChildOf($root_item)) {
+                    $msg = 'success';
+                } else {
+                    $msg = 'failed';
+                }
+
+            }
+
+            //$storyline->items()->save($storyline_item);
 
             $course->storylines()->save($storyline);
             
