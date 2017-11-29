@@ -23,22 +23,14 @@
     19 => 'Illuminate\\Translation\\TranslationServiceProvider',
     20 => 'Illuminate\\Validation\\ValidationServiceProvider',
     21 => 'Illuminate\\View\\ViewServiceProvider',
-<<<<<<< HEAD
-    22 => 'Spatie\\Fractal\\FractalServiceProvider',
-    23 => 'Barryvdh\\Debugbar\\ServiceProvider',
-=======
     22 => 'Barryvdh\\Debugbar\\ServiceProvider',
     23 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
->>>>>>> e5cb6212fd7d9ab53e2f83675aab4b2768790244
     24 => 'Intervention\\Image\\ImageServiceProvider',
     25 => 'Laravel\\Passport\\PassportServiceProvider',
     26 => 'Laravel\\Tinker\\TinkerServiceProvider',
     27 => 'Collective\\Html\\HtmlServiceProvider',
-<<<<<<< HEAD
     28 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-=======
     28 => 'Spatie\\Fractal\\FractalServiceProvider',
->>>>>>> e5cb6212fd7d9ab53e2f83675aab4b2768790244
     29 => 'Laravel\\Tinker\\TinkerServiceProvider',
     30 => 'Laravel\\Passport\\PassportServiceProvider',
     31 => 'Spatie\\Fractal\\FractalServiceProvider',

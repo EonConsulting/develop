@@ -5013,3 +5013,31 @@
 #58 {main}
 "} 
 
+[2017-11-29 14:07:39] local.ERROR: Parse error: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\wamp64\\www\\develop\\bootstrap\\cache\\services.php:26)
+[stacktrace]
+#0 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(92): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\wamp64\\\\www\\\\d...')
+#1 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(55): Illuminate\\Foundation\\ProviderRepository->loadManifest()
+#2 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(561): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(213): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(162): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(146): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#7 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#8 C:\\wamp64\\www\\develop\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#9 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
+#10 {main}
+"} 
+[2017-11-29 14:07:41] local.ERROR: Parse error: syntax error, unexpected '<<' (T_SL), expecting ')' {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '<<' (T_SL), expecting ')' at C:\\wamp64\\www\\develop\\bootstrap\\cache\\services.php:26)
+[stacktrace]
+#0 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(92): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\wamp64\\\\www\\\\d...')
+#1 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\ProviderRepository.php(55): Illuminate\\Foundation\\ProviderRepository->loadManifest()
+#2 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(561): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(213): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(162): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(146): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#7 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#8 C:\\wamp64\\www\\develop\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#9 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
+#10 {main}
+"} 
