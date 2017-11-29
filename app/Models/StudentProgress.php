@@ -27,6 +27,6 @@ class StudentProgress extends Model
      * @var array
      */
     protected $fillable = [
-        'student_id', 'course_id', 'storyline_id', 'current', 'root', 'furthest','storyline_item_id'
+        'student_id', 'course_id', 'storyline_id', 'visited'
     ];
 }

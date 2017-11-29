@@ -83,7 +83,7 @@ class Storyline2Core extends BaseController {
         }
 
     }
-*/
+  */
     /**
      * @param $item
      * @return \Illuminate\Http\JsonResponse

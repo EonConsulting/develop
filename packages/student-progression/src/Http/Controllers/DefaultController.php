@@ -12,23 +12,33 @@ use App\Models\StudentProgress;
 class DefaultController extends LTIBaseController {
     
     public function storeProgress(Request $request) {
-       $progress = StudentProgress::where([['student_id',$request->get('student')],
-                                          ['storyline_item_id',$request->get('item')]])->first();  
-       
-       if(empty($progress)){
+       $progress = StudentProgress::where('student_id',$request->get('student'))->first();  
+             
+       $visited = implode(", ",[$request->get('id')]);
+           
+       if($progress == NULL){
+           
            $StudentProgress = new StudentProgress([
+                
                 'student_id' => $request->get('student'),
-                'storyline_id' => $request->get('item'),
-                'storyline_item_id' => $request->get('storyline')                  
+                'storyline_id' => $request->get('storyline') ,
+                //'storyline_item_id' => $request->get('id'),
+                'visited' => $visited
+               
             ]); 
           
            if($StudentProgress->save()){
-               $msg = 'true';
+               $msg = 'saved';
            }else{
-               $msg = 'false';
+               $msg = 'not saved';
            }
          }else{
-             $msg = 'false';
+             $visited =[$progress->visited, $request->get('id')];
+             $commaList = implode(', ', $visited);
+             $progress = StudentProgress::where('student_id',$request->get('student'))
+                                          ->update(['visited' => $commaList]);
+             
+             $msg = 'updated';
          }
          
          $response = array(
