@@ -67,13 +67,13 @@ class AnalyticsLogIngester implements ShouldQueue {
                     // here we switch to the correct summarization process
                     switch ($json->verb->id) {
                         case "https://unisaonline.net/schema/1.0/content_search":
-                            $this->processContentSearch($json);
+                            $this->processContentSearch($log, $json);
                             break;
                         case "https://unisaonline.net/schema/1.0/course_search":
-                            $this->processCourseSearch($json);
+                            $this->processCourseSearch($log, $json);
                             break;
                         case "https://unisaonline.net/schema/1.0/topic":
-                            $this->processTopic($json);
+                            $this->processTopic($log, $json);
                             break;
                     }
                 } else {
@@ -83,28 +83,29 @@ class AnalyticsLogIngester implements ShouldQueue {
         }
     }
 
-    function processContentSearch($json)
+    function processContentSearch($log, $json)
     {
         // to be implemented
     }
     
-    function processCourseSearch($json)
+    function processCourseSearch($log, $json)
     {
         // to be implemented
     }
     
-    function processTopic($json) {
+    function processTopic($log, $json) {
         if ($json) {
             try {
-                $response = $this->client->request('POST', $indexname . "/external/" . $entry["id"], ["json" => $entry]);
-                switch ($response->getStatusCode()) {
-                    case "200":
-                        Log::info("POST of item id:" . $entry["id"] . " to index:" . $indexname . " successful");
-                        $this->updateCourseIngestedStatus($entry["id"]);
-                        break;
-                }
+                // get the fields we need to handle progress
+                
+                
+                
+                
+                
+                $this->updateAnalyticsIngestedStatus($log->id);
+                Log::info("Successful topic progress from log id:" . $log->id);
             } catch (\Exception $e) {
-                Log::error("POST of item id:" . $entry["id"] . " to index:" . $indexname . " failed :: " . $e->getMessage());
+                Log::error("Error on topic progress from log id:" . $log->id . " message: " . $e->getMessage());
             }
         }
     }
@@ -117,6 +118,15 @@ class AnalyticsLogIngester implements ShouldQueue {
 
     public function failed(\Exception $exception) {
         Log::critical("Job has failed: " . $exception->getMessage());
+    }
+    
+    // private functions
+    function render_items($storyline)
+    {
+        $result = $this->items_to_tree(Storyline::find($storyline)->items);
+        usort($result, [$this, "self::compare"]);
+        $result = $this->createTree($result);
+        $result = $result[0]['children'];
     }
 
 }
