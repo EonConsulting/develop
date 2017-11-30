@@ -135,10 +135,6 @@ class Storyline2ViewsBlade extends BaseController {
 
             $root_item->save();
             $root_id = $root_item->id;
-
-            //$parent = StorylineItem::where('id', '=', $parent_id)->first(); //parent
-            
-            //dd($root_parent);
                 
             for($i = 0; $i < 3; $i++){
 
@@ -172,7 +168,7 @@ class Storyline2ViewsBlade extends BaseController {
 
         $breadcrumbs = [
             'title' => 'Edit ' . $course['title'] . ' Storyline' //pass $course as param and load name here
-          ];
+        ];
 
         return view('eon.storyline2::lecturer.edit', [
             'course' => $course,
