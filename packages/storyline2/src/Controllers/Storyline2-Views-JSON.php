@@ -195,7 +195,7 @@ class Storyline2ViewsJSON extends BaseController {
 
             $map[] = [
                 'required' => $node['required'],
-                'student_progress'=>$node['student_progress']['student_id'],
+                //'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],

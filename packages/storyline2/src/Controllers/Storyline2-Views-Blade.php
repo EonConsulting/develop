@@ -61,8 +61,7 @@ class Storyline2ViewsBlade extends BaseController {
         $storyline_id = $course->latest_storyline()->id;
         $userId = auth()->user()->id;
         //$items = Storyline::find($storyline_id)->items->with('student_progress')->toArray();
-        $items = Storyline::find($storyline_id)->with(['items.student_progress'
-            =>function($q)use ($userId){$q->where('student_id',$userId);}])->first();
+        $items = Storyline::find($storyline_id)->with(['items'])->first();
         
         
         //exit();

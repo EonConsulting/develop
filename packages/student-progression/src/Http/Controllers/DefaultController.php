@@ -1,4 +1,5 @@
 <?php
+
 namespace EONConsulting\Student\Progression\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
@@ -10,38 +11,43 @@ use App\Models\StudentProgress;
 //use EONConsulting\Storyline\Table\Csv;
 
 class DefaultController extends LTIBaseController {
-    
+
     public function storeProgress(Request $request) {
-       $progress = StudentProgress::where('student_id',$request->get('student'))->first();  
-             
-       $visited = implode(", ",[$request->get('id')]);
-           
-       if($progress == NULL){
-           
-           $StudentProgress = new StudentProgress([
-                
+        $progress = StudentProgress::where([['student_id', $request->get('student')],
+                    ['storyline_id', $request->get('storyline')]])->first();
+
+        $visited = implode(", ", [$request->get('id')]);
+
+        if ($progress == NULL) {
+            $StudentProgress = new StudentProgress([
                 'student_id' => $request->get('student'),
-                'storyline_id' => $request->get('storyline') ,
+                'storyline_id' => $request->get('storyline'),
                 //'storyline_item_id' => $request->get('id'),
                 'visited' => $visited
-               
-            ]); 
-          
-           if($StudentProgress->save()){
-               $msg = 'saved';
-           }else{
-               $msg = 'not saved';
-           }
-         }else{
-             $visited =[$progress->visited, $request->get('id')];
-             $commaList = implode(', ', $visited);
-             $progress = StudentProgress::where('student_id',$request->get('student'))
-                                          ->update(['visited' => $commaList]);
-             
-             $msg = 'updated';
-         }
-         
-         $response = array(
+            ]);
+
+            if ($StudentProgress->save()) {
+                $msg = 'saved';
+            } else {
+                $msg = 'not saved';
+            }
+        } else {
+            $visited = explode(',', $progress->visited);
+            if (in_array($request->get('id'), $visited)) {
+                 $msg = 'visited';
+            } else {
+
+                $visited = [$progress->visited, $request->get('id')];
+                $commaList = implode(', ', $visited);
+                $progress = StudentProgress::where([['student_id', $request->get('student')],
+                            ['storyline_id', $request->get('storyline')]])
+                        ->update(['visited' => $commaList]);
+
+                $msg = 'updated';
+            }
+        }
+
+        $response = array(
             'msg' => $msg
         );
 
@@ -59,29 +65,26 @@ class DefaultController extends LTIBaseController {
         $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
         if (!empty($progress->id)) {
             $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
-            $current = $this->save_progress($StudentProgress, $request->get('id'),$progress->id,$ItemArray);
+            $current = $this->save_progress($StudentProgress, $request->get('id'), $progress->id, $ItemArray);
             $StorylineItem = $StudentProgress::find($progress->id);
-            if($current === 'true'){
-                $message = 'true';                
+            if ($current === 'true') {
+                $message = 'true';
                 $story = $progress->furthest;
-            }elseif($current === 'current'){
+            } elseif ($current === 'current') {
                 $message = 'true';
                 $story = $StorylineItem->current;
-            }elseif($current === 'false'){
+            } elseif ($current === 'false') {
+                $message = 'error';
+                $story = $StorylineItem->furthest;
+            } else {
                 $message = 'error';
                 $story = $StorylineItem->furthest;
             }
-            
-            else{
-                $message = 'error';
-                $story = $StorylineItem->furthest;
-            }
-            
         } else {
             $ItemArray = $this->topics($request->get('storyline'));
-            $ItemId = $this->save($StudentProgress,$StorylineItem, $request,$ItemArray);
+            $ItemId = $this->save($StudentProgress, $StorylineItem, $request, $ItemArray);
             $progress = $StudentProgress::find($ItemId);
-            
+
             $progress->furthest = 2;
             $progress->save();
             $message = 'false';
@@ -104,32 +107,29 @@ class DefaultController extends LTIBaseController {
      * @param type $ItemArray
      * @return string
      */
-    
-    
-    public function save_progress($StudentProgress, $current,$progressId,$ItemArray) {    
+    public function save_progress($StudentProgress, $current, $progressId, $ItemArray) {
 
         $Progress = $StudentProgress::find($progressId);
-        $currentIndex = array_search($current, $ItemArray);        
+        $currentIndex = array_search($current, $ItemArray);
         $furthestIndex = array_search($ItemArray[$Progress->furthest], $ItemArray);
         //$array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
         //dd($currentIndex,$furthestIndex);
         if ($currentIndex > $furthestIndex) {
             return 'false';
-        } elseif($currentIndex == $furthestIndex){ 
+        } elseif ($currentIndex == $furthestIndex) {
             $Progress->current = $Progress->furthest;
             end($ItemArray);
             $lastIndex = key($ItemArray);
-            if($lastIndex === $furthestIndex){
-               $Progress->furthest = $furthestIndex; 
-            }else{
-            $Progress->furthest = $furthestIndex+1; 
+            if ($lastIndex === $furthestIndex) {
+                $Progress->furthest = $furthestIndex;
+            } else {
+                $Progress->furthest = $furthestIndex + 1;
             }
             $Progress->save();
             return 'current';
-        }elseif($currentIndex < $furthestIndex){
-         return 'true';   
+        } elseif ($currentIndex < $furthestIndex) {
+            return 'true';
         }
-        
     }
 
     /**
@@ -139,16 +139,16 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function save($StudentProgress, $StorylineItem, $request, $ItemArray) {
-        $ItemId = (int) $request->get('id');     
-        $Item = $StorylineItem::find($ItemId);    
-        
+        $ItemId = (int) $request->get('id');
+        $Item = $StorylineItem::find($ItemId);
+
         $StudentProgress->student_id = (int) $request->get('student');
         $StudentProgress->course_id = (int) $request->get('course');
         $StudentProgress->storyline_id = (int) $request->get('storyline');
         $Index = array_search((int) $Item->id, $ItemArray);
         $StudentProgress->furthest = $Index;
         $StudentProgress->current = $Index;
-        $StudentProgress->root =  $Index;
+        $StudentProgress->root = $Index;
         if ($StudentProgress->save()) {
             return $StudentProgress->id;
         }
@@ -163,70 +163,66 @@ class DefaultController extends LTIBaseController {
     public function topics(Request $request) {
         $result = $this->items_to_tree(Storyline::find($storylineId)->items);
         usort($result, [$this, "self::compare"]);
-        
+
         foreach ($result as $descendant) {
-            $children[] = $descendant['id'];           
+            $children[] = $descendant['id'];
         }
-   
-     return  $children;
- 
-    
+
+        return $children;
     }
-    
-    public function topicView($item,$course){          
-        $Items = StorylineItem::where('required',$item)->first(); 
-        if($Items){
-           $ItemId = $Items->id;  
-        }else{
-          $ItemId = 0;   
+
+    public function topicView($item, $course) {
+        $Items = StorylineItem::where('required', $item)->first();
+        if ($Items) {
+            $ItemId = $Items->id;
+        } else {
+            $ItemId = 0;
         }
-        
-        $progress = StudentProgress::where([['storyline_item_id', $ItemId],['student_id',auth()->user()->id]])->first(); 
-        
-        if(!empty($Items) && empty($progress)){
-           $StudentProgress = new StudentProgress([
+
+        $progress = StudentProgress::where([['storyline_item_id', $ItemId], ['student_id', auth()->user()->id]])->first();
+
+        if (!empty($Items) && empty($progress)) {
+            $StudentProgress = new StudentProgress([
                 'student_id' => auth()->user()->id,
                 'storyline_item_id' => $Items->id,
                 'course_id' => $course,
                 'storyline_id' => $Items->storyline_id
-             ]);
-        
+            ]);
+
             if ($StudentProgress->save()) {
-              $msg = 'true';
-             }else{
-              $msg = 'false';
+                $msg = 'true';
+            } else {
+                $msg = 'false';
             }
-           
-          }else{
-              $msg = 'true';  
-         }
+        } else {
+            $msg = 'true';
+        }
         $response = array(
             'msg' => $msg,
         );
-       return \Response::json($response);
-              
-    }
-    
-    public function nextView($item){
-        $Items = StorylineItem::find($item);
-        if(!empty($Items->required)){
-             $progress = StudentProgress::where([['storyline_item_id', $item],['student_id',auth()->user()->id]])->first(); 
-             if(!empty($progress)){
-               $msg = 'true';  
-              }else{
-               $msg = 'false';   
-              }
-        }else{
-          $msg = 'true';  
-        } 
-        
-        $response = array(
-            'msg' => $msg,
-        );
-        
         return \Response::json($response);
     }
-    
+
+    public function nextView($item) {
+        $Items = StorylineItem::find($item);
+        if (!empty($Items->required)) {
+            $progress = StudentProgress::where([['storyline_item_id', $item], ['student_id', auth()->user()->id]])->first();
+            if (!empty($progress)) {
+                $msg = 'true';
+            } else {
+                $msg = 'false';
+            }
+        } else {
+            $msg = 'true';
+        }
+
+        $response = array(
+            'msg' => $msg,
+        );
+
+        return \Response::json($response);
+    }
+
     /**
      *
      * @param type $items
@@ -249,16 +245,17 @@ class DefaultController extends LTIBaseController {
 
         return $map;
     }
-    
+
     /**
      * 
      * @param type $a
      * @param type $b
      * @return int
      */
-    
-    public function compare($a,$b){
-        if($a['lft'] == $b['lft']){return 0;}
+    public function compare($a, $b) {
+        if ($a['lft'] == $b['lft']) {
+            return 0;
+        }
         return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 

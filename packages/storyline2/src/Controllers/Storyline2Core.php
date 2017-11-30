@@ -97,7 +97,7 @@ class Storyline2Core extends BaseController {
           }
         //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
          $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
-         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->with('items.student_progress')->first());
+         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->with('items')->first());
          usort($topicArray, [$this, "self::compare"]);
         
         if ($storyline_item['content_id'] == null) {
