@@ -311,6 +311,9 @@ Storyline Student Single
         background: #F9FAF7;
     }
 
+    .highlighted{
+        font-weight: bold;   
+    }
 
 
 </style>
@@ -322,6 +325,11 @@ Storyline Student Single
     <div class="page-container resizer" id="page-container">
 
         <div class="page-container-tree">
+            <div class="info-bar-name">
+                <div>
+                    <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
+                </div>
+            </div>
 
             <div id="tree">
 
@@ -342,14 +350,6 @@ Storyline Student Single
                             <div>
                                 <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                             </div>
-                        </div>
-                         <div class="info-bar-name">
-                            <div>
-                                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
-                            </div>
-                        </div>
-                        <div class="info-bar-name">
-                          <input type="submit" id="sub" class="btn btn-default" name="" value="submit"/>  
                         </div>
 
                         <div class="info-bar-buttons" style="text-align: right;">
@@ -444,13 +444,13 @@ Storyline Student Single
                 </div>
 
                 <p>Student Progression</p>
-                    <div class="form-group">
+                <div class="form-group">
                     <label for="selectNode">Set page prerequisite:</label>
                     <select id="selectNode" class="form-control">
                         <option value="">--Choose One--</option>
                     </select>  
-                    </div>
-                    
+                </div>
+
                 <div class="validation alert alert-warning" role="alert" id="validation">
 
                 </div>
@@ -645,9 +645,9 @@ var config = {
 <script>
 
     const selector = '.resizer';
-            let
+    let
     resizer = new Resizer(selector);
-            $(document).ready(function () {
+    $(document).ready(function () {
 
 
         $("#validation").hide();
@@ -961,7 +961,7 @@ var config = {
             "categories": cats,
             "tags": $("#content-tags").val(),
             "id": $("#content-id").val(),
-            "topic": $("#selectNode option:selected").val()  
+            "topic": $("#selectNode option:selected").val()
         };
 
         var item_id = $("#item-id").val();
@@ -1029,36 +1029,32 @@ var config = {
         }
 
     }
-    
+
     function highlightSearch() {
-        
-    var text = document.getElementById("q").value;
-    var query = new RegExp("(\\b" + text + "\\b)", "gim");
-    var e = document.getElementById("searchtext").innerHTML;
-    var enew = e.replace(/(<span>|<\/span>)/igm, "");
-    document.getElementById("searchtext").innerHTML = enew;
-    var newe = enew.replace(query, "<span>$1</span>");
-    document.getElementById("searchtext").innerHTML = newe;
+
+        var text = document.getElementById("q").value;
+        var query = new RegExp("(\\b" + text + "\\b)", "gim");
+        var e = document.getElementById("searchtext").innerHTML;
+        var enew = e.replace(/(<span>|<\/span>)/igm, "");
+        document.getElementById("searchtext").innerHTML = enew;
+        var newe = enew.replace(query, "<span>$1</span>");
+        document.getElementById("searchtext").innerHTML = newe;
 
     }
-    
-   $(document).ready(function(){
-    $("#sub").click(function(){
-       var text = document.getElementById("q").value; 
-       var $my_div = $('#tree'); // the div
-       $my_div.find('li').each(function(idx, elem) {
-       var elem = $(elem);           
-       if (elem.text().indexOf(text) != -1) { // if it contains your searched text
-           elem.show(); // display it ? only if needed, unclear from question
-           elem.addClass('highlighted'); // add your class for the highlight
-           $my_div.scrollTop(elem.position().top); // scroll to it
-           return false; // stop the loop
-      }
+
+    $(document).ready(function () {
+        $('#q').keyup(function () {
+            $("#tree").jstree("open_all");
+            var that = this, $allListElements = $('ul.jstree-children > li');
+            var $matchingListElements = $allListElements.filter(function (i, li) {
+                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
+                return ~listItemText.indexOf(searchText);
+            });
+            $allListElements.hide();
+            $matchingListElements.show();
+            //$matchingListElements.addClass('highlighted');
+        });
     });
-    e.preventDefault(); // stop an actual form from being submitted
-   });
-  });
-     
 
 
 </script>
