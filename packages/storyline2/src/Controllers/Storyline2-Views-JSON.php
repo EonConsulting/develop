@@ -48,7 +48,7 @@ class Storyline2ViewsJSON extends BaseController {
 
         //echo ($storyline);
         $sl = Storyline::find($storyline);
-        $sl['items'] = StorylineItem::where("storyline_id", $storyline)->get();
+        $sl = StorylineItem::where("storyline_id", $storyline)->get();
 
         //dd($items);
 
@@ -191,7 +191,7 @@ class Storyline2ViewsJSON extends BaseController {
 
         $map = [];
 
-        foreach ($items->items as $k => $node) {
+        foreach ($items as $k => $node) {
 
             $map[] = [
                 'required' => $node['required'],
