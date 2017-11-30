@@ -343,6 +343,11 @@ Storyline Student Single
                                 <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                             </div>
                         </div>
+                         <div class="info-bar-name">
+                            <div>
+                                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
+                            </div>
+                        </div>
 
                         <div class="info-bar-buttons" style="text-align: right;">
                             <!-- Trigger the modal with a button -->
@@ -1023,7 +1028,8 @@ var config = {
     }
     
     function highlightSearch() {
-    var text = document.getElementById("query").value;
+        
+    var text = document.getElementById("q").value;
     var query = new RegExp("(\\b" + text + "\\b)", "gim");
     var e = document.getElementById("searchtext").innerHTML;
     var enew = e.replace(/(<span>|<\/span>)/igm, "");
@@ -1032,6 +1038,13 @@ var config = {
     document.getElementById("searchtext").innerHTML = newe;
 
     }
+    
+   $(document).ready(function(){
+    $("#q").keydown(function(){
+          highlightSearch();
+   });
+  });
+     
 
 
 </script>

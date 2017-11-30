@@ -91,13 +91,18 @@ class Storyline2Core extends BaseController {
     public function get_content($item) {
 
         $storyline_item = StorylineItem::find($item);
+        
         $req = '';
         if(!empty($storyline_item->required)){
-            $req = $storyline_item = StorylineItem::find($storyline_item->required);
+            $req = StorylineItem::find($storyline_item->required);
           }
         //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
          $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
-         $topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->with('items')->first());
+         //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+         $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
+         
+         $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
+         
          usort($topicArray, [$this, "self::compare"]);
         
         if ($storyline_item['content_id'] == null) {
