@@ -14,7 +14,6 @@ class AlterStudentProgressTable extends Migration {
      */
     public function up() {
          Schema::table($this->set_schema_table, function (Blueprint $table) {
-             $table->dropColumn('current');
              $table->dropColumn('root');
              $table->dropColumn('furthest');
              $table->longText('visited')->after('storyline_id');
@@ -28,7 +27,6 @@ class AlterStudentProgressTable extends Migration {
      */
     public function down() {
         Schema::table($this->set_schema_table, function(Blueprint $table) {
-             $table->integer('current');
              $table->integer('root');
              $table->integer('furthest');
           });
