@@ -47,13 +47,13 @@ class Storyline2ViewsJSON extends BaseController {
     public function show_items($storyline) {
 
         //echo ($storyline);
-        $sl = Storyline::find($storyline);
-        $sl = StorylineItem::where("storyline_id", $storyline)->get();
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where("storyline_id", $storyline)->get();
 
         //dd($items);
 
         //$result = $this->items_to_tree(Storyline::find($storyline)->items);
-        $result = $this->items_to_tree($sl);
+        $result = $this->items_to_tree($items);
         
         //dd($result);
 
@@ -67,25 +67,30 @@ class Storyline2ViewsJSON extends BaseController {
 
     public function getTreeProgess($storyline){
         
-        $sl = Storyline::find($storyline);
-        $items = $this->items_to_tree($sl);
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where('storyline_id',$storyline)->get();
+        $items = $this->items_to_tree($items);
+
+        //dd($items);
 
         $progress = StudentProgress::where([
             ['storyline_id', '=', $storyline],
             ['student_id', '=', Auth()->user()->id]
         ])->first();
 
-        usort($items, [$this, "self::compare"]);
 
-        if($progress === null){
-            $progress = [
-                'furthest' => (int) $items[1]['id']
-            ];
-        }
+
+        usort($items, [$this, "self::compare"]);
         //dd($progress);
 
         $result = [];
-        $visited = explode(',',$progress['visited']);
+
+        if($progress !== null){
+            $visited = explode(',',$progress->visited);
+        } else {
+            $visited = [];
+        }
+        
         
         //dd($visited);
         //dd($items);
@@ -104,8 +109,13 @@ class Storyline2ViewsJSON extends BaseController {
 
         }
 
+        //dd($result);
+
         $result = $this->createTree($result);
+        //dd($result);
         $result = $result[0]['children'];
+
+        //dd($result);
 
         return $result;
 

@@ -524,6 +524,14 @@ Storyline Student Single
             $(this).children('i').toggleClass('fa-caret-right');
         });       
     });
+
+    function expandAll(){
+        $(".toggle-expand").each(function( index ) {
+            $(this).parent().children('ul').show();
+            $(this).children('i').addClass('fa-caret-down');
+            $(this).children('i').removeClass('fa-caret-right');
+        });
+    }
         
     $(window).resize(function(){
     resizeArea();
