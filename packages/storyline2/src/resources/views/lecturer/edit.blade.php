@@ -311,6 +311,9 @@ Storyline Student Single
         background: #F9FAF7;
     }
 
+    .highlighted{
+        font-weight: bold;   
+    }
 
 
 </style>
@@ -322,6 +325,11 @@ Storyline Student Single
     <div class="page-container resizer" id="page-container">
 
         <div class="page-container-tree">
+            <div class="info-bar-name">
+                <div>
+                    <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
+                </div>
+            </div>
 
             <div id="tree">
 
@@ -433,6 +441,14 @@ Storyline Student Single
                 <div class="form-group">
                     <label for="tags">Tags</label>
                     <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="" data-toggle="popover" data-placement="left" data-content="">
+                </div>
+
+                <p>Student Progression</p>
+                <div class="form-group">
+                    <label for="selectNode">Set page prerequisite:</label>
+                    <select id="selectNode" class="form-control">
+                        <option value="">--Choose One--</option>
+                    </select>  
                 </div>
 
                 <div class="validation alert alert-warning" role="alert" id="validation">
@@ -607,7 +623,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 <script>
 
     const selector = '.resizer';
-
     let resizer = new Resizer(selector);
 
     $( document ).ready(function(){
@@ -917,7 +932,8 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             "body": body,
             "categories": cats,
             "tags": $("#content-tags").val(),
-            "id": $("#content-id").val()
+            "id": $("#content-id").val(),
+            "topic": $("#selectNode option:selected").val()
         };
 
         var item_id = $("#item-id").val();
@@ -986,6 +1002,32 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         }
 
     }
+
+    function highlightSearch() {
+
+        var text = document.getElementById("q").value;
+        var query = new RegExp("(\\b" + text + "\\b)", "gim");
+        var e = document.getElementById("searchtext").innerHTML;
+        var enew = e.replace(/(<span>|<\/span>)/igm, "");
+        document.getElementById("searchtext").innerHTML = enew;
+        var newe = enew.replace(query, "<span>$1</span>");
+        document.getElementById("searchtext").innerHTML = newe;
+
+    }
+
+    $(document).ready(function () {
+        $('#q').keyup(function () {
+            $("#tree").jstree("open_all");
+            var that = this, $allListElements = $('ul.jstree-children > li');
+            var $matchingListElements = $allListElements.filter(function (i, li) {
+                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
+                return ~listItemText.indexOf(searchText);
+            });
+            $allListElements.hide();
+            $matchingListElements.show();
+            //$matchingListElements.addClass('highlighted');
+        });
+    });
 
 
 </script>

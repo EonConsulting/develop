@@ -16,6 +16,7 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
+use App\Models\StudentProgress;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 class Storyline2ViewsJSON extends BaseController {
@@ -23,7 +24,7 @@ class Storyline2ViewsJSON extends BaseController {
     /**
      * @return array
      */
-    public function render() {
+    public function render($storyline_id) {
 
         /*
           $var = $course::find(20);
@@ -31,7 +32,7 @@ class Storyline2ViewsJSON extends BaseController {
           $items = $var['items'];
          */
 
-        $storyline = Storyline::find(47);
+        $storyline = Storyline::find(storyline_id);
 
         $items = $storyline['items'];
 
@@ -44,13 +45,79 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function show_items($storyline) {
 
+        //echo ($storyline);
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where("storyline_id", $storyline)->get();
 
-        $result = $this->items_to_tree(Storyline::find($storyline)->items);
+        //dd($items);
+
+        //$result = $this->items_to_tree(Storyline::find($storyline)->items);
+        $result = $this->items_to_tree($items);
+        
+        //dd($result);
+
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
         $result = $result[0]['children'];
-
+        //dd($result);
         return response()->json($result);
+    }
+
+
+    public function getTreeProgess($storyline){
+        
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where('storyline_id',$storyline)->get();
+        $items = $this->items_to_tree($items);
+
+        //dd($items);
+
+        $progress = StudentProgress::where([
+            ['storyline_id', '=', $storyline],
+            ['student_id', '=', Auth()->user()->id]
+        ])->first();
+
+
+
+        usort($items, [$this, "self::compare"]);
+        //dd($progress);
+
+        $result = [];
+
+        if($progress !== null){
+            $visited = explode(',',$progress->visited);
+        } else {
+            $visited = [];
+        }
+        
+        
+        //dd($visited);
+        //dd($items);
+
+        foreach($items as $k => $item){
+
+            $temp = $item;
+
+            if(in_array($item['required'],$visited)){
+                $temp['enabled'] = true;
+            }else{
+                $temp['enabled'] = false;
+            }
+
+            $result[] = $temp;
+
+        }
+
+        //dd($result);
+
+        $result = $this->createTree($result);
+        //dd($result);
+        $result = $result[0]['children'];
+
+        //dd($result);
+
+        return $result;
+
     }
 
     /**
@@ -127,6 +194,8 @@ class Storyline2ViewsJSON extends BaseController {
         foreach ($items as $k => $node) {
 
             $map[] = [
+                'required' => $node['required'],
+                //'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],

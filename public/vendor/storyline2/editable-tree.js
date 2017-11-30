@@ -8,15 +8,28 @@ $(document).ready(function () {
 })
 
 function refreshTree() {
-    $.getJSON(url,
-            function (data) {
+
+    $.ajax({
+        method: "GET",
+        url: url,
+        contentType: 'json',
+        statusCode: {
+            200: function (data) { //success
                 console.log(data);
-
                 drawTree(data);
+                //treeToJSON();
+            },
+            400: function () { //bad request
 
-                treeToJSON();
+            },
+            500: function () { //server kakked
+
             }
-    );
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+    
 }
 
 
@@ -32,8 +45,6 @@ function drawTree(tree_data) {
         },
         "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
-
-
 
 }
 

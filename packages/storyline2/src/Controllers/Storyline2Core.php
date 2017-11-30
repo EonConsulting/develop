@@ -42,7 +42,45 @@ class Storyline2Core extends BaseController {
             return response()->json(['msg' => $msg]);
         }
     }
+/*
+    public function set_required(){
 
+        ini_set('max_execution_time', 5000);
+
+        $storylines = Storyline::all();
+
+        foreach($storylines as $storyline){
+
+            echo "Starting Storyline " . $storyline['id'] . " - Course: " . $storyline['course_id'] . ":---------------------------------<br>";
+
+            $items = StorylineItem::where('storyline_id',$storyline['id'])->orderBy('_lft', 'ASC')->get();
+
+            //dd($items->toArray());
+            $first = true;
+            $prev_id = 0;
+
+            foreach($items as $item){
+
+                //dd($item);
+
+                echo ("Start Item: " . $item['name']);
+                if($first === false){
+                    $item['required'] = $prev_id;
+                    echo (" | Set Item");
+                } else {
+                    $first = false;
+                }
+
+                $item->save();
+                echo " | Saved<br>";
+                $prev_id = $item['id'];
+            }
+
+            echo "Finished Storyline: ". $storyline['name'] . "---------------------------------<br><br>";
+        }
+
+    }
+  */
     /**
      * @param $item
      * @return \Illuminate\Http\JsonResponse
@@ -50,9 +88,21 @@ class Storyline2Core extends BaseController {
     public function get_content($item){
 
         $storyline_item = StorylineItem::find($item);
-
-        if ($storyline_item['content_id'] == null)
-        {
+        
+        $req = '';
+        if(!empty($storyline_item->required)){
+            $req = StorylineItem::find($storyline_item->required);
+          }
+        //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
+         $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
+         //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+         $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
+         
+         $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
+         
+         usort($topicArray, [$this, "self::compare"]);
+        
+        if ($storyline_item['content_id'] == null) {
             $result = [
                 "found" => false
             ];

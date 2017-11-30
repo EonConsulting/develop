@@ -257,6 +257,45 @@
         color: #fb7217;
 
     }
+    .in-active{
+        //pointer-events: none;
+        cursor: default;
+        color: #636B6F;
+    }
+
+    .tip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+    .menu-btn-disabled {
+        color: #b2b2b2;
+    }
+
+    .menu-btn-disabled:hover {
+        color: #b2b2b2;
+        cursor: not-allowed;
+    }
+
+    .menu-btn-disabled:focus {
+        color: #b2b2b2;
+        outline: none;
+    }
+
+    .menu-btn-disabled {
+        color: #b2b2b2 !important;
+    }
+
+    .menu-btn-disabled:hover {
+        color: #b2b2b2;
+        cursor: not-allowed;
+    }
+
+    .menu-btn-disabled:focus {
+        color: #b2b2b2;
+        outline: none;
+    }
 
 </style>
 
@@ -273,7 +312,7 @@
         <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-default btn-dropdown" data-target="#" href="/page.html">
             {{ $course['title'] }} <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+        <ul class="dropdown-menu multi-level" id="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
             @each('eon.storyline2::partials.dropdown', $items, 'item', 'eon.storyline2::partials.none')
         </ul>
     </div>
@@ -464,27 +503,29 @@
 
         $(".menu-btn").on("click", function() {
             var button = $(this);
-            var item_id = $(this).data("item-id");
-            load_content(item_id,button);
+            var item_id = $(this).data("item-id");  
+            loadContent(item_id,button);
+            
         });
 
 
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            loadContent(item_id,button);
         });
 
         $(document).on("click", ".arrow-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            loadContent(item_id,button);
+
         });
 
         $(document).on("click", ".dropdown-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            load_content(item_id, button);
+            loadContent(item_id,button);
         });
 
         //$('.arrow-btn').hide();
@@ -495,56 +536,60 @@
         //load first page
         var first = $('#content_tree').find('ul:first').children('li:first').find('a:first');
         var item_id = first.data("item-id");
-        getContent(item_id, first);
-
+        loadContent(item_id, first);
         //expand or collapse on caret click
-        $('.toggle-expand').on('click', function(e){
+        $(document).on('click','.toggle-expand', function(e){
             $(this).parent().children('ul').toggle();
             $(this).children('i').toggleClass('fa-caret-down');
             $(this).children('i').toggleClass('fa-caret-right');
+        });       
+    });
+
+    function expandAll(){
+        $(".toggle-expand").each(function( index ) {
+            $(this).parent().children('ul').show();
+            $(this).children('i').addClass('fa-caret-down');
+            $(this).children('i').removeClass('fa-caret-right');
         });
+    }
         
-
-    });
-
-
     $(window).resize(function(){
-        resizeArea();
+    resizeArea();
     });
+        
+        
+    function resizeArea(){
+        var areaHeight = $("#content-area").height();
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
         var toolsHeight = $("#tools").height();
         $(".flex-container").height(areaHeight - toolsHeight - 11);
     }
-
-    function load_content(item_id, button){
+    
+        
+    function refresh_items(data,item_id){    
         var courseId = '{{ $course->id }}';
-        var storyline = '{{ $storylineId }}';
-        var student = '{{auth()->user()->id}}';
         $.ajax({
-            url: '{{ url('student/progression') }}',
-            type: "POST",
-            data: {course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
+            type: "GET",
+            async: true,
             beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
-                    //window.location.href = "{{ url('/')}}"+"/lti/courses/{{$course->id}}/lectures/"+data.story;;
-                    getContent(item_id, button);
-                } else if(data.msg === 'error'){
-                    progress_error();
-                    //getContent(item_id, button);
-                }
+                $("#content_tree").html(data.items_html);
+                $("#dropdown-menu").html(data.drop_html);
+                
+                //pupulateContent(data, button);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                location.reload();
+            alert(errorThrown);
+                    // location.reload();
             }
-        });
+        });  
     }
-
+       
     // update XAPI analytics
     function logXAPITopicEvent(course_id, storyline_id, storyline_item_id) {
         //Log search
@@ -607,6 +652,30 @@
         );
     }
     
+
+    function loadContent(item_id, button){
+        var courseId = '{{ $course->id }}';
+        var storyline = '{{ $storylineId }}';
+        var student = '{{auth()->user()->id}}';
+        var item = '{{auth()->user()->id}}';
+        $.ajax({
+            url: '{{ url('student/progression') }}',
+            type: "POST",
+            data: {item: item,course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
+            beforeSend: function () {
+                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                refresh_items(data,item_id);
+                getContent(item_id, button);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+        });
+    }
+
     //Get Content
     function getContent(item_id,button) {
 
@@ -624,7 +693,7 @@
             statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        pupulateContent(data,button);
+                        pupulateContent(data,button);                       
                         logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
                         $("#noContentMessage").modal("show");
@@ -640,50 +709,43 @@
         }).error(function (req, status, error) {
             alert(error);
         });
-
     }
 
-    function pupulateContent(data,button){
-
-        //highlight clicked button
+    function pupulateContent(data, button){
+        //highlight clicked button       
         $(".menu-btn").removeClass('active-menu');
         button.addClass('active-menu');
 
         //create breadcrumbs
         var breadcrumb = button.html();
 
-        if(button.data('parent-id') !== '#') {
-
             var current_node = button;
-
-            while(current_node.data('parent-id') !== '#'){
+            while (current_node.data('parent-id') !== '#'){
 
                 var current_node = $('#' + current_node.data('parent-id'));
-
-                temp = '<a href="#" class="bread-btn" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
+                temp = '<a href="#" class="bread-btn" req="" data-parent-id="' + current_node.data('parent-id') + '" data-item-id="' + current_node.data('item-id') + '" >'
                 temp = temp + current_node.html();
                 temp = temp + '</a>';
-
                 breadcrumb = temp + '<span class="bread-seperator"> <i class="fa fa-angle-double-right"></i> </span>' + breadcrumb;
-
             }
         }
 
         var prev = $('.prev-btn');
-        if(button.data('prev-id') === '#'){
-            prev.data('item-id','');
+        console.log(button.data('prev-id'));
+        if (button.data('prev-id') === '#'){
+            prev.data('item-id', '');
             prev.hide();
         } else {
-            prev.data('item-id',button.data('prev-id'));
+            prev.data('item-id', button.data('prev-id'));
             prev.show();
         }
 
         var next = $('.next-btn');
-        if(button.data('next-id') === '#'){
-            next.data('item-id','');
+        if (button.data('next-id') === '#'){
+            next.data('item-id', '');
             next.hide();
         } else {
-            next.data('item-id',button.data('next-id'));
+            next.data('item-id', button.data('next-id'));
             next.show();
         }
 
@@ -697,7 +759,10 @@
 
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
 
     }
     
