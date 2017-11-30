@@ -46,7 +46,7 @@ class Storyline2ViewsJSON extends BaseController {
      */
     public function show_items($storyline) {
 
-        echo ($storyline);
+        //echo ($storyline);
         $sl = Storyline::find($storyline);
         $sl['items'] = StorylineItem::where("storyline_id", $storyline)->get();
 
@@ -60,7 +60,7 @@ class Storyline2ViewsJSON extends BaseController {
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
         $result = $result[0]['children'];
-
+        //dd($result);
         return response()->json($result);
     }
 
