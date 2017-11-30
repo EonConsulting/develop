@@ -16,7 +16,7 @@ class DefaultController extends LTIBaseController {
         $progress = StudentProgress::where([['student_id', $request->get('student')],
                     ['storyline_id', $request->get('storyline')]])->first();
 
-        $visited = implode(", ", [$request->get('id')]);
+        $visited = implode(",", [$request->get('id')]);
 
         if ($progress == NULL) {
             $StudentProgress = new StudentProgress([
@@ -38,7 +38,7 @@ class DefaultController extends LTIBaseController {
             } else {
 
                 $visited = [$progress->visited, $request->get('id')];
-                $commaList = implode(', ', $visited);
+                $commaList = implode(',', $visited);
                 $progress = StudentProgress::where([['student_id', $request->get('student')],
                             ['storyline_id', $request->get('storyline')]])
                         ->update(['visited' => $commaList]);
