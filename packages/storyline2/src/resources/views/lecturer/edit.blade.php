@@ -345,8 +345,11 @@ Storyline Student Single
                         </div>
                          <div class="info-bar-name">
                             <div>
-                                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
+                                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
                             </div>
+                        </div>
+                        <div class="info-bar-name">
+                          <input type="submit" id="sub" class="btn btn-default" name="" value="submit"/>  
                         </div>
 
                         <div class="info-bar-buttons" style="text-align: right;">
@@ -1040,8 +1043,19 @@ var config = {
     }
     
    $(document).ready(function(){
-    $("#q").keydown(function(){
-          highlightSearch();
+    $("#sub").click(function(){
+       var text = document.getElementById("q").value; 
+       var $my_div = $('#tree'); // the div
+       $my_div.find('li').each(function(idx, elem) {
+       var elem = $(elem);           
+       if (elem.text().indexOf(text) != -1) { // if it contains your searched text
+           elem.show(); // display it ? only if needed, unclear from question
+           elem.addClass('highlighted'); // add your class for the highlight
+           $my_div.scrollTop(elem.position().top); // scroll to it
+           return false; // stop the loop
+      }
+    });
+    e.preventDefault(); // stop an actual form from being submitted
    });
   });
      
