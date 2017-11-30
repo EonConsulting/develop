@@ -63,7 +63,10 @@ class Storyline2ViewsBlade extends BaseController {
 
         $items = $SL2JSON->getTreeProgess($storyline_id);
         
-        return view('eon.storyline2::student.refresh', ['items' => $items,'id'=>$item]);
+        $items_view = view('eon.storyline2::partials.refresh_items', ['items' => $items,'id'=>$item])->render();
+        $drop_view = view('eon.storyline2::partials.refresh_drop', ['items' => $items,'id'=>$item])->render();
+
+        return ['items_html' => $items_view, 'drop_html' => $drop_view];
     }
 
     public function makeList($list, $number = '')

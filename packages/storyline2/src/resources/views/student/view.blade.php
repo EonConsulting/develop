@@ -283,6 +283,20 @@ Storyline Student Single
         outline: none;
     }
 
+    .menu-btn-disabled {
+        color: #b2b2b2 !important;
+    }
+
+    .menu-btn-disabled:hover {
+        color: #b2b2b2;
+        cursor: not-allowed;
+    }
+
+    .menu-btn-disabled:focus {
+        color: #b2b2b2;
+        outline: none;
+    }
+
 </style>
 
 
@@ -298,7 +312,7 @@ Storyline Student Single
         <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-default btn-dropdown" data-target="#" href="/page.html">
             {{ $course['title'] }} <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+        <ul class="dropdown-menu multi-level" id="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
             @each('eon.storyline2::partials.dropdown', $items, 'item', 'eon.storyline2::partials.none')
         </ul>
     </div>
@@ -516,7 +530,7 @@ Storyline Student Single
         //load first page
         var first = $('#content_tree').find('ul:first').children('li:first').find('a:first');
         var item_id = first.data("item-id");
-        getContent(item_id, first);
+        loadContent(item_id, first);
         //expand or collapse on caret click
         $(document).on('click','.toggle-expand', function(e){
             $(this).parent().children('ul').toggle();
@@ -556,7 +570,9 @@ Storyline Student Single
                 //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-                $("#content_tree").html(data); 
+                $("#content_tree").html(data.items_html);
+                $("#dropdown-menu").html(data.drop_html);
+                
                 //pupulateContent(data, button);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -642,6 +658,7 @@ Storyline Student Single
                 $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
+                refresh_items(data,item_id);
                 getContent(item_id, button);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -665,7 +682,6 @@ Storyline Student Single
                 statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        refresh_items(data,item_id);
                         pupulateContent(data,button);                       
                         logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
