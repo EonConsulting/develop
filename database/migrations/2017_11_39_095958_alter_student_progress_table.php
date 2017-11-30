@@ -16,6 +16,7 @@ class AlterStudentProgressTable extends Migration {
          Schema::table($this->set_schema_table, function (Blueprint $table) {
              $table->dropColumn('root');
              $table->dropColumn('furthest');
+             $table->dropColumn('course_id');
              $table->longText('visited')->after('storyline_id');
         });
        }

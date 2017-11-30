@@ -545,10 +545,10 @@ Storyline Student Single
             type: "GET",
             async: true,
             beforeSend: function () {
-            //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-            $("#content_tree").html(data); 
+                $("#content_tree").html(data); 
                 //pupulateContent(data, button);
             },
             error: function (jqXHR, textStatus, errorThrown) {

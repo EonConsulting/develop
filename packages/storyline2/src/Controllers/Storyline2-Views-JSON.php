@@ -84,29 +84,20 @@ class Storyline2ViewsJSON extends BaseController {
         }
         //dd($progress);
 
-        $found = false;
         $result = [];
-        $visited = [];
+        $visited = explode(',',$progress['visited']);
         
+        //dd($visited);
         //dd($items);
 
         foreach($items as $k => $item){
 
             $temp = $item;
 
-            if($found === true){
-                if(in_array($item['required'],$visited)){
-                    $temp['enabled'] = true;
-                }else{
-                    $temp['enabled'] = false;
-                }
-            }else{
+            if(in_array($item['required'],$visited)){
                 $temp['enabled'] = true;
-                $visited[] = (string) $temp['id'];
-
-                if((int) $item['id'] === (int) $progress['furthest']){
-                    $found = true;
-                }
+            }else{
+                $temp['enabled'] = false;
             }
 
             $result[] = $temp;
