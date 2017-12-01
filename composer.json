@@ -1,112 +1,113 @@
 {
-  "name": "laravel/laravel",
-  "description": "The Laravel Framework.",
-  "keywords": ["framework", "laravel"],
-  "license": "MIT",
-  "type": "project",
-  "require": {
-    "php": ">=7.0.0",
-    "IMSGlobal/LTI": "^3.0.0",
-    "creativeorange/gravatar": "~1.0",
-    "doctrine/lexer": "^1.0",
-    "fideloper/proxy": "~3.3",
-    "gazsp/baum": "~1.1",
-    "guzzlehttp/guzzle": "^6.2",
-    "intervention/image": "^2.4",
-    "laravel/framework": "5.5.*",
-    "laravel/passport": "^4.0",
-    "laravel/tinker": "~1.0",
-    "laravelcollective/html": "^5.5",
-    "mikehaertl/phpwkhtmltopdf": "^2.2",
-    "predis/predis": "^1.1",
-    "spatie/laravel-fractal": "^5.2",
-    "doctrine/dbal": "^2.6",
-    "nexmo/client": "^1.1"
-  },
-  "require-dev": {
-    "barryvdh/laravel-debugbar": "^3.1",
-    "filp/whoops": "~2.0",
-    "fzaninotto/faker": "~1.4",
-    "mockery/mockery": "0.9.*",
-    "phpunit/phpunit": "~6.0"
-  },
-  "autoload": {
-    "classmap": [
-      "database/seeds",
-      "database/factories"
-    ],
-    "psr-4": {
-      "App\\": "app/",
-      "EONConsulting\\LaravelLTI\\": "packages/laravel-lti/src/",
-      "Tsugi\\": "packages/laravel-lti/vendor/tsugi/lib/src/",
-      "EONConsulting\\RolesPermissions\\": "packages/roles-permissions/src/",
-      "EONConsulting\\AppStore\\": "packages/app-store/src/",
-      "EONConsulting\\FileManager\\": "packages/file-manager/src/",
-      "EONConsulting\\Storyline\\Core\\": "packages/storyline-core/src/",
-      "EONConsulting\\Storyline\\Nav\\": "packages/storyline-nav/src/",
-      "EONConsulting\\Storyline\\Menu\\": "packages/storyline-menu/src/",
-      "EONConsulting\\Storyline\\Breadcrumbs\\": "packages/storyline-breadcrumbs/src/",
-      "EONConsulting\\Storyline\\MindMap\\": "packages/storyline-mindmap/src/",
-      "EONConsulting\\PHPSaasWrapper\\": "packages/PHPSaasWrapper/src/",
-      "EONConsulting\\CKEditorPluginV2\\": "packages/ck-editor-plugin-v2/src/",
-      "EONConsulting\\CKEditorPlugin\\": "packages/ck-editor-plugin-v1/src/",
-      "EONConsulting\\ImgProcessor\\": "packages/ImgProcessor/src/",
-      "EONConsulting\\Graphs\\": "packages/Graphs/src/",
-      "EONConsulting\\MindMap\\": "packages/MindMap/src/",
-      "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
-      "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
-      "EONConsulting\\Storyline2\\": "packages/storyline2/src",
-      "EONConsulting\\ContentBuilder\\": "packages/content-builder/src",
-      "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
-      "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src",
-      "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src"
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0",
+        "IMSGlobal/LTI": "^3.0.0",
+        "creativeorange/gravatar": "~1.0",
+        "doctrine/lexer": "^1.0",
+        "fideloper/proxy": "~3.3",
+        "gazsp/baum": "~1.1",
+        "guzzlehttp/guzzle": "^6.2",
+        "intervention/image": "^2.4",
+        "laravel/framework": "5.5.*",
+        "laravel/passport": "^4.0",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.5",
+        "mikehaertl/phpwkhtmltopdf": "^2.2",
+        "predis/predis": "^1.1",
+        "spatie/laravel-fractal": "^5.2",
+        "doctrine/dbal": "^2.6",
+        "nexmo/client": "^1.1"
     },
-    "files": [
-      "packages/laravel-lti/src/functions.php",
-      "packages/roles-permissions/src/functions.php",
-      "packages/app-store/src/functions.php",
-      "packages/file-manager/src/functions.php",
-      "packages/storyline-core/src/functions.php",
-      "packages/storyline-nav/src/functions.php",
-      "packages/storyline-menu/src/functions.php",
-      "packages/storyline-breadcrumbs/src/functions.php",
-      "packages/storyline-mindmap/src/functions.php",
-      "packages/PHPSaasWrapper/src/Http/helpers.php",
-      "packages/ck-editor-plugin-v1/src/functions.php",
-      "packages/ck-editor-plugin-v2/src/functions.php",
-      "packages/ImgProcessor/src/functions.php",
-      "packages/Graphs/src/Http/helpers.php",
-      "packages/MindMap/src/Http/helpers.php",
-      "packages/storyline-tagcloud/src/functions.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0"
     },
-    "files": ["tests/utilities/functions.php"]
-  },
-  "extra": {
-    "laravel": {
-      "dont-discover": [
-      ]
+    "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/",
+            "EONConsulting\\LaravelLTI\\": "packages/laravel-lti/src/",
+            "Tsugi\\": "packages/laravel-lti/vendor/tsugi/lib/src/",
+            "EONConsulting\\RolesPermissions\\": "packages/roles-permissions/src/",
+            "EONConsulting\\AppStore\\": "packages/app-store/src/",
+            "EONConsulting\\FileManager\\": "packages/file-manager/src/",
+            "EONConsulting\\Storyline\\Core\\": "packages/storyline-core/src/",
+            "EONConsulting\\Storyline\\Nav\\": "packages/storyline-nav/src/",
+            "EONConsulting\\Storyline\\Menu\\": "packages/storyline-menu/src/",
+            "EONConsulting\\Storyline\\Breadcrumbs\\": "packages/storyline-breadcrumbs/src/",
+            "EONConsulting\\Storyline\\MindMap\\": "packages/storyline-mindmap/src/",
+            "EONConsulting\\PHPSaasWrapper\\": "packages/PHPSaasWrapper/src/",
+            "EONConsulting\\CKEditorPluginV2\\": "packages/ck-editor-plugin-v2/src/",
+            "EONConsulting\\CKEditorPlugin\\": "packages/ck-editor-plugin-v1/src/",
+            "EONConsulting\\ImgProcessor\\": "packages/ImgProcessor/src/",
+            "EONConsulting\\Graphs\\": "packages/Graphs/src/",
+            "EONConsulting\\MindMap\\": "packages/MindMap/src/",
+            "EONConsulting\\Storyline\\TagCloud\\": "packages/storyline-tagcloud/src/",
+            "EONConsulting\\Storyline\\Table\\": "packages/storyline-table/src/",
+            "EONConsulting\\Storyline2\\": "packages/storyline2/src",
+            "EONConsulting\\ContentBuilder\\": "packages/content-builder/src",
+            "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
+            "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src",
+            "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src",
+            "EONConsulting\\Core\\": "packages/econtent-core/src"
+        },
+        "files": [
+            "packages/laravel-lti/src/functions.php",
+            "packages/roles-permissions/src/functions.php",
+            "packages/app-store/src/functions.php",
+            "packages/file-manager/src/functions.php",
+            "packages/storyline-core/src/functions.php",
+            "packages/storyline-nav/src/functions.php",
+            "packages/storyline-menu/src/functions.php",
+            "packages/storyline-breadcrumbs/src/functions.php",
+            "packages/storyline-mindmap/src/functions.php",
+            "packages/PHPSaasWrapper/src/Http/helpers.php",
+            "packages/ck-editor-plugin-v1/src/functions.php",
+            "packages/ck-editor-plugin-v2/src/functions.php",
+            "packages/ImgProcessor/src/functions.php",
+            "packages/Graphs/src/Http/helpers.php",
+            "packages/MindMap/src/Http/helpers.php",
+            "packages/storyline-tagcloud/src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        },
+        "files": ["tests/utilities/functions.php"]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
-  },
-  "scripts": {
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
-    "post-create-project-cmd": [
-      "@php artisan key:generate"
-    ],
-    "post-autoload-dump": [
-      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php artisan package:discover"
-    ]
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "optimize-autoloader": true
-  }
 }

@@ -41,7 +41,7 @@ class CoursesLTIController extends LTIBaseController {
                                             ],
                                             "type":"cross_fields",
                                             "query": "' . $searchterm . '",
-                                            "minimum_should_match":"2<-1 5<70%"
+                                            "minimum_should_match": "2<-1 5<70%"
                                         }
                                     }
                                 ]

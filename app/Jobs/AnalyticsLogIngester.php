@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Bus\Dispatchable;
+use \EONConsulting\Core\Classes as ECC;
 
 class AnalyticsLogIngester implements ShouldQueue {
 
@@ -83,27 +84,71 @@ class AnalyticsLogIngester implements ShouldQueue {
         }
     }
 
-    function processContentSearch($log, $json)
-    {
+    function processContentSearch($log, $json) {
         // to be implemented
     }
-    
-    function processCourseSearch($log, $json)
-    {
+
+    function processCourseSearch($log, $json) {
         // to be implemented
     }
-    
+
     function processTopic($log, $json) {
         if ($json) {
             try {
-                // get the fields we need to handle progress
-                
-                
-                
-                
-                
-                $this->updateAnalyticsIngestedStatus($log->id);
-                Log::info("Successful topic progress from log id:" . $log->id);
+                // quick validation on json vars
+                if ($json && $json->context && $json->context->extensions && $json->context->extensions->course_id && $json->context->extensions->storyline && $json->context->extensions->storyline_item && $json->actor && $json->actor->mbox) {
+                    $mbox = str_replace("mailto:", "", $json->actor->mbox);
+                    $U = new ECC\Users();
+                    $student_id = $U->GetUserFromEmailAddy($email);
+                    $course_id = $json->context->extensions->course_id;
+                    $storyline_id = $json->context->extensions->storyline;
+                    $storyline_item = $json->context->extensions->storyline_item;
+
+                    // get the structure of the course
+                    $SL = new ECC\Storylines();
+                    $items = $SL->GetStorylineItems($storyline_id);
+                    $sorted_items = $SL->TransformStorylineItemsToFlatArray($items);
+                    $storyline_item_ids = $SL->GetStorylineItemIdsFromFlatArray($sorted_items);
+
+                    // so where in the array is this storyline_item_id
+                    // we will use simple arithmetic : (position in array + 1) / array count
+                    $percent = 0; // default
+                    $index = array_search($storyline_item, $storyline_item_ids);
+                    if ($index !== false) {
+                        $percent = (($index + 1) / sizeof($storyline_item_ids)) * 100;
+                    }
+
+                    // we only update our progress if it is greater than 
+                    // what is already recorded as progress
+                    $SP = new ECC\Summaries();
+                    $progress_item = $SP->GetSummaryStudentProgression($student_id, $course_id, $storyline_id);
+
+                    if ($progress_item) {
+                        // this is an existing progress
+                        // we only save if necessary
+                        if ($percent > $current_progress) {
+                            $progress_item->progress = $percent;
+                            $SP->UpdateSummaryStudentProgress($progress_item);
+                        }
+                    } else {
+                        // this is a new progress
+                        $progress_item = [
+                            "progress_type_id" => $progress_type_id,
+                            "course_id" => $course_id,
+                            "storyline_id" => $storyline_id,
+                            "student_user_id" => $student_id,
+                            "progress" => $percent
+                        ];
+                            
+                        $SP->InsertSummaryStudentProgress($progress_item);
+                    }
+
+                    // set this log as processed
+                    $this->updateAnalyticsIngestedStatus($log->id);
+                    Log::info("Successful topic progress from log id:" . $log->id);
+                } else {
+                    Log::info("Unable to ingest log, missing storyline id, see log id:" . $log->id);
+                }
             } catch (\Exception $e) {
                 Log::error("Error on topic progress from log id:" . $log->id . " message: " . $e->getMessage());
             }
@@ -118,15 +163,6 @@ class AnalyticsLogIngester implements ShouldQueue {
 
     public function failed(\Exception $exception) {
         Log::critical("Job has failed: " . $exception->getMessage());
-    }
-    
-    // private functions
-    function render_items($storyline)
-    {
-        $result = $this->items_to_tree(Storyline::find($storyline)->items);
-        usort($result, [$this, "self::compare"]);
-        $result = $this->createTree($result);
-        $result = $result[0]['children'];
     }
 
 }
