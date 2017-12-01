@@ -128,11 +128,6 @@ class Storyline2ViewsBlade extends BaseController {
                 'name' => 'Root'
             ]);
 
-<<<<<<< HEAD
-            $storyline_item->save();
-
-            $storyline->items()->save($storyline_item);
-=======
             $root_item->save();
             $root_id = $root_item->id;
                 
@@ -158,7 +153,6 @@ class Storyline2ViewsBlade extends BaseController {
             }
 
             //$storyline->items()->save($storyline_item);
->>>>>>> feature/StudentProgress
 
             $course->storylines()->save($storyline);
             
