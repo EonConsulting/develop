@@ -94,13 +94,13 @@ class Storyline2Core extends BaseController {
             $req = StorylineItem::find($storyline_item->required);
           }
         //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
-         $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
-         //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
-         $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
-         
-         $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
-         
-         usort($topicArray, [$this, "self::compare"]);
+        $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
+        //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+        $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
+        
+        $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
+        
+        usort($topicArray, [$this, "self::compare"]);
         
         if ($storyline_item['content_id'] == null) {
             $result = [
@@ -159,9 +159,18 @@ class Storyline2Core extends BaseController {
 
         }
         
-
         return response()->json($result);
 
+    }
+
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
 

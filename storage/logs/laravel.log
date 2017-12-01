@@ -8750,3 +8750,6 @@ esources\\views\\partials\\items.blade.php) at C:\\wamp64\\www\\develop\\storage
 [2017-11-30 22:45:33] local.DEBUG: Learner  
 [2017-11-30 22:45:34] local.DEBUG: Attempting an LTI Login....  
 [2017-11-30 22:45:34] local.DEBUG: Learner  
+[2017-11-30 22:56:15] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-11-30 22:56:24] local.DEBUG: Attempting an LTI Login....  
+[2017-11-30 22:56:24] local.DEBUG: Instructor  
