@@ -115,6 +115,33 @@ function populateContentForm(data) {
 
     }
 
+    console.log(data);
+
+    getProgressTopics(data);
+
+}
+
+function getProgressTopics(data) {
+    if(data.req){
+        var option = "<option value="+data.req.id+">"+data.req.name+"</option><option value=''>--Choose One--</option>";
+    }else{
+        option =  "<option value=''>--Choose One--</option>";
+    }
+    
+    document.getElementById("selectNode").innerHTML = option;
+    var dropdown = document.getElementById("selectNode");
+    var myArray = data.topics;
+    // Loop through the array
+    for (var i = 0; i < myArray.length; ++i) {
+        // Append the element to the end of Array list
+        if (myArray[i].id == data.item) {
+            break;
+        }
+        if (i == 0) {
+            myArray.splice(i, 1);
+        }
+        dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
+    }
 }
 
 //Get Content

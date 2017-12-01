@@ -8757,3 +8757,9 @@ esources\\views\\partials\\items.blade.php) at C:\\wamp64\\www\\develop\\storage
 [2017-11-30 23:14:47] local.DEBUG: Learner  
 [2017-11-30 23:14:53] local.ERROR: Unable to perform search: Trying to get property of non-object  
 [2017-11-30 23:14:56] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-11-30 23:23:05] local.DEBUG: Attempting an LTI Login....  
+[2017-11-30 23:23:05] local.DEBUG: Learner  
+[2017-11-30 23:23:11] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-11-30 23:23:40] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-01 00:15:57] local.DEBUG: Attempting an LTI Login....  
+[2017-12-01 00:15:57] local.DEBUG: Instructor  

@@ -87,7 +87,7 @@ class Storyline2ViewsJSON extends BaseController {
         if($progress !== null){
             $visited = explode(',',$progress->visited);
         } else {
-            $visited = [];
+            $visited = [$items[0]['id']];
         }
         
         
@@ -98,7 +98,7 @@ class Storyline2ViewsJSON extends BaseController {
 
             $temp = $item;
 
-            if(in_array($item['required'],$visited)){
+            if(in_array($item['required'],$visited) || $item['required'] === null){
                 $temp['enabled'] = true;
             }else{
                 $temp['enabled'] = false;

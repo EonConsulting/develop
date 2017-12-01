@@ -31,7 +31,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://10.0.0.122:9200'),
+    'es_uri' => env('ES_URI', 'http://10.0.0.190:9200'),
 
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8000'),
+    'url' => env('APP_URL', 'http://develop.app'),
 
     /*
     |--------------------------------------------------------------------------
