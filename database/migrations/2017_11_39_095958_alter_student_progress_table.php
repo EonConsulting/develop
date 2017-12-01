@@ -14,10 +14,11 @@ class AlterStudentProgressTable extends Migration {
      */
     public function up() {
          Schema::table($this->set_schema_table, function (Blueprint $table) {
-             $table->dropColumn('root');
-             $table->dropColumn('furthest');
-             $table->dropColumn('course_id');
-             $table->longText('visited')->after('storyline_id');
+            $table->dropColumn('root');
+            $table->dropColumn('furthest');
+            $table->dropColumn('course_id');
+            $table->dropColumn('current');
+            $table->longText('visited')->after('storyline_id');
         });
        }
 
@@ -28,9 +29,11 @@ class AlterStudentProgressTable extends Migration {
      */
     public function down() {
         Schema::table($this->set_schema_table, function(Blueprint $table) {
-             $table->integer('root');
-             $table->integer('furthest');
-          });
+            $table->integer('root');
+            $table->integer('furthest');
+            $table->integer('course_id');
+            $table->integer('current');
+        });
        
     }
 
