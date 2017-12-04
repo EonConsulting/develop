@@ -29,6 +29,14 @@ class CoursesLTIController extends LTIBaseController {
             }';
         } else {
             $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "' . $searchterm . '*"
+                    }
+                }
+            }';
+            
+            /* $query = '{
                 "query":{
                     "function_score":{
                         "query":{
@@ -41,7 +49,7 @@ class CoursesLTIController extends LTIBaseController {
                                             ],
                                             "type":"cross_fields",
                                             "query": "' . $searchterm . '",
-                                            "minimum_should_match":"2<-1 5<70%"
+                                            "minimum_should_match": "2<-1 5<70%"
                                         }
                                     }
                                 ]
@@ -49,7 +57,7 @@ class CoursesLTIController extends LTIBaseController {
                         }
                     }
                 }
-            }';
+            }'; */
         }
 
         try {
