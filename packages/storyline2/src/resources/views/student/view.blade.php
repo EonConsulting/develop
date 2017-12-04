@@ -516,9 +516,7 @@
     }
 
     function pupulateContent(data, button){
-        //highlight clicked button       
-        $(".menu-btn").removeClass('active-menu');
-        button.addClass('active-menu');
+        
 
         //create breadcrumbs
         var breadcrumb = button.html();
@@ -562,6 +560,10 @@
 
         //var course_data = jQuery.parseJSON(data);
         $("#body").html(data.content.body);
+
+        //highlight clicked button       
+        $(".menu-btn").removeClass('active-menu');
+        button.addClass('active-menu');
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
