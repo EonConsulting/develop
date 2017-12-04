@@ -10,6 +10,7 @@ use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Tools\Elasticsearch\Elasticsearch;
+use App\Jobs\ElasticIndexContent;
 
 class ContentBuilderCore extends Controller {
 
@@ -40,6 +41,15 @@ class ContentBuilderCore extends Controller {
                 }
             }';
         } else {
+
+            $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "*' . $searchterm . '*"
+                    }
+                }
+            }';
+            /*
             $query = '{
                 "query":{
                     "function_score":{
@@ -61,7 +71,7 @@ class ContentBuilderCore extends Controller {
                         }
                     }
                 }
-            }';
+            }';*/
         }
 
         try {
@@ -249,7 +259,7 @@ class ContentBuilderCore extends Controller {
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
-     */
+     *//*
     public function save(Request $request) {
 
         $content = new Content([
@@ -271,7 +281,7 @@ class ContentBuilderCore extends Controller {
 
         return redirect()->route('eon.contentbuilder');
        
-    }
+    }*/
 
     /**
      * @param Request $request
@@ -286,7 +296,8 @@ class ContentBuilderCore extends Controller {
             'body' => $data['body'],
             'tags' => $data['tags'],
             'creator_id' => auth()->user()->id,
-            'description' => $data['description']
+            'description' => $data['description'],
+            'ingested' => 0
         ]);
         
         $content->save();
@@ -297,6 +308,8 @@ class ContentBuilderCore extends Controller {
             $temp = Category::find($category_id);
             $content->categories()->save($temp);
         }
+
+        ElasticIndexContent::dispatch();
 
         return 200;
 

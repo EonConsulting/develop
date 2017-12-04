@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MetadataType;
 use App\Models\CourseMetadata;
 use App\Models\ContentTemplates;
+use App\Jobs\ElasticIndexCourseInfo;
 use Validator;
 
 class CreateCourseController extends Controller
@@ -48,12 +49,15 @@ class CreateCourseController extends Controller
                 'description' => $request->get('description'),
                 'tags' => $request->get('tags'),
                 'creator_id' => auth()->user()->id,
-                'template_id' => $request->get('template')
+                'template_id' => $request->get('template'),
+                'ingested' => 0
             ]);
 
             $Course->save();
             //return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
             $request->session()->flash('alert-success', 'Module has been added successfully.');
+            ElasticIndexCourseInfo::dispatch();
+            
             // return view('lecturer.courses.metadatalist',['breadcrumbs' => $breadcrumbs,'course'=>$Course->id]);
             return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
         }
