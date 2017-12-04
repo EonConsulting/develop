@@ -31,7 +31,7 @@ class CoursesLTIController extends LTIBaseController {
             $query = '{
                 "query": {
                     "query_string" : {
-                        "query" : "' . $searchterm . '*"
+                        "query" : "*' . $searchterm . '*"
                     }
                 }
             }';

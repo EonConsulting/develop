@@ -9,12 +9,12 @@ namespace App\Tools\Elasticsearch;
 
 class Elasticsearch
 {
-    public function search($query, $from = 0, $size = 10)
+    public function search($index, $query, $from = 0, $size = 10)
     {
         $from = $from === null ? 0 : $from;
         $size = $size === null ? 10 : $size;
 
-        $search = config('app.es_uri') . '/courses/_search?from=' . $from . '&size=' . $size;
+        $search = config('app.es_uri') . '/'. $index .'/_search?from=' . $from . '&size=' . $size;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $search);
