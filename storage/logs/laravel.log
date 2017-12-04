@@ -5012,3 +5012,5 @@
 #57 /home/vagrant/Code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
 "} 
+[2017-12-04 01:00:50] local.DEBUG: Attempting an LTI Login....  
+[2017-12-04 01:00:50] local.DEBUG: Instructor  
