@@ -86,17 +86,28 @@ class AnalyticsLogIngester implements ShouldQueue {
 
     function processContentSearch($log, $json) {
         // to be implemented
+        Log::debug("Not implemented yet for log id:" . $log->id);
+        $this->updateAnalyticsIngestedStatus($log->id);
     }
 
     function processCourseSearch($log, $json) {
         // to be implemented
+        Log::debug("Not implemented yet for log id:" . $log->id);
+        $this->updateAnalyticsIngestedStatus($log->id);
     }
 
     function processTopic($log, $json) {
         if ($json) {
             try {
-                // quick validation on json vars
-                if ($json && $json->context && $json->context->extensions && $json->context->extensions->course_id && $json->context->extensions->storyline && $json->context->extensions->storyline_item && $json->actor && $json->actor->mbox) {
+                // quick validation on json vars, dirty but effective
+                if ($json 
+                        && $json->context 
+                        && $json->context->extensions 
+                        && $json->context->extensions->course_id 
+                        && $json->context->extensions->storyline 
+                        && $json->context->extensions->storyline_item 
+                        && $json->actor 
+                        && $json->actor->mbox) {
                     $mbox = str_replace("mailto:", "", $json->actor->mbox);
                     $U = new ECC\Users();
                     $student_id = $U->GetUserFromEmailAddy($email);
@@ -129,7 +140,9 @@ class AnalyticsLogIngester implements ShouldQueue {
                         if ($percent > $current_progress) {
                             $progress_item->progress = $percent;
                             $SP->UpdateSummaryStudentProgress($progress_item);
+                            Log::debug("Progress updated for log id:" . $log->id);
                         }
+                        Log::debug("Progress ignored for log id:" . $log->id);
                     } else {
                         // this is a new progress
                         $progress_item = [
@@ -141,6 +154,7 @@ class AnalyticsLogIngester implements ShouldQueue {
                         ];
                             
                         $SP->InsertSummaryStudentProgress($progress_item);
+                        Log::debug("New summary item created for log id:" . $log->id);
                     }
 
                     // set this log as processed

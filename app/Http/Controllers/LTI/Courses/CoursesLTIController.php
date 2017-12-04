@@ -29,6 +29,14 @@ class CoursesLTIController extends LTIBaseController {
             }';
         } else {
             $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "' . $searchterm . '*"
+                    }
+                }
+            }';
+            
+            /* $query = '{
                 "query":{
                     "function_score":{
                         "query":{
@@ -49,7 +57,7 @@ class CoursesLTIController extends LTIBaseController {
                         }
                     }
                 }
-            }';
+            }'; */
         }
 
         try {

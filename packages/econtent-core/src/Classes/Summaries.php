@@ -50,7 +50,7 @@ class Summaries {
      * @return row
      */
     function UpdateSummaryStudentProgress($item) {
-        $sp = SummaryStudentProgression::find($id);
+        $sp = SummaryStudentProgression::find($item->id);
         $sp->progress = $item->progress;
         $sp->save();
     }
