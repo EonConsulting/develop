@@ -33,7 +33,7 @@ class Summaries {
      * @return row
      */
     function GetSummaryStudentProgression($student_id, $course_id, $storyline_id) {
-        $sp = SummaryStudentProgression::where('student_id', $student_id)
+        $sp = SummaryStudentProgression::where('student_user_id', $student_id)
                 ->where('storyline_id', $storyline_id)
                 ->where('course_id', $course_id)
                 ->first();
@@ -65,11 +65,12 @@ class Summaries {
      */
     function InsertSummaryStudentProgress($item) {
         $sp = new SummaryStudentProgression();
-        $sp->progress_type_id = $item->progress_type_id;
-        $sp->course_id = $item->course_id;
-        $sp->storyline_id = $item->storyline_id;
-        $sp->student_user_id = $item->student_user_id;
-        $sp->progress = $item->progress;
+        $sp->progress_type_id = $item["progress_type_id"];
+        $sp->course_id = $item["course_id"];
+        $sp->storyline_id = $item["storyline_id"];
+        $sp->student_user_id = $item["student_user_id"];
+        $sp->progress = $item["progress"];
+        
         $sp->save();
     }
 

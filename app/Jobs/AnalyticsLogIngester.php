@@ -46,40 +46,49 @@ class AnalyticsLogIngester implements ShouldQueue {
         // lets take a 1000 at a time and stay in this loop until finished
         Log::debug("Starting analytics log ingestion");
         while (true) {
-            $logs = Db::table('analytics_log')
-                    ->where('ingested', '0')
-                    ->orderBy('id', 'asc')
-                    ->limit(1000)
-                    ->get();
+            try {
+                $logs = Db::table('analytics_log')
+                        ->where('ingested', '0')
+                        ->orderBy('id', 'asc')
+                        ->limit(1000)
+                        ->get();
 
-            // break out if the work is done
-            if (count($logs) <= 0) {
-                Log::debug("Finished analytics_log ingestion");
-                break;
-            }
-
-            // run through logs and decide on processing logic
-            foreach ($logs as $log) {
-
-                // turn the json payload into an object
-                $json = json_decode($log->payload);
-
-                if ($json && $json->verb && $json->verb->id) {
-                    // here we switch to the correct summarization process
-                    switch ($json->verb->id) {
-                        case "https://unisaonline.net/schema/1.0/content_search":
-                            $this->processContentSearch($log, $json);
-                            break;
-                        case "https://unisaonline.net/schema/1.0/course_search":
-                            $this->processCourseSearch($log, $json);
-                            break;
-                        case "https://unisaonline.net/schema/1.0/topic":
-                            $this->processTopic($log, $json);
-                            break;
-                    }
-                } else {
-                    Log::error("Analytics log item malformed payload id:" . $log["id"]);
+                // break out if the work is done
+                if (count($logs) <= 0) {
+                    Log::debug("Finished analytics_log ingestion");
+                    break;
                 }
+
+                // run through logs and decide on processing logic
+                foreach ($logs as $log) {
+
+                    // turn the json payload into an object
+                    $json = json_decode($log->payload);
+
+                    if ($json && $json->verb && $json->verb->id) {
+                        // here we switch to the correct summarization process
+                        switch ($json->verb->id) {
+                            case "https://unisaonline.net/schema/1.0/content_search":
+                                $this->processContentSearch($log, $json);
+                                break;
+                            case "https://unisaonline.net/schema/1.0/course_search":
+                                $this->processCourseSearch($log, $json);
+                                break;
+                            case "https://unisaonline.net/schema/1.0/topic":
+                                $this->processTopic($log, $json);
+                                break;
+                            default:
+                                // u r probably an unwanted entry, mark u as ingested
+                                $this->updateAnalyticsIngestedStatus($log->id, 1);
+                                break;
+                        }
+                    } else {
+                        Log::error("Analytics log item malformed payload id:" . $log["id"]);
+                    }
+                }
+            } catch (\Exception $e) {
+                Log::error("Exiting loop on topic progress with log id:" . $log->id . " message: " . $e->getMessage());
+                break;
             }
         }
     }
@@ -87,13 +96,13 @@ class AnalyticsLogIngester implements ShouldQueue {
     function processContentSearch($log, $json) {
         // to be implemented
         Log::debug("Not implemented yet for log id:" . $log->id);
-        $this->updateAnalyticsIngestedStatus($log->id);
+        $this->updateAnalyticsIngestedStatus($log->id, 1);
     }
 
     function processCourseSearch($log, $json) {
         // to be implemented
         Log::debug("Not implemented yet for log id:" . $log->id);
-        $this->updateAnalyticsIngestedStatus($log->id);
+        $this->updateAnalyticsIngestedStatus($log->id, 1);
     }
 
     function processTopic($log, $json) {
@@ -103,15 +112,18 @@ class AnalyticsLogIngester implements ShouldQueue {
                 if ($json 
                         && $json->context 
                         && $json->context->extensions 
-                        && $json->context->extensions->course_id 
+                        && $json->context->extensions->course 
                         && $json->context->extensions->storyline 
                         && $json->context->extensions->storyline_item 
                         && $json->actor 
                         && $json->actor->mbox) {
+                    // get some user info
                     $mbox = str_replace("mailto:", "", $json->actor->mbox);
                     $U = new ECC\Users();
-                    $student_id = $U->GetUserFromEmailAddy($email);
-                    $course_id = $json->context->extensions->course_id;
+                    $user = $U->GetUserFromEmailAddy($mbox);
+                    $student_id = $user->id;
+                    
+                    $course_id = $json->context->extensions->course;
                     $storyline_id = $json->context->extensions->storyline;
                     $storyline_item = $json->context->extensions->storyline_item;
 
@@ -119,16 +131,17 @@ class AnalyticsLogIngester implements ShouldQueue {
                     $SL = new ECC\Storylines();
                     $items = $SL->GetStorylineItems($storyline_id);
                     $sorted_items = $SL->TransformStorylineItemsToFlatArray($items);
-                    $storyline_item_ids = $SL->GetStorylineItemIdsFromFlatArray($sorted_items);
+                    $storyline_item_ids = array_column($SL->GetStorylineItemIdsFromFlatArray($sorted_items), "id");
 
                     // so where in the array is this storyline_item_id
                     // we will use simple arithmetic : (position in array + 1) / array count
-                    $percent = 0; // default
+                    $percent = 1; // default
                     $index = array_search($storyline_item, $storyline_item_ids);
                     if ($index !== false) {
-                        $percent = (($index + 1) / sizeof($storyline_item_ids)) * 100;
+                        $new_percent = number_format((($index + 1) / sizeof($storyline_item_ids)) * 100, 2, '.', '');
+                        $percent = ($new_percent > $percent) ? $new_percent : $percent;
                     }
-
+                    
                     // we only update our progress if it is greater than 
                     // what is already recorded as progress
                     $SP = new ECC\Summaries();
@@ -137,7 +150,7 @@ class AnalyticsLogIngester implements ShouldQueue {
                     if ($progress_item) {
                         // this is an existing progress
                         // we only save if necessary
-                        if ($percent > $current_progress) {
+                        if ($percent > $progress_item->progress) {
                             $progress_item->progress = $percent;
                             $SP->UpdateSummaryStudentProgress($progress_item);
                             Log::debug("Progress updated for log id:" . $log->id);
@@ -146,33 +159,33 @@ class AnalyticsLogIngester implements ShouldQueue {
                     } else {
                         // this is a new progress
                         $progress_item = [
-                            "progress_type_id" => $progress_type_id,
+                            "progress_type_id" => 1, // hard-wired for now, awaiting requirements
                             "course_id" => $course_id,
                             "storyline_id" => $storyline_id,
                             "student_user_id" => $student_id,
                             "progress" => $percent
                         ];
-                            
                         $SP->InsertSummaryStudentProgress($progress_item);
                         Log::debug("New summary item created for log id:" . $log->id);
                     }
 
                     // set this log as processed
-                    $this->updateAnalyticsIngestedStatus($log->id);
+                    $this->updateAnalyticsIngestedStatus($log->id, 1);
                     Log::info("Successful topic progress from log id:" . $log->id);
                 } else {
                     Log::info("Unable to ingest log, missing storyline id, see log id:" . $log->id);
                 }
             } catch (\Exception $e) {
-                Log::error("Error on topic progress from log id:" . $log->id . " message: " . $e->getMessage());
+                Log::error("Error on persisting progress from log id:" . $log->id . " message: " . $e->getMessage());
+                $this->updateAnalyticsIngestedStatus($log->id, 2);
             }
         }
     }
 
-    function updateAnalyticsIngestedStatus($id) {
+    function updateAnalyticsIngestedStatus($id, $status) {
         Db::table('analytics_log')
                 ->where('id', $id)
-                ->update(['ingested' => 1]);
+                ->update(['ingested' => $status]);
     }
 
     public function failed(\Exception $exception) {

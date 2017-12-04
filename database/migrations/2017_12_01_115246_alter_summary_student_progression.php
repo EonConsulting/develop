@@ -13,7 +13,7 @@ class AlterSummaryStudentProgression extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE `summary_student_progression` ADD COLUMN `storyline_id` after `course_id`');
+        DB::statement('ALTER TABLE `summary_student_progression` ADD COLUMN `storyline_id` INT(11) after `course_id`');
     }
 
     /**
