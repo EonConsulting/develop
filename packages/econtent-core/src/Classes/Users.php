@@ -25,7 +25,7 @@ class Users {
      * @return object
      */
     public function GetUserFromEmailAddy($email) {
-        $user = Storyline::where("email", $email)->first();
+        $user = User::where("email", $email)->first();
         
         return $user;
     }
