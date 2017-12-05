@@ -1,0 +1,16 @@
+{
+  "name": "eonconsulting/student-notes",
+  "description": "Package allowing students to make notes on storyline items",
+  "type": "package",
+  "authors": [
+    {
+      "name": "Kyle Vorster",
+      "email": "kyle.vorster@eon.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\StudentNotes\\": "src/"
+    }
+  }
+}
