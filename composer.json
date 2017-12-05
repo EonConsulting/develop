@@ -59,7 +59,8 @@
       "EONConsulting\\ContentBuilder\\": "packages/content-builder/src",
       "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
       "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src",
-      "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src"
+      "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src",
+      "EONConsulting\\StudentNotes\\": "packages/student-notes/src"
     },
     "files": [
       "packages/laravel-lti/src/functions.php",
