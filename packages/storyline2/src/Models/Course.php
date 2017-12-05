@@ -3,27 +3,71 @@
 namespace EONConsulting\Storyline2\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use EONConsulting\Storyline2\Models\Storyline;
+use App\Models\User;
 
 class Course extends Model {
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'courses';
-    protected $primaryKey = 'id';
-    protected $fillable = ['title', 'description', 'featured_image', 'tags', 'xml_file', 'creator_id'];
 
-    public function creator() {
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description', 'featured_image', 'tags', 'xml_file', 'creator_id'
+    ];
+
+    /**
+     * Fetch the creator of this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function creator()
+    {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function storylines() {
-        //return $this->hasMany(Storyline::class, 'course_id', 'id');
-        return $this->hasOne(Storyline::class, 'course_id', 'id');
+    /**
+     * Fetch storylines for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function storylines()
+    {
+        return $this->hasMany(Storyline::class, 'course_id', 'id');
     }
 
-    public function latest_storyline() {
+    /**
+     * Fetch latest storyline for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function latest_storyline()
+    {
         return $this->hasOne(Storyline::class, 'course_id', 'id')->orderBy('created_at', 'DESC')->first();
     }
 
-    public function users() {
-        return $this->hasMany(CourseUser::class, 'course_id', 'id');
+    /**
+     * Fetch course users for this model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'integrate_course_users', 'course_id', 'user_id');
     }
 }

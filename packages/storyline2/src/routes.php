@@ -50,5 +50,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::match(['get', 'post'], '/delete','Storyline2ViewsJSON@delete')->name('storyline2.JSON.delete');
         Route::post('/create','Storyline2ViewsJSON@create')->name('storyline2.JSON.create');
         //Add more routes
+
+        Route::post('/notify', ['as' => 'storyline2.courses.single.notify', 'uses' => 'CourseNotifyController@store']);
+        Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
+
+        Route::get('/set_required', 'Storyline2Core@set_required');
     });
 });

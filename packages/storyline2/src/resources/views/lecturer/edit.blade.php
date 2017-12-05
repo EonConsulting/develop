@@ -7,6 +7,7 @@ Storyline Student Single
 
 @section('custom-styles')
 <link rel="stylesheet" href="{{ url('vendor/jstree-themes/bootstrap/style.css') }}" />
+<link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
 
 <style>
 
@@ -49,7 +50,7 @@ Storyline Student Single
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        -webkit-flex-wrap: nowrap;
+        /*-webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
         -webkit-justify-content: flex-start;
@@ -57,10 +58,8 @@ Storyline Student Single
         justify-content: flex-start;
         -webkit-align-content: stretch;
         -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        align-content: stretch;*/
+
         margin-top: -15px;
     }
 
@@ -68,16 +67,18 @@ Storyline Student Single
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        min-width: 250px !important;
         width: 250px;
+
+        overflow-x: hidden;
         overflow-y: auto;
-        overflow-x: auto;
+
+        max-width: 350px;
     }
 
     .page-container-editor {
@@ -90,8 +91,9 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-    }
 
+        width: 70%;
+    }
 
     /**
      *----------------------------------------------------------------------
@@ -119,6 +121,7 @@ Storyline Student Single
         -webkit-align-items: flex-start;
         -ms-flex-align: start;
         align-items: flex-start;
+        flex: 1;
     }
 
     .content-info {
@@ -308,6 +311,10 @@ Storyline Student Single
         background: #F9FAF7;
     }
 
+    .highlighted{
+        font-weight: bold;   
+    }
+
 
 </style>
 @endsection
@@ -315,17 +322,24 @@ Storyline Student Single
 
 @section('content')
 <div>
-    <div class="page-container">
+    <div class="page-container resizer" id="page-container">
 
         <div class="page-container-tree">
+            <div class="info-bar-name">
+                <div>
+                    <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
+                </div>
+            </div>
 
             <div id="tree">
 
             </div>
 
+
         </div><!--End col-md-3 -->
 
         <div class="page-container-editor">
+
             <div class="content-container">
 
                 <div class="content-info">
@@ -429,6 +443,14 @@ Storyline Student Single
                     <input id="content-tags" type="text" name="tags" class="form-control" id="tags" placeholder="Tags" value="" data-toggle="popover" data-placement="left" data-content="">
                 </div>
 
+                <p>Student Progression</p>
+                <div class="form-group">
+                    <label for="selectNode">Set page prerequisite:</label>
+                    <select id="selectNode" class="form-control">
+                        <option value="">--Choose One--</option>
+                    </select>  
+                </div>
+
                 <div class="validation alert alert-warning" role="alert" id="validation">
 
                 </div>
@@ -516,6 +538,8 @@ Storyline Student Single
 @endsection
 
 @section('custom-scripts')
+<script src="{{ url("js/resizer/resizer.js") }}"> </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
@@ -545,6 +569,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     $(function(){
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
+                contentsCss : '{{ url($course->template->file_path) }}',
                 extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,
@@ -573,29 +598,32 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     });
 
     CKEDITOR.on('instanceReady', function() { 
-        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
-        var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
-        var ckBottomHeight      = $("#cke_1_bottom").height();
-
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
-
+        resize();
     });
 
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
-        var textEditHeight      = $("#content-area").height() - $("#info-bar").height();
+        resize();
+    });
+
+    function resize(){
+        var contentHeight       = $("#content-area").height();
+        var textEditHeight      = contentHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
         $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
-
-    });
+        //$("#page_container").css("background-color", "yellow");
+        $("#page-container").height( (contentHeight) + "px");
+    }
 
 </script>
 
 <script>
+
+    const selector = '.resizer';
+    let resizer = new Resizer(selector);
 
     $( document ).ready(function(){
 
@@ -904,7 +932,8 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             "body": body,
             "categories": cats,
             "tags": $("#content-tags").val(),
-            "id": $("#content-id").val()
+            "id": $("#content-id").val(),
+            "topic": $("#selectNode option:selected").val()
         };
 
         var item_id = $("#item-id").val();
@@ -973,6 +1002,32 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         }
 
     }
+
+    function highlightSearch() {
+
+        var text = document.getElementById("q").value;
+        var query = new RegExp("(\\b" + text + "\\b)", "gim");
+        var e = document.getElementById("searchtext").innerHTML;
+        var enew = e.replace(/(<span>|<\/span>)/igm, "");
+        document.getElementById("searchtext").innerHTML = enew;
+        var newe = enew.replace(query, "<span>$1</span>");
+        document.getElementById("searchtext").innerHTML = newe;
+
+    }
+
+    $(document).ready(function () {
+        $('#q').keyup(function () {
+            $("#tree").jstree("open_all");
+            var that = this, $allListElements = $('ul.jstree-children > li');
+            var $matchingListElements = $allListElements.filter(function (i, li) {
+                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
+                return ~listItemText.indexOf(searchText);
+            });
+            $allListElements.hide();
+            $matchingListElements.show();
+            //$matchingListElements.addClass('highlighted');
+        });
+    });
 
 
 </script>

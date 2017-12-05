@@ -157,7 +157,7 @@
 
         <?php if (laravel_lti()->is_instructor(auth()->user())) : ?>
             <!-- TODO: If role == instructor/admin the show this menu item -->
-            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') ? 'left-menu-active' : '' }}">
+            <li class="{{ (Route::currentRouteName() == 'content.builder' || Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') || Route::currentRouteName() == ('assets.index') || Route::currentRouteName() == ('assets.create') ? 'left-menu-active' : '' }}">
                 <a href="#" class="accordian">
                     <i class="fa fa-book fa-lg left-menu-icon"></i>
                     <span class="menu_collapse">
@@ -167,8 +167,8 @@
                 </a>
                 <div class="left-menu-sub {{ (Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') || Route::currentRouteName() == ('assets.index') || Route::currentRouteName() == ('assets.create') ? '' : 'hidden' }}">
                     <ul>
-                        <li>
-                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
+                        <li></li>
+                            <a href="{{ route('eon.contentbuilder') . '?from=0&size=12&searchterm=' }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
                         </li>
                         <li>
                             <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a>

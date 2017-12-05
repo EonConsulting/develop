@@ -43,16 +43,77 @@ class Storyline2Core extends BaseController {
         }
     }
 
+    public function set_required(){
+
+        ini_set('max_execution_time', 5000);
+
+        $storylines = Storyline::all();
+
+        foreach($storylines as $storyline){
+
+            echo "Starting Storyline " . $storyline['id'] . " - Course: " . $storyline['course_id'] . ":---------------------------------<br>";
+
+            $items = StorylineItem::where('storyline_id',$storyline['id'])->orderBy('_lft', 'ASC')->get();
+
+            //dd($items->toArray());
+            //$first = true;
+            $prev_id = 0;
+            $c = 0;
+
+            foreach($items as $item){
+
+                //dd($item);
+
+                echo ("Start Item: " . $item['name']);
+                if($c == 2){
+                    $item['required'] = $prev_id;
+                    echo (" | Set Item");
+                } else {
+                    $item['required'] = null;
+                    $c++;
+                }
+
+                $item->save();
+                echo " | Saved<br>";
+                $prev_id = $item['id'];
+            }
+
+            echo "Finished Storyline: ". $storyline['name'] . "---------------------------------<br><br>";
+        }
+
+    }
+
+    public function storeProgress($item,$data){
+        $item = StorylineItem::find($item); 
+        if(empty($data['topic'])){
+            $data['topic'] = NULL;
+        }
+        $item->required = $data['topic'];           
+        $item->save();
+    }   
+
     /**
      * @param $item
      * @return \Illuminate\Http\JsonResponse
-     */
+     *//*
     public function get_content($item){
 
         $storyline_item = StorylineItem::find($item);
-
-        if ($storyline_item['content_id'] == null)
-        {
+        
+        $req = '';
+        if(!empty($storyline_item->required)){
+            $req = StorylineItem::find($storyline_item->required);
+          }
+        //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
+        $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
+        //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+        $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
+        
+        $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
+        
+        usort($topicArray, [$this, "self::compare"]);
+        
+        if ($storyline_item['content_id'] == null) {
             $result = [
                 "found" => false
             ];
@@ -70,8 +131,50 @@ class Storyline2Core extends BaseController {
 
         return response()->json($result);
 
-    }
+    }*/
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $item
+     * @return void
+     */
+    public function get_content($item) {
+        $storyline_item = StorylineItem::find($item);
+        
+        $req = '';
+        if(!empty($storyline_item->required)){
+            $req = StorylineItem::find($storyline_item->required);
+        }
+        //$Siblings    = $storyline_item->getAncestorsAndSelfWithoutRoot();
+        $Storyline2ViewsJSON  = new Storyline2ViewsJSON;
+        //$topicArray = $Storyline2ViewsJSON->items_to_tree(Storyline::find($storyline_item->storyline_id)->items);
+        $items = StorylineItem::where('storyline_id',$storyline_item->storyline_id)->get();         
+         
+        $topicArray = $Storyline2ViewsJSON->items_to_tree($items);
+         
+        usort($topicArray, [$this, "self::compare"]);
+        
+        if ($storyline_item['content_id'] == null) {
+            $result = [
+                "topics" => $topicArray,
+                "item" => $item,
+                "req" =>$req,
+                "found" => false
+            ];
+        } else {
+            $content = Content::find((int) $storyline_item['content_id']);
+            $result = [
+                "found" => true, 
+                "topics" => $topicArray,
+                "item" => $item,
+                "req" =>$req,
+                "content" => $content,
+                "categories" => $content->categories
+            ];
+        }
+        return response()->json($result);
+    }
 
     /**
      * @param $content
@@ -109,9 +212,18 @@ class Storyline2Core extends BaseController {
 
         }
         
-
         return response()->json($result);
 
+    }
+
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public function compare($a,$b){
+        if($a['lft'] == $b['lft']){return 0;}
+        return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
 
@@ -166,6 +278,8 @@ class Storyline2Core extends BaseController {
             $categories = $data['categories'];
 
             $content->categories()->sync($categories);
+
+            $this->storeProgress($item,$data);
 
         }
         

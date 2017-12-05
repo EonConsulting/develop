@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MetadataType;
 use App\Models\CourseMetadata;
+use App\Models\ContentTemplates;
+use App\Jobs\ElasticIndexCourseInfo;
 use Validator;
 
 class CreateCourseController extends Controller
@@ -25,10 +27,14 @@ class CreateCourseController extends Controller
             ],
         ];
 
-
+        $templates = ContentTemplates::all();
         $metadataType = MetadataType::pluck('description', 'id');
 
-        return view('lecturer.courses.create', ['breadcrumbs' => $breadcrumbs, 'metadataType' => $metadataType]);
+        return view('lecturer.courses.create', [
+            'breadcrumbs' => $breadcrumbs,
+            'templates' => $templates,
+            'metadataType' => $metadataType
+        ]);
     }
 
     public function store(Request $request)
@@ -43,11 +49,15 @@ class CreateCourseController extends Controller
                 'description' => $request->get('description'),
                 'tags' => $request->get('tags'),
                 'creator_id' => auth()->user()->id,
+                'template_id' => $request->get('template'),
+                'ingested' => 0
             ]);
 
             $Course->save();
             //return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
             $request->session()->flash('alert-success', 'Module has been added successfully.');
+            ElasticIndexCourseInfo::dispatch();
+            
             // return view('lecturer.courses.metadatalist',['breadcrumbs' => $breadcrumbs,'course'=>$Course->id]);
             return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
         }
@@ -66,6 +76,7 @@ class CreateCourseController extends Controller
         ];
         
         $MetadataStore = MetadataType::get();
+        
         $MetaId = MetadataStore::pluck('id')->all();
 
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
@@ -74,6 +85,7 @@ class CreateCourseController extends Controller
     public function viewmetadata($id)
     {
         $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
+        
         $MetaId = MetadataStore::pluck('id')->all();
         return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
     }

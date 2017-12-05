@@ -16,16 +16,15 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
+use App\Models\StudentProgress;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 
 class Storyline2ViewsJSON extends BaseController {
 
     /**
-     *
-     * @param Course $course
-     * @return type
+     * @return array
      */
-    public function render() {
+    public function render($storyline_id) {
 
         /*
           $var = $course::find(20);
@@ -33,7 +32,7 @@ class Storyline2ViewsJSON extends BaseController {
           $items = $var['items'];
          */
 
-        $storyline = Storyline::find(47);
+        $storyline = Storyline::find(storyline_id);
 
         $items = $storyline['items'];
 
@@ -41,45 +40,129 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * Undocumented function
-     *
-     * @param [type] $storyline
-     * @return void
+     * @param $storyline
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show_items($storyline) {
 
-        $result = $this->items_to_tree(Storyline::find($storyline)->items);
-        usort($result, [$this, "self::compare"]);
+        //echo ($storyline);
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where("storyline_id", $storyline)->get();
 
-        return response()->json($this->createTree($result));
+        //dd($items);
+
+        //$result = $this->items_to_tree(Storyline::find($storyline)->items);
+        $result = $this->items_to_tree($items);
+        
+        //dd($result);
+
+        usort($result, [$this, "self::compare"]);
+        $result = $this->createTree($result);
+        $result = $result[0]['children'];
+        //dd($result);
+        return response()->json($result);
     }
 
 
-    public function createTree($items, $left = 0, $right = null, $i = 0, &$order = 0) {
+    public function getTreeProgess($storyline){
+        
+        //$sl = Storyline::find($storyline);
+        $items = StorylineItem::where('storyline_id',$storyline)->get();
+        $items = $this->items_to_tree($items);
+
+        //dd($items);
+
+        $progress = StudentProgress::where([
+            ['storyline_id', '=', $storyline],
+            ['student_id', '=', Auth()->user()->id]
+        ])->first();
+
+
+
+        usort($items, [$this, "self::compare"]);
+        //dd($progress);
+
+        $result = [];
+
+        if($progress !== null){
+            $visited = explode(',',$progress->visited);
+        } else {
+            $visited = [$items[0]['id']];
+        }
+        
+        
+        //dd($visited);
+        //dd($items);
+
+        foreach($items as $k => $item){
+
+            $temp = $item;
+
+            if(in_array($item['required'],$visited) || $item['required'] === null){
+                $temp['enabled'] = true;
+            }else{
+                $temp['enabled'] = false;
+            }
+
+            $result[] = $temp;
+
+        }
+
+        //dd($result);
+
+        $result = $this->createTree($result);
+        //dd($result);
+        $result = $result[0]['children'];
+
+        //dd($result);
+
+        return $result;
+
+    }
+
+    /**
+     * @param $items
+     * @param int $left
+     * @param null $right
+     * @param int $i
+     * @param string $num
+     * @param int $order
+     * @return array
+     */
+    public function createTree($items, $left = 0, $right = null, $i = 0, $num = '', &$order = 0) {
         $tree = [];
+        $count = 0;
 
         for($i; $i < count($items); $i++) {
             $temp = $items[$i];
-
             if ($temp['lft'] === $left + 1 && (is_null($right) || $temp['rgt'] < $right)) {
-                
+                $count++;
                 $temp['order'] = $order;
                 $order++;
 
                 if($i < 2 ){ //I say 2 because we don't display the root node, so by saying 2 instead of 1, we jump over the root
-                    $temp['prev'] = '#'; 
+                    $temp['prev'] = '#';
+                    $temp_num = "";
                 } else {
                     $temp['prev'] = $items[$i-1]['id'];
+                    $temp_num = $num . (string) $count . '.';
                 }
 
                 if($i === count($items)-1){
                     $temp['next'] = '#';
                 } else {
                     $temp['next'] = $items[$i+1]['id'];
+
                 }
 
-                if($temp['rgt'] - $temp['lft'] != 1){
-                    $temp['children'] = $this->createTree($items, $temp['lft'], $temp['rgt'], $i+1, $order);
+                if($num === ''){
+                    $temp['parent_id'] = '#';
+                }
+
+                $temp['num'] = $num . (string) $count . ')';
+
+                if($temp['rgt'] - $temp['lft'] !== 1){
+                    $temp['children'] = $this->createTree($items, $temp['lft'], $temp['rgt'], $i+1, $temp_num, $order);
                 }
 
                 $tree[] = $temp;
@@ -90,15 +173,19 @@ class Storyline2ViewsJSON extends BaseController {
         return $tree;
     }
 
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
         return ($a['lft'] < $b['lft']) ? -1 : 1;
     }
 
     /**
-     *
-     * @param type $items
-     * @return type
+     * @param $items
+     * @return array
      */
     public function items_to_tree($items) {
 
@@ -107,6 +194,8 @@ class Storyline2ViewsJSON extends BaseController {
         foreach ($items as $k => $node) {
 
             $map[] = [
+                'required' => $node['required'],
+                //'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
@@ -120,9 +209,8 @@ class Storyline2ViewsJSON extends BaseController {
 
 
     /**
-     * 
      * @param Request $request
-     * @return type
+     * @return \Illuminate\Http\JsonResponse
      */
     public function rename(Request $request) {
 
@@ -143,6 +231,10 @@ class Storyline2ViewsJSON extends BaseController {
         return response()->json(['msg' => $msg]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(Request $request) {
 
         $data = $request->json()->all();
@@ -197,9 +289,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
-     * @return type
+     * @return \Illuminate\Http\JsonResponse
      */
     public function move(Request $request) {
 
@@ -233,8 +324,8 @@ class Storyline2ViewsJSON extends BaseController {
     }
 
     /**
-     * 
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function delete(Request $request) {
 

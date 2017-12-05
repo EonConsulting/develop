@@ -8,15 +8,28 @@ $(document).ready(function () {
 })
 
 function refreshTree() {
-    $.getJSON(url,
-            function (data) {
+
+    $.ajax({
+        method: "GET",
+        url: url,
+        contentType: 'json',
+        statusCode: {
+            200: function (data) { //success
                 console.log(data);
-
                 drawTree(data);
+                //treeToJSON();
+            },
+            400: function () { //bad request
 
-                treeToJSON();
+            },
+            500: function () { //server kakked
+
             }
-    );
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+    
 }
 
 
@@ -27,14 +40,13 @@ function drawTree(tree_data) {
         "core": {
             "animation": 0,
             "check_callback": true,
-            "themes": {'name': 'proton', 'icons': false},
+            "themes": {'name': 'proton', 'icons': false, 'responsive': true},
             "data": tree_data
         },
         "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
 }
-
 
 
 function treeToJSON() {
@@ -103,6 +115,33 @@ function populateContentForm(data) {
 
     }
 
+    console.log(data);
+
+    getProgressTopics(data);
+
+}
+
+function getProgressTopics(data) {
+    if(data.req){
+        var option = "<option value="+data.req.id+">"+data.req.name+"</option><option value=''>--Choose One--</option>";
+    }else{
+        option =  "<option value=''>--Choose One--</option>";
+    }
+    
+    document.getElementById("selectNode").innerHTML = option;
+    var dropdown = document.getElementById("selectNode");
+    var myArray = data.topics;
+    // Loop through the array
+    for (var i = 0; i < myArray.length; ++i) {
+        // Append the element to the end of Array list
+        if (myArray[i].id == data.item) {
+            break;
+        }
+        if (i == 0) {
+            myArray.splice(i, 1);
+        }
+        dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
+    }
 }
 
 //Get Content

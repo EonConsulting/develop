@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Asset;
+use App\Models\ContentTemplates;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
@@ -40,20 +41,32 @@ class Storyline2ViewsBlade extends BaseController {
 
         $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
-       
-        $items = $SL2JSON->items_to_tree(Storyline::find($storyline_id)->items);
-        usort($items, array($this, "self::compare"));
-        $items = $SL2JSON->createTree($items);
+        $userId = auth()->user()->id;
+    
+        $items = $SL2JSON->getTreeProgess($storyline_id);
 
-        //dd($items);
-
-        $items = $this->makeList($items[0]['children']);
+        $course['template'] = ContentTemplates::find($course->template_id);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
         ];
 
         return view('eon.storyline2::student.view', ['items' => $items,'breadcrumbs' => $breadcrumbs,'course'=>$course,'storylineId'=>$storyline_id]);
+    }
+    
+    public function refresh_items($course,$item) {
+        $SL2JSON = new Storyline2JSON;
+
+        $course = Course::find($course);
+        $storyline_id = $course->latest_storyline()->id;
+        $userId = auth()->user()->id;
+
+        $items = $SL2JSON->getTreeProgess($storyline_id);
+        
+        $items_view = view('eon.storyline2::partials.refresh_items', ['items' => $items,'id'=>$item])->render();
+        $drop_view = view('eon.storyline2::partials.refresh_drop', ['items' => $items,'id'=>$item])->render();
+
+        return ['items_html' => $items_view, 'drop_html' => $drop_view];
     }
 
     public function makeList($list, $number = '')
@@ -93,6 +106,7 @@ class Storyline2ViewsBlade extends BaseController {
     public function edit($course) {
         
         $course = Course::find($course);
+        $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
 
@@ -109,14 +123,36 @@ class Storyline2ViewsBlade extends BaseController {
             $storyline->save();
             $storyline_id = $storyline->id;
 
-            $storyline_item = new StorylineItem([
+            $root_item = new StorylineItem([
                 'storyline_id' => $storyline_id,
-                'name' => 'Start Here'
+                'name' => 'Root'
             ]);
 
-            $storyline_item->save();
+            $root_item->save();
+            $root_id = $root_item->id;
+                
+            for($i = 0; $i < 3; $i++){
 
-            $storyline->items()->save($storyline_item);
+                $new_details = [
+                    'name' => "Topic " . ($i + 1),
+                    'storyline_id' => $storyline_id,
+                    'parent_id' => $root_id,
+                    'root_parent' => $root_id
+                ];
+
+                $new =  new StorylineItem($new_details);
+
+                $new->save();
+                
+                if ($new->makeChildOf($root_item)) {
+                    $msg = 'success';
+                } else {
+                    $msg = 'failed';
+                }
+
+            }
+
+            //$storyline->items()->save($storyline_item);
 
             $course->storylines()->save($storyline);
             
@@ -127,9 +163,10 @@ class Storyline2ViewsBlade extends BaseController {
 
         $breadcrumbs = [
             'title' => 'Edit ' . $course['title'] . ' Storyline' //pass $course as param and load name here
-          ];
+        ];
 
         return view('eon.storyline2::lecturer.edit', [
+            'course' => $course,
             'contents' => $contents,
             'storyline_id' => $storyline_id,
             'categories' => $categories,
