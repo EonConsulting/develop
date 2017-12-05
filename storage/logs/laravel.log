@@ -9001,3 +9001,100 @@ esources\\views\\partials\\items.blade.php) at C:\\wamp64\\www\\develop\\storage
 [2017-12-04 01:48:17] local.ERROR: Unable to perform search: Trying to get property of non-object  
 [2017-12-04 01:48:26] local.ERROR: Unable to perform search: Trying to get property of non-object  
 [2017-12-04 01:48:46] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:21:11] local.DEBUG: Attempting an LTI Login....  
+[2017-12-04 22:21:11] local.DEBUG: Learner  
+[2017-12-04 22:21:24] local.DEBUG: Attempting an LTI Login....  
+[2017-12-04 22:21:24] local.DEBUG: Learner  
+[2017-12-04 22:21:31] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:21:35] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:22:06] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:22:09] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:22:36] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:23:21] local.DEBUG: Attempting an LTI Login....  
+[2017-12-04 22:23:21] local.DEBUG: Instructor  
+[2017-12-04 22:23:29] local.DEBUG: Attempting an LTI Login....  
+[2017-12-04 22:23:29] local.DEBUG: Learner  
+[2017-12-04 22:23:33] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:23:54] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-04 22:24:05] local.ERROR: Unable to perform search: Trying to get property of non-object  
+[2017-12-05 09:08:01] local.ERROR: Command "make" is not defined.
+
+Did you mean one of these?
+    make:auth
+    make:command
+    make:controller
+    make:event
+    make:exception
+    make:factory
+    make:job
+    make:listener
+    make:mail
+    make:middleware
+    make:migration
+    make:model
+    make:notification
+    make:policy
+    make:provider
+    make:request
+    make:resource
+    make:rule
+    make:seeder
+    make:test
+    make:transformer {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make\" is not defined.
+
+Did you mean one of these?
+    make:auth
+    make:command
+    make:controller
+    make:event
+    make:exception
+    make:factory
+    make:job
+    make:listener
+    make:mail
+    make:middleware
+    make:migration
+    make:model
+    make:notification
+    make:policy
+    make:provider
+    make:request
+    make:resource
+    make:rule
+    make:seeder
+    make:test
+    make:transformer at C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php:576)
+[stacktrace]
+#0 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php(197): Symfony\\Component\\Console\\Application->find('make')
+#1 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php(122): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2017-12-05 09:26:08] local.ERROR: Class SummaryModuleProgressionSeeder does not exist {"exception":"[object] (ReflectionException(code: -1): Class SummaryModuleProgressionSeeder does not exist at C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:752)
+[stacktrace]
+#0 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(752): ReflectionClass->__construct('SummaryModulePr...')
+#1 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(631): Illuminate\\Container\\Container->build('SummaryModulePr...')
+#2 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(586): Illuminate\\Container\\Container->resolve('SummaryModulePr...', Array)
+#3 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(732): Illuminate\\Container\\Container->make('SummaryModulePr...', Array)
+#4 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(74): Illuminate\\Foundation\\Application->make('SummaryModulePr...')
+#5 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(63): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#6 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(122): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#7 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(64): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#8 [internal function]: Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#9 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(29): call_user_func_array(Array, Array)
+#10 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(180): Illuminate\\Container\\Container->call(Array)
+#14 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Command\\Command.php(240): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(167): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php(858): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php(216): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\symfony\\console\\Application.php(122): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\Users\\michael\\Documents\\projects\\eon\\src\\eContent\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+"} 
