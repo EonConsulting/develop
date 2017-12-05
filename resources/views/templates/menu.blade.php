@@ -167,8 +167,8 @@
                 </a>
                 <div class="left-menu-sub {{ (Route::currentRouteName() == 'eon.contentbuilder' || Route::currentRouteName() == 'eon.contentbuilder.update' || Route::currentRouteName() == 'categories.index') || Route::currentRouteName() == ('assets.index') || Route::currentRouteName() == ('assets.create') ? '' : 'hidden' }}">
                     <ul>
-                        <li>
-                            <a href="{{ route('eon.contentbuilder') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
+                        <li></li>
+                            <a href="{{ route('eon.contentbuilder') . '?from=0&size=12&searchterm=' }}"><i class="fa fa-circle-o left-menu-icon"></i>All Content</a>
                         </li>
                         <li>
                             <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a>

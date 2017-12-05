@@ -1,0 +1,21 @@
+{
+    "name": "eonconsulting/core",
+    "description": "Re-usable classes for core functions",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Michael Hanekom",
+            "email": "michael@vertopia.co.za"
+        },
+        {
+            "name": "Kenny Crous",
+            "email": "kcrous@iqbusiness.net"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "EONConsulting\\Core\\": "src/"
+      }
+    },
+    "require": {}
+}

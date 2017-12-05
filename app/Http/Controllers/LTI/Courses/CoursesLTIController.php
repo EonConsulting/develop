@@ -12,14 +12,17 @@ use EONConsulting\Storyline2\Models\Storyline;
 
 class CoursesLTIController extends LTIBaseController {
 
-    public function index(Request $request, Elasticsearch $elasticsearch) {
+    public function index(Request $request) {
         $breadcrumbs = [
             'title' => 'Modules',
         ];
 
+        $elasticsearch = new Elasticsearch;
         $searchterm = $request->get('searchterm');
         $from = $request->get('from');
         $size = $request->get('size');
+
+        $index = 'courses';
 
         if (empty($searchterm)) {
             $query = '{
@@ -29,6 +32,14 @@ class CoursesLTIController extends LTIBaseController {
             }';
         } else {
             $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "*' . $searchterm . '*"
+                    }
+                }
+            }';
+            
+            /* $query = '{
                 "query":{
                     "function_score":{
                         "query":{
@@ -41,7 +52,7 @@ class CoursesLTIController extends LTIBaseController {
                                             ],
                                             "type":"cross_fields",
                                             "query": "' . $searchterm . '",
-                                            "minimum_should_match":"2<-1 5<70%"
+                                            "minimum_should_match": "2<-1 5<70%"
                                         }
                                     }
                                 ]
@@ -49,11 +60,11 @@ class CoursesLTIController extends LTIBaseController {
                         }
                     }
                 }
-            }';
+            }'; */
         }
 
         try {
-            $output = $elasticsearch->search($query, $from, $size);
+            $output = $elasticsearch->search($index, $query, $from, $size);
             $output = json_decode($output);
 
             $hits = $output->hits->hits;

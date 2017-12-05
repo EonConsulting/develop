@@ -8,6 +8,9 @@ use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Tools\Elasticsearch\Elasticsearch;
+use App\Jobs\ElasticIndexContent;
 
 class ContentBuilderCore extends Controller {
 
@@ -15,34 +18,105 @@ class ContentBuilderCore extends Controller {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
-
-        $content = Content::with('categories')->get();
-        $content_squashed = [];
-
-        foreach($content as $k => $item){
-            $content[$k]->tags = $this->get_tags($item);
-            
-            if($item->clone_id === null){
-                
-                $content_squashed[$item->id] = $item;
-
-            }
-        }
-
-        $categories = Category::all();
-        $assets = Asset::all();
+    public function index(Request $request) {
 
         $breadcrumbs = [
             'title' => 'Content Store',
         ];
 
+        $categories = Category::all();
+
+        $elasticsearch = new Elasticsearch;
+
+        $index = 'content';
+        $searchterm = $request->get('searchterm');
+        $from = $request->get('from');
+        $size = $request->get('size');
+        
+
+        if (empty($searchterm)) {
+           $query = '{
+               "query": {
+                    "match_all": {}
+                }
+            }';
+        } else {
+
+            $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "*' . $searchterm . '*"
+                    }
+                }
+            }';
+            /*
+            $query = '{
+                "query":{
+                    "function_score":{
+                        "query":{
+                            "bool":{
+                                "must":[
+                                    {
+                                        "multi_match":{
+                                            "fields":[
+                                                "title^10","body^5"
+                                            ],
+                                            "type":"cross_fields",
+                                            "query": "' . $searchterm . '",
+                                            "minimum_should_match":"2<-1 5<70%"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }';*/
+        }
+
+        try {
+            $output = $elasticsearch->search($index, $query, $from, $size);
+            $output = json_decode($output);
+
+
+            $hits = $output->hits->hits;
+
+            $total = $output->hits->total;
+            
+            $fromNext = $from + $size;
+            $fromPrev = $from - $size;
+
+            $finalOutput = [
+                "fromNext" => $fromNext,
+                "fromPrev" => $fromPrev,
+                "total" => $total,
+                "size" => $size,
+                "searchterm" => $searchterm,
+                "results" => []
+            ];
+
+            foreach ($hits as $hit) {
+
+
+                $content = Content::find($hit->_id);
+                $content->tags = $this->get_tags($content);
+
+                $finalOutput['results'][] = $content;
+            }
+
+        } catch (\ErrorException $e) {
+            Log::error("Unable to perform search: " . $e->getMessage());
+            $finalOutput = array();
+        }
+
+        //dd($finalOutput);
+
         return view('eon.content-builder::store', [
-            'content' => $content,
+            'searchResults' => $finalOutput,
             'categories' => $categories,
-            'assets' => $assets,
             'breadcrumbs' => $breadcrumbs
         ]);
+
     }
 
 
@@ -185,7 +259,7 @@ class ContentBuilderCore extends Controller {
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
-     */
+     *//*
     public function save(Request $request) {
 
         $content = new Content([
@@ -207,7 +281,7 @@ class ContentBuilderCore extends Controller {
 
         return redirect()->route('eon.contentbuilder');
        
-    }
+    }*/
 
     /**
      * @param Request $request
@@ -222,7 +296,8 @@ class ContentBuilderCore extends Controller {
             'body' => $data['body'],
             'tags' => $data['tags'],
             'creator_id' => auth()->user()->id,
-            'description' => $data['description']
+            'description' => $data['description'],
+            'ingested' => 0
         ]);
         
         $content->save();
@@ -233,6 +308,8 @@ class ContentBuilderCore extends Controller {
             $temp = Category::find($category_id);
             $content->categories()->save($temp);
         }
+
+        ElasticIndexContent::dispatch();
 
         return 200;
 
