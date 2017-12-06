@@ -221,6 +221,7 @@ return [
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
         \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
+        \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
 
 
         /*
