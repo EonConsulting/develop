@@ -12,9 +12,8 @@
             {!! (isset($item['children']) ? 'tabindex="-1"' : '') !!}
             href="#"
             id="{{ $item['id'] }}"
-            class="{{ (!empty($item['required']) && !$item['enabled']) ? 'menu-btn-disabled' :'menu-btn'}}"
-            {!! (empty($item['required'] && !$item['enabled']) ? '' :'data-toggle="tooltip" data-placement="right" title="disabled"') !!}
-            req="{{ empty($item['required'])? 'null' :'' }}"
+            class="menu-btn"
+            data-toggle="tooltip" data-placement="right"
             data-parent-id="{{ $item['parent_id'] }}"
             data-item-id="{{ $item['id'] }}"
             data-prev-id="{{ $item['prev'] }}"
@@ -26,7 +25,7 @@
 
     @if(isset($item['children']))
     <ul>
-    @each('eon.storyline2::partials.items', $item['children'], 'item')
+    @each('eon.storyline2::lecturer.partials.items', $item['children'], 'item')
     </ul>
     @endif
 </li>
