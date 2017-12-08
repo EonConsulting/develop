@@ -368,6 +368,8 @@ Storyline Student Single
                                     <i class="fa fa-cube"></i>
                                     <span class="hidden-xs"> Assets</span>
                                 </button>
+                                
+                                <button class="btn btn-default p-check">plagiarism checker</button>
 
                             </div>
 
@@ -535,6 +537,44 @@ Storyline Student Single
 
     </div>
 </div>
+
+<div id="msgModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body msg-info">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="whiteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body msg-info">      
+       <div id="wbplayer"> </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+    
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -544,7 +584,16 @@ Storyline Student Single
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
-
+<script type="text/javascript" src="https://braincert.com/whiteboard/braincert-wb.js"></script>
+<script type="text/javascript">
+        bcwb.init({
+            apiKey: 'hHuZgPNvjFTcEyaa8sn3',
+            height:'1500',
+            width:'1500',
+            bgcolor:'#FFF',
+            logo:'LOGO_URL'
+        });
+       </script>
 <script>
 var base_url = "{{{ url('') }}}";
 var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
@@ -1026,6 +1075,39 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             $allListElements.hide();
             $matchingListElements.show();
             //$matchingListElements.addClass('highlighted');
+        });
+        
+        $(document).on('click','.-check',function(){
+            $("#whiteModal").modal();
+        });
+        
+        $(document).on('click','.p-check',function(){
+            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
+            $("#msgModal").modal();
+            if(data.length >1){               
+               var url = "{{ url('student/copyleaks') }}";
+               $.ajax({
+               url:url,
+               type: "POST",
+               data: {data: data, _token: "{{ csrf_token() }}"},
+               beforeSend: function () {
+                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
+               },
+                success: function (result) {
+                if (result.msg == 'true') {
+                    $('.msg-info').html(result.success);
+                } else {
+                    $('.msg-info').html('An error occured, please try again.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+          });
+          }else{
+             $('.msg-info').html('No content found, please add content.');
+          }
         });
     });
 
