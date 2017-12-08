@@ -18,16 +18,6 @@
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        /*-webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;*/
-
     }
 
     .flex-menu {
@@ -40,9 +30,7 @@
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        /*width: 250px;*/
 
-        /*overflow-x: hidden;*/
         overflow-y: auto;
 
         max-width: 350px;
@@ -313,15 +301,11 @@
             {{ $course['title'] }} <span class="caret"></span>
         </a>
         <ul class="dropdown-menu multi-level" id="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-            @each('eon.storyline2::student.partials.dropdown', $items, 'item', 'eon.storyline2::student.partials.none')
+            @each('eon.storyline2::lecturer.partials.dropdown', $items, 'item', 'eon.storyline2::lecturer.partials.none')
         </ul>
     </div>
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
-
-    <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-id="" id="view-notes-link"><i class="fa fa-comments-o"></i> View Notes </a></span>
-    <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-toggle="modal" data-id="" id="create-note-link" data-target="#create-note-modal"><i class="fa fa-pencil-square-o"></i> Create Note </a></span>
-
 </div>
 
 <div class="flex-container resizer">
@@ -332,7 +316,7 @@
 
             {{-- {!! $items !!} --}}
             <ul>
-            @each('eon.storyline2::student.partials.items', $items, 'item', 'eon.storyline2::student.partials.none')
+            @each('eon.storyline2::lecturer.partials.items', $items, 'item', 'eon.storyline2::lecturer.partials.none')
             </ul>
 
         </div>
@@ -452,38 +436,14 @@
     </div>
 @endsection
 
-@include('student-notes::note')
 
 @section('custom-scripts')
-    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
+<script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
-<script src="{{url('js/analytics/tincan.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>//Functions----------------------------------------------
 
-    function loadContent(item_id, button){
-        var courseId = '{{ $course->id }}';
-        var storyline = '{{ $storylineId }}';
-        var student = '{{auth()->user()->id}}';
-        var item = '{{auth()->user()->id}}';
-        $.ajax({
-            url: '{{ url('student/progression') }}',
-            type: "POST",
-            data: {item: item,course: courseId, id: item_id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            beforeSend: function () {
-                $('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
-            success: function (data, textStatus, jqXHR) {
-                refresh_items(data,item_id);
-                getContent(item_id, button);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                //ocation.reload();
-            }
-        });
-    }
 
     //Get Content
     function getContent(item_id,button) {
@@ -573,56 +533,11 @@
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     }
 
-    function saveProgress() {
-        var id = $('#content_tree').find('ul:first').children('li:first').find('a:first').data('item-id');
-        var courseId = '{{ $course->id }}';
-        var storyline = '{{ $storylineId }}';
-        var student = '{{auth()->user()->id}}';
-        $.ajax({
-            url: '{{url('')}}/student/progression',
-            type: "POST",
-            data: {course: courseId, id: id, storyline: storyline,student: student, _token: "{{ csrf_token() }}"},
-            success: function (data, textStatus, jqXHR) {
-                if (data.msg === 'true') {
-                    //$('#idIframe').attr('src','{{ url("")."/"}}'+data.story);
-                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                } else {
-                    //window.location.href = "/lti/courses/{{$course->id}}/lectures/" + data.story;
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                // location.reload();
-            }
-        });
-    }
 
     function resizeArea(){
         var areaHeight = $("#content-area").height();
         var toolsHeight = $("#tools").height();
         $(".flex-container").height(areaHeight - toolsHeight - 11);
-    }
-    
-    function refresh_items(data,item_id){    
-        var courseId = '{{ $course->id }}';
-        $.ajax({
-            url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
-            type: "GET",
-            async: true,
-            beforeSend: function () {
-                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
-            success: function (data, textStatus, jqXHR) {
-                $("#content_tree").html(data.items_html);
-                $("#dropdown-menu").html(data.drop_html);
-                
-                //pupulateContent(data, button);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-                    // location.reload();
-            }
-        });  
     }
 
 </script>
@@ -630,22 +545,10 @@
 
 <script>
   
-    window.onload = function () {
-       // $('a.active-menu').trigger('click');
-        saveProgress();
-    };
-
-    //$('.dropdown-toggle').dropdown()
-
     const selector = '.resizer';
 
     let resizer = new Resizer(selector);
-
     
-    
-    function progress_error(){
-        $("#errorModal").modal("show");
-    }
 
     $(document).ready(function(){
         resizeArea();
@@ -653,25 +556,25 @@
         $(document).on("click", ".menu-btn", function() {
             var button = $(this);
             var item_id = $(this).data("item-id");  
-            loadContent(item_id,button);
+            getContent(item_id,button);
         });
 
         $(document).on("click", ".bread-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            loadContent(item_id,button);
+            getContent(item_id,button);
         });
 
         $(document).on("click", ".arrow-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            loadContent(item_id,button);
+            getContent(item_id,button);
         });
 
         $(document).on("click", ".dropdown-btn", function() {
             var button = $('#'+$(this).data('item-id'));
             var item_id = $(this).data("item-id");
-            loadContent(item_id,button);
+            getContent(item_id,button);
         });
 
         //$('.arrow-btn').hide();
@@ -684,7 +587,7 @@
         console.log(first);
 
         var item_id = first.data("item-id");
-        loadContent(item_id, first);
+        getContent(item_id, first);
 
         //expand or collapse on caret click
         $(document).on('click','.toggle-expand', function(e){
@@ -706,69 +609,6 @@
         resizeArea();
     });
         
-    
-       
-    // update XAPI analytics
-    function logXAPITopicEvent(course_id, storyline_id, storyline_item_id) {
-        //Log search
-        var lrs;
-
-        try {
-            lrs = new TinCan.LRS(
-                    {
-                        endpoint: "{!! url('analytics/log') !!}",
-                        username: "{{ auth()->user()->name }}",
-                        password: null,
-                        allowFail: false
-                    }
-            );
-        } catch (ex) {
-            console.log("Failed to setup LRS XAPI object: ", ex);
-        }
-
-        var statement = new TinCan.Statement(
-                {
-                    actor: {
-                        mbox: "{{ auth()->user()->email }}"
-                    },
-                    verb: {
-                        id: "http://unisaonline.net/schema/1.0/topic"
-                    },
-                    target: {
-                        id: "{!! url('') !!}"
-                    },
-                    context: {
-                        extensions: {
-                            course: course_id,
-                            storyline: storyline_id,
-                            storyline_item: storyline_item_id
-                        }
-                    }
-                }
-        );
-
-        lrs.saveStatement(
-            statement,
-            {
-                callback: function (err, xhr) {
-                    if (err !== null) {
-                        if (xhr !== null) {
-                            console.log("Failed to save statement: " + xhr.responseText + " (" + xhr.status + ")");
-                            // TODO: do something with error, didn't save statement
-                            return;
-                        }
-
-                        console.log("Failed to save statement: " + err);
-                        // TODO: do something with error, didn't save statement
-                        return;
-                    }
-
-                    console.log("Statement saved");
-                    // TOOO: do something with success (possibly ignore)
-                }
-            }
-        );
-    }
     
 </script>
 

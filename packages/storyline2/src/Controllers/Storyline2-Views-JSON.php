@@ -77,8 +77,6 @@ class Storyline2ViewsJSON extends BaseController {
             ['student_id', '=', Auth()->user()->id]
         ])->first();
 
-
-
         usort($items, [$this, "self::compare"]);
         //dd($progress);
 
