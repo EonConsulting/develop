@@ -8,6 +8,7 @@ Storyline Student Single
 @section('custom-styles')
 <link rel="stylesheet" href="{{ url('vendor/jstree-themes/bootstrap/style.css') }}" />
 <link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+<link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 
 <style>
 
@@ -42,28 +43,16 @@ Storyline Student Single
      *----------------------------------------------------------------------
      */
 
-    
-    .page-container {
+    .flex-container {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        /*-webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;*/
-
-        margin-top: -15px;
     }
 
-    .page-container-tree {
+    .flex-menu {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -73,15 +62,14 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 250px;
 
-        overflow-x: hidden;
         overflow-y: auto;
 
         max-width: 350px;
+
     }
 
-    .page-container-editor {
+    .flex-content {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -93,6 +81,10 @@ Storyline Student Single
         align-self: stretch;
 
         width: 70%;
+
+        overflow-y: auto;
+        overflow-x: auto;
+
     }
 
     /**
@@ -315,32 +307,80 @@ Storyline Student Single
         font-weight: bold;   
     }
 
+    .tools {
+        margin: -15px 0 0 0;
+        background: #FFF;
+        border-width: 0px 0px 1px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        padding: 5px;
+        min-height: 35px;
+    }
+
+    .tools .sp {
+        height: 18px;
+        border-width: 0px 1px 0px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        width: 15px;
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .tools .btn {
+        border-radius: 0;
+        border: none;
+        color: #fb7217;
+
+    }
+
+    .tools-divider {
+        display: inline-block;
+        height: 25px;
+        width: 10px;
+        border-width: 0 1px 0 0;
+        border-color: #e0e0e0;
+        border-style: solid;
+        margin: 5px 10px 0 0;
+    }
+
 
 </style>
 @endsection
 
 
 @section('content')
-<div>
-    <div class="page-container resizer" id="page-container">
 
-        <div class="page-container-tree">
-            <div class="info-bar-name">
-                <div>
-                    <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
-                </div>
+<div class="tools" id="tools">
+
+    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
+
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
+    <span class="tools-divider pull-right"></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></span>
+    <span class="tools-divider pull-right"></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></span>
+
+</div>
+
+<div class="flex-container resizer">
+
+    <div class="flex-menu">
+        <div class="info-bar-name">
+            <div>
+                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
             </div>
+        </div>
 
-            <div id="tree">
+        <div id="tree">
 
-            </div>
+        </div>
 
+    </div><!--End flex-menu -->
 
-        </div><!--End col-md-3 -->
-
-        <div class="page-container-editor">
-
-            <div class="content-container">
+    <div class="flex-content">
+        <div class="content-container">
 
                 <div class="content-info">
 
@@ -350,25 +390,6 @@ Storyline Student Single
                                 <div>
                                     <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                                 </div>
-                            </div>
-
-                            <div class="info-bar-buttons" style="text-align: right;">
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" class="title-bar-button title-bar-button-save" data-toggle="modal" data-target="#saveModal">
-                                    <i class="fa fa-save"></i>
-                                    <span class="hidden-xs"> Save</span>
-                                </button>
-
-                                <button type="button" class="title-bar-button title-bar-button-import" data-toggle="modal" data-target="#importModal">
-                                    <i class="fa fa-save"></i>
-                                    <span class="hidden-xs"> Import</span>
-                                </button>
-
-                                <button class="title-bar-button title-bar-button-assets" data-toggle="modal" data-target="#assetsModal">
-                                    <i class="fa fa-cube"></i>
-                                    <span class="hidden-xs"> Assets</span>
-                                </button>
-
                             </div>
 
                         </div> <!-- row end -->
@@ -387,12 +408,10 @@ Storyline Student Single
                 </div>
         
             </div>
-        </div><!--End col-md-9 -->
 
-    </div><!--End row -->
+    </div><!--End flex-content -->
 
-</div><!--End container-fluid -->
-
+</div><!--End flexbox-container -->
 
 {{ csrf_field() }}
 
@@ -535,6 +554,28 @@ Storyline Student Single
 
     </div>
 </div>
+
+<div id="previewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content content-body">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Preview Content</h4>
+            </div>
+
+            <div class="modal-body content-preview" id="content-preview">
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#previewModal"><i class="fa fa-save"></i><span> Close</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -544,6 +585,7 @@ Storyline Student Single
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
 var base_url = "{{{ url('') }}}";
@@ -591,14 +633,27 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 breakBeforeClose : false,
                 breakAfterClose : false
             });
+
+            resize();
         });  
+
+        editor.on('change', function() {
+            body = editor.getData();
+            $("#content-preview").html(body);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        });
 
         editor.Height = '100%';
 
     });
 
-    CKEDITOR.on('instanceReady', function() { 
-        resize();
+   /* CKEDITOR.on('instanceReady', function() { 
+        
+    });*/
+
+    CKEDITOR.on('change', function() {
+        body = editor.getData();
+        $("#content-preview").html(body);
     });
 
     // resize the editor(s) while resizing the browser
@@ -606,16 +661,26 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         resize();
     });
 
+    function resizeArea(){
+        var areaHeight = $("#content-area").height();
+        var toolsHeight = $("#tools").height();
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
+    }
+
     function resize(){
-        var contentHeight       = $("#content-area").height();
-        var textEditHeight      = contentHeight - $("#info-bar").height();
+        var areaHeight = $("#content-area").height();
+        var toolsHeight = $("#tools").height();
+        var textEditHeight      = areaHeight - toolsHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 21) + "px");
         //$("#page_container").css("background-color", "yellow");
-        $("#page-container").height( (contentHeight) + "px");
+        //$("#page-container").height( (contentHeight) + "px");
+
+ 
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
     }
 
 </script>
