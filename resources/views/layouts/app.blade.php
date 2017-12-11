@@ -14,6 +14,8 @@ $lti = laravel_lti()->is_lti(auth()->user());
         
         @yield('custom-styles')
 
+        @stack('package-css')
+
     </head>
 
     <body id="app-body">
@@ -44,10 +46,18 @@ $lti = laravel_lti()->is_lti(auth()->user());
         @include('templates.default-scripts')
 
         @stack('hoisted-scripts')
-        
+
+        @stack('package-js')
+
+        @stack('package-modals')
+
         @yield('custom-scripts')
 
+
+
         @include('html-to-pdf::javascript')
+
+
        
     </body>
 

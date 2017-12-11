@@ -55,5 +55,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
 
         Route::get('/set_required', 'Storyline2Core@set_required');
+
+        Route::get('/preview/{course}', 'Storyline2ViewsBlade@preview')->name('storyline2.preview');
     });
 });
