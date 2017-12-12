@@ -113,6 +113,17 @@
             overflow-y: auto;
         }
 
+        .search {
+            margin: 15px 0 15px 0;
+
+        }
+
+        .pag {
+            overflow-y: auto;
+            text-align: center;
+            margin: 0 15px 15px 15px;
+        }
+
     </style>
 @endsection
 
@@ -155,16 +166,57 @@
         
 
         <div class="assets flex-item">
+
             <div class="search">
-                <div class="form-group">
-                    <label for="search"></label>
-                    <input type="text" class="form-control" name="search" placeholder="Enter a search term">
+                <div class="form-inline">
+
+                    <div class="form-group">
+                        <input type="text" id="searchterm" class="form-control" name="search" placeholder="Enter a search term">
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
+                    <button type="button" class="btn btn-info" id="btnReset">Reset</button>
                 </div>
+                
             </div>
+
+
             <div class="results">
+                <div class="pag">
+                    @if($searchResults['fromPrev'] >= 0)
+                    <a href="{!! url('/content') . '?from=' . $searchResults['fromPrev'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-left">Previous</a>
+                    @else
+                    <button class="btn btn-default disabled pull-left">Previous</button>
+                    @endif
 
+                    Showing 
+                    <strong>{{ $searchResults['fromNext'] - ($searchResults['size'] - 1) }}</strong>
+                        to 
 
-                <?php foreach($assets as $asset): ?>
+                    
+                    @if($searchResults['fromNext'] < $searchResults['total'])
+                    <strong>{{ $searchResults['fromNext'] }}</strong>
+                    @else
+                    <strong>{{ $searchResults['total'] }}</strong>
+                    @endif
+                    
+                    
+                        of 
+
+                    <strong>
+                    {{ $searchResults['total'] }}
+                    </strong>
+                    
+                        results
+
+                    @if($searchResults['fromNext'] < $searchResults['total'])
+                    <a href="{!! url('/content') . '?from=' . $searchResults['fromNext'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-right">Next</a>
+                    @else   
+                    <button class="btn btn-default disabled pull-right">Next</button>
+                    @endif
+                </div>
+
+                <?php foreach($searchResults['results'] as $asset): ?>
                 <div class="results-entry shadow">
                     <div class="results-entry-icon">
                         <i class="fa fa-image"></i>
@@ -179,6 +231,41 @@
                     </div>
                 </div>
                 <?php endforeach; ?>
+
+
+                <div class="pag">
+                    @if($searchResults['fromPrev'] >= 0)
+                    <a href="{!! url('/content/assets') . '?from=' . $searchResults['fromPrev'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-left">Previous</a>
+                    @else
+                    <button class="btn btn-default disabled pull-left">Previous</button>
+                    @endif
+
+                    Showing 
+                    <strong>{{ $searchResults['fromNext'] - ($searchResults['size'] - 1) }}</strong>
+                        to 
+
+                    
+                    @if($searchResults['fromNext'] < $searchResults['total'])
+                    <strong>{{ $searchResults['fromNext'] }}</strong>
+                    @else
+                    <strong>{{ $searchResults['total'] }}</strong>
+                    @endif
+                    
+                    
+                        of 
+
+                    <strong>
+                    {{ $searchResults['total'] }}
+                    </strong>
+                    
+                        results
+
+                    @if($searchResults['fromNext'] < $searchResults['total'])
+                    <a href="{!! url('/content/assets') . '?from=' . $searchResults['fromNext'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-right">Next</a>
+                    @else   
+                    <button class="btn btn-default disabled pull-right">Next</button>
+                    @endif
+                </div>
 
             </div>
         </div>
@@ -266,6 +353,27 @@
 
         $(document).ready(function() {
             resizeArea();
+
+            $("#searchterm").keypress(function (e) {
+                if (e.which === 13) {
+                    var sValue = $(this).val();
+                    if (sValue.length >= 3) {
+                        window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}" + sValue;
+                    }
+                }
+            });
+
+            $("#btnSearch").on("click", function () {
+                console.log('Search Clicked');
+                var sValue = $("#searchterm").val();
+                if (sValue.length >= 3) {
+                    window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}" + sValue;
+                }
+            });
+
+            $("#btnReset").on("click", function () {
+                window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}";
+            });
         });
 
         function changePreview(asset){
@@ -324,10 +432,6 @@
             } else {
                 $("#a-content-holder").hide();
             }
-
-
-
-
 
             $("#preview-place-holder").hide();
             $("#preview-asset").removeClass("hidden");
