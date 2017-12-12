@@ -121,7 +121,7 @@
         .pag {
             overflow-y: auto;
             text-align: center;
-            margin: 0 15px 15px 15px;
+            margin: 0 0 15px 0;
         }
 
     </style>
