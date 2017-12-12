@@ -16,11 +16,12 @@ class CreateIntegrateTaoResultsTable extends Migration
         Schema::create('integrate_tao_results', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('storyline_item_id');
+            $table->integer('storyline_item_id')->nullable();
             $table->string('lis_result_sourcedid');
             $table->string('delivery_execution_id')->nullable();
             $table->string('test_taker')->nullable();
             $table->string('score')->nullable();
+            $table->boolean('ingested')->default(0);
             $table->longText('response')->nullable();
             $table->timestamps();
         });
