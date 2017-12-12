@@ -160,7 +160,7 @@ class ContentBuilderAssets extends Controller {
 
         Asset::destroy($asset_id);
 
-        return redirect('content/assets');
+        return redirect('content/assets?from=0&size=20&searchterm=');
     }
 
 
@@ -186,9 +186,7 @@ class ContentBuilderAssets extends Controller {
                 default:
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
-
             }
-
 
         } else {
             $file_path = null;
@@ -216,7 +214,10 @@ class ContentBuilderAssets extends Controller {
             $asset->categories()->save($temp);
         }
 
-        return redirect('content/assets');
+
+        ElasticIndexAssets::dispatch();
+
+        return redirect('content/assets?from=0&size=20&searchterm=');
 
 
 
