@@ -14,7 +14,7 @@ class StoryLineItemObserver
     /**
      * Listen to the StorylineItem saved event.
      *
-     * @param  \EONConsulting\Storyline2\Models\StorylineItem  $user
+     * @param  \EONConsulting\Storyline2\Models\StorylineItem  $storyline_item
      * @return void
      */
     public function saved(StorylineItem $storyline_item)
