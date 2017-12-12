@@ -28,7 +28,6 @@ class DefaultController extends LTIBaseController {
             ]
         ]);
 
-
         if ($login->getStatusCode() == 200) {
             $body = $login->getBody()->getContents();
             $data = json_decode($body);
@@ -61,8 +60,7 @@ class DefaultController extends LTIBaseController {
         $process = $client->request('POST', '/v1/education/create-by-text', ['body' =>$text,                                          
                                     'verify' => false, 'headers' =>['Content-Type' =>'application/json',
                                     'Authorization' => ['Bearer ' . $token]]
-                                    
-                                    
+                                                                       
             ]);
         
         if ($process->getStatusCode() == 200) {
@@ -88,8 +86,7 @@ class DefaultController extends LTIBaseController {
         $result = $client->request('GET', 'https://api.copyleaks.com/v1/education/'.$data->ProcessId.'/result', [
                     'verify' => false, 'headers' =>[
                     'Content-Type' =>'application/json',
-                    'Authorization' => 'Bearer ' . $token]
-                
+                    'Authorization' => 'Bearer ' . $token]               
             ]);
         
         if ($result->getStatusCode() == 200) {
