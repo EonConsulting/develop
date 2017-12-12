@@ -7,6 +7,10 @@ use EONConsulting\TaoClient\Services\TaoApi;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use EONConsulting\TaoClient\Observers\StoryLineItemObserver;
 
+use EONConsulting\TaoClient\Console\Commands\TaoClientCommand;
+use EONConsulting\TaoClient\Console\Commands\TaoRetryJobsCommand;
+use EONConsulting\TaoClient\Console\Commands\TaoRemoveJobsCommand;
+
 class TaoClientServiceProvider extends ServiceProvider
 {
     /**
@@ -47,7 +51,9 @@ class TaoClientServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \EONConsulting\TaoClient\Console\Commands\TaoClientCommand::class,
+                TaoClientCommand::class,
+                TaoRetryJobsCommand::class,
+                TaoRemoveJobsCommand::class,
             ]);
         }
     }
