@@ -222,7 +222,7 @@ return [
 
         \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
-
+        \EONConsulting\TaoClient\TaoClientServiceProvider::class,
 
         /*
          * Application Service Providers...
