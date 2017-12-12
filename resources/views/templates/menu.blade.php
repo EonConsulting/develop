@@ -174,7 +174,7 @@
                             <a href="{{ route('eon.contentbuilder.update', 'new') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Content</a>
                         </li>
                         <li>
-                            <a href="{{ route('assets.index') }}"><i class="fa fa-circle-o left-menu-icon"></i>All Assets</a>
+                            <a href="{{ route('assets.index') . '?from=0&size=20&searchterm=' }}"><i class="fa fa-circle-o left-menu-icon"></i>All Assets</a>
                         </li>
                         <li>
                             <a href="{{ route('assets.create') }}"><i class="fa fa-circle-o left-menu-icon"></i>Create Asset</a>
