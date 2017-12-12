@@ -21,8 +21,12 @@ class DashboardLTIController extends LTIBaseController
 
         Log::debug("Attempting an LTI Login....");
         Log::debug($UserRole);
+        
+        // we want a more vanilla flavoured role, especially when dealing
+        // which the MyUNISA roles
+        $parsedRole = $this->interpretRole($UserRole);
 
-        switch ($UserRole) {
+        switch ($parsedRole) {
             case "Administrator":
                 $breadcrumbs = [
                     'title' => 'Administrator Dashboard'
@@ -56,6 +60,22 @@ class DashboardLTIController extends LTIBaseController
         }
     }
 
+    public function interpretRole($UserRole)
+    {
+        // example of what we get from MyUNISA
+        // "Instructor, Administrator,urn:lti:instrole:ims/lis/Administrator,urn:lti:sysrole:ims/lis/Administrator"
+        if (str_contains($UserRole, "urn:lti:instrole:") || str_contains($UserRole, "urn:lti:sysrole:"))
+        {
+            // this is probably a SAKAI LTI Token
+            // lets see if we can get an instrole, if not a sysrole
+            preg_match("/urn:lti:instrole:ims\/lis\/(\w+)/", $UserRole, $matches);
+            return $matches[1];
+        } else {
+            // this is another LTI Token, possibly TSUGI
+            return $UserRole;
+        }
+    }
+    
     public function lecturer_stud_analysis()
     {
         $breadcrumbs = [
