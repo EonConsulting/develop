@@ -60,7 +60,8 @@
       "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
       "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src",
       "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src",
-      "EONConsulting\\StudentNotes\\": "packages/student-notes/src"
+      "EONConsulting\\StudentNotes\\": "packages/student-notes/src",
+      "EONConsulting\\TaoClient\\": "packages/tao-client/src"
     },
     "files": [
       "packages/laravel-lti/src/functions.php",
