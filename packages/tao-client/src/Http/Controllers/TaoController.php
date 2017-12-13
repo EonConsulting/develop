@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use EONConsulting\TaoClient\Models\TaoAssessment;
 use EONConsulting\TaoClient\Models\TaoResult;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use EONConsulting\TaoClient\Services\UUID;
 
 use Tsugi\OAuth\OAuthSignatureMethod_HMAC_SHA1;
 use Tsugi\OAuth\OAuthConsumer;
@@ -68,7 +69,7 @@ class TaoController extends Controller
             return view('tao-client::launch-failed');
         }
 
-        $lis_result_sourcedid = uniqid('unisa_');
+        $lis_result_sourcedid = UUID::make();
 
         $user = auth()->user();
 
