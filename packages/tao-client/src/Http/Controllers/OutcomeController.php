@@ -13,10 +13,14 @@ use Log;
 
 class OutcomeController extends Controller
 {
-
+    /**
+     * OutcomeController constructor.
+     *
+     * @TODO Auth is returning null so we're forcing a user login
+     */
     public function __construct()
     {
-        Auth::loginUsingId(1400163);
+        Auth::loginUsingId(1);
 
         \Debugbar::disable();
     }
