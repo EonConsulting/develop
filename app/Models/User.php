@@ -128,4 +128,19 @@ class User extends Authenticatable
         $fullname = explode(" ", $this->name);
         return $fullname[1] ?? '';
     }
+
+    /**
+     * Get the user's LTI role.
+     *
+     * @return string
+     */
+    public function getLtiRoleAttribute()
+    {
+        if ( ! $lti = $this->lti->first())
+        {
+            return false;
+        }
+
+        return $lti->roles;
+    }
 }
