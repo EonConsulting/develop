@@ -16,7 +16,7 @@ class OutcomeController extends Controller
     /**
      * OutcomeController constructor.
      *
-     * @TODO Auth is returning null so we're forcing a user login
+     *  @TODO Auth is returning null so we're forcing a user login
      */
     public function __construct()
     {
@@ -63,7 +63,9 @@ class OutcomeController extends Controller
 
         $result->save();
 
-        TaoResultJob::dispatch($source_id);
+        Log::info('Received outcome for reference ' . $source_id);
+
+        TaoResultJob::dispatch($result);
     }
 
     /**
