@@ -6,7 +6,12 @@ use DOMDocument;
 
 class Helpers
 {
-
+    /**
+     * Clean the tao launch url
+     *
+     * @param $launch_url
+     * @return bool|string
+     */
     static public function sanitizeTaoLaunchUrl($launch_url)
     {
         $parts = parse_url($launch_url);
@@ -32,14 +37,26 @@ class Helpers
         return $tao_url . trim($path);
     }
 
+    /**
+     * Check if the url is a tao url
+     *
+     * @param $url
+     * @return bool
+     */
     static public function isTaoLink($url)
     {
         return ! preg_match('/DeliveryTool\/launch\//', $url);
     }
 
+    /**
+     * Get the tao url
+     *
+     * @param $content
+     * @return bool|string
+     */
     static public function getLaunchUrl($content)
     {
-        if( ! $tao_iframe_src = self::getTaoIframe($content))
+        if(! $tao_iframe_src = self::getTaoIframe($content))
         {
             return false;
         }
@@ -65,6 +82,12 @@ class Helpers
         return false;
     }
 
+    /**
+     * Get the tao url from the iframe in the content
+     *
+     * @param $content
+     * @return bool|string
+     */
     static public function getTaoIframe($content)
     {
 
@@ -74,13 +97,11 @@ class Helpers
             @$dom->loadHTML($content);
 
             $iframes = $dom->getElementsByTagName('iframe');
-        } catch(\Exception $e)
-        {
+        } catch(\Exception $e) {
             return false;
         }
 
-        foreach($iframes as $iframe)
-        {
+        foreach($iframes as $iframe) {
             return $iframe->getAttribute('src');
         }
 
