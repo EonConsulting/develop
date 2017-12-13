@@ -17,7 +17,7 @@ class CreateIntegrateTaoResultsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('storyline_item_id')->nullable();
-            $table->string('lis_result_sourcedid');
+            $table->string('lis_result_sourcedid')->index();
             $table->string('delivery_execution_id')->nullable();
             $table->string('test_taker')->nullable();
             $table->string('score')->nullable();
