@@ -8,11 +8,9 @@ use EONConsulting\TaoClient\Models\TaoAssessment;
 use EONConsulting\TaoClient\Models\TaoResult;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use EONConsulting\TaoClient\Services\UUID;
-
 use Tsugi\OAuth\OAuthSignatureMethod_HMAC_SHA1;
 use Tsugi\OAuth\OAuthConsumer;
 use Tsugi\OAuth\OAuthRequest;
-use Tsugi\OAuth\OAuthUtil;
 use Auth;
 use Log;
 
@@ -20,13 +18,9 @@ class TaoController extends Controller
 {
     /**
      * TaoController constructor.
-     *
-     * @TODO Auth is returning null so we're forcing a user login
      */
     public function __construct()
     {
-        Auth::loginUsingId(1);
-
         \Debugbar::disable();
     }
 
@@ -52,6 +46,11 @@ class TaoController extends Controller
         return response()->json(['status'  => 'success']);
     }
 
+    /**
+     * Show the Tao iframe
+     *
+     * @return \Illuminate\View\View
+     */
     public function show(Request $request)
     {
         $validated_data = $request->validate([
@@ -91,6 +90,15 @@ class TaoController extends Controller
         return view('tao-client::launch', ['url' => $assessment->launch_url, 'inputs' => $params]);
     }
 
+    /**
+     * Sign the LTI request using oAuth
+     *
+     * @param $url
+     * @param $consumer_key
+     * @param $consumer_secret
+     * @param $params
+     * @return array|null
+     */
     protected function signRequest($url, $consumer_key, $consumer_secret, $params)
     {
         $params['oauth_callback'] = 'about:blank';
@@ -108,6 +116,13 @@ class TaoController extends Controller
         return $params;
     }
 
+    /**
+     * Return LTI params
+     *
+     * @param $user
+     * @param $lis_result_sourcedid
+     * @return array
+     */
     protected function buildParams($user, $lis_result_sourcedid)
     {
         $params = [
@@ -118,7 +133,7 @@ class TaoController extends Controller
 
             'user_id' => $user->id,
             'user_image' => '',
-            'roles' => 'Learner',
+            'roles' => $user->lti_role,
 
             'lis_person_name_full' => $user->name,
             'lis_person_name_given' => $user->first_name,
