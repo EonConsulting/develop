@@ -73,3 +73,14 @@
 "} 
 [2017-12-11 22:44:08] local.DEBUG: Attempting an LTI Login....  
 [2017-12-11 22:44:08] local.DEBUG: Instructor  
+[2017-12-12 10:27:26] local.DEBUG: Starting asset sync to Elastic  
+[2017-12-12 10:27:26] local.INFO: POST of item id:3 to index:assets successful  
+[2017-12-12 10:27:26] local.INFO: POST of item id:4 to index:assets successful  
+[2017-12-12 10:27:26] local.DEBUG: Finished asset sync to Elastic  
+[2017-12-12 10:28:32] local.DEBUG: Starting asset sync to Elastic  
+[2017-12-12 10:28:32] local.INFO: POST of item id:5 to index:assets successful  
+[2017-12-12 10:28:32] local.DEBUG: Finished asset sync to Elastic  
+[2017-12-12 02:31:58] local.DEBUG: Attempting an LTI Login....  
+[2017-12-12 02:31:58] local.DEBUG: Instructor  
+[2017-12-12 04:34:06] local.DEBUG: Attempting an LTI Login....  
+[2017-12-12 04:34:06] local.DEBUG: Instructor  
