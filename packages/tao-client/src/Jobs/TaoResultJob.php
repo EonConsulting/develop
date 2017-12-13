@@ -31,20 +31,20 @@ class TaoResultJob implements ShouldQueue
     public $timeout = 120;
 
     /**
-     * Unique tao reference number
+     * Unqiue tao
      *
-     * @var $unique_reference
+     * \EONConsulting\TaoClient\Models\TaoResult
      */
-    protected $unique_reference;
+    protected $tao_result;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($unique_reference)
+    public function __construct(TaoResult $tao_result)
     {
-        $this->unique_reference = $unique_reference;
+        $this->tao_result = $tao_result;
     }
 
     /**
@@ -56,25 +56,12 @@ class TaoResultJob implements ShouldQueue
     public function handle(TaoApi $tao_api)
     {
 
-        try {
-
-            $integrate_tao_result = TaoResult::with(['result_identifier'])
-                ->bySourceId($this->unique_reference)
-                ->byPendingApi()
-                ->firstOrFail();
-
-        } catch(ModelNotFoundException $e)
+        if( ! $tao_storage = optional($this->tao_result->result_identifier)->result_storage)
         {
-            Log::debug('TaoResultJob: ' . $e->getMessage());
-            return false;
-        }
+            $this->tao_result->status = 0;
+            $this->tao_result->status_message = 'TaoResultJob: Test not completed on tao';
 
-        if( ! $tao_storage = optional($integrate_tao_result->result_identifier)->result_storage)
-        {
-            $integrate_tao_result->status = 0;
-            $integrate_tao_result->status_message = 'TaoResultJob: Test not completed on tao';
-
-            $integrate_tao_result->save();
+            $this->tao_result->save();
 
             Log::debug('TaoResultJob: Test not completed on tao!');
             return false;
@@ -88,22 +75,22 @@ class TaoResultJob implements ShouldQueue
 
         } catch(\Exception $e)
         {
-            $integrate_tao_result->status = 0;
-            $integrate_tao_result->status_message = 'TaoResultJob: ' . $e->getMessage();
+            $this->tao_result->status = 0;
+            $this->tao_result->status_message = 'TaoResultJob: ' . $e->getMessage();
 
-            $integrate_tao_result->save();
+            $this->tao_result->save();
 
             Log::debug('TaoResultJob: ' . $e->getMessage());
             return false;
         }
 
-        $integrate_tao_result->delivery_execution_id = $tao_storage->delivery;
-        $integrate_tao_result->test_taker = $tao_storage->test_taker;
-        $integrate_tao_result->response = $api_response;
-        $integrate_tao_result->status = 1;
-        $integrate_tao_result->status_message = 'API Response captured';
+        $this->tao_result->delivery_execution_id = $tao_storage->delivery;
+        $this->tao_result->test_taker = $tao_storage->test_taker;
+        $this->tao_result->response = $api_response;
+        $this->tao_result->status = 1;
+        $this->tao_result->status_message = 'API Response captured';
 
-        $integrate_tao_result->save();
+        $this->tao_result->save();
     }
 
 }
