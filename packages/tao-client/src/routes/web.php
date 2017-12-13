@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['namespace' => '\EONConsulting\TaoClient\Http\Controllers'], function () {
+Route::group(['namespace' => '\EONConsulting\TaoClient\Http\Controllers', 'middleware' => ['web']], function () {
 
     Route::get('/tao-client/show', [
         'as' => 'tao-client.show',
