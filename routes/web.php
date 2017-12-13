@@ -1,18 +1,18 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| E-Content System Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now work !
-|
-| These Routes are only System Specific Routes, Package and Component
-| Routes are in there individual packages.
-|
-*/
+  |--------------------------------------------------------------------------
+  | E-Content System Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register web routes for your application. These
+  | routes are loaded by the RouteServiceProvider within a group which
+  | contains the "web" middleware group. Now work !
+  |
+  | These Routes are only System Specific Routes, Package and Component
+  | Routes are in there individual packages.
+  |
+ */
 
 /*
  * ---------------------------------------
@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
  * Home - Non LTI Routes
  * --------------------------------------
  */
-Route::group(['middleware' => ['auth'],'prefix' => '/home'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'home.users.profile', 'uses' => 'ProfileController@index']);
@@ -65,7 +65,6 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function () {
 
 
 //Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);
-
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
 //Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  // TODO::replace-test
@@ -115,6 +114,11 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
         Route::match(['get', 'post'], '/mentor-stud-analysis', ['as' => 'lti.dashboards.mentor-stud-analysis', 'uses' => 'DashboardLTIController@mentor_stud_analysis']);
         Route::match(['get', 'post'], '/mentor-assess-analysis', ['as' => 'lti.dashboards.mentor-assess-analysis', 'uses' => 'DashboardLTIController@mentor_assess_analysis']);
     });
+    Route::group(['namespace' => 'Data'], function() {
+        Route::match(['get'], '/data-courses/', ['as' => 'lti.dashboards.data-courses', 'uses' => 'DashboardDataController@data_courses']);
+        Route::match(['get'], '/data-students/{course_id}', ['as' => 'lti.dashboards.data-students', 'uses' => 'DashboardDataController@data_students']);
+        Route::match(['get'], '/data-progression/{course_id}/{student_id}', ['as' => 'lti.dashboards.data-progression', 'uses' => 'DashboardDataController@data_progression']);
+    });
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);
         Route::match(['get', 'post'], '/profile/update', ['as' => 'lti.users.profile.update', 'uses' => 'ProfileLTIController@update']);
@@ -143,6 +147,6 @@ Route::get('/logout', function () {
  * Playground API's
  * ----------------------------------------------------
  */
-Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
-    Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
+Route::group(['prefix' => '/apis']/* 'middleware' => 'auth'] */, function () {
+    Route::match(['get', 'post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
 });

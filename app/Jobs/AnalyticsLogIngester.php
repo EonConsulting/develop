@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Bus\Dispatchable;
-use \EONConsulting\Core\Classes as ECC;
+use EONConsulting\Core\Classes as ECC;
 
 class AnalyticsLogIngester implements ShouldQueue {
 
