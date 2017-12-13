@@ -10,6 +10,7 @@ use EONConsulting\TaoClient\Observers\StoryLineItemObserver;
 use EONConsulting\TaoClient\Console\Commands\TaoClientCommand;
 use EONConsulting\TaoClient\Console\Commands\TaoRetryJobsCommand;
 use EONConsulting\TaoClient\Console\Commands\TaoRemoveJobsCommand;
+use EONConsulting\TaoClient\Console\Commands\TaoFixIframesCommand;
 
 class TaoClientServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,6 @@ class TaoClientServiceProvider extends ServiceProvider
         ]);
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'tao-client');
 
@@ -54,6 +54,7 @@ class TaoClientServiceProvider extends ServiceProvider
                 TaoClientCommand::class,
                 TaoRetryJobsCommand::class,
                 TaoRemoveJobsCommand::class,
+                TaoFixIframesCommand::class,
             ]);
         }
     }
