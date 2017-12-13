@@ -363,6 +363,7 @@ Storyline Student Single
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></span>
     <span class="tools-divider pull-right"></span>
     <span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i> Plagiarism Checker</a></span>
+    <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i> Whiteboard</a></span>
 </div>
 
 <div class="flex-container resizer">
@@ -597,16 +598,16 @@ Storyline Student Single
 </div>
 
 <div id="whiteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body msg-info">      
-       <div id="wbplayer"> </div>
-        
+      <div class="modal-body" >    
+          <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
+      <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -625,17 +626,33 @@ Storyline Student Single
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
-
-<script type="text/javascript" src="https://braincert.com/whiteboard/braincert-wb.js"></script>
-<script type="text/javascript">
-        bcwb.init({
-            apiKey: 'hHuZgPNvjFTcEyaa8sn3',
-            height:'1500',
-            width:'1500',
-            bgcolor:'#FFF',
-            logo:'LOGO_URL'
+<!--<script src="https://awwapp.com/static/widget/js/aww.min.js"></script>-->
+<!--<script type="text/javascript">
+        var aww = new AwwBoard('#aww-wrpper', {
+            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b'
         });
-       </script>
+        aww.doDrawLine('green', 10, 50, 50, 600, 600);
+        aww.drawText("This is drawing text", 100, 200, "green",
+                     "30px mono");
+</script>-->
+<script type="text/javascript">
+      var aww = new AwwBoard('#aww-wrapper', {
+            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b',
+            autoJoin: true,
+            boardLink: '5aj5342-56tz-uhjk-9874',
+            sizes: [3, 5, 8, 13, 20],
+            fontSizes: [10, 12, 16, 22, 30],
+            menuOrder: ['colors', 'sizes', 'tools', 'admin',
+              'utils'],
+            tools: ['pencil', 'rectangle','eraser', 'text', 'image'],
+            colors: [ "#000000", "#f44336", "#4caf50", "#2196f3",
+              "#ffc107", "#9c27b0",     "#e91e63", "#795548"],
+            defaultColor: "#000000",
+            defaultSize: 8,
+            defaultTool: 'pencil',
+     });
+</script>
+
 <script>
 var base_url = "{{{ url('') }}}";
 var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
@@ -1142,7 +1159,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             //$matchingListElements.addClass('highlighted');
         });
         
-        $(document).on('click','.-check',function(){
+        $(document).on('click','.white-b',function(){
             $("#whiteModal").modal();
         });
         

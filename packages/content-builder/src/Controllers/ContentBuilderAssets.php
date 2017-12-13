@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Asset;
 use EONConsulting\ContentBuilder\Models\Category;
 use Illuminate\Support\Facades\Storage;
-
+use App\Tools\Elasticsearch\Elasticsearch;
+use App\Jobs\ElasticIndexAssets;
 
 class ContentBuilderAssets extends Controller {
 
@@ -59,16 +60,81 @@ class ContentBuilderAssets extends Controller {
     }
 
     //resource method
-    public function index() {
+    public function index(Request $request) {
 
-        $assets = Asset::all();
+        $breadcrumbs = [
+            'title' => 'Content Store',
+        ];
+
+        $categories = Category::all();
+
+        $elasticsearch = new Elasticsearch;
+
+        $index = 'assets';
+        $searchterm = $request->get('searchterm');
+        $from = $request->get('from');
+        $size = $request->get('size');
+
+        if (empty($searchterm)) {
+           $query = '{
+               "query": {
+                    "match_all": {}
+                }
+            }';
+        } else {
+
+            $query = '{
+                "query": {
+                    "query_string" : {
+                        "query" : "*' . $searchterm . '*"
+                    }
+                }
+            }';
+        }
+
+        try {
+            $output = $elasticsearch->search($index, $query, $from, $size);
+            $output = json_decode($output);
+
+
+            $hits = $output->hits->hits;
+
+            $total = $output->hits->total;
+            
+            $fromNext = $from + $size;
+            $fromPrev = $from - $size;
+
+            $finalOutput = [
+                "fromNext" => $fromNext,
+                "fromPrev" => $fromPrev,
+                "total" => $total,
+                "size" => $size,
+                "searchterm" => $searchterm,
+                "results" => []
+            ];
+
+            foreach ($hits as $hit) {
+
+                $asset = Asset::find($hit->_id);
+                //$content->tags = $this->get_tags($content);
+
+                $finalOutput['results'][] = $asset;
+            }
+
+        } catch (\ErrorException $e) {
+            Log::error("Unable to perform search: " . $e->getMessage());
+            $finalOutput = array();
+        }
+
+
+        //$assets = Asset::all();
         $categories = Category::all();
 
         $breadcrumbs = [
             'title' => 'Asset Store'
         ];
 
-        return view('eon.content-builder::assets.index', ['assets' => $assets, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::assets.index', ['searchResults' => $finalOutput, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
     
     }
 
@@ -94,7 +160,7 @@ class ContentBuilderAssets extends Controller {
 
         Asset::destroy($asset_id);
 
-        return redirect('content/assets');
+        return redirect('content/assets?from=0&size=20&searchterm=');
     }
 
 
@@ -120,9 +186,7 @@ class ContentBuilderAssets extends Controller {
                 default:
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
-
             }
-
 
         } else {
             $file_path = null;
@@ -150,7 +214,10 @@ class ContentBuilderAssets extends Controller {
             $asset->categories()->save($temp);
         }
 
-        return redirect('content/assets');
+
+        ElasticIndexAssets::dispatch();
+
+        return redirect('content/assets?from=0&size=20&searchterm=');
 
 
 

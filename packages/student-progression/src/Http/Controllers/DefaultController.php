@@ -28,7 +28,6 @@ class DefaultController extends LTIBaseController {
             ]
         ]);
 
-
         if ($login->getStatusCode() == 200) {
             $body = $login->getBody()->getContents();
             $data = json_decode($body);
@@ -61,8 +60,7 @@ class DefaultController extends LTIBaseController {
         $process = $client->request('POST', '/v1/education/create-by-text', ['body' =>$text,                                          
                                     'verify' => false, 'headers' =>['Content-Type' =>'application/json',
                                     'Authorization' => ['Bearer ' . $token]]
-                                    
-                                    
+                                                                       
             ]);
         
         if ($process->getStatusCode() == 200) {
@@ -88,8 +86,7 @@ class DefaultController extends LTIBaseController {
         $result = $client->request('GET', 'https://api.copyleaks.com/v1/education/'.$data->ProcessId.'/result', [
                     'verify' => false, 'headers' =>[
                     'Content-Type' =>'application/json',
-                    'Authorization' => 'Bearer ' . $token]
-                
+                    'Authorization' => 'Bearer ' . $token]               
             ]);
         
         if ($result->getStatusCode() == 200) {
@@ -97,15 +94,13 @@ class DefaultController extends LTIBaseController {
             $data = json_decode($body);
             if(empty($data)){
                 $data = 'Content was Successfully scanned, no matches found.';
-             }else{
-                 
-                $data = "<div class='alert alert-success'><strong>Content was Successfully scanned</strong> </div><br><b>Suspected Website :</b><a href=".$data[0]->URL.">".$data[0]->URL."</a><br>"
+             }else{                
+                $data = "<div class='alert alert-success'><strong>Content was Successfully scanned</strong> </div><br><b>Suspected Website :</b><a href=".$data[0]->URL." target='_blank'>".$data[0]->URL."</a><br>"
                         . '<b>Result Title :</b>'.$data[0]->Title.'<br>'
                         . '<b>Number Of Copied Words :</b>'.$data[0]->NumberOfCopiedWords.'<br>'
                         //. '<b>Introduction :</b>'.$data[0]->Introduction.'<br>'
                         . "<b>Comparison Report :</b> <a href=".$data[0]->ComparisonReport.">".$data[0]->ComparisonReport."</a>";
-                
-                
+                                
                 return $data;
                         
              }

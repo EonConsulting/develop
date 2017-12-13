@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
 //Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  // TODO::replace-test
-Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function () {
+Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], function () {
     Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function () {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
         Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
