@@ -113,7 +113,7 @@ class TaoResult extends Model
         {
             $query->where('status', 0)
                   ->orWhereNull('status');
-        })->whereNull('response')->where('storyline_item_id', '!=', '0');
+        })->whereNull('response')->where('storyline_item_id', '!=', '0')->whereNotNull('score');
     }
 
     /**
@@ -128,6 +128,7 @@ class TaoResult extends Model
 
         return $query->whereNull('status')
                      ->whereNull('response')
+                     ->whereNull('score')
                      ->where('created_at', '<', $date);
     }
 }
