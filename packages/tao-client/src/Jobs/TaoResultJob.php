@@ -9,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use EONConsulting\TaoClient\Services\TaoApi;
 use EONConsulting\TaoClient\Models\TaoResult;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Log;
 
 class TaoResultJob implements ShouldQueue
