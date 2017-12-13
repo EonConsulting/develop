@@ -3,12 +3,7 @@
 namespace EONConsulting\TaoClient\Console\Commands;
 
 use Illuminate\Console\Command;
-
-use EONConsulting\TaoClient\Services\TaoApi;
-use EONConsulting\TaoClient\Models\Tao\ResultIdentifiers;
-use EONConsulting\TaoClient\Models\Tao\ResultsStorage;
 use EONConsulting\TaoClient\Models\TaoResult;
-use Log;
 
 class TaoRemoveJobsCommand extends Command
 {
@@ -24,20 +19,16 @@ class TaoRemoveJobsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
-
-    protected $tao_api;
+    protected $description = 'Clear tao results that was not completed.';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(TaoApi $tao_api)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->tao_api = $tao_api;
     }
 
     /**
@@ -47,12 +38,10 @@ class TaoRemoveJobsCommand extends Command
      */
     public function handle()
     {
-
         $tao_results = TaoResult::byIncomplete()->get();
 
         $tao_results->each->delete();
 
         $this->info('Incomplete results removed!');
-
     }
 }
