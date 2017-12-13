@@ -6,6 +6,7 @@ use EONConsulting\TaoClient\Models\TaoAssessment;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use EONConsulting\ContentBuilder\Models\Content;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use EONConsulting\TaoClient\Helpers;
 use Log;
 
 class StoryLineItemObserver
@@ -31,7 +32,7 @@ class StoryLineItemObserver
             return true;
         }
 
-        if( ! $launch_url = $this->getLaunchUrl($content->body))
+        if( ! $launch_url = Helpers::getLaunchUrl($content->body))
         {
             return true;
         }
@@ -53,25 +54,5 @@ class StoryLineItemObserver
 
         return true;
     }
-
-    protected function getLaunchUrl($content)
-    {
-        preg_match("/src\=\"(.*?)\" /", $content, $match);
-
-        if( ! isset($match[1]))
-        {
-            return false;
-        }
-
-        $match = explode('?launch_url=', $match[1]);
-
-        if( ! isset($match[1]))
-        {
-            return false;
-        }
-
-        return $match[1];
-    }
-
 
 }
