@@ -47,6 +47,9 @@ class TaoClientServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Register commands
+     */
     protected function registerCommands()
     {
         if ($this->app->runningInConsole()) {
@@ -59,11 +62,17 @@ class TaoClientServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Register modal observers
+     */
     protected function registerObservers()
     {
         StorylineItem::observe(StoryLineItemObserver::class);
     }
 
+    /**
+     * Register routes
+     */
     protected function registerRoutes()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
