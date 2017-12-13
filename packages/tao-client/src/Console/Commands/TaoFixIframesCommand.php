@@ -42,14 +42,10 @@ class TaoFixIframesCommand extends Command
      */
     public function handle()
     {
-        // $content = Content::whereIn('id', [89, 1080])->get();
-
         $content = Content::all();
-
 
         foreach($content as $text)
         {
-
             if( ! $launch_url = Helpers::getLaunchUrl($text->body))
             {
                 $this->error('No Tao Found. ' . $text->title);
@@ -76,9 +72,7 @@ class TaoFixIframesCommand extends Command
                 'secret' => config('tao-client.launch-options.secret'),
             ]);
 
-            $iframe = '<div class="iframeCover"><iframe allowtransparency="true" class="ckeditorframe" scrolling="yes" frameborder="0" src="' . route('tao-client.show') . '?launch_url=' . $launch_url . '" type="text/html" width="100%" height="800px"></iframe></div>';
-
-            $text->body = $iframe;
+            $text->body = $this->createIframe($launch_url);
 
             $text->save();
 
@@ -86,4 +80,8 @@ class TaoFixIframesCommand extends Command
         }
     }
 
+    protected function createIframe($launch_url)
+    {
+        return '<div class="iframeCover"><iframe allowtransparency="true" class="ckeditorframe" scrolling="yes" frameborder="0" src="' . route('tao-client.show') . '?launch_url=' . $launch_url . '" type="text/html" width="100%" height="800px"></iframe></div>';
+    }
 }
