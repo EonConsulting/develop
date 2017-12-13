@@ -94,15 +94,13 @@ class DefaultController extends LTIBaseController {
             $data = json_decode($body);
             if(empty($data)){
                 $data = 'Content was Successfully scanned, no matches found.';
-             }else{
-                 
+             }else{                
                 $data = "<div class='alert alert-success'><strong>Content was Successfully scanned</strong> </div><br><b>Suspected Website :</b><a href=".$data[0]->URL." target='_blank'>".$data[0]->URL."</a><br>"
                         . '<b>Result Title :</b>'.$data[0]->Title.'<br>'
                         . '<b>Number Of Copied Words :</b>'.$data[0]->NumberOfCopiedWords.'<br>'
                         //. '<b>Introduction :</b>'.$data[0]->Introduction.'<br>'
                         . "<b>Comparison Report :</b> <a href=".$data[0]->ComparisonReport.">".$data[0]->ComparisonReport."</a>";
-                
-                
+                                
                 return $data;
                         
              }
