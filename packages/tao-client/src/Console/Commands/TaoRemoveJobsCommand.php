@@ -4,6 +4,7 @@ namespace EONConsulting\TaoClient\Console\Commands;
 
 use Illuminate\Console\Command;
 use EONConsulting\TaoClient\Models\TaoResult;
+use Log;
 
 class TaoRemoveJobsCommand extends Command
 {
@@ -42,6 +43,7 @@ class TaoRemoveJobsCommand extends Command
 
         $tao_results->each->delete();
 
+        Log::info('Incomplete tests removed!');
         $this->info('Incomplete results removed!');
     }
 }
