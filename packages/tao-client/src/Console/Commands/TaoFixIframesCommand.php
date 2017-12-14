@@ -23,7 +23,7 @@ class TaoFixIframesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Fix iframe content for tao assessments';
 
     /**
      * Create a new command instance.
