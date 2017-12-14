@@ -28,9 +28,10 @@ class Helpers
             $path = '/' . $path;
         }
 
-        $explode = explode('&height=', $path);
-
-        $path = $explode[0];
+        if(str_contains($path, '&height='))
+        {
+            $path = str_before($path, '&height=');
+        }
 
         $tao_url = str_before(config('tao-client.api_url'), '/tao');
 
@@ -45,7 +46,7 @@ class Helpers
      */
     static public function isTaoLink($url)
     {
-        return ! preg_match('/DeliveryTool\/launch\//', $url);
+        return ! str_contains($url, '/DeliveryTool/launch/');
     }
 
     /**
@@ -56,7 +57,7 @@ class Helpers
      */
     static public function getLaunchUrl($content)
     {
-        if(! $tao_iframe_src = self::getTaoIframe($content))
+        if( ! $tao_iframe_src = self::getTaoIframe($content))
         {
             return false;
         }
@@ -66,17 +67,14 @@ class Helpers
             return false;
         }
 
-        $launch_url = explode('?launch_url=', $tao_iframe_src);
-        $delivery_url = explode('?delivery_url=', $tao_iframe_src);
-
-        if(isset($launch_url[1]))
+        if(str_contains($tao_iframe_src, '?launch_url='))
         {
-            return self::sanitizeTaoLaunchUrl($launch_url[1]);
+            return self::sanitizeTaoLaunchUrl(str_after($tao_iframe_src, '?launch_url='));
         }
 
-        if(isset($delivery_url[1]))
+        if(str_contains($tao_iframe_src, '?delivery_url='))
         {
-            return self::sanitizeTaoLaunchUrl($delivery_url[1]);
+            return self::sanitizeTaoLaunchUrl(str_after($tao_iframe_src, '?delivery_url='));
         }
 
         return false;
