@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['namespace' => '\EONConsulting\StudentNotes\Http\Controllers'], function () {
+Route::group(['namespace' => '\EONConsulting\StudentNotes\Http\Controllers','middleware' => ['web']], function () {
 
     Route::get('/student-notes', [
         'as' => 'student-notes.index',
