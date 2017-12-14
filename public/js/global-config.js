@@ -9,7 +9,7 @@ var global_conf = {
      * Please do not include a / at the end of this string.
      */
 
-    subdir: "" //local url
+    subdir: "/e-content" //local url
     //subdir: "/e-content" //dev url
 
 
