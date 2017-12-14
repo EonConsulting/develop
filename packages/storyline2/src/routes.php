@@ -3,7 +3,13 @@
 
 
 Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 'EONConsulting\Storyline2\Controllers'], function() {
-    Route::group(['middleware' => ['auth']], function() {
+   
+      //Student Routes
+    Route::group(['middleware' => ['auth','learner']], function() {       
+        Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
+    });
+    
+    Route::group(['middleware' => ['auth','instructor']], function() {
 
         /*
          * ---------------------------------------------
@@ -20,8 +26,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
          * ---------------------------------------------
          */
 
-        //Student Routes
-        Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
+        
 
         //Lecturer Routes
         Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->name('storyline2.lecturer.edit');

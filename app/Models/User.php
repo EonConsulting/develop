@@ -84,7 +84,7 @@ class User extends Authenticatable
      * @param string $role
      * @return bool
      */
-    public function hasRole($role = 'Administrator')
+    public function hasRole($role)
     {
         if ( ! $lti = $this->lti->first()) {
             return false;
@@ -93,7 +93,7 @@ class User extends Authenticatable
         if($lti->roles == $role) {
             return true;
         }
-
+        
         return false;
     }
 

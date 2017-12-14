@@ -1,5 +1,5 @@
 <?php
-    Route::group(['middleware' => ['web'], 'prefix' => '/eon/lti', 'namespace' => 'EONConsulting\AppStore\Http\Controllers'], function () {
+    Route::group(['middleware' => ['web','administrator'], 'prefix' => '/eon/lti', 'namespace' => 'EONConsulting\AppStore\Http\Controllers'], function () {
         Route::group(['middleware' => ['auth']], function () {
 
             // list all of the api's
