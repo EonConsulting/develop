@@ -99,7 +99,7 @@ class DefaultController extends LTIBaseController {
                         . '<b>Result Title :</b>'.$data[0]->Title.'<br>'
                         . '<b>Number Of Copied Words :</b>'.$data[0]->NumberOfCopiedWords.'<br>'
                         //. '<b>Introduction :</b>'.$data[0]->Introduction.'<br>'
-                        . "<b>Comparison Report :</b> <a href=".$data[0]->ComparisonReport.">".$data[0]->ComparisonReport."</a>";
+                        . "<b>Comparison Report :</b> <a href=".$data[0]->EmbededComparison." target='_blank'>".$data[0]->EmbededComparison."</a>";
                                 
                 return $data;
                         

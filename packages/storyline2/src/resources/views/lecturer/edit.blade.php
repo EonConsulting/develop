@@ -79,9 +79,7 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-
         width: 70%;
-
         overflow-y: auto;
         overflow-x: auto;
 
@@ -587,8 +585,8 @@ Storyline Student Single
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body msg-info">
-        
+      <div class="modal-body">
+      <div class="msg-info"></div>    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -613,8 +611,7 @@ Storyline Student Single
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-    
+  </div>    
 </div>
 @endsection
 
@@ -1191,6 +1188,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
              $('.msg-info').html('No content found, please add content.');
           }
         });
+        
     });
 
 
