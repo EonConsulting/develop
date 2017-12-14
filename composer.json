@@ -39,6 +39,7 @@
       "App\\": "app/",
       "EONConsulting\\LaravelLTI\\": "packages/laravel-lti/src/",
       "Tsugi\\": "packages/laravel-lti/vendor/tsugi/lib/src/",
+      "EONConsulting\\Core\\": "packages/econtent-core/src/",
       "EONConsulting\\RolesPermissions\\": "packages/roles-permissions/src/",
       "EONConsulting\\AppStore\\": "packages/app-store/src/",
       "EONConsulting\\FileManager\\": "packages/file-manager/src/",

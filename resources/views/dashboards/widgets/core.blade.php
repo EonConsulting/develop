@@ -50,20 +50,6 @@ class WidgetCore {
             this._selected_assessment = value;
         }
 
-        // data to be wired up to AJAX calls later
-        get courses() {
-            return [
-                {
-                    "course_id": "FBN1501",
-                    "description": "FBN1501 - Business Numerical Skills A"
-                },
-                {
-                    "course_id": "FBN1502",
-                    "description": "FBN1502 - Business Numerical Skills B"
-                }
-            ];
-        }
-
         get assessment_types() {
             return [
                 {
@@ -332,7 +318,7 @@ class WidgetCore {
             return [
                 // ALL FBN1501
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "ALL",
@@ -342,7 +328,7 @@ class WidgetCore {
                     "your_average": [0, 49.67, 69.75, 59, 56.67, 58.71, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "ALL",
@@ -353,7 +339,7 @@ class WidgetCore {
                 },
                 // ALL FBN1502
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "ALL",
@@ -363,7 +349,7 @@ class WidgetCore {
                     "your_average": [0, 0, 0, 0, 0, 0, 58.75, 60.67, 60.80, 61, 61.08, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "ALL",
@@ -374,17 +360,17 @@ class WidgetCore {
                 },
                 // STUDENT ALL FBN1501
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
-                    "student_id": "S1",
+                    "student_id": "2",
                     "labels": [],
                     "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
                     "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "S2",
@@ -394,7 +380,7 @@ class WidgetCore {
                     "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "S3",
@@ -404,17 +390,17 @@ class WidgetCore {
                     "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
-                    "student_id": "S1",
+                    "student_id": "2",
                     "labels": [],
                     "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
                     "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "S2",
@@ -424,7 +410,7 @@ class WidgetCore {
                     "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "S3",
@@ -435,17 +421,17 @@ class WidgetCore {
                 },
                 // STUDENT ALL FBN1502
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
-                    "student_id": "S1",
+                    "student_id": "2",
                     "labels": [],
                     "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
                     "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "S2",
@@ -455,7 +441,7 @@ class WidgetCore {
                     "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ALL",
                     "student_id": "S3",
@@ -465,17 +451,17 @@ class WidgetCore {
                     "your_average": [0, 77, 45, 61, 72, 69, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
-                    "student_id": "S1",
+                    "student_id": "2",
                     "labels": [],
                     "your_results": [0, 66, 60, 58, 55, 41, 0, 0, 0, 0, 0, 0],
                     "class_average": [0, 56, 82, 45, 69, 85, 0, 0, 0, 0, 0, 0],
                     "your_average": [0, 54, 85, 69, 66, 68, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "S2",
@@ -485,7 +471,7 @@ class WidgetCore {
                     "your_average": [0, 85, 41, 89, 84, 67, 0, 0, 0, 0, 0, 0]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-ALL",
                     "student_id": "S3",
@@ -496,7 +482,7 @@ class WidgetCore {
                 },
                 // STUDENT S1 SA's
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-MCQ",
                     "labels": ["MCQ1", "MCQ2", "MCQ3", "MCQ4", "MCQ5", "MCQ6"],
@@ -505,7 +491,7 @@ class WidgetCore {
                     "your_average": [60, 76, 75, 71, 79, 76]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-MCQ",
                     "labels": ["MCQ7", "MCQ8", "MCQ9", "MCQ10", "MCQ11", "MCQ12"],
@@ -514,7 +500,7 @@ class WidgetCore {
                     "your_average": [50, 72, 45, 71, 79, 76]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-VEN",
                     "labels": ["VEN1", "VEN2"],
@@ -523,7 +509,7 @@ class WidgetCore {
                     "your_average": [79, 76]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-VEN",
                     "labels": ["VEN3", "VEN4"],
@@ -532,7 +518,7 @@ class WidgetCore {
                     "your_average": [50, 72]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "SA",
                     "assessment_type_id": "SA-POR",
                     "labels": ["POR1", "POR2", "POR3", "POR4"],
@@ -541,7 +527,7 @@ class WidgetCore {
                     "your_average": [60, 76, 75, 71]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "SA",
                     "assessment_type_id": "SA-POR",
                     "labels": ["POR5", "POR6", "POR7", "POR8"],
@@ -550,7 +536,7 @@ class WidgetCore {
                     "your_average": [45, 71, 79, 76]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ASS1",
                     "labels": ["Result"],
@@ -559,7 +545,7 @@ class WidgetCore {
                     "your_average": [60]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ASS1",
                     "labels": ["Result"],
@@ -568,7 +554,7 @@ class WidgetCore {
                     "your_average": [72]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ASS2",
                     "labels": ["Result"],
@@ -577,7 +563,7 @@ class WidgetCore {
                     "your_average": [60]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-ASS2",
                     "labels": ["Result"],
@@ -586,7 +572,7 @@ class WidgetCore {
                     "your_average": [72]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-POR",
                     "labels": ["Result"],
@@ -595,7 +581,7 @@ class WidgetCore {
                     "your_average": [69]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-POR",
                     "labels": ["Result"],
@@ -604,7 +590,7 @@ class WidgetCore {
                     "your_average": [72]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-SA1",
                     "labels": ["Result"],
@@ -613,7 +599,7 @@ class WidgetCore {
                     "your_average": [61]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-SA1",
                     "labels": ["Result"],
@@ -622,7 +608,7 @@ class WidgetCore {
                     "your_average": [65]
                 },
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "assessment": "FA",
                     "assessment_type_id": "FA-SA2",
                     "labels": ["Result"],
@@ -631,7 +617,7 @@ class WidgetCore {
                     "your_average": [69]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "assessment": "FA",
                     "assessment_type_id": "FA-SA2",
                     "labels": ["Result"],
@@ -645,7 +631,7 @@ class WidgetCore {
         get progression() {
             return [
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "student_id": "ALL",
                     "progress": {
                         "videos": {
@@ -658,7 +644,7 @@ class WidgetCore {
                             "my_progress": [52],
                             "course_timeline": [42]
                         },
-                        "articles": {
+                        "storyline": {
                             "class_progress": [65],
                             "my_progress": [67],
                             "course_timeline": [60]
@@ -671,8 +657,8 @@ class WidgetCore {
                     }
                 },
                 {
-                    "course_id": "FBN1501",
-                    "student_id": "S1",
+                    "course_id": "16",
+                    "student_id": "2",
                     "progress": {
                         "videos": {
                             "class_progress": [25],
@@ -684,7 +670,7 @@ class WidgetCore {
                             "my_progress": [38],
                             "course_timeline": [52]
                         },
-                        "articles": {
+                        "storyline": {
                             "class_progress": [61],
                             "my_progress": [57],
                             "course_timeline": [70]
@@ -697,7 +683,7 @@ class WidgetCore {
                     }
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "student_id": "ALL",
                     "progress": {
                         "videos": {
@@ -710,7 +696,7 @@ class WidgetCore {
                             "my_progress": [29],
                             "course_timeline": [45]
                         },
-                        "articles": {
+                        "storyline": {
                             "class_progress": [51],
                             "my_progress": [39],
                             "course_timeline": [36]
@@ -723,8 +709,8 @@ class WidgetCore {
                     }
                 },
                 {
-                    "course_id": "FBN1502",
-                    "student_id": "S1",
+                    "course_id": "14",
+                    "student_id": "2",
                     "progress": {
                         "videos": {
                             "class_progress": [32],
@@ -736,7 +722,7 @@ class WidgetCore {
                             "my_progress": [39],
                             "course_timeline": [65]
                         },
-                        "articles": {
+                        "storyline": {
                             "class_progress": [41],
                             "my_progress": [49],
                             "course_timeline": [46]
@@ -754,7 +740,7 @@ class WidgetCore {
         get topics() {
             return [
                 {
-                    "course_id": "FBN1501",
+                    "course_id": "16",
                     "items": [
                         "Formulas",
                         "Interpretation",
@@ -769,7 +755,7 @@ class WidgetCore {
                     ]
                 },
                 {
-                    "course_id": "FBN1502",
+                    "course_id": "14",
                     "items": [
                         "x-axis",
                         "Two x-intercepts",
@@ -784,7 +770,7 @@ class WidgetCore {
                     ]
                 },
                 {
-                    "course_id": "ECS1501",
+                    "course_id": "45",
                     "items": [
                         "Production Curve -> Assumptions",
                         "Demand -> Supply Curve",
@@ -835,6 +821,82 @@ class WidgetCore {
             ];
         }
         
+        // data
+        // data to be wired up to AJAX calls later
+        data_courses(callback) {
+            $.ajax({
+                method: "GET",
+                url: "{{ url("") }}/lti/data-courses/",
+                contentType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        callback(data);
+                    },
+                    400: function () { //bad request
+                        console.log("Bad request");
+                    },
+                    500: function () { //server kakked
+                        console.log("Server error");
+                    }
+                }
+            }).error(function (req, status, error) {
+                return [];
+            });
+        }
+        
+        data_students(callback)
+        {
+            $.ajax({
+                method: "GET",
+                url: "{{ url("") }}/lti/data-students/" + instance.selected_course,
+                contentType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        callback(data);
+                    },
+                    400: function () { //bad request
+                        console.log("Bad request");
+                    },
+                    500: function () { //server kakked
+                        console.log("Server error");
+                    }
+                }
+            }).error(function (req, status, error) {
+                return [];
+            });
+        }
+        
+        data_progression(callback)
+        {
+            $.ajax({
+                method: "GET",
+                url: "{{ url("") }}/lti/data-progression/" + instance.selected_course + "/" + instance.selected_student,
+                contentType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        callback(data);
+                    },
+                    400: function () { //bad request
+                        console.log("Bad request");
+                    },
+                    500: function () { //server kakked
+                        console.log("Server error");
+                    }
+                }
+            }).error(function (req, status, error) {
+                return [];
+            });
+        }
+        
         // methods
         updateAssessmentTypes(a_type)
         {
@@ -864,7 +926,7 @@ class WidgetCore {
             var date = new Date(dateStr);
             return date.toLocaleDateString(locale, {month: 'short', day: 'numeric'});
         }
-
+        
         generateRandomDataset(value, period, min = 5, max = 40, boost = false)
         {
             var labels = [];
@@ -1027,15 +1089,6 @@ class WidgetCore {
                         break;
                 }
                 instance.renderResultsGraph(_.head(courses));
-
-                // lodash methods for rendering progression
-                var prog = _.filter(instance.progression, _.iteratee({'course_id': instance.selected_course}));
-                // these methods exist in other plugins but they
-                // need to be triggered in the event they exist in scope
-                instance.renderVideoProgressionGraph(_.head(prog));
-                instance.renderEbookProgressionGraph(_.head(prog));
-                instance.renderArticleProgressionGraph(_.head(prog));
-                instance.renderStudyGuideProgressionGraph(_.head(prog));
                 
                 // lodash methods for rendering assessment
                 var ass = _.filter(instance.assessments, _.iteratee({
@@ -1051,42 +1104,86 @@ class WidgetCore {
         
         bindStudentFilter()
         {
-            // event for change of student name
-            $("#student-filter").on("change", function(){
-                var self = $(this);
-                instance.selected_student = self.val();
-                $("#assessment-filter").trigger("change");
+            instance.data_students(function(data){
+                
+                // populate this with data first by changing
+                // the DOM only once
+                var listitems = '<option value="ALL">ALL</option>';
+                $.each(data, function(key, value){
+                    listitems += '<option value=' + value.student_id + '>' + value.name + '</option>';
+                });
+                $("#student-filter").append(listitems);
+                
+                // event for change of student name
+                $("#student-filter").on("change", function(){
+                    var self = $(this);
+                    instance.selected_student = self.val();
+                    $("#assessment-filter").trigger("change");
+
+                    // lodash methods for rendering progression                        
+                    var prog = _.filter(instance.progression, _.iteratee({
+                            'course_id': instance.selected_course,
+                            'student_id': instance.selected_student}
+                        )
+                    );
+                    // these methods exist in other plugins but they
+                    // need to be triggered in the event they exist in scope
+                    instance.renderVideoProgressionGraph(_.head(prog));
+                    instance.renderEbookProgressionGraph(_.head(prog));
+                    instance.renderStudyGuideProgressionGraph(_.head(prog));
+
+                    // callback render on ajax data for storylineprogression
+                    // ajax method for getting progression data
+                    instance.data_progression(function(data){
+                            instance.renderStorylineProgressionGraph(data);
+                        }
+                    );
+                });
             });
+            
+            
         }
         
         bindModuleFilter()
         {
-            $("#module-filter").on("change", function () {
-                var self = $(this);
-                instance.selected_course = $(this).val();
+            instance.data_courses(function(data){
+                // populate this with data first by changing
+                // the DOM only once
+                var listitems = '';
+                $.each(data, function(key, value){
+                    listitems += '<option value=' + value.id + '>' + value.title + '</option>';
+                });
+                $("#module-filter").append(listitems);
 
-                // be economical with the triggers
-                switch(instance.role)
-                {
-                    case "Learner":
-                        // trigger the assessment filter change event
-                        $("#assessment-filter").trigger("change");
-                        break;
-                    case "Instructor":
-                    case "Mentor":
-                        // trigger the student filter change event
-                        $("#student-filter").trigger("change");
-                        break;
-                }
-                
-                // update the top content if available
-                instance.renderTopContentTable();
-                instance.renderParticipationMetrics();
-                instance.renderNotificationMetrics();
-                instance.renderTimeline();
+                // then setup the bindings
+                $("#module-filter").on("change", function () {
+                    var self = $(this);
+                    instance.selected_course = $(this).val();
+
+                    // be economical with the triggers
+                    switch(instance.role)
+                    {
+                        case "Learner":
+                            // trigger the assessment filter change event
+                            $("#assessment-filter").trigger("change");
+                            break;
+                        case "Instructor":
+                        case "Mentor":
+                            // trigger the student filter change event
+                            $("#student-filter").trigger("change");
+                            break;
+                    }
+
+                    // update the top content if available
+                    instance.renderTopContentTable();
+                    instance.renderParticipationMetrics();
+                    instance.renderNotificationMetrics();
+                    instance.renderTimeline();
+                });
+                // and lets just select the first record on page load
+                $("#module-filter").trigger("change");
             });
-            // and lets just select the first record on page load
-            $("#module-filter").trigger("change");
+            
         }
         
         bindAssessmentTypeFilter()
@@ -1465,19 +1562,19 @@ class WidgetCore {
             });
         };
 
-        renderArticleProgressionGraph(data) {
+        renderStorylineProgressionGraph(data) {
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
             // clean way of skipping when widget not included in page
-            if ($('#article-progression').length <= 0) return;
+            if ($('#storyline-progression').length <= 0) return;
             
-            $('#article-progression').remove();
-            $('#article-progression-container').append('<canvas id="article-progression"><canvas>');
+            $('#storyline-progression').remove();
+            $('#storyline-progression-container').append('<canvas id="storyline-progression"><canvas>');
 
             // pull a switch-a-roo on the labels and axis count
             var labels = ['Progress'];
-            var areaChartCanvas = $('#article-progression').get(0).getContext('2d');
-
+            var areaChartCanvas = $('#storyline-progression').get(0).getContext('2d');
+            
             var areaChartData = {
                 labels: labels,
                 datasets: [
@@ -1486,25 +1583,24 @@ class WidgetCore {
                         backgroundColor: 'rgba(0, 166, 90, 1)',
                         //borderColor: 'rgba(0, 192, 239, 1)',
                         borderWidth: 0,
-                        data: data.progress.articles.class_progress
+                        data: data.progress.storyline.class_progress
                     },
                     {
                         label: 'My Progress',
                         backgroundColor: 'rgba(91, 211, 157, 1)',
                         //borderColor: 'rgba(221, 75, 57, 1)',
                         borderWidth: 0,
-                        data: data.progress.articles.my_progress
+                        data: data.progress.storyline.my_progress
                     },
                     {
                         label: 'Course Timeline',
                         backgroundColor: 'rgba(200, 200, 200, 1)',
                         //borderColor: 'rgba(0, 166, 90, 1)',
                         borderWidth: 0,
-                        data: data.progress.articles.course_timeline
+                        data: data.progress.storyline.module_progress
                     }
                 ]
             };
-
 
             var areaChartOptions = {
                 //Boolean - If we should show the scale at all

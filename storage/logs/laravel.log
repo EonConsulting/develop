@@ -73,6 +73,17 @@
 "} 
 [2017-12-11 22:44:08] local.DEBUG: Attempting an LTI Login....  
 [2017-12-11 22:44:08] local.DEBUG: Instructor  
+[2017-12-12 10:27:26] local.DEBUG: Starting asset sync to Elastic  
+[2017-12-12 10:27:26] local.INFO: POST of item id:3 to index:assets successful  
+[2017-12-12 10:27:26] local.INFO: POST of item id:4 to index:assets successful  
+[2017-12-12 10:27:26] local.DEBUG: Finished asset sync to Elastic  
+[2017-12-12 10:28:32] local.DEBUG: Starting asset sync to Elastic  
+[2017-12-12 10:28:32] local.INFO: POST of item id:5 to index:assets successful  
+[2017-12-12 10:28:32] local.DEBUG: Finished asset sync to Elastic  
+[2017-12-12 02:31:58] local.DEBUG: Attempting an LTI Login....  
+[2017-12-12 02:31:58] local.DEBUG: Instructor  
+[2017-12-12 04:34:06] local.DEBUG: Attempting an LTI Login....  
+[2017-12-12 04:34:06] local.DEBUG: Instructor  
 [2017-12-11 23:59:45] local.DEBUG: Attempting an LTI Login....  
 [2017-12-11 23:59:45] local.DEBUG: Administrator  
 [2017-12-12 10:00:15] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'eon_consult.roles_permissions' doesn't exist (SQL: select `permissions`.*, `roles_permissions`.`role_id` as `pivot_role_id`, `roles_permissions`.`permission_id` as `pivot_permission_id` from `permissions` inner join `roles_permissions` on `permissions`.`id` = `roles_permissions`.`permission_id` where `roles_permissions`.`role_id` in (1, 2)) {"userId":22,"email":"reggiestain@gmail.com","exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'eon_consult.roles_permissions' doesn't exist (SQL: select `permissions`.*, `roles_permissions`.`role_id` as `pivot_role_id`, `roles_permissions`.`permission_id` as `pivot_permission_id` from `permissions` inner join `roles_permissions` on `permissions`.`id` = `roles_permissions`.`permission_id` where `roles_permissions`.`role_id` in (1, 2)) at C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'eon_consult.roles_permissions' doesn't exist at C:\\wamp64\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'eon_consult.roles_permissions' doesn't exist at C:\\wamp64\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:77)
@@ -87,7 +98,8 @@
 #7 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(527): Illuminate\\Database\\Eloquent\\Relations\\Relation->getEager()
 #8 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(496): Illuminate\\Database\\Eloquent\\Builder->eagerLoadRelation(Array, 'permissions', Object(Closure))
 #9 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(464): Illuminate\\Database\\Eloquent\\Builder->eagerLoadRelations(Array)
-#10 C:\\wamp64\\www\\develop\\packages\oles-permissions\\src\\Http\\Controllers\\Admin\\Roles\\RolesController.php(23): Illuminate\\Database\\Eloquent\\Builder->get()
+#10 C:\\wamp64\\www\\develop\\packages\
+oles-permissions\\src\\Http\\Controllers\\Admin\\Roles\\RolesController.php(23): Illuminate\\Database\\Eloquent\\Builder->get()
 #11 [internal function]: EONConsulting\\RolesPermissions\\Http\\Controllers\\Admin\\Roles\\RolesController->index()
 #12 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): call_user_func_array(Array, Array)
 #13 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('index', Array)
