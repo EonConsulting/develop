@@ -55,9 +55,16 @@ class TaoResultJob implements ShouldQueue
     public function handle(TaoApi $tao_api)
     {
 
+        $status = 3;
+
+        if($this->tao_result->status == 3)
+        {
+            $status = 4;
+        }
+
         if( ! $tao_storage = optional($this->tao_result->result_identifier)->result_storage)
         {
-            $this->tao_result->status = 0;
+            $this->tao_result->status = $status;
             $this->tao_result->status_message = 'TaoResultJob: Test not completed on tao';
 
             $this->tao_result->save();
@@ -74,7 +81,7 @@ class TaoResultJob implements ShouldQueue
 
         } catch(\Exception $e)
         {
-            $this->tao_result->status = 0;
+            $this->tao_result->status = $status;
             $this->tao_result->status_message = 'TaoResultJob: ' . $e->getMessage();
 
             $this->tao_result->save();
@@ -86,10 +93,12 @@ class TaoResultJob implements ShouldQueue
         $this->tao_result->delivery_execution_id = $tao_storage->delivery;
         $this->tao_result->test_taker = $tao_storage->test_taker;
         $this->tao_result->response = $api_response;
-        $this->tao_result->status = 1;
+        $this->tao_result->status = 2;
         $this->tao_result->status_message = 'API Response captured';
 
         $this->tao_result->save();
+
+        Log::info('TaoResultJob: Job ran ' . $tao_storage->test_taker);
     }
 
 }
