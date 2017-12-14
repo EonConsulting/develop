@@ -121,7 +121,7 @@ class TaoResult extends Model
      */
     public function scopebyIncomplete($query)
     {
-        $date = Carbon::now()->subMinute(10);
+        $date = Carbon::now()->subDay(1);
 
         return $query->where('status', 0)
                      ->where('created_at', '<', $date);
