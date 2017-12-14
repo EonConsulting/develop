@@ -4,9 +4,12 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Jobs\AnalyticsLogIngester;
+use App\Jobs\ElasticIndexAssets;
 use App\Jobs\ElasticIndexContent;
 use App\Jobs\ElasticIndexCourseInfo;
 use App\Jobs\ElasticSearchSetup;
+use App\Jobs\ElasticSearchRefresh;
+
 
 class RunJob extends Command
 {
@@ -45,6 +48,12 @@ class RunJob extends Command
         {
             case "AnalyticsLogIngester":
                 AnalyticsLogIngester::dispatch();
+                break;
+            case "ElasticSearchRefresh":
+                ElasticSearchRefresh::dispatch();
+                break;
+            case "ElasticIndexAssets":
+                ElasticIndexAssets::dispatch();
                 break;
             case "ElasticIndexContent":
                 ElasticIndexContent::dispatch();

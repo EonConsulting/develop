@@ -45,8 +45,8 @@
                                 <td>{{ $course->title }}</td>
                                 <td>{{ $course->creator->name }}</td>
                                 <td>
-                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-success btn-sm">Storyline</a>
-
+                                    <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-info btn-sm">Storyline</a>
+                                    <a href="{{ route('storyline2.preview', $course->id) }}" class="btn btn-success btn-sm">Preview</a>
                                     <div class="btn-group">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-caret-down"></i>

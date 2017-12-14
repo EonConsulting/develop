@@ -22,14 +22,15 @@ class ElasticIndexContent implements ShouldQueue {
     // how many times the job should be retried
     public $tries = 1;
     private $client = null;
+    private $refresh;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct() {
-        
+    public function __construct($r = false) {
+        $this->refresh = $r;
     }
 
     /**
@@ -38,6 +39,10 @@ class ElasticIndexContent implements ShouldQueue {
      * @return void
      */
     public function handle() {
+        if($this->refresh){
+            $this->resetIngestedStatus();
+        }
+
         $this->fetchAndIndexContent();
     }
 
@@ -101,10 +106,15 @@ class ElasticIndexContent implements ShouldQueue {
         }
     }
 
-    function updateContentIngestedStatus($course_id) {
-        Db::table('content')
-                ->where('id', $course_id)
+    function updateContentIngestedStatus($content_id) {
+        DB::table('content')
+                ->where('id', $content_id)
                 ->update(['ingested' => 1]);
+    }
+
+    function resetIngestedStatus(){
+        DB::table('content')
+        ->update(['ingested' => 0]);
     }
 
     public function failed(\Exception $exception) {

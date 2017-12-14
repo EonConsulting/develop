@@ -7,11 +7,114 @@ use Illuminate\Http\Request;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
-
-//use EONConsulting\Storyline\Table\Csv;
+use GuzzleHttp\Client;
 
 class DefaultController extends LTIBaseController {
+    
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function copyleaks(Request $request) {
+        $client = new Client();
+        $cert = base_path() . '/vendor/guzzlehttp/guzzle/src/cacert.pem';
+        $text = $request->get('data');
+        $login = $client->request('POST', 'https://api.copyleaks.com/v1/account/login-api', [
+            'verify' => false,
+            'form_params' => [
+                'Email' => 'reggiest.ain@gmail.com',
+                'ApiKey' => '91FEFB7C-68B4-447B-A08D-8064F75A6EC0'
+            ]
+        ]);
 
+        if ($login->getStatusCode() == 200) {
+            $body = $login->getBody()->getContents();
+            $data = json_decode($body);
+            $result = $this->createByText($data,$text);
+            $msg = 'true';
+            $success = $result;
+            
+        } else {
+            $msg = 'false';
+            $success = 'error';
+        }
+        
+        $response = array(
+            'msg' => $msg,
+            'success' => $success
+        );
+
+        return \Response::json($response);
+    }
+    
+    /**
+     * 
+     * @param type $data
+     * @param type $text
+     * @return string
+     */
+    public function createByText($data,$text){
+        $client = new Client(['base_uri' => 'https://api.copyleaks.com']);
+        $token = $data->access_token;      
+        $process = $client->request('POST', '/v1/education/create-by-text', ['body' =>$text,                                          
+                                    'verify' => false, 'headers' =>['Content-Type' =>'application/json',
+                                    'Authorization' => ['Bearer ' . $token]]
+                                                                       
+            ]);
+        
+        if ($process->getStatusCode() == 200) {
+            $body = $process->getBody()->getContents();
+            $data = json_decode($body); 
+            sleep(20);
+            $result = $this->result($data,$token);
+            return $result;
+        } else {
+            return 'false';
+        }           
+    }
+    
+    /**
+     * 
+     * @param type $data
+     * @param type $token
+     * @return string
+     */
+    public function result($data,$token){        
+        $client = new Client();
+        //$cert = base_path() . '/vendor/guzzlehttp/guzzle/src/cacert.pem';
+        $result = $client->request('GET', 'https://api.copyleaks.com/v1/education/'.$data->ProcessId.'/result', [
+                    'verify' => false, 'headers' =>[
+                    'Content-Type' =>'application/json',
+                    'Authorization' => 'Bearer ' . $token]               
+            ]);
+        
+        if ($result->getStatusCode() == 200) {
+            $body = $result->getBody()->getContents();
+            $data = json_decode($body);
+            if(empty($data)){
+                $data = 'Content was Successfully scanned, no matches found.';
+             }else{                
+                $data = "<div class='alert alert-success'><strong>Content was Successfully scanned</strong> </div><br><b>Suspected Website :</b><a href=".$data[0]->URL." target='_blank'>".$data[0]->URL."</a><br>"
+                        . '<b>Result Title :</b>'.$data[0]->Title.'<br>'
+                        . '<b>Number Of Copied Words :</b>'.$data[0]->NumberOfCopiedWords.'<br>'
+                        //. '<b>Introduction :</b>'.$data[0]->Introduction.'<br>'
+                        . "<b>Comparison Report :</b> <a href=".$data[0]->EmbededComparison." target='_blank'>".$data[0]->EmbededComparison."</a>";
+                                
+                return $data;
+                        
+             }
+            return $data;       
+        } else {
+           return 'false'; 
+        }            
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
     public function storeProgress(Request $request) {
         $progress = StudentProgress::where([['student_id', $request->get('student')],
                     ['storyline_id', $request->get('storyline')]])->first();
