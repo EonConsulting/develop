@@ -21,12 +21,7 @@ class Helpers
             return false;
         }
 
-        $path = $parts['path'];
-
-        if(substr($path, 0, 1) != '/')
-        {
-            $path = '/' . $path;
-        }
+        $path = str_start($parts['path'], '/');
 
         if(str_contains($path, '&height='))
         {
