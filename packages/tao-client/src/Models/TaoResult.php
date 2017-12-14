@@ -83,7 +83,7 @@ class TaoResult extends Model
      */
     public function scopebyPendingOutcome($query)
     {
-        return $query->whereNull('status')
+        return $query->where('status', 0)
                      ->whereNull('score')
                      ->whereNotNull('storyline_item_id');
     }
@@ -109,11 +109,8 @@ class TaoResult extends Model
      */
     public function scopebyFailed($query)
     {
-        return $query->where(function ($query)
-        {
-            $query->where('status', 0)
-                  ->orWhereNull('status');
-        })->whereNull('response')->where('storyline_item_id', '!=', '0')->whereNotNull('score');
+        $query->where('status', 3)
+              ->whereNull('response');
     }
 
     /**
@@ -124,11 +121,9 @@ class TaoResult extends Model
      */
     public function scopebyIncomplete($query)
     {
-        $date = Carbon::now()->subDay(1);
+        $date = Carbon::now()->subMinute(10);
 
-        return $query->whereNull('status')
-                     ->whereNull('response')
-                     ->whereNull('score')
+        return $query->where('status', 0)
                      ->where('created_at', '<', $date);
     }
 }

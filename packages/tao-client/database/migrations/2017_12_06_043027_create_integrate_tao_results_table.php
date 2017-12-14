@@ -23,7 +23,7 @@ class CreateIntegrateTaoResultsTable extends Migration
             $table->string('score')->nullable();
             $table->boolean('ingested')->default(0);
             $table->longText('response')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(0);
             $table->string('status_message')->nullable();
             $table->timestamps();
         });
