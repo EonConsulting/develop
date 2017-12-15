@@ -8,15 +8,28 @@ $(document).ready(function () {
 })
 
 function refreshTree() {
-    $.getJSON(url,
-            function (data) {
+
+    $.ajax({
+        method: "GET",
+        url: url,
+        contentType: 'json',
+        statusCode: {
+            200: function (data) { //success
                 console.log(data);
-
                 drawTree(data);
+                //treeToJSON();
+            },
+            400: function () { //bad request
 
-                treeToJSON();
+            },
+            500: function () { //server kakked
+
             }
-    );
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+    
 }
 
 
@@ -36,40 +49,12 @@ function drawTree(tree_data) {
 }
 
 
-
 function treeToJSON() {
 
     var v = $(tree_id).jstree(true).get_json('#', {'flat': true});
     console.log(v);
 
 }
-
-//detect when node is clicked, ie. selected node changes
-
-/*
- $(tree_id).on("create_node.jstree", function (e, data) {
- console.log("Node created");
- });
- 
- $(tree_id).on("rename_node.jstree", function (e, data) {
- console.log("Node renamed");
- });
- 
- $(tree_id).on("delete_node.jstree", function (e, data) {
- console.log("Node deleted");
- });
- 
- $(tree_id).on("move_node.jstree", function (e, data) {
- console.log("Node moved");
- });
- 
- $(tree_id).on("cut.jstree", function (e, data) {
- console.log("Node cut");
- });
- 
- $(tree_id).on("paste.jstree", function (e, data) {
- console.log("paste pasted");
- });*/
 
 
 function import_content($content_id,$item_id,$action){
@@ -112,24 +97,51 @@ function populateContentForm(data) {
 
     console.log("populateContentForm called");
 
-    var course_data = jQuery.parseJSON(data);
+    //var course_data = jQuery.parseJSON(data);
 
-    if (course_data.found == true) {
+    if (data.found == true) {
 
-        $("#content-id").val(course_data.content.id);
-        $("#content-title").val(course_data.content.title);
-        $("#content-description").val(course_data.content.description);
-        $("#content-tags").val(course_data.content.tags);
-        var body = editor.setData(course_data.content.body);
+        $("#content-id").val(data.content.id);
+        $("#content-title").val(data.content.title);
+        $("#content-description").val(data.content.description);
+        $("#content-tags").val(data.content.tags);
+        var body = editor.setData(data.content.body);
 
-        for (index = 0; index < course_data.categories.length; ++index) {
-            cat_id = "#cat" + course_data.categories[index].id;
+        for (index = 0; index < data.categories.length; ++index) {
+            cat_id = "#cat" + data.categories[index].id;
             console.log(cat_id);
             $(cat_id).prop('checked', true);
         }
 
     }
 
+    console.log(data);
+
+    getProgressTopics(data);
+
+}
+
+function getProgressTopics(data) {
+    if(data.req){
+        var option = "<option value="+data.req.id+">"+data.req.name+"</option><option value=''>--Choose One--</option>";
+    }else{
+        option =  "<option value=''>--Choose One--</option>";
+    }
+    
+    document.getElementById("selectNode").innerHTML = option;
+    var dropdown = document.getElementById("selectNode");
+    var myArray = data.topics;
+    // Loop through the array
+    for (var i = 0; i < myArray.length; ++i) {
+        // Append the element to the end of Array list
+        if (myArray[i].id == data.item) {
+            break;
+        }
+        if (i == 0) {
+            myArray.splice(i, 1);
+        }
+        dropdown[dropdown.length] = new Option(myArray[i].text, myArray[i].id);
+    }
 }
 
 //Get Content

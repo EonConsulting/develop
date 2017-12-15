@@ -18,7 +18,7 @@ class ContentBuilderCore extends Controller {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request) {
+    public function index() {
 
         $breadcrumbs = [
             'title' => 'Content Store',
@@ -26,96 +26,137 @@ class ContentBuilderCore extends Controller {
 
         $categories = Category::all();
 
-        $elasticsearch = new Elasticsearch;
-
-        $index = 'content';
-        $searchterm = $request->get('searchterm');
-        $from = $request->get('from');
-        $size = $request->get('size');
-        
-
-        if (empty($searchterm)) {
-           $query = '{
-               "query": {
-                    "match_all": {}
-                }
-            }';
-        } else {
-
-            $query = '{
-                "query": {
-                    "query_string" : {
-                        "query" : "*' . $searchterm . '*"
-                    }
-                }
-            }';
-            /*
-            $query = '{
-                "query":{
-                    "function_score":{
-                        "query":{
-                            "bool":{
-                                "must":[
-                                    {
-                                        "multi_match":{
-                                            "fields":[
-                                                "title^10","body^5"
-                                            ],
-                                            "type":"cross_fields",
-                                            "query": "' . $searchterm . '",
-                                            "minimum_should_match":"2<-1 5<70%"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            }';*/
-        }
-
-        try {
-            $output = $elasticsearch->search($index, $query, $from, $size);
-            $output = json_decode($output);
-
-
-            $hits = $output->hits->hits;
-
-            $total = $output->hits->total;
-            
-            $fromNext = $from + $size;
-            $fromPrev = $from - $size;
-
-            $finalOutput = [
-                "fromNext" => $fromNext,
-                "fromPrev" => $fromPrev,
-                "total" => $total,
-                "size" => $size,
-                "searchterm" => $searchterm,
-                "results" => []
-            ];
-
-            foreach ($hits as $hit) {
-
-
-                $content = Content::find($hit->_id);
-                $content->tags = $this->get_tags($content);
-
-                $finalOutput['results'][] = $content;
-            }
-
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            $finalOutput = array();
-        }
-
-        //dd($finalOutput);
-
-        return view('eon.content-builder::store', [
-            'searchResults' => $finalOutput,
+        return view('eon.content-builder::content.store', [
             'categories' => $categories,
             'breadcrumbs' => $breadcrumbs
         ]);
+
+    }
+
+    public function contentSearchToHTML(Request $request){
+        $data = $request->json()->all();
+        
+        $from = $data['from'];
+        $size = $data['size'];
+
+        $results = $this->contentSearch($data['term'], $data['categories'], $from, $size);
+
+        $fromNext = $from + $size;
+        $fromPrev = $from - $size;
+
+        $renderedResults = "";
+
+        foreach($results['results'] as $result){
+            $renderedResults = $renderedResults . view('eon.content-builder::content.partials.result', ['item' => $result])->render();
+        }
+
+        $meta = $results['meta'];
+        $meta['fromNext'] = $fromNext;
+        $meta['fromPrev'] = $fromPrev;
+        $meta['size'] = $size;
+
+        $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
+
+        return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
+
+    }
+
+    function contentSearch($term,$categories = [], $from, $size){
+
+        $elasticsearch = new Elasticsearch;
+        $index = 'content';
+
+        $cats = implode(',',$categories);
+
+        if($term === null && $cats === ''){
+            $query = '{
+                "query": {
+                     "match_all": {}
+                 }
+             }';
+        }else{
+            $first = true;
+
+            $query = '{
+                "query": {
+                    "bool": {
+                        "must": [';
+            
+            if($term !== null){
+                $first = false;
+                $query = $query . '
+                {
+                    "query_string" : {
+                        "query":    "*' . $term . '*",
+                        "fields": [ "title", "description","body","tags" ]
+                    }
+                }';    
+            }
+
+            if($cats !== ""){
+
+                if(!$first){
+                    $query = $query . ',';
+                }
+
+                $query = $query . '
+                    {
+                        "match": {
+                            "categories":  "*' . $cats . '*"
+                        }
+                    }'; 
+
+            }
+
+            $query = $query . '
+                            ]
+                        }
+                    }
+                }';
+
+        }
+
+
+
+        $success = false;
+
+        try {
+            $output = $elasticsearch->search($index, $query, $from, $size);
+            $success = true;
+        } catch (\ErrorException $e) {
+            Log::error("Unable to perform search: " . $e->getMessage());
+            
+        }
+
+        if($success){
+            $output = json_decode($output);
+
+            $hits = $output->hits->hits;
+            $total = $output->hits->total;
+    
+            $searchOutput = [
+                "meta" => [
+                    "total" => $total,
+                    "searchterm" => $term,
+                ],
+                "results" => []
+            ];
+    
+            foreach ($hits as $hit) {
+    
+                $content = Content::find($hit->_id);
+                $content->tags = $this->get_tags($content);
+                $content->categories = $content->categories();
+    
+                $searchOutput['results'][] = $content;
+            }
+        } else {
+            $searchOutput = false;
+        }
+
+
+
+        return $searchOutput;
 
     }
 
@@ -138,7 +179,7 @@ class ContentBuilderCore extends Controller {
             ]
         ];
 
-        return view('eon.content-builder::view', ['content' => $content, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::content.view', ['content' => $content, 'breadcrumbs' => $breadcrumbs]);
 
     }
 
@@ -173,7 +214,7 @@ class ContentBuilderCore extends Controller {
 
         }
 
-        return view('eon.content-builder::edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::content.edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }
 
@@ -220,7 +261,7 @@ class ContentBuilderCore extends Controller {
         }
         
 
-        return view('eon.content-builder::new2', [
+        return view('eon.content-builder::content.new', [
             'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,

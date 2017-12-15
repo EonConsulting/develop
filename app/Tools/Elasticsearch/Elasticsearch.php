@@ -15,6 +15,19 @@ class Elasticsearch
         $size = $size === null ? 10 : $size;
 
         $search = config('app.es_uri') . '/'. $index .'/_search?from=' . $from . '&size=' . $size;
+        
+        return $this->execQueryWithCurl($search,$query);
+    }
+
+    public function searchAll($index,$query){
+
+        $search = config('app.es_uri') . '/'. $index .'/_search?from=0&size=50';
+
+        return $this->execQueryWithCurl($search,$query);
+
+    }
+
+    public function execQueryWithCurl($search, $query){
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $search);

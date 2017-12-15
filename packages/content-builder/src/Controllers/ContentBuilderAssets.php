@@ -60,82 +60,140 @@ class ContentBuilderAssets extends Controller {
     }
 
     //resource method
-    public function index(Request $request) {
-
-        $breadcrumbs = [
-            'title' => 'Content Store',
-        ];
-
-        $categories = Category::all();
-
-        $elasticsearch = new Elasticsearch;
-
-        $index = 'assets';
-        $searchterm = $request->get('searchterm');
-        $from = $request->get('from');
-        $size = $request->get('size');
-
-        if (empty($searchterm)) {
-           $query = '{
-               "query": {
-                    "match_all": {}
-                }
-            }';
-        } else {
-
-            $query = '{
-                "query": {
-                    "query_string" : {
-                        "query" : "*' . $searchterm . '*"
-                    }
-                }
-            }';
-        }
-
-        try {
-            $output = $elasticsearch->search($index, $query, $from, $size);
-            $output = json_decode($output);
-
-
-            $hits = $output->hits->hits;
-
-            $total = $output->hits->total;
-            
-            $fromNext = $from + $size;
-            $fromPrev = $from - $size;
-
-            $finalOutput = [
-                "fromNext" => $fromNext,
-                "fromPrev" => $fromPrev,
-                "total" => $total,
-                "size" => $size,
-                "searchterm" => $searchterm,
-                "results" => []
-            ];
-
-            foreach ($hits as $hit) {
-
-                $asset = Asset::find($hit->_id);
-                //$content->tags = $this->get_tags($content);
-
-                $finalOutput['results'][] = $asset;
-            }
-
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            $finalOutput = array();
-        }
-
-
-        //$assets = Asset::all();
-        $categories = Category::all();
+    public function index() {
 
         $breadcrumbs = [
             'title' => 'Asset Store'
         ];
 
-        return view('eon.content-builder::assets.index', ['searchResults' => $finalOutput, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        $categories = Category::all();
+
+        return view('eon.content-builder::assets.index', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
     
+    }
+
+    public function assetSearchToHTML(Request $request){
+        $data = $request->json()->all();
+        
+        $from = $data['from'];
+        $size = $data['size'];
+
+        $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
+
+        $fromNext = $from + $size;
+        $fromPrev = $from - $size;
+
+        $renderedResults = "";
+
+        foreach($results['results'] as $result){
+            $renderedResults = $renderedResults . view('eon.content-builder::assets.partials.result', ['item' => $result])->render();
+        }
+
+        $meta = $results['meta'];
+        $meta['fromNext'] = $fromNext;
+        $meta['fromPrev'] = $fromPrev;
+        $meta['size'] = $size;
+
+        $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
+
+        return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
+
+    }
+
+    function assetSearch($term,$categories = [], $from, $size){
+
+        $elasticsearch = new Elasticsearch;
+        $index = 'assets';
+
+        $cats = implode(',',$categories);
+
+        if($term === null && $cats === ''){
+            $query = '{
+                "query": {
+                     "match_all": {}
+                 }
+             }';
+        }else{
+            $first = true;
+
+            $query = '{
+                "query": {
+                    "bool": {
+                        "must": [';
+            
+            if($term !== null){
+                $first = false;
+                $query = $query . '
+                {
+                    "query_string" : {
+                        "query":    "*' . $term . '*",
+                        "fields": [ "title", "description","content","tags" ]
+                    }
+                }';    
+            }
+
+            if($cats !== ""){
+
+                if(!$first){
+                    $query = $query . ',';
+                }
+
+                $query = $query . '
+                    {
+                        "match": {
+                            "categories":  "*' . $cats . '*"
+                        }
+                    }'; 
+
+            }
+
+            $query = $query . '
+                            ]
+                        }
+                    }
+                }';
+
+        }
+
+        $success = false;
+
+        try {
+            $output = $elasticsearch->search($index, $query, $from, $size);
+            $success = true;
+        } catch (\ErrorException $e) {
+            Log::error("Unable to perform search: " . $e->getMessage());
+            
+        }
+
+        if($success){
+            $output = json_decode($output);
+
+            $hits = $output->hits->hits;
+            $total = $output->hits->total;
+    
+            $searchOutput = [
+                "meta" => [
+                    "total" => $total,
+                    "searchterm" => $term,
+                ],
+                "results" => []
+            ];
+    
+            foreach ($hits as $hit) {
+    
+                $assets = Asset::find($hit->_id);
+                $assets->categories = $assets->categories();
+    
+                $searchOutput['results'][] = $assets;
+            }
+        } else {
+            $searchOutput = false;
+        }
+
+
+
+        return $searchOutput;
+
     }
 
     public function create(){
