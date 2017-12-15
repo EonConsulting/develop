@@ -42,9 +42,9 @@
                             </div><!-- end col-md-8 -->
 
                             <div class="col-md-4">
-                                <h3>Articles</h3>
-                                <div class="container-fluid" id="article-progression-container" style="height: 300px;">
-                                    <canvas id="article-progression"></canvas>
+                                <h3>Storyline</h3>
+                                <div class="container-fluid" id="storyline-progression-container" style="height: 300px;">
+                                    <canvas id="storyline-progression"></canvas>
                                 </div>
                             </div><!-- end col-md-8 -->
 

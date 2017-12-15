@@ -313,7 +313,7 @@
             {{ $course['title'] }} <span class="caret"></span>
         </a>
         <ul class="dropdown-menu multi-level" id="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-            @each('eon.storyline2::partials.dropdown', $items, 'item', 'eon.storyline2::partials.none')
+            @each('eon.storyline2::student.partials.dropdown', $items, 'item', 'eon.storyline2::student.partials.none')
         </ul>
     </div>
 
@@ -332,7 +332,7 @@
 
             {{-- {!! $items !!} --}}
             <ul>
-            @each('eon.storyline2::partials.items', $items, 'item', 'eon.storyline2::partials.none')
+            @each('eon.storyline2::student.partials.items', $items, 'item', 'eon.storyline2::student.partials.none')
             </ul>
 
         </div>
@@ -489,9 +489,7 @@
     function getContent(item_id,button) {
 
         console.log("getContent called");
-
         actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
-
         $.ajax({
             method: "GET",
             url: actionUrl,
@@ -521,8 +519,6 @@
     }
 
     function pupulateContent(data, button){
-        
-
         //create breadcrumbs
         var breadcrumb = button.html();
 
@@ -613,6 +609,7 @@
                 //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
+                alert(data.items_html);
                 $("#content_tree").html(data.items_html);
                 $("#dropdown-menu").html(data.drop_html);
                 
@@ -732,7 +729,7 @@
                         mbox: "{{ auth()->user()->email }}"
                     },
                     verb: {
-                        id: "http://unisaonline.net/schema/1.0/topic"
+                        id: "https://unisaonline.net/schema/1.0/topic"
                     },
                     target: {
                         id: "{!! url('') !!}"

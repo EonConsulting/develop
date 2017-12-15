@@ -8,6 +8,7 @@ Storyline Student Single
 @section('custom-styles')
 <link rel="stylesheet" href="{{ url('vendor/jstree-themes/bootstrap/style.css') }}" />
 <link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
+<link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 
 <style>
 
@@ -42,28 +43,16 @@ Storyline Student Single
      *----------------------------------------------------------------------
      */
 
-    
-    .page-container {
+    .flex-container {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
-        /*-webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;*/
-
-        margin-top: -15px;
     }
 
-    .page-container-tree {
+    .flex-menu {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -73,15 +62,14 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-        width: 250px;
 
-        overflow-x: hidden;
         overflow-y: auto;
 
         max-width: 350px;
+
     }
 
-    .page-container-editor {
+    .flex-content {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -91,8 +79,10 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-
         width: 70%;
+        overflow-y: auto;
+        overflow-x: auto;
+
     }
 
     /**
@@ -315,32 +305,82 @@ Storyline Student Single
         font-weight: bold;   
     }
 
+    .tools {
+        margin: -15px 0 0 0;
+        background: #FFF;
+        border-width: 0px 0px 1px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        padding: 5px;
+        min-height: 35px;
+    }
+
+    .tools .sp {
+        height: 18px;
+        border-width: 0px 1px 0px 0px;
+        border-color: #d3d3d3;
+        border-style: solid;
+        width: 15px;
+        margin-right: 15px;
+        display: inline-block;
+    }
+
+    .tools .btn {
+        border-radius: 0;
+        border: none;
+        color: #fb7217;
+
+    }
+
+    .tools-divider {
+        display: inline-block;
+        height: 25px;
+        width: 10px;
+        border-width: 0 1px 0 0;
+        border-color: #e0e0e0;
+        border-style: solid;
+        margin: 5px 10px 0 0;
+    }
+
 
 </style>
 @endsection
 
 
 @section('content')
-<div>
-    <div class="page-container resizer" id="page-container">
 
-        <div class="page-container-tree">
-            <div class="info-bar-name">
-                <div>
-                    <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
-                </div>
+<div class="tools" id="tools">
+
+    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
+
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
+    <span class="tools-divider pull-right"></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></span>
+    <span class="tools-divider pull-right"></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></span>
+    <span class="tools-divider pull-right"></span>
+    <span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i> Plagiarism Checker</a></span>
+    <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i> Whiteboard</a></span>
+</div>
+
+<div class="flex-container resizer">
+
+    <div class="flex-menu">
+        <div class="info-bar-name">
+            <div>
+                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
             </div>
+        </div>
 
-            <div id="tree">
+        <div id="tree">
 
-            </div>
+        </div>
 
+    </div><!--End flex-menu -->
 
-        </div><!--End col-md-3 -->
-
-        <div class="page-container-editor">
-
-            <div class="content-container">
+    <div class="flex-content">
+        <div class="content-container">
 
                 <div class="content-info">
 
@@ -350,25 +390,6 @@ Storyline Student Single
                                 <div>
                                     <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                                 </div>
-                            </div>
-
-                            <div class="info-bar-buttons" style="text-align: right;">
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" class="title-bar-button title-bar-button-save" data-toggle="modal" data-target="#saveModal">
-                                    <i class="fa fa-save"></i>
-                                    <span class="hidden-xs"> Save</span>
-                                </button>
-
-                                <button type="button" class="title-bar-button title-bar-button-import" data-toggle="modal" data-target="#importModal">
-                                    <i class="fa fa-save"></i>
-                                    <span class="hidden-xs"> Import</span>
-                                </button>
-
-                                <button class="title-bar-button title-bar-button-assets" data-toggle="modal" data-target="#assetsModal">
-                                    <i class="fa fa-cube"></i>
-                                    <span class="hidden-xs"> Assets</span>
-                                </button>
-
                             </div>
 
                         </div> <!-- row end -->
@@ -387,12 +408,10 @@ Storyline Student Single
                 </div>
         
             </div>
-        </div><!--End col-md-9 -->
 
-    </div><!--End row -->
+    </div><!--End flex-content -->
 
-</div><!--End container-fluid -->
-
+</div><!--End flexbox-container -->
 
 {{ csrf_field() }}
 
@@ -535,6 +554,65 @@ Storyline Student Single
 
     </div>
 </div>
+
+<div id="previewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content content-body">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Preview Content</h4>
+            </div>
+
+            <div class="modal-body content-preview" id="content-preview">
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#previewModal"><i class="fa fa-save"></i><span> Close</span></button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="msgModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+      <div class="msg-info"></div>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="whiteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body" >    
+          <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
+      <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>    
+</div>
 @endsection
 
 @section('custom-scripts')
@@ -544,6 +622,33 @@ Storyline Student Single
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+<!--<script src="https://awwapp.com/static/widget/js/aww.min.js"></script>-->
+<!--<script type="text/javascript">
+        var aww = new AwwBoard('#aww-wrpper', {
+            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b'
+        });
+        aww.doDrawLine('green', 10, 50, 50, 600, 600);
+        aww.drawText("This is drawing text", 100, 200, "green",
+                     "30px mono");
+</script>-->
+<script type="text/javascript">
+      var aww = new AwwBoard('#aww-wrapper', {
+            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b',
+            autoJoin: true,
+            boardLink: '5aj5342-56tz-uhjk-9874',
+            sizes: [3, 5, 8, 13, 20],
+            fontSizes: [10, 12, 16, 22, 30],
+            menuOrder: ['colors', 'sizes', 'tools', 'admin',
+              'utils'],
+            tools: ['pencil', 'rectangle','eraser', 'text', 'image'],
+            colors: [ "#000000", "#f44336", "#4caf50", "#2196f3",
+              "#ffc107", "#9c27b0",     "#e91e63", "#795548"],
+            defaultColor: "#000000",
+            defaultSize: 8,
+            defaultTool: 'pencil',
+     });
+</script>
 
 <script>
 var base_url = "{{{ url('') }}}";
@@ -570,7 +675,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
                 contentsCss : '{{ url($course->template->file_path) }}',
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,
                 mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
@@ -591,14 +696,27 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 breakBeforeClose : false,
                 breakAfterClose : false
             });
+
+            resize();
         });  
+
+        editor.on('change', function() {
+            body = editor.getData();
+            $("#content-preview").html(body);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        });
 
         editor.Height = '100%';
 
     });
 
-    CKEDITOR.on('instanceReady', function() { 
-        resize();
+   /* CKEDITOR.on('instanceReady', function() { 
+        
+    });*/
+
+    CKEDITOR.on('change', function() {
+        body = editor.getData();
+        $("#content-preview").html(body);
     });
 
     // resize the editor(s) while resizing the browser
@@ -606,16 +724,26 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         resize();
     });
 
+    function resizeArea(){
+        var areaHeight = $("#content-area").height();
+        var toolsHeight = $("#tools").height();
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
+    }
+
     function resize(){
-        var contentHeight       = $("#content-area").height();
-        var textEditHeight      = contentHeight - $("#info-bar").height();
+        var areaHeight = $("#content-area").height();
+        var toolsHeight = $("#tools").height();
+        var textEditHeight      = areaHeight - toolsHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
         var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 11) + "px");
+        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 21) + "px");
         //$("#page_container").css("background-color", "yellow");
-        $("#page-container").height( (contentHeight) + "px");
+        //$("#page-container").height( (contentHeight) + "px");
+
+ 
+        $(".flex-container").height(areaHeight - toolsHeight - 11);
     }
 
 </script>
@@ -1027,6 +1155,40 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             $matchingListElements.show();
             //$matchingListElements.addClass('highlighted');
         });
+        
+        $(document).on('click','.white-b',function(){
+            $("#whiteModal").modal();
+        });
+        
+        $(document).on('click','.p-check',function(){
+            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
+            $("#msgModal").modal();
+            if(data.length >1){               
+               var url = "{{ url('student/copyleaks') }}";
+               $.ajax({
+               url:url,
+               type: "POST",
+               data: {data: data, _token: "{{ csrf_token() }}"},
+               beforeSend: function () {
+                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
+               },
+                success: function (result) {
+                if (result.msg == 'true') {
+                    $('.msg-info').html(result.success);
+                } else {
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+          });
+          }else{
+             $('.msg-info').html('No content found, please add content.');
+          }
+        });
+        
     });
 
 

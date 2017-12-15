@@ -1,0 +1,20 @@
+{
+  "name": "eonconsulting/tao-client",
+  "description": "Package provides a api to call results from tao",
+  "type": "package",
+  "authors": [
+    {
+      "name": "Kyle Vorster",
+      "email": "kyle.vorster@eon.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\TaoClient\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "guzzlehttp/guzzle": "~6.0@dev"
+  }
+}

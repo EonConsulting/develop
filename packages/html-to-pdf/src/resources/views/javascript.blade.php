@@ -7,7 +7,8 @@
         $.AjaxDownloader({
             url  : "{{ route("html-to-pdf.store") }}",
             data : {
-                html_content: encodeURIComponent($('div#body').html())
+                html_content: encodeURIComponent($('div#body').html()),
+                '_token': '{{ csrf_token() }}'
             }
         });
     });

@@ -53,6 +53,29 @@ class Storyline2ViewsBlade extends BaseController {
 
         return view('eon.storyline2::student.view', ['items' => $items,'breadcrumbs' => $breadcrumbs,'course'=>$course,'storylineId'=>$storyline_id]);
     }
+
+    public function preview($course){
+        $SL2JSON = new Storyline2JSON;
+        
+        $course = Course::find($course);
+        $storyline_id = $course->latest_storyline()->id;
+        $userId = auth()->user()->id;
+    
+        $items = StorylineItem::where('storyline_id',$storyline_id)->get();
+        $items = $SL2JSON->items_to_tree($items);
+        usort($items, [$this, "self::compare"]);
+        $items = $SL2JSON->createTree($items);
+        //dd($result);
+        $items = $items[0]['children'];
+
+        $course['template'] = ContentTemplates::find($course->template_id);
+
+        $breadcrumbs = [
+            'title' => 'Preview Storyline: ' . $course->title //pass $course as param and load name here
+        ];
+
+        return view('eon.storyline2::lecturer.preview', ['items' => $items,'breadcrumbs' => $breadcrumbs,'course'=>$course,'storylineId'=>$storyline_id]);
+    }
     
     public function refresh_items($course,$item) {
         $SL2JSON = new Storyline2JSON;
@@ -63,8 +86,8 @@ class Storyline2ViewsBlade extends BaseController {
 
         $items = $SL2JSON->getTreeProgess($storyline_id);
         
-        $items_view = view('eon.storyline2::partials.refresh_items', ['items' => $items,'id'=>$item])->render();
-        $drop_view = view('eon.storyline2::partials.refresh_drop', ['items' => $items,'id'=>$item])->render();
+        $items_view = view('eon.storyline2::student.partials.refresh_items', ['items' => $items,'id'=>$item])->render();
+        $drop_view = view('eon.storyline2::student.partials.refresh_drop', ['items' => $items,'id'=>$item])->render();
 
         return ['items_html' => $items_view, 'drop_html' => $drop_view];
     }

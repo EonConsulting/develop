@@ -24,7 +24,7 @@ class ConvertController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return pdf|null
      */
-    public function store(Request $request) // @TODO add javascript error controller
+    public function store(Request $request)
     {
         if( ! $content = $request->get('html_content'))
         {
@@ -41,6 +41,13 @@ class ConvertController extends Controller
 
         $pdf->addPage($html);
 
-        return $pdf->send('store.pdf');
+        $content = $pdf->send('store.pdf');
+
+        if ($content === false)
+        {
+            return json_encode(['message' => 'Failed creating PDF'], 500);
+        }
+
+        return $content;
     }
 }

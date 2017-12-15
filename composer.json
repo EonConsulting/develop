@@ -39,6 +39,7 @@
       "App\\": "app/",
       "EONConsulting\\LaravelLTI\\": "packages/laravel-lti/src/",
       "Tsugi\\": "packages/laravel-lti/vendor/tsugi/lib/src/",
+      "EONConsulting\\Core\\": "packages/econtent-core/src/",
       "EONConsulting\\RolesPermissions\\": "packages/roles-permissions/src/",
       "EONConsulting\\AppStore\\": "packages/app-store/src/",
       "EONConsulting\\FileManager\\": "packages/file-manager/src/",
@@ -60,7 +61,8 @@
       "EONConsulting\\Student\\Progression\\": "packages/student-progression/src",
       "EONConsulting\\AnalyticsLogger\\": "packages/analytics-logger/src",
       "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src",
-      "EONConsulting\\StudentNotes\\": "packages/student-notes/src"
+      "EONConsulting\\StudentNotes\\": "packages/student-notes/src",
+      "EONConsulting\\TaoClient\\": "packages/tao-client/src"
     },
     "files": [
       "packages/laravel-lti/src/functions.php",

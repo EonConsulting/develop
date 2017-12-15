@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCoursesTable extends Migration
+class AlterAssetsTable extends Migration
 {
+
+    public $set_schema_table = 'assets';
+
     /**
      * Run the migrations.
      *
@@ -13,10 +16,8 @@ class AlterCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function ($table) {
-            $table->unsignedInteger('template_id')->default(1);
-            $table->foreign('template_id', 'template_ibfk_1')
-                ->references('id')->on('content_templates');
+        Schema::table($this->set_schema_table, function (Blueprint $table) {
+            $table->integer('ingested')->default(0);
         });
     }
 
@@ -27,8 +28,8 @@ class AlterCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function ($table) {
-            $table->dropColumn('template_id');
+        Schema::table($this->set_schema_table, function (Blueprint $table) {
+            $table->dropColumn('ingested');
         });
     }
 }
