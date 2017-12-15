@@ -12,7 +12,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         //Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');
     });
 
-    Route::group(['middleware' => ['auth', 'instructor']], function() {
+    Route::group(['middleware' => ['auth']], function() {
 
         /*
          * ---------------------------------------------
