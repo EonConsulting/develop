@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Bus\Dispatchable;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use EONConsulting\ContentBuilder\Models\Content;
 
 class ElasticIndexContent implements ShouldQueue {
 
@@ -52,11 +53,13 @@ class ElasticIndexContent implements ShouldQueue {
         // lets take a 1000 at a time and stay in this loop until finished
         Log::debug("Starting content sync to Elastic");
         while (true) {
-            $content = Db::table('content')
+            /*$content = Db::table('content')
                     ->where('ingested', '0')
                     ->orderBy('id', 'asc')
                     ->limit(1000)
-                    ->get();
+                    ->get();*/
+
+            $content = Content::where('ingested', '0')->get();
 
             // break out if the work is done
             if (count($content) <= 0) {
@@ -67,13 +70,32 @@ class ElasticIndexContent implements ShouldQueue {
             // put an entry to Elastic for each row
             foreach ($content as $c) {
 
+                $categories = $c->categories()->select('name')->get();
+
+                $cats = "";
+                $first = true;
+
+                foreach($categories as $cat){
+
+                    if ($first === true){
+                        $first = false;
+                    } else {
+                        $cats = $cats . ",";
+                    }
+
+                    $cats = $cats . $cat['name'];
+                    //echo $cat['name'];
+                }
+
                 $entry = [
                     "id" => $c->id,
                     "title" => $c->title,
                     "body" => $c->body,
                     "description" => $c->description,
-                    "tags" => $c->tags
+                    "tags" => $c->tags,
+                    "categories" => $cats
                 ];
+                
                 $this->postElasticItem($entry);
             }
         }

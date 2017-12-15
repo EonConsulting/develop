@@ -132,36 +132,29 @@
     <div class="flex-container" id="container">
 
         <div class="filters flex-item">
-
+<!--
             <h1>Filters</h1>
 
             <div class="form-group">
                 <a href="#" class="filterBtn btn btn-default">My Assets</a>
                 <a href="#" class="filterBtn btn btn-default">All Assets</a>
             </div>
-
-
+-->
             <h1>Category</h1>
 
             <div class="form-group">
-
-                <div class="radio">
-                    <input id="categories" name="category" type="radio" value="all" ng-model="orderList">
-                    <label for="category">
-                        All
-                    </label>
-                </div>
                 <?php foreach($categories as $category): ?>
 
-                    <div class="radio">
-                        <input id="radio<?php echo $category->id; ?>" name="category" type="radio" value="<?php echo $category->id; ?>" ng-model="orderList">
+                    <div class="checkbox">
+                        <input id="radio<?php echo $category->id; ?>" name="categories" class="cat-btn" type="checkbox" value="<?php echo $category->name; ?>" ng-model="orderList">
                         <label for="radio<?php echo $category->id; ?>">
                             <?php echo $category->name; ?>
                         </label>
                     </div>
 
                 <?php endforeach; ?>
-            </div>  
+            </div> 
+            <a href="#" id="clear-categories" class="btn btn-xs btn-default btn-clear">Clear</a> 
         </div>
         
 
@@ -182,89 +175,17 @@
 
 
             <div class="results">
-                <div class="pag">
-                    @if($searchResults['fromPrev'] >= 0)
-                    <a href="{!! url('/content') . '?from=' . $searchResults['fromPrev'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-left">Previous</a>
-                    @else
-                    <button class="btn btn-default disabled pull-left">Previous</button>
-                    @endif
-
-                    Showing 
-                    <strong>{{ $searchResults['fromNext'] - ($searchResults['size'] - 1) }}</strong>
-                        to 
-
-                    
-                    @if($searchResults['fromNext'] < $searchResults['total'])
-                    <strong>{{ $searchResults['fromNext'] }}</strong>
-                    @else
-                    <strong>{{ $searchResults['total'] }}</strong>
-                    @endif
-                    
-                    
-                        of 
-
-                    <strong>
-                    {{ $searchResults['total'] }}
-                    </strong>
-                    
-                        results
-
-                    @if($searchResults['fromNext'] < $searchResults['total'])
-                    <a href="{!! url('/content') . '?from=' . $searchResults['fromNext'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-right">Next</a>
-                    @else   
-                    <button class="btn btn-default disabled pull-right">Next</button>
-                    @endif
+                
+                <div id="pagination-top">
+                        
                 </div>
 
-                <?php foreach($searchResults['results'] as $asset): ?>
-                <div class="results-entry shadow">
-                    <div class="results-entry-icon">
-                        <i class="fa fa-image"></i>
-                    </div>
-                    <div class="results-entry-title">
-                        <?php echo $asset['title']; ?>
-                    </div>
-                    <div class="results-entry-actions">
-                        <a href="{{ route('assets.delete', $asset['id']) }}" class="deleteEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-trash-o"></i></a>
-                        <a href="#" class="editEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="#" class="previewEntry" data-asset-id="<?php echo $asset['id']; ?>"><i class="fa fa-eye"></i></a>
-                    </div>
+                <div id="results">
+                    No results
                 </div>
-                <?php endforeach; ?>
 
+                <div id="pagination-bottom">
 
-                <div class="pag">
-                    @if($searchResults['fromPrev'] >= 0)
-                    <a href="{!! url('/content/assets') . '?from=' . $searchResults['fromPrev'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-left">Previous</a>
-                    @else
-                    <button class="btn btn-default disabled pull-left">Previous</button>
-                    @endif
-
-                    Showing 
-                    <strong>{{ $searchResults['fromNext'] - ($searchResults['size'] - 1) }}</strong>
-                        to 
-
-                    
-                    @if($searchResults['fromNext'] < $searchResults['total'])
-                    <strong>{{ $searchResults['fromNext'] }}</strong>
-                    @else
-                    <strong>{{ $searchResults['total'] }}</strong>
-                    @endif
-                    
-                    
-                        of 
-
-                    <strong>
-                    {{ $searchResults['total'] }}
-                    </strong>
-                    
-                        results
-
-                    @if($searchResults['fromNext'] < $searchResults['total'])
-                    <a href="{!! url('/content/assets') . '?from=' . $searchResults['fromNext'] . '&size=' . $searchResults['size'] . '&searchterm=' . $searchResults['searchterm'] !!}" class="btn btn-default pull-right">Next</a>
-                    @else   
-                    <button class="btn btn-default disabled pull-right">Next</button>
-                    @endif
                 </div>
 
             </div>
@@ -334,10 +255,10 @@
             </div>
 
         </div>
-
-
     
     </div>
+
+    {{ csrf_field() }}
 
 @endsection
 
@@ -350,138 +271,207 @@
 @section('custom-scripts')
 
     <script>
+    $from = 0;
+    $size = 10;
 
-        $(document).ready(function() {
-            resizeArea();
+    function search(){
 
-            $("#searchterm").keypress(function (e) {
-                if (e.which === 13) {
-                    var sValue = $(this).val();
-                    if (sValue.length >= 3) {
-                        window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}" + sValue;
-                    }
-                }
-            });
-
-            $("#btnSearch").on("click", function () {
-                console.log('Search Clicked');
-                var sValue = $("#searchterm").val();
-                if (sValue.length >= 3) {
-                    window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}" + sValue;
-                }
-            });
-
-            $("#btnReset").on("click", function () {
-                window.location.href = "{!! url('/content/assets?from=0&size=' . $searchResults['size'] . '&searchterm=') !!}";
-            });
-        });
-
-        function changePreview(asset){
-
-            $("#a-title").html(asset['title']);
-
-
-            //detect mime and build html----------------------------------------
-            if (asset['mime_type'] !== null){
-                $("#a-media").html(asset['html']);
-                $("#a-media-holder").show();
-
-            } else {
-                $("#a-media-holder").hide();
-
-            }
-
-            $("#a-mime-type").html(asset['icon']);
-
-            //build categories html--------------------------------------------
-
-            $categories_str = 'Catgories: ';
-            $num_cat = 0;
-
-            /*$(".menu_collapse").each(function( index ) {
-                $(this).removeClass("hidden", 1000);
-            });*/
-
-            $.each(asset['categories'], function(index, value){
-                $num_cat++;
-                if($num_cat > 1) {
-                    $categories_str += ", ";
-                }
-                $categories_str +=  value['name'];
-            });
-
-            $("#a-category").html($categories_str);
-
-
-            //build tags htm
-            $tags = asset['tags'].split(",");
-            $tags_str = '';
-            $tags.forEach(function(item, index){
-                $tags_str += "<span class='label label-default'>" + item + "</span> ";
-            });
-
-            $("#a-tags").html($tags_str);
-
-
-            //simple
-            $("#a-description").html(asset['description']);
-
-            if(asset['content'] !== null){
-                $("#a-content-holder").show();
-                $("#a-content").html(asset['content']);
-            } else {
-                $("#a-content-holder").hide();
-            }
-
-            $("#preview-place-holder").hide();
-            $("#preview-asset").removeClass("hidden");
-
-
-        }
-
+        $term = $("#searchterm").val();
         
-        $(document).on('click', '.previewEntry', function() {
+        $categories = [];
+        $.each($("input[name='categories']:checked"), function(){            
+            $categories.push($(this).val());
+        });
 
-            console.log("Preview clicked");
-            var id = $(this).data("asset-id"); //get category id from btn id attribute
-            console.log("Preview " + id);
+        $data = {
+            'term': $term,
+            'categories': $categories,
+            'from': $from,
+            'size': $size
+        };
 
-            $.ajax({
-                method: "GET",
-                url: "{{ url('content/assets/') }}/"+id,
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        console.log("search called");
+        console.log($data);
+
+        $actionUrl = "{{ url('/content/assets/search') }}";
+
+        $.ajax({
+            method: "POST",
+            url: $actionUrl,
+            data: JSON.stringify($data),
+            contentType: 'application/json',
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    populateResults(data);
                 },
-                statusCode: {
-                    200: function (data) { //success
+                400: function () { //bad request
 
-                        //var json = JSON.parse(data);
+                },
+                500: function () { //server kakked
 
-                        changePreview(data);
-
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
                 }
-            }).error(function (data) {
-                console.log("Delete AJAX Broke");
-            });
-
-
+            }
+        }).error(function (req, status, error) {
+            alert(error);
         });
 
-        $(window).resize(function(){
-            resizeArea();
+    }
+
+    function populateResults(data){
+
+        $('#pagination-top').html(data.renderedPag);
+
+        $('#results').html(data.renderedResults);
+
+        $('#pagination-bottom').html(data.renderedPag);
+
+    }
+
+    $(document).ready(function() {
+        resizeArea();
+
+        search();
+
+        $(document).on("click", ".btn-prev-page", function(){
+            $from -= 10;
+            search();
         });
 
-        function resizeArea(){
-            var areaHeight = $("#content-area").height();
-            $("#container").height(areaHeight);
+        $(document).on("click", ".btn-next-page", function(){
+            $from += 10;
+            search();
+        });
+
+        $(document).on("change", ".cat-btn", function(){
+            search();
+        });
+
+        $(document).on("click", ".btn-clear", function(){
+            $('.cat-btn').prop("checked", false);
+            search();
+        });
+
+        $("#btnSearch").on("click", function () {
+            search();
+        });
+
+        $("#btnReset").on("click", function () {
+            $('.cat-btn').prop("checked", false);
+            $("#searchterm").val("");
+            search();
+        });
+
+    });
+
+    function changePreview(asset){
+
+        $("#a-title").html(asset['title']);
+
+
+        //detect mime and build html----------------------------------------
+        if (asset['mime_type'] !== null){
+            $("#a-media").html(asset['html']);
+            $("#a-media-holder").show();
+
+        } else {
+            $("#a-media-holder").hide();
+
         }
+
+        $("#a-mime-type").html(asset['icon']);
+
+        //build categories html--------------------------------------------
+
+        $categories_str = 'Catgories: ';
+        $num_cat = 0;
+
+        /*$(".menu_collapse").each(function( index ) {
+            $(this).removeClass("hidden", 1000);
+        });*/
+
+        $.each(asset['categories'], function(index, value){
+            $num_cat++;
+            if($num_cat > 1) {
+                $categories_str += ", ";
+            }
+            $categories_str +=  value['name'];
+        });
+
+        $("#a-category").html($categories_str);
+
+
+        //build tags htm
+        $tags = asset['tags'].split(",");
+        $tags_str = '';
+        $tags.forEach(function(item, index){
+            $tags_str += "<span class='label label-default'>" + item + "</span> ";
+        });
+
+        $("#a-tags").html($tags_str);
+
+
+        //simple
+        $("#a-description").html(asset['description']);
+
+        if(asset['content'] !== null){
+            $("#a-content-holder").show();
+            $("#a-content").html(asset['content']);
+        } else {
+            $("#a-content-holder").hide();
+        }
+
+        $("#preview-place-holder").hide();
+        $("#preview-asset").removeClass("hidden");
+
+
+    }
+
+    
+    $(document).on('click', '.previewEntry', function() {
+
+        console.log("Preview clicked");
+        var id = $(this).data("asset-id"); //get category id from btn id attribute
+        console.log("Preview " + id);
+
+        $.ajax({
+            method: "GET",
+            url: "{{ url('content/assets/') }}/"+id,
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+
+                    //var json = JSON.parse(data);
+
+                    changePreview(data);
+
+                },
+                400: function () { //bad request
+
+                },
+                500: function () { //server kakked
+
+                }
+            }
+        }).error(function (data) {
+            console.log("Delete AJAX Broke");
+        });
+
+
+    });
+
+    $(window).resize(function(){
+        resizeArea();
+    });
+
+    function resizeArea(){
+        var areaHeight = $("#content-area").height();
+        $("#container").height(areaHeight);
+    }
 
 
     </script>                  
