@@ -489,9 +489,7 @@
     function getContent(item_id,button) {
 
         console.log("getContent called");
-
         actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
-
         $.ajax({
             method: "GET",
             url: actionUrl,
@@ -521,8 +519,6 @@
     }
 
     function pupulateContent(data, button){
-        
-
         //create breadcrumbs
         var breadcrumb = button.html();
 
@@ -613,6 +609,7 @@
                 //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
+                alert(data.items_html);
                 $("#content_tree").html(data.items_html);
                 $("#dropdown-menu").html(data.drop_html);
                 
