@@ -3,6 +3,8 @@
 Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 'EONConsulting\Storyline2\Controllers'], function() {
 
     //Student Routes
+      /*
+       * 
     Route::group(['middleware' => ['auth', 'learner']], function() {
         Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
         Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
@@ -11,8 +13,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         //Route::get('/item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
         //Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');
     });
+       * 
+       */
 
-    Route::group(['middleware' => ['auth', 'instructor']], function() {
+    Route::group(['middleware' => ['auth']], function() {
 
         /*
          * ---------------------------------------------
@@ -57,7 +61,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::match(['get', 'post'], '/delete', 'Storyline2ViewsJSON@delete')->name('storyline2.JSON.delete');
         Route::post('/create', 'Storyline2ViewsJSON@create')->name('storyline2.JSON.create');
         //Add more routes
-
+         Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
         Route::post('/notify', ['as' => 'storyline2.courses.single.notify', 'uses' => 'CourseNotifyController@store']);
         Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
 
