@@ -52,7 +52,7 @@ class ElasticIndexCourseInfo implements ShouldQueue {
         // lets take a 1000 at a time and stay in this loop until finished
         Log::debug("Starting course sync to Elastic");
         while (true) {
-            $courses = Db::table('courses')
+            $courses = DB::table('courses')
                     ->where('ingested', '0')
                     ->orderBy('id', 'asc')
                     ->limit(1000)
@@ -72,6 +72,7 @@ class ElasticIndexCourseInfo implements ShouldQueue {
                     "title" => $c->title,
                     "description" => $c->description,
                     "tags" => $c->tags
+                    
                 ];
                 $this->postElasticItem($entry);
             }

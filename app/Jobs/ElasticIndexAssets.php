@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Bus\Dispatchable;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use EONConsulting\ContentBuilder\Models\Asset;
 
 class ElasticIndexAssets implements ShouldQueue {
 
@@ -52,11 +53,12 @@ class ElasticIndexAssets implements ShouldQueue {
         // lets take a 1000 at a time and stay in this loop until finished
         Log::debug("Starting asset sync to Elastic");
         while (true) {
-            $assets = Db::table('assets')
+            /*$assets = Db::table('assets')
                     ->where('ingested', '0')
                     ->orderBy('id', 'asc')
                     ->limit(1000)
-                    ->get();
+                    ->get();*/
+            $assets = Asset::where('ingested', '0')->get();
 
             // break out if the work is done
             if (count($assets) <= 0) {
@@ -66,13 +68,33 @@ class ElasticIndexAssets implements ShouldQueue {
 
             // put an entry to Elastic for each row
             foreach ($assets as $c) {
+
+                $categories = $c->categories()->select('name')->get();
+
+                $cats = "";
+                $first = true;
+
+                foreach($categories as $cat){
+
+                    if ($first === true){
+                        $first = false;
+                    } else {
+                        $cats = $cats . ",";
+                    }
+
+                    $cats = $cats . $cat['name'];
+                    //echo $cat['name'];
+                }
+
                 $entry = [
                     "id" => $c->id,
                     "title" => $c->title,
                     "content" => $c->content,
                     "description" => $c->description,
-                    "tags" => $c->tags
+                    "tags" => $c->tags,
+                    "categories" => $cats
                 ];
+
                 $this->postElasticItem($entry);
             }
         }

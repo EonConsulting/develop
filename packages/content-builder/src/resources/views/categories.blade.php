@@ -169,7 +169,6 @@
 
         function drawTable($data){
 
-
             $html = "";
             $.each($data, function(i) {
 

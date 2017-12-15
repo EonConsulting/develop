@@ -609,7 +609,6 @@
                 //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
             },
             success: function (data, textStatus, jqXHR) {
-                alert(data.items_html);
                 $("#content_tree").html(data.items_html);
                 $("#dropdown-menu").html(data.drop_html);
                 

@@ -147,6 +147,10 @@ class ElasticSearchSetup implements ShouldQueue {
                     "tags" => [
                         "type" => "string",
                         "analyzer" => "autocomplete"
+                    ],
+                    "categories" => [
+                        "type" => "string",
+                        "analyser" => "autocomplete"
                     ]
                 ]
             ]
@@ -241,6 +245,10 @@ class ElasticSearchSetup implements ShouldQueue {
                     "tags" => [
                         "type" => "string",
                         "analyzer" => "autocomplete"
+                    ],
+                    "categories" => [
+                        "type" => "string",
+                        "analyser" => "autocomplete"
                     ]
                 ]
             ]
