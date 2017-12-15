@@ -17,6 +17,8 @@ class DashboardLTIController extends LTIBaseController
             'parent_title' => 'Instructor', //leave empty if none
         );
 
+        //$UserRole = "Instructor, Administrator,urn:lti:instrole:ims/lis/Administrator,urn:lti:sysrole:ims/lis/Administrator";
+        //$UserRole = "Learner";
         $UserRole = laravel_lti()->get_user_lti_type(auth()->user());
 
         Log::debug("Attempting an LTI Login....");
@@ -25,7 +27,7 @@ class DashboardLTIController extends LTIBaseController
         // we want a more vanilla flavoured role, especially when dealing
         // which the MyUNISA roles
         $parsedRole = $this->interpretRole($UserRole);
-
+        
         switch ($parsedRole) {
             case "Administrator":
                 $breadcrumbs = [
@@ -64,12 +66,15 @@ class DashboardLTIController extends LTIBaseController
     {
         // example of what we get from MyUNISA
         // "Instructor, Administrator,urn:lti:instrole:ims/lis/Administrator,urn:lti:sysrole:ims/lis/Administrator"
-        if (str_contains($UserRole, "urn:lti:instrole:") || str_contains($UserRole, "urn:lti:sysrole:"))
+        // if (str_contains($UserRole, "urn:lti:instrole:") || str_contains($UserRole, "urn:lti:sysrole:"))
+        if (str_contains($UserRole, ","))
         {
             // this is probably a SAKAI LTI Token
             // lets see if we can get an instrole, if not a sysrole
-            preg_match("/urn:lti:instrole:ims\/lis\/(\w+)/", $UserRole, $matches);
-            return $matches[1];
+            // preg_match("/urn:lti:instrole:ims\/lis\/(\w+)/", $UserRole, $matches);
+            // return $matches[1];
+            $fields = explode(",", $UserRole);
+            return ($fields[0] ?? "");
         } else {
             // this is another LTI Token, possibly TSUGI
             return $UserRole;

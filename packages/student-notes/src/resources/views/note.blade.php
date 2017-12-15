@@ -62,6 +62,9 @@ $(document).ready(function()
         $.ajax({
             type: "DELETE",
             url: $(this).attr("href"),
+            data: {
+                '_token': '{{ csrf_token() }}'
+            },
             success: function (data, textStatus, jqXHR)
             {
                 swal('Successful', 'Note removed Successfully!', 'success');
