@@ -22,7 +22,6 @@ return [
 
         'launch_presentation_locale' => 'en-US',
         'launch_presentation_document_target' => 'iframe',
-        'launch_presentation_css_url' => 'https://unisa.synergi.io/css/tao.css',
         'launch_presentation_width' => '100%',
         'launch_presentation_height' => '800px',
 
@@ -32,7 +31,7 @@ return [
         'tool_consumer_instance_name' => 'Unisa E-content',
         'tool_consumer_instance_description' => 'unisa e-content system',
 
-        'tool_consumer_instance_contact_email' => 'unisa@unisa-offline.eon.dev',
+        'tool_consumer_instance_contact_email' => 'info@unisaonline.net',
 
         'custom_skip_thankyou' => 'true',
         'custom_force_restart' => 'true',
