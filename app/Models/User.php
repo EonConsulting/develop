@@ -84,7 +84,7 @@ class User extends Authenticatable
      * @param string $role
      * @return bool
      */
-    public function hasRole($role = 'Administrator')
+    public function hasRole($role)
     {
         if ( ! $lti = $this->lti->first()) {
             return false;
@@ -93,7 +93,7 @@ class User extends Authenticatable
         if($lti->roles == $role) {
             return true;
         }
-
+        
         return false;
     }
 
@@ -105,5 +105,42 @@ class User extends Authenticatable
     public function routeNotificationForNexmo()
     {
         return $this->mobile_number;
+    }
+
+    /**
+     * Get the user's first name.
+     *
+     * @return string
+     */
+    public function getFirstNameAttribute()
+    {
+        $fullname = explode(" ", $this->name);
+        return $fullname[0] ?? '';
+    }
+
+    /**
+     * Get the user's last name.
+     *
+     * @return string
+     */
+    public function getLastNameAttribute()
+    {
+        $fullname = explode(" ", $this->name);
+        return $fullname[1] ?? '';
+    }
+
+    /**
+     * Get the user's LTI role.
+     *
+     * @return string
+     */
+    public function getLtiRoleAttribute()
+    {
+        if ( ! $lti = $this->lti->first())
+        {
+            return false;
+        }
+
+        return $lti->roles;
     }
 }

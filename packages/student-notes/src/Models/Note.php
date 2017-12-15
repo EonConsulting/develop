@@ -31,9 +31,7 @@ class Note extends Model
 
     public function scopebyStudent($query)
     {
-        $user_id = '1'; // auth()->user()->id @TODO
-
-        return $query->where('user_id', $user_id);
+        return $query->where('user_id', auth()->user()->id);
     }
 
     public function scopeforStoryLineItem($query, $storyline_item_id)

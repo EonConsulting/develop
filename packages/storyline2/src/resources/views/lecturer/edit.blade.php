@@ -79,9 +79,7 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-
         width: 70%;
-
         overflow-y: auto;
         overflow-x: auto;
 
@@ -587,8 +585,8 @@ Storyline Student Single
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body msg-info">
-        
+      <div class="modal-body">
+      <div class="msg-info"></div>    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -613,8 +611,7 @@ Storyline Student Single
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-    
+  </div>    
 </div>
 @endsection
 
@@ -678,7 +675,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         editor = CKEDITOR.replace('ltieditorv2inst', {
                 contentsCss : '{{ url($course->template->file_path) }}',
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 allowedContent: true,
                 fullPage: false,
                 mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
@@ -1179,7 +1176,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 if (result.msg == 'true') {
                     $('.msg-info').html(result.success);
                 } else {
-                    $('.msg-info').html('An error occured, please try again.');
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -1191,6 +1188,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
              $('.msg-info').html('No content found, please add content.');
           }
         });
+        
     });
 
 

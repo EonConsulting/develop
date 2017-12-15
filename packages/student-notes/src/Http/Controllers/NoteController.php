@@ -40,10 +40,8 @@ class NoteController extends Controller
             'body' => 'required',
         ]);
 
-        $user_id = '1'; // auth()->user()->id @TODO
-
         $note = Note::create([
-            'user_id' => $user_id,
+            'user_id' => auth()->user()->id,
             'storyline_item_id' => $data['storyline_item_id'],
             'body' => $data['body']
         ]);

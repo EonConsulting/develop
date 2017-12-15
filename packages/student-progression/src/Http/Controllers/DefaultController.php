@@ -23,8 +23,8 @@ class DefaultController extends LTIBaseController {
         $login = $client->request('POST', 'https://api.copyleaks.com/v1/account/login-api', [
             'verify' => false,
             'form_params' => [
-                'Email' => 'reggiest.ain@gmail.com',
-                'ApiKey' => '91FEFB7C-68B4-447B-A08D-8064F75A6EC0'
+                'Email' => 'reggiesta.in@gmail.com',
+                'ApiKey' => 'D98A75CC-24DC-4136-ABA0-7B96985651CB'
             ]
         ]);
 
@@ -99,7 +99,7 @@ class DefaultController extends LTIBaseController {
                         . '<b>Result Title :</b>'.$data[0]->Title.'<br>'
                         . '<b>Number Of Copied Words :</b>'.$data[0]->NumberOfCopiedWords.'<br>'
                         //. '<b>Introduction :</b>'.$data[0]->Introduction.'<br>'
-                        . "<b>Comparison Report :</b> <a href=".$data[0]->ComparisonReport.">".$data[0]->ComparisonReport."</a>";
+                        . "<b>Comparison Report :</b> <a href=".$data[0]->EmbededComparison." target='_blank'>".$data[0]->EmbededComparison."</a>";
                                 
                 return $data;
                         

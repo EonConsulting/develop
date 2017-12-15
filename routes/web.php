@@ -1,18 +1,18 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| E-Content System Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now work !
-|
-| These Routes are only System Specific Routes, Package and Component
-| Routes are in there individual packages.
-|
-*/
+  |--------------------------------------------------------------------------
+  | E-Content System Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register web routes for your application. These
+  | routes are loaded by the RouteServiceProvider within a group which
+  | contains the "web" middleware group. Now work !
+  |
+  | These Routes are only System Specific Routes, Package and Component
+  | Routes are in there individual packages.
+  |
+ */
 
 /*
  * ---------------------------------------
@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
  * Home - Non LTI Routes
  * --------------------------------------
  */
-Route::group(['middleware' => ['auth'],'prefix' => '/home'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'home.users.profile', 'uses' => 'ProfileController@index']);
@@ -65,20 +65,23 @@ Route::group(['middleware' => ['auth'],'prefix' => '/home'], function () {
 
 
 //Route::match(['get', 'post'], '/nonltiprofile', ['as' => 'nonlti.users.profile', 'uses' => 'Users\ProfileController@index']);
-
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
 //Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  // TODO::replace-test
+
+
+
+/*
+ * --------------------------------------
+ * Lecturer - Routes
+ * --------------------------------------
+ */
+
 Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], function () {
     Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function () {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
         Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
-        Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
-        Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
-        Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
-        Route::get('/view-metadata/{id}', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
-        Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
-        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']);
+        Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);        
         Route::get('/{course}', ['as' => 'courses.single', 'uses' => 'CourseController@show']);
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);
@@ -89,11 +92,13 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
         Route::post('/edit', ['as' => 'courses.edit', 'uses' => 'CoursesController@edit']);
         Route::post('/update', ['as' => 'courses.update', 'uses' => 'CoursesController@update']);
         Route::post('/course-metadata/update', ['as' => 'course-metadata.update', 'uses' => 'CreateCourseController@updatemetadata']);
-
-
+        Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
+        Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
+        Route::get('/view-metadata/{id}', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
+        Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
+        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']); 
         // Feed POst Route from Web Pack
         //Route::get('/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@get']);
-
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
     });
@@ -114,6 +119,11 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
         Route::match(['get', 'post'], '/lecturer-assess-analysis', ['as' => 'lti.dashboards.lecturer-assess-analysis', 'uses' => 'DashboardLTIController@lecturer_assess_analysis']);
         Route::match(['get', 'post'], '/mentor-stud-analysis', ['as' => 'lti.dashboards.mentor-stud-analysis', 'uses' => 'DashboardLTIController@mentor_stud_analysis']);
         Route::match(['get', 'post'], '/mentor-assess-analysis', ['as' => 'lti.dashboards.mentor-assess-analysis', 'uses' => 'DashboardLTIController@mentor_assess_analysis']);
+    });
+    Route::group(['namespace' => 'Data'], function() {
+        Route::match(['get'], '/data-courses/', ['as' => 'lti.dashboards.data-courses', 'uses' => 'DashboardDataController@data_courses']);
+        Route::match(['get'], '/data-students/{course_id}', ['as' => 'lti.dashboards.data-students', 'uses' => 'DashboardDataController@data_students']);
+        Route::match(['get'], '/data-progression/{course_id}/{student_id}', ['as' => 'lti.dashboards.data-progression', 'uses' => 'DashboardDataController@data_progression']);
     });
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);
@@ -143,6 +153,6 @@ Route::get('/logout', function () {
  * Playground API's
  * ----------------------------------------------------
  */
-Route::group(['prefix' => '/apis']/*'middleware' => 'auth']*/, function () {
-    Route::match(['get','post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
+Route::group(['prefix' => '/apis']/* 'middleware' => 'auth'] */, function () {
+    Route::match(['get', 'post'], '/loggeduser', ['as' => 'current.user', 'uses' => 'HomeController@current_user']);
 });
