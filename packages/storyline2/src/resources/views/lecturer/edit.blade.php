@@ -1176,7 +1176,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 if (result.msg == 'true') {
                     $('.msg-info').html(result.success);
                 } else {
-                    $('.msg-info').html('An error occured, please try again.');
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
