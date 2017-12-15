@@ -1163,7 +1163,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         $(document).on('click','.p-check',function(){
             var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
             $("#msgModal").modal();
-            if(data.length >1){               
+             if(data.length > 1){               
                var url = "{{ url('student/copyleaks') }}";
                $.ajax({
                url:url,
