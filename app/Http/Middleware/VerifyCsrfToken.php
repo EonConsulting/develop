@@ -13,6 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         '/eon/lti/*', '/eon/*', '/lti/*', '/lti', '/html2PDF', '/getEditorView', 'ajaxresponse', 'login', 'mindmap', 'savetodatabase', '/ajaxresponse/*', '/lecturer',
-        '/launchtransport/', '/xmltransport/', '/img-processor/*', '/img-processor','/lecturer/courses*','/lecturer*'
+        '/launchtransport/', '/xmltransport/', '/img-processor/*', '/img-processor','/lecturer/courses*','/lecturer*', 'tao-client/*'
     ];
 }

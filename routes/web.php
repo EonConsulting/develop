@@ -68,16 +68,20 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
 //Route::group(['middleware' => ['auth'], 'prefix' => '/lecturer'], function() {// TODO::replace-test
 //Instructor, auth, Sysadmin
 //Route::group(['middleware' => ['auth', 'instructor'], 'prefix' => '/lecturer'], function() {  // TODO::replace-test
+
+
+
+/*
+ * --------------------------------------
+ * Lecturer - Routes
+ * --------------------------------------
+ */
+
 Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], function () {
     Route::group(['prefix' => '/courses', 'namespace' => 'Courses'], function () {
         Route::get('/', ['as' => 'courses', 'uses' => 'CoursesController@index']);
         Route::get('/show', ['as' => 'courses.show', 'uses' => 'CoursesController@show']);
-        Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);
-        Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
-        Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
-        Route::get('/view-metadata/{id}', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
-        Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
-        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']);
+        Route::get('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@index']);        
         Route::get('/{course}', ['as' => 'courses.single', 'uses' => 'CourseController@show']);
         Route::get('/{course}/content', ['as' => 'courses.single.content', 'uses' => 'CourseContentController@index']);
         Route::get('/{course}/content/{storylineItem}', ['as' => 'courses.single.content.item', 'uses' => 'CourseContentController@show']);
@@ -88,11 +92,13 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
         Route::post('/edit', ['as' => 'courses.edit', 'uses' => 'CoursesController@edit']);
         Route::post('/update', ['as' => 'courses.update', 'uses' => 'CoursesController@update']);
         Route::post('/course-metadata/update', ['as' => 'course-metadata.update', 'uses' => 'CreateCourseController@updatemetadata']);
-
-
+        Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
+        Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
+        Route::get('/view-metadata/{id}', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
+        Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
+        Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']); 
         // Feed POst Route from Web Pack
         //Route::get('/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@get']);
-
         Route::match(['get', 'post'], '/{course}/storyline/feed', ['as' => 'courses.single.storyline.feed', 'uses' => 'CourseStorylineController@fetch']);
         Route::post('/{course}/storyline', ['as' => 'courses.single.storyline', 'uses' => 'CourseStorylineController@store']);
     });
