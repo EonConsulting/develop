@@ -636,8 +636,6 @@
     const selector = '.resizer';
 
     let resizer = new Resizer(selector);
-
-    
     
     function progress_error(){
         $("#errorModal").modal("show");

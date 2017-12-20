@@ -897,15 +897,31 @@ class WidgetCore {
             });
         }
         
-        // methods
-        updateAssessmentTypes(a_type)
+        data_assessment_types(callback)
         {
-            var select = $("#assessment-type-filter");
-            select.empty();
-            var items = _.filter(instance.assessment_types, _.iteratee({'assessment': a_type}));
-            $.each(items, function (idx, obj) {
-                var option = new Option(obj.description, obj.assessment_type_id);
-                select.append($(option));
+            $.ajax({
+                method: "GET",
+                url: "{{ url("") }}/lti/data-assessment-types/" 
+                        + instance.selected_course 
+                        + "/" + instance.selected_student
+                        + "/" + instance.selected_assessment,
+                contentType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        callback(data);
+                    },
+                    400: function () { //bad request
+                        console.log("Bad request");
+                    },
+                    500: function () { //server kakked
+                        console.log("Server error");
+                    }
+                }
+            }).error(function (req, status, error) {
+                return [];
             });
         }
         
@@ -1069,7 +1085,8 @@ class WidgetCore {
             $("#assessment-filter").on("change", function () {
                 var self = $(this);
                 instance.selected_assessment = self.val();
-                instance.updateAssessmentTypes(instance.selected_assessment);
+                //instance.updateAssessmentTypes(instance.selected_assessment);
+                instance.bindAssessmentTypeFilter();
                 // lodash methods for rendering graph
                 switch(instance.role)
                 {
@@ -1188,16 +1205,27 @@ class WidgetCore {
         
         bindAssessmentTypeFilter()
         {
-            // event for change on metric items
-            $("#assessment-type-filter").on("change", function () {
-                var self = $(this);
-                // lodash methods for rendering graph
-                var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
-                    'assessment': instance.selected_assessment, 
-                    'assessment_type_id': self.val()}
-                    )
-                );
-                instance.renderResultsGraph(_.head(courses));
+            instance.data_assessment_types(function(data){
+                
+                // populate this with data first by changing
+                // the DOM only once
+                var listitems = '';
+                $.each(data, function(key, value){
+                    listitems += '<option value=' + value.id + '>' + value.name + '</option>';
+                });
+                $("#assessment-type-filter").append(listitems);
+                
+                // event for change on metric items
+                $("#assessment-type-filter").on("change", function () {
+                    var self = $(this);
+                    // lodash methods for rendering graph
+                    var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
+                        'assessment': instance.selected_assessment, 
+                        'assessment_type_id': self.val()}
+                        )
+                    );
+                    instance.renderResultsGraph(_.head(courses));
+                });
             });
         }
         
