@@ -1,5 +1,6 @@
 <?php
 
+
 Route::group(['middleware' => ['web'], 'prefix' => 'student', 'namespace' => 'EONConsulting\Student\Progression\Http\Controllers'], function() {
     
     Route::group(['middleware' => ['auth', 'learner']], function() {

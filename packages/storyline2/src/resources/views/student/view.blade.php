@@ -489,7 +489,7 @@
     function getContent(item_id,button) {
 
         console.log("getContent called");
-        actionUrl = "{{ url("") }}/storyline2/item-content/" + item_id;
+        actionUrl = "{{ url("") }}/storyline2/student-item-content/" + item_id;
         $.ajax({
             method: "GET",
             url: actionUrl,
@@ -602,7 +602,7 @@
     function refresh_items(data,item_id){    
         var courseId = '{{ $course->id }}';
         $.ajax({
-            url: "{{ url("") }}/storyline2/item-refresh" +'/'+courseId+'/'+item_id,
+            url: "{{ url("") }}/storyline2/student-item-refresh" +'/'+courseId+'/'+item_id,
             type: "GET",
             async: true,
             beforeSend: function () {

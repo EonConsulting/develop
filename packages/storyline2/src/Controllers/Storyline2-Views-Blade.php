@@ -91,6 +91,7 @@ class Storyline2ViewsBlade extends BaseController {
 
         return ['items_html' => $items_view, 'drop_html' => $drop_view];
     }
+    
 
     public function makeList($list, $number = '')
     {
