@@ -13,7 +13,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::get('/show_items/{storyline}', 'Storyline2ViewsJSON@show_items')->name('storyline2.JSON.items');
         Route::get('/item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
         //Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');
-        Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
+        //Route::get('/item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
         
     });
    
