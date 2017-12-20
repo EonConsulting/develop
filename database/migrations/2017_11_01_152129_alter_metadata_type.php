@@ -11,14 +11,17 @@ class AlterMetadataType extends Migration {
      *
      * @return void
      */
-    
-    public $set_schema_table = 'metadata_types';
-    
-    public function up() {
-        Schema::table($this->set_schema_table, function (Blueprint $table) {
-           $table->longText('area')->after('description');
-        });
-    }
+
+    public function up()
+    {
+        //DB::statement('ALTER TABLE `metadata_types` CHANGE `area` `area` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;');
+		if (!Schema::hasColumn('metadata_types', 'area')) {
+			Schema::table('metadata_types', function (Blueprint $table) {
+				$table->char('email', 50)->charset('utf8mb4')->nullable(true);
+			});
+		}
+	}
+
 
     /**
      * Reverse the migrations.
