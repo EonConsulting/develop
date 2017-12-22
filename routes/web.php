@@ -123,6 +123,7 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
     Route::group(['namespace' => 'Data'], function() {
         Route::match(['get'], '/data-courses/', ['as' => 'lti.dashboards.data-courses', 'uses' => 'DashboardDataController@data_courses']);
         Route::match(['get'], '/data-students/{course_id}', ['as' => 'lti.dashboards.data-students', 'uses' => 'DashboardDataController@data_students']);
+        Route::match(['get'], '/data-assessment-types/{course_id}/{student_id}/{assessment}', ['as' => 'lti.dashboards.data-assessment-types', 'uses' => 'DashboardDataController@data_assessment_types']);
         Route::match(['get'], '/data-progression/{course_id}/{student_id}', ['as' => 'lti.dashboards.data-progression', 'uses' => 'DashboardDataController@data_progression']);
     });
     Route::group(['namespace' => 'Users'], function () {

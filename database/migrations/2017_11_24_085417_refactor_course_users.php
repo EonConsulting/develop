@@ -13,8 +13,16 @@ class RefactorCourseUsers extends Migration
      */
     public function up()
     {
-        DB::statement('RENAME TABLE `course_users` TO `integrate_course_users`');
-        DB::statement('ALTER TABLE `course_users` DROP COLUMN email, DROP COLUMN `opted_out`, DROP COLUMN `opted_out_date`');
+		if (Schema::hasTable('course_users')) {
+			Schema::table('course_users', function (Blueprint $table) {
+				$table->dropColumn('email');
+				$table->dropColumn('opted_out');
+				$table->dropColumn('opted_out_date');
+			});
+			Schema::rename('course_users', 'integrate_course_users');
+		}
+
+		
     }
 
     /**
