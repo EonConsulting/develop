@@ -297,6 +297,15 @@
         outline: none;
     }
 
+    .tree-collapse-button {
+        width: 25px;
+        height: 25px;
+        margin: -15px 0 0 -15px;
+        background: #e2e2e2;
+        float: left;
+        text-align: center;
+    }
+
 </style>
 
 
@@ -326,7 +335,7 @@
 
 <div class="flex-container resizer">
 
-    <div class="flex-menu">
+    <div class="flex-menu" id="tree">
 
         <div class="item-tree" id="content_tree">
 
@@ -341,6 +350,10 @@
     </div><!--End col-md-3 -->
 
     <div class="flex-content">
+
+        <a href="#" class="tree-collapse-button" id="tree-collapse">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
 
         <div class="content-navbar">
 
@@ -633,8 +646,9 @@
 
     //$('.dropdown-toggle').dropdown()
 
-    const selector = '.resizer';
+    var tree_expanded = true;
 
+    const selector = '.resizer';
     let resizer = new Resizer(selector);
     
     function progress_error(){
@@ -686,7 +700,32 @@
             $(this).children('i').toggleClass('fa-caret-down');
             $(this).children('i').toggleClass('fa-caret-right');
         });       
+
+        $(document).on('click', '#tree-collapse', function(){
+
+            if(tree_expanded){
+                collapse_tree();
+            }else{
+                expand_tree();
+            }
+
+        });
+
     });
+
+    function collapse_tree(){
+        resizer.remove();
+        $('#tree').hide();
+        $('#tree-collapse').html('<i class="fa fa-angle-double-right"></i>');
+        tree_expanded = false;
+    }
+
+    function expand_tree(){
+        let resizer = new Resizer(selector);
+        $('#tree').show();
+        $('#tree-collapse').html('<i class="fa fa-angle-double-left"></i>');
+        tree_expanded = true;
+    }
 
     function expandAll(){
         $(".toggle-expand").each(function( index ) {
