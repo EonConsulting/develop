@@ -130,7 +130,7 @@ class TaoApi
     {
         try {
 
-            $res = $this->client->request('GET', $this->config['api_url']. $endpoint, [
+            $res = $this->client->request('GET', $this->config['api_url'] . '/' . $endpoint, [
                 'query' => $params,
                 'auth' => [$this->config['api_user'], $this->config['api_pass']]
             ]);
