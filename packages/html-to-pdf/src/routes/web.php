@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['namespace' => 'EONConsulting\HtmlToPdf\Controllers', 'middleware' => ['web']], function () {
+Route::group(['namespace' => 'EONConsulting\HtmlToPdf\Http\Controllers', 'middleware' => ['web']], function () {
 
     Route::post('/html-to-pdf', [
         'middleware' => ['web'],
