@@ -16,14 +16,14 @@
                 '_token': '{{ csrf_token() }}'
             },
             httpMethod: "POST",
-        })
-        .success(function () {
-            swal.close();
-            swal('Success', 'Downloading PDF!', 'success');
-        })
-        .fail(function () {
-            swal.close();
-            swal('Oops...', 'Something went wrong!', 'error');
+            successCallback: function (url) {
+                swal.close();
+                swal('Success', 'Downloading PDF!', 'success');
+            },
+            failCallback: function (responseHtml, url) {
+                swal.close();
+                swal('Oops...', 'Something went wrong!', 'error');
+            }
         });
 
         e.preventDefault(); //otherwise a normal form submit would occur
