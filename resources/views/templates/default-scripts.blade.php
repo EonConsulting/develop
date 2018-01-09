@@ -16,3 +16,5 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+
+<script src="https://unpkg.com/sweetalert2@7.0.7/dist/sweetalert2.all.js"></script>
