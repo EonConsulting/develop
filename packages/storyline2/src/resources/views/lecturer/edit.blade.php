@@ -620,6 +620,7 @@ Storyline Student Single
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -659,51 +660,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 </script>
 
 <script>
-    // resize the editor(s) while the instance is ready
-    var editor = {};
-
-    $(function(){
-
-        editor = CKEDITOR.replace('ltieditorv2inst', {
-                contentsCss : '{{ url($course->template->file_path) }}',
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                allowedContent: true,
-                fullPage: false,
-                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
-            }
-        );
-
-        editor.on('instanceReady', function()
-        {
-            body = editor.document.getBody();
-            body.setAttribute( 'class', 'content-body');
-            
-            var writer = editor.dataProcessor.writer;
-            writer.indentationChars = '';
-            writer.lineBreakChars = '';
-
-            editor.dataProcessor.writer.setRules( 'p',
-            {
-                indent : false,
-                breakBeforeOpen : false,
-                breakAfterOpen : false, 
-                breakBeforeClose : false,
-                breakAfterClose : false
-            });
-
-            resize();
-        });  
-
-        editor.on('change', function() {
-            body = editor.getData();
-            $("#content-preview").html(body);
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        });
-
-        editor.Height = '100%';
-
-    });
-
+    
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
         resize();
@@ -738,6 +695,20 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     const selector = '.resizer';
     let resizer = new Resizer(selector);
 
+    var editor = init_editor('ltieditorv2inst','{{ url($course->template->file_path) }}');
+    editor.on('instanceReady', function()
+    {
+        body = editor.document.getBody();
+        body.setAttribute( 'class', 'content-body');
+
+        resize();
+    });  
+
+    editor.on('dataReady', function(){
+        body = editor.document.getBody();
+        body.setAttribute( 'class', 'content-body');
+    });
+
     $( document ).ready(function(){
 
         $("#validation").hide();
@@ -762,7 +733,53 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             importAsset($asset_id);
         });
 
+
+        $('#q').keyup(function () {
+            $("#tree").jstree("open_all");
+            var that = this, $allListElements = $('ul.jstree-children > li');
+            var $matchingListElements = $allListElements.filter(function (i, li) {
+                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
+                return ~listItemText.indexOf(searchText);
+            });
+            $allListElements.hide();
+            $matchingListElements.show();
+            //$matchingListElements.addClass('highlighted');
+        });
+        
+        $(document).on('click','.white-b',function(){
+            $("#whiteModal").modal();
+        });
+        
+        $(document).on('click','.p-check',function(){
+            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
+            $("#msgModal").modal();
+             if(data.length > 1){               
+               var url = "{{ url('student/copyleaks') }}";
+               $.ajax({
+               url:url,
+               type: "POST",
+               data: {data: data, _token: "{{ csrf_token() }}"},
+               beforeSend: function () {
+                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
+               },
+                success: function (result) {
+                if (result.msg == 'true') {
+                    $('.msg-info').html(result.success);
+                } else {
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+          });
+          }else{
+             $('.msg-info').html('No content found, please add content.');
+          }
+        });
     });
+
 
     function importAsset(asset){
 
@@ -1129,50 +1146,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     }
 
     $(document).ready(function () {
-        $('#q').keyup(function () {
-            $("#tree").jstree("open_all");
-            var that = this, $allListElements = $('ul.jstree-children > li');
-            var $matchingListElements = $allListElements.filter(function (i, li) {
-                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
-                return ~listItemText.indexOf(searchText);
-            });
-            $allListElements.hide();
-            $matchingListElements.show();
-            //$matchingListElements.addClass('highlighted');
-        });
         
-        $(document).on('click','.white-b',function(){
-            $("#whiteModal").modal();
-        });
-        
-        $(document).on('click','.p-check',function(){
-            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
-            $("#msgModal").modal();
-             if(data.length > 1){               
-               var url = "{{ url('student/copyleaks') }}";
-               $.ajax({
-               url:url,
-               type: "POST",
-               data: {data: data, _token: "{{ csrf_token() }}"},
-               beforeSend: function () {
-                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
-               },
-                success: function (result) {
-                if (result.msg == 'true') {
-                    $('.msg-info').html(result.success);
-                } else {
-                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                //ocation.reload();
-            }
-          });
-          }else{
-             $('.msg-info').html('No content found, please add content.');
-          }
-        });
         
     });
 

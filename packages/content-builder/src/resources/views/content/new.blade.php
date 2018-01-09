@@ -513,6 +513,8 @@ Storyline Student Single
 
 @section('custom-scripts')
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
 <script>
@@ -531,63 +533,10 @@ var base_url = "{{{ url('') }}}";
 
 
 <script>
-    // resize the editor(s) while the instance is ready
-    var editor = {};
-
-    $(function(){
-
-        editor = CKEDITOR.replace('ltieditorv2inst', {
-                contentsCss : '{{ url("css/content-templates/default.css") }}',
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                allowedContent: true,
-                fullPage: false,
-                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
-            }
-        );
-
-        editor.on('instanceReady', function()
-        {
-            body = editor.document.getBody();
-            body.setAttribute( 'class', 'content-body');
-
-            var writer = editor.dataProcessor.writer;
-            writer.indentationChars = '';
-            writer.lineBreakChars = '';
-
-            editor.dataProcessor.writer.setRules( 'p',
-            {
-                indent : false,
-                breakBeforeOpen : false,
-                breakAfterOpen : false, 
-                breakBeforeClose : false,
-                breakAfterClose : false
-            });
-
-            resize();
-        });  
-
-        editor.on('change', function() {
-            body = editor.getData();
-            $("#content-preview").html(body);
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        });
-
-        editor.Height = '100%';
-
-    });
 
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
-        /*
-        var textEditHeight      = $(".cktextarea").height();
-        var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
-        var ckBottomHeight      = $("#cke_1_bottom").height();
-
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 47) + "px");*/
-
         resize();
-
     });
 
     function resize(){
@@ -604,7 +553,7 @@ var base_url = "{{{ url('') }}}";
 </script>
 
 <script>
-
+    editor = {};
 
     $( document ).ready(function(){
 
@@ -615,16 +564,12 @@ var base_url = "{{{ url('') }}}";
         });
 
         $(".content-action").on("click", function(){
-
             $content_id = $(this).data("content-id");
-
             getContent($content_id);
         });
 
         $(".import-asset").on("click", function () {
-
             $asset_id = $(this).data("asset-id");
-
             importAsset($asset_id);
         });
 
@@ -634,6 +579,16 @@ var base_url = "{{{ url('') }}}";
             getContent(parseInt(content_id));
         }
 
+        var editor = init_editor('ltieditorv2inst','{{ url("css/content-templates/default.css") }}');
+
+        editor.on('instanceReady', function()
+        {
+            body = editor.document.getBody();
+            body.setAttribute( 'class', 'content-body');
+
+            resize();
+        });  
+        
     });
 
     function importAsset(asset){
