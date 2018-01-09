@@ -620,18 +620,9 @@ Storyline Student Single
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-<script src="https://use.fontawesome.com/5154cf88f4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
-<!--<script src="https://awwapp.com/static/widget/js/aww.min.js"></script>-->
-<!--<script type="text/javascript">
-        var aww = new AwwBoard('#aww-wrpper', {
-            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b'
-        });
-        aww.doDrawLine('green', 10, 50, 50, 600, 600);
-        aww.drawText("This is drawing text", 100, 200, "green",
-                     "30px mono");
-</script>-->
+
 <script type="text/javascript">
       var aww = new AwwBoard('#aww-wrapper', {
             apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b',
@@ -684,6 +675,9 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         editor.on('instanceReady', function()
         {
+            body = editor.document.getBody();
+            body.setAttribute( 'class', 'content-body');
+            
             var writer = editor.dataProcessor.writer;
             writer.indentationChars = '';
             writer.lineBreakChars = '';
@@ -710,15 +704,6 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     });
 
-   /* CKEDITOR.on('instanceReady', function() { 
-        
-    });*/
-
-    CKEDITOR.on('change', function() {
-        body = editor.getData();
-        $("#content-preview").html(body);
-    });
-
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
         resize();
@@ -735,7 +720,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         var toolsHeight = $("#tools").height();
         var textEditHeight      = areaHeight - toolsHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
+        //var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
         $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 21) + "px");

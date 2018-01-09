@@ -59,7 +59,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.ignoreEmptyParagraph = true;
     config.removeFormatAttributes = true;
 
-    config.scayt_autoStartup = true;
+    //config.scayt_autoStartup = true;
 
     //Configure the Default Sizes of CK Editor Plugin
     config.width = '100%';
