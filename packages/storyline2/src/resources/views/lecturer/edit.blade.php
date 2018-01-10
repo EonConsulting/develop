@@ -618,18 +618,10 @@ Storyline Student Single
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-<script src="https://use.fontawesome.com/5154cf88f4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.8.0/parsley.min.js"></script>
+<script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
-<!--<script src="https://awwapp.com/static/widget/js/aww.min.js"></script>-->
-<!--<script type="text/javascript">
-        var aww = new AwwBoard('#aww-wrpper', {
-            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b'
-        });
-        aww.doDrawLine('green', 10, 50, 50, 600, 600);
-        aww.drawText("This is drawing text", 100, 200, "green",
-                     "30px mono");
-</script>-->
+
 <script type="text/javascript">
       var aww = new AwwBoard('#aww-wrapper', {
             apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b',
@@ -666,57 +658,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 </script>
 
 <script>
-    // resize the editor(s) while the instance is ready
-    var editor = {};
-
-    $(function(){
-
-        editor = CKEDITOR.replace('ltieditorv2inst', {
-                contentsCss : '{{ url($course->template->file_path) }}',
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                allowedContent: true,
-                fullPage: false,
-                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
-            }
-        );
-
-        editor.on('instanceReady', function()
-        {
-            var writer = editor.dataProcessor.writer;
-            writer.indentationChars = '';
-            writer.lineBreakChars = '';
-
-            editor.dataProcessor.writer.setRules( 'p',
-            {
-                indent : false,
-                breakBeforeOpen : false,
-                breakAfterOpen : false, 
-                breakBeforeClose : false,
-                breakAfterClose : false
-            });
-
-            resize();
-        });  
-
-        editor.on('change', function() {
-            body = editor.getData();
-            $("#content-preview").html(body);
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        });
-
-        editor.Height = '100%';
-
-    });
-
-   /* CKEDITOR.on('instanceReady', function() { 
-        
-    });*/
-
-    CKEDITOR.on('change', function() {
-        body = editor.getData();
-        $("#content-preview").html(body);
-    });
-
+    
     // resize the editor(s) while resizing the browser
     $(window).resize(function(){
         resize();
@@ -733,7 +675,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         var toolsHeight = $("#tools").height();
         var textEditHeight      = areaHeight - toolsHeight - $("#info-bar").height();
         var ckTopHeight         = $("#cke_1_top").height();
-        var ckContentsHeight    = $("#cke_1_contents").height();
+        //var ckContentsHeight    = $("#cke_1_contents").height();
         var ckBottomHeight      = $("#cke_1_bottom").height();
 
         $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 21) + "px");
@@ -750,6 +692,20 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
     const selector = '.resizer';
     let resizer = new Resizer(selector);
+
+    var editor = init_editor('ltieditorv2inst','{{ url($course->template->file_path) }}');
+    editor.on('instanceReady', function()
+    {
+        body = editor.document.getBody();
+        body.setAttribute( 'class', 'content-body');
+
+        resize();
+    });  
+
+    editor.on('dataReady', function(){
+        body = editor.document.getBody();
+        body.setAttribute( 'class', 'content-body');
+    });
 
     $( document ).ready(function(){
 
@@ -775,7 +731,53 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
             importAsset($asset_id);
         });
 
+
+        $('#q').keyup(function () {
+            $("#tree").jstree("open_all");
+            var that = this, $allListElements = $('ul.jstree-children > li');
+            var $matchingListElements = $allListElements.filter(function (i, li) {
+                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
+                return ~listItemText.indexOf(searchText);
+            });
+            $allListElements.hide();
+            $matchingListElements.show();
+            //$matchingListElements.addClass('highlighted');
+        });
+        
+        $(document).on('click','.white-b',function(){
+            $("#whiteModal").modal();
+        });
+        
+        $(document).on('click','.p-check',function(){
+            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
+            $("#msgModal").modal();
+             if(data.length > 1){               
+               var url = "{{ url('student/copyleaks') }}";
+               $.ajax({
+               url:url,
+               type: "POST",
+               data: {data: data, _token: "{{ csrf_token() }}"},
+               beforeSend: function () {
+                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
+               },
+                success: function (result) {
+                if (result.msg == 'true') {
+                    $('.msg-info').html(result.success);
+                } else {
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+          });
+          }else{
+             $('.msg-info').html('No content found, please add content.');
+          }
+        });
     });
+
 
     function importAsset(asset){
 
@@ -1142,50 +1144,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
     }
 
     $(document).ready(function () {
-        $('#q').keyup(function () {
-            $("#tree").jstree("open_all");
-            var that = this, $allListElements = $('ul.jstree-children > li');
-            var $matchingListElements = $allListElements.filter(function (i, li) {
-                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
-                return ~listItemText.indexOf(searchText);
-            });
-            $allListElements.hide();
-            $matchingListElements.show();
-            //$matchingListElements.addClass('highlighted');
-        });
         
-        $(document).on('click','.white-b',function(){
-            $("#whiteModal").modal();
-        });
-        
-        $(document).on('click','.p-check',function(){
-            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
-            $("#msgModal").modal();
-             if(data.length > 1){               
-               var url = "{{ url('student/copyleaks') }}";
-               $.ajax({
-               url:url,
-               type: "POST",
-               data: {data: data, _token: "{{ csrf_token() }}"},
-               beforeSend: function () {
-                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
-               },
-                success: function (result) {
-                if (result.msg == 'true') {
-                    $('.msg-info').html(result.success);
-                } else {
-                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                //ocation.reload();
-            }
-          });
-          }else{
-             $('.msg-info').html('No content found, please add content.');
-          }
-        });
         
     });
 

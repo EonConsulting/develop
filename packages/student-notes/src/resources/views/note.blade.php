@@ -34,8 +34,6 @@
 
 @push('package-js')
 
-<script src="https://unpkg.com/sweetalert2@7.0.7/dist/sweetalert2.all.js"></script>
-
 <script>
 
 $(document).ready(function()
