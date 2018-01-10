@@ -1,15 +1,31 @@
-<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-ajax-downloader@1.1.0/src/ajaxdownloader.min.js"></script>
+<script src="{{ url('/vendor/html-to-pdf/jquery.fileDownload.js') }}"></script>
 <script>
-    $('#convert-html-to-pdf').click(function(event) {
+    $(document).on("click", "#convert-html-to-pdf", function (e) {
 
-        event.preventDefault();
+        swal({
+            title: "Loading",
+            text:  "We are preparing your PDF, please wait...",
+            type: "info",
+            timer: 3000,
+            showConfirmButton: false
+        });
 
-        $.AjaxDownloader({
-            url  : "{{ route("html-to-pdf.store") }}",
-            data : {
-                html_content: encodeURIComponent($('div#body').html()),
+        $.fileDownload('{{ route("html-to-pdf.store") }}', {
+            data: {
+                html_content: encodeURIComponent($("div#body").html()),
                 '_token': '{{ csrf_token() }}'
+            },
+            httpMethod: "POST",
+            successCallback: function (url) {
+                swal.close();
+                swal('Success', 'Downloading PDF!', 'success');
+            },
+            failCallback: function (responseHtml, url) {
+                swal.close();
+                swal('Oops...', 'Something went wrong!', 'error');
             }
         });
+
+        e.preventDefault(); //otherwise a normal form submit would occur
     });
 </script>
