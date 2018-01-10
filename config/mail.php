@@ -16,13 +16,7 @@ return [
     |
     */
     
-    'stream' => [
-        'ssl' => [
-            'allow_self_signed' => true,
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
-    ],
+   
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
@@ -37,7 +31,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -92,9 +86,9 @@ return [
     |
     */
 
-    'username' => env('reggiestain@gmail.com'),
+    'username' => env(''),
 
-    'password' => env('Reginald19'),
+    'password' => env(''),
 
     /*
     |--------------------------------------------------------------------------
