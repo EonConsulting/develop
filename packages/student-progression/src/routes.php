@@ -1,8 +1,9 @@
 <?php
 
 
+
 Route::group(['middleware' => ['web'], 'prefix' => 'student', 'namespace' => 'EONConsulting\Student\Progression\Http\Controllers'], function() {
-    
+    Route::post('/support/message','DefaultController@supportMail')->name('support.mail');
     Route::group(['middleware' => ['auth', 'learner']], function() {
        Route::post('/progression','DefaultController@storeProgress')->name('student.progression');
     });

@@ -265,8 +265,6 @@ class Storyline2Core extends BaseController {
             $content_id = (int) $data['id'];
 
             $content = Content::find($content_id);
-
-            
             $content->title = $data['title'];
             $content->body = $data['body'];
             $content->tags = $data['tags'];

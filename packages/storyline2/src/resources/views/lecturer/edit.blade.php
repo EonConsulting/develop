@@ -62,9 +62,7 @@ Storyline Student Single
         -webkit-align-self: stretch;
         -ms-flex-item-align: stretch;
         align-self: stretch;
-
         overflow-y: auto;
-
         max-width: 350px;
 
     }

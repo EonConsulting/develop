@@ -8,6 +8,10 @@ use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
 use GuzzleHttp\Client;
+use Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use Mailgun\Mailgun;
 
 class DefaultController extends LTIBaseController {
     
@@ -115,6 +119,17 @@ class DefaultController extends LTIBaseController {
      * @param Request $request
      * @return type
      */
+    
+    public function supportMail(Request $request){
+         Mail::send(new sendmail());
+     
+         $response = array(
+            'msg' => '200'
+        );
+
+        return \Response::json($response);       
+    }
+    
     public function storeProgress(Request $request) {
         $progress = StudentProgress::where([['student_id', $request->get('student')],
                     ['storyline_id', $request->get('storyline')]])->first();
