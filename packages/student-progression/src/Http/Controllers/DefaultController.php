@@ -12,6 +12,7 @@ use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Mailgun\Mailgun;
+use mikehaertl\wkhtmlto\Pdf;
 
 class DefaultController extends LTIBaseController {
 
@@ -117,39 +118,50 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function supportMail(Request $request) {
-
+        
         $mgClient = new Mailgun('key-f7003db80706a0ab023d62900ff91f95');
         $domain = "sandboxbbb5161c77b94bdba0db527694aed989.mailgun.org";
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
-            'from' => auth()->user()->name.'<re.ggiestain@gmail.com>',
-            'to' => auth()->user()->name .'<reggiestain@gmail.com>',
+            'from' => auth()->user()->name . '<re.ggiestain@gmail.com>',
+            'to' => 'Support <'.$_ENV['MAIL_TO'].'>',
             'subject' => $request->subject,
             'text' => $request->message
         ));
-        
-        if($result->http_response_body->message){            
+
+        if ($result->http_response_body->message) {
             $msg = '200';
-         }else{
-            $msg = 'error';  
-         }
-         
-         $response = array(
+        } else {
+            $msg = 'error';
+        }
+
+        $response = array(
             'msg' => $msg
         );
-         
+
 
         return \Response::json($response);
     }
 
     public function supportMail2(Request $request) {
         Mail::send(new sendmail());
-
         $response = array(
             'msg' => '200'
         );
 
         return \Response::json($response);
+    }
+
+    public function modulePDF($courseId) {
+        $storylineId = Storyline::where('course_id', '=', $courseId)->first();
+        $Content = StorylineItem::where('storyline_id', '=', 66)->get();
+        foreach ($Content as $value) {            
+            var_dump($value->contents);
+          
+        }
+        //exit();
+        // You can pass a filename, a HTML string, an URL or an options array to the constructor
+        
     }
 
     public function storeProgress(Request $request) {

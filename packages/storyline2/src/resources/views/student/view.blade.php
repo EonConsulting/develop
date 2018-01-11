@@ -325,7 +325,7 @@
             @each('eon.storyline2::student.partials.dropdown', $items, 'item', 'eon.storyline2::student.partials.none')
         </ul>
     </div>
-
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Download PDF </a></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
 
     <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-id="" id="view-notes-link"><i class="fa fa-comments-o"></i> View Notes </a></span>
@@ -709,6 +709,25 @@
                 expand_tree();
             }
 
+        });
+        
+        $(document).on('click', '#d-pdf', function(){
+            var courseId = '{{ $course->id }}';
+        $.ajax({
+            url: "{{ url("") }}/student/module/pdf/"+courseId,
+            type: "GET",
+            async: true,
+            beforeSend: function () {
+                //$('.csv-view').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+            },
+            success: function (data, textStatus, jqXHR) {
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+                    // location.reload();
+            }
+        });  
         });
 
     });
