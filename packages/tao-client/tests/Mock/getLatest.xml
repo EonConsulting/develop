@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentResult xmlns="http://www.imsglobal.org/xsd/imsqti_result_v2p1">
+    <context sourcedId="i1472806961552868263"/>
+    <testResult identifier="rdf#i1513600990615370344" datestamp="2017-12-18T12:43:29.772">
+        <outcomeVariable identifier="SECTION_EXIT_CODE_assessmentSection-1" cardinality="single" baseType="string">
+            <value><![CDATA[700]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="LtiOutcome" cardinality="single" baseType="float">
+            <value><![CDATA[0.6]]></value>
+        </outcomeVariable>
+    </testResult>
+    <itemResult identifier="item-2" datestamp="2017-12-18T12:43:14.721" sessionStatus="final">
+        <responseVariable identifier="numAttempts" cardinality="single" baseType="integer">
+            <candidateResponse>
+                <value><![CDATA[1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <responseVariable identifier="duration" cardinality="single" baseType="duration">
+            <candidateResponse>
+                <value><![CDATA[PT3.717662S]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="completionStatus" cardinality="single" baseType="identifier">
+            <value><![CDATA[completed]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="SCORE" cardinality="single" baseType="float">
+            <value><![CDATA[0]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="FEEDBACK_1" cardinality="single" baseType="identifier">
+            <value><![CDATA[feedbackModal_2]]></value>
+        </outcomeVariable>
+        <responseVariable identifier="RESPONSE" cardinality="single" baseType="identifier">
+            <candidateResponse>
+                <value><![CDATA[choice_2]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="ITEM_END_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513600996.63]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_TIMEZONE" cardinality="single" baseType="string">
+            <value><![CDATA[+02:00]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_START_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513600993.756]]></value>
+        </outcomeVariable>
+    </itemResult>
+    <itemResult identifier="item-3" datestamp="2017-12-18T12:43:19.191" sessionStatus="final">
+        <responseVariable identifier="numAttempts" cardinality="single" baseType="integer">
+            <candidateResponse>
+                <value><![CDATA[1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <responseVariable identifier="duration" cardinality="single" baseType="duration">
+            <candidateResponse>
+                <value><![CDATA[PT3.188229S]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="completionStatus" cardinality="single" baseType="identifier">
+            <value><![CDATA[completed]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="SCORE" cardinality="single" baseType="float">
+            <value><![CDATA[0]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="FEEDBACK_1" cardinality="single" baseType="identifier">
+            <value><![CDATA[feedbackModal_2]]></value>
+        </outcomeVariable>
+        <responseVariable identifier="RESPONSE" cardinality="single" baseType="identifier">
+            <candidateResponse>
+                <value><![CDATA[choice_2]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="ITEM_END_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601001.107]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_TIMEZONE" cardinality="single" baseType="string">
+            <value><![CDATA[+02:00]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_START_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513600999.336]]></value>
+        </outcomeVariable>
+    </itemResult>
+    <itemResult identifier="item-4" datestamp="2017-12-18T12:43:22.251" sessionStatus="final">
+        <responseVariable identifier="numAttempts" cardinality="single" baseType="integer">
+            <candidateResponse>
+                <value><![CDATA[1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <responseVariable identifier="duration" cardinality="single" baseType="duration">
+            <candidateResponse>
+                <value><![CDATA[PT2.245105S]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="completionStatus" cardinality="single" baseType="identifier">
+            <value><![CDATA[completed]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="SCORE" cardinality="single" baseType="float">
+            <value><![CDATA[1]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="FEEDBACK_1" cardinality="single" baseType="identifier">
+            <value><![CDATA[feedbackModal_1]]></value>
+        </outcomeVariable>
+        <responseVariable identifier="RESPONSE" cardinality="single" baseType="identifier">
+            <candidateResponse>
+                <value><![CDATA[choice_1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="ITEM_END_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601004.164]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_TIMEZONE" cardinality="single" baseType="string">
+            <value><![CDATA[+02:00]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_START_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601002.432]]></value>
+        </outcomeVariable>
+    </itemResult>
+    <itemResult identifier="item-5" datestamp="2017-12-18T12:43:25.255" sessionStatus="final">
+        <responseVariable identifier="numAttempts" cardinality="single" baseType="integer">
+            <candidateResponse>
+                <value><![CDATA[1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <responseVariable identifier="duration" cardinality="single" baseType="duration">
+            <candidateResponse>
+                <value><![CDATA[PT3.252478S]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="completionStatus" cardinality="single" baseType="identifier">
+            <value><![CDATA[completed]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="SCORE" cardinality="single" baseType="float">
+            <value><![CDATA[1]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="FEEDBACK_1" cardinality="single" baseType="identifier">
+            <value><![CDATA[feedbackModal_1]]></value>
+        </outcomeVariable>
+        <responseVariable identifier="RESPONSE" cardinality="single" baseType="identifier">
+            <candidateResponse>
+                <value><![CDATA[choice_2]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="ITEM_END_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601007.17]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_TIMEZONE" cardinality="single" baseType="string">
+            <value><![CDATA[+02:00]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_START_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601005.349]]></value>
+        </outcomeVariable>
+    </itemResult>
+    <itemResult identifier="item-6" datestamp="2017-12-18T12:43:29.159" sessionStatus="final">
+        <responseVariable identifier="numAttempts" cardinality="single" baseType="integer">
+            <candidateResponse>
+                <value><![CDATA[1]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <responseVariable identifier="duration" cardinality="single" baseType="duration">
+            <candidateResponse>
+                <value><![CDATA[PT4.155390S]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="completionStatus" cardinality="single" baseType="identifier">
+            <value><![CDATA[completed]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="SCORE" cardinality="single" baseType="float">
+            <value><![CDATA[1]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="FEEDBACK_1" cardinality="single" baseType="identifier">
+            <value><![CDATA[feedbackModal_1]]></value>
+        </outcomeVariable>
+        <responseVariable identifier="RESPONSE" cardinality="single" baseType="identifier">
+            <candidateResponse>
+                <value><![CDATA[choice_2]]></value>
+            </candidateResponse>
+        </responseVariable>
+        <outcomeVariable identifier="ITEM_END_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601011.073]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_TIMEZONE" cardinality="single" baseType="string">
+            <value><![CDATA[+02:00]]></value>
+        </outcomeVariable>
+        <outcomeVariable identifier="ITEM_START_TIME_CLIENT" cardinality="single" baseType="string">
+            <value><![CDATA[1513601008.258]]></value>
+        </outcomeVariable>
+    </itemResult>
+</assessmentResult>
