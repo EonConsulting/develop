@@ -2,7 +2,7 @@
 
 namespace EONConsulting\TaoClient;
 
-use Illuminate\Support\ServiceProvider;
+use EONConsulting\Core\Providers\AbstractServiceProvider as ServiceProvider;
 use EONConsulting\TaoClient\Services\TaoApi;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use EONConsulting\TaoClient\Observers\StoryLineItemObserver;
@@ -10,9 +10,19 @@ use EONConsulting\TaoClient\Observers\StoryLineItemObserver;
 use EONConsulting\TaoClient\Console\Commands\TaoRetryJobsCommand;
 use EONConsulting\TaoClient\Console\Commands\TaoRemoveJobsCommand;
 use EONConsulting\TaoClient\Console\Commands\TaoFixIframesCommand;
+use EONConsulting\TaoClient\Console\Commands\TaoCommand;
+
 
 class TaoClientServiceProvider extends ServiceProvider
 {
+
+    /**
+     * This namespace is applied to your controller routes.
+     *
+     * @var string
+     */
+    protected $namespace = 'EONConsulting\TaoClient';
+
     /**
      * Bootstrap any application services.
      *
@@ -28,9 +38,10 @@ class TaoClientServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'tao-client');
 
-        $this->registerCommands();
         $this->registerObservers();
         $this->registerRoutes();
+
+        $this->loadCommands(realpath(__DIR__ . '/Console/Commands'));
     }
 
     /**
@@ -47,17 +58,13 @@ class TaoClientServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register commands
+     * Get the pat of this package
+     *
+     * @return string
      */
-    protected function registerCommands()
+    protected function getPackageFolder()
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                TaoRetryJobsCommand::class,
-                TaoRemoveJobsCommand::class,
-                TaoFixIframesCommand::class,
-            ]);
-        }
+        return realpath(__DIR__);
     }
 
     /**
@@ -68,11 +75,4 @@ class TaoClientServiceProvider extends ServiceProvider
         StorylineItem::observe(StoryLineItemObserver::class);
     }
 
-    /**
-     * Register routes
-     */
-    protected function registerRoutes()
-    {
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-    }
 }
