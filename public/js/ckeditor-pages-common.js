@@ -23,4 +23,3 @@ function init_editor(editor_id,stylesheet_url){
 }
 
 
-

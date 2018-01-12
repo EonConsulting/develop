@@ -342,6 +342,11 @@ Storyline Student Single
         margin: 5px 10px 0 0;
     }
 
+    #save-status {
+        padding-top: 6px;
+        margin-right: 12px;
+        font-style: italic;
+    }
 
 </style>
 @endsection
@@ -354,6 +359,7 @@ Storyline Student Single
     <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
+    <span class="pull-right" id="save-status"></span>
     <span class="tools-divider pull-right"></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></span>
     <span class="tools-divider pull-right"></span>
@@ -596,23 +602,40 @@ Storyline Student Single
 </div>
 
 <div id="whiteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body" >    
-          <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
-      <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>    
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body" >    
+            <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
+        <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>    
 </div>
+
+<div id="unsavedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+            <div class="modal-body" >    
+                You have unsaved changes!
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-info">Discard Changes</a>
+                <a href="#" class="btn btn-info">Go Back</a>
+            </div>
+        </div>
+    </div>    
+</div>
+
 @endsection
 
 @section('custom-scripts')
@@ -645,6 +668,8 @@ Storyline Student Single
 <script>
 var base_url = "{{{ url('') }}}";
 var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
+var saved = true;
+var current = "";
 </script>
 
 <script src="{{ url('vendor/storyline2/editable-tree.js')}}"></script>
@@ -692,6 +717,9 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
 <script>
 
+    
+    var content_id = "";
+
     const selector = '.resizer';
     let resizer = new Resizer(selector);
 
@@ -709,7 +737,14 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         body.setAttribute( 'class', 'content-body');
     });
 
+    editor.on('change', function() {
+        saved = false;
+        check_save();
+    });
+
     $( document ).ready(function(){
+
+        check_save();
 
         $("#validation").hide();
 
@@ -780,6 +815,22 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         });
     });
 
+
+   
+    
+    function check_save(){
+        if(saved === true){
+            $("#save-status").html('All changes saved.');
+        }else{
+            $("#save-status").html('Changes not saved.');
+        }
+    }
+
+    window.onbeforeunload = function(evt) {
+        if(!saved){
+            return true;
+        }
+    }
 
     function importAsset(asset){
 
@@ -855,8 +906,30 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         createNode(ref);
     });
 
+    var previous = "";
+
     //Select Node Action
     $(tree_id).on("changed.jstree", function (e, data) {
+
+        console.log(data);
+        console.log(current);
+
+        if(!saved){
+            if(previous !== current){
+
+                $('#tree').jstree(true).select_node(current);
+                var previous = current;
+
+                $('#unsavedModal').modal('show');
+                
+            }
+        }else{
+            change_node(data);
+        }
+
+    });
+
+    function change_node(data){
         $("#item-id").val(data.node.id);
 
         $(".cat_check").prop('checked', false);
@@ -880,43 +953,61 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         $("#categories").popover("hide");
         $("#content-tags").popover("hide");
 
-    });
+    }
 
     //--form validation----------------------------------------------------
 
     //update events
-    $("#content-title").change(function(){
-        validate_title();
+    $(document).on('change', '#content-title', function(){
+        saved = false;
+        check_save();
+        //validate_title();
     });
+    
 
-    $("#content-description").change(function(){
+    $(document).on('change', "#content-description", function(){
         validate_description();
+        saved = false;
+        check_save();
     });
 
-    $("#ltieditorv2inst").change(function(){
+    $(document).on('change', "#ltieditorv2inst", function(){
         validate_content();
+        saved = false;
+        check_save();
     });
 
-    $("#categories input:checkbox").change(function(){
+    $(document).on('change', "#categories input:checkbox", function(){
         validate_categories();
+        saved = false;
+        check_save();
     });
 
-    $("#content-tags").change(function(){
+    $(document).on('change', "#content-tags", function(){
         validate_tags();
+        saved = false;
+        check_save();
     });
 
 
-    function validate_all(){
-        validate_title();
+    function validate_all(save = false){
+        validate_title_first(save);
+    }
+
+    function then_validate_others(save = false){
         validate_description();
         validate_categories();
         validate_body();
         validate_tags();
+
+        if(save){
+            save_content_to_item();
+        }
     }
 
 
     //check title is at least 4 characters long and unique
-    function validate_title(){
+    function validate_title_first(save = false){
 
         var element = $("#content-title");
         var title = element.val();
@@ -943,16 +1034,18 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 },
                 statusCode: {
                     200: function (data) { //success
-                        
-                        if(data && data.exists === true){
-                            valid["title_unique"] = false;
-                            console.log("Title not unique.");
-                            show_error(element,"This title already exists. Please enter a unique title.");
-                        } else {
+
+                        if(data.id === content_id){
                             valid["title_unique"] = true;
                             console.log("name doesn't exist");
                             element.popover("hide");
+                        }else{
+                            valid["title_unique"] = false;
+                            console.log("Title not unique.");
+                            show_error(element,"This title already exists. Please enter a unique title.");
                         }
+
+                        then_validate_others(save);
 
                     },
                     400: function () { //bad request
@@ -1096,7 +1189,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
 
         if(validation() === true) {
 
-            actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
+            actionUrl = base_url + "/content/store";
 
             $.ajax({
                 method: "POST",
@@ -1108,6 +1201,13 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
                 },
                 statusCode: {
                     200: function (data) { //success
+
+                        $("#content-id").val(data.id);
+                        content_id = data.id;
+
+                        saved = true;
+                        check_save();
+
                         $('#saveModal').modal('hide');
                     },
                     400: function () { //bad request
@@ -1124,9 +1224,7 @@ var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
         } else {
             
             var error = "There are problems with the content you are trying to save. Please fix them and try again.";
-
             $("#validation").html(error);
-
             $("#validation").show();
 
         }

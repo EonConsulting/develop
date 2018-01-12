@@ -301,6 +301,11 @@ Storyline Student Single
         margin: 5px 10px 0 0;
     }
 
+    #save-status {
+        padding-top: 6px;
+        margin-right: 12px;
+        font-style: italic;
+    }
 
 </style>
 @endsection
@@ -312,7 +317,10 @@ Storyline Student Single
 
     <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
 
+    
+
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
+    <span class="pull-right" id="save-status"></span>
     <span class="tools-divider pull-right"></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></span>
@@ -553,19 +561,21 @@ var base_url = "{{{ url('') }}}";
 </script>
 
 <script>
-    editor = {};
+
+    var saved = true;
+    var content_id = "{{ $content_id }}";
 
     $( document ).ready(function(){
 
         $("#validation").hide();
 
         $("#btnsbmit").on("click", function(){
-            save_content_to_item();
+            validate_all(true);
         });
 
         $(".content-action").on("click", function(){
-            $content_id = $(this).data("content-id");
-            getContent($content_id);
+            $cont_id = $(this).data("content-id");
+            getContent($cont_id);
         });
 
         $(".import-asset").on("click", function () {
@@ -573,23 +583,41 @@ var base_url = "{{{ url('') }}}";
             importAsset($asset_id);
         });
 
-        var content_id = "{{ $content_id }}";
-
         if(content_id !== "new"){
             getContent(parseInt(content_id));
         }
-
-        var editor = init_editor('ltieditorv2inst','{{ url("css/content-templates/default.css") }}');
-
-        editor.on('instanceReady', function()
-        {
-            body = editor.document.getBody();
-            body.setAttribute( 'class', 'content-body');
-
-            resize();
-        });  
         
+        check_save();
     });
+
+    window.onbeforeunload = function(evt) {
+        if(!saved){
+            return true;
+        }
+    }
+
+    var editor = init_editor('ltieditorv2inst','{{ url("css/content-templates/default.css") }}');
+
+    editor.on('instanceReady', function()
+    {
+        body = editor.document.getBody();
+        body.setAttribute( 'class', 'content-body');
+
+        resize();
+    });
+
+    editor.on('change', function() {
+        saved = false;
+        check_save();
+    });
+
+    function check_save(){
+        if(saved === true){
+            $("#save-status").html('All changes saved.');
+        }else{
+            $("#save-status").html('Changes not saved.');
+        }
+    }
 
     function importAsset(asset){
 
@@ -694,38 +722,58 @@ var base_url = "{{{ url('') }}}";
     //--form validation----------------------------------------------------
 
     //update events
-    $("#content-title").change(function(){
-        validate_title();
-    });
+    //TODO: change to $(document).on('click')... style
 
-    $("#content-description").change(function(){
+    $(document).on('change', '#content-title', function(){
+        saved = false;
+        check_save();
+        //validate_title();
+    });
+    
+
+    $(document).on('change', "#content-description", function(){
         validate_description();
+        saved = false;
+        check_save();
     });
 
-    $("#ltieditorv2inst").change(function(){
+    $(document).on('change', "#ltieditorv2inst", function(){
         validate_content();
+        saved = false;
+        check_save();
     });
 
-    $("#categories input:checkbox").change(function(){
+    $(document).on('change', "#categories input:checkbox", function(){
         validate_categories();
+        saved = false;
+        check_save();
     });
 
-    $("#content-tags").change(function(){
+    $(document).on('change', "#content-tags", function(){
         validate_tags();
+        saved = false;
+        check_save();
     });
 
 
-    function validate_all(){
-        validate_title();
+    function validate_all(save = false){
+        validate_title_first(save);
+    }
+
+    function then_validate_others(save = false){
         validate_description();
         validate_categories();
         validate_body();
         validate_tags();
+
+        if(save){
+            save_content();
+        }
     }
 
 
     //check title is at least 4 characters long and unique
-    function validate_title(){
+    function validate_title_first(save = false){
 
         var element = $("#content-title");
         var title = element.val();
@@ -752,16 +800,18 @@ var base_url = "{{{ url('') }}}";
                 },
                 statusCode: {
                     200: function (data) { //success
-                        
-                        if(data && data.exists === true){
-                            valid["title_unique"] = false;
-                            console.log("Title not unique.");
-                            show_error(element,"This title already exists. Please enter a unique title.");
-                        } else {
+
+                        if(data.id === content_id){
                             valid["title_unique"] = true;
                             console.log("name doesn't exist");
                             element.popover("hide");
+                        }else{
+                            valid["title_unique"] = false;
+                            console.log("Title not unique.");
+                            show_error(element,"This title already exists. Please enter a unique title.");
                         }
+
+                        then_validate_others(save);
 
                     },
                     400: function () { //bad request
@@ -893,14 +943,11 @@ var base_url = "{{{ url('') }}}";
     }
 
 
-    function save_content_to_item(){
 
-        $("#validation").hide();
+    function save_content(){
 
         var data = get_content_details();
         
-        validate_all();
-
         if(validation() === true) {
 
             actionUrl = base_url + "/content/store";
@@ -915,6 +962,13 @@ var base_url = "{{{ url('') }}}";
                 },
                 statusCode: {
                     200: function (data) { //success
+
+                        $("#content-id").val(data.id);
+                        content_id = data.id;
+
+                        saved = true;
+                        check_save();
+
                         $('#saveModal').modal('hide');
                     },
                     400: function () { //bad request
@@ -931,9 +985,7 @@ var base_url = "{{{ url('') }}}";
         } else {
             
             var error = "There are problems with the content you are trying to save. Please fix them and try again.";
-
             $("#validation").html(error);
-
             $("#validation").show();
 
         }

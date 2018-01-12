@@ -60,6 +60,10 @@ class Storyline2ViewsJSON extends BaseController {
         $result = $this->createTree($result);
         $result = $result[0]['children'];
         //dd($result);
+
+        $result[0]["state"]["selected"] = true;
+        $result[0]["state"]["opened"] = true;
+
         return response()->json($result);
     }
 
