@@ -15,6 +15,8 @@ return [
     |            "sparkpost", "log", "array"
     |
     */
+    
+   
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
@@ -56,8 +58,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'reggiestain@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Reginald Bossman'),
     ],
 
     /*
@@ -84,9 +86,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env(''),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env(''),
 
     /*
     |--------------------------------------------------------------------------

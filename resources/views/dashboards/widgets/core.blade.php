@@ -1071,7 +1071,7 @@ class WidgetCore {
             if (!instance._initialized)
             {
                 instance.bindAssessmentFilter();
-                instance.bindStudentFilter();
+                //instance.bindStudentFilter();
                 instance.bindModuleFilter();
                 instance.bindAssessmentTypeFilter();
                 instance.bindEngagementFilter();
@@ -1125,9 +1125,12 @@ class WidgetCore {
                 
                 // populate this with data first by changing
                 // the DOM only once
+                // clear the list
+                $("#student-filter").html('');
+                
                 var listitems = '<option value="ALL">ALL</option>';
                 $.each(data, function(key, value){
-                    listitems += '<option value=' + value.student_id + '>' + value.name + '</option>';
+                    listitems += '<option value=' + value.id + '>' + value.name + '</option>';
                 });
                 $("#student-filter").append(listitems);
                 
@@ -1191,6 +1194,9 @@ class WidgetCore {
                             break;
                     }
 
+                    // bind the student filter
+                    instance.bindStudentFilter();
+                    
                     // update the top content if available
                     instance.renderTopContentTable();
                     instance.renderParticipationMetrics();

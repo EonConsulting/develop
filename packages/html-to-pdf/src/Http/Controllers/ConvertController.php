@@ -1,6 +1,6 @@
 <?php
 
-namespace EONConsulting\HtmlToPdf\Controllers;
+namespace EONConsulting\HtmlToPdf\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,7 +28,8 @@ class ConvertController extends Controller
     {
         if( ! $content = $request->get('html_content'))
         {
-            return null;
+            \Log::debug('Error printing PDF!');
+            return response()->json(['message' => 'Error printing PDF!'], 500);
         }
 
         $pdf = new Pdf;
@@ -41,13 +42,15 @@ class ConvertController extends Controller
 
         $pdf->addPage($html);
 
-        $content = $pdf->send('store.pdf');
+        $content = $pdf->send('storyline-item.pdf');
 
         if ($content === false)
         {
-            return json_encode(['message' => 'Failed creating PDF'], 500);
+            \Log::debug($pdf->getError());
+            return response()->json(['message' => $pdf->getError()], 500);
         }
 
-        return $content;
+        return response($content, 200)
+            ->header('Set-Cookie', 'fileDownload=true; path=/');
     }
 }

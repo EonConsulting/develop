@@ -53,7 +53,32 @@ class Analytics {
     
     public function GetAllSummativeAssessments($course_id, $student_id)
     {
+        $all_items = [];
+        // add ALL
+        $all_items[] = [
+            "id" => "ALL",
+            "name" => "ALL"
+        ];
         
+        // add MCQ
+        $all_items[] = [
+            "id" => "MCQ-DEMO",
+            "name" => "MCQ Demo"
+        ];
+        
+        // add Venue Based
+        $all_items[] = [
+            "id" => "VENUE-DEMO",
+            "name" => "Venue Demo"
+        ];
+        
+        // add Portfolio
+        $all_items[] = [
+            "id" => "PORTFOLIO-DEMO",
+            "name" => "Portfolio Demo"
+        ];
+        
+        return $all_items;
     }
 
 }
