@@ -2,10 +2,27 @@
 
 namespace EONConsulting\StudentNotes;
 
-use Illuminate\Support\ServiceProvider;
+use EONConsulting\Core\Providers\AbstractServiceProvider as ServiceProvider;
 
 class StudentNotesServiceProvider extends ServiceProvider
 {
+
+    /**
+     * This namespace is applied to your controller routes.
+     *
+     * @var string
+     */
+    protected $namespace = 'EONConsulting\StudentNotes';
+
+    /**
+     * This middleware will be applied to all your routes .
+     *
+     * @var array
+     */
+    protected $middleware = [
+        'web', 'auth'
+    ];
+
     /**
      * Bootstrap any application services.
      *
@@ -13,7 +30,7 @@ class StudentNotesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->registerRoutes();
 
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'student-notes');
 
@@ -28,5 +45,15 @@ class StudentNotesServiceProvider extends ServiceProvider
     public function register()
     {
 
+    }
+
+    /**
+     * Get the pat of this package
+     *
+     * @return string
+     */
+    protected function getPackageFolder()
+    {
+        return realpath(__DIR__);
     }
 }
