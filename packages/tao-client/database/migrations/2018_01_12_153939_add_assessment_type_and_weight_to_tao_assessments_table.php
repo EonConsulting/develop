@@ -15,7 +15,7 @@ class AddAssessmentTypeAndWeightToTaoAssessmentsTable extends Migration
     {
         Schema::table('tao_assessments', function (Blueprint $table) {
             $table->string('assessment_type');
-            $table->string('assessment_weight');
+            $table->string('assessment_weight')->nullable();
         });
     }
 
