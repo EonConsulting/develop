@@ -28,11 +28,13 @@ abstract class AbstractServiceProvider extends ServiceProvider
      *
      * @param $paths
      */
-    protected function loadCommands($paths)
+    protected function loadCommands()
     {
         if ( ! $this->app->runningInConsole()) {
             return;
         }
+
+        $paths = $this->getPackageFolder() . '/Console/Commands';
 
         $paths = array_unique(is_array($paths) ? $paths : (array) $paths);
 
@@ -70,6 +72,24 @@ abstract class AbstractServiceProvider extends ServiceProvider
             ->namespace($this->namespace . '\Http\Controllers')
             ->prefix($this->route_prefix)
             ->group($this->getPackageFolder() .'/routes/web.php');
+    }
+
+    /**
+     * Load resource view files
+     *
+     * @param $namespace
+     */
+    protected function loadViews($namespace)
+    {
+        $this->loadViewsFrom($this->getPackageFolder() . '/resources/views', $namespace);
+    }
+
+    /**
+     * Load database migrations from package root folder
+     */
+    protected function loadMigrations()
+    {
+        $this->loadMigrationsFrom($this->getPackageFolder() . '/../database/migrations');
     }
 
 }
