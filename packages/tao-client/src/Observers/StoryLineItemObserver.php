@@ -20,7 +20,6 @@ class StoryLineItemObserver
      */
     public function saved(StorylineItem $storyline_item)
     {
-
         try {
 
             $content = Content::findOrFail($storyline_item->content_id);
@@ -32,25 +31,58 @@ class StoryLineItemObserver
             return true;
         }
 
-        if( ! $launch_url = Helpers::getLaunchUrl($content->body))
+        return $this->updateTaoAssessment($content->body, $storyline_item->id);
+    }
+
+    /**
+     * Listen to the StorylineItem update event.
+     *
+     * @param  \EONConsulting\Storyline2\Models\StorylineItem  $storyline_item
+     * @return void
+     */
+    public function updated(StorylineItem $storyline_item)
+    {
+        try {
+
+            $content = Content::findOrFail($storyline_item->content_id);
+
+        } catch(ModelNotFoundException $e)
         {
+            Log::debug('StoryLineItemObserver: [Content] | ' . $e->getMessage());
+
             return true;
+        }
+
+        return $this->updateTaoAssessment($content->body, $storyline_item->id);
+    }
+
+    /**
+     * Find Tao Assessment record and update it with storyline item id
+     *
+     * @param $content_body
+     * @param $storyline_item_id
+     * @return bool
+     */
+    protected function updateTaoAssessment($content_body, $storyline_item_id)
+    {
+        if( ! $launch_url = Helpers::getLaunchUrl($content_body))
+        {
+            return false;
         }
 
         try {
 
             $assessment = TaoAssessment::byLaunchUrl($launch_url)->firstOrFail();
 
+            $assessment->storyline_item_id = $storyline_item_id;
+
+            $assessment->save();
+
         } catch(ModelNotFoundException $e)
         {
             Log::debug('StoryLineItemObserver: [TaoAssessment] | ' . $e->getMessage());
-
-            return true;
+            return false;
         }
-
-        $assessment->storyline_item_id = $storyline_item->id;
-
-        $assessment->save();
 
         return true;
     }
