@@ -65,6 +65,16 @@ class TaoResult extends Model
     }
 
     /**
+     * Get the assessment for result
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function tao_assessment()
+    {
+        return $this->hasOne(TaoAssessment::class, 'storyline_item_id', 'storyline_item_id');
+    }
+
+    /**
      * Scope a query to only include results with source id.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -125,5 +135,16 @@ class TaoResult extends Model
 
         return $query->where('status', 0)
                      ->where('created_at', '<', $date);
+    }
+
+    /**
+     * Get the real score..
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRealScoreAttribute($value)
+    {
+        return ($this->score * 100);
     }
 }
