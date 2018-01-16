@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
+use App\Models\ContentTemplates;
 use App\Models\StudentProgress;
 use GuzzleHttp\Client;
 use Validator;
@@ -185,15 +186,16 @@ class DefaultController extends LTIBaseController {
         $SL2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
         $items = $SL2JSON->getTreeProgess($storyline_id);
+        $course['template'] = ContentTemplates::find($course->template_id);
         
-        $view = view('student-progression::module.modulepdf', ['items' => $items]);
+        $view = view('student-progression::module.modulepdf', ['items' => $items,'course'=>$course]);
         $contents = $view->render();
 
         $pdf = $this->wkhtml();
         //$pdf->setOptions($globalOptions);
         $pdf->addPage($contents);
         $pdf->addToc();
-        $pdf->binary = storage_path() . '/app/wkhtmltopdf/bin/wkhtmltopdf.exe';
+        $pdf->binary = storage_path() . '/wkhtmltopdf/bin/wkhtmltopdf.exe';
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $msg = $pdf->getError();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
@@ -225,9 +227,8 @@ class DefaultController extends LTIBaseController {
         if (File::isFile($file)) {
             $file = File::get($file);
             $response = Response::make($file, 200);
-
             $response->header('Content-Type', 'application/pdf');
-
+            
             return $response;
         }
     }

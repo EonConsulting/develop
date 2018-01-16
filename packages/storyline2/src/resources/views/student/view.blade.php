@@ -737,7 +737,7 @@
              $.ajax({
                url: "{{ url("") }}/student/module/print/"+courseId,
                type: "GET",
-               //async: false,
+               async: true,
                beforeSend: function () {
                $('.pdf-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> downloading......</button>");
              },
