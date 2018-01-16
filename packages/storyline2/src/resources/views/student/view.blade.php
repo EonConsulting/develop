@@ -325,7 +325,7 @@
             @each('eon.storyline2::student.partials.dropdown', $items, 'item', 'eon.storyline2::student.partials.none')
         </ul>
     </div>
-
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Download PDF </a></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
 
     <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-id="" id="view-notes-link"><i class="fa fa-comments-o"></i> View Notes </a></span>
@@ -463,6 +463,26 @@
 
         </div>
     </div>
+    
+    <div id="pdfModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body pdf-loading">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+    </div>
+   </div>
 @endsection
 
 @include('student-notes::note')
@@ -709,6 +729,32 @@
                 expand_tree();
             }
 
+        });
+        
+        $(document).on('click', '#d-pdf', function(){
+            var courseId = '{{ $course->id }}';
+             $("#pdfModal").modal();
+             $.ajax({
+               url: "{{ url("") }}/student/module/print/"+courseId,
+               type: "GET",
+               //async: false,
+               beforeSend: function () {
+               $('.pdf-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> downloading......</button>");
+             },
+             success: function (status, textStatus, jqXHR) {
+              if(status.msg == 'success'){   
+                    var link = "{{ url("") }}/student/module/downloadPDF/"+status.course;
+                    var win = window.open(link, '_blank','width=1000, height=700, left=24, top=24, scrollbars, resizable');                   
+                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> PDF was downloaded successfully.</div>");
+                }else{
+                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> An error occured, please try again.</div>");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+                    // location.reload();
+            }
+        });  
         });
 
     });

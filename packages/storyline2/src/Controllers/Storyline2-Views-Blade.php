@@ -43,7 +43,7 @@ class Storyline2ViewsBlade extends BaseController {
         $storyline_id = $course->latest_storyline()->id;
         $userId = auth()->user()->id;
     
-        $items = $SL2JSON->getTreeProgess($storyline_id);
+        $items = $SL2JSON->getTreeProgess($storyline_id);       
 
         $course['template'] = ContentTemplates::find($course->template_id);
 
