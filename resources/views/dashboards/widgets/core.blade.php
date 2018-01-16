@@ -49,6 +49,13 @@ class WidgetCore {
         set selected_assessment(value) {
             this._selected_assessment = value;
         }
+        
+        get selected_assessment_type() {
+            return this._selected_assessment_type;
+        }
+        set selected_assessment_type(value) {
+            this._selected_assessment_type = value;
+        }
 
         get assessment_types() {
             return [
@@ -899,30 +906,72 @@ class WidgetCore {
         
         data_assessment_types(callback)
         {
-            $.ajax({
-                method: "GET",
-                url: "{{ url("") }}/lti/data-assessment-types/" 
-                        + instance.selected_course 
-                        + "/" + instance.selected_student
-                        + "/" + instance.selected_assessment,
-                contentType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        callback(data);
+            if(instance.selected_course 
+                    && instance.selected_student 
+                    && instance.selected_assessment)
+            {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ url("") }}/lti/data-assessment-types/" 
+                            + instance.selected_course 
+                            + "/" + instance.selected_student
+                            + "/" + instance.selected_assessment,
+                    contentType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                     },
-                    400: function () { //bad request
-                        console.log("Bad request");
-                    },
-                    500: function () { //server kakked
-                        console.log("Server error");
+                    statusCode: {
+                        200: function (data) { //success
+                            callback(data);
+                        },
+                        400: function () { //bad request
+                            console.log("Bad request");
+                        },
+                        500: function () { //server kakked
+                            console.log("Server error");
+                        }
                     }
-                }
-            }).error(function (req, status, error) {
-                return [];
-            });
+                }).error(function (req, status, error) {
+                    return [];
+                });
+            } else {
+                callback();
+            }
+        }
+        
+        data_assessment_results(callback)
+        {
+            if(instance.selected_course 
+                    && instance.selected_student 
+                    && instance.selected_assessment_type)
+            {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ url("") }}/lti/data-assessment-results/" 
+                            + instance.selected_course 
+                            + "/" + instance.selected_student
+                            + "/" + instance.selected_assessment_type,
+                    contentType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                    },
+                    statusCode: {
+                        200: function (data) { //success
+                            callback(data);
+                        },
+                        400: function () { //bad request
+                            console.log("Bad request");
+                        },
+                        500: function () { //server kakked
+                            console.log("Server error");
+                        }
+                    }
+                }).error(function (req, status, error) {
+                    return [];
+                });
+            } else {
+                callback();
+            }
         }
         
         generateRandomNumber(minimum, maximum, boost_factor)
@@ -1071,9 +1120,9 @@ class WidgetCore {
             if (!instance._initialized)
             {
                 instance.bindAssessmentFilter();
-                //instance.bindStudentFilter();
+                //instance.bindStudentFilter(); // moved into callback
                 instance.bindModuleFilter();
-                instance.bindAssessmentTypeFilter();
+                //instance.bindAssessmentTypeFilter(); // moved into callback
                 instance.bindEngagementFilter();
                 instance.bindTutorSupportFilter();
             }
@@ -1128,7 +1177,7 @@ class WidgetCore {
                 // clear the list
                 $("#student-filter").html('');
                 
-                var listitems = '<option value="ALL">ALL</option>';
+                var listitems = '';
                 $.each(data, function(key, value){
                     listitems += '<option value=' + value.id + '>' + value.name + '</option>';
                 });
@@ -1215,22 +1264,27 @@ class WidgetCore {
                 
                 // populate this with data first by changing
                 // the DOM only once
+                $("#assessment-type-filter").html('');
+                
                 var listitems = '';
                 $.each(data, function(key, value){
                     listitems += '<option value=' + value.id + '>' + value.name + '</option>';
                 });
+                if (listitems.length <= 0){
+                    listitems = '<option value="none">-- none available --</option>';
+                }
                 $("#assessment-type-filter").append(listitems);
                 
                 // event for change on metric items
                 $("#assessment-type-filter").on("change", function () {
                     var self = $(this);
-                    // lodash methods for rendering graph
-                    var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
-                        'assessment': instance.selected_assessment, 
-                        'assessment_type_id': self.val()}
-                        )
-                    );
-                    instance.renderResultsGraph(_.head(courses));
+                    instance.selected_assessment_type = self.val();
+                    
+                    // fire the method for fetching the results data
+                    // with a callback of course
+                    instance.data_assessment_results(function(data){
+                        instance.renderResultsGraph(data);
+                    })
                 });
             });
         }

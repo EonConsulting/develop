@@ -31,7 +31,7 @@ class DashboardDataController extends LTIBaseController {
 
         $result = [];
         $users = new \EONConsulting\Core\Classes\Users();
-        
+
         // we need to query the integrate_* tables
         // to find out which students belong to which courses
         // and which students belong to which mentors
@@ -68,6 +68,24 @@ class DashboardDataController extends LTIBaseController {
                 $result = $analytics->getAllSummativeAssessments($course_id, $student_id);
                 break;
         }
+
+        return response()->json($result);
+    }
+
+    /**
+     * 
+     * @param int $course_id
+     * @param int $student_id
+     * @param int $assessment
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data_assessment_results($course_id, $student_id, $assessment_type) {
+
+        // this is the different assessments that a student
+        // has participated in
+        $analytics = new \EONConsulting\Core\Classes\Analytics();
+
+        $result = $analytics->getAssessmentResults($course_id, $student_id, $assessment_type);
 
         return response()->json($result);
     }
