@@ -198,7 +198,9 @@ class Storyline2ViewsJSON extends BaseController {
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
-                'lft' => $node['_lft']
+                'lft' => $node['_lft'],
+                'body' => $node['contents']['body'],
+                'title' => $node['contents']['title']
             ];
         }
 

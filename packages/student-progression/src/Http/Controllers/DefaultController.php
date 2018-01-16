@@ -4,6 +4,7 @@ namespace EONConsulting\Student\Progression\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
+use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use App\Models\StudentProgress;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Mailgun\Mailgun;
 use mikehaertl\wkhtmlto\Pdf;
+use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class DefaultController extends LTIBaseController {
 
@@ -118,13 +123,13 @@ class DefaultController extends LTIBaseController {
      * @return type
      */
     public function supportMail(Request $request) {
-        
+
         $mgClient = new Mailgun('key-f7003db80706a0ab023d62900ff91f95');
         $domain = "sandboxbbb5161c77b94bdba0db527694aed989.mailgun.org";
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
             'from' => auth()->user()->name . '<re.ggiestain@gmail.com>',
-            'to' => 'Support <'.$_ENV['MAIL_TO'].'>',
+            'to' => 'Support <' . $_ENV['MAIL_TO'] . '>',
             'subject' => $request->subject,
             'text' => $request->message
         ));
@@ -139,7 +144,6 @@ class DefaultController extends LTIBaseController {
             'msg' => $msg
         );
 
-
         return \Response::json($response);
     }
 
@@ -152,16 +156,80 @@ class DefaultController extends LTIBaseController {
         return \Response::json($response);
     }
 
+    public function wkhtml() {
+        $pdf = new Pdf([
+            'commandOptions' => [
+                'useExec' => false,
+                'escapeArgs' => false,
+            ],
+        ]);
+
+        $globalOptions = array(
+            // Make Chrome not complain
+            'no-outline',
+            // Default page options
+            'page-size' => 'Letter'
+        );
+
+        return $pdf;
+    }
+    
+    /**
+     * 
+     * @param type $courseId
+     * @return type
+     */
+
     public function modulePDF($courseId) {
-        $storylineId = Storyline::where('course_id', '=', $courseId)->first();
-        $Content = StorylineItem::where('storyline_id', '=', 66)->get();
-        foreach ($Content as $value) {            
-            var_dump($value->contents);
-          
-        }
-        //exit();
-        // You can pass a filename, a HTML string, an URL or an options array to the constructor
+        $course = Course::find($courseId);
+        $SL2JSON = new Storyline2JSON;
+        $storyline_id = $course->latest_storyline()->id;
+        $items = $SL2JSON->getTreeProgess($storyline_id);
         
+        $view = view('student-progression::module.modulepdf', ['items' => $items]);
+        $contents = $view->render();
+
+        $pdf = $this->wkhtml();
+        //$pdf->setOptions($globalOptions);
+        $pdf->addPage($contents);
+        $pdf->addToc();
+        $pdf->binary = storage_path() . '/app/wkhtmltopdf/bin/wkhtmltopdf.exe';
+        if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
+            $msg = $pdf->getError();
+            $file = storage_path() . '/modules/' . $course->title . '.pdf';
+            $func = $pdf;
+        } else {
+            $msg = 'success';
+            $file = storage_path() . '/modules/' . $course->title . '.pdf';
+            $func = $pdf;
+        }
+
+        $response = array(
+            'msg' => $msg,
+            'course' => $courseId,
+            'file' => $file,
+            'func' => $func
+        );
+
+        return \Response::json($response);
+    }
+
+    /**
+     * 
+     * @param type $courseId
+     * @return type
+     */
+    public function downloadPDF($courseId) {
+        $course = Course::find($courseId);
+        $file = storage_path() . '/modules/' . $course->title . '.pdf';
+        if (File::isFile($file)) {
+            $file = File::get($file);
+            $response = Response::make($file, 200);
+
+            $response->header('Content-Type', 'application/pdf');
+
+            return $response;
+        }
     }
 
     public function storeProgress(Request $request) {
