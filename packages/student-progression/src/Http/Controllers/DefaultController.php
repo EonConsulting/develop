@@ -130,7 +130,7 @@ class DefaultController extends LTIBaseController {
         # Make the call to the client.
         $result = $mgClient->sendMessage($domain, array(
             'from' => auth()->user()->name . '<re.ggiestain@gmail.com>',
-            'to' => 'Support <' . $_ENV['MAIL_TO'] . '>',
+            'to' => 'Support <' .$_ENV['MAIL_TO'] . '>',
             'subject' => $request->subject,
             'text' => $request->message
         ));
@@ -195,14 +195,15 @@ class DefaultController extends LTIBaseController {
         //$pdf->setOptions($globalOptions);
         $pdf->addPage($contents);
         $pdf->addToc();
-        $pdf->binary = storage_path() . '/wkhtmltopdf/bin/wkhtmltopdf.exe';
-        if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
+        $pdf->binary = $ENV['WKHTMLTOPDF_BIN'].'/bin/wkhtmltopdf.exe';
+        
+        if (!$pdf->saveAs(storage_path() . '/modules/'. $course->title . '.pdf')) {
             $msg = $pdf->getError();
-            $file = storage_path() . '/modules/' . $course->title . '.pdf';
+            $file = storage_path() . '/modules/'. $course->title . '.pdf';
             $func = $pdf;
         } else {
             $msg = 'success';
-            $file = storage_path() . '/modules/' . $course->title . '.pdf';
+            $file = storage_path() . '/modules/'. $course->title . '.pdf';
             $func = $pdf;
         }
 
