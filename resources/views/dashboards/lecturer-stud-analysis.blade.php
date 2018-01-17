@@ -5,7 +5,6 @@ Lecturer Dashboard
 @endsection
 
 @section('custom-styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
 
 <style>
 
@@ -83,9 +82,6 @@ Lecturer Dashboard
     <script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
     <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
-    <!-- Student timeline -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     @endpush
     
     <!-- this must always be loaded first -->

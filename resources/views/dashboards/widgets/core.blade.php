@@ -1250,7 +1250,6 @@ class WidgetCore {
                     instance.renderTopContentTable();
                     instance.renderParticipationMetrics();
                     instance.renderNotificationMetrics();
-                    instance.renderTimeline();
                 });
                 // and lets just select the first record on page load
                 $("#module-filter").trigger("change");
@@ -2041,91 +2040,7 @@ class WidgetCore {
               options: areaChartOptions
             });
         }
-        
-        renderTimeline()
-        {
-            $('#calendar-timeline').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                height: 500,
-                defaultDate: '2017-11-01',
-                navLinks: true, // can click day/week names to navigate views
-                editable: false,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'FBN1502 Test 1',
-                        start: '2017-11-01',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'New Student Welcome',
-                        start: '2017-11-07',
-                        end: '2017-11-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'FBN102 Exam',
-                        start: '2017-11-09T16:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-11-16T16:00:00'
-                    },
-                    {
-                        title: 'Student Conference',
-                        start: '2017-11-11',
-                        end: '2017-11-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-11-12T10:30:00',
-                        end: '2017-11-12T12:30:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'FBN101 Exam',
-                        start: '2017-11-12T12:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FNB104 Test',
-                        start: '2017-11-12T14:30:00'
-                    },
-                    {
-                        title: 'FBN105 Test',
-                        start: '2017-11-12T17:30:00'
-                    },
-                    {
-                        title: 'FBN103 Exam',
-                        start: '2017-11-12T20:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FBN102 Test',
-                        start: '2017-11-13T07:00:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'MyUnisa',
-                        url: 'http://unisa.ac.za/',
-                        start: '2017-11-28'
-                    }
-                ]
-            });
-        }
-        
+                
         renderTopContentTable()
         {
             var ts = _.filter(instance.topics, _.iteratee({'course_id': instance.selected_course}));
