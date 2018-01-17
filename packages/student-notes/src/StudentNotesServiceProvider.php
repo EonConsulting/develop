@@ -31,10 +31,8 @@ class StudentNotesServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerRoutes();
-
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'student-notes');
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrations();
+        $this->loadViews('student-notes');
     }
 
     /**
