@@ -33,8 +33,7 @@ class HtmlToPdfServiceProvider extends ServiceProvider
             __DIR__.'/config/html-to-pdf.php' => config_path('html-to-pdf.php'),
         ]);
 
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'html-to-pdf');
-
+        $this->loadViews('html-to-pdf');
         $this->registerRoutes();
     }
 
