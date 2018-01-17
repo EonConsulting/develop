@@ -123,7 +123,7 @@
                     }
                 ]
             });
-        }
+        };
         renderTimeline();
     });
 </script>

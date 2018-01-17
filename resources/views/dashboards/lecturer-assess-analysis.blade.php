@@ -93,6 +93,8 @@ Lecturer Dashboard
     
     @include('dashboards.widgets.results', ['size' => 'large'])
     
+    @include('dashboards.widgets.assessmentresults', ['size' => 'xlarge'])
+    
     @include('dashboards.widgets.progression', ['size' => 'xlarge'])
 
 @endsection
