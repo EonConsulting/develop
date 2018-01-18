@@ -1,0 +1,14 @@
+{
+    "name": "e-content/exports",
+    "description": "e-content exports package",
+    "authors": [
+        {
+            "name": "Reginald Bossman",
+            "email": "reggiestain@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+     
+    }
+}
