@@ -3,7 +3,6 @@
 return [
 
     /*
-<<<<<<< HEAD
       |--------------------------------------------------------------------------
       | Mail Driver
       |--------------------------------------------------------------------------
@@ -25,7 +24,7 @@ return [
         ],
     ],
     
-=======
+    /**
     |--------------------------------------------------------------------------
     | Mail Driver
     |--------------------------------------------------------------------------
@@ -39,7 +38,6 @@ return [
     |
     */
 
->>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52
     'driver' => env('MAIL_DRIVER', 'smtp'),
     /*
       |--------------------------------------------------------------------------
@@ -89,7 +87,6 @@ return [
      */
     'encryption' => env('MAIL_ENCRYPTION'),
     /*
-<<<<<<< HEAD
       |--------------------------------------------------------------------------
       | SMTP Server Username
       |--------------------------------------------------------------------------
@@ -101,22 +98,7 @@ return [
      */
     'username' => env('MAIL_USERNAME'),
     'password' => env('MAIL_PASSWORD'),
-=======
-    |--------------------------------------------------------------------------
-    | SMTP Server Username
-    |--------------------------------------------------------------------------
-    |
-    | If your SMTP server requires a username for authentication, you should
-    | set it here. This will get used to authenticate with your server on
-    | connection. You may also set the "password" value below this one.
-    |
-    */
 
-    'username' => env('MAIL_USERNAME'),
-
-    'password' => env('MAIL_PASSWORD'),
-
->>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52
     /*
       |--------------------------------------------------------------------------
       | Sendmail System Path
@@ -144,9 +126,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-<<<<<<< HEAD
-];
-=======
 
 ];
->>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52
+
+

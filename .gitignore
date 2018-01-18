@@ -22,3 +22,4 @@ composer.lock
 /public/uploads/*
 /bootstrap/cache/*
 /storage/logs/laravel.log
+/config/mail.php

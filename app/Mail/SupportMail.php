@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 
-class SendMail extends Mailable
+class SupportMail extends Mailable
 {
     use Queueable, SerializesModels;
     

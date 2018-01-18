@@ -1,9 +1,9 @@
 <?php
 
-namespace EONConsulting\Notifications\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\SendMail;
+use App\Mail\SupportMail;
 use Mail;
 
 
