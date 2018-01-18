@@ -9,18 +9,42 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Console\Command;
 use Symfony\Component\Finder\Finder;
 use ReflectionClass;
+use Illuminate\Support\Facades\Gate;
 
 abstract class AbstractServiceProvider extends ServiceProvider
 {
 
+    /**
+     * This namespace is applied to your controller routes.
+     *
+     * @var string
+     */
     protected $namespace = '';
 
-    protected $middleware = [
+    /**
+     * Middleware to be used for all routes
+     *
+     * @var array
+     */
+    protected $middleware = [];
 
-    ];
-
+    /**
+     * Prefix to be added to all routes
+     *
+     * @var string
+     */
     protected $route_prefix = '';
 
+    /**
+     * The policy mappings for this package.
+     *
+     * @var array
+     */
+    protected $policies = [];
+
+    /**
+     * Abstract method that must be registered in classes that use this abstract class
+     */
     abstract protected function getPackageFolder();
 
     /**
@@ -90,6 +114,17 @@ abstract class AbstractServiceProvider extends ServiceProvider
     protected function loadMigrations()
     {
         $this->loadMigrationsFrom($this->getPackageFolder() . '/../database/migrations');
+    }
+
+    /**
+     * Register package specific policies
+     */
+    protected function registerPolicies()
+    {
+        foreach ($this->policies as $model => $policy)
+        {
+            Gate::policy($model, $policy);
+        }
     }
 
 }
