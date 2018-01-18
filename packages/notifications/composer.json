@@ -1,0 +1,16 @@
+{
+    "name": "eonconsulting/notifications",
+    "description": "e-content notifications package",
+    "authors": [
+        {
+            "name": "Reginald Bossman",
+            "email": "reggiestain@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {
+        "EONConsulting\\Notifications\\": "src/"
+      }
+    }
+}

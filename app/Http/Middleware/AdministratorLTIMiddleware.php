@@ -19,40 +19,10 @@ class AdministratorLTIMiddleware
             return redirect()->to('/');
         }
 
-        if( ! auth()->user()->hasRole('Administrator'))
-        {
+        if( ! auth()->user()->hasRole('Administrator')) {
             return redirect()->to('/');
         }
 
         return $next($request);
-
-
-
-        /*
-
-        $user = $request->user();
-
-        if ( ! $user) {
-            // user not found
-            return redirect()->to('/');
-        }
-
-        $lti = $user->lti;
-
-        if (count($lti) == 0) {
-            // no lti links found
-            return redirect()->to('/');
-        }
-
-        $lti = $lti[0];
-        $role = $lti->roles;
-
-        switch ($role) {
-            case 'Administrator':
-                return $next($request);
-                break;
-        }
-
-        return redirect()->to('/');*/
     }
 }

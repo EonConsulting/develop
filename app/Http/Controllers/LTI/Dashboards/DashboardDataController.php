@@ -10,7 +10,6 @@ use App\Models\IntegrateTaoResults;
 use App\Models\SummaryStudentProgression;
 use App\Models\SummaryModuleProgression;
 
-
 class DashboardDataController extends LTIBaseController {
 
     /**
@@ -30,30 +29,18 @@ class DashboardDataController extends LTIBaseController {
      */
     public function data_students($course_id) {
 
-        // different user lists for instructors and mentors
-        /* THIS WILl EVENTUALLY BE ENABLED
-          if (laravel_lti()->is_instructor(auth()->user())){
-          $result = "";
-          } else if (laravel_lti()->is_mentor(auth()->user())){
-          $result = "";
-          }
-         * 
-         */
+        $result = [];
+        $users = new \EONConsulting\Core\Classes\Users();
 
-        $result = [
-            [
-                "student_id" => "2",
-                "name" => "Hlobisile Student",
-            ],
-            [
-                "student_id" => "S2",
-                "name" => "Student 2",
-            ],
-            [
-                "student_id" => "S3",
-                "name" => "Student 3",
-            ],
-        ];
+        // we need to query the integrate_* tables
+        // to find out which students belong to which courses
+        // and which students belong to which mentors
+        // different user lists for instructors and mentors
+        if (laravel_lti()->is_instructor(auth()->user())) {
+            $result = $users->GetUsersForCourse($course_id);
+        } else if (laravel_lti()->is_mentor(auth()->user())) {
+            $result = $users->GetUsersForCourse($course_id, auth()->user()->id);
+        }
 
         return response()->json($result);
     }
@@ -66,15 +53,14 @@ class DashboardDataController extends LTIBaseController {
      * @return \Illuminate\Http\JsonResponse
      */
     public function data_assessment_types($course_id, $student_id, $assessment) {
-        
+
         // this is the different assessments that a student
         // has participated in
         $analytics = new \EONConsulting\Core\Classes\Analytics();
-        
+
         // switch assessment
         $result = [];
-        switch($assessment)
-        {
+        switch ($assessment) {
             case "FA": // formative assessments
                 $result = $analytics->getAllFormativeAssessments($course_id, $student_id);
                 break;
@@ -82,6 +68,24 @@ class DashboardDataController extends LTIBaseController {
                 $result = $analytics->getAllSummativeAssessments($course_id, $student_id);
                 break;
         }
+
+        return response()->json($result);
+    }
+
+    /**
+     * 
+     * @param int $course_id
+     * @param int $student_id
+     * @param int $assessment
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data_assessment_results($course_id, $student_id, $assessment_type) {
+
+        // this is the different assessments that a student
+        // has participated in
+        $analytics = new \EONConsulting\Core\Classes\Analytics();
+
+        $result = $analytics->getAssessmentResults($course_id, $student_id, $assessment_type);
 
         return response()->json($result);
     }
@@ -153,4 +157,5 @@ class DashboardDataController extends LTIBaseController {
 
         return response()->json($result);
     }
+
 }

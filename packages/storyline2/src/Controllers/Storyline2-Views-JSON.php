@@ -58,6 +58,12 @@ class Storyline2ViewsJSON extends BaseController {
 
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
+
+        if( ! isset($result[0]['children']))
+        {
+            return response()->json($result);
+        }
+
         $result = $result[0]['children'];
         //dd($result);
         return response()->json($result);
@@ -198,7 +204,9 @@ class Storyline2ViewsJSON extends BaseController {
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
-                'lft' => $node['_lft']
+                'lft' => $node['_lft'],
+                'body' => $node['contents']['body'],
+                'title' => $node['contents']['title']
             ];
         }
 

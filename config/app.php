@@ -31,7 +31,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://10.0.0.190:9200'),
+    'es_uri' => env('ES_URI', 'http://dev.unisaonline.net:9200'),
 
 
     /*
@@ -223,6 +223,7 @@ return [
         \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
+        \EONConsulting\Notifications\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...

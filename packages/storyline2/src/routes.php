@@ -6,7 +6,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
     
     Route::group(['middleware' => ['auth','learner']], function() {
         Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
-
         Route::get('/student-item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
         Route::get('/student-item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
        });
