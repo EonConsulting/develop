@@ -22,7 +22,8 @@ class NotificationServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadViews('eon.notifications');
-        
+        $this->loadMigrations();
+
     }
 
     /**
