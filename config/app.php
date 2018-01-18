@@ -223,6 +223,9 @@ return [
         \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
+        OwenIt\Auditing\AuditingServiceProvider::class,
+        \EONConsulting\Auditing\AuditingServiceProvider::class,
+        \EONConsulting\Messages\MessagesServiceProvider::class,
         \EONConsulting\Notifications\NotificationServiceProvider::class,
 
         /*
