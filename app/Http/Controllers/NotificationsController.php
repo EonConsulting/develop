@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\SupportMail;
+use EONConsulting\Notifications\Mail\SupportMail;
 use Mail;
 
 
 class NotificationsController {
     
-    public function supportMail(Request $request) {
+    /**
+     * 
+     * @param Request $data
+     * @return type
+     */
+    
+    public function supportMail(Request $data) {
                
-        Mail::to(env('SUPPORT_MAIL'))->send(new SendMail());
+        Mail::to(env('SUPPORT_MAIL'))->send(new SupportMail($data));
 
         $response = array(
             'msg' => '200'

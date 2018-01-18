@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <p>{!! $msg !!}</p>
+        <p>body</p>
+        <p>{{ $msg }}</p>
     </body>
 </html>
