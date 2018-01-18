@@ -49,6 +49,13 @@ class WidgetCore {
         set selected_assessment(value) {
             this._selected_assessment = value;
         }
+        
+        get selected_assessment_type() {
+            return this._selected_assessment_type;
+        }
+        set selected_assessment_type(value) {
+            this._selected_assessment_type = value;
+        }
 
         get assessment_types() {
             return [
@@ -899,30 +906,72 @@ class WidgetCore {
         
         data_assessment_types(callback)
         {
-            $.ajax({
-                method: "GET",
-                url: "{{ url("") }}/lti/data-assessment-types/" 
-                        + instance.selected_course 
-                        + "/" + instance.selected_student
-                        + "/" + instance.selected_assessment,
-                contentType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        callback(data);
+            if(instance.selected_course 
+                    && instance.selected_student 
+                    && instance.selected_assessment)
+            {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ url("") }}/lti/data-assessment-types/" 
+                            + instance.selected_course 
+                            + "/" + instance.selected_student
+                            + "/" + instance.selected_assessment,
+                    contentType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                     },
-                    400: function () { //bad request
-                        console.log("Bad request");
-                    },
-                    500: function () { //server kakked
-                        console.log("Server error");
+                    statusCode: {
+                        200: function (data) { //success
+                            callback(data);
+                        },
+                        400: function () { //bad request
+                            console.log("Bad request");
+                        },
+                        500: function () { //server kakked
+                            console.log("Server error");
+                        }
                     }
-                }
-            }).error(function (req, status, error) {
-                return [];
-            });
+                }).error(function (req, status, error) {
+                    return [];
+                });
+            } else {
+                callback();
+            }
+        }
+        
+        data_assessment_results(callback)
+        {
+            if(instance.selected_course 
+                    && instance.selected_student 
+                    && instance.selected_assessment_type)
+            {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ url("") }}/lti/data-assessment-results/" 
+                            + instance.selected_course 
+                            + "/" + instance.selected_student
+                            + "/" + instance.selected_assessment_type,
+                    contentType: 'json',
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                    },
+                    statusCode: {
+                        200: function (data) { //success
+                            callback(data);
+                        },
+                        400: function () { //bad request
+                            console.log("Bad request");
+                        },
+                        500: function () { //server kakked
+                            console.log("Server error");
+                        }
+                    }
+                }).error(function (req, status, error) {
+                    return [];
+                });
+            } else {
+                callback();
+            }
         }
         
         generateRandomNumber(minimum, maximum, boost_factor)
@@ -1071,11 +1120,15 @@ class WidgetCore {
             if (!instance._initialized)
             {
                 instance.bindAssessmentFilter();
-                //instance.bindStudentFilter();
+                //instance.bindStudentFilter(); // moved into callback
                 instance.bindModuleFilter();
-                instance.bindAssessmentTypeFilter();
+                //instance.bindAssessmentTypeFilter(); // moved into callback
                 instance.bindEngagementFilter();
                 instance.bindTutorSupportFilter();
+                instance.bindUpdateButtons();
+                
+                // set some default message on graphs
+                instance.renderAssessmentResultsGraph(null);
             }
             instance._initialized = true;
         }
@@ -1087,8 +1140,9 @@ class WidgetCore {
                 instance.selected_assessment = self.val();
                 //instance.updateAssessmentTypes(instance.selected_assessment);
                 instance.bindAssessmentTypeFilter();
+                
                 // lodash methods for rendering graph
-                switch(instance.role)
+                /*switch(instance.role)
                 {
                     case "Learner":
                         var courses = _.filter(instance.results, _.iteratee({
@@ -1105,7 +1159,7 @@ class WidgetCore {
                         ));
                         break;
                 }
-                instance.renderResultsGraph(_.head(courses));
+                //instance.renderAssessmentResultsGraph(_.head(courses));
                 
                 // lodash methods for rendering assessment
                 var ass = _.filter(instance.assessments, _.iteratee({
@@ -1113,10 +1167,12 @@ class WidgetCore {
                         'student_id': instance.selected_student}
                     )
                 );
+        
                 // these methods exist in other plaugins but they
                 // need to be triggered in the event they exist in scope
-                instance.renderAssessmentGraph(ass);
+                instance.renderAssessmentGraph(ass); */
             });
+            $("#assessment-filter").trigger("change");
         }
         
         bindStudentFilter()
@@ -1128,7 +1184,7 @@ class WidgetCore {
                 // clear the list
                 $("#student-filter").html('');
                 
-                var listitems = '<option value="ALL">ALL</option>';
+                var listitems = '';
                 $.each(data, function(key, value){
                     listitems += '<option value=' + value.id + '>' + value.name + '</option>';
                 });
@@ -1138,7 +1194,14 @@ class WidgetCore {
                 $("#student-filter").on("change", function(){
                     var self = $(this);
                     instance.selected_student = self.val();
-                    $("#assessment-filter").trigger("change");
+                    
+                    // lodash methods for rendering module results
+                    var results = _.filter(instance.results, _.iteratee({
+                            'course_id': instance.selected_course,
+                            'student_id': instance.selected_student}
+                        )
+                    );
+                    instance.renderResultsGraph(_.head(results));
 
                     // lodash methods for rendering progression                        
                     var prog = _.filter(instance.progression, _.iteratee({
@@ -1159,9 +1222,9 @@ class WidgetCore {
                         }
                     );
                 });
+                
+                $("#student-filter").trigger("change");
             });
-            
-            
         }
         
         bindModuleFilter()
@@ -1181,7 +1244,8 @@ class WidgetCore {
                     instance.selected_course = $(this).val();
 
                     // be economical with the triggers
-                    switch(instance.role)
+                    // IGNORING THIS FOR NOW CAUSE THE FLOW HAS CHANGED
+                    /*switch(instance.role)
                     {
                         case "Learner":
                             // trigger the assessment filter change event
@@ -1192,7 +1256,7 @@ class WidgetCore {
                             // trigger the student filter change event
                             $("#student-filter").trigger("change");
                             break;
-                    }
+                    } */
 
                     // bind the student filter
                     instance.bindStudentFilter();
@@ -1201,7 +1265,6 @@ class WidgetCore {
                     instance.renderTopContentTable();
                     instance.renderParticipationMetrics();
                     instance.renderNotificationMetrics();
-                    instance.renderTimeline();
                 });
                 // and lets just select the first record on page load
                 $("#module-filter").trigger("change");
@@ -1215,22 +1278,27 @@ class WidgetCore {
                 
                 // populate this with data first by changing
                 // the DOM only once
+                $("#assessment-type-filter").html('');
+                
                 var listitems = '';
                 $.each(data, function(key, value){
                     listitems += '<option value=' + value.id + '>' + value.name + '</option>';
                 });
+                if (listitems.length <= 0){
+                    listitems = '<option value="none">-- none available --</option>';
+                }
                 $("#assessment-type-filter").append(listitems);
                 
                 // event for change on metric items
                 $("#assessment-type-filter").on("change", function () {
                     var self = $(this);
-                    // lodash methods for rendering graph
-                    var courses = _.filter(instance.results, _.iteratee({'course_id': instance.selected_course, 
-                        'assessment': instance.selected_assessment, 
-                        'assessment_type_id': self.val()}
-                        )
-                    );
-                    instance.renderResultsGraph(_.head(courses));
+                    instance.selected_assessment_type = self.val();
+                    
+                    // fire the method for fetching the results data
+                    // with a callback of course
+                    instance.data_assessment_results(function(data){
+                        instance.renderAssessmentResultsGraph(data);
+                    })
                 });
             });
         }
@@ -1300,7 +1368,20 @@ class WidgetCore {
             $("#tutor-support-filter").trigger("change");
         }
         
+        bindUpdateButtons()
+        {
+            $("#btnUpdateModuleGraphs").on("click", function(){
+                $("#student-filter").trigger("change");
+            });
+            
+            $("#btnUpdateAssessGraphs").on("click", function(){
+                $("#assessment-type-filter").trigger("change");
+            });
+        }
+        
         renderResultsGraph(data) {
+            
+            
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
             // clean way of skipping when widget not included in page
@@ -1316,6 +1397,113 @@ class WidgetCore {
             }
 
             var areaChartCanvas = $('#student-results').get(0).getContext('2d');
+            
+            var areaChartData = {
+                labels: data.labels,
+                datasets: [
+
+                    {
+                        label: 'Your Results',
+                        backgroundColor: 'rgba(251, 114, 23, 1)',
+                        borderWidth: 0,
+                        data: data.your_results
+                    },
+                    {
+                        label: 'Your Average',
+                        backgroundColor: 'rgba(251, 158, 96, 1)',
+                        borderWidth: 0,
+                        data: data.your_average
+                    },
+                    {
+                        label: 'Class Average',
+                        backgroundColor: 'rgba(200, 200, 200, 1)',
+                        borderWidth: 0,
+                        data: data.class_average
+                    }
+                ]
+            };
+
+
+            var areaChartOptions = {
+                //Boolean - If we should show the scale at all
+                showScale: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: false,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - Whether the line is curved between points
+                bezierCurve: true,
+                //Number - Tension of the bezier curve between points
+                bezierCurveTension: 0.3,
+                //Boolean - Whether to show a dot for each point
+                pointDot: true,
+                //Number - Radius of each point dot in pixels
+                pointDotRadius: 1,
+                //Number - Pixel width of point dot stroke
+                pointDotStrokeWidth: 1,
+                //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+                pointHitDetectionRadius: 20,
+                //Boolean - Whether to show a stroke for datasets
+                datasetStroke: true,
+                //Number - Pixel width of dataset stroke
+                datasetStrokeWidth: 2,
+                //Boolean - Whether to fill the dataset with a color
+                datasetFill: true,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                //Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100  // minimum value will be 0.
+                            }
+                        }]
+                }
+            };
+
+            // In Chart.js 2.0.0 Alpha 3 onwards you will need to create your chart like so:
+            var areaChart = new Chart(areaChartCanvas, {
+                type: "bar",
+                data: areaChartData,
+                options: areaChartOptions
+            });
+        }
+        
+        renderAssessmentResultsGraph(data) {
+            // MH: this is a workaround to trash the canvas
+            // .destroy() does not work :(
+            // clean way of skipping when widget not included in page
+            if ($('#assessment-results').length <= 0) return;
+            
+            $('#assessment-results').remove();
+            $('#assessment-results-container').append('<canvas id="assessment-results"><canvas>');
+
+            // pull a switch-a-roo on the labels and axis count
+            if (data && data.labels.length < 1)
+            {
+                data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            }
+
+            var areaChartCanvas = $('#assessment-results').get(0).getContext('2d');
+            
+            // write a default message on the canvas and get out of here
+            if(!data){
+                areaChartCanvas.font = "15px Arial";
+                areaChartCanvas.fillText("Please apply filters to see data",10,50);
+                return;
+            }
 
             var areaChartData = {
                 labels: data.labels,
@@ -1987,91 +2175,7 @@ class WidgetCore {
               options: areaChartOptions
             });
         }
-        
-        renderTimeline()
-        {
-            $('#calendar-timeline').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                height: 500,
-                defaultDate: '2017-11-01',
-                navLinks: true, // can click day/week names to navigate views
-                editable: false,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'FBN1502 Test 1',
-                        start: '2017-11-01',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'New Student Welcome',
-                        start: '2017-11-07',
-                        end: '2017-11-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'FBN102 Exam',
-                        start: '2017-11-09T16:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-11-16T16:00:00'
-                    },
-                    {
-                        title: 'Student Conference',
-                        start: '2017-11-11',
-                        end: '2017-11-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-11-12T10:30:00',
-                        end: '2017-11-12T12:30:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'FBN101 Exam',
-                        start: '2017-11-12T12:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FNB104 Test',
-                        start: '2017-11-12T14:30:00'
-                    },
-                    {
-                        title: 'FBN105 Test',
-                        start: '2017-11-12T17:30:00'
-                    },
-                    {
-                        title: 'FBN103 Exam',
-                        start: '2017-11-12T20:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FBN102 Test',
-                        start: '2017-11-13T07:00:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'MyUnisa',
-                        url: 'http://unisa.ac.za/',
-                        start: '2017-11-28'
-                    }
-                ]
-            });
-        }
-        
+                
         renderTopContentTable()
         {
             var ts = _.filter(instance.topics, _.iteratee({'course_id': instance.selected_course}));

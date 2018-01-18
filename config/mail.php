@@ -15,8 +15,6 @@ return [
     |            "sparkpost", "log", "array"
     |
     */
-    
-   
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
@@ -58,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'reggiestain@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Reginald Bossman'),
+        'address' => env('MAIL_FROM_ADDRESS', 'dont-reply@unisaonline.net'),
+        'name' => env('MAIL_FROM_NAME', 'Unisa Online'),
     ],
 
     /*
@@ -86,9 +84,9 @@ return [
     |
     */
 
-    'username' => env(''),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env(''),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

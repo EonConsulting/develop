@@ -42,15 +42,13 @@ class ConvertController extends Controller
 
         $pdf->addPage($html);
 
-        $content = $pdf->send('storyline-item.pdf');
-
-        if ($content === false)
+        if( ! $content = $pdf->send('storyline-item.pdf'))
         {
             \Log::debug($pdf->getError());
             return response()->json(['message' => $pdf->getError()], 500);
         }
 
-        return response($content, 200)
+        return response('PDF Generated!', 200)
             ->header('Set-Cookie', 'fileDownload=true; path=/');
     }
 }

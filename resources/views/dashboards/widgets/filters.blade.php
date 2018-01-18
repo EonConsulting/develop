@@ -25,6 +25,9 @@
                         <label for="student-filter">Student</label>
                         <select class="form-control" id="student-filter">
                         </select>
+                        <button class="btn btn-xs pull-right" id="btnUpdateModuleGraphs">UPDATE GRAPH</button>
+                        <br/>
+                        <hr>
                         <br/>
                         <label for="assessment-filter">Assessment</label>
                         <select class="form-control" id="assessment-filter">
@@ -35,6 +38,7 @@
                         <label for="assessment-type-filter">Assessment Type</label>
                         <select class="form-control" id="assessment-type-filter">
                         </select>
+                        <button class="btn btn-xs pull-right" id="btnUpdateAssessGraphs">UPDATE GRAPH</button>
                     </div>
                 </div> <!-- end col-md-4 -->
             </div>

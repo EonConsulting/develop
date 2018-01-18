@@ -34,7 +34,11 @@ class StorylineItem extends Node {
         //return $this->hasMany(Storyline::class, 'course_id', 'id');
         return $this->belongsTo('EONConsulting\ContentBuilder\Models\Content')->withTimestamps();
     }
-
+    
+     public function contents() {
+        return $this->belongsTo(\EONConsulting\ContentBuilder\Models\Content::class, 'content_id', 'id');
+    }
+    
     protected $parentColumn = 'parent_id';
     protected $leftColumn = '_lft';
     protected $rightColumn = '_rgt';
