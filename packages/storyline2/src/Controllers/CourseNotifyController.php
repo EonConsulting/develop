@@ -5,7 +5,7 @@ namespace EONConsulting\Storyline2\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\Storyline2\Models\Course;
-use App\Notifications\CourseNotifier;
+use EONConsulting\Notifications\Notifications\Courses\CourseNotifier;
 
 class CourseNotifyController extends Controller
 {
@@ -40,6 +40,4 @@ class CourseNotifyController extends Controller
 
         return redirect()->back();
     }
-
-
 }

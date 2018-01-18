@@ -21,6 +21,7 @@ class NotificationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViews('eon.notifications');
+        $this->loadMigrations();
     }
 
     /**
