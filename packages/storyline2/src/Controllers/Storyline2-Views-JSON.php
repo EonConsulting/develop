@@ -195,23 +195,30 @@ class Storyline2ViewsJSON extends BaseController {
      * @param $items
      * @return array
      */
-    public function items_to_tree($items) {
+    public function items_to_tree($items, $withcontent = false) {
 
         $map = [];
 
         foreach ($items as $k => $node) {
 
-            $map[] = [
+
+            $temp = [
                 'required' => $node['required'],
                 //'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
-                'lft' => $node['_lft'],
-                'body' => $node['contents']['body'],
-                'title' => $node['contents']['title']
+                'lft' => $node['_lft']
+                
             ];
+
+            if($withcontent){
+                $temp['body'] = $node['contents']['body'];
+                $temp['title'] = $node['contents']['title'];
+            }
+
+            $map[] = $temp;
         }
 
         return $map;
