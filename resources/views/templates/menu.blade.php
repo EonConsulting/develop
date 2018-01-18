@@ -111,6 +111,10 @@
             <?php endif; ?>
 
         </li>
+        
+        <li class="{{ (Route::currentRouteName() == 'lti.dashboards.planning') ? 'left-menu-active' : '' }}">
+            <a href="{{ route('lti.dashboards.planning') }}" class="planning"> <i class="fa fa-calendar left-menu-icon"></i> Planning</a>
+        </li>
 
         <?php // if (laravel_lti()->is_instructor(auth()->user())): ?>
         <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? 'left-menu-active' : '' }}">

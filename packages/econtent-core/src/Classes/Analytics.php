@@ -68,6 +68,11 @@ class Analytics {
         $average = 0;
         $combined_score = 0;
         $result_count = 0;
+        
+        // initialize some other vars
+        $labels = [];
+        $your_results = [];
+        $your_average = [];
 
         // just get out of here for all items
         if ($student_id == "ALL") {

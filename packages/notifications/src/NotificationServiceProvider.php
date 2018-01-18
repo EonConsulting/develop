@@ -2,10 +2,17 @@
 
 namespace EONConsulting\Notifications;
 
-use Illuminate\Support\ServiceProvider;
+use EONConsulting\Core\Providers\AbstractServiceProvider as ServiceProvider;
 
 class NotificationServiceProvider extends ServiceProvider
 {
+    /**
+     * This namespace is applied to your controller routes.
+     *
+     * @var string
+     */
+    protected $namespace = 'EONConsulting\Notifications';
+
     /**
      * Bootstrap the application services.
      *
@@ -13,13 +20,7 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'eon.notifications');
-
-        $this->publishes([
-            __DIR__.'/assets' => base_path('public/vendor/notifications'),
-        ]);
+        $this->loadViews('eon.notifications');
     }
 
     /**
@@ -30,5 +31,15 @@ class NotificationServiceProvider extends ServiceProvider
     public function register()
     {
 
+    }
+
+    /**
+     * Get the pat of this package
+     *
+     * @return string
+     */
+    protected function getPackageFolder()
+    {
+        return realpath(__DIR__);
     }
 }

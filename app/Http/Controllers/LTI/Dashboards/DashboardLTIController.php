@@ -125,4 +125,13 @@ class DashboardLTIController extends LTIBaseController
 
         return view('dashboards.mentor-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
     }
+    
+    public function planning()
+    {
+        $breadcrumbs = [
+            'title' => 'Planning'
+        ];
+
+        return view('dashboards.planning', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
 }

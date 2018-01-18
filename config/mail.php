@@ -3,6 +3,7 @@
 return [
 
     /*
+<<<<<<< HEAD
       |--------------------------------------------------------------------------
       | Mail Driver
       |--------------------------------------------------------------------------
@@ -24,6 +25,21 @@ return [
         ],
     ],
     
+=======
+    |--------------------------------------------------------------------------
+    | Mail Driver
+    |--------------------------------------------------------------------------
+    |
+    | Laravel supports both SMTP and PHP's "mail" function as drivers for the
+    | sending of e-mail. You may specify which one you're using throughout
+    | your application here. By default, Laravel is setup for SMTP mail.
+    |
+    | Supported: "smtp", "sendmail", "mailgun", "mandrill", "ses",
+    |            "sparkpost", "log", "array"
+    |
+    */
+
+>>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52
     'driver' => env('MAIL_DRIVER', 'smtp'),
     /*
       |--------------------------------------------------------------------------
@@ -58,8 +74,8 @@ return [
       |
      */
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'reggiestain@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Reginald Bossman'),
+        'address' => env('MAIL_FROM_ADDRESS', 'dont-reply@unisaonline.net'),
+        'name' => env('MAIL_FROM_NAME', 'Unisa Online'),
     ],
     /*
       |--------------------------------------------------------------------------
@@ -73,6 +89,7 @@ return [
      */
     'encryption' => env('MAIL_ENCRYPTION'),
     /*
+<<<<<<< HEAD
       |--------------------------------------------------------------------------
       | SMTP Server Username
       |--------------------------------------------------------------------------
@@ -84,6 +101,22 @@ return [
      */
     'username' => env('MAIL_USERNAME'),
     'password' => env('MAIL_PASSWORD'),
+=======
+    |--------------------------------------------------------------------------
+    | SMTP Server Username
+    |--------------------------------------------------------------------------
+    |
+    | If your SMTP server requires a username for authentication, you should
+    | set it here. This will get used to authenticate with your server on
+    | connection. You may also set the "password" value below this one.
+    |
+    */
+
+    'username' => env('MAIL_USERNAME'),
+
+    'password' => env('MAIL_PASSWORD'),
+
+>>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52
     /*
       |--------------------------------------------------------------------------
       | Sendmail System Path
@@ -111,4 +144,9 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+<<<<<<< HEAD
 ];
+=======
+
+];
+>>>>>>> 2ff9cb96391198649ff12cc750335d67e0932c52

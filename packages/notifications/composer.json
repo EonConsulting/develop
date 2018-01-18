@@ -12,9 +12,5 @@
       "psr-4": {
         "EONConsulting\\Notifications\\": "src/"
       }
-    },
-
-    "require": {
-       "illuminate/support" : "~5"
     }
 }
