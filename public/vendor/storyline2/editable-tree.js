@@ -46,7 +46,30 @@ function drawTree(tree_data) {
         "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
     });
 
+    console.log(tree_data[0]['id']);
+
+    //$('#tree').jstree(true).select_node(tree_data[0]['id']);
+
 }
+
+$(tree_id).on("ready.jstree", function(e, data) {
+
+    console.log("tree ready");
+    var tree = data.instance;
+    var obj = tree.get_selected(true)[0];
+
+    // trigger the on_select handler for the tree node that is currently selected and ensure that it is opened
+    if (obj) {
+        if (obj.state.opened) {
+            tree.trigger('select_node', { 'node' : obj, 'selected' : tree._data.core.selected, 'event' : e });
+        } else {
+            tree.open_node(obj, function() {
+                tree.trigger('select_node', { 'node' : obj, 'selected' : tree._data.core.selected, 'event' : e });
+            });
+        }
+    }
+});
+
 
 
 function treeToJSON() {
@@ -118,6 +141,9 @@ function populateContentForm(data) {
     console.log(data);
 
     getProgressTopics(data);
+
+    saved = true;
+    check_save();
 
 }
 

@@ -332,14 +332,27 @@ class ContentBuilderCore extends Controller {
 
         $data = $request->json()->all();
 
-        $content = new Content([
-            'title' => $data['title'],
-            'body' => $data['body'],
-            'tags' => $data['tags'],
-            'creator_id' => auth()->user()->id,
-            'description' => $data['description'],
-            'ingested' => 0
-        ]);
+        if($data['id'] === "new"){
+            $content = new Content([
+                'title' => $data['title'],
+                'body' => $data['body'],
+                'tags' => $data['tags'],
+                'creator_id' => auth()->user()->id,
+                'description' => $data['description'],
+                'ingested' => 0
+            ]);
+        }else{
+
+            $content = Content::find($data['id']);
+
+            $content->title = $data['title'];
+            $content->body = $data['body'];
+            $content->tags = $data['tags'];
+            $content->creator_id = auth()->user()->id;
+            $content->description = $data['description'];
+            $content->ingested = 0;
+
+        }
         
         $content->save();
         
@@ -352,7 +365,7 @@ class ContentBuilderCore extends Controller {
 
         ElasticIndexContent::dispatch();
 
-        return 200;
+        return ['id' => $content->id];
 
     }
 
@@ -446,12 +459,20 @@ class ContentBuilderCore extends Controller {
 
         $title = $data['title'];
 
-        $exists = Content::where('title', $title)->exists();
+        $content = Content::where('title', $title)->first();
 
-        if($exists){
-            $result = ['exists' => true];
+        //dd($content);
+
+        if($content !== null){
+            $result = [
+                'exists' => true,
+                'id' => "".$content->id
+            ];
         } else {
-            $result = ['exists' => false];
+            $result = [
+                'exists' => false,
+                'id' => "new"
+            ];
         }
 
         return response()->json($result);

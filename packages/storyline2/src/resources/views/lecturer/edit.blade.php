@@ -340,6 +340,11 @@ Storyline Student Single
         margin: 5px 10px 0 0;
     }
 
+    #save-status {
+        padding-top: 6px;
+        margin-right: 12px;
+        font-style: italic;
+    }
 
 </style>
 @endsection
@@ -349,17 +354,18 @@ Storyline Student Single
 
 <div class="tools" id="tools">
 
-    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
+    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i><span class="hidden-xs hidden-sm"> Preview</span></a></span>
 
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i><span class="hidden-xs hidden-sm"> Save</span></a></span>
+    <span class="pull-right" id="save-status"></span>
     <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i><span class="hidden-xs hidden-sm"> Print PDF</span></a></span>
     <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i><span class="hidden-xs hidden-sm"> Import Content</span></a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i><span class="hidden-xs hidden-sm"> Import Asset</span></a></span>
     <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i> Plagiarism Checker</a></span>
-    <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i> Whiteboard</a></span>
+    <span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i><span class="hidden-xs hidden-sm"> Plagiarism Checker</span></a></span>
+    <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i><span class="hidden-xs hidden-sm"> Whiteboard</span></a></span>
 </div>
 
 <div class="flex-container resizer">
@@ -594,561 +600,57 @@ Storyline Student Single
 </div>
 
 <div id="whiteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body" >    
-          <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
-      <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>    
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body" >    
+            <!--<div style="width: 500px;height: 500px" id="aww-wrapper"></div>-->    
+        <!-- <iframe width="100%" height="600px" frameBorder="0" src="https://app.learn-cube.com/clases/dev5/demo/"></iframe> -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>    
 </div>
+
+<div id="unsavedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+        
+            <div class="modal-body" >    
+                You have unsaved changes!
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="discard_changes" class="btn btn-info">Discard Changes</a>
+                <a href="#" data-toggle="modal" data-target="#unsavedModal" class="btn btn-info">Go Back</a>
+            </div>
+        </div>
+    </div>    
+</div>
+
 @endsection
 
 @section('custom-scripts')
-<script src="{{ url("js/resizer/resizer.js") }}"> </script>
 
+<script src="{{ url('js/resizer/resizer.js') }}"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
-<script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
-<script type="text/javascript">
-      var aww = new AwwBoard('#aww-wrapper', {
-            apiKey: 'de5e7579-1039-40bd-855d-5654a20fe12b',
-            autoJoin: true,
-            boardLink: '5aj5342-56tz-uhjk-9874',
-            sizes: [3, 5, 8, 13, 20],
-            fontSizes: [10, 12, 16, 22, 30],
-            menuOrder: ['colors', 'sizes', 'tools', 'admin',
-              'utils'],
-            tools: ['pencil', 'rectangle','eraser', 'text', 'image'],
-            colors: [ "#000000", "#f44336", "#4caf50", "#2196f3",
-              "#ffc107", "#9c27b0",     "#e91e63", "#795548"],
-            defaultColor: "#000000",
-            defaultSize: 8,
-            defaultTool: 'pencil',
-     });
-</script>
-
+<script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
 <script>
-var base_url = "{{{ url('') }}}";
-var url = base_url + "/storyline2/show_items/{{ $storyline_id }}";
+    var storyline_id = "{{ $storyline_id }}";
+    var base_url = "{{{ url('') }}}";
+    var course_template_path = "{{ url($course->template->file_path) }}";
+    var copyleak_url = "{{ url('student/copyleaks') }}";
+    var csrf_token = "{{ csrf_token() }}";
 </script>
-
-<script src="{{ url('vendor/storyline2/editable-tree.js')}}"></script>
-
-    
-<script>
-    //Dialogue Insertion Point -->
-
-    var config = {
-        extraPlugins: 'dialog',
-        toolbar: [[ 'LTIButton' ]]
-    };
-</script>
-
-<script>
-    
-    // resize the editor(s) while resizing the browser
-    $(window).resize(function(){
-        resize();
-    });
-
-    function resizeArea(){
-        var areaHeight = $("#content-area").height();
-        var toolsHeight = $("#tools").height();
-        $(".flex-container").height(areaHeight - toolsHeight - 11);
-    }
-
-    function resize(){
-        var areaHeight = $("#content-area").height();
-        var toolsHeight = $("#tools").height();
-        var textEditHeight      = areaHeight - toolsHeight - $("#info-bar").height();
-        var ckTopHeight         = $("#cke_1_top").height();
-        //var ckContentsHeight    = $("#cke_1_contents").height();
-        var ckBottomHeight      = $("#cke_1_bottom").height();
-
-        $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 21) + "px");
-        //$("#page_container").css("background-color", "yellow");
-        //$("#page-container").height( (contentHeight) + "px");
-
- 
-        $(".flex-container").height(areaHeight - toolsHeight - 11);
-    }
-
-</script>
-
-<script>
-
-    const selector = '.resizer';
-    let resizer = new Resizer(selector);
-
-    var editor = init_editor('ltieditorv2inst','{{ url($course->template->file_path) }}');
-    editor.on('instanceReady', function()
-    {
-        body = editor.document.getBody();
-        body.setAttribute( 'class', 'content-body');
-
-        resize();
-    });  
-
-    editor.on('dataReady', function(){
-        body = editor.document.getBody();
-        body.setAttribute( 'class', 'content-body');
-    });
-
-    $( document ).ready(function(){
-
-        $("#validation").hide();
-
-        $("#btnsbmit").on("click", function(){
-            save_content_to_item();
-        });
-
-        $(".content-action").on("click", function(){
-
-            $content_id = $(this).data("content-id");
-            $item_id = $("#item-id").attr('value');
-            $action = $(this).data("action");
-
-            import_content($content_id,$item_id,$action);
-        });
-
-        $(".import-asset").on("click", function () {
-
-            $asset_id = $(this).data("asset-id");
-
-            importAsset($asset_id);
-        });
-
-
-        $('#q').keyup(function () {
-            $("#tree").jstree("open_all");
-            var that = this, $allListElements = $('ul.jstree-children > li');
-            var $matchingListElements = $allListElements.filter(function (i, li) {
-                var listItemText = $(li).text().toUpperCase(), searchText = that.value.toUpperCase();
-                return ~listItemText.indexOf(searchText);
-            });
-            $allListElements.hide();
-            $matchingListElements.show();
-            //$matchingListElements.addClass('highlighted');
-        });
-        
-        $(document).on('click','.white-b',function(){
-            $("#whiteModal").modal();
-        });
-        
-        $(document).on('click','.p-check',function(){
-            var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
-            $("#msgModal").modal();
-             if(data.length > 1){               
-               var url = "{{ url('student/copyleaks') }}";
-               $.ajax({
-               url:url,
-               type: "POST",
-               data: {data: data, _token: "{{ csrf_token() }}"},
-               beforeSend: function () {
-                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
-               },
-                success: function (result) {
-                if (result.msg == 'true') {
-                    $('.msg-info').html(result.success);
-                } else {
-                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                //ocation.reload();
-            }
-          });
-          }else{
-             $('.msg-info').html('No content found, please add content.');
-          }
-        });
-    });
-
-
-    function importAsset(asset){
-
-        actionUrl = base_url + "/content/assets/" + asset;
-
-        $.ajax({
-            method: "GET",
-            url: actionUrl,
-            contentType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-                    if(data['content'] !== null){
-                        CKEDITOR.instances['ltieditorv2inst'].insertHtml('<p>' + data['content'] + '</p>');
-                    }
-                    var html = data['html'];
-                    CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
-
-                    $('#assetsModal').modal('hide');
-
-                },
-                400: function () { //bad request
-
-                },
-                500: function () { //server kakked
-
-                }
-            }
-        }).error(function (req, status, error) {
-            alert(error);
-        });
-
-    }
-
-    var valid = {
-        "title_length": false,
-        "title_unique": false,
-        "description": false,
-        "tags": false,
-        "content": false,
-        "categories": false
-    };
-
-    //Delete Node Action
-    $(tree_id).on("delete_node.jstree", function (e, data) {
-        console.log(data.node.id);
-        deleteNode(data.node.id);
-    });
-
-    //Rename Node Action
-    $(tree_id).on("rename_node.jstree", function (e, data) {
-        var ref = data.node;
-        renameNode(ref);
-    });
-
-    //Move Node Action
-    $(tree_id).on("move_node.jstree", function (e, data) {
-        console.log(data);
-        var ref = {
-            node: data.node,
-            position: data.position,
-            old_position: data.old_position
-        };
-        console.log(ref);
-        moveNode(ref);
-    });
-
-    //Create Node Action
-    $(tree_id).on("create_node.jstree", function (e, data) {
-        var ref =  data.node;
-        createNode(ref);
-    });
-
-    //Select Node Action
-    $(tree_id).on("changed.jstree", function (e, data) {
-        $("#item-id").val(data.node.id);
-
-        $(".cat_check").prop('checked', false);
-        $("#content-id").val("");
-        $("#content-title").val("");
-        $("#content-description").val("");
-        $("#content-tags").val("");
-
-        var body = editor.setData("");
-
-        var ref = data.node;
-        getContent(ref);
-
-        for (var item in valid){
-            item = false;
-        }
-
-        $("#content-title").popover("hide");
-        $("#content-body").popover("hide");
-        $("#content-description").popover("hide");
-        $("#categories").popover("hide");
-        $("#content-tags").popover("hide");
-
-    });
-
-    //--form validation----------------------------------------------------
-
-    //update events
-    $("#content-title").change(function(){
-        validate_title();
-    });
-
-    $("#content-description").change(function(){
-        validate_description();
-    });
-
-    $("#ltieditorv2inst").change(function(){
-        validate_content();
-    });
-
-    $("#categories input:checkbox").change(function(){
-        validate_categories();
-    });
-
-    $("#content-tags").change(function(){
-        validate_tags();
-    });
-
-
-    function validate_all(){
-        validate_title();
-        validate_description();
-        validate_categories();
-        validate_body();
-        validate_tags();
-    }
-
-
-    //check title is at least 4 characters long and unique
-    function validate_title(){
-
-        var element = $("#content-title");
-        var title = element.val();
-
-        if(title.length < 4){
-
-            console.log("Title not long enough.")
-            valid["title_length"] = false;
-            show_error(element,"This title isn't long enough. Please enter a title that is at least 4 characters long.");
-
-        } else {
-
-            valid["title_length"] = true;
-
-            var actionUrl = base_url + "/content/content-title-exists";
-
-            $.ajax({
-                method: "POST",
-                url: actionUrl,
-                contentType: 'json',
-                data: JSON.stringify({"title": title}),
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        
-                        if(data && data.exists === true){
-                            valid["title_unique"] = false;
-                            console.log("Title not unique.");
-                            show_error(element,"This title already exists. Please enter a unique title.");
-                        } else {
-                            valid["title_unique"] = true;
-                            console.log("name doesn't exist");
-                            element.popover("hide");
-                        }
-
-                    },
-                    400: function () { //bad request
-        
-                    },
-                    500: function () { //server kakked
-        
-                    }
-                }
-            }).error(function (req, status, error) {
-                alert(error);
-            });
-
-        }
-        
-    }
-
-    //check that at least one category has been chosen
-    function validate_categories(){
-
-        var element = $('#categories');
-        var cats = $("#categories input:checkbox:checked").map(function(){
-            return $(this).val();
-        }).get();
-
-        if(cats.length < 1){
-            valid["categories"] = false;
-            show_error(element,"Please select at least one category.");
-        } else {
-            valid["categories"] = true;
-            element.popover("hide");
-        }
-
-    }
-
-    //check if body is the same as any other
-    function validate_body(){
-
-        var element = $('#ltieditorv2inst');
-        var body = editor.getData();
-
-        if(body.length < 4){
-            valid["content"] = false;
-            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
-        } else {
-            valid["content"] = true;
-            element.popover("hide");
-        }
-
-    }
-
-    //check if description is longer than 4 characters
-    function validate_description(){
-
-        var element = $("#content-description");
-        var description = element.val()
-
-        if(description.length < 4){
-            valid["description"] = false;
-            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
-        } else {
-            valid["description"] = true;
-            element.popover("hide");
-        }
-
-    }
-
-    //check if tags has been filled in
-    function validate_tags(){
-
-        var element = $("#content-tags");
-        var tags = element.val()
-
-        if(tags.length < 4){
-            valid["tags"] = false;
-            show_error(element,"You have not added enough content. You need to add at least 4 characters.");
-        } else {
-            valid["tags"] = true;
-            element.popover("hide");
-        }
-
-    }
-
-    function check_for_id(){
-        var id = $("#content-id").val();
-        return id;
-    }
-
-    //pop up error
-    function show_error(element,message){
-        element.attr('data-content', message);
-        element.popover("show");
-    }
-
-    //get content information from form
-    function get_content_details(){
-
-        var body = editor.getData();
-
-        var cats = $("#categories input:checkbox:checked").map(function(){
-            return $(this).val();
-        }).get();
-    
-        var data = {
-            "title": $("#content-title").val(),
-            "description": $("#content-description").val(),
-            "body": body,
-            "categories": cats,
-            "tags": $("#content-tags").val(),
-            "id": $("#content-id").val(),
-            "topic": $("#selectNode option:selected").val()
-        };
-
-        var item_id = $("#item-id").val();
-
-        return data;
-
-    }
-
-    function validation(){
-
-        for(var item in valid){
-            if(item === false){
-                return false;
-            }
-        }
-
-        return true;
-
-    }
-
-
-    function save_content_to_item(){
-
-        $("#validation").hide();
-
-        var data = get_content_details();
-        var item_id = $("#item-id").attr('value');
-        
-        validate_all();
-
-        if(validation() === true) {
-
-            actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
-
-            $.ajax({
-                method: "POST",
-                url: actionUrl,
-                contentType: 'json',
-                data: JSON.stringify(data),
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        $('#saveModal').modal('hide');
-                    },
-                    400: function () { //bad request
-        
-                    },
-                    500: function () { //server kakked
-        
-                    }
-                }
-            }).error(function (req, status, error) {
-                alert(error);
-            });
-
-        } else {
-            
-            var error = "There are problems with the content you are trying to save. Please fix them and try again.";
-
-            $("#validation").html(error);
-
-            $("#validation").show();
-
-        }
-
-    }
-
-    function highlightSearch() {
-
-        var text = document.getElementById("q").value;
-        var query = new RegExp("(\\b" + text + "\\b)", "gim");
-        var e = document.getElementById("searchtext").innerHTML;
-        var enew = e.replace(/(<span>|<\/span>)/igm, "");
-        document.getElementById("searchtext").innerHTML = enew;
-        var newe = enew.replace(query, "<span>$1</span>");
-        document.getElementById("searchtext").innerHTML = newe;
-
-    }
-
-    $(document).ready(function () {
-        
-        
-    });
-
-
-</script>
+<script src="{{ url('js/storyline.js')}}"></script>
 
 @endsection
