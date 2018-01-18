@@ -148,15 +148,6 @@ class DefaultController extends LTIBaseController {
         return \Response::json($response);
     }
 
-    public function supportMail2(Request $request) {
-        Mail::send(new sendmail());
-        $response = array(
-            'msg' => '200'
-        );
-
-        return \Response::json($response);
-    }
-
     public function wkhtml() {
         $pdf = new Pdf([
             'commandOptions' => [

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
+    
+    public $msg;
 
     /**
      * Create a new message instance.
@@ -19,7 +21,7 @@ class SendMail extends Mailable
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
@@ -29,6 +31,7 @@ class SendMail extends Mailable
      */
     public function build(Request $request)
     {
-        return $this->view('emails.support.message',['msg'=>$request->message])->subject($request->subject)->to('reggiestain@gmail.com');
+        return $this->view('eon.notifications::support.message',['msg'=>$request->message]);
+                    
     }
 }

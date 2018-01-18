@@ -33,7 +33,7 @@
                                    <strong>Warning!</strong> Please enter a message and subject.</div>");
             }else{
             var formData = $("#support-m").serialize();
-            var url = "{{ url("") }}/student/support/message";
+            var url = "{{ url("") }}/notifications/support/message";
             $.ajax({
                 url: url,
                 type: "POST",
