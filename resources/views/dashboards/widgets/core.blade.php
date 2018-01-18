@@ -1125,6 +1125,10 @@ class WidgetCore {
                 //instance.bindAssessmentTypeFilter(); // moved into callback
                 instance.bindEngagementFilter();
                 instance.bindTutorSupportFilter();
+                instance.bindUpdateButtons();
+                
+                // set some default message on graphs
+                instance.renderAssessmentResultsGraph(null);
             }
             instance._initialized = true;
         }
@@ -1138,7 +1142,7 @@ class WidgetCore {
                 instance.bindAssessmentTypeFilter();
                 
                 // lodash methods for rendering graph
-                switch(instance.role)
+                /*switch(instance.role)
                 {
                     case "Learner":
                         var courses = _.filter(instance.results, _.iteratee({
@@ -1166,8 +1170,9 @@ class WidgetCore {
         
                 // these methods exist in other plaugins but they
                 // need to be triggered in the event they exist in scope
-                instance.renderAssessmentGraph(ass);
+                instance.renderAssessmentGraph(ass); */
             });
+            $("#assessment-filter").trigger("change");
         }
         
         bindStudentFilter()
@@ -1189,7 +1194,14 @@ class WidgetCore {
                 $("#student-filter").on("change", function(){
                     var self = $(this);
                     instance.selected_student = self.val();
-                    $("#assessment-filter").trigger("change");
+                    
+                    // lodash methods for rendering module results
+                    var results = _.filter(instance.results, _.iteratee({
+                            'course_id': instance.selected_course,
+                            'student_id': instance.selected_student}
+                        )
+                    );
+                    instance.renderResultsGraph(_.head(results));
 
                     // lodash methods for rendering progression                        
                     var prog = _.filter(instance.progression, _.iteratee({
@@ -1213,8 +1225,6 @@ class WidgetCore {
                 
                 $("#student-filter").trigger("change");
             });
-            
-            
         }
         
         bindModuleFilter()
@@ -1234,7 +1244,8 @@ class WidgetCore {
                     instance.selected_course = $(this).val();
 
                     // be economical with the triggers
-                    switch(instance.role)
+                    // IGNORING THIS FOR NOW CAUSE THE FLOW HAS CHANGED
+                    /*switch(instance.role)
                     {
                         case "Learner":
                             // trigger the assessment filter change event
@@ -1245,7 +1256,7 @@ class WidgetCore {
                             // trigger the student filter change event
                             $("#student-filter").trigger("change");
                             break;
-                    }
+                    } */
 
                     // bind the student filter
                     instance.bindStudentFilter();
@@ -1357,7 +1368,20 @@ class WidgetCore {
             $("#tutor-support-filter").trigger("change");
         }
         
+        bindUpdateButtons()
+        {
+            $("#btnUpdateModuleGraphs").on("click", function(){
+                $("#student-filter").trigger("change");
+            });
+            
+            $("#btnUpdateAssessGraphs").on("click", function(){
+                $("#assessment-type-filter").trigger("change");
+            });
+        }
+        
         renderResultsGraph(data) {
+            
+            
             // MH: this is a workaround to trash the canvas
             // .destroy() does not work :(
             // clean way of skipping when widget not included in page
@@ -1373,7 +1397,7 @@ class WidgetCore {
             }
 
             var areaChartCanvas = $('#student-results').get(0).getContext('2d');
-
+            
             var areaChartData = {
                 labels: data.labels,
                 datasets: [
@@ -1473,6 +1497,13 @@ class WidgetCore {
             }
 
             var areaChartCanvas = $('#assessment-results').get(0).getContext('2d');
+            
+            // write a default message on the canvas and get out of here
+            if(!data){
+                areaChartCanvas.font = "15px Arial";
+                areaChartCanvas.fillText("Please apply filters to see data",10,50);
+                return;
+            }
 
             var areaChartData = {
                 labels: data.labels,
