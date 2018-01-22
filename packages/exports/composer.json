@@ -8,6 +8,11 @@
         }
     ],
     "minimum-stability": "dev",
+    "autoload": {
+    "psr-4": {
+      "EONConsulting\\Exports\\": "src/"
+    }
+  },
     "require": {
      
     }

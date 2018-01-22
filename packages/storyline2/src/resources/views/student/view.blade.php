@@ -735,19 +735,19 @@
             var courseId = '{{ $course->id }}';
              $("#pdfModal").modal();
              $.ajax({
-               url: "{{ url("") }}/student/module/print/"+courseId,
+               url: "{{ url("") }}/module/print/"+courseId,
                type: "GET",
                async: true,
                beforeSend: function () {
-               $('.pdf-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> downloading......</button>");
+               $('.pdf-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Converting to PDF....</button>");
              },
              success: function (status, textStatus, jqXHR) {
-              if(status.msg == 'success'){   
-                    var link = "{{ url("") }}/student/module/downloadPDF/"+status.course;
+              if(status.res == '200'){   
+                    var link = "{{ url("") }}/module/downloadPDF/"+status.course;
                     var win = window.open(link, '_blank','width=1000, height=700, left=24, top=24, scrollbars, resizable');                   
-                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> PDF was downloaded successfully.</div>");
+                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong>"+status.msg+"</div>");
                 }else{
-                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success!</strong> An error occured, please try again.</div>");
+                    $(".pdf-loading").html("<div class='alert alert-danger alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error!</strong>"+status.msg+"</div>");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

@@ -156,13 +156,6 @@ class DefaultController extends LTIBaseController {
             ],
         ]);
 
-        $globalOptions = array(
-            // Make Chrome not complain
-            'no-outline',
-            // Default page options
-            'page-size' => 'Letter'
-        );
-
         return $pdf;
     }
     
@@ -176,17 +169,25 @@ class DefaultController extends LTIBaseController {
         $course = Course::find($courseId);
         $SL2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
-        $items = $SL2JSON->getTreeProgess($storyline_id);
+        $items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
+        $items = $this->items_to_tree($items);
+        
         $course['template'] = ContentTemplates::find($course->template_id);
         
         $view = view('student-progression::module.modulepdf', ['items' => $items,'course'=>$course]);
         $contents = $view->render();
 
         $pdf = $this->wkhtml();
-        //$pdf->setOptions($globalOptions);
+        $globalOptions = array(
+            // Make Chrome not complain
+            'no-outline',
+            // Default page options
+            'page-size' => 'Letter'
+        );
+        $pdf->setOptions($globalOptions);
         $pdf->addPage($contents);
         $pdf->addToc();
-        $pdf->binary = $ENV['WKHTMLTOPDF_BIN'].'/bin/wkhtmltopdf.exe';
+        $pdf->binary = storage_path().'/wkhtmltopdf/bin/wkhtmltopdf.exe';
         
         if (!$pdf->saveAs(storage_path() . '/modules/'. $course->title . '.pdf')) {
             $msg = $pdf->getError();
@@ -268,175 +269,6 @@ class DefaultController extends LTIBaseController {
     }
 
     /**
-     * 
-     * @param Request $request
-     * @return type
-     */
-    public function storeProg(Request $request) {
-        $StudentProgress = new StudentProgress();
-        $StorylineItem = new StorylineItem();
-        $progress = $StudentProgress::whereStudentId($request->get('student'))->first();
-        if (!empty($progress->id)) {
-            $ItemArray = $this->topics($StorylineItem, $request->get('storyline'));
-            $current = $this->save_progress($StudentProgress, $request->get('id'), $progress->id, $ItemArray);
-            $StorylineItem = $StudentProgress::find($progress->id);
-            if ($current === 'true') {
-                $message = 'true';
-                $story = $progress->furthest;
-            } elseif ($current === 'current') {
-                $message = 'true';
-                $story = $StorylineItem->current;
-            } elseif ($current === 'false') {
-                $message = 'error';
-                $story = $StorylineItem->furthest;
-            } else {
-                $message = 'error';
-                $story = $StorylineItem->furthest;
-            }
-        } else {
-            $ItemArray = $this->topics($request->get('storyline'));
-            $ItemId = $this->save($StudentProgress, $StorylineItem, $request, $ItemArray);
-            $progress = $StudentProgress::find($ItemId);
-
-            $progress->furthest = 2;
-            $progress->save();
-            $message = 'false';
-            $story = $ItemId;
-        }
-
-        $response = array(
-            'msg' => $message,
-            'story' => $story,
-        );
-
-        return \Response::json($response);
-    }
-
-    /**
-     * 
-     * @param type $StudentProgress
-     * @param type $current
-     * @param type $progressId
-     * @param type $ItemArray
-     * @return string
-     */
-    public function save_progress($StudentProgress, $current, $progressId, $ItemArray) {
-
-        $Progress = $StudentProgress::find($progressId);
-        $currentIndex = array_search($current, $ItemArray);
-        $furthestIndex = array_search($ItemArray[$Progress->furthest], $ItemArray);
-        //$array = array_diff($ItemArray, [$Progress->root,$Progress->current,$Progress->furthest]);
-        //dd($currentIndex,$furthestIndex);
-        if ($currentIndex > $furthestIndex) {
-            return 'false';
-        } elseif ($currentIndex == $furthestIndex) {
-            $Progress->current = $Progress->furthest;
-            end($ItemArray);
-            $lastIndex = key($ItemArray);
-            if ($lastIndex === $furthestIndex) {
-                $Progress->furthest = $furthestIndex;
-            } else {
-                $Progress->furthest = $furthestIndex + 1;
-            }
-            $Progress->save();
-            return 'current';
-        } elseif ($currentIndex < $furthestIndex) {
-            return 'true';
-        }
-    }
-
-    /**
-     * 
-     * @param type $StudentProgress
-     * @param type $request
-     * @return type
-     */
-    public function save($StudentProgress, $StorylineItem, $request, $ItemArray) {
-        $ItemId = (int) $request->get('id');
-        $Item = $StorylineItem::find($ItemId);
-
-        $StudentProgress->student_id = (int) $request->get('student');
-        $StudentProgress->course_id = (int) $request->get('course');
-        $StudentProgress->storyline_id = (int) $request->get('storyline');
-        $Index = array_search((int) $Item->id, $ItemArray);
-        $StudentProgress->furthest = $Index;
-        $StudentProgress->current = $Index;
-        $StudentProgress->root = $Index;
-        if ($StudentProgress->save()) {
-            return $StudentProgress->id;
-        }
-    }
-
-    /**
-     * 
-     * @param type $StorylineItem
-     * @param type $storylineId
-     * @return type
-     */
-    public function topics($StorylineItem, $storylineId) {
-        $result = $this->items_to_tree(Storyline::find($storylineId)->items);
-        usort($result, [$this, "self::compare"]);
-
-        foreach ($result as $descendant) {
-            $children[] = $descendant['id'];
-        }
-
-        return $children;
-    }
-
-    public function topicView($item, $course) {
-        $Items = StorylineItem::where('required', $item)->first();
-        if ($Items) {
-            $ItemId = $Items->id;
-        } else {
-            $ItemId = 0;
-        }
-
-        $progress = StudentProgress::where([['storyline_item_id', $ItemId], ['student_id', auth()->user()->id]])->first();
-
-        if (!empty($Items) && empty($progress)) {
-            $StudentProgress = new StudentProgress([
-                'student_id' => auth()->user()->id,
-                'storyline_item_id' => $Items->id,
-                'course_id' => $course,
-                'storyline_id' => $Items->storyline_id
-            ]);
-
-            if ($StudentProgress->save()) {
-                $msg = 'true';
-            } else {
-                $msg = 'false';
-            }
-        } else {
-            $msg = 'true';
-        }
-        $response = array(
-            'msg' => $msg,
-        );
-        return \Response::json($response);
-    }
-
-    public function nextView($item) {
-        $Items = StorylineItem::find($item);
-        if (!empty($Items->required)) {
-            $progress = StudentProgress::where([['storyline_item_id', $item], ['student_id', auth()->user()->id]])->first();
-            if (!empty($progress)) {
-                $msg = 'true';
-            } else {
-                $msg = 'false';
-            }
-        } else {
-            $msg = 'true';
-        }
-
-        $response = array(
-            'msg' => $msg,
-        );
-
-        return \Response::json($response);
-    }
-
-    /**
      *
      * @param type $items
      * @return type
@@ -452,8 +284,17 @@ class DefaultController extends LTIBaseController {
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
-                'lft' => $node['_lft']
+                'lft' => $node['_lft'],
+                'title' => $node['contents']['title'],
+                'body' => $node['contents']['body']
             ];
+            
+             if($node['contents']){
+                $temp['body'] = $node['contents']['body'];
+                $temp['title'] = $node['contents']['title'];
+            }
+            
+            $map[] = $temp;
         }
 
         return $map;

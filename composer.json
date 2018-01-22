@@ -64,7 +64,8 @@
       "EONConsulting\\HtmlToPdf\\": "packages/html-to-pdf/src",
       "EONConsulting\\StudentNotes\\": "packages/student-notes/src",
       "EONConsulting\\TaoClient\\": "packages/tao-client/src",
-      "EONConsulting\\Notifications\\": "packages/notifications/src"
+      "EONConsulting\\Notifications\\": "packages/notifications/src",
+      "EONConsulting\\Exports\\": "packages/exports/src"
     },
     "files": [
       "packages/laravel-lti/src/functions.php",

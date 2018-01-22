@@ -201,7 +201,6 @@ class Storyline2ViewsJSON extends BaseController {
 
         foreach ($items as $k => $node) {
 
-
             $temp = [
                 'required' => $node['required'],
                 //'student_progress'=>$node['student_progress']['student_id'],

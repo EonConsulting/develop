@@ -224,6 +224,7 @@ return [
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
         \EONConsulting\Notifications\NotificationServiceProvider::class,
+        \EONConsulting\Exports\ExportServiceProvider::class,
 
         /*
          * Application Service Providers...
