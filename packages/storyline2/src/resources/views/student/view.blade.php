@@ -488,7 +488,7 @@
 @include('student-notes::note')
 
 @section('custom-scripts')
-    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
+    <script src="{{ url('js/resizer/resizer.js') }}"> </script>
 
 <script src="{{url('js/analytics/tincan.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
