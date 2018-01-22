@@ -364,7 +364,8 @@ Storyline Student Single
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i><span class="hidden-xs hidden-sm"> Import Content</span></a></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i><span class="hidden-xs hidden-sm"> Import Asset</span></a></span>
     <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i><span class="hidden-xs hidden-sm"> Plagiarism Checker</span></a></span>
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="auditing-index"><i class="fa fa-history"></i> Audit Log</a></span>
+    <span class="tools-divider pull-right"></span><span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i><span class="hidden-xs hidden-sm"> Plagiarism Checker</span></a></span>
     <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i><span class="hidden-xs hidden-sm"> Whiteboard</span></a></span>
 </div>
 
@@ -654,3 +655,5 @@ Storyline Student Single
 <script src="{{ url('js/storyline.js')}}"></script>
 
 @endsection
+
+@include('auditing::popup')

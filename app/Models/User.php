@@ -8,10 +8,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use EONConsulting\Storyline2\Models\Course;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Contracts\UserResolver;
+use Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable, UserResolver
 {
-    use Notifiable, HasApiTokens, HasPermissionTrait;
+    use Notifiable, HasApiTokens, HasPermissionTrait, \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +33,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function resolveId()
+    {
+        return Auth::check() ? Auth::user()->getAuthIdentifier() : null;
+    }
 
     /**
      * Fetch the user lti.

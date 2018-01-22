@@ -3,23 +3,67 @@
 namespace EONConsulting\ContentBuilder\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\User;
+use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\Storyline2\Models\StorylineItem;
 
-class Content extends Model {
+class Content extends Model implements Auditable
+{
 
+    use \OwenIt\Auditing\Auditable;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'content';
-    protected $primaryKey = 'id';
-    protected $fillable = ['title', 'body', 'tags', 'creator_id','description','cloned_id'];
 
-    public function creator() {
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'body', 'tags', 'creator_id','description','cloned_id'
+    ];
+
+    /**
+     * Fetch the creator of this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function creator()
+    {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function categories() {
-        return $this->belongsToMany('EONConsulting\ContentBuilder\Models\Category', 'content_categories')->withTimestamps();
+    /**
+     * Fetch the categories for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'content_categories')->withTimestamps();
     }
 
-    public function storyline_items() {
-        return $this->hasMany('EONConsulting\Storyline2\Models\StorylineItem', 'content_id')->withTimestamps();
+    /**
+     * Fetch storyline items for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function storyline_items()
+    {
+        return $this->hasMany(StorylineItem::class, 'content_id')->withTimestamps();
     }
 
 

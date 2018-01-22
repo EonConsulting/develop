@@ -91,6 +91,15 @@ Course List
         </div>
     </div>
 
+    @push('package-css')
+        <style>
+            .badgebox { opacity: 0; }
+            .badgebox + .badge { text-indent: -999999px; width: 27px; }
+            .badgebox:focus + .badge { box-shadow: inset 0px 0px 5px; }
+            .badgebox:checked + .badge { text-indent: 0; }
+        </style>
+    @endpush
+
     <!-- Notification Model -->
     <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -107,18 +116,14 @@ Course List
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="email">Send via Email:</label>
-                            <input type="checkbox" class="form-control" id="email" name="options[]" value="email">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sms">Send via Sms:</label>
-                            <input type="checkbox" class="form-control" id="sms" name="options[]" value="nexmo">
+                            <label for="primary" class="btn btn-primary">Email <input type="checkbox" id="primary" class="badgebox" name="options[]" value="mail"><span class="badge">&check;</span></label>
+                            <label for="info" class="btn btn-info">SMS <input type="checkbox" id="info" class="badgebox" name="options[]" value="nexmo"><span class="badge">&check;</span></label>
+                            <label for="success" class="btn btn-success">In system notice <input type="checkbox" id="success" class="badgebox" name="options[]" value="database" checked><span class="badge">&check;</span></label>
                         </div>
 
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea class="form-control" id="message" name="message"></textarea>
+                            <textarea class="form-control" id="message" name="message" style="height: 150px;"></textarea>
                         </div>
 
                     </div>

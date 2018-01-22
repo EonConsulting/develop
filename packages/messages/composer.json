@@ -1,0 +1,16 @@
+{
+  "name": "eonconsulting/Messages",
+  "description": "Laravel in system messages.",
+  "type": "package",
+  "authors": [
+    {
+      "name": "Kyle Vorster",
+      "email": "kyle.vorster@eon.co.za"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "EONConsulting\\Messages\\": "src/"
+    }
+  }
+}

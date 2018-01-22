@@ -291,7 +291,7 @@
             </li>
         <?php endif; ?>
         <li><a href="#" class="support"> <i class="fa fa-support left-menu-icon"></i> Support</a></li>
-
+        <li><a href="javascript:void();" id="messages-index"> <i class="fa fa-commenting-o left-menu-icon"></i> Messages</a></li>
     </ul>
 </div>
 
@@ -359,3 +359,4 @@
     </div>
 </div>
 
+@include('messages::popup')
