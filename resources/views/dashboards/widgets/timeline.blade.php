@@ -47,14 +47,42 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,basicWeek,basicDay'
+                    right: 'month,basicWeek,basicDay,listMonth'
                 },
                 height: 500,
-                defaultDate: '2017-11-01',
+                views: {
+                    listMonth: { buttonText: 'list month' }
+                },
+                //defaultDate: '2017-11-01',
                 navLinks: true, // can click day/week names to navigate views
-                editable: false,
+                editable: true,
                 eventLimit: true, // allow "more" link when too many events
-                events: [
+                events: function(start, end, timezone, callback) {
+                    console.log(start);
+                    console.log(end);
+                    console.log(timezone);
+                    console.log(callback);
+                    /* $.ajax({
+                        url: 'myxmlfeed.php',
+                        dataType: 'xml',
+                        data: {
+                            // our hypothetical feed requires UNIX timestamps
+                            start: start.unix(),
+                            end: end.unix()
+                        },
+                        success: function(doc) {
+                            var events = [];
+                            $(doc).find('event').each(function() {
+                                events.push({
+                                    title: $(this).attr('title'),
+                                    start: $(this).attr('start') // will be parsed
+                                });
+                            });
+                            callback(events);
+                        }
+                    }); */
+                }
+                /*events: [
                     {
                         title: 'FBN1502 Test 1',
                         start: '2017-11-01',
@@ -121,7 +149,7 @@
                         url: 'http://unisa.ac.za/',
                         start: '2017-11-28'
                     }
-                ]
+                ] */
             });
         };
         renderTimeline();

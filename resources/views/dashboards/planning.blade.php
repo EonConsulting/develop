@@ -7,7 +7,7 @@ Planning Dashboard
 
 
 @section('custom-styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css" />
 
 <style>
 
@@ -82,7 +82,7 @@ Planning Dashboard
     <script src="{{url('/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
     <!-- Student timeline -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
     @endpush
 
     <!-- this must always be loaded first -->
