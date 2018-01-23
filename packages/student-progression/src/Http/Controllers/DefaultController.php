@@ -279,21 +279,22 @@ class DefaultController extends LTIBaseController {
 
         foreach ($items as $k => $node) {
 
-            $map[] = [
+            $temp = [
                 'id' => (string) $node['id'],
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
                 'lft' => $node['_lft'],
-                'title' => $node['contents']['title'],
-                'body' => $node['contents']['body']
             ];
             
              if($node['contents']){
                 $temp['body'] = $node['contents']['body'];
                 $temp['title'] = $node['contents']['title'];
+            }else{
+                $temp['body'] = '';
+                $temp['title'] = '';
             }
-            
+                       
             $map[] = $temp;
         }
 

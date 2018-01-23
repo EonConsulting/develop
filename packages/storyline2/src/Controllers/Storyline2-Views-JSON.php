@@ -77,7 +77,7 @@ class Storyline2ViewsJSON extends BaseController {
     public function getTreeProgess($storyline){
         
         //$sl = Storyline::find($storyline);
-        $items = StorylineItem::where('storyline_id',$storyline)->get();
+        $items = StorylineItem::with('contents')->where('storyline_id',$storyline)->get();
         $items = $this->items_to_tree($items);
 
         //dd($items);
@@ -212,9 +212,12 @@ class Storyline2ViewsJSON extends BaseController {
                 
             ];
 
-            if($withcontent){
+            if($node['contents']){
                 $temp['body'] = $node['contents']['body'];
                 $temp['title'] = $node['contents']['title'];
+            }else{
+                $temp['body'] = '';
+                $temp['title'] = '';
             }
 
             $map[] = $temp;

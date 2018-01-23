@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
+use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 use EONConsulting\Student\Progression\Http\Controllers\DefaultController as StudentProgress;
 use App\Models\ContentTemplates;
 use Illuminate\Http\Request;
@@ -30,9 +31,7 @@ class ExportsController extends Controller {
         );
         
         $pdf->setOptions($globalOptions);
-        
-        $binary = str_replace(array('\'', '"'), '',env('WKHTMLTOPDF_BIN'));
-        
+        $binary = str_replace(array('\'', '"'), '',env('WKHTMLTOPDF_BIN'));        
         $pdf->binary = $binary;
 
         return $pdf;
@@ -40,18 +39,18 @@ class ExportsController extends Controller {
         
     public function modulePDF($courseId) {
         $course = Course::find($courseId);
-        $StudentProgress = new StudentProgress;
+        $Storyline2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
-        $items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
-        $items = $StudentProgress->items_to_tree($items);
+        //$items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
+        $items = $Storyline2JSON->getTreeProgess($storyline_id);
+        
         $course['template'] = ContentTemplates::find($course->template_id);
         
         $view = view('exports::module.modulepdf', ['items' => $items,'course'=>$course]);
         $contents = $view->render();
         
         $pdf = $this->wkhtml();
-        
-        
+       
         $pdf->addPage($contents);
         $pdf->addToc();
         
@@ -62,7 +61,7 @@ class ExportsController extends Controller {
  
         } else {            
             $res = '200';
-            $msg = ' Module <b>'.$course->title.'</b> was converted to PDF successfully.';
+            $msg = ' Module <b>'.$course->title.'</b> was converted and saved as PDF successfully.';
             $file = storage_path() . '/modules/'. $course->title . '.pdf';
         }
 
@@ -77,6 +76,20 @@ class ExportsController extends Controller {
     }
     
     public function downloadPDF($courseId) {
+        $course = Course::find($courseId);
+        $file = storage_path() . '/modules/' . $course->title . '.pdf';
+        if (File::isFile($file)) {
+            $file = File::get($file);
+            $response = Response::make($file, 200);
+            $response->header('Content-Type', 'application/pdf');
+            
+            return $response;
+        }else{
+            echo "<h2 style='color:red'>This file does not exit, please login as lecturer and save this module as PDF.</h2>";
+        }
+    }
+    
+    public function downloadPDF2($courseId) {
         $course = Course::find($courseId);
         $file = storage_path() . '/modules/' . $course->title . '.pdf';
         if (File::isFile($file)) {

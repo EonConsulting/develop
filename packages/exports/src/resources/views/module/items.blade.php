@@ -1,7 +1,7 @@
 
         <div class="col-xs-12">
             <li class="list-group-item">
-                <h2> {!! $item['title'] !!}</h2>
+                <h2> {!! $item['text'] !!}</h2>
                 <p> {!! $item['body'] !!}</p>
             </li>
             @if(isset($item['children']))    
