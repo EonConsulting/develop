@@ -1,13 +1,5 @@
 <div class="row">
-    <?php switch($size): case "small": ?>
-        <div class="col-md-3 sp-top-15">
-    <?php break; case "medium": ?>
-        <div class="col-md-6 sp-top-15">
-    <?php break; case "large": ?>
-        <div class="col-md-9 sp-top-15">
-    <?php break; case "xlarge": default: ?>
-        <div class="col-md-12 sp-top-15">            
-    <?php break; endswitch; ?>
+    <div class="col-md-12 sp-top-15">            
         <div class="dashboard-card shadow top-bdr-2 sp-bot-15  mr-bot-15">
 
             <div class="dashboard-card-heading">
@@ -16,20 +8,35 @@
 
             <div class="row basic-clearfix sp-top-15 sp-bot-15">
                 <div class="container-fluid">
+
+                    <div class="col-lg-9 col-md-8 col-xs-12">
+                        <label for="module-filter">Module</label>
+                        <select class="form-control" id="module-filter">
+                        </select>
+                        <br/>
+                    </div>
+                    
                     <div class="col-lg-9 col-md-8 col-xs-12">
                         <div id="calendar-timeline"></div>
                     </div>
-
-                    <div class="col-lg-3 col-md-4 col-xs-12">
-                        <h4>Timeline Key</h3>
-                            <div>
-                                <p><div class="btn btn-success btn-cal-key">Formal Assessment</div></p>
-                                <p><div class="btn btn-warning btn-cal-key">Assignment</div></p>
-                                <p><div class="btn btn-danger btn-cal-key">Exam</div></p>
-                                <p><div class="btn btn-info btn-cal-key">Self Assessment</div></p>
-                                <p><div class="btn btn-primary btn-cal-key">Other</div></p>
-                            </div>
-                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-xs-12">
+                    <h4>Timeline Key</h3>
+                        <div class="col-lg-2 col-md-3 col-xs-6">
+                            <div class="btn btn-success btn-cal-key">Formal Assessment</div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-6">
+                            <div class="btn btn-warning btn-cal-key">Assignment</div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-6">
+                            <div class="btn btn-danger btn-cal-key">Exam</div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-6">
+                            <div class="btn btn-info btn-cal-key">Self Assessment</div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-xs-6">
+                            <div class="btn btn-primary btn-cal-key">Other</div>
+                        </div>
                 </div>
             </div>
         </div> <!-- end row -->
@@ -41,7 +48,52 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
-        var renderTimeline = function()
+        selected_course = "";
+        
+        var dataCourses = function(callback) {
+            $.ajax({
+                method: "GET",
+                url: "{{ url("") }}/lti/data-courses/",
+                contentType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                statusCode: {
+                    200: function (data) { //success
+                        callback(data);
+                    },
+                    400: function () { //bad request
+                        console.log("Bad request");
+                    },
+                    500: function () { //server kakked
+                        console.log("Server error");
+                    }
+                }
+            }).error(function (req, status, error) {
+                return [];
+            });
+        }
+
+        var bindModuleFilter = function()
+        {
+            dataCourses(function(data){
+                var listitems = '';
+                $.each(data, function(key, value){
+                    listitems += '<option value=' + value.id + '>' + value.title + '</option>';
+                });
+                $("#module-filter").append(listitems);
+                
+                $("#module-filter").on("change", function () {
+                    var self = $(this);
+                    selected_course = self.val();
+                    dataTimeline();
+                });
+                $("#module-filter").trigger("change");
+            });
+        }
+        bindModuleFilter();
+        
+        var dataTimeline = function()
         {
             $('#calendar-timeline').fullCalendar({
                 header: {
@@ -53,106 +105,39 @@
                 views: {
                     listMonth: { buttonText: 'list month' }
                 },
-                //defaultDate: '2017-11-01',
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: function(start, end, timezone, callback) {
-                    console.log(start);
-                    console.log(end);
-                    console.log(timezone);
-                    console.log(callback);
-                    /* $.ajax({
-                        url: 'myxmlfeed.php',
-                        dataType: 'xml',
+                    $.ajax({
+                        url: "{{ url("") }}/lti/data-timeline",
+                        contentType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                        },
                         data: {
-                            // our hypothetical feed requires UNIX timestamps
-                            start: start.unix(),
-                            end: end.unix()
+                            start: start.format('YYYY-MM-DD'),
+                            end: end.format('YYYY-MM-DD'),
+                            course: selected_course
                         },
                         success: function(doc) {
                             var events = [];
                             $(doc).find('event').each(function() {
                                 events.push({
                                     title: $(this).attr('title'),
-                                    start: $(this).attr('start') // will be parsed
+                                    start: $(this).attr('start'), // will be parsed
+                                    end: $(this).attr('end'), // will be parsed
+                                    backgroundColor: $(this).attr('backgroundColor'),
+                                    borderColor: $(this).attr('borderColor'),
+                                    url: $(this).attr('url')
                                 });
                             });
                             callback(events);
                         }
-                    }); */
+                    });
                 }
-                /*events: [
-                    {
-                        title: 'FBN1502 Test 1',
-                        start: '2017-11-01',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'New Student Welcome',
-                        start: '2017-11-07',
-                        end: '2017-11-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'FBN102 Exam',
-                        start: '2017-11-09T16:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2017-11-16T16:00:00'
-                    },
-                    {
-                        title: 'Student Conference',
-                        start: '2017-11-11',
-                        end: '2017-11-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2017-11-12T10:30:00',
-                        end: '2017-11-12T12:30:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'FBN101 Exam',
-                        start: '2017-11-12T12:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FNB104 Test',
-                        start: '2017-11-12T14:30:00'
-                    },
-                    {
-                        title: 'FBN105 Test',
-                        start: '2017-11-12T17:30:00'
-                    },
-                    {
-                        title: 'FBN103 Exam',
-                        start: '2017-11-12T20:00:00',
-                        backgroundColor: '#dd4b39', //red
-                        borderColor: '#dd4b39' //red
-                    },
-                    {
-                        title: 'FBN102 Test',
-                        start: '2017-11-13T07:00:00',
-                        backgroundColor: '#00a65a', //Success (green)
-                        borderColor: '#00a65a' //Success (green)
-                    },
-                    {
-                        title: 'MyUnisa',
-                        url: 'http://unisa.ac.za/',
-                        start: '2017-11-28'
-                    }
-                ] */
             });
         };
-        renderTimeline();
     });
 </script>
 @endsection
