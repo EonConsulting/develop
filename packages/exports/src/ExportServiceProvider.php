@@ -12,6 +12,15 @@ class ExportServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'EONConsulting\Exports';
+    
+    /**
+     * This middleware will be applied to all your routes .
+     *
+     * @var array
+     */
+    protected $middleware = [
+        'web', 'auth'
+    ];
 
     /**
      * Bootstrap the application services.
@@ -20,9 +29,13 @@ class ExportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
-        $this->loadViews('eon.exports');
-        $this->loadMigrations();
+        $this->publishes([
+            __DIR__.'/config/html-to-pdf.php' => config_path('html-to-pdf.php'),
+        ]);
+
+        $this->loadViews('exports');
+        //$this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->registerRoutes();
 
     }
 
@@ -33,7 +46,9 @@ class ExportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->mergeConfigFrom(
+            __DIR__.'/config/html-to-pdf.php', 'html-to-pdf'
+        );
     }
 
     /**

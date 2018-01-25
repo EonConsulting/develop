@@ -227,6 +227,7 @@ return [
         \EONConsulting\Auditing\AuditingServiceProvider::class,
         \EONConsulting\Messages\MessagesServiceProvider::class,
         \EONConsulting\Notifications\NotificationServiceProvider::class,
+        \EONConsulting\Exports\ExportServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -906,9 +906,11 @@ class WidgetCore {
         
         data_assessment_types(callback)
         {
-            if(instance.selected_course 
+            /*if(instance.selected_course 
                     && instance.selected_student 
                     && instance.selected_assessment)
+            { */
+            if (instance.selected_assessment)
             {
                 $.ajax({
                     method: "GET",
@@ -1122,7 +1124,7 @@ class WidgetCore {
                 instance.bindAssessmentFilter();
                 //instance.bindStudentFilter(); // moved into callback
                 instance.bindModuleFilter();
-                //instance.bindAssessmentTypeFilter(); // moved into callback
+                //instance.bindAssessmentTypeFilter(); // moved to callback
                 instance.bindEngagementFilter();
                 instance.bindTutorSupportFilter();
                 instance.bindUpdateButtons();
