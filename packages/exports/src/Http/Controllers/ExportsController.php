@@ -30,6 +30,7 @@ class ExportsController extends Controller {
                 'page-size' => 'Letter' //Default page options
             ];
             $pdf->setOptions($globalOptions);
+            $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
             $pdf = new Pdf([
                 'commandOptions' => [
@@ -45,9 +46,10 @@ class ExportsController extends Controller {
                 'page-size' => 'Letter' //Default page options
             ];
             $pdf->setOptions($globalOptions);
+            $binary = env('WKHTMLTOPDF_BIN');
         }
 
-        $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+        
         $pdf->binary = $binary;
 
         return $pdf;
