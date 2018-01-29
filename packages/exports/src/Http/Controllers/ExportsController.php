@@ -32,21 +32,13 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
-            $pdf = new Pdf([
-                'commandOptions' => [
-                    'enableXvfb' => true,
-                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
-                    // Optional: Set options for xfvb-run. The following defaults are used.
-                    'xvfbRunOptions' => '--auto-servernum',
-                ],
-            ]);
+            $pdf = new Pdf();
             $globalOptions = [
                 //'no-outline', // Make Chrome not complain
                 'page-size' => 'Letter' //Default page options
             ];
             $pdf->setOptions($globalOptions);
-            $binary = '/usr/bin/wkhtmltopdf';
+            $binary = env('WKHTMLTOPDF_BIN');
         }
 
         
@@ -70,7 +62,7 @@ class ExportsController extends Controller {
 
         $pdf = $this->wkhtml();
 
-        $pdf->addPage('<html><h1>Introduction</h1></html>');
+        $pdf->addPage($contents);
         $pdf->addToc();
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
