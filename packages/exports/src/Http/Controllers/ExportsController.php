@@ -25,16 +25,26 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
-            $globalOptions =[
+            $globalOptions = [
                 'no-outline', // Make Chrome not complain
                 'page-size' => 'Letter' //Default page options
-            ];           
+            ];
             $pdf->setOptions($globalOptions);
         } else {
-            $pdf = new Pdf;
-            $pdf->setOptions(
-                    config('html-to-pdf')
-            );
+            $pdf = new Pdf([
+                'commandOptions' => [
+                    'enableXvfb' => true,
+                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
+                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
+                    // Optional: Set options for xfvb-run. The following defaults are used.
+                    'xvfbRunOptions' => '--auto-servernum',
+                ],
+            ]);
+            $globalOptions = [
+                'no-outline', // Make Chrome not complain
+                'page-size' => 'Letter' //Default page options
+            ];
+            $pdf->setOptions($globalOptions);
         }
 
         $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
@@ -63,7 +73,7 @@ class ExportsController extends Controller {
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
-            $msg = $pdf->getCommand()->getOutput();//$pdf->getError();
+            $msg = $pdf->getCommand()->getOutput(); //$pdf->getError();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
         } else {
             $res = '200';

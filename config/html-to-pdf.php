@@ -1,15 +1,15 @@
 <?php
 
 return [
-    //'binary' => '/usr/bin/wkhtmltopdf',
-    //'no-outline',         // Make Chrome not complain
+    'binary' => '/usr/bin/wkhtmltopdf',
+    'no-outline',         // Make Chrome not complain
     'margin-top'    => 10,
     'margin-right'  => 10,
     'margin-bottom' => 10,
     'margin-left'   => 10,
     'javascript-delay' => 2000,
     // Explicitly tell wkhtmltopdf that we're using an X environment
-   // 'use-xserver',
+    'use-xserver',
 
     // Enable built in Xvfb support in the command
     'commandOptions' => array(
