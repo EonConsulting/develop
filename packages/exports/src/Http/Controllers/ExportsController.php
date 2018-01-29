@@ -34,8 +34,11 @@ class ExportsController extends Controller {
         } else {
             $pdf = new Pdf([
                 'commandOptions' => [
-                    'useExec' => false,
-                    'escapeArgs' => false,
+                    'enableXvfb' => true,
+                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
+                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
+                    // Optional: Set options for xfvb-run. The following defaults are used.
+                    //'xvfbRunOptions' => '--auto-servernum',
                 ],
             ]);
             $globalOptions = [
