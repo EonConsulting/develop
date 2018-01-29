@@ -10,6 +10,7 @@ return [
     'javascript-delay' => 2000,
     // Explicitly tell wkhtmltopdf that we're using an X environment
     'use-xserver',
+    'ignoreWarnings' => true,
 
     // Enable built in Xvfb support in the command
     'commandOptions' => array(
