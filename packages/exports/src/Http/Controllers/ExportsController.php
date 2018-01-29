@@ -46,7 +46,7 @@ class ExportsController extends Controller {
                 'page-size' => 'Letter' //Default page options
             ];
             $pdf->setOptions($globalOptions);
-            $binary = env('WKHTMLTOPDF_BIN');
+            $binary = '/usr/bin/wkhtmltopdf';
         }
 
         
