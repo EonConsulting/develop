@@ -15,60 +15,60 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
 class ExportsController extends Controller {
-    
-    
+
     public function wkhtml() {
-        $pdf = new Pdf([
-            'commandOptions' => [
-                'useExec' => false,
-                'escapeArgs' => false,
-                'procOptions' =>[
-            // This will bypass the cmd.exe which seems to be recommended on Windows
-            'bypass_shell' => true,
-            // Also worth a try if you get unexplainable errors
-                    'suppress_errors' => true,
+        $host = request()->getHttpHost();
+        if ($host === 'localhost:8000') {
+            $pdf = new Pdf([
+                'commandOptions' => [
+                    'useExec' => false,
+                    'escapeArgs' => false,
                 ],
-            ]
-        ]);
-        
-        $globalOptions = array(           
-            'no-outline',// Make Chrome not complain
-            'page-size' => 'Letter' //Default page options
-        );
-        
-        $pdf->setOptions($globalOptions);
-        $binary = str_replace(array('\'', '"'), '',env('WKHTMLTOPDF_BIN'));        
+            ]);
+            $globalOptions = array(
+                'no-outline', // Make Chrome not complain
+                'page-size' => 'Letter' //Default page options
+            );           
+            $pdf->setOptions($globalOptions);
+        } else {
+            $pdf = new Pdf;
+            $pdf->setOptions(
+                    config('html-to-pdf')
+            );
+        }
+
+        $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         $pdf->binary = $binary;
 
         return $pdf;
     }
-        
+
     public function modulePDF($courseId) {
+
         $course = Course::find($courseId);
         $Storyline2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
         //$items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
         $items = $Storyline2JSON->getTreeProgess($storyline_id);
-        
+
         $course['template'] = ContentTemplates::find($course->template_id);
-        
-        $view = view('exports::module.modulepdf', ['items' => $items,'course'=>$course]);
+
+        $view = view('exports::module.modulepdf', ['items' => $items, 'course' => $course]);
         $contents = $view->render();
-        
+
         $pdf = $this->wkhtml();
-       
+
         $pdf->addPage($contents);
         $pdf->addToc();
-        
-        if (!$pdf->saveAs(storage_path() . '/modules/'. $course->title . '.pdf')) {
+
+        if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
             $msg = $pdf->getError();
-            $file = storage_path() . '/modules/'. $course->title . '.pdf';
- 
-        } else {            
+            $file = storage_path() . '/modules/' . $course->title . '.pdf';
+        } else {
             $res = '200';
-            $msg = ' Module <b>'.$course->title.'</b> was converted and saved as PDF successfully.';
-            $file = storage_path() . '/modules/'. $course->title . '.pdf';
+            $msg = ' Module <b>' . $course->title . '</b> was converted and saved as PDF successfully.';
+            $file = storage_path() . '/modules/' . $course->title . '.pdf';
         }
 
         $response = array(
@@ -80,7 +80,7 @@ class ExportsController extends Controller {
 
         return \Response::json($response);
     }
-    
+
     public function downloadPDF($courseId) {
         $course = Course::find($courseId);
         $file = storage_path() . '/modules/' . $course->title . '.pdf';
@@ -88,13 +88,13 @@ class ExportsController extends Controller {
             $file = File::get($file);
             $response = Response::make($file, 200);
             $response->header('Content-Type', 'application/pdf');
-            
+
             return $response;
-        }else{
+        } else {
             echo "<h2 style='color:red'>This file does not exit, please login as lecturer and save this module as PDF.</h2>";
         }
     }
-    
+
     public function downloadPDF2($courseId) {
         $course = Course::find($courseId);
         $file = storage_path() . '/modules/' . $course->title . '.pdf';
@@ -102,9 +102,9 @@ class ExportsController extends Controller {
             $file = File::get($file);
             $response = Response::make($file, 200);
             $response->header('Content-Type', 'application/pdf');
-            
+
             return $response;
         }
     }
-    
+
 }
