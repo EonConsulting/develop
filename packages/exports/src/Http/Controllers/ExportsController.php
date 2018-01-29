@@ -60,7 +60,13 @@ class ExportsController extends Controller {
 
         $pdf->addPage($contents);
         $pdf->addToc();
-
+        
+        if( ! $content = $pdf->send('storyline-item.pdf')){
+            echo 'error';
+        }else{
+            echo 'generated';
+        }
+exit();
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
             $msg = $pdf->getError();
