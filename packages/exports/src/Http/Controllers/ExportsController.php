@@ -17,13 +17,17 @@ use Illuminate\Support\Facades\Response;
 class ExportsController extends Controller {
 
     public function wkhtml() {
+        /*
         $pdf = new Pdf([
             'commandOptions' => [
                 'useExec' => false,
                 'escapeArgs' => false,
             ],
         ]);
+         * 
+         */
 
+        $pdf = new Pdf();
         $globalOptions = [
             //'binary' => '/usr/bin/wkhtmltopdf',
             'no-outline', // Make Chrome not complain
