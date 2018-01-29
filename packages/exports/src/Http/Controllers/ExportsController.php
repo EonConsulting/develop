@@ -25,10 +25,10 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
-            $globalOptions = array(
+            $globalOptions =[
                 'no-outline', // Make Chrome not complain
                 'page-size' => 'Letter' //Default page options
-            );           
+            ];           
             $pdf->setOptions($globalOptions);
         } else {
             $pdf = new Pdf;

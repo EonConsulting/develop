@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'binary' => '/usr/bin/wkhtmltopdf',
+    //'binary' => '/usr/bin/wkhtmltopdf',
     'no-outline',         // Make Chrome not complain
     'margin-top'    => 10,
     'margin-right'  => 10,
