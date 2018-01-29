@@ -52,8 +52,8 @@ class ExportsController extends Controller {
         $pdf->setOptions(
             config('html-to-pdf')
         );
-        $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
-        $pdf->binary = $binary;
+        //$binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+        //$pdf->binary = $binary;
 
         return $pdf;
     }
