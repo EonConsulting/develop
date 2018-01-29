@@ -70,7 +70,7 @@ class ExportsController extends Controller {
 
         $pdf = $this->wkhtml();
 
-        $pdf->addPage($contents);
+        $pdf->addPage('<html><h1>Introduction</h1></html>');
         $pdf->addToc();
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
