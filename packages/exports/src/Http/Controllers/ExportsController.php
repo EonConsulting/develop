@@ -32,7 +32,12 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
-            $pdf = new Pdf();
+            $pdf = new Pdf([
+                'commandOptions' => [
+                    'useExec' => false,
+                    'escapeArgs' => false,
+                ],
+            ]);
             $globalOptions = [
                 //'no-outline', // Make Chrome not complain
                 'page-size' => 'Letter' //Default page options
