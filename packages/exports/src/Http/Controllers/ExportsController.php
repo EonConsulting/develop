@@ -32,11 +32,12 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
+            
             $pdf = new Pdf;
-
             $pdf->setOptions(
                     config('html-to-pdf')
             );
+            $pdf->setOptions($globalOptions);
         }
 
         return $pdf;
@@ -55,15 +56,10 @@ class ExportsController extends Controller {
         $view = view('exports::module.modulepdf', ['items' => $items, 'course' => $course]);
         $contents = $view->render();
 
-        //$pdf = $this->wkhtml();
-        $pdf = new Pdf;
+        $pdf = $this->wkhtml();
 
-            $pdf->setOptions(
-                    config('html-to-pdf')
-            );
-
-        $pdf->addPage($contents);
-        //$pdf->addToc();
+        $pdf->addPage("<html><h1>Reginald Bossman</h1></html>");
+        $pdf->addToc();
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
