@@ -37,6 +37,7 @@ class ExportsController extends Controller {
             $pdf->setOptions(
                     config('html-to-pdf')
             );
+            
         }
 
         return $pdf;
@@ -57,7 +58,7 @@ class ExportsController extends Controller {
 
         $pdf = $this->wkhtml();
 
-        $pdf->addPage("<html><h1>Reginald Bossman</h1></html>");
+        $pdf->addPage($contents);
         $pdf->addToc();
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
