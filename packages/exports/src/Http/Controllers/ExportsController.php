@@ -33,8 +33,10 @@ class ExportsController extends Controller {
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
             $pdf = new Pdf([
-                'binary' => '/usr/bin/wkhtmltopdf',//env('WKHTMLTOPDF_BIN'),
+                'binary' => '/usr/bin/wkhtmltopdf', //env('WKHTMLTOPDF_BIN'),
                 'ignoreWarnings' => true,
+                // Explicitly tell wkhtmltopdf that we're using an X environment
+                'use-xserver',
                 'commandOptions' => [
                     'enableXvfb' => true,
                     // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
@@ -48,9 +50,8 @@ class ExportsController extends Controller {
                 'page-size' => 'Letter' //Default page options
             ];
             $pdf->setOptions($globalOptions);
-            
         }
-      
+
         return $pdf;
     }
 
@@ -74,7 +75,7 @@ class ExportsController extends Controller {
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
-            $msg =  $pdf->getError();//$pdf->getCommand()->getOutput();
+            $msg = $pdf->getError(); //$pdf->getCommand()->getOutput();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
         } else {
             $res = '200';
