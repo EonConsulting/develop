@@ -18,6 +18,9 @@ class ExportsController extends Controller {
 
     public function wkhtml() {
         $host = request()->getHttpHost();
+        
+        $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+        
         if ($host === 'localhost:8000') {
             $pdf = new Pdf([
                 'commandOptions' => [
@@ -25,38 +28,31 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
+             
             $globalOptions = [
+                'binary' => $binary,
                 'no-outline', // Make Chrome not complain
-                'page-size' => 'Letter' //Default page options
+                'margin-top' => 10,
+                'margin-right' => 10,
+                'margin-bottom' => 10,
+                'margin-left' => 10,
+                'javascript-delay' => 2000,
             ];
             $pdf->setOptions($globalOptions);
-            $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+           
         } else {
-            $pdf = new Pdf([
-                'commandOptions' => [
-                    'enableXvfb' => true,
-                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
-                    // Optional: Set options for xfvb-run. The following defaults are used.
-                    //'xvfbRunOptions' => '--auto-servernum',
-                ],
-            ]);
-            $globalOptions = [
-                //'no-outline', // Make Chrome not complain
-                'page-size' => 'Letter' //Default page options
-            ];
-            $pdf->setOptions($globalOptions);
-            $binary = env('WKHTMLTOPDF_BIN');
-        }
 
-        
-        $pdf->binary = $binary;
+            $pdf = new Pdf;
+            $pdf->setOptions(
+                    config('html-to-pdf')
+            );
+        }
 
         return $pdf;
     }
 
     public function modulePDF($courseId) {
-
+        ini_set('memory_limit', '2048M');
         $course = Course::find($courseId);
         $Storyline2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
@@ -75,7 +71,7 @@ class ExportsController extends Controller {
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
-            $msg = $pdf->getCommand()->getOutput(); //$pdf->getError();
+            $msg = $pdf->getError(); //$pdf->getCommand()->getOutput();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
         } else {
             $res = '200';

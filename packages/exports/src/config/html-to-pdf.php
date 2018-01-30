@@ -17,7 +17,7 @@ return [
         'enableXvfb' => true,
 
         // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-        'xvfbRunBinary' => '/usr/bin/xvfb-run --server-args="-screen 0, 1920x1080x24',
+        'xvfbRunBinary' => '/usr/bin/xvfb-run',
 
         // Optional: Set options for xfvb-run. The following defaults are used.
         'xvfbRunOptions' =>  '--auto-servernum',
