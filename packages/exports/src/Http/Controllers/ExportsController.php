@@ -32,24 +32,11 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
-            $pdf = new Pdf([
-                'binary' => '/usr/bin/wkhtmltopdf', //env('WKHTMLTOPDF_BIN'),
-                'ignoreWarnings' => true,
-                // Explicitly tell wkhtmltopdf that we're using an X environment
-                'use-xserver',
-                'commandOptions' => [
-                    'enableXvfb' => true,
-                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
-                    // Optional: Set options for xfvb-run. The following defaults are used.
-                    'xvfbRunOptions' => '--auto-servernum',
-                ],
-            ]);
-            $globalOptions = [
-                //'no-outline', // Make Chrome not complain
-                'page-size' => 'Letter' //Default page options
-            ];
-            $pdf->setOptions($globalOptions);
+            $pdf = new Pdf;
+
+            $pdf->setOptions(
+                    config('html-to-pdf')
+            );
         }
 
         return $pdf;
