@@ -37,7 +37,6 @@ class ExportsController extends Controller {
             $pdf->setOptions(
                     config('html-to-pdf')
             );
-            $pdf->setOptions($globalOptions);
         }
 
         return $pdf;
