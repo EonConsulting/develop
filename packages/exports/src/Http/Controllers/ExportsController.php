@@ -32,16 +32,17 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
-            $pdf = new Pdf([
-                'ignoreWarnings' => true,
+            $pdf = new Pdf(array(
                 'commandOptions' => array(
-                    'useExec' => true, // Can help if generation fails without a useful error message
-                    'procEnv' => array(
-                        // Check the output of 'locale' on your system to find supported languages
-                        'LANG' => 'en_US.utf-8',
+                    'escapeArgs' => false,
+                    'procOptions' => array(
+                        // This will bypass the cmd.exe which seems to be recommended on Windows
+                        'bypass_shell' => true,
+                        // Also worth a try if you get unexplainable errors
+                        'suppress_errors' => true,
                     ),
                 ),
-            ]);
+            ));
             $globalOptions = [
                 //'no-outline', // Make Chrome not complain
                 'page-size' => 'Letter' //Default page options
