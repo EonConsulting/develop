@@ -34,6 +34,7 @@ class ExportsController extends Controller {
         } else {
             $pdf = new Pdf([
                 'binary' => env('WKHTMLTOPDF_BIN'),
+                'ignoreWarnings' => true,
                 'commandOptions' => [
                     'enableXvfb' => true,
                     // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
