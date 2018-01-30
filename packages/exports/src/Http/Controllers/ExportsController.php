@@ -18,6 +18,9 @@ class ExportsController extends Controller {
 
     public function wkhtml() {
         $host = request()->getHttpHost();
+        
+        $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+        
         if ($host === 'localhost:8000') {
             $pdf = new Pdf([
                 'commandOptions' => [
@@ -25,19 +28,24 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
+             
             $globalOptions = [
+                'binary' => $binary,
                 'no-outline', // Make Chrome not complain
-                'page-size' => 'Letter' //Default page options
+                'margin-top' => 10,
+                'margin-right' => 10,
+                'margin-bottom' => 10,
+                'margin-left' => 10,
+                'javascript-delay' => 2000,
             ];
             $pdf->setOptions($globalOptions);
-            $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
+           
         } else {
-            
+
             $pdf = new Pdf;
             $pdf->setOptions(
                     config('html-to-pdf')
             );
-            
         }
 
         return $pdf;
