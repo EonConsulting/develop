@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use App\Models\Course;
+use App\Models\TimelineEvent;
 use App\Models\IntegrateTaoResults;
 use App\Models\SummaryStudentProgression;
 use App\Models\SummaryModuleProgression;
@@ -175,6 +176,43 @@ class DashboardDataController extends LTIBaseController {
         $events = $timelines->findByFilters($start, $end, $course_id, $user_id, $role);
 
         return response()->json($events);
+    }
+    
+    /**
+     * @param \Illuminate\Http\Request
+     * @return HttpStatusCode
+     */
+    public function store_timeline_event(Request $request)
+    {
+        if (is_array($request->all()))
+        {
+            $data = $request->all();
+            
+            // only lecturers can set is_global = 1
+            $role = laravel_lti()->get_user_lti_type(auth()->user());
+            $is_global = ($role == "Instructor") ? $data["is_global"] : 0;
+            
+            $new_event = [
+                "start" => $data["start"],
+                "end" => $data["end"],
+                "user_id" => auth()->user()->id,
+                "course_id" => $data["course_id"],
+                "is_global" => $is_global,
+                "title" => $data["title"],
+                "type" => $data["type"],
+                "url" => $data["url"]
+            ];
+            
+            $record = TimelineEvent::create($new_event);
+            if ($record)
+            {
+                return response('Created', 201);
+            } else {
+                return response('Server Error', 500);
+            }
+        } else {
+            return response('Bad Request', 400);
+        }
     }
 
 }
