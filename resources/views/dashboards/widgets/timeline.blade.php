@@ -48,7 +48,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
-        selected_course = "";
+        var selected_course = "";
+        var calendarIsInitialized = false;
         
         var dataCourses = function(callback) {
             $.ajax({
@@ -86,14 +87,41 @@
                 $("#module-filter").on("change", function () {
                     var self = $(this);
                     selected_course = self.val();
-                    dataTimeline();
+                    // refresh the calendar events
+                    if (calendarIsInitialized){
+                        $('#calendar-timeline').fullCalendar("refetchEvents");
+                    } else {
+                        renderTimeline();
+                        calendarIsInitialized = true;
+                    }
                 });
                 $("#module-filter").trigger("change");
             });
         }
         bindModuleFilter();
         
-        var dataTimeline = function()
+        function getFillColor(type){
+            switch(type){
+                case 'formal_assessment':
+                    return "#20895e";
+                break;
+                case 'assignment':
+                    return "#fb7217";
+                break;
+                case 'exam':
+                    return "#dd4b39";
+                break;
+                case 'self_assessment':
+                    return "#00c0ef";
+                break;
+                case 'other':
+                default:
+                    return "#3097D1";
+                break;
+            }
+        }
+        
+        function renderTimeline()
         {
             $('#calendar-timeline').fullCalendar({
                 header: {
@@ -108,32 +136,60 @@
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
+                selectable: true,
+                selectHelper: true,
+                select: function(start, end) {
+                  var title = prompt('Event Title:');
+                  var eventData;
+                  if (title) {
+                    eventData = {
+                      title: title,
+                      start: start,
+                      end: end
+                    };
+                    $('#calendar-timeline').fullCalendar('renderEvent', eventData, true); // stick? = true
+                  }
+                  $('#calendar-timeline').fullCalendar('unselect');
+                },
                 events: function(start, end, timezone, callback) {
                     $.ajax({
-                        url: "{{ url("") }}/lti/data-timeline",
-                        contentType: "json",
+                        url: "{{ url("") }}/lti/data-timeline/",
+                        contentType: 'json',
                         headers: {
                             'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                         },
                         data: {
                             start: start.format('YYYY-MM-DD'),
                             end: end.format('YYYY-MM-DD'),
-                            course: selected_course
+                            course_id: selected_course
                         },
-                        success: function(doc) {
-                            var events = [];
-                            $(doc).find('event').each(function() {
-                                events.push({
-                                    title: $(this).attr('title'),
-                                    start: $(this).attr('start'), // will be parsed
-                                    end: $(this).attr('end'), // will be parsed
-                                    backgroundColor: $(this).attr('backgroundColor'),
-                                    borderColor: $(this).attr('borderColor'),
-                                    url: $(this).attr('url')
+                        statusCode: {
+                            200: function (data) { //success
+                                var events = [];
+                                $.each(data, function(idx, obj) {
+                                    var _item = {
+                                        title: obj['title'],
+                                        start: obj['start'], // will be parsed
+                                        end: obj['end'], // will be parsed
+                                        type: obj['type'],
+                                        backgroundColor: getFillColor(obj['type']),
+                                        borderColor: getFillColor(obj['type']),
+                                        url: obj['url']
+                                    }
+                                    events.push(_item);
                                 });
-                            });
-                            callback(events);
+                                //console.log(events);
+                                callback(events);
+                            },
+                            400: function () { //bad request
+                                console.log("Bad request");
+                            },
+                            500: function () { //server kakked
+                                console.log("Server error");
+                            }
                         }
+                    }).error(function (req, status, error) {
+                        return [];
                     });
                 }
             });

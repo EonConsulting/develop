@@ -157,5 +157,24 @@ class DashboardDataController extends LTIBaseController {
 
         return response()->json($result);
     }
+    
+      /**
+     * 
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function filter_timeline_events(Request $request) {
+        
+        $start = $request->input("start", date('Y-m-d'));
+        $end = $request->input("end", date('Y-m-d'));
+        $course_id = $request->input("course_id", 0);
+        $user_id = auth()->user()->id;
+        $role = laravel_lti()->get_user_lti_type(auth()->user());
+            
+        $timelines = new \EONConsulting\Core\Classes\Timelines();
+        $events = $timelines->findByFilters($start, $end, $course_id, $user_id, $role);
+
+        return response()->json($events);
+    }
 
 }
