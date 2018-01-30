@@ -49,9 +49,7 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             
         }
-       
-        $pdf->binary = $binary;
-
+      
         return $pdf;
     }
 
