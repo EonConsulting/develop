@@ -38,7 +38,7 @@ class ExportsController extends Controller {
                     // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
                     'xvfbRunBinary' => '/usr/bin/xvfb-run',
                     // Optional: Set options for xfvb-run. The following defaults are used.
-                    //'xvfbRunOptions' => '--auto-servernum',
+                    'xvfbRunOptions' => '--auto-servernum',
                 ],
             ]);
             $globalOptions = [
@@ -48,8 +48,7 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = env('WKHTMLTOPDF_BIN');
         }
-
-        
+       
         $pdf->binary = $binary;
 
         return $pdf;
@@ -75,7 +74,7 @@ class ExportsController extends Controller {
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
-            $msg = $pdf->getCommand()->getOutput(); //$pdf->getError();
+            $msg =  $pdf->getError();//$pdf->getCommand()->getOutput();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
         } else {
             $res = '200';
