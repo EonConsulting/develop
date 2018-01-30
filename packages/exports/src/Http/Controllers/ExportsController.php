@@ -33,7 +33,7 @@ class ExportsController extends Controller {
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
             $pdf = new Pdf([
-                'binary' => env('WKHTMLTOPDF_BIN'),
+                'binary' => '/usr/bin/wkhtmltopdf',//env('WKHTMLTOPDF_BIN'),
                 'ignoreWarnings' => true,
                 'commandOptions' => [
                     'enableXvfb' => true,
