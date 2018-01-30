@@ -52,7 +52,7 @@ class ExportsController extends Controller {
     }
 
     public function modulePDF($courseId) {
-
+        ini_set('memory_limit', '2048M');
         $course = Course::find($courseId);
         $Storyline2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
