@@ -33,13 +33,14 @@ class ExportsController extends Controller {
             $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
         } else {
             $pdf = new Pdf([
-                'commandOptions' => [
-                    'enableXvfb' => true,
-                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
-                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
-                    // Optional: Set options for xfvb-run. The following defaults are used.
-                    'xvfbRunOptions' => '--auto-servernum',
-                ],
+                'ignoreWarnings' => true,
+                'commandOptions' => array(
+                    'useExec' => true, // Can help if generation fails without a useful error message
+                    'procEnv' => array(
+                        // Check the output of 'locale' on your system to find supported languages
+                        'LANG' => 'en_US.utf-8',
+                    ),
+                ),
             ]);
             $globalOptions = [
                 //'no-outline', // Make Chrome not complain
@@ -48,7 +49,7 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
             $binary = env('WKHTMLTOPDF_BIN');
         }
-       
+
         $pdf->binary = $binary;
 
         return $pdf;
@@ -74,7 +75,7 @@ class ExportsController extends Controller {
 
         if (!$pdf->saveAs(storage_path() . '/modules/' . $course->title . '.pdf')) {
             $res = 'error';
-            $msg =  $pdf->getError();//$pdf->getCommand()->getOutput();
+            $msg = $pdf->getError(); //$pdf->getCommand()->getOutput();
             $file = storage_path() . '/modules/' . $course->title . '.pdf';
         } else {
             $res = '200';
