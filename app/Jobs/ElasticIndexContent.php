@@ -59,7 +59,19 @@ class ElasticIndexContent implements ShouldQueue {
                     ->limit(1000)
                     ->get();*/
 
-            $content = Content::where('ingested', '0')->get();
+            //$content = Content::where('ingested', '0')->get();
+
+            $content = DB::select("
+                SELECT c.id as content_id, c.title, c.body, c.description, c.tags, GROUP_CONCAT(s.course_id) as course_ids, GROUP_CONCAT(cat.name) as categories FROM content c 
+                    LEFT JOIN storyline_items si ON si.content_id = c.id
+                    LEFT JOIN storylines s ON s.id = si.storyline_id
+                    LEFT JOIN content_categories cc ON cc.content_id = c.id
+                    LEFT JOIN lk_content_categories cat ON cat.id = cc.category_id
+                    WHERE 1=1
+                    AND c.ingested = 0
+                    GROUP BY c.id
+                    ORDER BY c.id ASC
+            ");
 
             // break out if the work is done
             if (count($content) <= 0) {
@@ -70,36 +82,53 @@ class ElasticIndexContent implements ShouldQueue {
             // put an entry to Elastic for each row
             foreach ($content as $c) {
 
-                $categories = $c->categories()->select('name')->get();
-
-                $cats = "";
-                $first = true;
-
-                foreach($categories as $cat){
-
-                    if ($first === true){
-                        $first = false;
-                    } else {
-                        $cats = $cats . ",";
-                    }
-
-                    $cats = $cats . $cat['name'];
-                    //echo $cat['name'];
-                }
-
                 $entry = [
-                    "id" => $c->id,
+                    "id" => $c->content_id,
                     "title" => $c->title,
                     "body" => $c->body,
                     "description" => $c->description,
                     "tags" => $c->tags,
-                    "categories" => $cats
+                    "categories" => explode(',',$c->categories),
+                    "courses" => explode(',',$c->course_ids)
                 ];
                 
                 $this->postElasticItem($entry);
             }
         }
     }
+
+    
+    function fetchAndIndexContentbyID($id){
+
+        Log::debug("Starting content sync by ID to Elastic");
+
+        $c = DB::select('
+            SELECT c.id as content_id, c.title, c.body, c.description, c.tags, GROUP_CONCAT(s.course_id) as course_ids, GROUP_CONCAT(cat.name) as categories FROM content c 
+                LEFT JOIN storyline_items si ON si.content_id = c.id
+                LEFT JOIN storylines s ON s.id = si.storyline_id
+                LEFT JOIN content_categories cc ON cc.content_id = c.id
+                LEFT JOIN lk_content_categories cat ON cat.id = cc.category_id
+                WHERE 1=1
+                AND c.id = '.$id.'
+                GROUP BY c.id
+                ORDER BY c.id ASC
+        ')[0];
+
+        //Log::debug($c);
+
+        $entry = [
+            "id" => $c->content_id,
+            "title" => $c->title,
+            "body" => $c->body,
+            "description" => $c->description,
+            "tags" => $c->tags,
+            "categories" => explode(',',$c->categories),
+            "courses" => explode(',',$c->course_ids)
+        ];
+
+        $this->postElasticItem($entry);
+    }
+
 
     function postElasticItem($entry) {
         if ($entry) {

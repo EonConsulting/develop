@@ -1,0 +1,63 @@
+[2018-01-29 21:33:17] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:33:17] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "statistics",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:33:17] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-01-29 21:36:33] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:36:33] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "disabled",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:36:33] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-01-29 21:36:43] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:36:43] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "statistics",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:36:43] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-01-29 15:43:01] local.DEBUG: Attempting an LTI Login....  
+[2018-01-29 15:43:01] local.DEBUG: Instructor  
+[2018-01-30 01:54:29] local.ERROR: There are no commands defined in the "views" namespace.
+
+Did you mean this?
+    view {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): There are no commands defined in the \"views\" namespace.
+
+Did you mean this?
+    view at /home/vagrant/code/develop/vendor/symfony/console/Application.php:556)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/symfony/console/Application.php(596): Symfony\\Component\\Console\\Application->findNamespace('views')
+#1 /home/vagrant/code/develop/vendor/symfony/console/Application.php(221): Symfony\\Component\\Console\\Application->find('views:clear')
+#2 /home/vagrant/code/develop/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 /home/vagrant/code/develop/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 

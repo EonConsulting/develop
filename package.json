@@ -25,6 +25,7 @@
     "chart.js": "^2.6.0",
     "composer": "^0.14.2",
     "cross-env": "^3.2.4",
+    "gulp": "^3.9.1",
     "vue-ckeditor": "^1.0.0",
     "vue-ckeditor2": "^1.11.0",
     "vue-resource": "^1.3.4",
