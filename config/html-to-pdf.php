@@ -2,6 +2,7 @@
 
 return [
     'binary' => '/usr/bin/wkhtmltopdf',
+    'timeout' => false,
     'no-outline',         // Make Chrome not complain
     'margin-top'    => 10,
     'margin-right'  => 10,
