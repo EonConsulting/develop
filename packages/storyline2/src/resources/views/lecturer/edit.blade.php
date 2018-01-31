@@ -168,7 +168,7 @@ Storyline Student Single
         -webkit-align-self: auto;
         -ms-flex-item-align: auto;
         align-self: auto;
-        padding-right: 15px;
+    
     }
 
     .info-bar-buttons {
@@ -192,6 +192,10 @@ Storyline Student Single
     .cke_resizer {display: none;}
 
 
+    .search-container {
+        margin: 0 auto 0 auto;
+    }
+
     .form-title {
 
         border-width: 0px 0px 1px 0px;
@@ -199,10 +203,8 @@ Storyline Student Single
         border-color: #FFF;
 
         padding: 5px;
-        margin: 5px;
 
         background: none;
-        width: 100%;
 
     }
 
@@ -331,7 +333,6 @@ Storyline Student Single
     }
 
     .tools-divider {
-        display: inline-block;
         height: 25px;
         width: 10px;
         border-width: 0 1px 0 0;
@@ -346,6 +347,10 @@ Storyline Student Single
         font-style: italic;
     }
 
+    .disabled {
+        color: #999;
+    }
+
 </style>
 @endsection
 
@@ -353,7 +358,15 @@ Storyline Student Single
 @section('content')
 
 <div class="tools" id="tools">
-
+    
+    <span class="search-container">
+        <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
+        <a href="#" class="btn btn-default" id="search"><i class="fa fa-search"></i></a>
+        <a href="#" class="btn btn-default" id="prev-result"><i class="fa fa-caret-left"></i></a>
+        <span id="search_numbers">0 / 0</span>
+        <a href="#" class="btn btn-default" id="next-result"><i class="fa fa-caret-right"></i></a>
+    </span>
+    <span class="tools-divider"></span>
     <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i><span class="hidden-xs hidden-sm"> Preview</span></a></span>
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i><span class="hidden-xs hidden-sm"> Save</span></a></span>
@@ -374,7 +387,7 @@ Storyline Student Single
     <div class="flex-menu">
         <div class="info-bar-name">
             <div>
-                <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>                                
+                                                
             </div>
         </div>
 
@@ -393,7 +406,7 @@ Storyline Student Single
 
                             <div class="info-bar-name">
                                 <div>
-                                    <input id="content-title" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
+                                    <input id="content-title" style="width: 100%;" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                                 </div>
                             </div>
 
@@ -646,6 +659,7 @@ Storyline Student Single
 
 <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
 <script>
+    var course_id = "{{ $course_id }}";
     var storyline_id = "{{ $storyline_id }}";
     var base_url = "{{{ url('') }}}";
     var course_template_path = "{{ url($course->template->file_path) }}";

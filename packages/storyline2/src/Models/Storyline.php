@@ -57,8 +57,7 @@ class Storyline extends Model {
     public function items()
     {
         return $this->hasMany(StorylineItem::class, 'storyline_id', 'id')
-                        ->orderBy('level', 'ASC')
-                        ->orderBy('position', 'ASC');
+                    ->orderBy('_lft', 'ASC');
     }
 
     /**

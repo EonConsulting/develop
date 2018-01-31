@@ -41,6 +41,8 @@ class ContentBuilderCore extends Controller {
 
         $results = $this->contentSearch($data['term'], $data['categories'], $from, $size);
 
+        //dd($results);
+
         $fromNext = $from + $size;
         $fromPrev = $from - $size;
 
@@ -61,68 +63,95 @@ class ContentBuilderCore extends Controller {
 
     }
 
-    function contentSearch($term,$categories = [], $from, $size){
+    function contentSearch($term, $categories = [], $from, $size){
 
         $elasticsearch = new Elasticsearch;
         $index = 'content';
 
-        $cats = implode(',',$categories);
+        //$cats = implode(',',$categories);
 
-        if($term === null && $cats === ''){
+        //dd($term);
+
+        /*Log::debug("Dump search inputs");
+        Log::debug($term);
+        Log::debug($categories);*/
+
+        if($term === null && sizeof($categories) === 0){
+
+            Log::debug("Get ALL content");
+
             $query = '{
                 "query": {
                      "match_all": {}
                  }
              }';
         }else{
+
             $first = true;
+
+            //if a term is passed, build term portion of query
+            if($term !== null){
+
+                $q_term = '
+                "should": [
+                    { "match": { "title": "'. $term .'" }},
+                    { "match": { "description": "'. $term .'" }},
+                    { "match": { "body": "'. $term .'" }},
+                    { "match": { "tags": "'. $term .'" }}
+                ]';
+                
+                $first = false;
+            }else{
+                $q_term = '';
+            }
+            
+            
+            //if a term is passed, build term portion of query
+            if(sizeof($categories) !== 0){ //category only
+
+                $q_cat = '';
+                if(!$first){
+                    $q_cat .= ',';
+                }
+                $q_cat .= '"filter": [';
+
+                $first_cat = true;
+                foreach($categories as $category){
+
+                    if($first_cat){
+                        $first_cat = false;
+                    }else{
+                        $q_cat .= ',';
+                    }
+                    $q_cat .= '{ "match": { "categories": "' . $category . '" }}';
+                    
+                }
+                
+                $q_cat .= ']';
+
+            }else{
+                $q_cat = '';
+            }
 
             $query = '{
                 "query": {
                     "bool": {
-                        "must": [';
-            
-            if($term !== null){
-                $first = false;
-                $query = $query . '
-                {
-                    "query_string" : {
-                        "query":    "*' . $term . '*",
-                        "fields": [ "title", "description","body","tags" ]
+                        ' . $q_term .
+                        $q_cat .'
                     }
-                }';    
-            }
-
-            if($cats !== ""){
-
-                if(!$first){
-                    $query = $query . ',';
                 }
-
-                $query = $query . '
-                    {
-                        "match": {
-                            "categories":  "*' . $cats . '*"
-                        }
-                    }'; 
-
-            }
-
-            $query = $query . '
-                            ]
-                        }
-                    }
-                }';
-
+            }';
         }
 
-
+        Log::debug("Query String---------------------------------------------------");
+        Log::debug($query);
 
         $success = false;
 
         try {
             $output = $elasticsearch->search($index, $query, $from, $size);
             $success = true;
+            Log::debug("Elastic search success---------------------------------------------------");
         } catch (\ErrorException $e) {
             Log::error("Unable to perform search: " . $e->getMessage());
             
@@ -144,11 +173,13 @@ class ContentBuilderCore extends Controller {
     
             foreach ($hits as $hit) {
     
-                $content = Content::find($hit->_id);
-                $content->tags = $this->get_tags($content);
-                $content->categories = $content->categories();
+                //$content = Content::find($hit->_id);
+                //$content->tags = $this->get_tags($content);
+                //$content->categories = $content->categories();
+
+                //$hit->tags = explode(',',$hit->tags);
     
-                $searchOutput['results'][] = $content;
+                $searchOutput['results'][] = $hit->_source;
             }
         } else {
             $searchOutput = false;
@@ -214,6 +245,8 @@ class ContentBuilderCore extends Controller {
 
         }
 
+
+
         return view('eon.content-builder::content.edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }
@@ -266,8 +299,8 @@ class ContentBuilderCore extends Controller {
             'content_id' => $content_id,
             'categories' => $categories,
             'assets' => $assets,
-            'breadcrumbs' => $breadcrumbs]
-        );
+            'breadcrumbs' => $breadcrumbs
+        ]);
 
     }
 
