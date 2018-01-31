@@ -59,6 +59,7 @@ class ExportsController extends Controller {
                 'margin-bottom' => 10,
                 'margin-left' => 10,
                     //'javascript-delay' => 2000,
+                'use-xserver',
             ];
 
             $pdf->setOptions($globalOptions);
