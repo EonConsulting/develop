@@ -50,6 +50,7 @@
         
         var selected_course = "";
         var calendarIsInitialized = false;
+        var events = [];
         
         var dataCourses = function(callback) {
             $.ajax({
@@ -121,7 +122,7 @@
             }
         }
         
-        function prepareTimelineForm(start, end)
+        function prepareTimelineForm(id, title, start, end, event_type, is_global)
         {
             // prepare the datetimepickers
             $('#dt_from').datetimepicker();
@@ -134,15 +135,24 @@
             $("#dt_to").on("dp.change", function (e) {
                 $('#dt_from').data("DateTimePicker").maxDate(e.date);
             });
-
-            // set the dates according to what was selected
-            $("#dt_from").data("DateTimePicker").date(start);
-            $("#dt_to").data("DateTimePicker").date(end);
             
-            // reset the fields
-            $("#title").val('');
-            $("#event_type").val($("#event_type option:first").val());
-            $("#is_global").prop('checked', false);
+            // set the fields
+            if (id > 0)
+            {
+                // existing record
+                $("#event_id").val(id);
+                $("#title").val(title);
+                $("#event_type").val(event_type).change();
+                $("#is_global").prop('checked', !!parseInt(is_global));
+            } else {
+                // new record
+                $("#title").val('');
+                $("#event_type").val($("#event_type option:first").val());
+                $("#is_global").prop('checked', false);
+            }
+            // set the dates according to what was selected
+            $("#dt_from").data("DateTimePicker").date(new Date(start));
+            $("#dt_to").data("DateTimePicker").date(new Date(end));
         }
         
         function saveTimelineEvent(){
@@ -153,10 +163,11 @@
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
                 data: {
+                    id: $("#event_id").val(),
                     title: $("#title").val(),
-                    url: $("#url").val(),
-                    start: $("#dt_from").data("DateTimePicker").date().format('YYYY-MM-DD hh:mm:ss'),
-                    end: $("#dt_to").data("DateTimePicker").date().format('YYYY-MM-DD hh:mm:ss'),
+                    //url: $("#url").val(),
+                    start: $("#dt_from").data("DateTimePicker").date().format('YYYY-MM-DD HH:mm:ss'),
+                    end: $("#dt_to").data("DateTimePicker").date().format('YYYY-MM-DD HH:mm:ss'),
                     is_global: ($("#is_global").is(":checked")) ? 1 : 0,
                     type: $("#event_type").val(),
                     course_id: selected_course
@@ -197,7 +208,7 @@
                 selectHelper: true,
                 select: function(start, end) {
                     $('#editTimelineModal').modal('show');  
-                    prepareTimelineForm(start, end);
+                    prepareTimelineForm(id, title, start, end, event_type, is_global);
                     $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
                   /*  
                   var title = prompt('Event Title:');
@@ -227,16 +238,18 @@
                         },
                         statusCode: {
                             200: function (data) { //success
-                                var events = [];
+                                events = [];
                                 $.each(data, function(idx, obj) {
                                     var _item = {
+                                        id: obj['id'],
                                         title: obj['title'],
                                         start: obj['start'], // will be parsed
                                         end: obj['end'], // will be parsed
                                         type: obj['type'],
+                                        is_global: obj['is_global'],
                                         backgroundColor: getFillColor(obj['type']),
-                                        borderColor: getFillColor(obj['type']),
-                                        url: obj['url']
+                                        borderColor: getFillColor(obj['type'])
+                                        //url: obj['url']
                                     }
                                     events.push(_item);
                                 });
@@ -253,6 +266,14 @@
                     }).error(function (req, status, error) {
                         return [];
                     });
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+                    $('#editTimelineModal').modal('show');  
+                    // we store the dataset in memory in events objects
+                    var ev = _.head(_.filter(events, _.iteratee({'id': calEvent.id})));
+                    prepareTimelineForm(ev.id, ev.title, ev.start, 
+                        ev.end, ev.type, ev.is_global);
+                    $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
                 }
             });
         };
@@ -273,11 +294,8 @@
             <form>
                 <div class="form-group">
                     <label for="title">Title</label>
+                    <input type="hidden" id="event_id">
                     <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Enter title">
-                </div>
-                <div class="form-group">
-                    <label for="url">URL</label>
-                    <input type="text" class="form-control" id="url" aria-describedby="url" placeholder="Enter url (if any)">
                 </div>
                 <div class="form-group">
                     <div class="container">
