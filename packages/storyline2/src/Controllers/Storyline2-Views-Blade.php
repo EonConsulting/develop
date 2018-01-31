@@ -93,7 +93,7 @@ class Storyline2ViewsBlade extends BaseController {
     }
     
 
-    public function makeList($list, $number = '')
+   /* public function makeList($list, $number = '')
     {
         $result = '<ul>';
         $count = 0;
@@ -116,7 +116,7 @@ class Storyline2ViewsBlade extends BaseController {
         $result = $result . '</ul>';
 
         return $result;
-    }
+    }*/
 
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}
@@ -127,9 +127,9 @@ class Storyline2ViewsBlade extends BaseController {
      * @param $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($course) {
+    public function edit($course_id) {
         
-        $course = Course::find($course);
+        $course = Course::find($course_id);
         $course['template'] = ContentTemplates::find($course->template_id);
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
@@ -192,6 +192,7 @@ class Storyline2ViewsBlade extends BaseController {
         return view('eon.storyline2::lecturer.edit', [
             'course' => $course,
             'contents' => $contents,
+            'course_id' => $course_id,
             'storyline_id' => $storyline_id,
             'categories' => $categories,
             'assets' => $assets,

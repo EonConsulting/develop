@@ -274,6 +274,14 @@
                     prepareTimelineForm(ev.id, ev.title, ev.start, 
                         ev.end, ev.type, ev.is_global);
                     $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
+                },
+                loading: function(isLoading, view){
+                    if (isLoading){
+                        // kenny's preloader
+                        show_pre_loader();
+                    } else {
+                        hide_pre_loader();
+                    }
                 }
             });
         };

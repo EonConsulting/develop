@@ -16,6 +16,12 @@ var content_id = "";
 const selector = '.resizer';
 var previous_node = "";
 
+//Search Variables
+var current_result = -1;
+var p_result = 0;
+var search_results = null;
+var search = false;
+
 //Dialogue Insertion Point -->
 var config = {
     extraPlugins: 'dialog',
@@ -353,6 +359,8 @@ function populateContentForm(data) {
         }
 
         
+    } else {
+        $("#content-id").val('');
     }
 
     if(debug) console.log(data);
@@ -390,13 +398,13 @@ function getProgressTopics(data) {
 }
 
 function getContent(id) {
-
+    
     if(debug) console.log("getContent called");
 
     var item_id = id;
     if(debug) console.log(item_id);
     actionUrl = base_url + "/storyline2/item-content/" + item_id;
-
+    show_pre_loader();
     $.ajax({
         method: "GET",
         url: actionUrl,
@@ -407,6 +415,7 @@ function getContent(id) {
         statusCode: {
             200: function (data) { //success
                 populateContentForm(data);
+                hide_pre_loader();
             },
             400: function () { //bad request
 
@@ -432,7 +441,7 @@ function save_content_to_item(){
 
     if(validation() === true) {
 
-        actionUrl = base_url + "/content/store";
+        actionUrl = base_url + "/storyline2/save-item-content/" + item_id;
 
         $.ajax({
             method: "POST",
@@ -751,6 +760,81 @@ function highlightSearch() {
 
 }
 
+function next_result() {
+    current_result++;
+    $(tree_id).jstree("deselect_all");
+    $(tree_id).jstree('select_node', search_results[current_result]['item_id']);
+    update_search_numbers();
+    check_search_buttons();
+}
+
+function prev_result(){
+    current_result--;
+    $(tree_id).jstree("deselect_all");
+    $(tree_id).jstree('select_node', search_results[current_result]['item_id']);
+    update_search_numbers();
+    check_search_buttons();
+}
+
+function update_search_numbers(){
+    var current = current_result+1;
+    var total = search_results.length;
+    $('#search_numbers').html(current + ' / ' + total);
+}
+
+function check_search_buttons(){
+    if(current_result === (search_results.length-1)){
+        $('#next-result').addClass('disabled');
+    }else{
+        $('#next-result').removeClass('disabled');
+    }
+
+    if(current_result === 0){
+        $('#prev-result').addClass('disabled');
+    }else{
+        $('#prev-result').removeClass('disabled');
+    }
+}
+
+function search_storyline(term){
+    current_result = -1;
+    console.log(term);
+
+    var actionUrl = base_url + "/storyline2/search-content";
+
+    var data = {
+        'from': 0,
+        'size': 500,
+        'term': term,
+        'course': course_id
+    };
+
+    $.ajax({
+        method: "POST",
+        url: actionUrl,
+        data: JSON.stringify(data),
+        contentType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        },
+        statusCode: {
+            200: function (data) { //success
+                console.log(data);
+                search_results = data['results'];
+                next_result();
+            },
+            400: function () { //bad request
+
+            },
+            500: function () { //server kakked
+
+            }
+        }
+    }).error(function (req, status, error) {
+        alert(error);
+    });
+}
+
 
 //Common functions-------------------------------------------
 
@@ -801,7 +885,7 @@ $(document).on("click", ".import-asset", function () {
     $asset_id = $(this).data("asset-id");
     importAsset($asset_id);
 });
-
+/*
 $(document).on("keyup", '#q', function () {
     $("#tree").jstree("open_all");
     var that = this, $allListElements = $('ul.jstree-children > li');
@@ -813,6 +897,18 @@ $(document).on("keyup", '#q', function () {
     $matchingListElements.show();
     //$matchingListElements.addClass('highlighted');
 });
+*/
+
+$(document).on("click", '#search', function () {
+
+    var term = $('#q').val();
+
+    if(term.length > 3){
+        search_storyline(term);
+    }
+    
+});
+
 
 $(document).on('click','.white-b',function(){
     $("#whiteModal").modal();
@@ -979,4 +1075,12 @@ $(document).on('keyup', "#content-tags", function(){
     validate_tags();
     saved = false;
     check_save();
+});
+
+$(document).on('click', '#next-result', function(){
+    next_result();
+});
+
+$(document).on('click', '#prev-result', function(){
+    prev_result();
 });

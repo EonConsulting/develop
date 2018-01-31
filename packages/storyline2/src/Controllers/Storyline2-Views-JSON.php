@@ -212,7 +212,7 @@ class Storyline2ViewsJSON extends BaseController {
                 
             ];
 
-            if($node['contents']){
+            if($withcontent){
                 $temp['body'] = $node['contents']['body'];
                 $temp['title'] = $node['contents']['title'];
             }else{
@@ -273,7 +273,7 @@ class Storyline2ViewsJSON extends BaseController {
             'name' => $text,
             'storyline_id' => $parent->storyline_id,
             'parent_id' => $parent_id,
-            'root_parent' => $root_parent
+            'root_parent' => $parent->root_parent
         ];
 
         $new = StorylineItem::create($new_details);
@@ -317,17 +317,22 @@ class Storyline2ViewsJSON extends BaseController {
         $parentId = (int) $data['node']['parent'];
         $itemId = (int) $data['node']['id'];
         $position = (int) $data['position'];
-        $old_position = (int) $data['old_position'];
-        $parent = StorylineItem::find($parentId);
-        $decendants = $parent->getImmediateDescendants();
-        $num_children = count($decendants);
         $node = StorylineItem::find($itemId);
 
+        if($data['node']['parent'] === "#"){
+            $parent = StorylineItem::find($node->root_parent);
+        }else{
+            $parent = StorylineItem::find($parentId);
+        }
+        
+        $decendants = $parent->getImmediateDescendants();
+        $num_children = count($decendants);
+        
         if($num_children === 0 || $position === 0){
             $msg = $node->makeFirstChildOf($parent) ? "Made First Child of Parent" : "Failure";
         } else {
 
-            if($position === $num_children-1){
+            if($position === $num_children){
                 $msg = $node->makeLastChildOf($parent) ? "Made Last Child of Parent" : "Failure";
             }else {
                 $msg = $node->makeLastChildOf($parent);

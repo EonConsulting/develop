@@ -170,7 +170,7 @@
 <script>
 
 $from = 0;
-$size = 10;
+$size = 12;
 
 function search(){
 
@@ -233,29 +233,33 @@ $(document).ready(function () {
     search();
 
     $(document).on("click", ".btn-prev-page", function(){
-        $from -= 10;
+        $from -= $size;
         search();
     });
 
     $(document).on("click", ".btn-next-page", function(){
-        $from += 10;
+        $from += $size;
         search();
     });
 
     $(document).on("change", ".cat-btn", function(){
+        $from = 0;
         search();
     });
 
     $(document).on("click", ".btn-clear", function(){
+        $from = 0;
         $('.cat-btn').prop("checked", false);
         search();
     });
 
     $("#btnSearch").on("click", function () {
+        $from = 0;
         search();
     });
 
     $("#btnReset").on("click", function () {
+        $from = 0;
         $('.cat-btn').prop("checked", false);
         $("#searchterm").val("");
         search();
