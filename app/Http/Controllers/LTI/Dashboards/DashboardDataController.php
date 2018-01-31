@@ -193,17 +193,36 @@ class DashboardDataController extends LTIBaseController {
             $is_global = ($role == "Instructor") ? $data["is_global"] : 0;
             
             $new_event = [
+                "id" => $data["id"],
                 "start" => $data["start"],
                 "end" => $data["end"],
                 "user_id" => auth()->user()->id,
                 "course_id" => $data["course_id"],
                 "is_global" => $is_global,
                 "title" => $data["title"],
-                "type" => $data["type"],
-                "url" => $data["url"]
+                "type" => $data["type"]
+                //"url" => $data["url"]
             ];
             
-            $record = TimelineEvent::create($new_event);
+            if ($new_event["id"] > 0)
+            {
+                // update
+                $record = TimelineEvent::find($new_event["id"]);
+                
+                $record->start = $new_event["start"];
+                $record->end = $new_event["end"];
+                $record->user_id = $new_event["user_id"];
+                $record->course_id = $new_event["course_id"];
+                $record->is_global = $new_event["is_global"];
+                $record->title = $new_event["title"];
+                $record->type = $new_event["type"];
+                
+                $record->save();
+            } else {
+                // insert
+                $record = TimelineEvent::create($new_event);
+            }
+            
             if ($record)
             {
                 return response('Created', 201);
