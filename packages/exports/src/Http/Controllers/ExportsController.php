@@ -41,6 +41,7 @@ class ExportsController extends Controller {
             $pdf->setOptions($globalOptions);
         } else {
             $pdf = new Pdf([
+                'binary' => $binary,
                 'commandOptions' => array(
                     'enableXvfb' => true,
                     // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
