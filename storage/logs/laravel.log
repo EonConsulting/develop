@@ -1,0 +1,45 @@
+[2018-01-29 21:33:17] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:33:17] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "statistics",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:33:17] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-01-29 21:36:33] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:36:33] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "disabled",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:36:33] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-01-29 21:36:43] local.DEBUG: Query String---------------------------------------------------  
+[2018-01-29 21:36:43] local.DEBUG: {
+                "query": {
+                    "bool": {
+                        
+                "must": {
+                    "multi_match": {
+                        "query" : "statistics",
+                        "fields" : ["title","description","body","tags"]
+                    }
+                },"filter": [{ "match": { "courses": "59" }}]
+                    }
+                }
+            }  
+[2018-01-29 21:36:43] local.DEBUG: Elastic search success---------------------------------------------------  

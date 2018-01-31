@@ -93,7 +93,7 @@ class Storyline2ViewsBlade extends BaseController {
     }
     
 
-    public function makeList($list, $number = '')
+   /* public function makeList($list, $number = '')
     {
         $result = '<ul>';
         $count = 0;
@@ -116,7 +116,7 @@ class Storyline2ViewsBlade extends BaseController {
         $result = $result . '</ul>';
 
         return $result;
-    }
+    }*/
 
     public function compare($a,$b){
         if($a['lft'] == $b['lft']){return 0;}

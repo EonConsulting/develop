@@ -362,9 +362,9 @@ Storyline Student Single
     <span class="search-container">
         <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
         <a href="#" class="btn btn-default" id="search"><i class="fa fa-search"></i></a>
-        <a href="#" class="btn btn-default" id="prev-result"><i class="fa fa-caret-left"></i></a>
+        <a href="#" class="btn btn-default disabled" id="prev-result"><i class="fa fa-caret-left"></i></a>
         <span id="search_numbers">0 / 0</span>
-        <a href="#" class="btn btn-default" id="next-result"><i class="fa fa-caret-right"></i></a>
+        <a href="#" class="btn btn-default disabled" id="next-result"><i class="fa fa-caret-right"></i></a>
     </span>
     <span class="tools-divider"></span>
     <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i><span class="hidden-xs hidden-sm"> Preview</span></a></span>
