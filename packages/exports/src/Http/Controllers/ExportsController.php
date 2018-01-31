@@ -65,6 +65,10 @@ class ExportsController extends Controller {
 
         $view = view('exports::module.modulepdf', ['items' => $items, 'course' => $course]);
         $contents = $view->render();
+        
+        echo $contents;
+        
+        exit();
 
         $pdf = $this->wkhtml();
 
@@ -87,8 +91,10 @@ class ExportsController extends Controller {
             'file' => $file,
             'res' => $res
         );
+        
+        var_dump();
 
-        return \Response::json($response);
+        //return \Response::json($response);
     }
 
     public function downloadPDF($courseId) {
