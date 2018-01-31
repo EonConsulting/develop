@@ -398,13 +398,13 @@ function getProgressTopics(data) {
 }
 
 function getContent(id) {
-
+    
     if(debug) console.log("getContent called");
 
     var item_id = id;
     if(debug) console.log(item_id);
     actionUrl = base_url + "/storyline2/item-content/" + item_id;
-
+    show_pre_loader();
     $.ajax({
         method: "GET",
         url: actionUrl,
@@ -415,6 +415,7 @@ function getContent(id) {
         statusCode: {
             200: function (data) { //success
                 populateContentForm(data);
+                hide_pre_loader();
             },
             400: function () { //bad request
 
