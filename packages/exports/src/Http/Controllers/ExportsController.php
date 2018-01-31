@@ -18,9 +18,9 @@ class ExportsController extends Controller {
 
     public function wkhtml() {
         $host = request()->getHttpHost();
-        
+
         $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
-        
+
         if ($host === 'localhost:8000') {
             $pdf = new Pdf([
                 'commandOptions' => [
@@ -28,7 +28,7 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
-             
+
             $globalOptions = [
                 'binary' => $binary,
                 'no-outline', // Make Chrome not complain
@@ -39,13 +39,28 @@ class ExportsController extends Controller {
                 'javascript-delay' => 2000,
             ];
             $pdf->setOptions($globalOptions);
-           
         } else {
+            $pdf = new Pdf([
+                'commandOptions' => array(
+                    'enableXvfb' => true,
+                    // Optional: Set your path to xvfb-run. Default is just 'xvfb-run'.
+                    'xvfbRunBinary' => '/usr/bin/xvfb-run',
+                    // Optional: Set options for xfvb-run. The following defaults are used.
+                    'xvfbRunOptions' => '--auto-servernum',
+                ),
+            ]);
 
-            $pdf = new Pdf;
-            $pdf->setOptions(
-                    config('html-to-pdf')
-            );
+            $globalOptions = [
+                'binary' => $binary,
+                'no-outline', // Make Chrome not complain
+                'margin-top' => 10,
+                'margin-right' => 10,
+                'margin-bottom' => 10,
+                'margin-left' => 10,
+                    //'javascript-delay' => 2000,
+            ];
+
+            $pdf->setOptions($globalOptions);
         }
 
         return $pdf;
@@ -53,7 +68,7 @@ class ExportsController extends Controller {
 
     public function modulePDF($courseId) {
         //ini_set('memory_limit', '2048M');
-        set_time_limit(60*5);
+        set_time_limit(60 * 5);
         $course = Course::find($courseId);
         $Storyline2JSON = new Storyline2JSON;
         $storyline_id = $course->latest_storyline()->id;
