@@ -128,6 +128,7 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
         Route::match(['get'], '/data-assessment-results/{course_id}/{student_id}/{assessment_type}', ['as' => 'lti.dashboards.data-assessment-results', 'uses' => 'DashboardDataController@data_assessment_results']);
         Route::match(['get'], '/data-progression/{course_id}/{student_id}', ['as' => 'lti.dashboards.data-progression', 'uses' => 'DashboardDataController@data_progression']);
         Route::match(['get'], '/data-timeline/', ['as' => 'lti.dashboards.data-timeline', 'uses' => 'DashboardDataController@filter_timeline_events']);
+        Route::match(['post'], '/data-timeline', ['as' => 'lti.dashboards.data-timeline-store', 'uses' => 'DashboardDataController@store_timeline_event']);
     });
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);
