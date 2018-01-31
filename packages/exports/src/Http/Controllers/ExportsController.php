@@ -86,10 +86,8 @@ class ExportsController extends Controller {
             'file' => $file,
             'res' => $res
         );
-        
-        var_dump();
 
-        //return \Response::json($response);
+        return \Response::json($response);
     }
 
     public function downloadPDF($courseId) {
