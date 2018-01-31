@@ -65,11 +65,6 @@ class ExportsController extends Controller {
 
         $view = view('exports::module.modulepdf', ['items' => $items, 'course' => $course]);
         $contents = $view->render();
-        
-        echo $contents;
-        
-        exit();
-
         $pdf = $this->wkhtml();
 
         $pdf->addPage($contents);
