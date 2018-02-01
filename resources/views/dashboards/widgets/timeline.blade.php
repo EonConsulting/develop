@@ -124,6 +124,8 @@
         
         function prepareTimelineForm(id, title, start, end, event_type, is_global)
         {
+            console.log(start);
+            console.log(end);
             // prepare the datetimepickers
             $('#dt_from').datetimepicker();
             $('#dt_to').datetimepicker({
@@ -144,15 +146,18 @@
                 $("#title").val(title);
                 $("#event_type").val(event_type).change();
                 $("#is_global").prop('checked', !!parseInt(is_global));
+                // set the dates according to what was selected
+                $("#dt_from").data("DateTimePicker").date(new Date(start));
+                $("#dt_to").data("DateTimePicker").date(new Date(end));
             } else {
                 // new record
                 $("#title").val('');
                 $("#event_type").val($("#event_type option:first").val());
                 $("#is_global").prop('checked', false);
+                // set the dates according to what was selected
+                $("#dt_from").data("DateTimePicker").date(start);
+                $("#dt_to").data("DateTimePicker").date(end);
             }
-            // set the dates according to what was selected
-            $("#dt_from").data("DateTimePicker").date(new Date(start));
-            $("#dt_to").data("DateTimePicker").date(new Date(end));
         }
         
         function saveTimelineEvent(){
@@ -208,21 +213,9 @@
                 selectHelper: true,
                 select: function(start, end) {
                     $('#editTimelineModal').modal('show');  
-                    prepareTimelineForm(id, title, start, end, event_type, is_global);
+                    prepareTimelineForm(null, null, start, end, null, null);
                     $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
-                  /*  
-                  var title = prompt('Event Title:');
-                  var eventData;
-                  if (title) {
-                    eventData = {
-                      title: title,
-                      start: start,
-                      end: end
-                    };
-                    $('#calendar-timeline').fullCalendar('renderEvent', eventData, true); // stick? = true
-                  }
-                  */
-                  $('#calendar-timeline').fullCalendar('unselect');
+                    $('#calendar-timeline').fullCalendar('unselect');
                 },
                 events: function(start, end, timezone, callback) {
                     $.ajax({

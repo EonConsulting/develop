@@ -73,4 +73,6 @@ class OutcomeController extends Controller
     {
         return view('tao-client::return');
     }
+
+
 }
