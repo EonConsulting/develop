@@ -2,22 +2,46 @@
 <html lang="en">
 <head>
 
-    <title>Failed to launch tao test</title>
+    <title>Assessment Completed</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <style>
+        .text {
+            font-size: 18pt;
+            color: #999;
+            font-weight: bold;
+        }
+
+        .text small {
+            font-size: 14pt;
+            font-weight: normal;
+        }
+        
+        .icon {
+            font-size: 54pt;
+            color: #fb7217;
+        }
+
+        .message {
+            margin-top: 15vh;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body id="app-body">
 
-<div class="container">
-    <div class="row">
-        <div class="alert alert-success" role="alert">Thank you for completing your test.!</div>
-    </div>
+<div class="message">
+        <div class="icon"><i class="fa fa-thumbs-up"></i></div>
+        <div class="text">
+            You have completed this assessment!<br>
+            <small>Your results will be available shortly.</small>
+        </div>
 </div>
 
 <!-- Latest compiled and minified JavaScript -->
