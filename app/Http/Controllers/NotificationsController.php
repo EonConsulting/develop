@@ -15,11 +15,7 @@ class NotificationsController {
      * @return type
      */
     
-    public function supportMail(Request $data) {
-        
-        var_dump(env('SUPPORT_MAIL'));
-        exit();
-               
+    public function supportMail(Request $data) {             
         Mail::to(env('SUPPORT_MAIL'))->send(new SupportMail($data));
 
         $response = array(
