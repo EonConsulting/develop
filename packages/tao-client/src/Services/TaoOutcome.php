@@ -92,7 +92,7 @@ class TaoOutcome
      *
      * @return string
      */
-    public function getResult()
+    public function getResult() // @TODO should we return score out of a 100 or just 0.?
     {
         return array_get($this->response, 'imsx_POXBody.replaceResultRequest.resultRecord.result.resultScore.textString');
     }

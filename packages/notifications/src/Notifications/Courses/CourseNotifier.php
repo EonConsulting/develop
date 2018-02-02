@@ -89,7 +89,7 @@ class CourseNotifier extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return NexmoMessage
      */
-    public function toNexmo($notifiable)
+    public function toNexmo($notifiable) // @TODO add the text for a sms message
     {
         return (new NexmoMessage)
             ->content('Your SMS message content!');

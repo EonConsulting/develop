@@ -381,7 +381,7 @@
 
             </div>
 
-        <div class="content-body" id="body"></div>
+            <div class="content-body" id="body" data-current-item-id=""></div>
     
         </div>
 
@@ -582,6 +582,8 @@
         button.addClass('active-menu');
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+        $('#body').data('current-item-id', current_node.data('item-id'));
     }
 
     function saveProgress() {
