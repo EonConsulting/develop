@@ -72,8 +72,8 @@ return [
       |
      */
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'dont-reply@unisaonline.net'),
-        'name' => env('MAIL_FROM_NAME', 'Unisa Online'),
+        'address' => env('MAIL_FROM_ADDRESS', 'reggiestain@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'reggiestain@gmail.com'),
     ],
     /*
       |--------------------------------------------------------------------------
