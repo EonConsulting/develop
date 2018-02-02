@@ -8,6 +8,7 @@ use EONConsulting\TaoClient\Services\TaoOutcome;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use EONConsulting\TaoClient\Exceptions\TaoOutcomeException;
 use EONConsulting\TaoClient\Jobs\TaoResultJob;
+use EONConsulting\Notifications\Notifications\TaoOutcome as NotificationTaoOutcome;
 use Auth;
 use Log;
 
@@ -58,6 +59,13 @@ class OutcomeController extends Controller
         $result->score = $outcome->getResult();
 
         $result->save();
+
+        if( $user = $result->user)
+        {
+            $user->notify(
+                new NotificationTaoOutcome($outcome->getResult())
+            );
+        }
 
         Log::info('Received outcome for reference ' . $source_id);
 
