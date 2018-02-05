@@ -6,6 +6,7 @@
 [2018-01-31 22:36:40] local.ERROR: Unable to perform search: Undefined property: stdClass::$hits  
 [2018-01-31 22:41:16] local.DEBUG: Attempting an LTI Login....  
 [2018-01-31 22:41:16] local.DEBUG: Instructor  
+
 [2018-02-05 03:11:29] local.DEBUG: Attempting an LTI Login....  
 [2018-02-05 03:11:29] local.DEBUG: Instructor  
 [2018-02-05 13:28:01] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.audits' doesn't exist (SQL: select count(*) as aggregate from `audits` where `audits`.`auditable_id` = 2 and `audits`.`auditable_id` is not null and `audits`.`auditable_type` = EONConsulting\ContentBuilder\Models\Content) {"userId":1,"email":"jacqueline.nel@eon.co.za","exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.audits' doesn't exist (SQL: select count(*) as aggregate from `audits` where `audits`.`auditable_id` = 2 and `audits`.`auditable_id` is not null and `audits`.`auditable_type` = EONConsulting\\ContentBuilder\\Models\\Content) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.audits' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.audits' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
@@ -107,11 +108,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)
@@ -203,11 +207,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)
@@ -299,11 +306,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)
@@ -395,11 +405,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)
