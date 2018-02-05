@@ -313,7 +313,6 @@ Storyline Student Single
         border-style: solid;
         padding: 5px;
         min-height: 35px;
-        overflow-y: auto;
     }
 
     .tools .sp {
@@ -366,7 +365,7 @@ Storyline Student Single
     
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <i class="fa fa-file-text"></i> File
+            <i class="fa fa-file-text"></i><span class="hidden-xs hidden-md"> File</span>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -379,18 +378,18 @@ Storyline Student Single
 
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <i class="fa fa-download"></i> Import
+            <i class="fa fa-download"></i><span class="hidden-xs hidden-md"> Import</span>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><a href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Content</a></li>
-            <li><a href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Asset</a></li>
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></li>
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></li>
         </ul>
     </div>
 
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <i class="fa fa-wrench"></i> Tools
+            <i class="fa fa-wrench"></i><span class="hidden-xs hidden-md"> Tools</span>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
