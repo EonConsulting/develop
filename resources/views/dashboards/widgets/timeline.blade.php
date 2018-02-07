@@ -198,7 +198,6 @@
                 title: "Are you sure?",
                 text: "An event cannot be recovered once it is deleted",
                 type: "warning",
-                buttons: true,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -216,12 +215,15 @@
                             id: $("#event_id").val(),
                         },
                         statusCode: {
-                            201: function () { //created
+                            200: function () { //created
                                 $('#editTimelineModal').modal('hide');  
                                 $('#calendar-timeline').fullCalendar("refetchEvents");
                             },
                             400: function () { //bad request
-                                console.log("Bad request");
+                                swal("Request cannot be processed, please try again");
+                            },
+                            404: function () { //bad request
+                                swal("This event can only be deleted by it's owner");
                             },
                             500: function () { //server kakked
                                 console.log("Server error");
