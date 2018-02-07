@@ -194,3 +194,532 @@
 #62 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 {main}
 "} 
+[2018-02-07 11:39:31] local.ERROR: Not enough arguments (missing: "name"). {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Not enough arguments (missing: \"name\"). at C:\\www\\develop\\vendor\\symfony\\console\\Input\\Input.php:76)
+[stacktrace]
+#0 C:\\www\\develop\\vendor\\symfony\\console\\Command\\Command.php(247): Symfony\\Component\\Console\\Input\\Input->validate()
+#1 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#2 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\www\\develop\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2018-02-07 11:50:56] local.ERROR: SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) {"exception":"[object] (Doctrine\\DBAL\\Driver\\PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) at C:\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:47, PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) at C:\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:43)
+[stacktrace]
+#0 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(64): Doctrine\\DBAL\\Driver\\PDOConnection->__construct('mysql:host=127....', 'homestead', 'secret', Array)
+#1 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(43): Illuminate\\Database\\Connectors\\Connector->createPdoConnection('mysql:host=127....', 'homestead', 'secret', Array)
+#2 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\ConnectionFactory.php(183): Illuminate\\Database\\Connectors\\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(915): call_user_func(Object(Closure))
+#6 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(940): Illuminate\\Database\\Connection->getPdo()
+#7 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(399): Illuminate\\Database\\Connection->getReadPdo()
+#8 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(325): Illuminate\\Database\\Connection->getPdoForSelect(true)
+#9 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(657): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from i...', Array)
+#10 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
+#11 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(333): Illuminate\\Database\\Connection->run('select * from i...', Array, Object(Closure))
+#12 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\MySqlBuilder.php(18): Illuminate\\Database\\Connection->select('select * from i...', Array)
+#13 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\DatabaseMigrationRepository.php(156): Illuminate\\Database\\Schema\\MySqlBuilder->hasTable('migrations')
+#14 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(545): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#15 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(96): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#16 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(62): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#17 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#18 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(29): call_user_func_array(Array, Array)
+#19 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#20 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#21 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#22 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#23 C:\\www\\develop\\vendor\\symfony\\console\\Command\\Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#25 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\www\\develop\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 {main}
+"} 
+[2018-02-07 11:50:56] local.ERROR: SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) (SQL: select * from information_schema.tables where table_schema = unisa and table_name = migrations) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) (SQL: select * from information_schema.tables where table_schema = unisa and table_name = migrations) at C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) at C:\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:47, PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'homestead'@'localhost' (using password: YES) at C:\\www\\develop\\vendor\\doctrine\\dbal\\lib\\Doctrine\\DBAL\\Driver\\PDOConnection.php:43)
+[stacktrace]
+#0 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
+#1 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(333): Illuminate\\Database\\Connection->run('select * from i...', Array, Object(Closure))
+#2 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\MySqlBuilder.php(18): Illuminate\\Database\\Connection->select('select * from i...', Array)
+#3 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\DatabaseMigrationRepository.php(156): Illuminate\\Database\\Schema\\MySqlBuilder->hasTable('migrations')
+#4 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(545): Illuminate\\Database\\Migrations\\DatabaseMigrationRepository->repositoryExists()
+#5 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(96): Illuminate\\Database\\Migrations\\Migrator->repositoryExists()
+#6 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(62): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->prepareDatabase()
+#7 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#8 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(29): call_user_func_array(Array, Array)
+#9 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#11 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#12 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#13 C:\\www\\develop\\vendor\\symfony\\console\\Command\\Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#14 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\www\\develop\\vendor\\symfony\\console\\Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\www\\develop\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 
+[2018-02-06 17:32:11] local.ERROR: Cannot declare class CreateAuditsTable, because the name is already in use {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot declare class CreateAuditsTable, because the name is already in use at /home/vagrant/code/develop/database/migrations/2018_01_25_094234_create_audits_table.php:52)
+[stacktrace]
+#0 {main}
+"} 
+[2018-02-06 17:34:23] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails (SQL: drop table if exists `content_templates`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails (SQL: drop table if exists `content_templates`) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:107, PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:105)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('drop table if e...', Array, Object(Closure))
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('drop table if e...', Array, Object(Closure))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('drop table if e...')
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->dropIfExists('content_templat...')
+#6 /home/vagrant/code/develop/database/migrations/2018_02_07_114015_drop_content_template_table.php(16): Illuminate\\Support\\Facades\\Facade::__callStatic('dropIfExists', Array)
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): DropContentTemplateTable->up()
+#8 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(DropContentTemplateTable), 'up')
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/vagrant/c...', 33, false)
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/vagrant/code/develop/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/vagrant/code/develop/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 /home/vagrant/code/develop/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 /home/vagrant/code/develop/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /home/vagrant/code/develop/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 {main}
+"} 
+[2018-02-06 17:41:09] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails (SQL: drop table if exists `content_templates`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails (SQL: drop table if exists `content_templates`) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:107, PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1217 Cannot delete or update a parent row: a foreign key constraint fails at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:105)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('drop table if e...', Array, Object(Closure))
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('drop table if e...', Array, Object(Closure))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('drop table if e...')
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->dropIfExists('content_templat...')
+#6 /home/vagrant/code/develop/database/migrations/2018_02_07_114015_drop_content_template_table.php(16): Illuminate\\Support\\Facades\\Facade::__callStatic('dropIfExists', Array)
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): DropContentTemplateTable->up()
+#8 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(DropContentTemplateTable), 'up')
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/vagrant/c...', 34, false)
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/vagrant/code/develop/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/vagrant/code/develop/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 /home/vagrant/code/develop/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 /home/vagrant/code/develop/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /home/vagrant/code/develop/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 {main}
+"} 
+[2018-02-06 17:42:35] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`unisa`.`#sql-5e5_23`, CONSTRAINT `template_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`)) (SQL: alter table `courses` add constraint `template_ibfk_1` foreign key (`template_id`) references `templates` (`id`)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`unisa`.`#sql-5e5_23`, CONSTRAINT `template_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`)) (SQL: alter table `courses` add constraint `template_ibfk_1` foreign key (`template_id`) references `templates` (`id`)) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`unisa`.`#sql-5e5_23`, CONSTRAINT `template_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`)) at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:107, PDOException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`unisa`.`#sql-5e5_23`, CONSTRAINT `template_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `templates` (`id`)) at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:105)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('alter table `co...', Array, Object(Closure))
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('alter table `co...', Array, Object(Closure))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('alter table `co...')
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(149): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->table('courses', Object(Closure))
+#6 /home/vagrant/code/develop/database/migrations/2018_02_07_114015_drop_content_template_table.php(20): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): DropContentTemplateTable->up()
+#8 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(DropContentTemplateTable), 'up')
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/vagrant/c...', 34, false)
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/vagrant/code/develop/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/vagrant/code/develop/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 /home/vagrant/code/develop/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 /home/vagrant/code/develop/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /home/vagrant/code/develop/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 {main}
+"} 
+[2018-02-06 17:43:14] local.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'template_ibfk_1'; check that column/key exists (SQL: alter table `courses` drop foreign key `template_ibfk_1`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42000): SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'template_ibfk_1'; check that column/key exists (SQL: alter table `courses` drop foreign key `template_ibfk_1`) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42000): SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'template_ibfk_1'; check that column/key exists at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:107, PDOException(code: 42000): SQLSTATE[42000]: Syntax error or access violation: 1091 Can't DROP 'template_ibfk_1'; check that column/key exists at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOStatement.php:105)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('alter table `co...', Array, Object(Closure))
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(459): Illuminate\\Database\\Connection->run('alter table `co...', Array, Object(Closure))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(86): Illuminate\\Database\\Connection->statement('alter table `co...')
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(252): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(149): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\Schema\\Builder->table('courses', Object(Closure))
+#6 /home/vagrant/code/develop/database/migrations/2018_02_07_114015_drop_content_template_table.php(20): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(359): DropContentTemplateTable->up()
+#8 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(366): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(177): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(DropContentTemplateTable), 'up')
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(146): Illuminate\\Database\\Migrations\\Migrator->runUp('/home/vagrant/c...', 34, false)
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(95): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(69): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#13 [internal function]: Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)
+#19 /home/vagrant/code/develop/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#21 /home/vagrant/code/develop/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 /home/vagrant/code/develop/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 /home/vagrant/code/develop/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /home/vagrant/code/develop/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 {main}
+"} 
+[2018-02-06 07:55:27] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 07:55:27] local.DEBUG: Instructor  
+[2018-02-06 07:55:33] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 07:55:33] local.DEBUG: Learner  
+[2018-02-06 07:55:37] local.ERROR: Unable to perform search: Undefined property: stdClass::$hits  
+[2018-02-06 07:59:08] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 07:59:08] local.DEBUG: Instructor  
+[2018-02-06 17:59:20] local.DEBUG: Get ALL content  
+[2018-02-06 17:59:20] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 17:59:20] local.DEBUG: {
+                "query": {
+                     "match_all": {}
+                 }
+             }  
+[2018-02-06 17:59:20] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 17:59:22] local.DEBUG: Get ALL content  
+[2018-02-06 17:59:22] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 17:59:22] local.DEBUG: {
+                "query": {
+                     "match_all": {}
+                 }
+             }  
+[2018-02-06 17:59:22] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:00:59] local.ERROR: Unable to perform search: Undefined property: stdClass::$hits  
+[2018-02-06 08:01:48] local.ERROR: Unable to perform search: Undefined property: stdClass::$hits  
+[2018-02-06 08:04:25] local.DEBUG: Get ALL content  
+[2018-02-06 08:04:25] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:04:25] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:04:25] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:04:25] local.ERROR: Undefined property: stdClass::$hits {"userId":1,"email":"jacqueline.nel@eon.co.za","exception":"[object] (ErrorException(code: 0): Undefined property: stdClass::$hits at /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php:89)
+[stacktrace]
+#0 /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php(89): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', '/home/vagrant/c...', 89, Array)
+#1 [internal function]: App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController->index(Object(Illuminate\\Http\\Request))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('index', Array)
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController), 'index')
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(169): Illuminate\\Routing\\Route->runController()
+#6 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(658): Illuminate\\Routing\\Route->run()
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#8 /home/vagrant/code/develop/packages/laravel-lti/src/Http/Controllers/LTIBaseController.php(88): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(131): EONConsulting\\LaravelLTI\\Http\\Controllers\\LTIBaseController->EONConsulting\\LaravelLTI\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#32 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#33 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/vagrant/code/develop/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /home/vagrant/code/develop/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 {main}
+"} 
+[2018-02-06 08:05:04] local.DEBUG: Get ALL content  
+[2018-02-06 08:05:04] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:05:04] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:05:04] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:05:04] local.ERROR: Undefined property: stdClass::$hits {"userId":1,"email":"jacqueline.nel@eon.co.za","exception":"[object] (ErrorException(code: 0): Undefined property: stdClass::$hits at /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php:89)
+[stacktrace]
+#0 /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php(89): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', '/home/vagrant/c...', 89, Array)
+#1 [internal function]: App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController->index(Object(Illuminate\\Http\\Request))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('index', Array)
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController), 'index')
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(169): Illuminate\\Routing\\Route->runController()
+#6 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(658): Illuminate\\Routing\\Route->run()
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#8 /home/vagrant/code/develop/packages/laravel-lti/src/Http/Controllers/LTIBaseController.php(88): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(131): EONConsulting\\LaravelLTI\\Http\\Controllers\\LTIBaseController->EONConsulting\\LaravelLTI\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#32 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#33 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/vagrant/code/develop/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /home/vagrant/code/develop/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 {main}
+"} 
+[2018-02-06 08:09:37] local.DEBUG: Get ALL content  
+[2018-02-06 08:09:37] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:09:37] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:09:37] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:09:37] local.ERROR: Undefined property: stdClass::$hits {"userId":1,"email":"jacqueline.nel@eon.co.za","exception":"[object] (ErrorException(code: 0): Undefined property: stdClass::$hits at /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php:89)
+[stacktrace]
+#0 /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php(89): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', '/home/vagrant/c...', 89, Array)
+#1 [internal function]: App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController->index(Object(Illuminate\\Http\\Request))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('index', Array)
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController), 'index')
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(169): Illuminate\\Routing\\Route->runController()
+#6 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(658): Illuminate\\Routing\\Route->run()
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#8 /home/vagrant/code/develop/packages/laravel-lti/src/Http/Controllers/LTIBaseController.php(88): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(131): EONConsulting\\LaravelLTI\\Http\\Controllers\\LTIBaseController->EONConsulting\\LaravelLTI\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#32 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#33 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/vagrant/code/develop/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /home/vagrant/code/develop/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 {main}
+"} 
+[2018-02-06 08:10:42] local.DEBUG: Get ALL content  
+[2018-02-06 08:10:42] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:10:42] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:10:42] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:12:31] local.ERROR: Undefined index: from {"userId":1,"email":"jacqueline.nel@eon.co.za","exception":"[object] (ErrorException(code: 0): Undefined index: from at /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php:24)
+[stacktrace]
+#0 /home/vagrant/code/develop/app/Http/Controllers/LTI/Courses/CoursesLTIController.php(24): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined index...', '/home/vagrant/c...', 24, Array)
+#1 [internal function]: App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController->index(Object(Illuminate\\Http\\Request))
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('index', Array)
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\LTI\\Courses\\CoursesLTIController), 'index')
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(169): Illuminate\\Routing\\Route->runController()
+#6 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(658): Illuminate\\Routing\\Route->run()
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#8 /home/vagrant/code/develop/packages/laravel-lti/src/Http/Controllers/LTIBaseController.php(88): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(131): EONConsulting\\LaravelLTI\\Http\\Controllers\\LTIBaseController->EONConsulting\\LaravelLTI\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#31 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#32 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#33 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/vagrant/code/develop/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /home/vagrant/code/develop/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#56 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#57 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#58 {main}
+"} 
+[2018-02-06 08:13:08] local.DEBUG: Get ALL content  
+[2018-02-06 08:13:08] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:13:08] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:13:08] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:13:24] local.DEBUG: Get ALL content  
+[2018-02-06 08:13:24] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:13:24] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:13:24] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:13:54] local.DEBUG: Get ALL content  
+[2018-02-06 08:13:54] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-06 08:13:54] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-06 08:13:54] local.DEBUG: Elastic search success---------------------------------------------------  

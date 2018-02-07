@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContentTemplates extends Model
 {
-
     protected $table = 'content_templates';
     protected $primaryKey = 'id';
     protected $fillable = ['name','file_path'];
