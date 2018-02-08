@@ -118,7 +118,7 @@
 
         <?php // if (laravel_lti()->is_instructor(auth()->user())): ?>
         <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? 'left-menu-active' : '' }}">
-            <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses') }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
+            <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses').'?from=0&size=12&searchterm=' }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                 <i class="fa fa-edit fa-lg left-menu-icon"></i>
                 <span class="menu_collapse">
                     Modules

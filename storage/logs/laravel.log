@@ -723,3 +723,74 @@
                 }
             }  
 [2018-02-06 08:13:54] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-06 08:15:52] local.ERROR: Unable to perform search: Undefined property: stdClass::$hits  
+[2018-02-06 08:18:41] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 08:18:41] local.DEBUG: Learner  
+[2018-02-06 08:18:52] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 08:18:52] local.DEBUG: Learner  
+[2018-02-06 19:16:29] local.ERROR: Class EONConsulting\Storyline2\Controllers\TemplateController does not exist {"exception":"[object] (ReflectionException(code: -1): Class EONConsulting\\Storyline2\\Controllers\\TemplateController does not exist at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php:752)
+[stacktrace]
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(752): ReflectionClass->__construct('EONConsulting\\\\S...')
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(631): Illuminate\\Container\\Container->build('EONConsulting\\\\S...')
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Container/Container.php(586): Illuminate\\Container\\Container->resolve('EONConsulting\\\\S...', Array)
+#3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(732): Illuminate\\Container\\Container->make('EONConsulting\\\\S...', Array)
+#4 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(226): Illuminate\\Foundation\\Application->make('EONConsulting\\\\S...')
+#5 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(796): Illuminate\\Routing\\Route->getController()
+#6 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Route.php(757): Illuminate\\Routing\\Route->controllerMiddleware()
+#7 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(671): Illuminate\\Routing\\Route->gatherMiddleware()
+#8 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(651): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#9 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#10 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#11 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#12 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#13 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /home/vagrant/code/develop/vendor/barryvdh/laravel-debugbar/src/Middleware/InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/vagrant/code/develop/vendor/fideloper/proxy/src/TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#34 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#35 /home/vagrant/code/develop/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#36 {main}
+"} 
+[2018-02-06 19:16:29] local.ERROR: Cannot declare class EONConsulting\Storyline2\Controllers\Storyline2Core, because the name is already in use {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot declare class EONConsulting\\Storyline2\\Controllers\\Storyline2Core, because the name is already in use at /home/vagrant/code/develop/packages/storyline2/src/Controllers/TemplateController.php:24)
+[stacktrace]
+#0 {main}
+"} 
+[2018-02-06 09:16:52] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 09:16:52] local.DEBUG: Learner  
+[2018-02-06 09:17:44] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 09:17:45] local.DEBUG: Instructor  
+[2018-02-06 10:46:06] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 10:46:06] local.DEBUG: Instructor  
+[2018-02-06 13:47:25] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 13:47:25] local.DEBUG: Instructor  
+[2018-02-06 16:28:02] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 16:28:02] local.DEBUG: Instructor  
+[2018-02-06 16:30:45] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 16:30:45] local.DEBUG: Learner  
+[2018-02-06 16:30:49] local.DEBUG: Attempting an LTI Login....  
+[2018-02-06 16:30:49] local.DEBUG: Learner  
+[2018-02-07 02:31:13] local.DEBUG: Get ALL content  
+[2018-02-07 02:31:13] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-07 02:31:13] local.DEBUG: {
+                "query": {
+                     "match_all": {}
+                 }
+             }  
+[2018-02-07 02:31:13] local.DEBUG: Elastic search success---------------------------------------------------  

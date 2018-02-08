@@ -13,7 +13,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
    
     Route::group(['middleware' => ['auth','instructor']], function() {
 
-        /*
+        /**
          * ---------------------------------------------
          * Storyline 2 - Core - Routes
          * ---------------------------------------------
@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         //Core Routes
         Route::get('/', 'Storyline2Core@index')->name('storyline2');
 
-        /*
+        /**
          * ---------------------------------------------
          * Storyline 2 - Views - Blade - Routes
          * ---------------------------------------------
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->name('storyline2.lecturer.edit');
 
 
-        /*
+        /**
          * ---------------------------------------------
          * Storyline 2 - Views - JSON - Routes
          * ---------------------------------------------
@@ -63,5 +63,17 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         Route::get('/set_required', 'Storyline2Core@set_required');
 
         Route::get('/preview/{course}', 'Storyline2ViewsBlade@preview')->name('storyline2.preview');
+        
+
+        /**
+         * -----------------------------------------------------
+         * Template Designer Routes
+         * -----------------------------------------------------
+         */
+
+        Route::resource('/templates', 'TemplateController');
+
+
+
     });
 });
