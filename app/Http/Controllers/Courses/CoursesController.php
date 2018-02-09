@@ -45,7 +45,7 @@ class CoursesController extends Controller
     public function edit(Request $request)
     {
         $id = (int)$request->get('id');
-        if ($request->get('text') === 'Edit Module') {
+        if ($request->get('text') === 'Module') {
             $templates = ContentTemplates::all();
             $data = Course::find($id);
             return view('lecturer.courses.edit', ['data' => $data, 'templates' => $templates]);

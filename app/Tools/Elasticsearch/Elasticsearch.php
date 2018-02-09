@@ -9,10 +9,10 @@ namespace App\Tools\Elasticsearch;
 
 class Elasticsearch
 {
-    public function search($index, $query, $from = 0, $size = 10)
+    public function search($index, $query, $from = 0, $size = 12)
     {
-        $from = $from === null ? 0 : $from;
-        $size = $size === null ? 10 : $size;
+       /* $from = $from === null ? 0 : $from;
+        $size = $size === null ? 12 : $size;*/
 
         $search = config('app.es_uri') . '/'. $index .'/_search?from=' . $from . '&size=' . $size;
         

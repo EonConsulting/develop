@@ -119,12 +119,17 @@ Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
         Route::match(['get', 'post'], '/lecturer-assess-analysis', ['as' => 'lti.dashboards.lecturer-assess-analysis', 'uses' => 'DashboardLTIController@lecturer_assess_analysis']);
         Route::match(['get', 'post'], '/mentor-stud-analysis', ['as' => 'lti.dashboards.mentor-stud-analysis', 'uses' => 'DashboardLTIController@mentor_stud_analysis']);
         Route::match(['get', 'post'], '/mentor-assess-analysis', ['as' => 'lti.dashboards.mentor-assess-analysis', 'uses' => 'DashboardLTIController@mentor_assess_analysis']);
+        Route::match(['get', 'post'], '/planning', ['as' => 'lti.dashboards.planning', 'uses' => 'DashboardLTIController@planning']);
     });
     Route::group(['namespace' => 'Data'], function() {
         Route::match(['get'], '/data-courses/', ['as' => 'lti.dashboards.data-courses', 'uses' => 'DashboardDataController@data_courses']);
         Route::match(['get'], '/data-students/{course_id}', ['as' => 'lti.dashboards.data-students', 'uses' => 'DashboardDataController@data_students']);
         Route::match(['get'], '/data-assessment-types/{course_id}/{student_id}/{assessment}', ['as' => 'lti.dashboards.data-assessment-types', 'uses' => 'DashboardDataController@data_assessment_types']);
+        Route::match(['get'], '/data-assessment-results/{course_id}/{student_id}/{assessment_type}', ['as' => 'lti.dashboards.data-assessment-results', 'uses' => 'DashboardDataController@data_assessment_results']);
         Route::match(['get'], '/data-progression/{course_id}/{student_id}', ['as' => 'lti.dashboards.data-progression', 'uses' => 'DashboardDataController@data_progression']);
+        Route::match(['get'], '/data-timeline', ['as' => 'lti.dashboards.data-timeline', 'uses' => 'DashboardDataController@filter_timeline_events']);
+        Route::match(['post'], '/data-timeline', ['as' => 'lti.dashboards.data-timeline-store', 'uses' => 'DashboardDataController@store_timeline_event']);
+        Route::match(['delete'], '/data-timeline', ['as' => 'lti.dashboards.data-timeline-delete', 'uses' => 'DashboardDataController@delete_timeline_event']);
     });
     Route::group(['namespace' => 'Users'], function () {
         Route::match(['get', 'post'], '/profile', ['as' => 'lti.users.profile', 'uses' => 'ProfileLTIController@index']);

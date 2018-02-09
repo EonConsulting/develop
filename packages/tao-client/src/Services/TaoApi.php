@@ -3,6 +3,8 @@
 namespace EONConsulting\TaoClient\Services;
 
 use GuzzleHttp\Client;
+use EONConsulting\TaoClient\Services\TaoApiResponse;
+use EONConsulting\Core\Helpers\XmlToArray;
 
 class TaoApi
 {
@@ -87,6 +89,20 @@ class TaoApi
         return $this;
     }
 
+    /*
+     * Exports an existing QTI Item as a QTI 2.1 package
+     *
+     * Api endpoint [Get /taoQtiItem/RestQtiItem/export/]
+     */
+    public function exportItem($id)
+    {
+        $this->response = $this->callApi('taoQtiItem/RestQtiItem/export/', [
+            'id' => $id,
+        ], 'GET');
+
+        return $this;
+    }
+
     /**
      * Convert xml to Array
      *
@@ -120,6 +136,26 @@ class TaoApi
     }
 
     /**
+     * Get raw response
+     *
+     * @return string
+     */
+    public function toRaw()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Get object with getters to easily get results from api response
+     *
+     * @return string
+     */
+    public function toObject()
+    {
+        return new TaoApiResponse($this->toArray());
+    }
+
+    /**
      * Call the API and return the results in a object
      *
      * @param $endpoint
@@ -130,7 +166,7 @@ class TaoApi
     {
         try {
 
-            $res = $this->client->request('GET', $this->config['api_url'] . '/' . $endpoint, [
+            $res = $this->client->request('GET', $this->config['api_url'] . $endpoint, [
                 'query' => $params,
                 'auth' => [$this->config['api_user'], $this->config['api_pass']]
             ]);

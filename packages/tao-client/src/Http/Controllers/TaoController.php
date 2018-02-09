@@ -33,14 +33,18 @@ class TaoController extends Controller
     {
         $validated_data = $request->validate([
             'launch_url' => 'required',
+            'assessment_type' => 'required',
+            'assessment_weight' => 'required_if:assessment_type,Formal Assessment',
         ]);
 
-        $assessment = TaoAssessment::firstOrCreate([
+        $assessment = TaoAssessment::updateOrCreate([
             'launch_url' => $validated_data['launch_url'],
         ],[
             'launch_url' => $validated_data['launch_url'],
             'key' => config('tao-client.launch-options.key'),
             'secret' => config('tao-client.launch-options.secret'),
+            'assessment_type' => $validated_data['assessment_type'],
+            'assessment_weight' => $validated_data['assessment_weight'],
         ]);
 
         return response()->json(['status'  => 'success']);

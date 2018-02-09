@@ -112,9 +112,15 @@
                         {!! $course['title'] !!}
 
                         @if($course['has_sl'])
+                        
+                        <a href="#" class="pull-right print-pdf" id="{{$course['id']}}" style="margin-left:20px" role="button">
+                            Download <i class="fa fa-file-pdf-o"></i>
+                        </a>
+                        
                         <a href="{{ route('storyline2.student.single', $course['id']) }}" class="pull-right" role="button">
                             <i class="fa fa-eye"></i> View
                         </a>
+                        
                         @else
                         <span class="pull-right">No Lecture Available</span>
                         @endif
@@ -264,6 +270,13 @@ $(document).ready(function () {
 
     $("#btnReset").on("click", function () {
         window.location.href = "{!! url('/lti/courses') !!}";
+    });
+    
+    $(document).on('click', '.print-pdf', function(e){      
+        e.preventDefault();
+        var courseId = $(this).attr('id');
+        var link = "{{ url("") }}/module/print/"+courseId;
+        var win = window.open(link, '_blank','width=1000, height=700, left=14, top=14, scrollbars, resizable');
     });
 });
 </script>

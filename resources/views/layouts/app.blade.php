@@ -53,12 +53,12 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         @yield('custom-scripts')
 
-
-
         @include('html-to-pdf::javascript')
 
-
-       
+        <div id="js-loading">
+            <img src="{{ url('img/loading.gif') }}" alt=""><br>
+            <p>Loading...</p>
+        </div>
     </body>
 
 </html>

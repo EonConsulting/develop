@@ -297,6 +297,15 @@
         outline: none;
     }
 
+    .tree-collapse-button {
+        width: 25px;
+        height: 25px;
+        margin: -15px 0 0 -15px;
+        background: #e2e2e2;
+        float: left;
+        text-align: center;
+    }
+
 </style>
 
 
@@ -316,7 +325,7 @@
             @each('eon.storyline2::student.partials.dropdown', $items, 'item', 'eon.storyline2::student.partials.none')
         </ul>
     </div>
-
+    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Download PDF </a></span>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
 
     <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-id="" id="view-notes-link"><i class="fa fa-comments-o"></i> View Notes </a></span>
@@ -326,7 +335,7 @@
 
 <div class="flex-container resizer">
 
-    <div class="flex-menu">
+    <div class="flex-menu" id="tree">
 
         <div class="item-tree" id="content_tree">
 
@@ -341,6 +350,10 @@
     </div><!--End col-md-3 -->
 
     <div class="flex-content">
+
+        <a href="#" class="tree-collapse-button" id="tree-collapse">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
 
         <div class="content-navbar">
 
@@ -368,7 +381,7 @@
 
             </div>
 
-        <div class="content-body" id="body"></div>
+            <div class="content-body" id="body" data-current-item-id=""></div>
     
         </div>
 
@@ -450,12 +463,14 @@
 
         </div>
     </div>
+    
+    
 @endsection
 
 @include('student-notes::note')
 
 @section('custom-scripts')
-    <script src="{{ url("js/resizer/resizer.js") }}"> </script>
+    <script src="{{ url('js/resizer/resizer.js') }}"> </script>
 
 <script src="{{url('js/analytics/tincan.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
@@ -567,6 +582,8 @@
         button.addClass('active-menu');
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+        $('#body').data('current-item-id', current_node.data('item-id'));
     }
 
     function saveProgress() {
@@ -633,8 +650,9 @@
 
     //$('.dropdown-toggle').dropdown()
 
-    const selector = '.resizer';
+    var tree_expanded = true;
 
+    const selector = '.resizer';
     let resizer = new Resizer(selector);
     
     function progress_error(){
@@ -686,7 +704,32 @@
             $(this).children('i').toggleClass('fa-caret-down');
             $(this).children('i').toggleClass('fa-caret-right');
         });       
+
+        $(document).on('click', '#tree-collapse', function(){
+
+            if(tree_expanded){
+                collapse_tree();
+            }else{
+                expand_tree();
+            }
+
+        });
+   
     });
+
+    function collapse_tree(){
+        resizer.remove();
+        $('#tree').hide();
+        $('#tree-collapse').html('<i class="fa fa-angle-double-right"></i>');
+        tree_expanded = false;
+    }
+
+    function expand_tree(){
+        let resizer = new Resizer(selector);
+        $('#tree').show();
+        $('#tree-collapse').html('<i class="fa fa-angle-double-left"></i>');
+        tree_expanded = true;
+    }
 
     function expandAll(){
         $(".toggle-expand").each(function( index ) {

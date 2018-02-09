@@ -6,7 +6,6 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
     
     Route::group(['middleware' => ['auth','learner']], function() {
         Route::get('/view/{course}', 'Storyline2ViewsBlade@view')->name('storyline2.student.single');
-
         Route::get('/student-item-refresh/{course}/{item}', 'Storyline2ViewsBlade@refresh_items')->name('storyline2.item.refresh');
         Route::get('/student-item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
        });
@@ -45,6 +44,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
         //Render JSON Route
         Route::get('/json-render', 'Storyline2ViewsJSON@render')->name('storyline2.JSON.render');
         Route::get('/show_items/{storyline}', 'Storyline2ViewsJSON@show_items')->name('storyline2.JSON.items');
+        Route::post('/search-content', 'Storyline2Core@search_storyline')->name('storyline2.content.search');
 
         Route::get('/item-content/{item}', 'Storyline2Core@get_content')->name('storyline2.item.content');
         Route::post('/save-item-content/{item}', 'Storyline2Core@save_content')->name('storyline2.item.content.save');

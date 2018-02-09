@@ -12,7 +12,7 @@ var global_conf = {
     subdir: "/e-content" //local url
     //subdir: "/e-content" //dev url
 
-
+    
 };
 
 console.log("Subdir is set to: " + global_conf["subdir"]);

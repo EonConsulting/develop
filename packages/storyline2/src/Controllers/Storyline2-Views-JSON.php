@@ -58,8 +58,18 @@ class Storyline2ViewsJSON extends BaseController {
 
         usort($result, [$this, "self::compare"]);
         $result = $this->createTree($result);
+
+        if( ! isset($result[0]['children']))
+        {
+            return response()->json($result);
+        }
+
         $result = $result[0]['children'];
         //dd($result);
+
+        $result[0]["state"]["selected"] = true;
+        $result[0]["state"]["opened"] = true;
+
         return response()->json($result);
     }
 
@@ -67,7 +77,7 @@ class Storyline2ViewsJSON extends BaseController {
     public function getTreeProgess($storyline){
         
         //$sl = Storyline::find($storyline);
-        $items = StorylineItem::where('storyline_id',$storyline)->get();
+        $items = StorylineItem::with('contents')->where('storyline_id',$storyline)->get();
         $items = $this->items_to_tree($items);
 
         //dd($items);
@@ -185,13 +195,13 @@ class Storyline2ViewsJSON extends BaseController {
      * @param $items
      * @return array
      */
-    public function items_to_tree($items) {
+    public function items_to_tree($items, $withcontent = false) {
 
         $map = [];
 
         foreach ($items as $k => $node) {
 
-            $map[] = [
+            $temp = [
                 'required' => $node['required'],
                 //'student_progress'=>$node['student_progress']['student_id'],
                 'id' => (string) $node['id'],
@@ -199,7 +209,18 @@ class Storyline2ViewsJSON extends BaseController {
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
                 'lft' => $node['_lft']
+                
             ];
+
+            if($withcontent){
+                $temp['body'] = $node['contents']['body'];
+                $temp['title'] = $node['contents']['title'];
+            }else{
+                $temp['body'] = '';
+                $temp['title'] = '';
+            }
+
+            $map[] = $temp;
         }
 
         return $map;
@@ -252,7 +273,7 @@ class Storyline2ViewsJSON extends BaseController {
             'name' => $text,
             'storyline_id' => $parent->storyline_id,
             'parent_id' => $parent_id,
-            'root_parent' => $root_parent
+            'root_parent' => $parent->root_parent
         ];
 
         $new = StorylineItem::create($new_details);
@@ -296,17 +317,22 @@ class Storyline2ViewsJSON extends BaseController {
         $parentId = (int) $data['node']['parent'];
         $itemId = (int) $data['node']['id'];
         $position = (int) $data['position'];
-        $old_position = (int) $data['old_position'];
-        $parent = StorylineItem::find($parentId);
-        $decendants = $parent->getImmediateDescendants();
-        $num_children = count($decendants);
         $node = StorylineItem::find($itemId);
 
+        if($data['node']['parent'] === "#"){
+            $parent = StorylineItem::find($node->root_parent);
+        }else{
+            $parent = StorylineItem::find($parentId);
+        }
+        
+        $decendants = $parent->getImmediateDescendants();
+        $num_children = count($decendants);
+        
         if($num_children === 0 || $position === 0){
             $msg = $node->makeFirstChildOf($parent) ? "Made First Child of Parent" : "Failure";
         } else {
 
-            if($position === $num_children-1){
+            if($position === $num_children){
                 $msg = $node->makeLastChildOf($parent) ? "Made Last Child of Parent" : "Failure";
             }else {
                 $msg = $node->makeLastChildOf($parent);

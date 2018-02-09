@@ -41,7 +41,7 @@ class TaoResult extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
@@ -62,6 +62,16 @@ class TaoResult extends Model
     public function result_identifier()
     {
         return $this->hasOne(ResultIdentifiers::class, 'result_id', 'lis_result_sourcedid');
+    }
+
+    /**
+     * Get the assessment for result
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function tao_assessment()
+    {
+        return $this->hasOne(TaoAssessment::class, 'storyline_item_id', 'storyline_item_id');
     }
 
     /**
@@ -125,5 +135,16 @@ class TaoResult extends Model
 
         return $query->where('status', 0)
                      ->where('created_at', '<', $date);
+    }
+
+    /**
+     * Get the real score..
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRealScoreAttribute($value)
+    {
+        return ($this->score * 100);
     }
 }

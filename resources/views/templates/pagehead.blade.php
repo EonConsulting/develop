@@ -24,6 +24,8 @@
     ]) !!};
 </script>
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <!-- Piwik Analytics -->
 <script type="text/javascript">
   var _paq = _paq || [];

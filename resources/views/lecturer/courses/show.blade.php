@@ -55,6 +55,7 @@ Course List
                                             <a href="#" class="notifyId dropdown-link" type="button" data-id="{{$course->id}}" data-toggle="modal" data-target="#notificationModal"><i class="fa fa-envelope"></i> Notify</a>
                                             <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                             <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
+                                            <a href="#" class="pdfId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-file-pdf-o"></i> Save as PDF</a>
                                         </div>
                                     </div>
                                 </td>
@@ -91,6 +92,35 @@ Course List
         </div>
     </div>
 
+    <div id="pdfModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body pdf-loading">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+    </div>
+   </div>
+
+    @push('package-css')
+        <style>
+            .badgebox { opacity: 0; }
+            .badgebox + .badge { text-indent: -999999px; width: 27px; }
+            .badgebox:focus + .badge { box-shadow: inset 0px 0px 5px; }
+            .badgebox:checked + .badge { text-indent: 0; }
+        </style>
+    @endpush
+
     <!-- Notification Model -->
     <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -107,18 +137,14 @@ Course List
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="email">Send via Email:</label>
-                            <input type="checkbox" class="form-control" id="email" name="options[]" value="email">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sms">Send via Sms:</label>
-                            <input type="checkbox" class="form-control" id="sms" name="options[]" value="nexmo">
+                            <label for="primary" class="btn btn-primary">Email <input type="checkbox" id="primary" class="badgebox" name="options[]" value="mail"><span class="badge">&check;</span></label>
+                            <label for="info" class="btn btn-info">SMS <input type="checkbox" id="info" class="badgebox" name="options[]" value="nexmo"><span class="badge">&check;</span></label>
+                            <label for="success" class="btn btn-success">In system notice <input type="checkbox" id="success" class="badgebox" name="options[]" value="database" checked><span class="badge">&check;</span></label>
                         </div>
 
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea class="form-control" id="message" name="message"></textarea>
+                            <textarea class="form-control" id="message" name="message" style="height: 150px;"></textarea>
                         </div>
 
                     </div>
@@ -168,7 +194,7 @@ Course List
                     },
                     success: function (data, textStatus, jqXHR) {
                         $("#formModal").modal();
-                        if(text === 'Module'){
+                        if(text === ' Module'){
                             $(".data-title").text('Edit Module');
                         }else{
                             $(".data-title").text('Edit Metadata');
@@ -238,6 +264,33 @@ Course List
                     }
                 });
             });
+            
+            $(document).on('click', '.pdfId', function(e){
+              e.preventDefault();
+              var courseId = $(this).attr('id');
+             $("#pdfModal").modal();
+             $.ajax({
+               url: "{{ url("") }}/module/downloadPDF/"+courseId,
+               type: "GET",
+               async: true,
+               beforeSend: function () {
+               $('.pdf-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Converting to PDF....</button>");
+             },
+             success: function (status, textStatus, jqXHR) {
+              if(status.res == '200'){   
+                    //var link = "{{ url("") }}/module/downloadPDF/"+status.course;
+                    //var win = window.open(link, '_blank','width=1000, height=700, left=24, top=24, scrollbars, resizable');                   
+                    $(".pdf-loading").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>"+status.msg+"</div>");
+                }else{
+                    $(".pdf-loading").html("<div class='alert alert-danger alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>"+status.msg+"</div>");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+                    // location.reload();
+            }
+          });  
+        });
 
         });
 
