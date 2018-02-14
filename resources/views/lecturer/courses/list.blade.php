@@ -57,6 +57,7 @@
                                             <a href="#" class="notifyId dropdown-link" type="button" data-id="{{$course->id}}" data-toggle="modal" data-target="#notificationModal"><i class="fa fa-envelope"></i> Notify</a>
                                             <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                             <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
+                                            <a href="#" class="marksId dropdown-link" id="{{$course->id}}"><i class="fa fa-file-excel"></i> Export Marks</a>
                                         </div>
                                     </div> 
                                 </td>
@@ -93,6 +94,26 @@
             </div>
         </div>
     </div>
+    
+    <div id="csvModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body csv-loading">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+    </div>
+   </div>
 
     @push('package-css')
         <style>
@@ -243,9 +264,37 @@
                     }
                 });
             });
+            
+            $(".marksId").click(function (event) {
+                event.preventDefault();   
+                var courseId = $(this).attr("id");
+                var url = '{{ route("module.export-marks",":course") }}';
+                url = url.replace(':course', courseId);
+                $("#csvModal").modal();
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    beforeSend: function () {
+                        $('.csv-loading').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Exporting marks to CSV....</button>");
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if(data.success){
+                          $(".msgdata-info").html("<div class='alert alert-success alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Success! </strong>" + data.success + "</div>");
+                          $('.meta-footer').html("<a href='{{ route('courses') }}' class='btn btn-default'>OK</a>");
+                           } else{
+                          $(".msg-info").html("<div class='alert alert-error alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Error! </strong>" + data.success + "</div>");
+                          $('.btnSubmit').text("Submit");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        //location.reload();
+                    }
+                });
+            });
         
         });
-        
+               
         function search() {
             // Declare variables
             var input, filter, table, tr, td, i;

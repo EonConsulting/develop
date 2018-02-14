@@ -9,18 +9,21 @@ use EONConsulting\Storyline2\Models\StorylineItem;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 use EONConsulting\Student\Progression\Http\Controllers\DefaultController as StudentProgress;
 use App\Models\ContentTemplates;
+use App\Models\LtiUser;
 use Illuminate\Http\Request;
 use mikehaertl\wkhtmlto\Pdf;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Laracsv\Export;
+use EONConsulting\Exports\Models\TaoResult;
 
 class ExportsController extends Controller {
 
     public function wkhtml() {
         $host = request()->getHttpHost();
-        
+
         $binary = str_replace(array('\'', '"'), '', env('WKHTMLTOPDF_BIN'));
-        
+
         if ($host === 'localhost:8000') {
             $pdf = new Pdf([
                 'commandOptions' => [
@@ -28,7 +31,7 @@ class ExportsController extends Controller {
                     'escapeArgs' => false,
                 ],
             ]);
-             
+
             $globalOptions = [
                 'binary' => $binary,
                 'no-outline', // Make Chrome not complain
@@ -39,7 +42,6 @@ class ExportsController extends Controller {
                 'javascript-delay' => 2000,
             ];
             $pdf->setOptions($globalOptions);
-           
         } else {
 
             $pdf = new Pdf;
@@ -104,16 +106,25 @@ class ExportsController extends Controller {
         }
     }
 
-    public function downloadPDF2($courseId) {
-        $course = Course::find($courseId);
-        $file = storage_path() . '/modules/' . $course->title . '.pdf';
-        if (File::isFile($file)) {
-            $file = File::get($file);
-            $response = Response::make($file, 200);
-            $response->header('Content-Type', 'application/pdf');
+    public function export_marks($courseId) {
+        $storyline = Storyline::where(['course_id' => $courseId])->first();
+        $storylineItem = StorylineItem::where(['storyline_id' => $storyline->id])->pluck('id');
+        $marks = TaoResult::with('storyline_item', 'lti_user')
+                            ->whereIn('storyline_item_id', $storylineItem)
+                            ->groupBy('user_id')                   
+                            ->orderBy('id')->get(); 
 
-            return $response;
-        }
+        $csvExporter = new Export;
+
+        $csvExporter->beforeEach(function ($marks) { 
+             $marks->score = $marks->avg('score');
+             $marks->test_taker = 'Assessment Type';
+        });
+
+        $csvExporter->build($marks, ['lti_user.user_key' => 'Student ID','lti_user.displayname' => 'Student Name','test_taker' => 'Assessment Type','score' => 'Score'])
+                ->download('module-marks.csv');
+        exit();
+
     }
 
 }
