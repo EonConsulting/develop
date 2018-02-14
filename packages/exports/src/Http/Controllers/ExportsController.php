@@ -121,7 +121,7 @@ class ExportsController extends Controller {
              $marks->test_taker = 'Assessment Type';
         });
 
-        $csvExporter->build($marks, ['lti_user.user_key' => 'Student ID','lti_user.displayname' => 'Student Name','test_taker' => 'Assessment Type','score' => 'Score'])
+        $csvExporter->build($marks, ['lti_user.user_key' =>'Student ID','lti_user.displayname' => 'Student Name','test_taker' => 'Assessment Type','score' => 'Score'])
                 ->download('module-marks.csv');
         exit();
 

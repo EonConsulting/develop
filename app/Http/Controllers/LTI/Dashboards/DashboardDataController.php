@@ -253,7 +253,6 @@ class DashboardDataController extends LTIBaseController {
             
             // only lecturers can set is_global = 1
             $role = laravel_lti()->get_user_lti_type(auth()->user());
-            $is_global = ($role == "Instructor") ? $data["is_global"] : 0;
             $id = $data["id"];
             
             // delete

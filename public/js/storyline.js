@@ -561,12 +561,21 @@ function importAsset(asset){
         },
         statusCode: {
             200: function (data) { //success
+                
+                // we add the data-asset-id attribute <span> in here so we can identify mimetypes
+                // for analytics and also know which asset we inserted here
+                // we also have to construct the html string cause CKEditor is fucking stupid
+                var html ='<div style="display: inline-block;" data-asset-id=' + asset + '>';
+                
                 if(data['content'] !== null){
-                    CKEDITOR.instances['ltieditorv2inst'].insertHtml('<p>' + data['content'] + '</p>');
+                    html += data['content'];
                 }
-                var html = data['html'];
-                CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
 
+                html +=  data['html'];
+                html += '</div>';
+                
+                CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
+                
                 $('#assetsModal').modal('hide');
 
             },

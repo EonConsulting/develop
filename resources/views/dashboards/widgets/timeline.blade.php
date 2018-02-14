@@ -101,6 +101,12 @@
         }
         bindModuleFilter();
         
+        function bindModalEvents(){
+            $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
+            $('#btnDeleteTimelineEntry').on("click", deleteTimelineEvent);
+        }
+        bindModalEvents();
+        
         function getFillColor(type){
             switch(type){
                 case 'formal_assessment':
@@ -129,12 +135,12 @@
             $('#dt_to').datetimepicker({
                 useCurrent: false, //Important! See issue #1075
             });
-            $("#dt_from").on("dp.change", function (e) {
+            /* $("#dt_from").on("dp.change", function (e) {
                 $('#dt_to').data("DateTimePicker").minDate(e.date);
             });
             $("#dt_to").on("dp.change", function (e) {
                 $('#dt_from').data("DateTimePicker").maxDate(e.date);
-            });
+            }); */
             
             // set the fields
             if (event_item.id > 0)
@@ -147,6 +153,7 @@
                 // set the dates according to what was selected
                 $("#dt_from").data("DateTimePicker").date(new Date(event_item.start));
                 $("#dt_to").data("DateTimePicker").date(new Date(event_item.end));
+                $("#btnDeleteTimelineEntry").show();
             } else {
                 // new record
                 $("#event_id").val('');
@@ -156,6 +163,7 @@
                 // set the dates according to what was selected
                 $("#dt_from").data("DateTimePicker").date(event_item.start);
                 $("#dt_to").data("DateTimePicker").date(event_item.end);
+                $("#btnDeleteTimelineEntry").hide();
             }
         }
         
@@ -198,7 +206,6 @@
                 title: "Are you sure?",
                 text: "An event cannot be recovered once it is deleted",
                 type: "warning",
-                buttons: true,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -216,12 +223,15 @@
                             id: $("#event_id").val(),
                         },
                         statusCode: {
-                            201: function () { //created
+                            200: function () { //created
                                 $('#editTimelineModal').modal('hide');  
                                 $('#calendar-timeline').fullCalendar("refetchEvents");
                             },
                             400: function () { //bad request
-                                console.log("Bad request");
+                                swal("Request cannot be processed, please try again");
+                            },
+                            404: function () { //bad request
+                                swal("This event can only be deleted by it's owner");
                             },
                             500: function () { //server kakked
                                 console.log("Server error");
@@ -258,8 +268,7 @@
                         end: end
                     });
                     $('#calendar-timeline').fullCalendar('unselect');
-                    $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
-                    $('#btnDeleteTimelineEntry').on("click", deleteTimelineEvent);
+                    
                 },
                 events: function(start, end, timezone, callback) {
                     $.ajax({
@@ -316,8 +325,6 @@
                         event_type: ev.type,
                         is_global: ev.is_global
                     });
-                    $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
-                    $('#btnDeleteTimelineEntry').on("click", deleteTimelineEvent);
                 },
                 loading: function(isLoading, view){
                     if (isLoading){
@@ -385,10 +392,12 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+                <?php if (laravel_lti()->get_user_lti_type(auth()->user()) == "Instructor"): ?>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="is_global">
                     <label class="form-check-label" for="is_global">Global</label>
-                </div>                
+                </div>        
+                <?php endif; ?>
             </form>
         </div>
         <div class="modal-footer">
