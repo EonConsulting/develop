@@ -16,7 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Asset;
-use App\Models\ContentTemplates;
+use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 
@@ -45,7 +46,16 @@ class Storyline2ViewsBlade extends BaseController {
     
         $items = $SL2JSON->getTreeProgess($storyline_id);       
 
-        $course['template'] = ContentTemplates::find($course->template_id);
+        /*$course['template'] = Template::find($course->template_id);
+            ->transformWith(new TemplateTransformer());*/
+
+
+        $course['template'] = Template::where("id", $course->template_id)
+            ->get()
+            ->transformWith(new TemplateTransformer())
+            ->toArray()['data'][0];
+
+        //dd($course['template']);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
@@ -68,7 +78,7 @@ class Storyline2ViewsBlade extends BaseController {
         //dd($result);
         $items = $items[0]['children'];
 
-        $course['template'] = ContentTemplates::find($course->template_id);
+        $course['template'] = Template::find($course->template_id);
 
         $breadcrumbs = [
             'title' => 'Preview Storyline: ' . $course->title //pass $course as param and load name here
@@ -130,7 +140,11 @@ class Storyline2ViewsBlade extends BaseController {
     public function edit($course_id) {
         
         $course = Course::find($course_id);
-        $course['template'] = ContentTemplates::find($course->template_id);
+        $course['template'] = Template::where("id", $course->template_id)
+            ->get()
+            ->transformWith(new TemplateTransformer())
+            ->toArray()['data'][0];
+        
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
 
