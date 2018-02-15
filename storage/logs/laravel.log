@@ -30,11 +30,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)
@@ -126,11 +129,14 @@
                     AND te.is_global = 1
                     AND te.start between :g_start AND :g_end) at /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'unisa.timeline_events' doesn't exist at /home/vagrant/code/develop/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
 [stacktrace]
-#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\\
+#0 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(624): Illuminate\\Database\\Connection->runQueryCallback('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\\
+#1 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/Connection.php(333): Illuminate\\Database\\Connection->run('SELECT te.*\
+\
   ...', Array, Object(Closure))
-#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\\
+#2 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(327): Illuminate\\Database\\Connection->select('SELECT te.*\
+\
   ...', Array)
 #3 /home/vagrant/code/develop/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(221): Illuminate\\Database\\DatabaseManager->__call('select', Array)
 #4 /home/vagrant/code/develop/packages/econtent-core/src/Classes/Timelines.php(47): Illuminate\\Support\\Facades\\Facade::__callStatic('select', Array)

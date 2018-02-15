@@ -21,7 +21,7 @@ class CreateTimelineEvents extends Migration
             $table->string('type');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->boolean('is_global')->default('0');
             $table->timestamps();
         });

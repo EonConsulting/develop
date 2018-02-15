@@ -192,8 +192,15 @@ class DashboardDataController extends LTIBaseController {
             $role = laravel_lti()->get_user_lti_type(auth()->user());
             $is_global = ($role == "Instructor") ? $data["is_global"] : 0;
             
+            if (!empty($data["id"]))
+            {
+                $id = $data["id"];
+            } else {
+                $id = 0;
+            }
+            
             $new_event = [
-                "id" => $data["id"],
+                "id" => $id,
                 "start" => $data["start"],
                 "end" => $data["end"],
                 "user_id" => auth()->user()->id,
@@ -228,6 +235,35 @@ class DashboardDataController extends LTIBaseController {
                 return response('Created', 201);
             } else {
                 return response('Server Error', 500);
+            }
+        } else {
+            return response('Bad Request', 400);
+        }
+    }
+    
+    /**
+     * @param \Illuminate\Http\Request
+     * @return HttpStatusCode
+     */
+    public function delete_timeline_event(Request $request)
+    {
+        if (is_array($request->all()))
+        {
+            $data = $request->all();
+            
+            // only lecturers can set is_global = 1
+            $role = laravel_lti()->get_user_lti_type(auth()->user());
+            $id = $data["id"];
+            
+            // delete
+            $record = TimelineEvent::find($id);
+            
+            if ($record->user_id == auth()->user()->id)
+            {
+                $record->delete();
+                return response('Deleted', 200);
+            } else {
+                return response('Not your event', 404);
             }
         } else {
             return response('Bad Request', 400);

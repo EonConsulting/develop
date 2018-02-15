@@ -351,6 +351,10 @@ Storyline Student Single
     }
 
     {{ url($course['template']['css']) }}
+    
+    .dropdown {
+        display: inline-block;
+    }
 
 </style>
 @endsection
@@ -360,27 +364,51 @@ Storyline Student Single
 
 <div class="tools" id="tools">
     
-    <span class="search-container">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i class="fa fa-file-text"></i><span class="hidden-xs hidden-md"> File</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></li>
+            <li><a href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i class="fa fa-download"></i><span class="hidden-xs hidden-md"> Import</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i> Import Content</a></li>
+            <li><a href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i> Import Asset</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i class="fa fa-wrench"></i><span class="hidden-xs hidden-md"> Tools</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="javascript:void();" id="auditing-index"><i class="fa fa-history"></i> Audit Log</a></li>
+            <li><a class="p-check" href="javascript:void();"><i class="fa fa-low-vision"></i> Plagiarism Checker</a></li>
+            <li><a class="white-b" href="javascript:void();"><i class="fa fa-external-link"></i> Whiteboard</a></li>
+        </ul>
+    </div>
+
+    <span class="search-container pull-right">
         <input id="q" type="text" class="form-title" name="s" placeholder="Search" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
         <a href="#" class="btn btn-default" id="search"><i class="fa fa-search"></i></a>
         <a href="#" class="btn btn-default disabled" id="prev-result"><i class="fa fa-caret-left"></i></a>
         <span id="search_numbers">0 / 0</span>
         <a href="#" class="btn btn-default disabled" id="next-result"><i class="fa fa-caret-right"></i></a>
     </span>
-    <span class="tools-divider"></span>
-    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i><span class="hidden-xs hidden-sm"> Preview</span></a></span>
 
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i><span class="hidden-xs hidden-sm"> Save</span></a></span>
-    <span class="pull-right" id="save-status"></span>
-    <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i><span class="hidden-xs hidden-sm"> Print PDF</span></a></span>
-    <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#importModal"><i class="fa fa-list"></i><span class="hidden-xs hidden-sm"> Import Content</span></a></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-cube"></i><span class="hidden-xs hidden-sm"> Import Asset</span></a></span>
-    <span class="tools-divider pull-right"></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="auditing-index"><i class="fa fa-history"></i> Audit Log</a></span>
-    <span class="tools-divider pull-right"></span><span class="pull-right"><a class="btn btn-default p-check" href="javascript:void();"><i class="fa fa-low-vision"></i><span class="hidden-xs hidden-sm"> Plagiarism Checker</span></a></span>
-    <span class="pull-right"><a class="btn btn-default white-b" href="javascript:void();"><i class="fa fa-external-link"></i><span class="hidden-xs hidden-sm"> Whiteboard</span></a></span>
+    
 </div>
 
 <div class="flex-container resizer">

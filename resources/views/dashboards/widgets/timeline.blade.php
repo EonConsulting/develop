@@ -101,6 +101,12 @@
         }
         bindModuleFilter();
         
+        function bindModalEvents(){
+            $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
+            $('#btnDeleteTimelineEntry').on("click", deleteTimelineEvent);
+        }
+        bindModalEvents();
+        
         function getFillColor(type){
             switch(type){
                 case 'formal_assessment':
@@ -122,41 +128,42 @@
             }
         }
         
-        function prepareTimelineForm(id, title, start, end, event_type, is_global)
+        function prepareTimelineForm(event_item)
         {
-            console.log(start);
-            console.log(end);
             // prepare the datetimepickers
             $('#dt_from').datetimepicker();
             $('#dt_to').datetimepicker({
                 useCurrent: false, //Important! See issue #1075
             });
-            $("#dt_from").on("dp.change", function (e) {
+            /* $("#dt_from").on("dp.change", function (e) {
                 $('#dt_to').data("DateTimePicker").minDate(e.date);
             });
             $("#dt_to").on("dp.change", function (e) {
                 $('#dt_from').data("DateTimePicker").maxDate(e.date);
-            });
+            }); */
             
             // set the fields
-            if (id > 0)
+            if (event_item.id > 0)
             {
                 // existing record
-                $("#event_id").val(id);
-                $("#title").val(title);
-                $("#event_type").val(event_type).change();
-                $("#is_global").prop('checked', !!parseInt(is_global));
+                $("#event_id").val(event_item.id);
+                $("#title").val(event_item.title);
+                $("#event_type").val(event_item.event_type).change();
+                $("#is_global").prop('checked', !!parseInt(event_item.is_global));
                 // set the dates according to what was selected
-                $("#dt_from").data("DateTimePicker").date(new Date(start));
-                $("#dt_to").data("DateTimePicker").date(new Date(end));
+                $("#dt_from").data("DateTimePicker").date(new Date(event_item.start));
+                $("#dt_to").data("DateTimePicker").date(new Date(event_item.end));
+                $("#btnDeleteTimelineEntry").show();
             } else {
                 // new record
+                $("#event_id").val('');
                 $("#title").val('');
                 $("#event_type").val($("#event_type option:first").val());
                 $("#is_global").prop('checked', false);
                 // set the dates according to what was selected
-                $("#dt_from").data("DateTimePicker").date(start);
-                $("#dt_to").data("DateTimePicker").date(end);
+                $("#dt_from").data("DateTimePicker").date(event_item.start);
+                $("#dt_to").data("DateTimePicker").date(event_item.end);
+                $("#btnDeleteTimelineEntry").hide();
             }
         }
         
@@ -194,6 +201,49 @@
             });
         }
         
+        function deleteTimelineEvent(){
+            swal({
+                title: "Are you sure?",
+                text: "An event cannot be recovered once it is deleted",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              })
+              .then((willDelete) => {
+                if (willDelete.value) {
+                    $.ajax({
+                        url: "{{ url("") }}/lti/data-timeline",
+                        type: "DELETE",
+                        headers: {
+                            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                        },
+                        data: {
+                            id: $("#event_id").val(),
+                        },
+                        statusCode: {
+                            200: function () { //created
+                                $('#editTimelineModal').modal('hide');  
+                                $('#calendar-timeline').fullCalendar("refetchEvents");
+                            },
+                            400: function () { //bad request
+                                swal("Request cannot be processed, please try again");
+                            },
+                            404: function () { //bad request
+                                swal("This event can only be deleted by it's owner");
+                            },
+                            500: function () { //server kakked
+                                console.log("Server error");
+                            }
+                        }
+                    }).error(function (req, status, error) {
+                        return [];
+                    });
+                } 
+            });
+        }
+        
         function renderTimeline()
         {
             $('#calendar-timeline').fullCalendar({
@@ -207,15 +257,18 @@
                     listMonth: { buttonText: 'list month' }
                 },
                 navLinks: true, // can click day/week names to navigate views
-                editable: true,
+                editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
                 selectHelper: true,
-                select: function(start, end) {
-                    $('#editTimelineModal').modal('show');  
-                    prepareTimelineForm(null, null, start, end, null, null);
-                    $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
+                select: function(start, end, jsEvent, view) {
+                    $('#editTimelineModal').modal('show'); 
+                    prepareTimelineForm({
+                        start: start,
+                        end: end
+                    });
                     $('#calendar-timeline').fullCalendar('unselect');
+                    
                 },
                 events: function(start, end, timezone, callback) {
                     $.ajax({
@@ -264,9 +317,14 @@
                     $('#editTimelineModal').modal('show');  
                     // we store the dataset in memory in events objects
                     var ev = _.head(_.filter(events, _.iteratee({'id': calEvent.id})));
-                    prepareTimelineForm(ev.id, ev.title, ev.start, 
-                        ev.end, ev.type, ev.is_global);
-                    $('#btnSaveTimelineEntry').on("click", saveTimelineEvent);
+                    prepareTimelineForm({
+                        id: ev.id,
+                        title: ev.title,
+                        start: ev.start,
+                        end: ev.end,
+                        event_type: ev.type,
+                        is_global: ev.is_global
+                    });
                 },
                 loading: function(isLoading, view){
                     if (isLoading){
@@ -334,14 +392,17 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+                <?php if (laravel_lti()->get_user_lti_type(auth()->user()) == "Instructor"): ?>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="is_global">
                     <label class="form-check-label" for="is_global">Global</label>
-                </div>                
+                </div>        
+                <?php endif; ?>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" id="btnSaveTimelineEntry" class="btn btn-success">Save</button>
+            <button type="button" id="btnDeleteTimelineEntry" class="btn btn-danger">Delete</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use EONConsulting\Notifications\Mail\SupportMail;
+use EONConsulting\Notifications\Models\SupportMessages;
 use Mail;
 
 
@@ -16,11 +17,23 @@ class NotificationsController {
      */
     
     public function supportMail(Request $data) {
+        
+        $crud = new SupportMessages([
+                'sender_id' => (int)auth()->user()->id,
+                'subject' => $data->get('subject'),
+                'message' => $data->get('message')
                
-        Mail::to(env('SUPPORT_MAIL'))->send(new SupportMail($data));
+            ]);
+        
+        if($crud->save()){            
+           Mail::to(env('SUPPORT_MAIL'))->send(new SupportMail($data));
+           $msg = '200';
+           }else{
+           $msg = 'error';   
+          }
 
         $response = array(
-            'msg' => '200'
+            'msg' => $msg
         );
 
         return \Response::json($response);

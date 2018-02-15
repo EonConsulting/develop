@@ -16,3 +16,6 @@
         @endforeach
     </tbody>
 </table>
+<script>
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>

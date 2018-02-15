@@ -44,14 +44,8 @@ $(document).ready(function()
         $("#create-note-form [name='body']").val('');
     }
 
-    $(document).on("click", ".menu-btn, .bread-btn, .arrow-btn, .dropdown-btn", function()
-    {
-        $('#view-notes-link').data('item-id', $(this).data("item-id"));
-        $('#create-note-link').data('item-id', $(this).data("item-id"));
-    });
-
     $(document).on("click", "#create-note-link", function() {
-        $("#create-note-form input[name='storyline_item_id']").val($(this).data("item-id"));
+        $("#create-note-form input[name='storyline_item_id']").val($('#body').data("current-item-id"));
     });
 
     $(document).on( "click", ".delete-student-note", function(e) {
@@ -75,7 +69,7 @@ $(document).ready(function()
     });
 
     $(document).on("click", "#view-notes-link", function() {
-        var item_id = $(this).data("item-id");
+        var item_id = $('#body').data("current-item-id");
 
         $.ajax({
             type: "GET",
