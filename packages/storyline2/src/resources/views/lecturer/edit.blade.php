@@ -8,7 +8,6 @@ Storyline Student Single
 @section('custom-styles')
 <link rel="stylesheet" href="{{ url('vendor/jstree-themes/bootstrap/style.css') }}" />
 <link rel="stylesheet" href="{{ url('js/resizer/resizer.css') }}" />
-<link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 
 <style>
 
@@ -351,6 +350,8 @@ Storyline Student Single
         color: #999;
     }
 
+    {{ url($course['template']['css']) }}
+
 </style>
 @endsection
 
@@ -661,8 +662,8 @@ Storyline Student Single
 <script>
     var course_id = "{{ $course_id }}";
     var storyline_id = "{{ $storyline_id }}";
-    var base_url = "{{{ url('') }}}";
-    var course_template_path = "{{ url($course->template->file_path) }}";
+    var base_url = "{{ url('') }}";
+    var css = "{{ $course['template']['css'] }}";
     var copyleak_url = "{{ url('student/copyleaks') }}";
     var csrf_token = "{{ csrf_token() }}";
 </script>

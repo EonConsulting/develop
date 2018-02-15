@@ -4,6 +4,7 @@ namespace EONConsulting\Storyline2\Transformers;
 
 use League\Fractal\TransformerAbstract;
 use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 
 class TemplateTransformer extends TransformerAbstract
 {
@@ -14,20 +15,35 @@ class TemplateTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(Template $template)
+    public function transform(Template $template = null)
     {
-        $style_array = json_decode($template->styles);
-
-        $styles = "";
-
-        foreach($style_array as $style => $value){
-            //TODO: add transformation code
-        }
         
-        $template->styles = $styles;
+        return [
+            'id' => $template['id'],
+            'name' => $template['name'],
+            'css' => $this->json_to_css($template['styles'])
+        ];
 
-        return $template;
     }
 
+    protected function json_to_css($style_JSON){
+
+        $style_array = json_decode($style_JSON);
+
+        $style_string = "";
+
+        foreach($style_array as $element => $styles){
+            $style_string .= '.content-body ' . $element . ' {';
+
+            foreach($styles as $style => $value){
+                $style_string .= $style . ': ' . $value . ';';
+            }
+
+            $style_string .= '} ';
+        }
+        
+        return $style_string;
+
+    }
 
 }

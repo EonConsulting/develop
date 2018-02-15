@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MetadataType;
 use App\Models\CourseMetadata;
-use EONConsulting\Storyline2\Models\Templates;
+use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use App\Jobs\ElasticIndexCourseInfo;
 use Validator;
 
@@ -27,7 +28,10 @@ class CreateCourseController extends Controller
             ],
         ];
 
-        $templates = Templates::all();
+        $templates = Template::all();
+
+        //dd($templates);
+
         $metadataType = MetadataType::pluck('description', 'id');
 
         return view('lecturer.courses.create', [

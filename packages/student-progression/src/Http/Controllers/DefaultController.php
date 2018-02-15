@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
-use App\Models\ContentTemplates;
+use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use App\Models\StudentProgress;
 use GuzzleHttp\Client;
 use Validator;
@@ -172,7 +173,10 @@ class DefaultController extends LTIBaseController {
         $items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
         $items = $this->items_to_tree($items);
         
-        $course['template'] = ContentTemplates::find($course->template_id);
+        $course['template'] = Template::where("id", $course->template_id)
+            ->get()
+            ->transformWith(new TemplateTransformer())
+            ->toArray()['data'][0];
         
         $view = view('student-progression::module.modulepdf', ['items' => $items,'course'=>$course]);
         $contents = $view->render();

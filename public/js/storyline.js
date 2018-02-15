@@ -52,7 +52,7 @@ if(debug === true) {
 
 let resizer = new Resizer(selector);
 
-var editor = init_editor('ltieditorv2inst',course_template_path);
+var editor = init_editor('ltieditorv2inst',css);
 
 
 
@@ -947,15 +947,22 @@ $(document).on('click','.p-check',function(){
 
 //Editor events---------------------------------------------
 editor.on('instanceReady', function(){
+
     var body = editor.document.getBody();
     body.setAttribute( 'class', 'content-body');
 
     resize();
+
+    //editor.document.appendStyleText(css);
+/*
+    doc = editor.dom.document();
+    doc.appendStyleText(css);*/
 });
 
 editor.on('dataReady', function(){
     var body = editor.document.getBody();
     body.setAttribute( 'class', 'content-body');
+    editor.document.appendStyleText(css);
 });
 
 editor.on('key', function() {

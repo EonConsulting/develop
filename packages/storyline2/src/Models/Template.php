@@ -27,7 +27,7 @@ class Template extends Model {
      * @var array
      */
     protected $fillable = [
-        'name','styles','creator'
+        'name','styles','creator_id'
     ];
 
     /**

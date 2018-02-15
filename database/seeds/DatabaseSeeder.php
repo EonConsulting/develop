@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->command->info('metadata_type table seeded!');
         $this->call(MetadataStoreSeeder::class);
         $this->command->info('metadata_store table seeded!');
-        $this->call(ContentTemplatesSeeder::class);
-        $this->command->info('content_templates table seeded!');
         $this->call(PopulateIntegrationAndAnalyticsSeeder::class);
         $this->command->info('populated integration and analytics tables!');
     }

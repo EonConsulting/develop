@@ -17,7 +17,7 @@ class CreateTemplateTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('file_name');
-            $table->string('styles');
+            $table->text('styles');
             $table->unsignedInteger('creator_id');
            
             $table->timestamps();

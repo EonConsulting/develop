@@ -44,11 +44,11 @@ Create a Course
                             <label for="template">Template</label>
                             <select class="form-control" name="template" id="">
 
-                                <?php foreach($templates as $template): ?>
+                                @foreach($templates as $template)
+                                
+                                <option value="{{ $template['id'] }}">{{ $template['name'] }}</option>
 
-                                <option value="<?php echo $template['id']; ?>"><?php echo $template['name']; ?></option>
-
-                                <?php endforeach; ?>
+                                @endforeach
 
                             </select>
                         </div>
