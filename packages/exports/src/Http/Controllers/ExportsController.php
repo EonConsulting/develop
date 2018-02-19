@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Laracsv\Export;
 use EONConsulting\Exports\Models\TaoResult;
+use Carbon\Carbon;
 
 class ExportsController extends Controller {
 
@@ -105,26 +106,66 @@ class ExportsController extends Controller {
             echo "<h2 style='color:red'>This file does not exit, please login as lecturer and save this module as PDF.</h2>";
         }
     }
+    
+    /**
+     * 
+     * @return Export
+     */
+    public function lara_csv(){
+        $csvExporter = new Export;
+        
+        return $csvExporter;
+    }
 
-    public function export_marks($courseId) {
+    /**
+     * 
+     * @param Request $request
+     * @return type
+     */
+    public function export_marks(Request $request) {
+        $courseId = (int)$request->get('course_id');
+        if(empty($request->get('dt_from'))){ 
+        $res = 'error';
+        $msg = 'Please select period start date.';       
+        }elseif(empty($request->get('dt_to'))){
+        $res = 'error';
+        $msg = 'Please select period end date.';
+        }else{
+        $res = '200';    
+        $msg = 'CSV file has been generated successfully.';   
+        }
+        $response = ['res' => $res,'msg' => $msg,'id'=>$courseId,
+                     'from'=>$request->get('dt_from'),'to'=>$request->get('dt_to')];
+        return \Response::json($response);        
+    }
+    
+    /**
+     * 
+     * @param type $courseId
+     */
+    public function csv_download($courseId,$dt_frm,$dt_to){       
+        $frm = Carbon::parse($dt_frm)->format('Y-m-d');
+        $to  = Carbon::parse($dt_to)->format('Y-m-d');
         $storyline = Storyline::where(['course_id' => $courseId])->first();
         $storylineItem = StorylineItem::where(['storyline_id' => $storyline->id])->pluck('id');
         $marks = TaoResult::with('storyline_item', 'lti_user')
                             ->whereIn('storyline_item_id', $storylineItem)
+                            ->WhereBetween('created_at', [$frm,$to])
                             ->groupBy('user_id')                   
                             ->orderBy('id')->get(); 
-
-        $csvExporter = new Export;
-
+        
+        $csvExporter = $this->lara_csv();
+        
         $csvExporter->beforeEach(function ($marks) { 
              $marks->score = $marks->avg('score');
              $marks->test_taker = 'Assessment Type';
         });
-
-        $csvExporter->build($marks, ['lti_user.user_key' =>'Student ID','lti_user.displayname' => 'Student Name','test_taker' => 'Assessment Type','score' => 'Score'])
-                ->download('module-marks.csv');
-        exit();
-
+        
+       $csvExporter->build($marks,['lti_user.user_key' =>'Student ID',
+                                   'lti_user.displayname' => 'Student Name',
+                                   'test_taker' => 'Assessment Type','score' => 'Score'])
+                   ->download('module-marks.csv'); 
+       die();
     }
 
 }
