@@ -272,12 +272,9 @@ class ContentBuilderAssets extends Controller {
             $asset->categories()->save($temp);
         }
 
-
         ElasticIndexAssets::dispatch();
 
         return redirect('content/assets?from=0&size=20&searchterm=');
-
-
 
     }
 

@@ -1,4 +1,4 @@
-function init_editor(editor_id,stylesheet_url){
+function init_editor(editor_id){
 
     var editor = {};
 
@@ -6,8 +6,8 @@ function init_editor(editor_id,stylesheet_url){
         contentsCss : stylesheet_url,
         removePlugins: 'scayt,wsc',
 	disableNativeSpellChecker: false,
+        scayt_autoStartup: true,
         extraPlugins: 'interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-        removePlugins: 'sourcearea',
         allowedContent: true,
         fullPage: false,
         mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
@@ -18,7 +18,7 @@ function init_editor(editor_id,stylesheet_url){
         $("#content-preview").html(body);
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     });
-
+    
     editor.Height = '100%';
 
     return editor;

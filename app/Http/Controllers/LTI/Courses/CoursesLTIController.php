@@ -24,7 +24,12 @@ class CoursesLTIController extends LTIBaseController {
 
         $index = 'courses';
 
-        if (empty($searchterm)) {
+        //dd($searchterm);
+
+        if ($searchterm === '') {
+
+            Log::debug("Get ALL content");
+
             $query = '{
                "query": {
                     "match_all": {}
@@ -39,32 +44,26 @@ class CoursesLTIController extends LTIBaseController {
                 }
             }';
             
-            /* $query = '{
-                "query":{
-                    "function_score":{
-                        "query":{
-                            "bool":{
-                                "must":[
-                                    {
-                                        "multi_match":{
-                                            "fields":[
-                                                "title^10","description^5","tags^5"
-                                            ],
-                                            "type":"cross_fields",
-                                            "query": "' . $searchterm . '",
-                                            "minimum_should_match": "2<-1 5<70%"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            }'; */
         }
+
+        Log::debug("Query String---------------------------------------------------");
+        Log::debug($query);
+
+        $success = false;
 
         try {
             $output = $elasticsearch->search($index, $query, $from, $size);
+            $success = true;
+            Log::debug("Elastic search success---------------------------------------------------");
+        } catch (\ErrorException $e) {
+            Log::error("Unable to perform search: " . $e->getMessage());
+            
+        }
+
+        //dd($output);
+
+        if($success) {
+            //$output = $elasticsearch->search($index, $query, $from, $size);
             $output = json_decode($output);
 
             $hits = $output->hits->hits;
@@ -98,9 +97,8 @@ class CoursesLTIController extends LTIBaseController {
                     );
                 }
             }
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            $finalOutput = array();
+        } else {
+            $searchOutput = false;
         }
 
         //dd($finalOutput);

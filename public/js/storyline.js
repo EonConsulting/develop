@@ -52,7 +52,7 @@ if(debug === true) {
 
 let resizer = new Resizer(selector);
 
-var editor = init_editor('ltieditorv2inst',course_template_path);
+var editor = init_editor('ltieditorv2inst',css);
 
 
 
@@ -926,27 +926,28 @@ $(document).on('click','.white-b',function(){
 $(document).on('click','.p-check',function(){
     var data =  CKEDITOR.instances['ltieditorv2inst'].document.getBody().getText();
     $("#msgModal").modal();
-        if(data.length > 1){               
+
+    if(data.length > 1){               
         var url = copyleak_url;
         $.ajax({
-        url:url,
-        type: "POST",
-        data: {data: data, _token: csrf_token},
-        beforeSend: function () {
-        $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
-        },
-        success: function (result) {
-        if (result.msg == 'true') {
-            $('.msg-info').html(result.success);
-        } else {
-            $('.msg-info').html('You have run out of credits, please update your credit plan.');
-        }
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-        alert(errorThrown);
-        //ocation.reload();
-    }
-    });
+            url:url,
+            type: "POST",
+            data: {data: data, _token: csrf_token},
+            beforeSend: function () {
+                $('.msg-info').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Scanning content....</button>");
+            },
+            success: function (result) {
+                if (result.msg == 'true') {
+                    $('.msg-info').html(result.success);
+                } else {
+                    $('.msg-info').html('You have run out of credits, please update your credit plan.');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                //ocation.reload();
+            }
+        });
     }else{
         $('.msg-info').html('No content found, please add content.');
     }
@@ -955,15 +956,22 @@ $(document).on('click','.p-check',function(){
 
 //Editor events---------------------------------------------
 editor.on('instanceReady', function(){
+
     var body = editor.document.getBody();
     body.setAttribute( 'class', 'content-body');
 
     resize();
+
+    //editor.document.appendStyleText(css);
+/*
+    doc = editor.dom.document();
+    doc.appendStyleText(css);*/
 });
 
 editor.on('dataReady', function(){
     var body = editor.document.getBody();
     body.setAttribute( 'class', 'content-body');
+    editor.document.appendStyleText(css);
 });
 
 editor.on('key', function() {
