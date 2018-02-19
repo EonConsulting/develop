@@ -8,7 +8,8 @@ use EONConsulting\Storyline2\Models\Storyline;
 use EONConsulting\Storyline2\Models\StorylineItem;
 use EONConsulting\Storyline2\Controllers\Storyline2ViewsJSON as Storyline2JSON;
 use EONConsulting\Student\Progression\Http\Controllers\DefaultController as StudentProgress;
-use App\Models\ContentTemplates;
+use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use Illuminate\Http\Request;
 use mikehaertl\wkhtmlto\Pdf;
 use Illuminate\Support\Facades\File;
@@ -61,7 +62,7 @@ class ExportsController extends Controller {
         //$items = StorylineItem::with('contents')->where('storyline_id',$storyline_id)->get();
         $items = $Storyline2JSON->getTreeProgess($storyline_id);
 
-        $course['template'] = ContentTemplates::find($course->template_id);
+        $course['template'] = Template::find($course->template_id);
 
         $view = view('exports::module.modulepdf', ['items' => $items, 'course' => $course]);
         $contents = $view->render();

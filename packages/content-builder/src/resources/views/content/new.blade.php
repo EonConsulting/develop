@@ -596,7 +596,7 @@ var base_url = "{{{ url('') }}}";
         }
     }
 
-    var editor = init_editor('ltieditorv2inst','{{ url("css/content-templates/default.css") }}');
+    var editor = init_editor('ltieditorv2inst');
 
     editor.on('instanceReady', function()
     {

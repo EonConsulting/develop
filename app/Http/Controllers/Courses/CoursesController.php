@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\CourseMetadata;
 use App\Models\MetadataStore;
-use App\Models\ContentTemplates;
+use EONConsulting\Storyline2\Models\Template;
+use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use Validator;
 
 class CoursesController extends Controller
@@ -46,7 +47,7 @@ class CoursesController extends Controller
     {
         $id = (int)$request->get('id');
         if ($request->get('text') === 'Module') {
-            $templates = ContentTemplates::all();
+            $templates = Template::all();
             $data = Course::find($id);
             return view('lecturer.courses.edit', ['data' => $data, 'templates' => $templates]);
 

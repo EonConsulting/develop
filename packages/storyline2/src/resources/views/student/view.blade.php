@@ -306,10 +306,9 @@
         text-align: center;
     }
 
+    {{ url($course['template']['css']) }}
 </style>
 
-
-    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 @endsection
 
 
