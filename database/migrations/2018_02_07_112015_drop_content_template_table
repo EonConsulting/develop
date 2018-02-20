@@ -13,11 +13,18 @@ class DropContentTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            $table->dropForeign('template_ibfk_1');
-        });
 
-        Schema::dropIfExists('content_templates');
+        Schema::table('courses', function (Blueprint $table) {
+            $table->dropIndex('template_ibfk_1');
+            $table->dropForeign('template_ibfk_1');
+
+            $table->dropcolumn('template_id');
+        });
+        
+        if(Schema::hasTable('content_templates')){
+            Schema::dropIfExists('content_templates');
+        }
+        
     }
 
     /**
