@@ -13,13 +13,15 @@ class CreateStorylineItemTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('lk_storyline_item_type', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('name');
-            $table->string('description');
-            $table->string('class');
-        });
+        if(!Schema::hasTable('lk_storyline_item_type')){
+            Schema::create('lk_storyline_item_type', function (Blueprint $table) {
+                $table->increments('id');
+                $table->timestamps();
+                $table->string('name');
+                $table->string('description');
+                $table->string('class');
+            });
+        }
     }
 
     /**
