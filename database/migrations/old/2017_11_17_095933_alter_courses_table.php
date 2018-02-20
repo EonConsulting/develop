@@ -14,7 +14,7 @@ class AlterCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function ($table) {
-            $table->unsignedInteger('template_id')->default(1);
+            $table->unsignedInteger('template_id');
             $table->foreign('template_id', 'template_ibfk_1')
                 ->references('id')->on('content_templates');
         });
