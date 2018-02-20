@@ -15,7 +15,6 @@ class DropContentTemplateTable extends Migration
     {
 
         Schema::table('courses', function (Blueprint $table) {
-            $table->dropIndex('template_ibfk_1');
             $table->dropForeign('template_ibfk_1');
 
             $table->dropcolumn('template_id');
