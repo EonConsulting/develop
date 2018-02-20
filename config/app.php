@@ -192,6 +192,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+       
 
         \EONConsulting\LaravelLTI\LaravelLTIServiceProvider::class,
         \EONConsulting\RolesPermissions\RolesPermissionsServiceProvider::class,
@@ -238,6 +239,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ViewComposerServiceProvider::class,
+        
 
     ],
 

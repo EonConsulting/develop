@@ -28,8 +28,6 @@ class HomeController extends LTIAuthBaseController
      */
     public function index()
     {
-
-        //dd($this->user->id);
         switch ($this->get_user_role($this->user)) {
             case 'Instructor':
                 //return view('nonlti.dashboards.lecturer');
