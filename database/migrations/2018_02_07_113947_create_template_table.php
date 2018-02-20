@@ -13,21 +13,25 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('templates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('file_name');
-            $table->text('styles');
-            $table->unsignedInteger('creator_id');
-           
-            $table->timestamps();
-
-            $table->foreign('creator_id', 'user_ibfk_3')
-                ->references('id')->on('users');
-        });
-
+        if(!Schema::hasTable('templates')){
+            Schema::create('templates', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('file_name');
+                $table->text('styles');
+                $table->unsignedInteger('creator_id');
+               
+                $table->timestamps();
+    
+                $table->foreign('creator_id', 'user_ibfk_3')
+                    ->references('id')->on('users');
+            });
+        }
+    
         Schema::table('courses', function (Blueprint $table) {
-            $table->foreign('template_id', 'template_ibfk_1')
+            $table->unsignedInteger('template_id')->nullable()->default(null);
+
+            $table->foreign('template_id', 'template_ibfk_8')
                 ->references('id')->on('templates');
         });
 

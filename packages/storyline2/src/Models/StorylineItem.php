@@ -5,6 +5,7 @@ namespace EONConsulting\Storyline2\Models;
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
 use EONConsulting\ContentBuilder\Models\Content;
+use EONConsulting\ContentBuilder\Models\StorylineItemType;
 
 class StorylineItem extends Node {
     //Enable Nested Sets//
@@ -30,7 +31,7 @@ class StorylineItem extends Node {
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'storyline_id', 'root_parent', 'level', 'name', 'description', 'file_name', 'file_url','content_id'
+        'parent_id', 'storyline_id', 'root_parent', 'level', 'name', 'description', 'file_name', 'file_url','content_id','type'
     ];
 
     //Set Scope for Storyline Construction
@@ -85,6 +86,16 @@ class StorylineItem extends Node {
     public function contents()
     {
         return $this->belongsTo(Content::class, 'content_id', 'id');
+    }
+
+    /**
+     * Fetch storyline items for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function type()
+    {
+        return $this->hasOne(StorylineItemType::class, 'type');
     }
     
 }
