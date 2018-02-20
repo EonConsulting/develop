@@ -126,26 +126,29 @@ class ExportsController extends Controller {
      */
     public function export_marks(Request $request) {
         $courseId = (int)$request->get('course_id');
+        $dt_frm = $request->get('dt_from');
+        $dt_to = $request->get('dt_to');
+        $marks = $this->get_tao_results($courseId, $dt_frm, $dt_to);
         if(empty($request->get('dt_from'))){ 
-        $res = 'error';
-        $msg = 'Please select period start date.';       
+           $res = 'error';
+           $msg = 'Please select period start date.';       
         }elseif(empty($request->get('dt_to'))){
-        $res = 'error';
-        $msg = 'Please select period end date.';
+            $res = 'error';
+            $msg = 'Please select period end date.';
+        }elseif($marks->isEmpty()){
+             $res = 'error';    
+             $msg = 'There were no records found.';  
         }else{
-        $res = '200';    
-        $msg = 'CSV file has been generated successfully.';   
+            $res = '200';    
+            $msg = 'CSV file has been generated successfully.';  
         }
+        
         $response = ['res' => $res,'msg' => $msg,'id'=>$courseId,
                      'from'=>$request->get('dt_from'),'to'=>$request->get('dt_to')];
         return \Response::json($response);        
     }
     
-    /**
-     * 
-     * @param type $courseId
-     */
-    public function csv_download($courseId,$dt_frm,$dt_to){       
+    public function get_tao_results($courseId,$dt_frm,$dt_to){
         $frm = Carbon::parse($dt_frm)->format('Y-m-d');
         $to  = Carbon::parse($dt_to)->format('Y-m-d');
         $storyline = Storyline::where(['course_id' => $courseId])->first();
@@ -156,8 +159,20 @@ class ExportsController extends Controller {
                             ->groupBy('user_id')                   
                             ->orderBy('id')->get(); 
         
-        $csvExporter = $this->lara_csv();
+        return $marks;
         
+    }
+    
+    /**
+     * 
+     * @param type $courseId
+     * @param type $dt_frm
+     * @param type $dt_to
+     */
+    public function csv_download($courseId,$dt_frm,$dt_to){       
+        
+        $marks = $this->get_tao_results($courseId, $dt_frm, $dt_to);        
+        $csvExporter = $this->lara_csv();       
         $csvExporter->beforeEach(function ($marks) { 
              $marks->score = $marks->avg('score');
              $marks->test_taker = 'Assessment Type';

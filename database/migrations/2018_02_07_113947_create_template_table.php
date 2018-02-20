@@ -6,9 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTemplateTable extends Migration
 {
-
-    private $table = 'templates';
-
     /**
      * Run the migrations.
      *
@@ -16,9 +13,8 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable($table)){
-
-            Schema::create($table, function (Blueprint $table) {
+        if(!Schema::hasTable('templates')){
+            Schema::create('templates', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
                 $table->string('file_name');
@@ -30,11 +26,12 @@ class CreateTemplateTable extends Migration
                 $table->foreign('creator_id', 'user_ibfk_3')
                     ->references('id')->on('users');
             });
-
         }
-        
+    
         Schema::table('courses', function (Blueprint $table) {
-            $table->foreign('template_id', 'template_ibfk_1')
+            $table->unsignedInteger('template_id')->nullable()->default(null);
+
+            $table->foreign('template_id', 'template_ibfk_8')
                 ->references('id')->on('templates');
         });
 
@@ -47,7 +44,7 @@ class CreateTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::table($table, function (Blueprint $table) {
+        Schema::table('templates', function (Blueprint $table) {
             $table->dropForeign('user_ibfk_3');
         });
         
