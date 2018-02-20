@@ -86,5 +86,10 @@ class StorylineItem extends Node {
     {
         return $this->belongsTo(Content::class, 'content_id', 'id');
     }
+
+
+    public function type(){
+        return $this->hasOne(StorylineItemType::class, 'type');
+    }
     
 }
