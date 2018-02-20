@@ -35,7 +35,7 @@ class AlterJobsTable extends Migration
     {
         Schema::dropIfExists('jobs');
 
-        Schema::create($this->set_schema_table, function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
             $table->string('queue', 191);
