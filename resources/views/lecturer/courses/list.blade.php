@@ -55,7 +55,7 @@ Course List
                                         <a href="#" class="notifyId dropdown-link" type="button" data-id="{{$course->id}}" data-toggle="modal" data-target="#notificationModal"><i class="fa fa-envelope"></i> Notify</a>
                                         <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                         <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
-                                        <a href="#" class="marksId dropdown-link" id="{{$course->id}}"><i class="fa fa-file-excel"></i> Export Marks</a>
+                                        <a href="#" class="marksId dropdown-link" id="{{$course->id}}"><i class="fa fa-file-excel-o"></i> Export Marks</a>
                                     </div>
                                 </div> 
                             </td>
