@@ -64,16 +64,14 @@ class TaoResultsIngester implements ShouldQueue {
 
                     // turn the json payload into an object
                     //$json = json_decode($log->response);
-
                     // take the score and pass it into the summaries_assessment_results table
                     $user_id = $log->user_id;
                     $test_id = $log->id;
                     $sourcedid = $log->lis_result_sourcedid;
                     $score = $log->score;
                     $testname = ""; // get via API call
-                    
+
                     $this->summarizeEntry($user_id, $test_id, $sourcedid, $testname, $score);
-                    
                 }
             } catch (\Exception $e) {
                 Log::error("Exiting loop on tao results log id:" . $log->id . " message: " . $e->getMessage());
@@ -91,20 +89,13 @@ class TaoResultsIngester implements ShouldQueue {
         if ($json) {
             try {
                 // quick validation on json vars, dirty but effective
-                if ($json 
-                        && $json->context 
-                        && $json->context->extensions 
-                        && $json->context->extensions->course 
-                        && $json->context->extensions->storyline 
-                        && $json->context->extensions->storyline_item 
-                        && $json->actor 
-                        && $json->actor->mbox) {
+                if ($json && $json->context && $json->context->extensions && $json->context->extensions->course && $json->context->extensions->storyline && $json->context->extensions->storyline_item && $json->actor && $json->actor->mbox) {
                     // get some user info
                     $mbox = str_replace("mailto:", "", $json->actor->mbox);
                     $U = new ECC\Users();
                     $user = $U->GetUserFromEmailAddy($mbox);
                     $student_id = $user->id;
-                    
+
                     $course_id = $json->context->extensions->course;
                     $storyline_id = $json->context->extensions->storyline;
                     $storyline_item = $json->context->extensions->storyline_item;
@@ -123,21 +114,18 @@ class TaoResultsIngester implements ShouldQueue {
                         $new_percent = number_format((($index + 1) / sizeof($storyline_item_ids)) * 100, 2, '.', '');
                         $percent = ($new_percent > $percent) ? $new_percent : $percent;
                     }
-                    
+
                     // we only update our progress if it is greater than 
                     // what is already recorded as progress
                     $SP = new ECC\Summaries();
                     $progress_item = $SP->GetSummaryStudentProgression($student_id, $course_id, $storyline_id);
 
                     if ($progress_item) {
-                        // this is an existing progress
-                        // we only save if necessary
-                        if ($percent > $progress_item->progress) {
-                            $progress_item->progress = $percent;
-                            $SP->UpdateSummaryStudentProgress($progress_item);
-                            Log::debug("Progress updated for log id:" . $log->id);
-                        }
-                        Log::debug("Progress ignored for log id:" . $log->id);
+                        $percentages = [
+                            "percent" => $percent
+                        ];
+                        $SP->UpdateSummaryStudentProgress($progress_item, $percentages);
+                        Log::debug("Progress updated for log id:" . $log->id);
                     } else {
                         // this is a new progress
                         $progress_item = [
@@ -145,7 +133,9 @@ class TaoResultsIngester implements ShouldQueue {
                             "course_id" => $course_id,
                             "storyline_id" => $storyline_id,
                             "student_user_id" => $student_id,
-                            "progress" => $percent
+                            "progress" => $percent,
+                            "video_progress" => 0,
+                            "ebook_progress" => 0
                         ];
                         $SP->InsertSummaryStudentProgress($progress_item);
                         Log::debug("New summary item created for log id:" . $log->id);

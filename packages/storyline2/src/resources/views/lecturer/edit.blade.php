@@ -226,7 +226,7 @@ Storyline Student Single
     .title-bar-button {
         height: 43px;
         float: right;
-        background: $666;
+        background: #666;
         color: #FFF;
         border: none;
         padding: 0px 15px 0px 15px;

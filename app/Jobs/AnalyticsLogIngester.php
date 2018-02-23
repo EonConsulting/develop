@@ -76,6 +76,7 @@ class AnalyticsLogIngester implements ShouldQueue {
                                 break;
                             case "https://unisaonline.net/schema/1.0/topic":
                                 $this->processTopic($log, $json);
+                                $this->processAssets($log, $json);
                                 break;
                             default:
                                 // u r probably an unwanted entry, mark u as ingested
@@ -109,20 +110,15 @@ class AnalyticsLogIngester implements ShouldQueue {
         if ($json) {
             try {
                 // quick validation on json vars, dirty but effective
-                if ($json 
-                        && $json->context 
-                        && $json->context->extensions 
-                        && $json->context->extensions->course 
-                        && $json->context->extensions->storyline 
-                        && $json->context->extensions->storyline_item 
-                        && $json->actor 
-                        && $json->actor->mbox) {
+                if ($json && $json->context && $json->context->extensions && $json->context->extensions->course 
+                        && $json->context->extensions->storyline && $json->context->extensions->storyline_item 
+                        && $json->actor && $json->actor->mbox) {
                     // get some user info
                     $mbox = str_replace("mailto:", "", $json->actor->mbox);
                     $U = new ECC\Users();
                     $user = $U->GetUserFromEmailAddy($mbox);
                     $student_id = $user->id;
-                    
+
                     $course_id = $json->context->extensions->course;
                     $storyline_id = $json->context->extensions->storyline;
                     $storyline_item = $json->context->extensions->storyline_item;
@@ -141,7 +137,7 @@ class AnalyticsLogIngester implements ShouldQueue {
                         $new_percent = number_format((($index + 1) / sizeof($storyline_item_ids)) * 100, 2, '.', '');
                         $percent = ($new_percent > $percent) ? $new_percent : $percent;
                     }
-                    
+
                     // we only update our progress if it is greater than 
                     // what is already recorded as progress
                     $SP = new ECC\Summaries();
@@ -149,13 +145,11 @@ class AnalyticsLogIngester implements ShouldQueue {
 
                     if ($progress_item) {
                         // this is an existing progress
-                        // we only save if necessary
-                        if ($percent > $progress_item->progress) {
-                            $progress_item->progress = $percent;
-                            $SP->UpdateSummaryStudentProgress($progress_item);
-                            Log::debug("Progress updated for log id:" . $log->id);
-                        }
-                        Log::debug("Progress ignored for log id:" . $log->id);
+                        $percentages = [
+                            "percent" => $percent
+                        ];
+                        //$progress_item->progress = $percent;
+                        $SP->UpdateSummaryStudentProgress($progress_item, $percentages);
                     } else {
                         // this is a new progress
                         $progress_item = [
@@ -163,7 +157,9 @@ class AnalyticsLogIngester implements ShouldQueue {
                             "course_id" => $course_id,
                             "storyline_id" => $storyline_id,
                             "student_user_id" => $student_id,
-                            "progress" => $percent
+                            "progress" => $percent,
+                            "video_progress" => 0,
+                            "ebook_progress" => 0
                         ];
                         $SP->InsertSummaryStudentProgress($progress_item);
                         Log::debug("New summary item created for log id:" . $log->id);
@@ -173,7 +169,76 @@ class AnalyticsLogIngester implements ShouldQueue {
                     $this->updateAnalyticsIngestedStatus($log->id, 1);
                     Log::info("Successful topic progress from log id:" . $log->id);
                 } else {
-                    Log::info("Unable to ingest log, missing storyline id, see log id:" . $log->id);
+                    Log::info("Unable to ingest log, missing required ids, see log id:" . $log->id);
+                }
+            } catch (\Exception $e) {
+                Log::error("Error on persisting progress from log id:" . $log->id . " message: " . $e->getMessage());
+                $this->updateAnalyticsIngestedStatus($log->id, 2);
+            }
+        }
+    }
+
+    function processAssets($log, $json) {
+        if ($json) {
+            try {
+                // quick validation on json vars, dirty but effective
+                if ($json && $json->context && $json->context->extensions && $json->context->extensions->course 
+                        && $json->context->extensions->storyline && $json->context->extensions->storyline_item 
+                        && $json->actor && $json->actor->mbox) {
+                    // get some user info
+                    $mbox = str_replace("mailto:", "", $json->actor->mbox);
+                    $U = new ECC\Users();
+                    $user = $U->GetUserFromEmailAddy($mbox);
+                    $student_id = $user->id;
+
+                    $course_id = $json->context->extensions->course;
+                    $storyline_id = $json->context->extensions->storyline;
+                    $storyline_item = $json->context->extensions->storyline_item;
+
+                    // so now shit gets real because we have no idea how many asset types
+                    // there are per course, so what we have to do is check if there is
+                    // a course asset summary register, if not, build one
+                    // get the structure of the course
+                    $SA = new ECC\Assets();
+                    $asset_register = $SA->BuildAssetRegister($course_id, $storyline_id);
+                    
+                    if (count($asset_register) > 0) {
+                        // YAY!!! There is an asset register
+                        
+                        // determine progress if it exists
+                        // this is the common student progress table
+                        $SP = new ECC\Summaries();
+                        $progress_item = $SP->GetSummaryStudentProgression($student_id, $course_id, $storyline_id);
+                        
+                        if (count($progress_item) > 0) {
+                            // work out the percent progress
+                            $asset_percentages = $SA->GetAssetProgressPercentage($course_id, $storyline_item);
+                            $SP->UpdateSummaryStudentProgress($progress_item, $asset_percentages);
+                        } else {
+                            // this is a new progress
+                            $progress_item = [
+                                "progress_type_id" => 1, // hard-wired for now, awaiting requirements
+                                "course_id" => $course_id,
+                                "storyline_id" => $storyline_id,
+                                "student_user_id" => $student_id,
+                                "progress" => 0,
+                                "video_progress" => 0,
+                                "ebook_progress" => 0
+                            ];
+                            $SP->InsertSummaryStudentProgress($progress_item);
+                            Log::debug("New asset summary item created for log id:" . $log->id);
+                        }
+                    } else {
+                        // CRAP!!! No asset register, get out of here
+                        Log::error("Error building asset register for course_id:" . $course_id);
+                        return;
+                    }
+
+                    // set this log as processed
+                    $this->updateAnalyticsIngestedStatus($log->id, 1);
+                    Log::info("Successful topic progress from log id:" . $log->id);
+                } else {
+                    Log::info("Unable to ingest log, missing required ids, see log id:" . $log->id);
                 }
             } catch (\Exception $e) {
                 Log::error("Error on persisting progress from log id:" . $log->id . " message: " . $e->getMessage());

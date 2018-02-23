@@ -53,7 +53,8 @@ class Storylines {
                 'text' => $node['name'],
                 'parent_id' => ($node['parent_id'] === null) ? "#" : $node['parent_id'],
                 'rgt' => $node['_rgt'],
-                'lft' => $node['_lft']
+                'lft' => $node['_lft'],
+                'content_id' => $node['content_id']
             ];
         }
 

@@ -36,26 +36,26 @@ class Storyline2ViewsBlade extends BaseController {
      * @param $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function view($course) {
+    public function view(Course $course) {
 
         $SL2JSON = new Storyline2JSON;
 
-        $course = Course::find($course);
         $storyline_id = $course->latest_storyline()->id;
         $userId = auth()->user()->id;
     
-        $items = $SL2JSON->getTreeProgess($storyline_id);       
+        $items = $SL2JSON->getTreeProgess($storyline_id);
 
-        /*$course['template'] = Template::find($course->template_id);
-            ->transformWith(new TemplateTransformer());*/
+        try {
 
+            $template = Template::findOrFail($course->template_id);
 
-        $course['template'] = Template::where("id", $course->template_id)
-            ->get()
-            ->transformWith(new TemplateTransformer())
-            ->toArray()['data'][0];
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        {
+            \Log::debug($e->getMessage());
+            abort(500, 'Unable to find themes');
+        }
 
-        //dd($course['template']);
+        $course['template'] = (new TemplateTransformer)->transform($template);
 
         $breadcrumbs = [
           'title' => 'View Storyline: ' . $course->title //pass $course as param and load name here
@@ -137,14 +137,21 @@ class Storyline2ViewsBlade extends BaseController {
      * @param $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($course_id) {
+    public function edit(Course $course)
+    {
+        try {
+
+            $template = Template::findOrFail($course->template_id);
+
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        {
+            \Log::debug($e->getMessage());
+            abort(500, 'Unable to find themes');
+        }
         
-        $course = Course::find($course_id);
-        $course['template'] = Template::where("id", $course->template_id)
-            ->get()
-            ->transformWith(new TemplateTransformer())
-            ->toArray()['data'][0];
-        
+        $course_array = $course->toArray();
+        $course_array['template'] = (new TemplateTransformer)->transform($template);
+
         $contents = Content::all();
         $latest_storyline = $course->latest_storyline();
 
@@ -204,9 +211,9 @@ class Storyline2ViewsBlade extends BaseController {
         ];
 
         return view('eon.storyline2::lecturer.edit', [
-            'course' => $course,
+            'course' => $course_array,
             'contents' => $contents,
-            'course_id' => $course_id,
+            'course_id' => $course_array['id'],
             'storyline_id' => $storyline_id,
             'categories' => $categories,
             'assets' => $assets,

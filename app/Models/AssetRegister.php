@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SummaryStudentProgression extends Model
+class AssetRegister extends Model
 {
 
   /**
@@ -12,7 +12,7 @@ class SummaryStudentProgression extends Model
    *
    * @var string
    */
-    protected $table = 'summary_student_progression';
+    protected $table = 'asset_register';
     /**
      * The primary key for the model.
      *
@@ -26,7 +26,7 @@ class SummaryStudentProgression extends Model
      * @var array
      */
     protected $fillable = [
-        'progress_type_id', 'course_id', 'student_user_id', 'progress', 'video_progress',
-        'ebook_progress'
+        'course_id', 'storyline_id', 'video_count', 'video_register', 'ebook_count',
+        'ebook_register'
     ];
 }
