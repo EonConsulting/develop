@@ -1,0 +1,41 @@
+[2018-02-19 13:20:31] local.DEBUG: Attempting an LTI Login....  
+[2018-02-19 13:20:31] local.DEBUG: Instructor  
+[2018-02-19 13:20:40] local.DEBUG: Attempting an LTI Login....  
+[2018-02-19 13:20:40] local.DEBUG: Learner  
+[2018-02-19 13:20:45] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-19 13:20:45] local.DEBUG: {
+                "query": {
+                    "query_string" : {
+                        "query" : "**"
+                    }
+                }
+            }  
+[2018-02-19 13:20:45] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-19 13:20:49] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-19 13:20:49] local.DEBUG: {
+                "query": {
+                    "query_string" : {
+                        "query" : "**"
+                    }
+                }
+            }  
+[2018-02-19 13:20:49] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-20 18:03:23] local.DEBUG: Attempting an LTI Login....  
+[2018-02-20 18:03:23] local.DEBUG: Learner  
+[2018-02-20 18:03:28] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-20 18:03:28] local.DEBUG: {
+                "query": {
+                    "query_string" : {
+                        "query" : "**"
+                    }
+                }
+            }  
+[2018-02-20 18:03:28] local.DEBUG: Elastic search success---------------------------------------------------  
+[2018-02-20 18:04:34] local.DEBUG: Get ALL content  
+[2018-02-20 18:04:34] local.DEBUG: Query String---------------------------------------------------  
+[2018-02-20 18:04:34] local.DEBUG: {
+               "query": {
+                    "match_all": {}
+                }
+            }  
+[2018-02-20 18:04:34] local.DEBUG: Elastic search success---------------------------------------------------  
