@@ -37,6 +37,10 @@ class ElasticSearchRefresh implements ShouldQueue {
 
     public function handle(){
         
+        DB::table('courses')->update([ 'ingested' => 0 ]);
+        DB::table('content')->update([ 'ingested' => 0 ]);
+        DB::table('assets')->update([ 'ingested' => 0 ]);
+
         ElasticSearchSetup::dispatch();
 
         ElasticIndexCourseInfo::dispatch(true);
