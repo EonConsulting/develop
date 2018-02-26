@@ -26,7 +26,7 @@ class CoursesLTIController extends LTIBaseController {
 
         //dd($searchterm);
 
-        if ($searchterm === '') {
+        if ($searchterm === null) {
 
             Log::debug("Get ALL content");
 
