@@ -1213,13 +1213,13 @@ class WidgetCore {
                     );
                     // these methods exist in other plugins but they
                     // need to be triggered in the event they exist in scope
-                    instance.renderVideoProgressionGraph(_.head(prog));
-                    instance.renderEbookProgressionGraph(_.head(prog));
                     instance.renderStudyGuideProgressionGraph(_.head(prog));
 
                     // callback render on ajax data for storylineprogression
                     // ajax method for getting progression data
                     instance.data_progression(function(data){
+                            instance.renderVideoProgressionGraph(data);
+                            instance.renderEbookProgressionGraph(data);
                             instance.renderStorylineProgressionGraph(data);
                         }
                     );
@@ -1611,21 +1611,21 @@ class WidgetCore {
                         backgroundColor: 'rgba(0, 192, 239, 1)',
                         //borderColor: 'rgba(0, 192, 239, 1)',
                         borderWidth: 0,
-                        data: data.progress.videos.class_progress
+                        data: data.progress.video.class_progress
                     },
                     {
                         label: 'My Progress',
                         backgroundColor: 'rgba(111, 215, 241, 1)',
                         //borderColor: 'rgba(221, 75, 57, 1)',
                         borderWidth: 0,
-                        data: data.progress.videos.my_progress
+                        data: data.progress.video.my_progress
                     },
                     {
                         label: 'Course Timeline',
                         backgroundColor: 'rgba(200, 200, 200, 1)',
                         //borderColor: 'rgba(0, 166, 90, 1)',
                         borderWidth: 0,
-                        data: data.progress.videos.course_timeline
+                        data: data.progress.video.module_progress
                     }
                 ]
             };
@@ -1709,21 +1709,21 @@ class WidgetCore {
                         backgroundColor: 'rgba(221, 75, 57, 1)',
                         //borderColor: 'rgba(0, 192, 239, 1)',
                         borderWidth: 0,
-                        data: data.progress.ebooks.class_progress
+                        data: data.progress.ebook.class_progress
                     },
                     {
                         label: 'My Progress',
                         backgroundColor: 'rgba(226, 145, 135, 1)',
                         //borderColor: 'rgba(221, 75, 57, 1)',
                         borderWidth: 0,
-                        data: data.progress.ebooks.my_progress
+                        data: data.progress.ebook.my_progress
                     },
                     {
                         label: 'Course Timeline',
                         backgroundColor: 'rgba(200, 200, 200, 1)',
                         //borderColor: 'rgba(0, 166, 90, 1)',
                         borderWidth: 0,
-                        data: data.progress.ebooks.course_timeline
+                        data: data.progress.ebook.module_progress
                     }
                 ]
             };
