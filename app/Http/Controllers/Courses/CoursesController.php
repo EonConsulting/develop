@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
-use App\Models\Course;
+use EONConsulting\Storyline2\Models\Course;
 //use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,13 +28,13 @@ class CoursesController extends Controller
 
     public function allCourses()
     {
-        $courses = Course::orderBy('id', 'DESC')->get();
+        $courses = Course::with(['creator'])->orderBy('id', 'DESC')->get();
         return $courses;
     }
 
     public function show()
     {
-        $courseCreator = Course::where('creator_id', auth()->user()->id)->get();
+        $courseCreator = Course::with(['creator'])->where('creator_id', auth()->user()->id)->get();
 
         $breadcrumbs = [
             'title' => 'My Modules'
