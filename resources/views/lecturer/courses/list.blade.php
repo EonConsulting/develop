@@ -68,7 +68,6 @@ Course List
     </div>
 </div>
 
-
 @section('exterior-content')
 
 <div id="formModal" class="modal fade" role="dialog">
