@@ -21,8 +21,7 @@ class NotificationsController {
         $crud = new SupportMessages([
                 'sender_id' => (int)auth()->user()->id,
                 'subject' => $data->get('subject'),
-                'message' => $data->get('message')
-               
+                'message' => $data->get('message')              
             ]);
         
         if($crud->save()){            
