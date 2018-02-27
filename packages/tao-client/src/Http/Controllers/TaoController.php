@@ -34,7 +34,7 @@ class TaoController extends Controller
         $validated_data = $request->validate([
             'launch_url' => 'required',
             'assessment_type' => 'required',
-            'assessment_weight' => 'required_if:assessment_type,Formal Assessment',
+            //'assessment_weight' => 'required_if:assessment_type,Formal Assessment',
         ]);
 
         $assessment = TaoAssessment::updateOrCreate([
@@ -44,7 +44,7 @@ class TaoController extends Controller
             'key' => config('tao-client.launch-options.key'),
             'secret' => config('tao-client.launch-options.secret'),
             'assessment_type' => $validated_data['assessment_type'],
-            'assessment_weight' => $validated_data['assessment_weight'],
+            //'assessment_weight' => $validated_data['assessment_weight'],
         ]);
 
         return response()->json(['status'  => 'success']);
