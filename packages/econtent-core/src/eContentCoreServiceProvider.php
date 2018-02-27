@@ -35,11 +35,11 @@ class eContentCoreServiceProvider extends ServiceProvider
         $this->loadViews('ecore');
         $this->registerRouteMacros();
 
-        \DB::listen(function ($query) {
+        /*\DB::listen(function ($query) {
             \Log::debug($query->sql);
             // $query->bindings
             // $query->time
-        });
+        });*/
 
     }
 
