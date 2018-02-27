@@ -253,7 +253,7 @@ class ContentImporterCommand extends Command
             'title' => $params['title'],
             'description' => $params['title'],
             'body' => $params['body'],
-            'creator_id' => 2,
+            'creator_id' => 1,
         ]);
     }
 
@@ -267,7 +267,7 @@ class ContentImporterCommand extends Command
         return Course::firstOrCreate([
             'title' => $params['title'],
             'description' => 'Auto Imported',
-            'creator_id' => 2,
+            'creator_id' => 1,
             'template_id' => 1,
         ]);
     }
@@ -281,7 +281,7 @@ class ContentImporterCommand extends Command
     {
         return Storyline::firstOrCreate([
             'course_id' => $params['course_id'],
-            'creator_id' => 2,
+            'creator_id' => 1,
             'version' => 1,
         ]);
     }
