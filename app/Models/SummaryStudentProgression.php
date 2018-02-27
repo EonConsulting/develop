@@ -26,6 +26,7 @@ class SummaryStudentProgression extends Model
      * @var array
      */
     protected $fillable = [
-        'progress_type_id', 'course_id', 'student_user_id', 'progress'
+        'progress_type_id', 'course_id', 'student_user_id', 'progress', 'video_progress',
+        'ebook_progress'
     ];
 }

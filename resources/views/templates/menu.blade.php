@@ -120,7 +120,7 @@
         </li>
 
         <?php // if (laravel_lti()->is_instructor(auth()->user())): ?>
-        <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? 'left-menu-active' : '' }}">
+        <li class="{{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show' || Route::currentRouteName() === 'templates.index') ? 'left-menu-active' : '' }}">
             <a href="{{ (laravel_lti()->is_instructor(auth()->user())) ? '#' : route('lti.courses').'?from=0&size=12&searchterm=' }}" {{ (laravel_lti()->is_instructor(auth()->user())) ? "class=accordian" : "" }}>
                 <i class="fa fa-edit fa-lg left-menu-icon"></i>
                 <span class="menu_collapse">
@@ -133,7 +133,7 @@
             </a>
 
             <?php if (laravel_lti()->is_instructor(auth()->user())): ?>
-                <div class="left-menu-sub {{ (Route::currentRouteName() == 'courses' || Route::currentRouteName() == 'courses.create' || Route::currentRouteName() == 'courses.show') ? '' : 'hidden' }}">
+                <div class="left-menu-sub {{ (Route::currentRouteName() === 'courses' || Route::currentRouteName() === 'courses.create' || Route::currentRouteName() === 'courses.show' || Route::currentRouteName() === 'templates.index') ? '' : 'hidden' }}">
                     <ul>
 
                         <li class="{{ (Route::currentRouteName() == 'courses') ? 'left-menu-active' : '' }}">
@@ -156,6 +156,14 @@
                                 Create
                             </a>
                         </li>
+
+                        <li class="{{ (Route::currentRouteName() == 'templates.index') ? 'left-menu-active' : '' }}">
+                            <a href="{{ route('templates.index') }}">
+                                <i class="fa fa-circle-o left-menu-icon"></i>
+                                Templates
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             <?php endif; ?>

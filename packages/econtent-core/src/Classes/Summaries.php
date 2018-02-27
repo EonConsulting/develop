@@ -8,6 +8,7 @@
 namespace EONConsulting\Core\Classes;
 
 use App\Models\SummaryStudentProgression;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Description of Summaries
@@ -49,12 +50,33 @@ class Summaries {
      * @param object $item the object to update
      * @return row
      */
-    function UpdateSummaryStudentProgress($item) {
-        $sp = SummaryStudentProgression::find($item->id);
-        $sp->progress = $item->progress;
-        $sp->save();
+    function UpdateSummaryStudentProgress($item, $percentages = null) {
+        
+        //$sp = SummaryStudentProgression::find($item->id);
+        
+        // we only save if necessary
+        if ($percentages)
+        {
+            if (!empty($percentages["percent"]))
+            {
+                $item->progress = $percentages["percent"];
+            }
+            
+            if (!empty($percentages["video_percent"]))
+            {
+                $item->video_progress = $percentages["video_percent"];
+            }
+            
+            if (!empty($percentages["ebook_percent"]))
+            {
+                $item->ebook_progress = $percentages["ebook_percent"];
+            }
+              
+            $item->save();
+            Log::debug("Asset progress updated for summary_asset_id:" . $item->id);
+        } 
     }
-    
+
     /**
      * This method inserts the new progression for a student per course and module
      *
@@ -70,7 +92,9 @@ class Summaries {
         $sp->storyline_id = $item["storyline_id"];
         $sp->student_user_id = $item["student_user_id"];
         $sp->progress = $item["progress"];
-        
+        $sp->video_progress = $item["video_progress"];
+        $sp->ebook_progress = $item["ebook_progress"];
+
         $sp->save();
     }
 

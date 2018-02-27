@@ -306,10 +306,9 @@
         text-align: center;
     }
 
+    {{ url($course['template']['css']) }}
 </style>
 
-
-    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
 @endsection
 
 
@@ -769,7 +768,7 @@
                         mbox: "{{ auth()->user()->email }}"
                     },
                     verb: {
-                        id: "https://unisaonline.net/schema/1.0/topic"
+                        id: "https://unisaonline.net/schema/1.0/topic" // you've engaged with a topic
                     },
                     target: {
                         id: "{!! url('') !!}"

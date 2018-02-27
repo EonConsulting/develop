@@ -245,8 +245,6 @@ class ContentBuilderCore extends Controller {
 
         }
 
-
-
         return view('eon.content-builder::content.edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
 
     }

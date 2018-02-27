@@ -123,6 +123,28 @@ class DashboardDataController extends LTIBaseController {
                             0
                         //(int)$ssp_avg
                         ]
+                    ],
+                    "video" => [
+                        "class_progress" => [
+                            $smp_items["class_video_progress"]
+                        ],
+                        "module_progress" => [
+                            $smp_items["module_video_progress"]
+                        ],
+                        "my_progress" => [
+                            0
+                        ]
+                    ],
+                    "ebook" => [
+                        "class_progress" => [
+                            $smp_items["class_ebook_progress"]
+                        ],
+                        "module_progress" => [
+                            $smp_items["module_ebook_progress"]
+                        ],
+                        "my_progress" => [
+                            0
+                        ]
                     ]
                 ]
             ];
@@ -130,11 +152,11 @@ class DashboardDataController extends LTIBaseController {
             // this is the expected progress for the course
             // as well as the class average, pre-calculated
             $smp_items = SummaryModuleProgression::where("course_id", $course_id)
-                    ->firstOrFail();
+                    ->first();
 
             $ssp_items = SummaryStudentProgression::where("course_id", $course_id)
                     ->where("student_user_id", $student_id)
-                    ->firstOrFail();
+                    ->first();
 
             $result = [
                 "course_id" => $course_id,
@@ -149,6 +171,28 @@ class DashboardDataController extends LTIBaseController {
                         ],
                         "my_progress" => [
                             $ssp_items["progress"]
+                        ]
+                    ],
+                    "video" => [
+                        "class_progress" => [
+                            $smp_items["class_video_progress"]
+                        ],
+                        "module_progress" => [
+                            $smp_items["module_video_progress"]
+                        ],
+                        "my_progress" => [
+                            $ssp_items["video_progress"]
+                        ]
+                    ],
+                    "ebook" => [
+                        "class_progress" => [
+                            $smp_items["class_ebook_progress"]
+                        ],
+                        "module_progress" => [
+                            $smp_items["module_ebook_progress"]
+                        ],
+                        "my_progress" => [
+                            $ssp_items["ebook_progress"]
                         ]
                     ]
                 ]

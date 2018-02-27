@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
     // http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
     // The toolbar groups arrangement, optimized for two toolbar rows.
-    /*config.toolbarGroups = [
+    config.toolbarGroups = [
         { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
         { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
         { name: 'links' },
@@ -31,8 +31,10 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
         { name: 'styles' },
         { name: 'colors' },
-    ];*/
+    ];
 
+    //config.extraPlugins = 'sourcearea';
+/*
     config.toolbarGroups = [
         { name: 'tools', groups: [ 'tools' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
@@ -41,7 +43,7 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'forms', groups: [ 'forms' ] },
         { name: 'links', groups: [ 'links' ] },
         { name: 'insert', groups: [ 'insert' ] },
-        { name: 'others' },
+        { name: 'others'},
         '/',
         { name: 'styles', groups: [ 'styles' ] },
         { name: 'colors', groups: [ 'colors' ] },
@@ -49,9 +51,8 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
 
     ];
-
-    config.removeButtons = 'Save,NewPage,Preview,Templates,PasteFromWord,Paste,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Anchor,PageBreak,About';
-
+*/
+    //config.removeButtons = 'Save,NewPage,Preview,Templates,PasteFromWord,Paste,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Anchor,PageBreak,About';
 
     config.pasteFromWordPromptCleanup = true;
     config.pasteFromWordRemoveFontStyles = true;

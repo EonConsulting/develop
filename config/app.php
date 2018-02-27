@@ -31,7 +31,7 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://10.0.2.2:9200'),
+    'es_uri' => env('ES_URI', 'http://197.189.232.130:9200'),
 
 
     /*
@@ -192,6 +192,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+       
 
         \EONConsulting\LaravelLTI\LaravelLTIServiceProvider::class,
         \EONConsulting\RolesPermissions\RolesPermissionsServiceProvider::class,
@@ -238,6 +239,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ViewComposerServiceProvider::class,
+        
 
     ],
 

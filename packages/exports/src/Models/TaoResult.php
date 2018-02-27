@@ -1,0 +1,156 @@
+<?php
+
+namespace EONConsulting\Exports\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use EONConsulting\Storyline2\Models\StorylineItem;
+use App\Models\User;
+use EONConsulting\TaoClient\Models\Tao\ResultIdentifiers;
+use EONConsulting\TaoClient\Models\Tao\ResultsStorage;
+use EONConsulting\TaoClient\Models\TaoAssessment;
+use Carbon\Carbon;
+use App\Models\LtiUser;
+
+class TaoResult extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'integrate_tao_results';
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'response' => 'array',
+    ];
+
+    /**
+     * Get user related to this model
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    
+    public function lti_user()
+    {
+        return $this->belongsTo(LtiUser::class, 'user_id', 'user_id');
+    }
+
+    /**
+     * Get storyline item related to this model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function storyline_item()
+    {
+        return $this->belongsTo(StorylineItem::class, 'storyline_item_id', 'id');
+    }
+
+    /**
+     * Get result identifier from tao's database
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function result_identifier()
+    {
+        return $this->hasOne(ResultIdentifiers::class, 'result_id', 'lis_result_sourcedid');
+    }
+
+    /**
+     * Get the assessment for result
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function tao_assessment()
+    {
+        return $this->hasOne(TaoAssessment::class, 'storyline_item_id', 'storyline_item_id');
+    }
+
+    /**
+     * Scope a query to only include results with source id.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebySourceId($query, $source_id)
+    {
+        return $query->where('lis_result_sourcedid', $source_id);
+    }
+
+    /**
+     * Scope a query to only include pending outcomes.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyPendingOutcome($query)
+    {
+        return $query->where('status', 0)
+                     ->whereNull('score')
+                     ->whereNotNull('storyline_item_id');
+    }
+
+    /**
+     * Scope a query to only include pending api.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyPendingApi($query)
+    {
+        return $query->where('status', 1)
+                     ->whereNull('response')
+                     ->whereNotNull('storyline_item_id');
+    }
+
+    /**
+     * Scope a query to only include pending api.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyFailed($query)
+    {
+        $query->where('status', 3)
+              ->whereNull('response');
+    }
+
+    /**
+     * Scope a query to only include incomplete.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyIncomplete($query)
+    {
+        $date = Carbon::now()->subDay(1);
+
+        return $query->where('status', 0)
+                     ->where('created_at', '<', $date);
+    }
+
+    /**
+     * Get the real score..
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRealScoreAttribute($value)
+    {
+        return ($this->score * 100);
+    }
+}

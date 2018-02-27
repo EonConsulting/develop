@@ -1,4 +1,4 @@
-$developer = true;
+$developer = false;
 $collapsed = false;
 
 console.log(window.global_conf.subdir);
