@@ -32,6 +32,39 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
             <div data-simplebar class="content-area" id="content-area">
                 <div style="height: 15px;"></div>
+
+
+                @if(session()->has('flash.success'))
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+
+                                    <strong>Success! </strong>
+                                    {{ session()->get('flash.success') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if(session()->has('flash.error'))
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
+
+                                    <strong>Request failed! </strong>
+                                    {{ session()->get('flash.error') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
                 @yield('content')
             </div>
 
@@ -53,7 +86,15 @@ $lti = laravel_lti()->is_lti(auth()->user());
 
         @yield('custom-scripts')
 
-        @include('html-to-pdf::javascript')
+        <script>
+            jQuery(document).ready(function($)
+            {
+                $(".alert-success").delay(4000).slideUp(200, function() {
+                    $(this).alert('close');
+                });
+
+            });
+        </script>
 
         <div id="js-loading">
             <img src="{{ url('img/loading.gif') }}" alt=""><br>

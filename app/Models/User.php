@@ -90,25 +90,6 @@ class User extends Authenticatable implements Auditable, UserResolver
     }
 
     /**
-     * Check if user has role
-     *
-     * @param string $role
-     * @return bool
-     */
-    public function hasRole($role)
-    {
-        if ( ! $lti = $this->lti->first()) {
-            return false;
-        }
-
-        if($lti->roles == $role) {
-            return true;
-        }
-        
-        return false;
-    }
-
-    /**
      * Route notifications for the Nexmo channel.
      *
      * @return string
@@ -154,4 +135,70 @@ class User extends Authenticatable implements Auditable, UserResolver
 
         return $lti->roles;
     }
+
+    /**
+     * Determine if the model has any of the given role(s).
+     *
+     * @param string|array
+     *
+     * @return bool
+     */
+    public function hasAnyRole($roles): bool
+    {
+        if ( ! $lti = $this->lti->first()) {
+            return false;
+        }
+
+        if (is_string($roles) && false !== strpos($roles, '|'))
+        {
+            $roles = $this->convertPipeToArray($roles);
+        }
+
+        return collect($roles)->contains(strtolower($lti->roles));
+    }
+
+    /**
+     * Check if user has role
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        if ( ! $lti = $this->lti->first()) {
+            return false;
+        }
+
+        if($lti->roles == $role) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function convertPipeToArray(string $pipeString)
+    {
+        $pipeString = trim($pipeString);
+
+        if (strlen($pipeString) <= 2) {
+            return $pipeString;
+        }
+
+        $quoteCharacter = substr($pipeString, 0, 1);
+
+        $endCharacter = substr($quoteCharacter, -1, 1);
+
+        if ($quoteCharacter !== $endCharacter)
+        {
+            return explode('|', $pipeString);
+        }
+
+        if (! in_array($quoteCharacter, ["'", '"']))
+        {
+            return explode('|', $pipeString);
+        }
+
+        return explode('|', trim($pipeString, $quoteCharacter));
+    }
+
 }
