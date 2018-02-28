@@ -98,6 +98,8 @@ class eContentCoreServiceProvider extends ServiceProvider
     {
         Response::macro('stream_file', function($disk, $filename)
         {
+            ob_end_clean();
+
             return response()->stream(function() use ($disk, $filename)
             {
                 $stream = Storage::disk($disk)->readStream($filename);
