@@ -32,14 +32,24 @@ class CoursesController extends Controller
         return $courses;
     }
 
-    public function show()
+    public function show($title)
     {
+        if($title === 'my'){
         $courseCreator = Course::where('creator_id', auth()->user()->id)->get();
 
         $breadcrumbs = [
             'title' => 'My Modules'
         ];
+        
+        }else{
+        $courseCreator = Course::all();
 
+        $breadcrumbs = [
+            'title' => 'All Modules'
+        ];
+        
+        }
+        
         return view('lecturer.courses.show', ['courses' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
     }
     

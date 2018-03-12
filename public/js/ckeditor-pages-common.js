@@ -1,6 +1,8 @@
 function init_editor(editor_id){
 
     var editor = {};
+    
+    
 
     editor = CKEDITOR.replace(editor_id, {
         //contentsCss : stylesheet_url,
