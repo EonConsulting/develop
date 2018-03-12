@@ -47,8 +47,8 @@
                                             style: 'margin-top:5px',
                                             items: [ [ 'Self Assessment' ], [ 'Formal Assessment' ] ],
                                             'default': 'Self Assessment'
-                                        },
-                                        {
+                                        }
+                                        /*,{
                                             type: 'text',
                                             id: 'assessment_weight',
                                             label: 'Assessment Weight',
@@ -72,7 +72,7 @@
                                                     return false;
                                                 }
                                             }
-                                        }
+                                        }*/
                                     ]
                                 }]
                             }
@@ -84,7 +84,7 @@
                             var dialog = CKEDITOR.dialog.getCurrent();
                             var data_launch_url = dialog.getContentElement('ltitab', 'launch_url').getInputElement().getValue();
                             var data_assessment_type = dialog.getContentElement('ltitab', 'assessment_type').getInputElement().getValue();
-                            var data_assessment_weight = dialog.getContentElement('ltitab', 'assessment_weight').getInputElement().getValue();
+                           // var data_assessment_weight = dialog.getContentElement('ltitab', 'assessment_weight').getInputElement().getValue();
                             var erorlogNum = 'XD0000000CK111';
 
                             $.ajax({
@@ -93,7 +93,7 @@
                                 data: {
                                     launch_url: data_launch_url,
                                     assessment_type: data_assessment_type,
-                                    assessment_weight: data_assessment_weight
+                                    //assessment_weight: data_assessment_weight
                                 },
                                 success: function (config) {
                                     if (config.status == 'success') {

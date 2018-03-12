@@ -52,7 +52,7 @@ class Storyline2ViewsBlade extends BaseController {
         } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
         {
             \Log::debug($e->getMessage());
-            abort(500, 'Unable to find themes');
+            $template = Template::first();
         }
 
         $course['template'] = (new TemplateTransformer)->transform($template);
@@ -139,6 +139,7 @@ class Storyline2ViewsBlade extends BaseController {
      */
     public function edit(Course $course)
     {
+
         try {
 
             $template = Template::findOrFail($course->template_id);
@@ -146,9 +147,9 @@ class Storyline2ViewsBlade extends BaseController {
         } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
         {
             \Log::debug($e->getMessage());
-            abort(500, 'Unable to find themes');
+            $template = Template::first();
         }
-        
+
         $course_array = $course->toArray();
         $course_array['template'] = (new TemplateTransformer)->transform($template);
 
@@ -213,7 +214,7 @@ class Storyline2ViewsBlade extends BaseController {
         return view('eon.storyline2::lecturer.edit', [
             'course' => $course_array,
             'contents' => $contents,
-            'course_id' => $course_array['id'],
+            'course_id' => $course->id,
             'storyline_id' => $storyline_id,
             'categories' => $categories,
             'assets' => $assets,

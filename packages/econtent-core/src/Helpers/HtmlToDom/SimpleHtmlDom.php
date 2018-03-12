@@ -171,7 +171,18 @@ class SimpleHtmlDom
         $this->root->_[HtmlHandler::HDOM_INFO_BEGIN] = -1;
         $this->root->nodetype = HtmlHandler::HDOM_TYPE_ROOT;
         $this->parent = $this->root;
-        if ($this->size>0) $this->char = $this->doc[0];
+
+        if ($this->size > 0)
+        {
+            if($this->doc instanceof SimpleHtmlDom)
+            {
+                $this->char = $this->doc;
+            }
+            else
+            {
+                $this->char = $this->doc[0];
+            }
+        }
     }
 
     // set callback function
@@ -207,9 +218,17 @@ class SimpleHtmlDom
 
         // reset the length of content
         $this->size = strlen($this->doc);
-        if ($this->size>0)
+
+        if ($this->size > 0)
         {
-            $this->char = $this->doc[0];
+            if($this->doc instanceof SimpleHtmlDom)
+            {
+                $this->char = $this->doc;
+            }
+            else
+            {
+                $this->char = $this->doc[0];
+            }
         }
     }
 
@@ -246,7 +265,16 @@ class SimpleHtmlDom
 
         if ($pos===$this->pos) return '';
         $posOld = $this->pos;
-        $this->char = $this->doc[$pos];
+
+        if($this->doc instanceof SimpleHtmlDom)
+        {
+            $this->char = $this->doc;
+        }
+        else
+        {
+            $this->char = $this->doc[$pos];
+        }
+
         $this->pos = $pos;
         return substr($this->doc, $posOld, $pos-$posOld);
     }

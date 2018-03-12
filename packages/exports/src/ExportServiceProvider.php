@@ -29,14 +29,9 @@ class ExportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/config/html-to-pdf.php' => config_path('html-to-pdf.php'),
-        ]);
-
         $this->loadViews('exports');
-        //$this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->registerRoutes();
-
+        $this->loadCommands();
     }
 
     /**
@@ -46,9 +41,7 @@ class ExportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/config/html-to-pdf.php', 'html-to-pdf'
-        );
+
     }
 
     /**

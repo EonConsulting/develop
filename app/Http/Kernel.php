@@ -59,6 +59,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'instructor' => \App\Http\Middleware\InstructorLTIMiddleware::class,
         'learner' => \App\Http\Middleware\LearnerLTIMiddleware::class,
-        'administrator' => \App\Http\Middleware\AdministratorLTIMiddleware::class
+        'administrator' => \App\Http\Middleware\AdministratorLTIMiddleware::class,
+        'role' => \EONConsulting\Core\Middlewares\RoleMiddleware::class,
+
     ];
 }

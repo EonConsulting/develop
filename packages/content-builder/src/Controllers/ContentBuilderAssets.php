@@ -8,7 +8,9 @@ use EONConsulting\ContentBuilder\Models\Asset;
 use EONConsulting\ContentBuilder\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use App\Tools\Elasticsearch\Elasticsearch;
+use App\Tools\Alfresco\Alfresco;
 use App\Jobs\ElasticIndexAssets;
+use Illuminate\Support\Facades\Log;
 
 class ContentBuilderAssets extends Controller {
 
@@ -244,6 +246,27 @@ class ContentBuilderAssets extends Controller {
                 default:
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
+            }
+
+
+            /**
+             * TODO: Figure out why this returns success but no file shows
+             * Might be authentication, although I set the folder to public for this test
+             */
+            $alfresco = new Alfresco;
+
+            try {
+                $output = $alfresco->upload(json_encode([
+                    'filedata' => $request->file('assetFile'),
+                    'filename' => $data['title'],
+                    'siteid' => 'unisa-e-content',
+                    'containerid' => 'documentLibrary ',
+                    'uploaddirectory' => 'Uploads'
+                ]));
+
+                Log::info("Performed upload, output: " . $output);
+            } catch (\ErrorException $e) {
+                Log::error("Unable to perform upload: " . $e->getMessage());
             }
 
         } else {

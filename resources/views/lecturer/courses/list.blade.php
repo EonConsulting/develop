@@ -67,6 +67,8 @@ Course List
                                         <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                                         <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
                                         <a href="#" class="marksId dropdown-link" id="{{$course->id}}"><i class="fa fa-file-excel-o"></i> Export Marks</a>
+
+                                        <a href="{{ route('export.full-html-export', $course) }}" class="dropdown-link"><i class="fa fa-tags"></i> Export Full Course</a>
                                     </div>
                                 </div> 
                             </td>
