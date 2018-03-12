@@ -144,31 +144,38 @@ class Assets {
 
         $result = [];
 
-        // find youtube and vimeo
-        foreach ($html->find('iframe') as $iframe) {
-            // youtube videos
-            $src = $iframe->getAttribute('src');
-            if (strpos($src, 'youtube.com') !== false) {
-                $result[] = [
-                    "position" => $count++,
-                    "src" => $src
-                ];
-            }
-            if (strpos($src, 'vimeo.com') !== false) {
-                $result[] = [
-                    "position" => $count++,
-                    "src" => $src
-                ];
+        if($this->elementExists($html, 'iframe'))
+        {
+            // find youtube and vimeo
+            foreach ($html->find('iframe') as $iframe) {
+                // youtube videos
+                $src = $iframe->getAttribute('src');
+                if (strpos($src, 'youtube.com') !== false) {
+                    $result[] = [
+                        "position" => $count++,
+                        "src" => $src
+                    ];
+                }
+                if (strpos($src, 'vimeo.com') !== false) {
+                    $result[] = [
+                        "position" => $count++,
+                        "src" => $src
+                    ];
+                }
             }
         }
-        // find mp4
-        foreach ($html->find('video source') as $video) {
-            $src = $video->getAttribute('src');
-            if (strpos($src, '.mp4') !== false) {
-                $result[] = [
-                    "position" => $count++,
-                    "src" => $src
-                ];
+
+        if($this->elementExists($html, 'video source')) {
+
+            // find mp4
+            foreach($html->find('video source') as $video) {
+                $src = $video->getAttribute('src');
+                if(strpos($src, '.mp4') !== false) {
+                    $result[] = [
+                        "position" => $count++,
+                        "src" => $src
+                    ];
+                }
             }
         }
 
@@ -178,18 +185,33 @@ class Assets {
     function ParseHtmlForEbookAssets($html, $count = 1) {
         $result = [];
 
-        // find ebooks
-        foreach ($html->find('a') as $ebook) {
-            $href = $ebook->getAttribute('href');
-            if (strpos($href, '.epub') !== false) {
-                $result[] = [
-                    "position" => $count++,
-                    "href" => $href
-                ];
+        if($this->elementExists($html, 'a')) {
+
+            // find ebooks
+            foreach($html->find('a') as $ebook) {
+                $href = $ebook->getAttribute('href');
+                if(strpos($href, '.epub') !== false) {
+                    $result[] = [
+                        "position" => $count++,
+                        "href" => $href
+                    ];
+                }
             }
         }
 
         return $result;
+    }
+    
+    /**
+     * Check if the html dom exists
+     *
+     * @param \EONConsulting\Core\Helpers\HtmlToDom\HtmlHandler $dom
+     * @param string $find
+     * @return bool
+     */
+    protected function elementExists($dom, $find)
+    {
+        return $dom->find($find, 0) != null;
     }
 
 }

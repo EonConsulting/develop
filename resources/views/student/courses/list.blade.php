@@ -112,10 +112,12 @@
                         {!! $course['title'] !!}
 
                         @if($course['has_sl'])
-                        
-                        <a href="#" class="pull-right print-pdf" id="{{$course['id']}}" style="margin-left:20px" role="button">
-                            Download <i class="fa fa-file-pdf-o"></i>
-                        </a>
+
+                            @if($course['full_course_html'])
+                            <a href="{{ route('export.full-html-download', $course['id']) }}" class="pull-right" style="margin-left:20px" role="button">
+                                Full Course Download <i class="fa fa-file-pdf-o"></i>
+                            </a>
+                            @endif
                         
                         <a href="{{ route('storyline2.student.single', $course['id']) }}" class="pull-right" role="button">
                             <i class="fa fa-eye"></i> View

@@ -31,8 +31,16 @@ return [
     */
 
     //'es_url' => env('ES_URL'),
-    'es_uri' => env('ES_URI', 'http://197.189.232.130:9200'),
+    'es_uri' => env('ES_URI', 'http://127.0.0.1:9200'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Alfresco URL
+    |--------------------------------------------------------------------------
+    | This value is the URL for the Elasticsearch server.
+    */
+
+    'alf_uri' => env('ES_URI', 'http://197.189.232.130:8080'),
 
     /*
     |--------------------------------------------------------------------------
@@ -192,7 +200,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-       
 
         \EONConsulting\LaravelLTI\LaravelLTIServiceProvider::class,
         \EONConsulting\RolesPermissions\RolesPermissionsServiceProvider::class,
@@ -229,6 +236,7 @@ return [
         \EONConsulting\Messages\MessagesServiceProvider::class,
         \EONConsulting\Notifications\NotificationServiceProvider::class,
         \EONConsulting\Exports\ExportServiceProvider::class,
+        \EONConsulting\Core\eContentCoreServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -239,7 +247,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ViewComposerServiceProvider::class,
-        
+
 
     ],
 
