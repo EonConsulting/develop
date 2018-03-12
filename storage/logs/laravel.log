@@ -840,3 +840,28 @@
 #63 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
 #64 {main}
 "} 
+[2018-03-12 10:10:46] local.DEBUG: Starting course sync to Elastic  
+[2018-03-12 10:10:47] local.INFO: POST of item id:14 to index:courses successful  
+[2018-03-12 10:10:47] local.INFO: POST of item id:16 to index:courses successful  
+[2018-03-12 10:10:48] local.INFO: POST of item id:18 to index:courses successful  
+[2018-03-12 10:10:48] local.INFO: POST of item id:109 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:185 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:186 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:187 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:188 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:189 to index:courses successful  
+[2018-03-12 10:10:49] local.INFO: POST of item id:190 to index:courses successful  
+[2018-03-12 10:10:50] local.INFO: POST of item id:191 to index:courses successful  
+[2018-03-12 10:10:50] local.INFO: POST of item id:192 to index:courses successful  
+[2018-03-12 10:10:50] local.INFO: POST of item id:194 to index:courses successful  
+[2018-03-12 10:10:50] local.INFO: POST of item id:195 to index:courses successful  
+[2018-03-12 10:10:50] local.DEBUG: Finished course sync to Elastic  
+[2018-03-12 10:11:11] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:11] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:12] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:12] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:44] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:55] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:11:55] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:15:07] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
+[2018-03-12 10:15:07] local.DEBUG: StoryLineItemObserver: [Content] | No query results for model [EONConsulting\ContentBuilder\Models\Content]   
