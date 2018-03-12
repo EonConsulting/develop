@@ -24,3 +24,4 @@ composer.lock
 /storage/logs/*
 /storage/modules/*
 /config/mail.php
+.DS_Store
