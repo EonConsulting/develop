@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use tidy;
+use EONConsulting\Core\Converters\Components\Image;
 
 use Facades\ {
     EONConsulting\Core\Services\HttpClient
@@ -361,6 +362,18 @@ class Importer
             {
                 $asset->outertext = '<img src="' . url('uploads/image/unknown-file.jpg') . '" width="350px" height="350px">';
                 continue;
+            }
+
+            if($asset->tag == 'img')
+            {
+                try {
+                    $image = Image::load($url);
+
+                    $asset->height = $image->getHeight();
+                    $asset->width = $image->getWidth();
+                    $asset->style = "width: {$image->getWidth()}px; height: {$image->getHeight()}px;";
+                } catch(\Exception $e) {
+                }
             }
 
             $asset->src = $src;
