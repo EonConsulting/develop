@@ -10,8 +10,6 @@ use EONConsulting\ContentBuilder\Models\Content;
 use Illuminate\Console\Command;
 use Storage;
 
-// use EONConsulting\Core\Helpers\ContentImporter\Importer;
-
 use Facades\ {
     EONConsulting\Core\Helpers\ContentImporter\Importer
 };
@@ -50,15 +48,11 @@ class ContentImporterCommand extends Command
     public function handle()
     {
 
-
-
         if( ! $course_values = $this->commandQuestions())
         {
-            $this->info('Stopping inport!');
+            $this->info('Stopping import!');
             return;
         }
-
-
 
         DB::beginTransaction();
 
@@ -249,12 +243,17 @@ class ContentImporterCommand extends Command
      */
     protected function createContent($params)
     {
-        return Content::firstOrCreate([
+        $content = Content::firstOrCreate([
             'title' => $params['title'],
             'description' => $params['title'],
             'body' => $params['body'],
+            'tags' => 'fbn course',
             'creator_id' => 1,
         ]);
+
+        $content->categories()->sync([6,15]);
+
+        return $content;
     }
 
     /*
