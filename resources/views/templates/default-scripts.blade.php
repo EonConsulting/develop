@@ -8,6 +8,7 @@
 <script src="{{ url('/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
+<script src="{{ url('/js/contextMenu.min.js') }}"></script>
 <!--Simple Bar-->
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
 
