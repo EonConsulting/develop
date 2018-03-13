@@ -127,7 +127,7 @@ class LTIBaseController extends Controller {
                     }
                 }
 
-                Auth::loginUsingId($user->id);
+                Auth::loginUsingId($user->user_id);
 
                 if($launch->redirect_url)
                 {
