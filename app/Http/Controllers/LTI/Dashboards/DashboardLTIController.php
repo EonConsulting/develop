@@ -12,6 +12,8 @@ class DashboardLTIController extends LTIBaseController
 
     public function index()
     {
+        //dd(auth()->user());
+        //exit();
         $data = array(
             'page_title' => 'Dashboard', //make this the name if the page
             'parent_title' => 'Instructor', //leave empty if none

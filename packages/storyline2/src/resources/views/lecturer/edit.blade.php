@@ -688,6 +688,7 @@ Storyline Student Single
 
 <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
 <script>
+    
     var course_id = "{{ $course_id }}";
     var storyline_id = "{{ $storyline_id }}";
     var base_url = "{{ url('') }}";

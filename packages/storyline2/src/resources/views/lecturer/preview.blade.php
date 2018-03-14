@@ -380,9 +380,7 @@
 
 </div><!--End flexbox-container -->
 
-
 @endsection
-
 
 @section('exterior-content')
 
