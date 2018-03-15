@@ -65,9 +65,10 @@ class Storyline2ViewsBlade extends BaseController {
     }
 
     public function preview($course){
-        $SL2JSON = new Storyline2JSON;
         
-        $course = Course::find($course);
+        $SL2JSON = new Storyline2JSON;  
+        
+        $course = Course::find($course);      
         $storyline_id = $course->latest_storyline()->id;
         $userId = auth()->user()->id;
     

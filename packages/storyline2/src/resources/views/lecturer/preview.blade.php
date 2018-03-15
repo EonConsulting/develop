@@ -288,7 +288,7 @@
 </style>
 
 
-    <link rel="stylesheet" href="{{ url($course->template->file_path) }}" />
+    <link rel="stylesheet" href="{{ url($course->template->name) }}" />
 @endsection
 
 
