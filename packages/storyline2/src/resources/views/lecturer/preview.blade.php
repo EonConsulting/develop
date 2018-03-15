@@ -314,7 +314,7 @@
 
         <div class="item-tree" id="content_tree">
 
-            {{-- {!! $items !!} --}}
+            {{--{!! $items !!} --}}
             <ul>
             @each('eon.storyline2::lecturer.partials.items', $items, 'item', 'eon.storyline2::lecturer.partials.none')
             </ul>

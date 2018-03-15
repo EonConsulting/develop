@@ -1045,7 +1045,9 @@ $(tree_id).on("select_node.jstree", function (e, data) {
         if(previous_node !== selected_node){
             //$('#tree').jstree(true).select_node(selected_node);
             $("#tree").jstree("select_node", "#"+selected_node);
+            $("#tree").jstree("deselect_node", "#"+current_node);
             var previous_node = selected_node;
+            //alert('previous'+previous_node);
             $('#unsavedModal').modal('show');
         }
     }else{
