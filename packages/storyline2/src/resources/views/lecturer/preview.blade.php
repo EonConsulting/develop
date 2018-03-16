@@ -284,11 +284,11 @@
         color: #b2b2b2;
         outline: none;
     }
+    
+{{ url($course['template']['css']) }}    
 
-</style>
+</style>]
 
-
-    <link rel="stylesheet" href="{{ url($course->template->name) }}" />
 @endsection
 
 

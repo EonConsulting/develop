@@ -76,11 +76,21 @@ class Storyline2ViewsBlade extends BaseController {
         $items = $SL2JSON->items_to_tree($items);
         usort($items, [$this, "self::compare"]);
         $items = $SL2JSON->createTree($items);
-        //dd($result);
+        
         $items = $items[0]['children'];
 
-        $course['template'] = Template::find($course->template_id);
+        try {
 
+            $template = Template::findOrFail($course->template_id);
+
+        } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        {
+            \Log::debug($e->getMessage());
+            $template = Template::first();
+        }
+        
+        $course['template'] = (new TemplateTransformer)->transform($template);
+        
         $breadcrumbs = [
             'title' => 'Preview Storyline: ' . $course->title //pass $course as param and load name here
         ];
