@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 
-class JobFailed extends Notification implements ShouldQueue
+class JobNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -23,8 +23,8 @@ class JobFailed extends Notification implements ShouldQueue
      * @var array
      */
     protected $views = [
-        'email' => 'eon.notifications::email.job-failed',
-        'database' => 'eon.notifications::database.job-failed'
+        'email' => 'eon.notifications::email.job-notification',
+        'database' => 'eon.notifications::database.job-notification'
     ];
 
     /**

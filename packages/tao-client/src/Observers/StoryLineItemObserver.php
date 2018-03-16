@@ -13,34 +13,12 @@ class StoryLineItemObserver
 {
 
     /**
-     * Listen to the StorylineItem saved event.
+     * Listen to the StorylineItem saving event.
      *
      * @param  \EONConsulting\Storyline2\Models\StorylineItem  $storyline_item
      * @return void
      */
-    public function saved(StorylineItem $storyline_item)
-    {
-        try {
-
-            $content = Content::findOrFail($storyline_item->content_id);
-
-        } catch(ModelNotFoundException $e)
-        {
-            Log::debug('StoryLineItemObserver: [Content] | ' . $e->getMessage());
-
-            return true;
-        }
-
-        return $this->updateTaoAssessment($content->body, $storyline_item->id);
-    }
-
-    /**
-     * Listen to the StorylineItem update event.
-     *
-     * @param  \EONConsulting\Storyline2\Models\StorylineItem  $storyline_item
-     * @return void
-     */
-    public function updated(StorylineItem $storyline_item)
+    public function saving(StorylineItem $storyline_item)
     {
         try {
 
@@ -86,5 +64,4 @@ class StoryLineItemObserver
 
         return true;
     }
-
 }

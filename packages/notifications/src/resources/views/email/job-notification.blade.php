@@ -7,9 +7,13 @@
 
     <br/><br/>
 
+    @if(array_has($message, 'debugging'))
+
     <h4>PHP debugging</h4>
 
     {{ $message['debugging'] }}
+
+    @endif
 
     Thanks,
     {{ config('app.name') }}
