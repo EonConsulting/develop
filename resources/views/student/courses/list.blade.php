@@ -84,16 +84,15 @@
         <div class="col-md-12">
             <div class="search-area">
 
-                <form id="search-form">
+                <form id="search-form" action="{{ route('lti.courses') }}" method="get">
                     <div class="search-input">
                         <input class="form-control" name="searchterm" id="searchterm">
                     </div>
                     <span style="position: relative;">
-                        <button type="button" class="btn btn-primary" id="btnSearch">Search</button>
+                        <button type="submit" class="btn btn-primary" id="btnSearch">Search</button>
                         <button type="button" class="btn btn-info" id="btnReset">Reset</button>
                     </span>
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 </form>
             </div>
 
@@ -103,55 +102,46 @@
                 @endif
             </div>
 
-            @isset($searchResults)
-            @isset($searchResults['results'])
-            @foreach($searchResults['results'] as $course)
-            <div class="course-card shadow">
-                <div class="caption">
-                    <h1>
-                        {!! $course['title'] !!}
+            @forelse($courses as $course)
+                <div class="course-card shadow">
+                    <div class="caption">
+                        <h1>
+                            {!! $course->title !!}
 
-                        @if($course['has_sl'])
-
-                            @if($course['full_course_html'])
-                            <a href="{{ route('export.full-html-download', $course['id']) }}" class="pull-right" style="margin-left:20px" role="button">
-                                Full Course Download <i class="fa fa-file-pdf-o"></i>
+                            @if($course->has_sl)
+                            <a href="{{ route('storyline2.student.single', $course->id) }}" class="pull-right" role="button" style="margin-right: 20px;">
+                                <i class="fa fa-eye"></i> View
                             </a>
                             @endif
-                        
-                        <a href="{{ route('storyline2.student.single', $course['id']) }}" class="pull-right" role="button">
-                            <i class="fa fa-eye"></i> View
-                        </a>
-                        
-                        @else
-                        <span class="pull-right">No Lecture Available</span>
-                        @endif
-                    </h1>
-                    <p>
-                        @if($course['description'] !== null)
-                            {{ $course['description'] }}
-                        @else
-                            <i>No description.</i>
-                        @endif
-                    </p>
-                    <p>
-                        @if($course['tags'] !== "" && $course['tags'] !== null)
-                            @foreach(explode(',',$course['tags']) as $tag)
-                                <span class="label label-default">{{ $tag }}</span>
-                            @endforeach
-                        @else
-                            <i>No tags.</i>
-                        @endif
-                    </p>
-                </div>
-            </div>
-            @endforeach
-            @endisset
+                        </h1>
 
-            @empty($searchResults['results'])
-            <div>No results found</div>
-            @endempty
-            @endisset
+                        <p>
+                            @if($course->description !== null)
+                                {{ $course->description }}
+                            @else
+                                <i>No description.</i>
+                            @endif
+                        </p>
+                        <p>
+                            @if($course->tags !== "" && $course->tags !== null)
+                                @foreach(explode(',',$course->tags) as $tag)
+                                    <span class="label label-default">{{ $tag }}</span>
+                                @endforeach
+                            @else
+                                <i>No tags.</i>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+            @empty
+                <div>No results found</div>
+            @endforelse
+
+            <div>
+                {{ $paginate->links() }}
+            </div>
+
         </div>
     </div>
 </div>
@@ -167,7 +157,7 @@
 $(document).ready(function () {
     // 2017-11-01 MH just temporarily commented this out
     // cause it was screwing up the DEMO - thanks a ton Dario you shit!
-    // 
+    //
     // 2017-11-20 After wanting to hunt Dario down and shoot
     // him in the face with a paintball gun, MH fixed this........forever
 
@@ -273,8 +263,8 @@ $(document).ready(function () {
     $("#btnReset").on("click", function () {
         window.location.href = "{!! url('/lti/courses') !!}";
     });
-    
-    $(document).on('click', '.print-pdf', function(e){      
+
+    $(document).on('click', '.print-pdf', function(e){
         e.preventDefault();
         var courseId = $(this).attr('id');
         var link = "{{ url("") }}/module/print/"+courseId;
