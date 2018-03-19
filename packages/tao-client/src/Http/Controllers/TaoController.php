@@ -31,9 +31,11 @@ class TaoController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated_data = $request->validate([
             'launch_url' => 'required',
             'assessment_type' => 'required',
+            'storyline_id' => 'required',
             //'assessment_weight' => 'required_if:assessment_type,Formal Assessment',
         ]);
 
@@ -44,6 +46,7 @@ class TaoController extends Controller
             'key' => config('tao-client.launch-options.key'),
             'secret' => config('tao-client.launch-options.secret'),
             'assessment_type' => $validated_data['assessment_type'],
+            'storyline_item_id' => $validated_data['storyline_id'],
             //'assessment_weight' => $validated_data['assessment_weight'],
         ]);
 
@@ -60,6 +63,11 @@ class TaoController extends Controller
         $validated_data = $request->validate([
             'launch_url' => 'required',
         ]);
+
+        if( ! auth()->user()->hasRole('Learner'))
+        {
+            return view('tao-client::instructor-launch');
+        }
 
         try {
 
@@ -86,6 +94,8 @@ class TaoController extends Controller
             'storyline_item_id' => $storyline_item_id,
             'lis_result_sourcedid' => $lis_result_sourcedid
         ]);
+
+        $this->logIt($tao_result);
 
         $params = $this->buildParams($user, $lis_result_sourcedid);
 
@@ -161,4 +171,10 @@ class TaoController extends Controller
         return array_merge($params, $default_settings);
     }
 
+    protected function logIt($log)
+    {
+        \Log::debug('---------------------------------------------------------------');
+        \Log::debug($log);
+        \Log::debug('---------------------------------------------------------------');
+    }
 }

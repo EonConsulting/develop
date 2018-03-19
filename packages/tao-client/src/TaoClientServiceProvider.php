@@ -30,7 +30,7 @@ class TaoClientServiceProvider extends ServiceProvider
 
         $this->loadMigrations();
         $this->loadViews('tao-client');
-        $this->registerObservers();
+        //$this->registerObservers();
         $this->registerRoutes();
         $this->loadCommands();
     }
