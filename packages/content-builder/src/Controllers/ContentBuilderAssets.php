@@ -194,7 +194,7 @@ class ContentBuilderAssets extends Controller {
                 $assets->categories = $assets->categories();                
                 $searchOutput['results'][] = $assets;
                 if(empty($assets))
-                $searchOutput = false;
+                $searchOutput = null;
             }
         } else {
             $searchOutput = false;
