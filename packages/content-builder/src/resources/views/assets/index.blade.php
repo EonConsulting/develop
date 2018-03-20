@@ -315,7 +315,7 @@
                 }
             }
         }).error(function (req, status, error) {
-            alert(error);
+            //alert(error);
         });
 
     }

@@ -4167,3 +4167,13 @@
 #64 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
 #65 {main}
 "} 
+[2018-03-18 21:56:02] local.DEBUG: Attempting an LTI Login....  
+[2018-03-18 21:56:02] local.DEBUG: Instructor  
+[2018-03-19 09:03:18] local.INFO: Performed upload, output: {"error":{"root_cause":[{"type":"string_index_out_of_bounds_exception","reason":"String index out of range: 0"}],"type":"string_index_out_of_bounds_exception","reason":"String index out of range: 0"},"status":500}  
+[2018-03-19 09:03:19] local.DEBUG: Starting asset sync to Elastic  
+[2018-03-19 09:03:19] local.INFO: POST of item id:2 to index:assets successful  
+[2018-03-19 09:03:19] local.DEBUG: Finished asset sync to Elastic  
+[2018-03-19 21:45:01] local.DEBUG: Attempting an LTI Login....  
+[2018-03-19 21:45:01] local.DEBUG: Instructor  
+[2018-03-19 22:59:41] local.DEBUG: Attempting an LTI Login....  
+[2018-03-19 22:59:41] local.DEBUG: Instructor  
