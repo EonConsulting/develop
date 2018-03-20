@@ -83,6 +83,18 @@ class HttpClient
 
         return $this->run($url, 'POST')->getBody();
     }
+    
+    /*
+     * Helper method to put to a url
+     *
+     * @return string
+     */
+    public function put($url, $params = [])
+    {
+        $this->setRequestOptions($params);
+
+        return $this->run($url, 'PUT')->getBody();
+    }
 
 
 
