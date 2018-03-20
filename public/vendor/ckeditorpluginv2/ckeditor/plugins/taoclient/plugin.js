@@ -84,6 +84,7 @@
                             var dialog = CKEDITOR.dialog.getCurrent();
                             var data_launch_url = dialog.getContentElement('ltitab', 'launch_url').getInputElement().getValue();
                             var data_assessment_type = dialog.getContentElement('ltitab', 'assessment_type').getInputElement().getValue();
+                            var data_storyline_id = $('#item-id').val();
                            // var data_assessment_weight = dialog.getContentElement('ltitab', 'assessment_weight').getInputElement().getValue();
                             var erorlogNum = 'XD0000000CK111';
 
@@ -93,16 +94,19 @@
                                 data: {
                                     launch_url: data_launch_url,
                                     assessment_type: data_assessment_type,
-                                    //assessment_weight: data_assessment_weight
+                                    storyline_id: data_storyline_id,
+                                    //assessment_weight: data_storyline_id
                                 },
                                 success: function (config) {
                                     if (config.status == 'success') {
                                         var url = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + "/tao-client/show?launch_url=" + data_launch_url;
                                         var div = new CKEDITOR.dom.element('div');
                                         var iframe = new CKEDITOR.dom.element('iframe');
+
                                         div.setAttributes({
                                             'class': 'iframeCover',
                                         });
+
                                         iframe.setAttributes({
                                             'width': '100%',
                                             'height': '600px',
