@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
         Route::resource('/categories', 'ContentBuilderCategories');
         Route::resource('/assets', 'ContentBuilderAssets');
         Route::get('/assets/delete/{asset}', 'ContentBuilderAssets@delete')->name('assets.delete');
+        Route::get('/assets/edit/{asset}', 'ContentBuilderAssets@edit')->name('assets.edit');
         //Route::get('/categories', 'ContentBuilderCategories@index')->name('categories.index');
         
         //other JSON routes

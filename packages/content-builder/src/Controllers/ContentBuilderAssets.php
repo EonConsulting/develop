@@ -81,7 +81,9 @@ class ContentBuilderAssets extends Controller {
         $size = $data['size'];
 
         $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
-
+        
+        if($results){
+    
         $fromNext = $from + $size;
         $fromPrev = $from - $size;
 
@@ -99,6 +101,10 @@ class ContentBuilderAssets extends Controller {
         $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
 
         return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
+        
+        }else{
+            
+        }
 
     }
 
@@ -166,7 +172,7 @@ class ContentBuilderAssets extends Controller {
             Log::error("Unable to perform search: " . $e->getMessage());
             
         }
-
+        
         if($success){
             $output = json_decode($output);
 
@@ -182,7 +188,7 @@ class ContentBuilderAssets extends Controller {
             ];
     
             foreach ($hits as $hit) {
-    
+   
                 $assets = Asset::find($hit->_id);
                 $assets->categories = $assets->categories();
     
@@ -191,9 +197,6 @@ class ContentBuilderAssets extends Controller {
         } else {
             $searchOutput = false;
         }
-
-
-
         return $searchOutput;
 
     }
@@ -221,6 +224,13 @@ class ContentBuilderAssets extends Controller {
         Asset::destroy($asset_id);
 
         return redirect('content/assets?from=0&size=20&searchterm=');
+    }
+    
+    public function edit($asset_id){
+
+        $asset = Asset::find($asset_id);
+        $categories = Category::all();
+        return view('eon.content-builder::assets.edit', ['asset' => $asset,'categories'=>$categories]);
     }
 
 
