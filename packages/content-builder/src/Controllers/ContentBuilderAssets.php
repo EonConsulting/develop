@@ -190,9 +190,11 @@ class ContentBuilderAssets extends Controller {
             foreach ($hits as $hit) {
    
                 $assets = Asset::find($hit->_id);
-                $assets->categories = $assets->categories();
-    
+                if(!empty($assets))
+                $assets->categories = $assets->categories();                
                 $searchOutput['results'][] = $assets;
+                if(empty($assets))
+                $searchOutput = false;
             }
         } else {
             $searchOutput = false;
@@ -237,8 +239,6 @@ class ContentBuilderAssets extends Controller {
     public function store(Request $request){
 
         $data = $request->all();
-
-        //dd($data);
 
         if ($request->hasFile('assetFile'))
         {
