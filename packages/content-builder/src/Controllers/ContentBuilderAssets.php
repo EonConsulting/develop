@@ -225,6 +225,13 @@ class ContentBuilderAssets extends Controller {
 
         return redirect('content/assets?from=0&size=20&searchterm=');
     }
+    
+    public function edit($asset_id){
+
+        $asset = Asset::find($asset_id);
+        $categories = Category::all();
+        return view('eon.content-builder::assets.edit', ['asset' => $asset,'categories'=>$categories]);
+    }
 
 
     public function store(Request $request){
