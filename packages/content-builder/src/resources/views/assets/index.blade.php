@@ -260,6 +260,10 @@ Assets
 
 {{ csrf_field()}}
 
+@endsection
+
+
+@section('exterior-content')
 <!-- Modal -->
 <div id="assetModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -279,12 +283,6 @@ Assets
 
     </div>
 </div>    
-
-@endsection
-
-
-@section('exterior-content')
-
 @endsection
 
 
