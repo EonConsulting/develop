@@ -82,8 +82,6 @@ class ContentBuilderAssets extends Controller {
 
         $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
         
-        if($results){
-    
         $fromNext = $from + $size;
         $fromPrev = $from - $size;
 
@@ -101,11 +99,6 @@ class ContentBuilderAssets extends Controller {
         $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
 
         return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
-        
-        }else{
-            
-        }
-
     }
 
     function assetSearch($term,$categories = [], $from, $size){
