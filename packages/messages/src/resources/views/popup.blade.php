@@ -101,13 +101,16 @@
                 var parent_dom = $(this).closest('tr');
 
                 $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     type: "DELETE",
                     url: ajax_url,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR)
                     {
                         $(parent_dom).fadeOut('slow', function(tr) {
-                            tr.remove();
+                            $(this).remove();
                         });
 
                         swal('Successful', data.message, 'success');

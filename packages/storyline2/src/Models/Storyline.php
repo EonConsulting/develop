@@ -3,6 +3,9 @@
 namespace EONConsulting\Storyline2\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Models\StorylineItem;
 
 class Storyline extends Model {
 

@@ -63,8 +63,17 @@ class Content extends Model implements Auditable
      */
     public function storyline_items()
     {
-        return $this->hasMany(StorylineItem::class, 'content_id')->withTimestamps();
+        return $this->hasMany(StorylineItem::class, 'content_id');
     }
 
+    /**
+     * Fetch storyline item for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function storyline_item()
+    {
+        return $this->hasOne(StorylineItem::class, 'content_id');
+    }
 
 }

@@ -4,6 +4,7 @@ namespace EONConsulting\Storyline2\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use EONConsulting\Storyline2\Models\Storyline;
+use EONConsulting\Storyline2\Models\Template;
 use App\Models\User;
 
 class Course extends Model {
@@ -69,5 +70,10 @@ class Course extends Model {
     public function users()
     {
         return $this->belongsToMany(User::class, 'integrate_course_users', 'course_id', 'user_id');
+    }
+    
+    public function template()
+    {
+        return $this->belongsTo(Template::class, 'template_id', 'id');
     }
 }

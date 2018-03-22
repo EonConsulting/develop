@@ -12,6 +12,7 @@ use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Http\Response;
 use Storage;
+use EONConsulting\Core\Services\Elastic\Elastic;
 
 class eContentCoreServiceProvider extends ServiceProvider
 {
@@ -34,12 +35,22 @@ class eContentCoreServiceProvider extends ServiceProvider
         $this->bootCollectionMacro();
         $this->loadViews('ecore');
         $this->registerRouteMacros();
+        $this->publishConfigs();
 
-        /*\DB::listen(function ($query) {
-            \Log::debug($query->sql);
-            // $query->bindings
-            // $query->time
-        });*/
+        if(env('APP_DEBUG', 'false') == 'true')
+        {
+            \DB::listen(function($query) {
+
+                if( ! preg_match("/from \`jobs\` where/", $query->sql))
+                {
+                    \Log::info(
+                        $query->sql,
+                        $query->bindings,
+                        $query->time
+                    );
+                }
+            });
+        }
 
     }
 
@@ -53,8 +64,23 @@ class eContentCoreServiceProvider extends ServiceProvider
         $this->app->singleton(HttpClient::class, function ($app) {
             return new HttpClient(new GuzzleClient);
         });
+
+        $this->registerElastic();
     }
 
+    protected function registerElastic()
+    {
+        $this->app->singleton(Elastic::class, function ($app) {
+            return new Elastic();
+        });
+    }
+
+    protected function publishConfigs()
+    {
+        $this->publishes([
+            $this->getPackageFolder() . '/../config/elastic.php' => config_path('elastic.php'),
+        ]);
+    }
 
     /**
      * Get the pat of this package
@@ -96,13 +122,11 @@ class eContentCoreServiceProvider extends ServiceProvider
      */
     protected function registerRouteMacros()
     {
-        Response::macro('stream_file', function($disk, $filename)
+        Response::macro('stream_file', function($disk, $filepath, $filename_override = null)
         {
-            ob_end_clean();
-
-            return response()->stream(function() use ($disk, $filename)
+            return response()->stream(function() use ($disk, $filepath, $filename_override)
             {
-                $stream = Storage::disk($disk)->readStream($filename);
+                $stream = Storage::disk($disk)->readStream($filepath);
 
                 fpassthru($stream);
 
@@ -112,12 +136,13 @@ class eContentCoreServiceProvider extends ServiceProvider
 
             }, 200, [
                 'Cache-Control'         => 'must-revalidate, post-check=0, pre-check=0',
-                'Content-Type'          => Storage::disk($disk)->mimeType($filename),
-                'Content-Length'        => Storage::disk($disk)->size($filename),
-                'Content-Disposition'   => 'attachment; filename="' . basename($filename) . '"',
+                'Content-Type'          => Storage::disk($disk)->mimeType($filepath),
+                'Content-Length'        => Storage::disk($disk)->size($filepath),
+                'Content-Disposition'   => 'attachment; filename="' . basename($filename_override ?? $filepath) . '"',
                 'Pragma'                => 'public',
             ]);
         });
 
     }
+
 }

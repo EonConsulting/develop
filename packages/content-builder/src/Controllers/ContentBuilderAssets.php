@@ -81,7 +81,7 @@ class ContentBuilderAssets extends Controller {
         $size = $data['size'];
 
         $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
-
+        
         $fromNext = $from + $size;
         $fromPrev = $from - $size;
 
@@ -99,7 +99,6 @@ class ContentBuilderAssets extends Controller {
         $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
 
         return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
-
     }
 
     function assetSearch($term,$categories = [], $from, $size){
@@ -166,7 +165,7 @@ class ContentBuilderAssets extends Controller {
             Log::error("Unable to perform search: " . $e->getMessage());
             
         }
-
+        
         if($success){
             $output = json_decode($output);
 
@@ -182,18 +181,17 @@ class ContentBuilderAssets extends Controller {
             ];
     
             foreach ($hits as $hit) {
-    
-                $assets = Asset::find($hit->_id);
-                $assets->categories = $assets->categories();
-    
+   
+                $assets = Asset::find((int)$hit->_id);
+                if(!empty($assets))
+                $assets->categories = $assets->categories();                
                 $searchOutput['results'][] = $assets;
+                if(empty($assets))
+                $searchOutput;
             }
         } else {
             $searchOutput = false;
         }
-
-
-
         return $searchOutput;
 
     }
@@ -222,13 +220,18 @@ class ContentBuilderAssets extends Controller {
 
         return redirect('content/assets?from=0&size=20&searchterm=');
     }
+    
+    public function edit($asset_id){
+
+        $asset = Asset::find($asset_id);
+        $categories = Category::all();
+        return view('eon.content-builder::assets.edit', ['asset' => $asset,'categories'=>$categories]);
+    }
 
 
     public function store(Request $request){
 
         $data = $request->all();
-
-        //dd($data);
 
         if ($request->hasFile('assetFile'))
         {

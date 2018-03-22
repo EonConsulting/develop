@@ -11,8 +11,9 @@ var debug = true;
 var url = base_url + "/storyline2/show_items/" + storyline_id;
 var saved = true;
 var tree_id = "#tree";
-var current_node = "";
+//var current_node = "";
 var content_id = "";
+var selected_node = "";
 const selector = '.resizer';
 var previous_node = "";
 
@@ -854,8 +855,6 @@ function show_error(element,message){
 }
 
 
-
-
 /**
  * ---------------------------------------------------------------------
  * Event Functions
@@ -1039,15 +1038,16 @@ $(tree_id).on("select_node.jstree", function (e, data) {
     if(debug) console.log(data);
     
     current_node = data['selected'][0];
-
+ 
     if(debug) console.log(current_node);
 
     if(!saved){
-        if(previous_node !== current_node){
-
-            $('#tree').jstree(true).select_node(current_node);
-            var previous_node = current_node;
-
+        if(previous_node !== selected_node){
+            //$('#tree').jstree(true).select_node(selected_node);
+            $("#tree").jstree("select_node", "#"+selected_node);
+            $("#tree").jstree("deselect_node", "#"+current_node);
+            var previous_node = selected_node;
+            //alert('previous'+previous_node);
             $('#unsavedModal').modal('show');
         }
     }else{
@@ -1072,6 +1072,14 @@ $(document).on('keyup', '#content-title', function(){
 
 $(document).on('keyup', "#content-description", function(){
     validate_description();
+    saved = false;
+    check_save();
+});
+
+CKEDITOR.instances.ltieditorv2inst.on('key', function(e) {
+    var n = $(tree_id).jstree("get_selected");
+    selected_node = $('#'+n).attr("id");
+    validate_content();
     saved = false;
     check_save();
 });

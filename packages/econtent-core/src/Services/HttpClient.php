@@ -72,6 +72,32 @@ class HttpClient
         return $this->run($url, 'GET', $params)->getBody();
     }
 
+    /*
+     * Helper method to post to get the content of a url
+     *
+     * @return string
+     */
+    public function post($url, $params = [])
+    {
+        $this->setRequestOptions($params);
+
+        return $this->run($url, 'POST')->getBody();
+    }
+    
+    /*
+     * Helper method to put to a url
+     *
+     * @return string
+     */
+    public function put($url, $params = [])
+    {
+        $this->setRequestOptions($params);
+
+        return $this->run($url, 'PUT')->getBody();
+    }
+
+
+
     /**
      * Run the request
      *
@@ -83,7 +109,7 @@ class HttpClient
     {
         try {
 
-            $response = $this->client->request($method, $url, $this->getRequestOptions());
+             $response = $this->client->request($method, $url, $this->getRequestOptions());
 
         } catch (RequestException $e) {
 

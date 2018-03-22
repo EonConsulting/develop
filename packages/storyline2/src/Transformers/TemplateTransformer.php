@@ -4,12 +4,9 @@ namespace EONConsulting\Storyline2\Transformers;
 
 use League\Fractal\TransformerAbstract;
 use EONConsulting\Storyline2\Models\Template;
-use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 
 class TemplateTransformer extends TransformerAbstract
 {
-
-
     /**
      * A Fractal transformer.
      *
@@ -17,7 +14,6 @@ class TemplateTransformer extends TransformerAbstract
      */
     public function transform(Template $template = null)
     {
-        
         return [
             'id' => $template['id'],
             'name' => $template['name'],
