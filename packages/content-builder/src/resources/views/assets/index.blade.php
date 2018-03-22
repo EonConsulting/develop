@@ -264,25 +264,33 @@ Assets
 
 
 @section('exterior-content')
-<!-- Modal -->
-<div id="assetModal" class="modal fade" role="dialog">
+<!-- line modal -->
+<div class="modal fade" id="assetModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Asset</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
             </div>
             <div class="modal-body asset-content">
-
+            <!-- content goes here -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+                    </div>
+                    <div class="btn-group btn-delete hidden" role="group">
+                        <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-</div>    
+</div>
 @endsection
 
 
@@ -383,22 +391,22 @@ Assets
         });
 
         $(document).on("click", ".editEntry", function () {
-            $("#assetModal").modal();
             var asset = $(this).attr("id");
+            $("#assetModal").modal();
             $.ajax({
-            url: "{{url('')}}/content/assets/edit/"+ asset,
-            type: "GET",
-            beforeSend: function () {
-                $('.asset-content').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-            },
-            success: function (data, textStatus, jqXHR) {
-               $(".asset-content").html(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-               
-            }
-          });
-         }); 
+                url: "{{url('')}}/content/assets/edit/" + asset,
+                type: "GET",
+                beforeSend: function () {
+                    $('.asset-content').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $(".asset-content").html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        });
 
     });
 

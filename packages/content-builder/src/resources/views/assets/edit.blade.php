@@ -1,37 +1,24 @@
     <div class="asset-form">
         <form action="{{ url('/content/assets') }}" method="post" enctype='multipart/form-data'>
-
             {{ csrf_field() }}
-
             <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label for="title">Title</label>
                         <input class="form-control" type="text" name="title" id="title" value="{{ $asset->title }}" required>
                     </div>
-                </div>
-
-                <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Tags (comma seperated)</label>
                         <input class="form-control" type="text" name="tags" id="tags" value="{{ $asset->tags }}" required>
                     </div>
-                </div>
-
             </div>
-
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" rows="2" name="description" value="{{ $asset->description }}" id="description" required></textarea>
                     </div>
                 </div>
-
             </div>
-
             <div class="row">
 
                 <div class="col-md-12">
@@ -42,8 +29,6 @@
                 </div>
 
             </div>
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
