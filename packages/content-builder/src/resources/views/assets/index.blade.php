@@ -267,48 +267,9 @@ Assets
 
 @endsection
 
-
 @section('custom-scripts')
-<script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
+
 <script>
-    
-    var config = {
-        extraPlugins: 'dialog',
-        toolbar: [[ 'LTIButton' ]]
-    };
-    
-    var editor = {};
-
-    $(function(){
-
-        editor = CKEDITOR.replace('ltieditorv2inst', {
-                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                allowedContent: true,
-                fullPage: false,
-                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
-            }
-        );
-
-        editor.on('instanceReady', function()
-        {
-            var writer = editor.dataProcessor.writer;
-            writer.indentationChars = '';
-            writer.lineBreakChars = '';
-
-            editor.dataProcessor.writer.setRules( 'p',
-            {
-                indent : false,
-                breakBeforeOpen : false,
-                breakAfterOpen : false, 
-                breakBeforeClose : false,
-                breakAfterClose : false
-            });
-        });  
-
-        editor.Height = '100%';
-
-    });
-    
     $from = 0;
     $size = 10;
 
@@ -400,24 +361,6 @@ Assets
             $('.cat-btn').prop("checked", false);
             $("#searchterm").val("");
             search();
-        });
-
-        $(document).on("click", ".editEntry", function () {
-            var asset = $(this).attr("id");
-            $("#assetModal").modal();
-            $.ajax({
-                url: "{{url('')}}/content/assets/edit/" + asset,
-                type: "GET",
-                beforeSend: function () {
-                    $('.asset-content').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    $(".asset-content").html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-
-                }
-            });
         });
 
     });
