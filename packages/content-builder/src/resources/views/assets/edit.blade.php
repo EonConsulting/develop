@@ -45,7 +45,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" rows="2" name="description" value="{{ $asset->description }}" id="description" required></textarea>
+                        <textarea class="form-control" rows="2" name="description" id="description" required>{{ $asset->description }}</textarea>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="content">Content Block</label>
-                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" value="{{ $asset->content }}" name="content" data-toggle="popover" data-placement="left" data-content=""></textarea>
+                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="content" data-toggle="popover" data-placement="left" data-content="">{{ $asset->content }}</textarea>
                     </div>
                 </div>
 
