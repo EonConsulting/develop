@@ -235,10 +235,6 @@ class ContentBuilderAssets extends Controller {
         return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,'breadcrumbs'=>$breadcrumbs]);
     }
      
-    public function update(Request $request){
-        
-    }
-
     public function store(Request $request){
 
         $data = $request->all();
