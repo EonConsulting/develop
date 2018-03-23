@@ -464,27 +464,8 @@ Assets
         console.log("delete clicked");
         var id = $(this).attr('id'); //get category id from btn id attribute
         console.log("delete " + id);
-        if (confirm("Are you sure you want to delete this asset?")) {
-            $.ajax({
-            method: "GET",
-            url: "{{ url('content/assets/delete/')}}"+ id,
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-                      alert(data.success);
-                },
-                400: function () { //bad request
-
-                },
-                500: function () { //server kakked
-
-                }
-            }
-        }).error(function (data) {
-            console.log("Delete AJAX Broke");
-        });
+        if(confirm("Are you sure you want to delete this asset?")) {
+           window.location.href = "{{ url('content/assets/delete/')}}"+ id;           
         }
         return false;       
     });
