@@ -462,7 +462,7 @@ Assets
     
     $(document).on('click', '.deleteEntry', function () {
         console.log("delete clicked");
-        var id = $(this).attr("data-asset-id"); //get category id from btn id attribute
+        var id = $(this).attr('id'); //get category id from btn id attribute
         console.log("delete " + id);
         if (confirm("Are you sure you want to delete this asset?")) {
             $.ajax({
