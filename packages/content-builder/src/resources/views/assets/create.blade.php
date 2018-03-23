@@ -129,7 +129,8 @@
     
     <script>
     
-    $("#asset-form").on("submit", function(){
+    $("#asset-form").on("submit", function(event){
+        event.preventDefault();
         save_asset();
     });
 
