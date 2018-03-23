@@ -359,45 +359,33 @@ class ContentBuilderCore extends Controller {
      * @param Request $request
      * @return int
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'sometimes',
+            'title' => 'required',
+            'body' => 'required',
+            'tags' => 'required',
+            'description' => 'required',
+            'categories' => 'sometimes',
+        ]);
 
-        $data = $request->json()->all();
+        $content = Content::updateOrCreate([
+            'id' => array_get($data, 'id')
+        ],[
+            'title' => array_get($data, 'title'),
+            'body' => array_get($data, 'body'),
+            'tags' => array_get($data, 'tags'),
+            'creator_id' => auth()->user()->id,
+            'description' => array_get($data, 'description'),
+            'ingested' => 0,
+        ]);
 
-        if($data['id'] === "new"){
-            $content = new Content([
-                'title' => $data['title'],
-                'body' => $data['body'],
-                'tags' => $data['tags'],
-                'creator_id' => auth()->user()->id,
-                'description' => $data['description'],
-                'ingested' => 0
-            ]);
-        }else{
-
-            $content = Content::find($data['id']);
-
-            $content->title = $data['title'];
-            $content->body = $data['body'];
-            $content->tags = $data['tags'];
-            $content->creator_id = auth()->user()->id;
-            $content->description = $data['description'];
-            $content->ingested = 0;
-
-        }
-        
-        $content->save();
-        
-        $categories = $data['categories'];
-
-        foreach($categories as $k => $category_id) {
-            $temp = Category::find($category_id);
-            $content->categories()->save($temp);
-        }
+        $content->categories()->sync(array_get($data, 'categories'));
 
         ElasticIndexContent::dispatch();
 
         return ['id' => $content->id];
-
     }
 
     /**
