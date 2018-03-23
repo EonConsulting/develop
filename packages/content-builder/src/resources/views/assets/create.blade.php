@@ -30,7 +30,7 @@
 @section('content')
 
     <div class="asset-form">
-        <form id="asset-form" method="post" enctype='multipart/form-data'>
+        <form id="asset-form" action="{{ url('/content/assets') }}" method="post" enctype='multipart/form-data'>
 
             {{ csrf_field() }}
 
@@ -130,8 +130,8 @@
     <script>
     
     $("#asset-form").on("submit", function(event){
-        event.preventDefault();
-        save_asset();
+        //event.preventDefault();
+        //save_asset();
     });
 
     var config = {

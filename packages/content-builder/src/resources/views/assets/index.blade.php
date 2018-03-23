@@ -467,7 +467,7 @@ Assets
         if (confirm("Are you sure you want to delete this asset?")) {
             $.ajax({
             method: "GET",
-            url: "{{ url('content/assets/delete') }}/" + id,
+            url: "{{ url('content/assets/delete/')}}"+ id,
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
             },

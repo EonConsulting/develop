@@ -182,9 +182,9 @@ class ContentBuilderAssets extends Controller {
     
             foreach ($hits as $hit) {
    
-                $assets = Asset::find((int)$hit->_id);
+                $assets = Asset::with('categories')->find((int)$hit->_id);
                 if(!empty($assets))
-                $assets->categories = $assets->categories();                
+                //$assets->categories = $assets->categories();                
                 $searchOutput['results'][] = $assets;
                 if(empty($assets))
                 $searchOutput;
