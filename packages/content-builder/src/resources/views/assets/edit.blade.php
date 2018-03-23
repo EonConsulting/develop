@@ -62,27 +62,27 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="file" name="assetFile">
+                        <input type="file" name="assetFile" title="{{ $asset->file_name}}">
                     </div>
                 </div>
             </div>
 
             <div class="row">
-
                 <div class="col-md-12">
                     <label for="categories">Categories</label>
                 </div>
 
                 <div class="col-md-12">
-                    <?php foreach($categories as $category): ?>
+                    @foreach($categories as $category)
                     <div class="category_checkbox">
                         <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>"> <?php echo $category['name']; ?>
+                            <label>                                
+                            {{ Form::checkbox('categories[]', $category->id, in_array($category->id,$catArray) ? true : false )}}   
+                            {{ $category->name}}
                             </label>
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    @endforeach
                 </div>
 
             </div>
@@ -97,7 +97,6 @@
 
         </form>
     </div>
-
 
 @endsection
 

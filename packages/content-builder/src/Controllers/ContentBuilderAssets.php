@@ -223,9 +223,16 @@ class ContentBuilderAssets extends Controller {
     
     public function edit($asset_id){
 
+        $breadcrumbs = [
+            'title' => 'Edit Asset'
+        ];
+        
         $asset = Asset::find($asset_id);
-        $categories = Category::all();
-        return view('eon.content-builder::assets.edit', ['asset' => $asset,'categories'=>$categories]);
+        foreach ($asset as $cat) {
+            $catArray = $cat->id;
+        }
+        $categories = Category::get();
+        return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,'breadcrumbs'=>$breadcrumbs]);
     }
 
 
