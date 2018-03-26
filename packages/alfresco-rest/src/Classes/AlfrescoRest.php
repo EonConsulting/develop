@@ -31,19 +31,6 @@ class AlfrescoRest {
 
     /**
      * 
-     * @return Client
-     */
-    public function CreateClient() {
-        return new Client([
-            // Base URI is used with relative requests
-            'base_uri' => $this->config['api-base-url'],
-            // You can set any number of default request options.
-            'timeout' => 2.0, // 2 minutes
-        ]);
-    }
-    
-    /**
-     * 
      * @param type $parent_node_id
      * @param type $filename
      * @param type $nodetype
@@ -60,7 +47,58 @@ class AlfrescoRest {
      * @param type $relativepath
      */
     public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = '') {
-        return $this->CreateNode($parent_node_id, $nodename, $nodetype, $relativepath);
+
+        // we can check for conflicts but this is nicer
+        // check whether there is already a folder, if not create
+        $folder_list = $this->GetNodeChildFolderList($parent_node_id);
+        $key = array_search($nodename, array_column($folder_list, 'name'));
+        if (!empty($key)) {
+            $folder_node_id = $key['id'];
+        } else {
+            // try to recreate the node in case it does not exists
+            $folder_node_id = $this->CreateNode($parent_node_id, $nodename, $nodetype, $relativepath); // this will automatically use root node
+        }
+
+        return folder_node_id;
+    }
+
+    function GetNodeChildFolderList($parent_node_id) {
+        $node_list = [];
+
+        if (empty($parent_node_id)) {
+            $parent_node_id = $this->config['base-dir-node-id'];
+        }
+
+        $params = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => $this->config['api-auth-header']
+            ]
+        ];
+
+        $request_url = printf("nodes/%s/children?where=(isFolder=true)", $parent_node_id);
+
+        try {
+            $request = $this->client->request("GET", $request_url, $params);
+            $result = $request->getBody();
+            $jr = json_decode($result);
+
+            if ($jr && $jr->list && $jr->list->entries) {
+                foreach ($jr->list->entries as $en) {
+                    // this is the new node id of the created folder
+                    $node_list[] = [
+                        "id" => $en->id,
+                        "nodeType" => $en->nodeType,
+                        "isFolder" => $en->isFolder,
+                        "name" => $en->name
+                    ];
+                }
+            }
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage() . " URL: [{$request_url}]");
+        }
+
+        return $node_list;
     }
 
     /**
@@ -70,7 +108,7 @@ class AlfrescoRest {
      */
     public function UpdateContent($node_id, $content) {
         $updated_node_id = null;
-        
+
         $params = [
             'body' => $content, // byte stream
             'headers' => [
@@ -93,12 +131,25 @@ class AlfrescoRest {
         } catch (\Exception $e) {
             Log::debug($e->getMessage() . " URL: [{$request_url}]");
         }
-        
+
         return $updated_node_id;
     }
 
     /*     * **************************************************************** */
     /*     * ***********  SET OF PRIVATE FUNCTIONS ************************** */
+
+    /**
+     * 
+     * @return Client
+     */
+    function CreateClient() {
+        return new Client([
+            // Base URI is used with relative requests
+            'base_uri' => $this->config['api-base-url'],
+            // You can set any number of default request options.
+            'timeout' => 2.0, // 2 minutes
+        ]);
+    }
 
     /**
      * 
