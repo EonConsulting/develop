@@ -232,7 +232,8 @@ class ContentBuilderAssets extends Controller {
             $catArray[] = $cat->id;
         }
         $categories = Category::get();
-        return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,'breadcrumbs'=>$breadcrumbs]);
+        return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,
+                    'assetId'=>$asset_id,'breadcrumbs'=>$breadcrumbs]);
     }
      
     public function store(Request $request){
