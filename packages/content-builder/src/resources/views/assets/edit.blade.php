@@ -63,6 +63,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <input type="file" name="assetFile" title="{{ $asset->file_name}}">
+                        <input type="hidden" name="id" title="{{ $asset->id}}">
                     </div>
                 </div>
             </div>

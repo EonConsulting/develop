@@ -228,6 +228,8 @@ class ContentBuilderAssets extends Controller {
         ];
         
         $asset = Asset::find($asset_id);
+        dd($asset->categories);
+        exit();
         foreach ($asset->categories as $cat) {
             $catArray[] = $cat->id;
         }
@@ -236,9 +238,7 @@ class ContentBuilderAssets extends Controller {
     }
      
     public function store(Request $request){
-
         $data = $request->all();
-
         if ($request->hasFile('assetFile'))
         {
             $file = $request->file('assetFile');
