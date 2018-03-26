@@ -228,8 +228,6 @@ class ContentBuilderAssets extends Controller {
         ];
         
         $asset = Asset::find($asset_id);
-        dd($asset->categories);
-        exit();
         foreach ($asset->categories as $cat) {
             $catArray[] = $cat->id;
         }
