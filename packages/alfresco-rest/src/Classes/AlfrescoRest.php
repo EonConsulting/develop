@@ -60,13 +60,13 @@ class AlfrescoRest {
         $node_list = [];
 
         if (empty($parent_node_id)) {
-            $parent_node_id = config('alfresco-rest.base-dir-node-id');
+            $parent_node_id = config('alfresco.base-dir-node-id');
         }
 
         $params = [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => config('alfresco-rest.api-auth-header')
+                'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 
@@ -107,7 +107,7 @@ class AlfrescoRest {
             'body' => $content, // can be binary, typically file contents
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => config('alfresco-rest.api-auth-header')
+                'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 
@@ -139,7 +139,7 @@ class AlfrescoRest {
     function CreateClient() {
         return new Client([
             // Base URI is used with relative requests
-            'base_uri' => config('alfresco-rest.api-base-url'),
+            'base_uri' => config('alfresco.api-base-url'),
             // You can set any number of default request options.
             'timeout' => 2.0, // 2 minutes
         ]);
@@ -155,7 +155,7 @@ class AlfrescoRest {
         $new_node_id = null;
 
         if (empty($parent_node_id)) {
-            $parent_node_id = config('alfresco-rest.base-dir-node-id');
+            $parent_node_id = config('alfresco.base-dir-node-id');
         }
 
         if (empty($relativepath)) {
@@ -175,7 +175,7 @@ class AlfrescoRest {
             'body' => $body,
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => config('alfresco-rest.api-auth-header')
+                'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 

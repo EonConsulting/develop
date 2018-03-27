@@ -23,7 +23,7 @@ class AlfrescoRestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/alfresco-rest.php' => config_path('alfresco-rest.php'),
+            __DIR__.'/config/alfresco.php' => config_path('alfresco.php'),
         ]);
     }
 
@@ -35,13 +35,13 @@ class AlfrescoRestServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
+            __DIR__.'/config/alfresco.php', 'alfresco'
         );
         
         $this->app->bind(AlfrescoRest::class, function($app){
             return new AlfrescoRest(new Client([
                 // Base URI is used with relative requests
-                'base_uri' => config('alfresco-rest.api-base-url'),
+                'base_uri' => config('alfresco.api-base-url'),
                 // You can set any number of default request options.
                 'timeout' => 2.0, // 2 minutes
             ])); //, config('alfresco-rest'));
