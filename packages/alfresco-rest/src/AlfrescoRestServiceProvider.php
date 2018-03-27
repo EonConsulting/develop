@@ -37,6 +37,7 @@ class AlfrescoRestServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $x = config('alfresco-rest');
         $this->app->bind(AlfrescoRest::class, function($app){
             return new AlfrescoRest(new Client([
                 // Base URI is used with relative requests
@@ -46,9 +47,9 @@ class AlfrescoRestServiceProvider extends ServiceProvider
             ]), config('alfresco-rest'));
         });
 
-        $this->mergeConfigFrom(
-            __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
-        );
+        //$this->mergeConfigFrom(
+        //    __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
+        //);
     }
 
     /**
