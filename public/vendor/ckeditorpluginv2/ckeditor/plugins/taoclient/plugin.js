@@ -100,12 +100,7 @@
                                 success: function (config) {
                                     if (config.status == 'success') {
                                         var url = ((window.global_conf.subdir !== 'undefined') ? window.global_conf.subdir : '') + "/tao-client/show?launch_url=" + data_launch_url;
-                                        var div = new CKEDITOR.dom.element('div');
                                         var iframe = new CKEDITOR.dom.element('iframe');
-
-                                        div.setAttributes({
-                                            'class': 'iframeCover',
-                                        });
 
                                         iframe.setAttributes({
                                             'width': '100%',
@@ -117,7 +112,7 @@
                                             'class': 'ckeditorframe',
                                         });
 
-                                        editor.insertElement(div, div.append(iframe));
+                                        editor.insertElement(iframe, iframe);
                                     }
                                     else {
                                         console.log(config);

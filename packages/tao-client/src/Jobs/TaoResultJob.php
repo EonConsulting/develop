@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use EONConsulting\TaoClient\Services\TaoApi;
 use EONConsulting\TaoClient\Models\TaoResult;
 use Log;
+use Exception;
 
 class TaoResultJob implements ShouldQueue
 {
@@ -20,14 +21,14 @@ class TaoResultJob implements ShouldQueue
      *
      * @var int
      */
-    public $tries = 3;
+    public $tries = 1;
 
     /**
      * The number of seconds the job can run before timing out.
      *
      * @var int
      */
-    public $timeout = 120;
+    public $timeout = 320;
 
     /**
      * Unqiue tao
