@@ -42,7 +42,11 @@ class AlfrescoRest {
      * @param type $foldername
      * @param type $relativepath
      */
+<<<<<<< HEAD
+    public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = '') {
+=======
     public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = "") {
+>>>>>>> 80d37a10a31bc918632f7d91270355fdb34388e8
 
         // we can check for conflicts but this is nicer
         // check whether there is already a folder, if not create

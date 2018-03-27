@@ -29,12 +29,13 @@
 
 @section('content')   
 <div class="asset-form">
-        <form action="{{ route('eon.contentbuilder.update', $assetId) }}" method="post" enctype='multipart/form-data'>
+        <form action="{{ route('asset.update') }}" method="post" enctype='multipart/form-data'>
             {{ csrf_field() }}
             <div class="row">
                     <div class="form-group col-md-6">
                         <label for="title">Title</label>
                         <input class="form-control" type="text" name="title" id="title" value="{{ $asset->title }}" required>
+                        <input class="form-control" type="hidden" name="id" id="title" value="{{ $asset->id }}" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="title">Tags (comma seperated)</label>
