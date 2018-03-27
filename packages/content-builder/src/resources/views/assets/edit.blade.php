@@ -29,7 +29,7 @@
 
 @section('content')   
 <div class="asset-form">
-        <form action="{{ url('/content/assets') }}" method="post" enctype='multipart/form-data'>
+        <form action="{{ route('eon.contentbuilder.update', $assetId) }}" method="post" enctype='multipart/form-data'>
             {{ csrf_field() }}
             <div class="row">
                     <div class="form-group col-md-6">
@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                       <!-- <input type="submit" class="btn btn-info" value="Save">-->
+                       <input type="submit" class="btn btn-info" value="Save">
                     </div>
                 </div>
             </div>

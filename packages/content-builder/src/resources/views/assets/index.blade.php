@@ -499,7 +499,7 @@ Assets
         var id = $(this).attr('id'); //get category id from btn id attribute
         console.log("delete " + id);
         if(confirm("Are you sure you want to delete this asset?")) {
-           window.location.href = "{{ url('content/assets/delete/')}}"+ id;           
+           window.location.href = "{{ url('content/assets/delete')}}/"+ id;           
         }
         return false;       
     });
