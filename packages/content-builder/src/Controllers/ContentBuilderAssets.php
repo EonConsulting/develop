@@ -425,38 +425,60 @@ class ContentBuilderAssets extends Controller {
         return $html;
 
     }
-    
-    public function update_asset(Request $request){
-   
-        $data = $request->json()->all();
-        $asset = Asset::find($data['id']);
-        $asset->title = $data['title'];
-        $asset->description = $data['description'];
-        $asset->tags = $data['tags'];
-        $asset->file_name = $data['file_name'];
-        $asset->mime_type = $data['mime_type'];
-        $asset->size = $data['size'];
-        $asset->creator_id = auth()->user()->id;
-
-        $asset->save();
-
-    }
 
     public function update(Request $request, $id){
+        if ($request->isMethod('post')) {
+            if ($request->hasFile('assetFile')){
+                 $file = $request->file('assetFile');
+                 $file_size = $file->getClientSize();
+                 $file_mime = $file->getMimeType();
+                 switch ($file_mime){
+                 case 'audio/mpeg':
+                 case 'application/octet-stream':
+                    $file_mime = 'audio/mp3';
+                    $file_path = $file->storeAs($file_mime,explode(".",$file->hashName())[0].".mp3",'uploads');
+                    break;
+                 default:
+                    $file_path = $file->store($file->getMimeType(),'uploads');
+                    break;
+                   }
+                /**
+                * TODO: Figure out why this returns success but no file shows
+                * Might be authentication, although I set the folder to public for this test
+                */
+                $alfresco = new Alfresco;
+                try {
+                $output = $alfresco->upload(json_encode([
+                    'filedata' => $request->file('assetFile'),
+                    'filename' => $request->input('title'),
+                    'siteid' => 'unisa-e-content',
+                    'containerid' => 'documentLibrary ',
+                    'uploaddirectory' => 'Uploads'
+                ]));
 
-        $asset = Asset::find($id);
-        $data = $request->json()->all();
+                Log::info("Performed upload, output: " . $output);
+            } catch (\ErrorException $e) {
+                Log::error("Unable to perform upload: " . $e->getMessage());
+            }
 
-        $asset->title = $data['title'];
-        $asset->description = $data['description'];
-        $asset->tags = $data['tags'];
-        $asset->file_name = $data['file_name'];
-        $asset->mime_type = $data['mime_type'];
-        $asset->size = $data['size'];
-        $asset->creator_id = auth()->user()->id;
-
-        $asset->save();
-
+            } else {
+            $file_path = null;
+            $file_mime = null;
+            $file_size = null;
+            }
+            $asset = Asset::find($id);
+            $asset->title = $request->input('title');
+            $asset->description = $request->input('description');
+            $asset->tags = $request->input('tags');
+            $asset->file_name = $file_path;
+            $asset->mime_type = $file_mime;
+            $asset->size = $file_size;
+            $asset->creator_id = auth()->user()->id;
+            $asset->save();
+            return Redirect::route('assets.index')->withErrors(['msg', 'Asset has been updated successfully']);
+        }else{
+           return Redirect::back()->withErrors(['msg', 'An error occured, please try again.']);
+        }
     }
 
 
