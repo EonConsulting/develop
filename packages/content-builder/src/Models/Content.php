@@ -33,7 +33,7 @@ class Content extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title', 'body', 'tags', 'creator_id','description','cloned_id'
+       'title', 'body', 'tags', 'creator_id','description','cloned_id'
     ];
 
     /**

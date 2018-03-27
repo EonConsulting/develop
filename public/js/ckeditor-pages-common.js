@@ -18,7 +18,6 @@ function init_editor(editor_id){
 
     editor.on('change', function() {
         body = editor.getData();
-        $("#content-preview").html(body);
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     });
     

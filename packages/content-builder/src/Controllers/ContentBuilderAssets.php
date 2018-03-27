@@ -182,9 +182,9 @@ class ContentBuilderAssets extends Controller {
     
             foreach ($hits as $hit) {
    
-                $assets = Asset::find((int)$hit->_id);
+                $assets = Asset::with('categories')->find((int)$hit->_id);
                 if(!empty($assets))
-                $assets->categories = $assets->categories();                
+                //$assets->categories = $assets->categories();                
                 $searchOutput['results'][] = $assets;
                 if(empty($assets))
                 $searchOutput;
@@ -223,16 +223,21 @@ class ContentBuilderAssets extends Controller {
     
     public function edit($asset_id){
 
+        $breadcrumbs = [
+            'title' => 'Edit Asset'
+        ];
+        
         $asset = Asset::find($asset_id);
-        $categories = Category::all();
-        return view('eon.content-builder::assets.edit', ['asset' => $asset,'categories'=>$categories]);
+        foreach ($asset->categories as $cat) {
+            $catArray[] = $cat->id;
+        }
+        $categories = Category::get();
+        return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,
+                    'assetId'=>$asset_id,'breadcrumbs'=>$breadcrumbs]);
     }
-
-
+     
     public function store(Request $request){
-
         $data = $request->all();
-
         if ($request->hasFile('assetFile'))
         {
             $file = $request->file('assetFile');
@@ -388,6 +393,22 @@ class ContentBuilderAssets extends Controller {
         }
 
         return $html;
+
+    }
+    
+    public function update_asset(Request $request){
+   
+        $data = $request->json()->all();
+        $asset = Asset::find($data['id']);
+        $asset->title = $data['title'];
+        $asset->description = $data['description'];
+        $asset->tags = $data['tags'];
+        $asset->file_name = $data['file_name'];
+        $asset->mime_type = $data['mime_type'];
+        $asset->size = $data['size'];
+        $asset->creator_id = auth()->user()->id;
+
+        $asset->save();
 
     }
 

@@ -72,7 +72,8 @@
       "EONConsulting\\Notifications\\": "packages/notifications/src",
       "EONConsulting\\Exports\\": "packages/exports/src",
       "EONConsulting\\Auditing\\": "packages/auditing/src",
-      "EONConsulting\\Messages\\": "packages/messages/src"
+      "EONConsulting\\Messages\\": "packages/messages/src",
+      "EONConsulting\\Alfresco\\Rest\\": "packages/alfresco-rest/src"
     },
     "files": [
       "packages/laravel-lti/src/functions.php",

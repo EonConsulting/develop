@@ -349,12 +349,12 @@ Storyline Student Single
     .disabled {
         color: #999;
     }
-
-    {{ url($course['template']['css']) }}
     
     .dropdown {
         display: inline-block;
     }
+
+    {!! array_get($course, 'template.css', '') !!}
 
 </style>
 @endsection
@@ -371,9 +371,9 @@ Storyline Student Single
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li><a href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></li>
-            <li><a href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></li>
+            <li><a href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></li>
         </ul>
     </div>
 
@@ -431,15 +431,15 @@ Storyline Student Single
 
                 <div class="content-info">
 
-                        <div class="info-bar-container" id="info-bar">
+                    <div class="info-bar-container" id="info-bar">
 
-                            <div class="info-bar-name">
-                                <div>
-                                    <input id="content-title" style="width: 100%;" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
-                                </div>
+                        <div class="info-bar-name">
+                            <div>
+                                <input id="content-title" style="width: 100%;" type="text" class="form-title" name="content-title" placeholder="Content Title" value="" data-toggle="popover" data-placement="bottom" data-content=""/>
                             </div>
+                        </div>
 
-                        </div> <!-- row end -->
+                    </div> <!-- row end -->
 
                 </div>
             
@@ -463,6 +463,7 @@ Storyline Student Single
 {{ csrf_field() }}
 
 @endsection
+
 
 @section('exterior-content')
 <!-- Modal -->
@@ -688,7 +689,6 @@ Storyline Student Single
 
 <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
 <script>
-    
     var course_id = "{{ $course_id }}";
     var storyline_id = "{{ $storyline_id }}";
     var base_url = "{{ url('') }}";

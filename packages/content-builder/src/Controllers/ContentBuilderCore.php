@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Asset;
-use EONConsulting\Alfresco\Rest\Classes as ARC;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexContent;
 
 class ContentBuilderCore extends Controller {
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -30,11 +30,12 @@ class ContentBuilderCore extends Controller {
             'categories' => $categories,
             'breadcrumbs' => $breadcrumbs
         ]);
+
     }
 
-    public function contentSearchToHTML(Request $request) {
+    public function contentSearchToHTML(Request $request){
         $data = $request->json()->all();
-
+        
         $from = $data['from'];
         $size = $data['size'];
 
@@ -47,7 +48,7 @@ class ContentBuilderCore extends Controller {
 
         $renderedResults = "";
 
-        foreach ($results['results'] as $result) {
+        foreach($results['results'] as $result){
             $renderedResults = $renderedResults . view('eon.content-builder::content.partials.result', ['item' => $result])->render();
         }
 
@@ -59,21 +60,23 @@ class ContentBuilderCore extends Controller {
         $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
 
         return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
+
     }
 
-    function contentSearch($term, $categories = [], $from, $size) {
+    function contentSearch($term, $categories = [], $from, $size){
 
         $elasticsearch = new Elasticsearch;
         $index = 'content';
 
         //$cats = implode(',',$categories);
+
         //dd($term);
 
-        /* Log::debug("Dump search inputs");
-          Log::debug($term);
-          Log::debug($categories); */
+        /*Log::debug("Dump search inputs");
+        Log::debug($term);
+        Log::debug($categories);*/
 
-        if ($term === null && sizeof($categories) === 0) {
+        if($term === null && sizeof($categories) === 0){
 
             Log::debug("Get ALL content");
 
@@ -82,48 +85,51 @@ class ContentBuilderCore extends Controller {
                      "match_all": {}
                  }
              }';
-        } else {
+        }else{
 
             $first = true;
 
             //if a term is passed, build term portion of query
-            if ($term !== null) {
+            if($term !== null){
 
                 $q_term = '
                 "should": [
-                    { "match": { "title": "' . $term . '" }},
-                    { "match": { "description": "' . $term . '" }},
-                    { "match": { "body": "' . $term . '" }},
-                    { "match": { "tags": "' . $term . '" }}
+                    { "match": { "title": "'. $term .'" }},
+                    { "match": { "description": "'. $term .'" }},
+                    { "match": { "body": "'. $term .'" }},
+                    { "match": { "tags": "'. $term .'" }}
                 ]';
-
+                
                 $first = false;
-            } else {
+            }else{
                 $q_term = '';
             }
-
-
+            
+            
             //if a term is passed, build term portion of query
-            if (sizeof($categories) !== 0) { //category only
+            if(sizeof($categories) !== 0){ //category only
+
                 $q_cat = '';
-                if (!$first) {
+                if(!$first){
                     $q_cat .= ',';
                 }
                 $q_cat .= '"filter": [';
 
                 $first_cat = true;
-                foreach ($categories as $category) {
+                foreach($categories as $category){
 
-                    if ($first_cat) {
+                    if($first_cat){
                         $first_cat = false;
-                    } else {
+                    }else{
                         $q_cat .= ',';
                     }
                     $q_cat .= '{ "match": { "categories": "' . $category . '" }}';
+                    
                 }
-
+                
                 $q_cat .= ']';
-            } else {
+
+            }else{
                 $q_cat = '';
             }
 
@@ -131,7 +137,7 @@ class ContentBuilderCore extends Controller {
                 "query": {
                     "bool": {
                         ' . $q_term .
-                    $q_cat . '
+                        $q_cat .'
                     }
                 }
             }';
@@ -148,14 +154,15 @@ class ContentBuilderCore extends Controller {
             Log::debug("Elastic search success---------------------------------------------------");
         } catch (\ErrorException $e) {
             Log::error("Unable to perform search: " . $e->getMessage());
+            
         }
 
-        if ($success) {
+        if($success){
             $output = json_decode($output);
 
             $hits = $output->hits->hits;
             $total = $output->hits->total;
-
+    
             $searchOutput = [
                 "meta" => [
                     "total" => $total,
@@ -163,14 +170,15 @@ class ContentBuilderCore extends Controller {
                 ],
                 "results" => []
             ];
-
+    
             foreach ($hits as $hit) {
-
+    
                 //$content = Content::find($hit->_id);
                 //$content->tags = $this->get_tags($content);
                 //$content->categories = $content->categories();
-                //$hit->tags = explode(',',$hit->tags);
 
+                //$hit->tags = explode(',',$hit->tags);
+    
                 $searchOutput['results'][] = $hit->_source;
             }
         } else {
@@ -180,7 +188,9 @@ class ContentBuilderCore extends Controller {
 
 
         return $searchOutput;
+
     }
+
 
     /**
      * @param $content_id
@@ -191,7 +201,7 @@ class ContentBuilderCore extends Controller {
         $content = Content::find($content_id);
 
         $content->tags = $this->get_tags($content);
-
+        
         $breadcrumbs = [
             'title' => 'View Content',
             'href' => route('eon.contentbuilder'),
@@ -201,13 +211,14 @@ class ContentBuilderCore extends Controller {
         ];
 
         return view('eon.content-builder::content.view', ['content' => $content, 'breadcrumbs' => $breadcrumbs]);
+
     }
 
     /**
      * @param $content_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($content_id) {
+    public function edit($content_id){
 
         $content = Content::find($content_id);
 
@@ -221,19 +232,23 @@ class ContentBuilderCore extends Controller {
 
         $categories = Category::all();
 
-        foreach ($categories as $k => $category) {
-            $categories[$k]->checked = false;
+        foreach($categories as $k => $category){
+            $categories[$k]->checked = false; 
+            
+            foreach($content->categories as $content_category){
 
-            foreach ($content->categories as $content_category) {
-
-                if ($category->id === $content_category->id) {
+                if($category->id === $content_category->id){
                     $categories[$k]->checked = true;
                 }
+
             }
+
         }
 
-        return view('eon.content-builder::content.edit', ['content' => $content, 'categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::content.edit', ['content' => $content,'categories'=> $categories, 'breadcrumbs' => $breadcrumbs]);
+
     }
+
 
     /**
      * @param $course
@@ -241,19 +256,21 @@ class ContentBuilderCore extends Controller {
      */
     public function get_tags($course) {
 
-        $tags = explode(',', $course->tags);
+        $tags = explode(',',$course->tags);
 
-        foreach ($course->categories as $category) {
+        foreach($course->categories as $category){
 
-            $temp_tags = explode(',', $category->tags);
+            $temp_tags = explode(',',$category->tags);
 
             $tags = array_merge($tags, $temp_tags);
+
         }
 
         $result = [];
 
         return array_count_values($tags);
     }
+
 
     /**
      * @param $content
@@ -268,21 +285,23 @@ class ContentBuilderCore extends Controller {
         $contents = Content::all();
         $assets = Asset::all();
 
-        if ($content !== "new") {
+        if($content !== "new"){
             $content_id = $content;
         } else {
             $content_id = "new";
         }
-
+        
 
         return view('eon.content-builder::content.new', [
-            'contents' => $contents,
+            'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,
             'assets' => $assets,
             'breadcrumbs' => $breadcrumbs
         ]);
+
     }
+
 
     /**
      * ----------------------------------------------------------
@@ -290,104 +309,79 @@ class ContentBuilderCore extends Controller {
      * ----------------------------------------------------------
      */
 
+
     /**
      * @param $content
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($content) {
+    public function show($content){
 
-        if ($content === "all") {
-            $result = Content::all();
+        if($content === "all"){
+            $result = Content::all();  
         } else {
             $result = Content::find($content);
             $result->categories = $result->categories()->get();
         }
 
         return response()->json($result);
+
     }
+
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      *//*
-      public function save(Request $request) {
+    public function save(Request $request) {
 
-      $content = new Content([
-      'title' => $request->get('title'),
-      'body' => $request->get('data'),
-      'tags' => $request->get('tags'),
-      'creator_id' => auth()->user()->id,
-      'description' => $request->get('description')
-      ]);
+        $content = new Content([
+            'title' => $request->get('title'),
+            'body' => $request->get('data'),
+            'tags' => $request->get('tags'),
+            'creator_id' => auth()->user()->id,
+            'description' => $request->get('description')
+        ]);
+        
+        $content->save();
+        
+        $categories = $request->get('categories');
 
-      $content->save();
+        foreach($categories as $k => $category_id) {
+            $temp = Category::find($category_id);
+            $content->categories()->save($temp);
+        }
 
-      $categories = $request->get('categories');
-
-      foreach($categories as $k => $category_id) {
-      $temp = Category::find($category_id);
-      $content->categories()->save($temp);
-      }
-
-      return redirect()->route('eon.contentbuilder');
-
-      } */
+        return redirect()->route('eon.contentbuilder');
+       
+    }*/
 
     /**
      * @param Request $request
      * @return int
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'sometimes',
+            'title' => 'required',
+            'body' => 'required',
+            'tags' => 'required',
+            'description' => 'required',
+            'categories' => 'sometimes',
+        ]);
 
-        $data = $request->json()->all();
+        $content = Content::updateOrCreate([
+            'id' => array_get($data, 'id')
+        ],[
+            'title' => array_get($data, 'title'),
+            'body' => array_get($data, 'body'),
+            'tags' => array_get($data, 'tags'),
+            'creator_id' => auth()->user()->id,
+            'description' => array_get($data, 'description'),
+            'ingested' => 0,
+        ]);
 
-        if ($data['id'] === "new") {
-            $content = new Content([
-                'title' => $data['title'],
-                'body' => $data['body'],
-                'tags' => $data['tags'],
-                'creator_id' => auth()->user()->id,
-                'description' => $data['description'],
-                'ingested' => 0
-            ]);
-        } else {
-
-            $content = Content::find($data['id']);
-
-            $content->title = $data['title'];
-            $content->body = $data['body'];
-            $content->tags = $data['tags'];
-            $content->creator_id = auth()->user()->id;
-            $content->description = $data['description'];
-            $content->ingested = 0;
-        }
-
-        $content->save();
-
-        // put this alfresco in a try catch so that we don't break anything
-        try {
-            // MH : this is where we need to export the asset to
-            // alfresco
-            $arc = new ARC\AlfrescoRest();
-            $nodename = substr($content->title, 0, 6); // course code e.g. FBN1502
-            
-
-            // now create an emtpy file and then upload its content
-            $file_node_id = $arc->CreateFile($folder_node_id, $content->title);
-            // upload its contents
-            $arc->UpdateContent($file_node_id, $content->body);
-        } catch (Exception $ex) {
-            Log::error("Unable to create asset in Alfresco for asset_id : " . $content->id . " : " . $ex->getMessage());
-        }
-
-
-
-        $categories = $data['categories'];
-
-        foreach ($categories as $k => $category_id) {
-            $temp = Category::find($category_id);
-            $content->categories()->save($temp);
-        }
+        $content->categories()->sync(array_get($data, 'categories'));
 
         ElasticIndexContent::dispatch();
 
@@ -401,24 +395,24 @@ class ContentBuilderCore extends Controller {
      * @param [type] $content_id
      * @return void
      */
-    /*   public function update(Request $request, $content_id){
+ /*   public function update(Request $request, $content_id){
 
-      $content = Content::find($content_id);
+        $content = Content::find($content_id);
+        
+        $content->title = $request->get('title');
+        $content->body = $request->get('data');
+        $content->tags = $request->get('tags');
+        $content->creator_id = auth()->user()->id;
+        $content->description = $request->get('description');
+        
+        $categories = $request->get('categories');
+        $content->categories()->sync($categories);
 
-      $content->title = $request->get('title');
-      $content->body = $request->get('data');
-      $content->tags = $request->get('tags');
-      $content->creator_id = auth()->user()->id;
-      $content->description = $request->get('description');
+        $content->save();
 
-      $categories = $request->get('categories');
-      $content->categories()->sync($categories);
+        return redirect()->route('eon.contentbuilder');
 
-      $content->save();
-
-      return redirect()->route('eon.contentbuilder');
-
-      } */
+    }*/
 
     /**
      * Undocumented function
@@ -426,12 +420,13 @@ class ContentBuilderCore extends Controller {
      * @param [type] $content_id
      * @return void
      */
-    public function delete($content_id) {
-
+    public function delete($content_id){
+        
         //TODO: Finish this
 
         $content = Content::find($content_id);
         $content->categories()->delete();
+
     }
 
     /**
@@ -441,17 +436,19 @@ class ContentBuilderCore extends Controller {
      * @param [type] $keywords
      * @return void
      */
-    public function search($category_id, $keywords) {
-
-
+    public function search($category_id,$keywords){
+        
+    
         $content = Content::all();
 
-        foreach ($content as $k => $item) {
+        foreach($content as $k => $item){
             $content[$k]->tags = $this->get_tags($item);
         }
 
         //TODO: Finish this
+
     }
+
 
     /**
      * @param $request
@@ -468,13 +465,14 @@ class ContentBuilderCore extends Controller {
         }
     }
 
+
     /**
      * Undocumented function
      *
      * @param [type] $title
      * @return void
      */
-    public function title_exists(Request $request) {
+    public function title_exists(Request $request){
 
         $data = $request->json()->all();
 
@@ -484,10 +482,10 @@ class ContentBuilderCore extends Controller {
 
         //dd($content);
 
-        if ($content !== null) {
+        if($content !== null){
             $result = [
                 'exists' => true,
-                'id' => "" . $content->id
+                'id' => "".$content->id
             ];
         } else {
             $result = [
@@ -497,6 +495,7 @@ class ContentBuilderCore extends Controller {
         }
 
         return response()->json($result);
+
     }
 
 }

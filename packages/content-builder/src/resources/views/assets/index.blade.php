@@ -264,39 +264,46 @@ Assets
 
 
 @section('exterior-content')
-<!-- line modal -->
-<div class="modal fade" id="assetModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<!-- Modal -->
+<div id="exportModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
+
+        <!-- Modal content-->
         <div class="modal-content">
+
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+                <h4 class="modal-title">Export Asset to Alfresco</h4>
             </div>
-            <div class="modal-body asset-content">
-            <!-- content goes here -->
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
-                    </div>
-                    <div class="btn-group btn-delete hidden" role="group">
-                        <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
-                    </div>
+
+                <div class="modal-body">
+                    <form id="export-form">
+                        <input id="form-category-id" type="hidden" name="id" value="">
+
+                        <div class="form-group">
+                            <label for="export_name">Asset Name</label>
+                            <input name="export_name" type="text" class="form-control" id="export_name" placeholder="Asset Name" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="export_folder">Folder to export to : <small>e.g. FBN1501/images</small></label>
+                            <input name="export_folder" type="text" class="form-control" id="export_folder" placeholder="Export Folder" value="">
+                        </div>
+                    </form>
                 </div>
-            </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary save-btn" id="btnExportAsset"><i class="fa fa-save"></i><span> Save</span></button>
+                </div>
         </div>
     </div>
-</div>
+</div>  
 @endsection
-
 
 @section('custom-scripts')
 
 <script>
+    var selectedAssetId = 0;
+    var selectedExportName = '';
     $from = 0;
     $size = 10;
 
@@ -390,24 +397,6 @@ Assets
             search();
         });
 
-        $(document).on("click", ".editEntry", function () {
-            var asset = $(this).attr("id");
-            $("#assetModal").modal();
-            $.ajax({
-                url: "{{url('')}}/content/assets/edit/" + asset,
-                type: "GET",
-                beforeSend: function () {
-                    $('.asset-content').html("<button class='btn btn-default btn-lg'><i class='fa fa-spinner fa-spin'></i> Loading</button>");
-                },
-                success: function (data, textStatus, jqXHR) {
-                    $(".asset-content").html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-
-                }
-            });
-        });
-
     });
 
     function changePreview(asset) {
@@ -475,7 +464,6 @@ Assets
 
 
     $(document).on('click', '.previewEntry', function () {
-
         console.log("Preview clicked");
         var id = $(this).data("asset-id"); //get category id from btn id attribute
         console.log("Preview " + id);
@@ -504,8 +492,50 @@ Assets
         }).error(function (data) {
             console.log("Delete AJAX Broke");
         });
+    });
+    
+    $(document).on('click', '.deleteEntry', function () {
+        console.log("delete clicked");
+        var id = $(this).attr('id'); //get category id from btn id attribute
+        console.log("delete " + id);
+        if(confirm("Are you sure you want to delete this asset?")) {
+           window.location.href = "{{ url('content/assets/delete')}}/"+ id;           
+        }
+        return false;       
+    });
+    
+    $(document).on('click', '.exportEntry', function () {
+        // modal opens thru wrapped data-toggle span class on result.blade
+        selectedAssetId = $(this).data("asset-id");
+        selectedExportName = $(this).data("export-name");
+        $("#export_name").val(selectedExportName);
+    });
+    
+    $("#btnExportAsset").on('click', function () {
 
-
+        $.ajax({
+            method: "POST",
+            url: "{{ url('content/assets/export') }}",
+            data: {
+                id: selectedAssetId,
+                name: $("#export_name").val(),
+                folder: $("#export_folder").val()
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    swal('Success', 'Export successful', 'success');
+                    $('#exportModal').modal('hide');
+                },
+                500: function () { //server kakked
+                    swal('Error', 'Export failed', 'error');
+                }
+            }
+        }).error(function (data) {
+            console.log("Export asset AJAX broke");
+        });
     });
 
     $(window).resize(function () {
