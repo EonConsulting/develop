@@ -395,6 +395,22 @@ class ContentBuilderAssets extends Controller {
         return $html;
 
     }
+    
+    public function update_asset(Request $request){
+   
+        $data = $request->json()->all();
+        $asset = Asset::find($data['id']);
+        $asset->title = $data['title'];
+        $asset->description = $data['description'];
+        $asset->tags = $data['tags'];
+        $asset->file_name = $data['file_name'];
+        $asset->mime_type = $data['mime_type'];
+        $asset->size = $data['size'];
+        $asset->creator_id = auth()->user()->id;
+
+        $asset->save();
+
+    }
 
     public function update(Request $request, $id){
 
