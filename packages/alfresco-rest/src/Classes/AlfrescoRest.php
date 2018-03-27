@@ -15,11 +15,9 @@ use Log;
 class AlfrescoRest {
 
     protected $client;
-    protected $config;
 
-    public function __construct(Client $client, array $config) {
+    public function __construct(Client $client) {
         $this->client = $client;
-        $this->config = $config;
     }
 
     /*     * **************************************************************** */
@@ -62,13 +60,13 @@ class AlfrescoRest {
         $node_list = [];
 
         if (empty($parent_node_id)) {
-            $parent_node_id = $this->config['base-dir-node-id'];
+            $parent_node_id = config('alfresco-rest.base-dir-node-id');
         }
 
         $params = [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => $this->config['api-auth-header']
+                'Authorization' => config('alfresco-rest.api-auth-header')
             ]
         ];
 
@@ -109,7 +107,7 @@ class AlfrescoRest {
             'body' => $content, // can be binary, typically file contents
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => $this->config['api-auth-header']
+                'Authorization' => config('alfresco-rest.api-auth-header')
             ]
         ];
 
@@ -141,7 +139,7 @@ class AlfrescoRest {
     function CreateClient() {
         return new Client([
             // Base URI is used with relative requests
-            'base_uri' => $this->config['api-base-url'],
+            'base_uri' => config('alfresco-rest.api-base-url'),
             // You can set any number of default request options.
             'timeout' => 2.0, // 2 minutes
         ]);
@@ -154,11 +152,10 @@ class AlfrescoRest {
      * @param type $relativepath
      */
     function CreateNode($parent_node_id, $nodename, $nodetype, $relativepath) {
-        dd($this->config);
         $new_node_id = null;
 
         if (empty($parent_node_id)) {
-            $parent_node_id = $this->config['base-dir-node-id'];
+            $parent_node_id = config('alfresco-rest.base-dir-node-id');
         }
 
         if (empty($relativepath)) {
@@ -173,12 +170,12 @@ class AlfrescoRest {
                 "relativePath" => $relativepath
             ];
         }
-
+        
         $params = [
             'body' => $body,
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => $this->config['api-auth-header']
+                'Authorization' => config('alfresco-rest.api-auth-header')
             ]
         ];
 

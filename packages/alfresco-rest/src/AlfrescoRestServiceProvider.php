@@ -25,9 +25,6 @@ class AlfrescoRestServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/alfresco-rest.php' => config_path('alfresco-rest.php'),
         ]);
-
-        //$this->loadViews('html-to-pdf');
-        //$this->registerRoutes();
     }
 
     /**
@@ -37,19 +34,20 @@ class AlfrescoRestServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $x = config('alfresco-rest');
+        $this->mergeConfigFrom(
+            __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
+        );
+        
         $this->app->bind(AlfrescoRest::class, function($app){
             return new AlfrescoRest(new Client([
                 // Base URI is used with relative requests
                 'base_uri' => config('alfresco-rest.api-base-url'),
                 // You can set any number of default request options.
                 'timeout' => 2.0, // 2 minutes
-            ]), config('alfresco-rest'));
+            ])); //, config('alfresco-rest'));
         });
 
-        //$this->mergeConfigFrom(
-        //    __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
-        //);
+        
     }
 
     /**
