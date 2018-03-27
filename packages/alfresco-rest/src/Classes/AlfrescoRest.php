@@ -5,7 +5,7 @@
  * Class to centralize all processing for alfresco rest API
  */
 
-namespace EONConsulting\Alfresco\Rest\Classes;
+namespace EONConsulting\Alfresco\Rest;
 
 use GuzzleHttp\Client;
 use Log;
@@ -14,16 +14,12 @@ use Log;
 
 class AlfrescoRest {
 
-    /**
-     * Alfresco config content
-     * @var
-     */
-    protected $config;
     protected $client;
+    protected $config;
 
-    public function __construct() {
-        $this->config = config('alfresco-rest');
-        $this->client = $this->CreateClient();
+    public function __construct(Client $client, $config) {
+        $this->client = $client;
+        $this->config = $config;
     }
 
     /*     * **************************************************************** */
@@ -36,8 +32,8 @@ class AlfrescoRest {
      * @param type $nodetype
      * @return type
      */
-    public function CreateFile($parent_node_id, $filename, $nodetype = "cm:content") {
-        return $this->CreateNode($parent_node_id, $filename, $nodetype, null);
+    public function CreateFile($parent_node_id, $filename, $nodetype = "cm:content", $relativepath = "") {
+        return $this->CreateNode($parent_node_id, $filename, $nodetype, $relativepath);
     }
 
     /**
@@ -46,7 +42,7 @@ class AlfrescoRest {
      * @param type $foldername
      * @param type $relativepath
      */
-    public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = '') {
+    public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = "") {
 
         // we can check for conflicts but this is nicer
         // check whether there is already a folder, if not create
@@ -110,7 +106,7 @@ class AlfrescoRest {
         $updated_node_id = null;
 
         $params = [
-            'body' => $content, // byte stream
+            'body' => $content, // can be binary, typically file contents
             'headers' => [
                 'Accept' => 'application/json',
                 'Authorization' => $this->config['api-auth-header']
@@ -158,6 +154,7 @@ class AlfrescoRest {
      * @param type $relativepath
      */
     function CreateNode($parent_node_id, $nodename, $nodetype, $relativepath) {
+        dd($this->config);
         $new_node_id = null;
 
         if (empty($parent_node_id)) {
@@ -198,6 +195,7 @@ class AlfrescoRest {
             }
         } catch (\Exception $e) {
             Log::debug($e->getMessage() . " URL: [{$request_url}]");
+            throw $e;
         }
 
         return $new_node_id;
