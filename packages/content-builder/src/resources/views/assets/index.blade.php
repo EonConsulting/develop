@@ -264,12 +264,46 @@ Assets
 
 
 @section('exterior-content')
+<!-- Modal -->
+<div id="exportModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Export Asset to Alfresco</h4>
+            </div>
+
+                <div class="modal-body">
+                    <form id="export-form">
+                        <input id="form-category-id" type="hidden" name="id" value="">
+
+                        <div class="form-group">
+                            <label for="export_name">Asset Name</label>
+                            <input name="export_name" type="text" class="form-control" id="export_name" placeholder="Asset Name" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="export_folder">Folder to export to : <small>e.g. FBN1501/images</small></label>
+                            <input name="export_folder" type="text" class="form-control" id="export_folder" placeholder="Export Folder" value="">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary save-btn" id="btnExportAsset"><i class="fa fa-save"></i><span> Save</span></button>
+                </div>
+        </div>
+    </div>
+</div>  
 @endsection
 
 @section('custom-scripts')
 
 <script>
+    var selectedAssetId = 0;
+    var selectedExportName = '';
     $from = 0;
     $size = 10;
 
@@ -468,6 +502,40 @@ Assets
            window.location.href = "{{ url('content/assets/delete')}}/"+ id;           
         }
         return false;       
+    });
+    
+    $(document).on('click', '.exportEntry', function () {
+        // modal opens thru wrapped data-toggle span class on result.blade
+        selectedAssetId = $(this).data("asset-id");
+        selectedExportName = $(this).data("export-name");
+        $("#export_name").val(selectedExportName);
+    });
+    
+    $("#btnExportAsset").on('click', function () {
+
+        $.ajax({
+            method: "POST",
+            url: "{{ url('content/assets/export') }}",
+            data: {
+                id: selectedAssetId,
+                name: $("#export_name").val(),
+                folder: $("#export_folder").val()
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            },
+            statusCode: {
+                200: function (data) { //success
+                    swal('Success', 'Export successful', 'success');
+                    $('#exportModal').modal('hide');
+                },
+                500: function () { //server kakked
+                    swal('Error', 'Export failed', 'error');
+                }
+            }
+        }).error(function (data) {
+            console.log("Export asset AJAX broke");
+        });
     });
 
     $(window).resize(function () {

@@ -4177,9 +4177,3 @@
 [2018-03-19 21:45:01] local.DEBUG: Instructor  
 [2018-03-19 22:59:41] local.DEBUG: Attempting an LTI Login....  
 [2018-03-19 22:59:41] local.DEBUG: Instructor  
-[2018-03-26 08:17:42] local.INFO: select * from `users_lti_links` where `lti_user_id` = ? limit 1 ["292832126"] 
-[2018-03-26 08:17:43] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
-[2018-03-26 08:17:46] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
-[2018-03-26 08:17:46] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
-[2018-03-26 08:17:46] local.DEBUG: Attempting an LTI Login....  
-[2018-03-26 08:17:46] local.DEBUG: Instructor  
