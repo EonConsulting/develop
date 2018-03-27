@@ -140,6 +140,11 @@ Assets
                         <a href="#" class="filterBtn btn btn-default">All Assets</a>
                     </div>
         -->
+        <div>
+            @if($errors->any())
+            <h4>{{$errors - > first()}}</h4>
+            @endif
+        </div>
         <h1>Category</h1>
 
         <div class="form-group">
@@ -275,25 +280,25 @@ Assets
                 <h4 class="modal-title">Export Asset to Alfresco</h4>
             </div>
 
-                <div class="modal-body">
-                    <form id="export-form">
-                        <input id="form-category-id" type="hidden" name="id" value="">
+            <div class="modal-body">
+                <form id="export-form">
+                    <input id="form-category-id" type="hidden" name="id" value="">
 
-                        <div class="form-group">
-                            <label for="export_name">Asset Name</label>
-                            <input name="export_name" type="text" class="form-control" id="export_name" placeholder="Asset Name" value="">
-                        </div>
+                    <div class="form-group">
+                        <label for="export_name">Asset Name</label>
+                        <input name="export_name" type="text" class="form-control" id="export_name" placeholder="Asset Name" value="">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="export_folder">Folder to export to : <small>e.g. FBN1501/images</small></label>
-                            <input name="export_folder" type="text" class="form-control" id="export_folder" placeholder="Export Folder" value="">
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="export_folder">Folder to export to : <small>e.g. FBN1501/images</small></label>
+                        <input name="export_folder" type="text" class="form-control" id="export_folder" placeholder="Export Folder" value="">
+                    </div>
+                </form>
+            </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-primary save-btn" id="btnExportAsset"><i class="fa fa-save"></i><span> Save</span></button>
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary save-btn" id="btnExportAsset"><i class="fa fa-save"></i><span> Save</span></button>
+            </div>
         </div>
     </div>
 </div>  
@@ -493,24 +498,24 @@ Assets
             console.log("Delete AJAX Broke");
         });
     });
-    
+
     $(document).on('click', '.deleteEntry', function () {
         console.log("delete clicked");
         var id = $(this).attr('id'); //get category id from btn id attribute
         console.log("delete " + id);
-        if(confirm("Are you sure you want to delete this asset?")) {
-           window.location.href = "{{ url('content/assets/delete')}}/"+ id;           
+        if (confirm("Are you sure you want to delete this asset?")) {
+            window.location.href = "{{ url('content/assets/delete')}}/" + id;
         }
-        return false;       
+        return false;
     });
-    
+
     $(document).on('click', '.exportEntry', function () {
         // modal opens thru wrapped data-toggle span class on result.blade
         selectedAssetId = $(this).data("asset-id");
         selectedExportName = $(this).data("export-name");
         $("#export_name").val(selectedExportName);
     });
-    
+
     $("#btnExportAsset").on('click', function () {
 
         $.ajax({
