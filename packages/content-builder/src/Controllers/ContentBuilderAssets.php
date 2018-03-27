@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Asset;
 use EONConsulting\ContentBuilder\Models\Category;
+use EONConsulting\Alfresco\Rest as ARC;
 use Illuminate\Support\Facades\Storage;
 use App\Tools\Elasticsearch\Elasticsearch;
-use App\Tools\Alfresco\Alfresco;
 use App\Jobs\ElasticIndexAssets;
 use Illuminate\Support\Facades\Log;
 
@@ -16,9 +16,18 @@ class ContentBuilderAssets extends Controller {
 
     private $path;
     private $mimes;
+    
+    /*
+     * Alfresco Rest Client
+     *
+     * @var \EONConsulting\Alfresco\Rest\Classes\AlfrescoRest
+     */
+    protected $alfresco;
 
-    public function __construct(){
+    public function __construct(ARC\AlfrescoRest $alfresco){
 
+        $this->alfresco = $alfresco;
+        
         $this->path = url('uploads/');
 
         $this->mimes = $mimes = [
@@ -235,6 +244,49 @@ class ContentBuilderAssets extends Controller {
         return view('eon.content-builder::assets.edit',['asset' => $asset,'catArray'=>$catArray,'categories'=>$categories,
                     'assetId'=>$asset_id,'breadcrumbs'=>$breadcrumbs]);
     }
+    
+    // AJAX request
+    public function export(Request $request) {
+        $data = $request->all();
+
+        // get the asset from DB
+        $asset = Asset::find($data["id"]);
+
+        if (count($asset) > 0) {
+            // sync it to alfresco, overwriting existing
+            // put this alfresco in a try catch so that we don't break anything
+            try {
+                // MH : this is where we need to export the asset to
+                // alfresco
+                //$arc = new ARC\AlfrescoRest();
+                // now create an emtpy file and then upload its content
+                // an HTML file if content != null
+                if (!empty($asset->content)) {
+                    $html_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . ".html", $data['folder']);
+                    // upload its contents
+                    // if content = NULL, check for file
+                    // upload content as HTML and file as mime-type
+                    $this->alfresco->UpdateContent($html_file_node_id, $asset->content);
+                }
+
+                if (!empty($asset->file_name)) {
+                    $pathparts = pathinfo($asset->file_name);
+                    $mime_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . $pathparts['extension'], $data['folder']);
+                    // read file contents and update
+                    if (Storage::disk('uploads')->exists($asset['file_name']))
+                    {
+                        $contents = Storage::disk('uploads')->get($asset['file_name']);
+                        $this->alfresco->UpdateContent($mime_file_node_id, $contents);
+                    }
+                }
+                
+                return response('OK', 200);
+            } catch (Exception $ex) {
+                Log::error("Unable to create asset in Alfresco for asset_id : " . $content->id . " : " . $ex->getMessage());
+                return response('Server Error', 500);
+            }
+        }
+    }
      
     public function store(Request $request){
         $data = $request->all();
@@ -255,28 +307,6 @@ class ContentBuilderAssets extends Controller {
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
             }
-
-
-            /**
-             * TODO: Figure out why this returns success but no file shows
-             * Might be authentication, although I set the folder to public for this test
-             */
-            $alfresco = new Alfresco;
-
-            try {
-                $output = $alfresco->upload(json_encode([
-                    'filedata' => $request->file('assetFile'),
-                    'filename' => $data['title'],
-                    'siteid' => 'unisa-e-content',
-                    'containerid' => 'documentLibrary ',
-                    'uploaddirectory' => 'Uploads'
-                ]));
-
-                Log::info("Performed upload, output: " . $output);
-            } catch (\ErrorException $e) {
-                Log::error("Unable to perform upload: " . $e->getMessage());
-            }
-
         } else {
             $file_path = null;
             $file_mime = null;

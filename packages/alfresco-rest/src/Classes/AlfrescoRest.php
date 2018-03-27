@@ -17,7 +17,7 @@ class AlfrescoRest {
     protected $client;
     protected $config;
 
-    public function __construct(Client $client, $config) {
+    public function __construct(Client $client, array $config) {
         $this->client = $client;
         $this->config = $config;
     }
