@@ -177,6 +177,8 @@ Course List
 @endsection
 @endsection
 
+@include('exports::course-export-modal')
+
 @section('custom-scripts')
 
 <script src="{{url('/js/app.js') }}"></script>

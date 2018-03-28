@@ -20,6 +20,7 @@ use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexContent;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use EONConsulting\Exports\Jobs\SinglePdfExportJob;
 
 
 class Storyline2Core extends BaseController {
@@ -100,6 +101,8 @@ class Storyline2Core extends BaseController {
 
             $content = $item->content;
 
+            $faulty_file = $item->faulty_file;
+
             $result = [
                 "found" => true, 
                 "topics" => $topicArray,
@@ -107,6 +110,7 @@ class Storyline2Core extends BaseController {
                 "req" =>$req,
                 "content" => $content,
                 "categories" => $content->categories,
+                "faulty_file" => $faulty_file,
             ];
         }
 
@@ -331,7 +335,7 @@ class Storyline2Core extends BaseController {
             'tags' => 'required',
             'topic' => 'sometimes',
             'description' => 'required',
-            'categories' => 'sometimes',
+            'categories' => 'required',
         ]);
 
         $content = Content::updateOrCreate([
@@ -357,6 +361,14 @@ class Storyline2Core extends BaseController {
         $es = new ElasticIndexContent();
 
         $es->fetchAndIndexContentbyID($content->id);
+
+        /*
+         * Temp because the observers ain't working
+         */
+        if($item = $content->storyline_item)
+        {
+            SinglePdfExportJob::dispatch($item);
+        }
 
         return response()->json($content, 200);
     }

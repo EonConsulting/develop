@@ -371,7 +371,7 @@ Storyline Student Single
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li><a href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></li>
-            <li><a href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF</a></li>
+            <li><a href="#" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Download PDF</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></li>
         </ul>
@@ -430,6 +430,14 @@ Storyline Student Single
         <div class="content-container">
 
                 <div class="content-info">
+
+                    <div class="alert alert-danger" role="alert" style="border-radius:0px;margin-bottom:0; display:none;" id="pdf-generation-alert">
+
+                        <p class="text-area"></p>
+
+                        <a href="#" data-toggle="modal" data-id="" data-target="#pdf-generation-modal">More Info</a>
+
+                    </div>
 
                     <div class="info-bar-container" id="info-bar">
 
@@ -680,6 +688,10 @@ Storyline Student Single
 
 @endsection
 
+@include('auditing::popup')
+@include('exports::storyline-export-problems')
+@include('exports::lecturer-storyline-pdf-download')
+
 @section('custom-scripts')
 
 <script src="{{ url('js/resizer/resizer.js') }}"> </script>
@@ -699,5 +711,3 @@ Storyline Student Single
 <script src="{{ url('js/storyline.js')}}"></script>
 
 @endsection
-
-@include('auditing::popup')
