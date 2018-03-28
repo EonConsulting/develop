@@ -5,25 +5,19 @@
  * Class to centralize all processing for alfresco rest API
  */
 
-namespace EONConsulting\Alfresco\Rest\Classes;
+namespace EONConsulting\Alfresco\Rest;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use Log;
 
 //use Illuminate\Support\Facades\DB;
 
 class AlfrescoRest {
 
-    /**
-     * Alfresco config content
-     * @var
-     */
-    protected $config;
     protected $client;
 
-    public function __construct() {
-        $this->config = config('alfresco-rest');
-        $this->client = $this->CreateClient();
+    public function __construct(GuzzleClient $client) {
+        $this->client = $client;
     }
 
     /*     * **************************************************************** */
@@ -31,26 +25,13 @@ class AlfrescoRest {
 
     /**
      * 
-     * @return Client
-     */
-    public function CreateClient() {
-        return new Client([
-            // Base URI is used with relative requests
-            'base_uri' => $this->config['api-base-url'],
-            // You can set any number of default request options.
-            'timeout' => 2.0, // 2 minutes
-        ]);
-    }
-    
-    /**
-     * 
      * @param type $parent_node_id
      * @param type $filename
      * @param type $nodetype
      * @return type
      */
-    public function CreateFile($parent_node_id, $filename, $nodetype = "cm:content") {
-        return $this->CreateNode($parent_node_id, $filename, $nodetype, null);
+    public function CreateFile($parent_node_id, $filename, $nodetype = "cm:content", $relativepath = "") {
+        return $this->CreateNode($parent_node_id, $filename, $nodetype, $relativepath);
     }
 
     /**
@@ -59,8 +40,61 @@ class AlfrescoRest {
      * @param type $foldername
      * @param type $relativepath
      */
-    public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = '') {
-        return $this->CreateNode($parent_node_id, $nodename, $nodetype, $relativepath);
+    public function CreateFolder($parent_node_id, $nodename, $nodetype = "cm:folder", $relativepath = "") {
+
+        // we can check for conflicts but this is nicer
+        // check whether there is already a folder, if not create
+        $folder_list = $this->GetNodeChildFolderList($parent_node_id);
+        $key = array_search($nodename, array_column($folder_list, 'name'));
+        if (!empty($key)) {
+            $folder_node_id = $key['id'];
+        } else {
+            // try to recreate the node in case it does not exists
+            $folder_node_id = $this->CreateNode($parent_node_id, $nodename, $nodetype, $relativepath); // this will automatically use root node
+        }
+
+        return folder_node_id;
+    }
+
+    function GetNodeChildFolderList($parent_node_id) {
+        $node_list = [];
+
+        if (empty($parent_node_id)) {
+            $parent_node_id = config('alfresco.base-dir-node-id');
+        }
+
+        $params = [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => config('alfresco.api-auth-header')
+            ]
+        ];
+
+        //$request_url = printf("%s/nodes/%s/children?where=(isFolder=true)", 
+        //        config('alfresco.api-base-url'), $parent_node_id);
+        $request_url = sprintf("nodes/%s/children?where=(isFolder=true)", $parent_node_id);
+
+        try {
+            $request = $this->client->request("GET", $request_url, $params);
+            $result = $request->getBody();
+            $jr = json_decode($result);
+
+            if ($jr && $jr->list && $jr->list->entries) {
+                foreach ($jr->list->entries as $en) {
+                    // this is the new node id of the created folder
+                    $node_list[] = [
+                        "id" => $en->id,
+                        "nodeType" => $en->nodeType,
+                        "isFolder" => $en->isFolder,
+                        "name" => $en->name
+                    ];
+                }
+            }
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage() . " URL: [{$request_url}]");
+        }
+
+        return $node_list;
     }
 
     /**
@@ -70,16 +104,17 @@ class AlfrescoRest {
      */
     public function UpdateContent($node_id, $content) {
         $updated_node_id = null;
-        
+
         $params = [
-            'body' => $content, // byte stream
+            'body' => $content, // can be binary, typically file contents
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => $this->config['api-auth-header']
+                'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 
-        $request_url = printf("nodes/%s/content", $node_id);
+        //$request_url = sprintf("%s/nodes/%s/content", config('alfresco.api-base-url'), $node_id);
+        $request_url = sprintf("nodes/%s/content", $node_id);
 
         try {
             $request = $this->client->request("PUT", $request_url, $params);
@@ -93,12 +128,25 @@ class AlfrescoRest {
         } catch (\Exception $e) {
             Log::debug($e->getMessage() . " URL: [{$request_url}]");
         }
-        
+
         return $updated_node_id;
     }
 
     /*     * **************************************************************** */
     /*     * ***********  SET OF PRIVATE FUNCTIONS ************************** */
+
+    /**
+     * 
+     * @return Client
+     */
+    function CreateClient() {
+        return new Client([
+            // Base URI is used with relative requests
+            'base_uri' => config('alfresco.api-base-url'),
+            // You can set any number of default request options.
+            'timeout' => 2.0, // 2 minutes
+        ]);
+    }
 
     /**
      * 
@@ -110,31 +158,32 @@ class AlfrescoRest {
         $new_node_id = null;
 
         if (empty($parent_node_id)) {
-            $parent_node_id = $this->config['base-dir-node-id'];
+            $parent_node_id = config('alfresco.base-dir-node-id');
         }
 
         if (empty($relativepath)) {
-            $body = [
+            $json = [
                 "name" => $nodename,
                 "nodeType" => $nodetype
             ];
         } else {
-            $body = [
+            $json = [
                 "name" => $nodename,
                 "nodeType" => $nodetype,
                 "relativePath" => $relativepath
             ];
         }
-
+        
         $params = [
-            'body' => $body,
+            'json' => $json,
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => $this->config['api-auth-header']
+                'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 
-        $request_url = printf("nodes/%s/children", $parent_node_id);
+        //$request_url = sprintf("%s/nodes/%s/children", config('alfresco.api-base-url'), $parent_node_id);
+        $request_url = sprintf("nodes/%s/children", $parent_node_id);
 
         try {
             $request = $this->client->request("POST", $request_url, $params);
@@ -147,6 +196,7 @@ class AlfrescoRest {
             }
         } catch (\Exception $e) {
             Log::debug($e->getMessage() . " URL: [{$request_url}]");
+            throw $e;
         }
 
         return $new_node_id;

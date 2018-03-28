@@ -237,6 +237,7 @@ return [
         \EONConsulting\Notifications\NotificationServiceProvider::class,
         \EONConsulting\Exports\ExportServiceProvider::class,
         \EONConsulting\Core\eContentCoreServiceProvider::class,
+        \EONConsulting\Alfresco\Rest\AlfrescoRestServiceProvider::class,
 
         /*
          * Application Service Providers...

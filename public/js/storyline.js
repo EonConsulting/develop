@@ -352,6 +352,7 @@ function populateContentForm(data) {
         $("#content-description").val(data.content.description);
         $("#content-tags").val(data.content.tags);
         var body = editor.setData(data.content.body);
+        $("#content-preview").html(data.content.body);
 
         for (index = 0; index < data.categories.length; ++index) {
             cat_id = "#cat" + data.categories[index].id;
@@ -359,7 +360,7 @@ function populateContentForm(data) {
             $(cat_id).prop('checked', true);
         }
 
-        
+
     } else {
         $("#content-id").val('');
     }
@@ -435,7 +436,7 @@ function save_content_to_item(){
 
     $("#validation").hide();
 
-    var data = get_content_details();
+    var form_data = get_content_details();
     var item_id = $("#item-id").attr('value');
     
     validate_all();
@@ -447,8 +448,8 @@ function save_content_to_item(){
         $.ajax({
             method: "POST",
             url: actionUrl,
-            contentType: 'json',
-            data: JSON.stringify(data),
+            //contentType: 'json',
+            data: form_data, //JSON.stringify(data),
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
             },
@@ -470,8 +471,6 @@ function save_content_to_item(){
     
                 }
             }
-        }).error(function (req, status, error) {
-            alert(error);
         });
 
     } else {
@@ -1038,7 +1037,7 @@ $(tree_id).on("select_node.jstree", function (e, data) {
     if(debug) console.log(data);
     
     current_node = data['selected'][0];
- 
+
     if(debug) console.log(current_node);
 
     if(!saved){

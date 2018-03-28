@@ -332,6 +332,7 @@ Course List
                                     },
                                     success: function (data, textStatus, jqXHR) {
                                         $(".module-view").html(data);
+                                        $('.dropdown-toggle').dropdown();
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
                                       
@@ -354,6 +355,7 @@ Course List
                                     },
                                     success: function (data, textStatus, jqXHR) {
                                         $(".module-view").html(data);
+                                        $('.dropdown-toggle').dropdown();
                                     },
                                     error: function (jqXHR, textStatus, errorThrown) {
                                       

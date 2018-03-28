@@ -284,10 +284,10 @@
         color: #b2b2b2;
         outline: none;
     }
-    
-{{ url($course['template']['css']) }}    
 
-</style>]
+    {!! array_get($course, 'template.css', '') !!}
+
+</style>
 
 @endsection
 
@@ -314,7 +314,6 @@
 
         <div class="item-tree" id="content_tree">
 
-            {{--{!! $items !!} --}}
             <ul>
             @each('eon.storyline2::lecturer.partials.items', $items, 'item', 'eon.storyline2::lecturer.partials.none')
             </ul>
@@ -352,7 +351,7 @@
 
             </div>
 
-        <div class="content-body" id="body"></div>
+        <div class="content-body" id="body" data-current-item-id=""></div>
     
         </div>
 
@@ -529,6 +528,8 @@
         button.addClass('active-menu');
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+
+        $('#body').data('current-item-id', data.item.id);
     }
 
 

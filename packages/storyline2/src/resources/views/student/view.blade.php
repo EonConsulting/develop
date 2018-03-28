@@ -306,7 +306,8 @@
         text-align: center;
     }
 
-    {{ url($course['template']['css']) }}
+    {!! array_get($course, 'template.css', '') !!}
+
 </style>
 
 @endsection
@@ -325,8 +326,6 @@
         </ul>
     </div>
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Download PDF </a></span>
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
-
     <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-id="" id="view-notes-link"><i class="fa fa-comments-o"></i> View Notes </a></span>
     <span class="pull-right"><a href="#" class="btn btn-default" type="button" data-toggle="modal" data-id="" id="create-note-link" data-target="#create-note-modal"><i class="fa fa-pencil-square-o"></i> Create Note </a></span>
 
@@ -582,7 +581,7 @@
         
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
-        $('#body').data('current-item-id', current_node.data('item-id'));
+        $('#body').data('current-item-id', data.item.id);
     }
 
     function saveProgress() {

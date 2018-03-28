@@ -36,7 +36,7 @@ class TaoOutcome extends Notification implements ShouldQueue
      */
     public function __construct($tao_result)
     {
-        $this->tao_result = $tao_result;
+        $this->setTaoResult($tao_result);
     }
 
     /**
@@ -61,10 +61,9 @@ class TaoOutcome extends Notification implements ShouldQueue
         return (new MailMessage)
             ->from('dont-reply@unisaonline.net', 'Unisa Online')
             ->subject('Tao Assessment Result')
-            ->markdown($this->views['email'], [
-                'user' => $notifiable,
-                'tao_result' => $this->tao_result
-            ]);
+            ->greeting("Dear {$notifiable->name}")
+            ->line("You've recently done a tao assessment and you scored [{$this->getTaoResult()}]")
+            ->salutation("Unisa Team");
     }
 
     /**
@@ -91,7 +90,7 @@ class TaoOutcome extends Notification implements ShouldQueue
             $this->views['database'], $this->views['email']
         ], [
             'user' => $notifiable,
-            'tao_result' => $this->tao_result
+            'tao_result' => $this->getTaoResult()
         ])->render();
 
         return [
@@ -100,4 +99,18 @@ class TaoOutcome extends Notification implements ShouldQueue
         ];
     }
 
+    /**
+     * @return string
+     */
+    public function getTaoResult(): string
+    {
+        return $this->tao_result;
+    }
+    /**
+     * @param string $entity
+     */
+    public function setTaoResult(string $tao_result)
+    {
+        $this->tao_result = $tao_result;
+    }
 }

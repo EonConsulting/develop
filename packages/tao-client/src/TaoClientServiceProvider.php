@@ -30,7 +30,6 @@ class TaoClientServiceProvider extends ServiceProvider
 
         $this->loadMigrations();
         $this->loadViews('tao-client');
-        //$this->registerObservers();
         $this->registerRoutes();
         $this->loadCommands();
     }
@@ -42,7 +41,7 @@ class TaoClientServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(TaoApi::class, function () {
+        $this->app->bind(TaoApi::class, function () {
             $tao_api = new TaoApi(new \GuzzleHttp\Client(), $this->app['config']['tao-client']);
             return $tao_api;
         });
@@ -56,14 +55,6 @@ class TaoClientServiceProvider extends ServiceProvider
     protected function getPackageFolder()
     {
         return realpath(__DIR__);
-    }
-
-    /**
-     * Register modal observers
-     */
-    protected function registerObservers()
-    {
-        StorylineItem::observe(StoryLineItemObserver::class);
     }
 
 }

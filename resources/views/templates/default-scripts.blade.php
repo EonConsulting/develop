@@ -8,9 +8,11 @@
 <script src="{{ url('/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
 <script src="{{ url('/plugins/fastclick/fastclick.js') }}"></script>
-<script src="{{ url('/js/contextMenu.min.js') }}"></script>
+{{--<script src="{{ url('/js/contextMenu.min.js') }}"></script>--}}
 <!--Simple Bar-->
 <script src="https://unpkg.com/simplebar@latest/dist/simplebar.js"></script>
+
+<script src="https://unpkg.com/sweetalert2@7.0.7/dist/sweetalert2.all.js"></script>
 
 <script>
     $(function () {
@@ -69,8 +71,29 @@
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        error: function (x, status, error)
+        {
+            if (x.status == 422)
+            {
+                var error_messages = x.responseJSON.message;
+
+                if(x.responseJSON.errors)
+                {
+                    error_messages+= "<br/><br/>";
+
+                    jQuery.each( x.responseJSON.errors, function( i, val ) {
+                        error_messages += val + "<br/>";
+                    });
+                }
+
+                swal.close();
+                swal('Oops...', error_messages, 'error');
+            }
         }
     });
+
+
 
     function show_pre_loader(){
         $("#js-loading").show();
@@ -80,6 +103,6 @@
         $("#js-loading").hide();
     }
 
-</script>
 
-<script src="https://unpkg.com/sweetalert2@7.0.7/dist/sweetalert2.all.js"></script>
+
+</script>

@@ -3,6 +3,8 @@
 namespace EONConsulting\Alfresco\Rest;
 
 use EONConsulting\Core\Providers\AbstractServiceProvider as ServiceProvider;
+use EONConsulting\Alfresco\Rest as ARC;
+use GuzzleHttp\Client as GuzzleClient;
 
 class AlfrescoRestServiceProvider extends ServiceProvider
 {
@@ -21,11 +23,8 @@ class AlfrescoRestServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/alfresco-rest.php' => config_path('alfresco-rest.php'),
+            __DIR__.'/config/alfresco.php' => config_path('alfresco.php'),
         ]);
-
-        //$this->loadViews('html-to-pdf');
-        //$this->registerRoutes();
     }
 
     /**
@@ -36,8 +35,19 @@ class AlfrescoRestServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/alfresco-rest.php', 'alfresco-rest'
+            __DIR__.'/config/alfresco.php', 'alfresco'
         );
+        
+        $this->app->bind(ARC\AlfrescoRest::class, function($app){
+            return new AlfrescoRest(new GuzzleClient([
+                // Base URI is used with relative requests
+                'base_uri' => config('alfresco.api-base-url'),
+                // You can set any number of default request options.
+                'timeout' => 2.0, // 2 minutes
+            ])); //, config('alfresco-rest'));
+        });
+
+        
     }
 
     /**
