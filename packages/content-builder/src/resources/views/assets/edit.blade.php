@@ -116,7 +116,13 @@ Create Asset
 <script src="{{url('/js/plupload/plupload.full.min.js')}}"></script>
 
 <script>
+    
+$(document).ready(function(){
+  $("input[name=recipients\\[\\]]").prop('checked', function(_, checked) {
+    return !checked;
+});
 
+});
 $("#submit").on("click", function () {
     save_asset();
 });
@@ -205,6 +211,8 @@ function save_asset() {
     });
 
 }
+
+
 
 </script>
 
