@@ -263,7 +263,7 @@ class ContentBuilderAssets extends Controller {
                 // now create an emtpy file and then upload its content
                 // an HTML file if content != null
                 if (!empty($asset->content)) {
-                    $html_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . ".html", $data['folder']);
+                    $html_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . ".html", "cm:cmobject", $data['folder']);
                     // upload its contents
                     // if content = NULL, check for file
                     // upload content as HTML and file as mime-type
@@ -272,7 +272,7 @@ class ContentBuilderAssets extends Controller {
 
                 if (!empty($asset->file_name)) {
                     $pathparts = pathinfo($asset->file_name);
-                    $mime_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . $pathparts['extension'], $data['folder']);
+                    $mime_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . '.' . $pathparts['extension'], "cm:cmobject", $data['folder']);
                     // read file contents and update
                     if (Storage::disk('uploads')->exists($asset['file_name']))
                     {

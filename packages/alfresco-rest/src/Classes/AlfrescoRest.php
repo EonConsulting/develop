@@ -7,7 +7,7 @@
 
 namespace EONConsulting\Alfresco\Rest;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use Log;
 
 //use Illuminate\Support\Facades\DB;
@@ -16,7 +16,7 @@ class AlfrescoRest {
 
     protected $client;
 
-    public function __construct(Client $client) {
+    public function __construct(GuzzleClient $client) {
         $this->client = $client;
     }
 
@@ -70,7 +70,9 @@ class AlfrescoRest {
             ]
         ];
 
-        $request_url = printf("nodes/%s/children?where=(isFolder=true)", $parent_node_id);
+        //$request_url = printf("%s/nodes/%s/children?where=(isFolder=true)", 
+        //        config('alfresco.api-base-url'), $parent_node_id);
+        $request_url = sprintf("nodes/%s/children?where=(isFolder=true)", $parent_node_id);
 
         try {
             $request = $this->client->request("GET", $request_url, $params);
@@ -111,7 +113,8 @@ class AlfrescoRest {
             ]
         ];
 
-        $request_url = printf("nodes/%s/content", $node_id);
+        //$request_url = sprintf("%s/nodes/%s/content", config('alfresco.api-base-url'), $node_id);
+        $request_url = sprintf("nodes/%s/content", $node_id);
 
         try {
             $request = $this->client->request("PUT", $request_url, $params);
@@ -159,12 +162,12 @@ class AlfrescoRest {
         }
 
         if (empty($relativepath)) {
-            $body = [
+            $json = [
                 "name" => $nodename,
                 "nodeType" => $nodetype
             ];
         } else {
-            $body = [
+            $json = [
                 "name" => $nodename,
                 "nodeType" => $nodetype,
                 "relativePath" => $relativepath
@@ -172,14 +175,15 @@ class AlfrescoRest {
         }
         
         $params = [
-            'body' => $body,
+            'json' => $json,
             'headers' => [
                 'Accept' => 'application/json',
                 'Authorization' => config('alfresco.api-auth-header')
             ]
         ];
 
-        $request_url = printf("nodes/%s/children", $parent_node_id);
+        //$request_url = sprintf("%s/nodes/%s/children", config('alfresco.api-base-url'), $parent_node_id);
+        $request_url = sprintf("nodes/%s/children", $parent_node_id);
 
         try {
             $request = $this->client->request("POST", $request_url, $params);

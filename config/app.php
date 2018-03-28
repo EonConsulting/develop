@@ -228,7 +228,6 @@ return [
         \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
-        \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
@@ -237,6 +236,7 @@ return [
         \EONConsulting\Notifications\NotificationServiceProvider::class,
         \EONConsulting\Exports\ExportServiceProvider::class,
         \EONConsulting\Core\eContentCoreServiceProvider::class,
+        \EONConsulting\Alfresco\Rest\AlfrescoRestServiceProvider::class,
 
         /*
          * Application Service Providers...

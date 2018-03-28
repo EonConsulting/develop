@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Courses;
 
-use App\Http\Requests\Instructors\Courses\StoreCourseRequest;
-use App\Models\Course;
-use App\Models\MetadataStore;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\MetadataType;
-use App\Models\CourseMetadata;
-use EONConsulting\Storyline2\Models\Template;
-use EONConsulting\Storyline2\Transformers\TemplateTransformer;
 use App\Jobs\ElasticIndexCourseInfo;
-use Validator;
+use App\Models\CourseMetadata;
+use App\Models\MetadataStore;
+use App\Models\MetadataType;
+use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Models\Template;
+use Illuminate\Http\Request;
 
 class CreateCourseController extends Controller
 {
@@ -30,43 +26,38 @@ class CreateCourseController extends Controller
 
         $templates = Template::all();
 
-        //dd($templates);
-
         $metadataType = MetadataType::pluck('description', 'id');
 
         return view('lecturer.courses.create', [
             'breadcrumbs' => $breadcrumbs,
             'templates' => $templates,
-            'metadataType' => $metadataType
+            'metadataType' => $metadataType,
         ]);
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-                    'title' => 'required',
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'sometimes',
+            'tags' => 'sometimes',
+            'template' => 'sometimes',
         ]);
 
-        if ($validator->passes()) {
-            $Course = new Course([
-                'title' => $request->get('title'),
-                'description' => $request->get('description'),
-                'tags' => $request->get('tags'),
-                'creator_id' => auth()->user()->id,
-                'template_id' => $request->get('template'),
-                'ingested' => 0
-            ]);
+        $Course = Course::create([
+            'title' => array_get($data, 'title'),
+            'description' => array_get($data, 'description'),
+            'tags' => array_get($data, 'tags'),
+            'creator_id' => auth()->user()->id,
+            'template_id' => array_get($data, 'template'),
+            'ingested' => 0,
+        ]);
 
-            $Course->save();
-            //return response()->json(['success'=>'Module has been added successfully.','course'=>$Course->id]);
-            $request->session()->flash('alert-success', 'Module has been added successfully.');
-            ElasticIndexCourseInfo::dispatch();
-            
-            // return view('lecturer.courses.metadatalist',['breadcrumbs' => $breadcrumbs,'course'=>$Course->id]);
-            return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
-        }
-        $request->session()->flash('alert-danger', 'Title is required.');
-        return redirect()->route("courses.create");
+        $request->session()->flash('alert-success', 'Module has been added successfully.');
+
+        ElasticIndexCourseInfo::dispatch();
+
+        return redirect()->action('Courses\CreateCourseController@metadatalist', ['id' => $Course->id]);
     }
 
     public function metadatalist($id)
@@ -78,18 +69,18 @@ class CreateCourseController extends Controller
                 'title' => 'Create Metadata',
             ],
         ];
-        
+
         $MetadataStore = MetadataType::get();
-        
+
         $MetaId = MetadataStore::pluck('id')->all();
 
         return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
-    
+
     public function viewmetadata($id)
     {
         $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
-        
+
         $MetaId = MetadataStore::pluck('id')->all();
         return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
     }

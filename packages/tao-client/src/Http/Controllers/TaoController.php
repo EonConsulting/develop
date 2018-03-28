@@ -141,7 +141,7 @@ class TaoController extends Controller
     {
         $params = [
 
-            'resource_link_id' => '12345',
+            'resource_link_id' => UUID::make(),
             'resource_link_title' => 'Title for thing',
             'resource_link_description' => 'desc',
 

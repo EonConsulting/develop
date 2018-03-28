@@ -4,10 +4,13 @@ namespace EONConsulting\Storyline2\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use EONConsulting\Storyline2\Models\Storyline;
-use EONConsulting\Storyline2\Models\Template;
 use App\Models\User;
+use EONConsulting\Exports\Models\Traits\Exportable;
+use EONConsulting\Storyline2\Models\Template;
 
 class Course extends Model {
+
+    use Exportable;
 
     /**
      * The table associated with the model.
@@ -71,7 +74,12 @@ class Course extends Model {
     {
         return $this->belongsToMany(User::class, 'integrate_course_users', 'course_id', 'user_id');
     }
-    
+
+    /**
+     * Fetch template for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
     public function template()
     {
         return $this->belongsTo(Template::class, 'template_id', 'id');

@@ -6,6 +6,10 @@ use GuzzleHttp\Client;
 use EONConsulting\TaoClient\Services\TaoApiResponse;
 use EONConsulting\Core\Helpers\XmlToArray;
 
+use Facades\ {
+    EONConsulting\Core\Services\HttpClient
+};
+
 class TaoApi
 {
     /**
@@ -164,24 +168,12 @@ class TaoApi
      */
     protected function callApi($endpoint, $params)
     {
-        try {
+        $content = HttpClient::get($this->config['api_url'] . $endpoint, [
+            'query' => $params,
+            'auth' => [$this->config['api_user'], $this->config['api_pass']]
+        ]);
 
-            $res = $this->client->request('GET', $this->config['api_url'] . $endpoint, [
-                'query' => $params,
-                'auth' => [$this->config['api_user'], $this->config['api_pass']]
-            ]);
-
-        } catch(\Exception $e)
-        {
-            return $e->getMessage();
-        }
-
-        if($res->getStatusCode() != 200)
-        {
-            throw new \Exception('Unable to fetch content!');
-        }
-
-        return ((string) $res->getBody());
+        return (string) $content;
     }
 
     /**

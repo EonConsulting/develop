@@ -17,8 +17,6 @@
 
 <!--Simple Bar-->
 <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
-<!--contextMenu styles-->
-<link rel="stylesheet" href="{{url('/css/contextMenu.min.css')}}">
 
 <script>
     window.Laravel = {!! json_encode([

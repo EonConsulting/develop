@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\StorylineItemType;
+use EONConsulting\Exports\Models\Traits\Exportable;
 
 class StorylineItem extends Node {
     //Enable Nested Sets//
     //use NodeTrait;
+
+    use Exportable;
 
     /**
      * The table associated with the model.
@@ -34,15 +37,53 @@ class StorylineItem extends Node {
         'parent_id', 'storyline_id', 'root_parent', 'level', 'name', 'description', 'file_name', 'file_url','content_id','type'
     ];
 
-    //Set Scope for Storyline Construction
-    protected $scoped = ['storyline_id'];
-    protected static $holdCurrentStoryLineId;
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [
+        'id','_lft', '_rgt', 'nesting'
+    ];
+
+    /**
+     * Columns which restrict what we consider our Nested Set list
+     *
+     * @var array
+     */
+    protected $scoped = [
+        'storyline_id'
+    ];
+
+    /**
+     * Column name to store the reference to parent's node.
+     *
+     * @var string
+     */
     protected $parentColumn = 'parent_id';
+
+    /**
+     * Column name for left index.
+     *
+     * @var string
+     */
     protected $leftColumn = '_lft';
+
+    /**
+     * Column name for right index.
+     *
+     * @var string
+     */
     protected $rightColumn = '_rgt';
+
+    /**
+     * Column name for depth field.
+     *
+     * @var string
+     */
     protected $depthColumn = 'level';
 
-    protected $guarded = array('id','_lft', '_rgt', 'nesting');
+    protected static $holdCurrentStoryLineId;
 
     //Set Attribute Mutation
     public function __construct(array $attributes = array()) {
@@ -96,6 +137,18 @@ class StorylineItem extends Node {
     public function type()
     {
         return $this->hasOne(StorylineItemType::class, 'type');
+    }
+
+    /*
+     * Helper scope to get a storyline by just providing the storyline item
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $storyline_id
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyStoryline($query, $storyline_id)
+    {
+        return $query->where('storyline_id', $storyline_id);
     }
     
 }
