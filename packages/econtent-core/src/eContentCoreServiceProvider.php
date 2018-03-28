@@ -70,7 +70,7 @@ class eContentCoreServiceProvider extends ServiceProvider
 
     protected function registerElastic()
     {
-        $this->app->singleton(Elastic::class, function ($app) {
+        $this->app->bind(Elastic::class, function ($app) {
             return new Elastic();
         });
     }

@@ -466,6 +466,7 @@
 @endsection
 
 @include('student-notes::note')
+@include('exports::student-storyline-pdf-download')
 
 @section('custom-scripts')
     <script src="{{ url('js/resizer/resizer.js') }}"> </script>

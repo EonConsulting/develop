@@ -140,11 +140,13 @@ Assets
                         <a href="#" class="filterBtn btn btn-default">All Assets</a>
                     </div>
         -->
-        <div>
-            @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-            @endif
+
+        @if (session('msg'))
+        <div class="alert alert-success">
+            {{ session('msg')}}
         </div>
+        @endif
+
         <h1>Category</h1>
 
         <div class="form-group">

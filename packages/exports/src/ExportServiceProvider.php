@@ -32,6 +32,7 @@ class ExportServiceProvider extends ServiceProvider
         $this->loadViews('exports');
         $this->registerRoutes();
         $this->loadCommands();
+        $this->loadMigrations();
     }
 
     /**

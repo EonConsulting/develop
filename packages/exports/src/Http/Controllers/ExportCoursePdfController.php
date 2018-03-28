@@ -4,10 +4,10 @@ namespace EONConsulting\Exports\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use EONConsulting\Storyline2\Models\Course;
-use EONConsulting\Exports\Jobs\CourseExportJob;
+use EONConsulting\Exports\Jobs\BulkPdfExportJob;
 use Illuminate\Support\Facades\Auth;
 
-class ExportCourseHtmlController extends Controller
+class ExportCoursePdfController extends Controller
 {
 
     /**
@@ -17,11 +17,9 @@ class ExportCourseHtmlController extends Controller
      */
     public function generate(Course $course)
     {
-        $user = Auth::user();
+        BulkPdfExportJob::dispatch($course);
 
-        CourseExportJob::dispatch($user, $course);
-
-        $message = 'Export started, file will be available for download soon.';
+        $message = 'Export started, files will be available for download soon.';
 
         return redirect()->route('courses', [])->with('flash.success', $message);
     }

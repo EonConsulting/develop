@@ -12,6 +12,7 @@ use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexAssets;
 use Illuminate\Support\Facades\Log;
 
+
 class ContentBuilderAssets extends Controller {
 
     private $path;
@@ -443,7 +444,10 @@ class ContentBuilderAssets extends Controller {
 
     public function update(Request $request, $id){
         if ($request->isMethod('post')) {
+            $assetFile = Asset::find($id);
             if ($request->hasFile('assetFile')){
+                 $assetFile = Asset::find($id);
+                 Storage::delete($assetFile->file_name);
                  $file = $request->file('assetFile');
                  $file_size = $file->getClientSize();
                  $file_mime = $file->getMimeType();
@@ -457,29 +461,11 @@ class ContentBuilderAssets extends Controller {
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
                    }
-                /**
-                * TODO: Figure out why this returns success but no file shows
-                * Might be authentication, although I set the folder to public for this test
-                */
-                $alfresco = new Alfresco;
-                try {
-                $output = $alfresco->upload(json_encode([
-                    'filedata' => $request->file('assetFile'),
-                    'filename' => $request->input('title'),
-                    'siteid' => 'unisa-e-content',
-                    'containerid' => 'documentLibrary ',
-                    'uploaddirectory' => 'Uploads'
-                ]));
-
-                Log::info("Performed upload, output: " . $output);
-            } catch (\ErrorException $e) {
-                Log::error("Unable to perform upload: " . $e->getMessage());
-            }
-
+               
             } else {
-            $file_path = null;
-            $file_mime = null;
-            $file_size = null;
+            $file_path = $assetFile->file_name;
+            $file_mime = $assetFile->mime_type;
+            $file_size = $assetFile->size;
             }
             $asset = Asset::find($id);
             $asset->title = $request->input('title');
@@ -490,9 +476,11 @@ class ContentBuilderAssets extends Controller {
             $asset->size = $file_size;
             $asset->creator_id = auth()->user()->id;
             $asset->save();
-            return Redirect::route('assets.index')->withErrors(['msg', 'Asset has been updated successfully']);
+            $asset->categories()->sync($asset->categories);
+            exit();
+            return Redirect('content/assets?from=0&size=20&searchterm=')->with('msg', 'Asset has been updated successfully');
         }else{
-           return Redirect::back()->withErrors(['msg', 'An error occured, please try again.']);
+           return Redirect::back()->withErrors('msg', 'An error occured, please try again.');
         }
     }
 

@@ -317,7 +317,7 @@ Storyline Student Single
 
     <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
 
-    
+
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
     <span class="pull-right" id="save-status"></span>
@@ -946,7 +946,8 @@ var base_url = "{{{ url('') }}}";
 
     function save_content(){
 
-        var data = get_content_details();
+        //var data = get_content_details();
+        var form_data = get_content_details();
         
         if(validation() === true) {
 
@@ -955,8 +956,10 @@ var base_url = "{{{ url('') }}}";
             $.ajax({
                 method: "POST",
                 url: actionUrl,
-                contentType: 'json',
-                data: JSON.stringify(data),
+                data: form_data,
+
+                //contentType: 'json',
+                //data: JSON.stringify(data),
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
