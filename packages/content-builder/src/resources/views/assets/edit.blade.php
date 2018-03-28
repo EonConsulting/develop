@@ -28,11 +28,11 @@ Create Asset
 
 
 @section('content')   
-<div>
-    @if($errors->any())
-    <h4>{{$errors - > first()}}</h4>
-    @endif
-</div>
+@if (session('msg'))
+    <div class="alert alert-success">
+        {{ session('msg') }}
+    </div>
+@endif
 <div class="asset-form">
     <form action="{{ route('asset.update', $assetId) }}" method="post" enctype='multipart/form-data'>
         {{ csrf_field() }}
