@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('taoclient:retry-jobs')->everyFiveMinutes();
+        $schedule->command('taoclient:retry-jobs')->everyTenMinutes();
         $schedule->command('taoclient:remove-jobs')->daily();
         $schedule->command('jobs:runjob AnalyticsLogIngester')->everyMinute();
     }
