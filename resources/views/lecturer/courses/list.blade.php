@@ -31,8 +31,8 @@ Course List
                 <div class="panel-heading">Modules <a href="{{ route('courses.create') }}" class="btn btn-primary btn-xs"><span class="fa fa-plus"></span></a>                   
                     <div class="col-md-4 pull-right"><input type="text" id="txt_search" class="form-control" onkeyup="search()" placeholder="Search Courses.."></div>
                     <div class="col-md-4 btn-group pull-right" id="radioBtn">
-                        <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="all">All Modules</a>
-                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="my">My Modules</a>                       
+                        <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="all">All Modules</a>
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="my">My Modules</a>
                     </div>
                     <div class="clearfix"></div>                       
                 </div>
@@ -323,7 +323,7 @@ Course List
                                 });
                             
                                  var url = '{{ route("courses.show",":title") }}';    
-                                 url = url.replace(':title', 'all');                     
+                                 url = url.replace(':title', 'all');
                                  $.ajax({
                                     url: url,
                                     type: "GET",
