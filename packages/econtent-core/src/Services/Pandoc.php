@@ -61,6 +61,7 @@ class Pandoc
         return $this->from('html+tex_math_single_backslash+tex_math_dollars+tex_math_double_backslash')
                     ->mathjax()
                     ->template($template)
+                    ->pdfEngine('xelatex')
                     ->inputFile($this->getFullBasepath() . '/item.html')
                     ->outputFile($this->getFullBasepath() . '/item.pdf')
                     ->setErrorFile($this->getBasepath() . '/error.text');
@@ -74,6 +75,7 @@ class Pandoc
             ->from('html+tex_math_single_backslash+tex_math_dollars+tex_math_double_backslash')
             ->mathjax()
             ->template($template)
+            ->pdfEngine('xelatex')
             ->inputFile($this->getFullBasepath() . '/item.html')
             ->outputFile($this->getFullBasepath() . '/item.pdf')
             ->setErrorFile($this->getBasepath() . '/error.text');

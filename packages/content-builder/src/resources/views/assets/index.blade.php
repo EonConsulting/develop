@@ -536,6 +536,9 @@ Assets
                     swal('Success', 'Export successful', 'success');
                     $('#exportModal').modal('hide');
                 },
+                409: function (data) { //success
+                    swal('Error', 'Asset name already exists, use another name', 'error');
+                },
                 500: function () { //server kakked
                     swal('Error', 'Export failed', 'error');
                 }

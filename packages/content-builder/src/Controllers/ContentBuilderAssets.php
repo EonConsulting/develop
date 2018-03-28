@@ -257,13 +257,22 @@ class ContentBuilderAssets extends Controller {
             // sync it to alfresco, overwriting existing
             // put this alfresco in a try catch so that we don't break anything
             try {
-                // MH : this is where we need to export the asset to
-                // alfresco
-                //$arc = new ARC\AlfrescoRest();
+                // MH : this is where we need to export the asset to alfresco
+                
+                // always create the folder
+                //$alfresco_folder = $this->alfresco->CreateFolder(null, $data['name'], $nodetype, $relativepath) 
+                
                 // now create an emtpy file and then upload its content
                 // an HTML file if content != null
                 if (!empty($asset->content)) {
-                    $html_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . ".html", "cm:cmobject", $data['folder']);
+                    $result = $this->alfresco->CreateFile(null, $data['name'] . ".html", "cm:content", $data['folder']);
+                    if ($result["code"] === 409)
+                    {
+                        return response('Conflict', 409);
+                    } else {
+                        $html_file_node_id = $result["id"];
+                    }
+                    
                     // upload its contents
                     // if content = NULL, check for file
                     // upload content as HTML and file as mime-type
@@ -272,7 +281,13 @@ class ContentBuilderAssets extends Controller {
 
                 if (!empty($asset->file_name)) {
                     $pathparts = pathinfo($asset->file_name);
-                    $mime_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . '.' . $pathparts['extension'], "cm:cmobject", $data['folder']);
+                    $result = $this->alfresco->CreateFile(null, $data['name'] . '.' . $pathparts['extension'], "cm:content", $data['folder']);
+                    if ($result["code"] === 409)
+                    {
+                        return response('Conflict', 409);
+                    } else {
+                        $mime_file_node_id = $result["id"];
+                    }
                     // read file contents and update
                     if (Storage::disk('uploads')->exists($asset['file_name']))
                     {
