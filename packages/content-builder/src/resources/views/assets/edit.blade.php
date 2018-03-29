@@ -117,12 +117,18 @@ Create Asset
 
 <script>
     
-$(document).ready(function(){
-  $("input[name=recipients\\[\\]]").prop('checked', function(_, checked) {
-    return !checked;
+$(document).ready(function () {
+    $('.cat-check input[type="checkbox"]').change(function () {
+        var mycheck = new Array();
+        $(".cat-check input[type='checkbox']:checked").each(function () {
+            if ($(this).is(':checked')) {
+                
+            }
+        });
+        alert(mycheck);
+    });
 });
 
-});
 $("#submit").on("click", function () {
     save_asset();
 });

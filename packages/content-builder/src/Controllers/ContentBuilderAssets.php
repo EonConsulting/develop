@@ -476,7 +476,7 @@ class ContentBuilderAssets extends Controller {
             $asset->size = $file_size;
             $asset->creator_id = auth()->user()->id;
             $asset->save();
-            $asset->categories()->sync($asset->categories);
+            $asset->categories()->sync($request->input('categories'));
             return Redirect('content/assets?from=0&size=20&searchterm=')->with('msg', 'Asset has been updated successfully');
         }else{
            return Redirect::back()->withErrors('msg', 'An error occured, please try again.');
