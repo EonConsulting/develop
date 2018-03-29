@@ -189,8 +189,12 @@ class ContentBuilderAssets extends Controller {
                 ],
                 "results" => []
             ];
+
+            $hits = collect($hits)->pluck('_id');
+
+            $searchOutput['results'] = $assets = Asset::with('categories')->whereIn('id', $hits->toArray())->get();
     
-            foreach ($hits as $hit) {
+            /*foreach ($hits as $hit) {
    
                 $assets = Asset::with('categories')->find((int)$hit->_id);
                 if(!empty($assets))
@@ -198,7 +202,7 @@ class ContentBuilderAssets extends Controller {
                 $searchOutput['results'][] = $assets;
                 if(empty($assets))
                 $searchOutput;
-            }
+            }*/
         } else {
             $searchOutput = false;
         }
