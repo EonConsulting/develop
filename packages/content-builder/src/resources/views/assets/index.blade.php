@@ -141,12 +141,6 @@ Assets
                     </div>
         -->
 
-        @if (session('msg'))
-        <div class="alert alert-success">
-            {{ session('msg')}}
-        </div>
-        @endif
-
         <h1>Category</h1>
 
         <div class="form-group">
@@ -169,6 +163,12 @@ Assets
 
         <div class="search">
             <div class="form-inline">
+
+                @if (session('msg'))
+                    <div class="alert alert-success">
+                        {{ session('msg')}}
+                    </div>
+                @endif
 
                 <div class="form-group">
                     <input type="text" id="searchterm" class="form-control" name="search" placeholder="Enter a search term">
