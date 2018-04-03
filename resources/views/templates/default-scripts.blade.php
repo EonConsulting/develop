@@ -30,11 +30,14 @@
         
          $('#support-m').submit(function (event) {
             event.preventDefault();
-            if( !$("textarea#msg").val() ) {
-              $(".v-alert").html("<div class='alert alert-warning'>\n\
+
+             if( ! $("textarea#msg").val() || ! $("input#subj").val()) {
+                 $(".v-alert").html("<div class='alert alert-warning'>\n\
                                    <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
                                    <strong>Warning!</strong> Please enter a message and subject.</div>");
-            }else{
+                 return false;
+             }
+
             var formData = $("#support-m").serialize();
             var url = "{{ url("") }}/notifications/support/message";
             $.ajax({
@@ -60,11 +63,10 @@
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    swal('Oops...', 'Unable to send support message, please try again later.', 'error');
                     //location.reload();
                 }
             });
-        }
         });
     });
 
