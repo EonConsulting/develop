@@ -120,35 +120,46 @@
         $(function(){
 
             var editor = CKEDITOR.replace('ltieditorv2inst', {
-                        extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-                        allowedContent: true,
-                        fullPage: true,
-                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
-                        height: 500,
-                    on : {
-                        // maximize the editor on startup
-                        'instanceReady' : function( evt ) {
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset.css")}}');
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset-print.css")}}');
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/materialize.css")}}' );
-                            this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/economics.css")}}');
-                            this.document.appendStyleSheet('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-                            var ckeditor_head = window.frames[0].document.head;
-                            var script = document.createElement( 'script' );
-                            script.type = 'text/javascript';
-                            script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG";
-                            //$("#someElement").append( script );
+                disableNativeSpellChecker: false,
+                scayt_autoStartup: true,
+                extraPlugins: 'sourcedialog,interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard,autosave',
+                removePlugins: 'scayt,wsc,sourcearea',
+                allowedContent: true,
+                fullPage: false,
+                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
 
-                            ckeditor_head.append(script);
+                {{-- Leaving old code in case something goes wrong
+                extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+                    allowedContent: true,
+                    fullPage: true,
+                    mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
+                --}}
+                    height: 500,
+                on : {
+                    // maximize the editor on startup
+                    'instanceReady' : function( evt ) {
+                        this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset.css")}}');
+                        this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/composite-asset-print.css")}}');
+                        this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/materialize.css")}}' );
+                        this.document.appendStyleSheet('{{url("/vendor/storyline/core/components/css/economics.css")}}');
+                        this.document.appendStyleSheet('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-                        }
+                        var ckeditor_head = window.frames[0].document.head;
+                        var script = document.createElement( 'script' );
+                        script.type = 'text/javascript';
+                        script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG";
+                        //$("#someElement").append( script );
+
+                        ckeditor_head.append(script);
+
                     }
                 }
-            );
+            }
+        );
 
 
-            {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
+        {{--CKEDITOR.document.appendStyleSheet("{{URL::asset('/vendor/ckeditorpluginv2/css/custom-contents.css')}}");--}}
 
             function getData() {
                 return editor.getData();
