@@ -138,21 +138,20 @@ Create a Course
         $('div.alert').delay(8000).slideUp(300);
 
         function getdata(id) {
-            var url = '{{ route("courses.viewmetadata",":id") }}';
-            url = url.replace(':id', id);
+            var url = '{{ route("courses.viewmetadata") }}'; 
             $.ajax({
                 url: url,
-                type: "GET",
+                type: "POST",
                 asyn: false,
+                data:{'id':id,'course':'{{$course}}'},
                 beforeSend: function () {
-                    $('.btnSubmit').text("Saving.....");
+                    //$('.btnSubmit').text("Saving.....");
                 },
                 success: function (data, textStatus, jqXHR) {
                     $(".metadata-content").html(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                    location.reload();
+                    
                 }
             });
         }
