@@ -29,44 +29,54 @@
          });
         
          $('#support-m').submit(function (event) {
-            event.preventDefault();
 
-             if( ! $("textarea#msg").val() || ! $("input#subj").val()) {
+             event.preventDefault();
+
+             var modal = $(this);
+
+             if( ! $(modal).find('#subj').val() ) {
                  $(".v-alert").html("<div class='alert alert-warning'>\n\
                                    <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
-                                   <strong>Warning!</strong> Please enter a message and subject.</div>");
+                                   <strong>Warning!</strong> Please enter a subject.</div>");
                  return false;
+             } else if( ! $(modal).find('#msg').val() ) {
+                 $(".v-alert").html("<div class='alert alert-warning'>\n\
+                                   <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
+                                   <strong>Warning!</strong> Please enter a message.</div>");
+                 return false;
+             } else {
+
+                 var formData = $("#support-m").serialize();
+                 var url = "{{ url("") }}/notifications/support/message";
+                 $.ajax({
+                     url: url,
+                     type: "POST",
+                     asyn: false,
+                     data: formData,
+                     beforeSend: function () {
+                         $('.send-m').html("sending.....");
+                     },
+                     success: function (data, textStatus, jqXHR) {
+                         if (data.msg === '200') {
+                             $('.send-m').html("Send a message");
+                             $(".v-alert").html("<div class='alert alert-success'>\n\
+                                       <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
+                                       <strong>Success!</strong> Message has been sent successfully.</div>");
+                         } else {
+                             $('.send-m').html("Send a message");
+                             $(".v-alert").html("<div class='alert alert-danger'>\n\
+                                       <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
+                                       <strong>Error!</strong> An error occured, please try again.</div>");
+                         }
+                     },
+                     error: function (jqXHR, textStatus, errorThrown) {
+                         swal('Oops...', 'Unable to send support message, please try again later.', 'error');
+                         location.reload();
+                     }
+                 });
              }
 
-            var formData = $("#support-m").serialize();
-            var url = "{{ url("") }}/notifications/support/message";
-            $.ajax({
-                url: url,
-                type: "POST",
-                asyn: false,
-                data: formData,
-                beforeSend: function () {
-                $('.send-m').html("sending.....");
-               },
-                success: function (data, textStatus, jqXHR)
-                {
-                    if (data.msg === '200') {
-                        $('.send-m').html("Send a message");
-                        $(".v-alert").html("<div class='alert alert-success'>\n\
-                                   <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
-                                   <strong>Success!</strong> Message has been sent successfully.</div>");                   
-                    } else {
-                        $('.send-m').html("Send a message");
-                        $(".v-alert").html("<div class='alert alert-danger'>\n\
-                                   <a class='close' href='#' data-dismiss='alert' aria-label='close' title='close'>×</a>\n\
-                                   <strong>Error!</strong> An error occured, please try again.</div>");
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    swal('Oops...', 'Unable to send support message, please try again later.', 'error');
-                    //location.reload();
-                }
-            });
+             event.preventDefault();
         });
     });
 
