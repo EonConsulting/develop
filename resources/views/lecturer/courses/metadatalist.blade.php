@@ -57,11 +57,15 @@ Create a Course
 
     <div class="row">
         <div class="span12">
-            <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip to storyline <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             <p class="lead">Metadata Type List</p> <br>
             @if (session('success'))
             <div class="alert alert-success">
-                {{ session('success') }}
+                <strong>Success!</strong> {{ session('success') }} <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="alert-link">Skip to storyline <i class="fa fa-long-arrow-right"></i></a>
+            </div>
+            @elseif (session('error'))
+            <div class="alert alert-warning">
+             <strong>Warning!</strong>   {{ session('error') }}
             </div>
             @endif
             <div id="tab" data-toggle="buttons-radio">
@@ -131,7 +135,7 @@ Create a Course
             getdata(id);
         });
 
-
+        $('div.alert').delay(8000).slideUp(300);
 
         function getdata(id) {
             var url = '{{ route("courses.viewmetadata",":id") }}';

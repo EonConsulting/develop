@@ -87,7 +87,8 @@ class CreateCourseController extends Controller
 
     public function storemetadata(Request $request)
     {
-        CourseMetadata::find()->where(['course_id',]);
+        $MetadataType = CourseMetadata::where(['metadata_type_id'=>$request->get('metadata_type_id')]);
+        if(!$MetadataType->first()){
         $value = $request->get('value');       
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [
@@ -104,9 +105,11 @@ class CreateCourseController extends Controller
         if ($check) {
             return redirect()->back()->with('success','Course Metadata has been added successfully.');
             //return response()->json(['success' => 'Metadata has been added successfully.']);
-        }
-            return redirect()->back()->with('error','An error occured, please try again.');
+           }
+           return redirect()->back()->with('error','An error occured, please try again.');
         //return response()->json(['error' => 'An error occured, pleas try again']);
+        }
+     return redirect()->back()->with('error','The metadata selected has already been saved.');
     }
 
     public function updatemetadata(Request $request)
