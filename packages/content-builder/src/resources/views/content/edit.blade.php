@@ -252,10 +252,21 @@
        $(function(){
            
             var editor = CKEDITOR.replace('ltieditorv2inst', {
+
+                disableNativeSpellChecker: false,
+                scayt_autoStartup: true,
+                extraPlugins: 'sourcedialog,interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard,autosave',
+                removePlugins: 'scayt,wsc,sourcearea',
+                allowedContent: true,
+                fullPage: false,
+                mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
+
+            {{-- Leaving old code in case something goes wrong
                         extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                         allowedContent: true,
                         fullPage: false,
-                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',                       
+                        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
+            --}}
                 }
             );
             
