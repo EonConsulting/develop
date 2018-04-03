@@ -82,12 +82,13 @@ class CreateCourseController extends Controller
         $MetadataStore = MetadataStore::where('metadata_type_id', $id)->get();
 
         $MetaId = MetadataStore::pluck('id')->all();
-        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore]);
+        return view('lecturer.courses.viewmetadata', ['MetaId'=>$MetaId,'MetadataStore'=>$MetadataStore,'MetaTypeId'=>$id]);
     }
 
     public function storemetadata(Request $request)
     {
-        $value = $request->get('value');
+        CourseMetadata::find()->where(['course_id',]);
+        $value = $request->get('value');       
         foreach ($request->get('metadata_store_id') as $key => $selected_id) {
             $Metadata = [
                 'course_id' => $request->get('course_id'),
@@ -99,12 +100,13 @@ class CreateCourseController extends Controller
             $status = new CourseMetadata($Metadata);
             $check = $status->save();
         }
-
+        
         if ($check) {
-            return response()->json(['success' => 'Metadata has been added successfully.']);
+            return redirect()->back()->with('success','Course Metadata has been added successfully.');
+            //return response()->json(['success' => 'Metadata has been added successfully.']);
         }
-
-        return response()->json(['error' => 'An error occured, pleas try again']);
+            return redirect()->back()->with('error','An error occured, please try again.');
+        //return response()->json(['error' => 'An error occured, pleas try again']);
     }
 
     public function updatemetadata(Request $request)

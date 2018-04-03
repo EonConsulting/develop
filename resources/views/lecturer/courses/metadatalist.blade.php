@@ -6,68 +6,75 @@ Create a Course
 
 @section('custom-styles')
 
-    <style>
-        #tab .btn {
-            margin-bottom: 5px;
-        }
+<style>
+    #tab .btn {
+        margin-bottom: 5px;
+    }
 
-        .container-fluid {
-            margin: 0px 15px 0px 15px;
-        }
+    .container-fluid {
+        margin: 0px 15px 0px 15px;
+    }
 
-        .meta-entry-container {
-            margin: 30px 0px 30px 0px;
-            overflow-y: auto;
-        }
+    .meta-entry-container {
+        margin: 30px 0px 30px 0px;
+        overflow-y: auto;
+    }
 
-        .meta-entry {
-            background: #FFF;
-            width: 300px;
-            /*height: 100px;*/
-            float: left;
-            padding: 15px;
-            margin: 0px 15px 15px 0px;
-        }
+    .meta-entry {
+        background: #FFF;
+        width: 300px;
+        /*height: 100px;*/
+        float: left;
+        padding: 15px;
+        margin: 0px 15px 15px 0px;
+    }
 
-        .meta-entry input[type=text] {
-            width: 100%;
-        }
+    .meta-entry input[type=text] {
+        width: 100%;
+    }
 
-        .meta-checkbox {
-            float: left;
-            width: 20px;
-        }
+    .meta-checkbox {
+        float: left;
+        width: 20px;
+    }
 
-        .meta-description {
-            margin-left: 20px;
-            height: 50px;
-        }
+    .meta-description {
+        margin-left: 20px;
+        height: 50px;
+    }
 
-        .meta-value {
+    .meta-value {
 
-        }
+    }
 
 
-    </style>
+</style>
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
+
     <div class="row">
         <div class="span12">
             <a href="{{ route('storyline2.lecturer.edit', $course) }}" class="btn btn-default pull-right" style="margin-right:50px">Skip <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
             <p class="lead">Metadata Type List</p> <br>
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <div id="tab" data-toggle="buttons-radio">
                 @foreach($MetadataStore as $key=>$resource)
                 <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-default metatype" data-toggle="tab">{{$resource->name}}</a>
                 @endforeach
+            </div>
+            <form id="c-metadata" action="{{ route('courses.storemetadata') }}" method="post"> 
+                {{ Form::hidden('course_id', $course) }}
+                <div class="tab-content metadata-content">
 
-            </div>
-            
-            <div class="tab-content metadata-content">
-                
-            </div>
+                </div>
+            </form>    
         </div>
     </div> 
 </div>
@@ -110,11 +117,11 @@ Create a Course
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>-->
 <!--<script src="{{url('/js/app.js')}}"></script>-->
 <script>
-    
+
     $(document).ready(function () {
         var onload = $(".metatype").attr('id');
         getdata(onload);
-        
+
         $(".metatype").click(function () {
             var id = $(this).attr('id');
 
@@ -124,7 +131,9 @@ Create a Course
             getdata(id);
         });
 
-       function getdata(id){
+
+
+        function getdata(id) {
             var url = '{{ route("courses.viewmetadata",":id") }}';
             url = url.replace(':id', id);
             $.ajax({
@@ -142,7 +151,7 @@ Create a Course
                     location.reload();
                 }
             });
-       }
+        }
     });
 </script>
 
