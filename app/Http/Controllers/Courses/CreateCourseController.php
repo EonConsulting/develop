@@ -70,11 +70,15 @@ class CreateCourseController extends Controller
             ],
         ];
 
-        $MetadataStore = MetadataType::get();
-
+         $MetadataStore = MetadataType::get();
+         $CMetadataId = CourseMetadata::where(['course_id'=>$id])->groupBy('metadata_type_id')->get();
+         $ids = [];
+         foreach ($CMetadataId as $value) {
+              $ids[] = $value->metadata_type_id;
+         }
         $MetaId = MetadataStore::pluck('id')->all();
-
-        return view('lecturer.courses.metadatalist', ['MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
+        $html = "style='color:red'";
+        return view('lecturer.courses.metadatalist', ['html'=>$html,'ids'=>$ids,'MetaId'=>$MetaId,'breadcrumbs' => $breadcrumbs, 'course' => $id, 'MetadataStore'=>$MetadataStore]);
     }
 
     public function viewmetadata($id)

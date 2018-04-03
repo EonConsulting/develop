@@ -70,7 +70,7 @@ Create a Course
             @endif
             <div id="tab" data-toggle="buttons-radio">
                 @foreach($MetadataStore as $key=>$resource)
-                <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-default metatype" data-toggle="tab">{{$resource->name}}</a>
+                <a href="#{{$resource->id}}" id="{{$resource->id}}" class="btn btn-large btn-default metatype" data-toggle="tab" {!! in_array($resource->id,$ids) ? $html:false !!} >{{$resource->name}}</a>
                 @endforeach
             </div>
             <form id="c-metadata" action="{{ route('courses.storemetadata') }}" method="post"> 
