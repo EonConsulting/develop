@@ -188,10 +188,10 @@ Course List
 
 <script>
 
-                        $('.notifyId').on('click', function ()
-                        {
-                            $("#notification-form input[name='course_id']").val($(this).data('id'));
-                        });
+    $(document).on('click', 'a.notifyId', function(event)
+    {
+        $("#notification-form input[name='course_id']").val($(this).data('id'));
+    });
 
                         $(document).ready(function ($) {
                             var _token = $('#tok').val();
