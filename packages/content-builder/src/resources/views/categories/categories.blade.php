@@ -170,11 +170,16 @@
                 
                 //add tags
                 $html += "<td>";
-                $tags = $(this)[0]['tags'].split(",");
-                $.each($tags, function(j){
 
-                    $html += "<span class='label label-default'>" + $tags[j] + "</span><span> </span>";
-                });
+                if($(this)[0]['tags'])
+                {
+                    $tags = $(this)[0]['tags'].split(",");
+                    $.each($tags, function(j){
+
+                        $html += "<span class='label label-default'>" + $tags[j] + "</span><span> </span>";
+                    });
+                }
+
                 $html += "</td>";
 
                 //add actions
@@ -246,7 +251,7 @@
                 }
             });
         });
-        
+
         $(document).on('submit', '#edit-cat-form', function(event) {
             event.preventDefault();
             $.ajax({
@@ -256,59 +261,16 @@
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
-                beforeSend: function () {
-                    $('.save-btn').html("Updating....");
-                },
                 success: function (data, textStatus, jqXHR) {
-                        $('.save-btn').html("Save");
-                        $('div.alert').delay(8000).slideUp(300);
-                        if(data.success){
-                        $(".cat-msg").html("<div class='alert alert-success'>\n\
-                                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>\n\
-                                            <strong>Success!</strong> "+data.success+"<a href='{{ url('/content/categories') }}'>View Categories List</a></div>");
-                        }  
-                        if(data.error){
-                        $(".cat-msg").html("<div class='alert alert-danger'>\n\
-                                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>\n\
-                                            <strong>Warning!</strong> "+data.error+"</div>");
-                        }       
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    
+
+                    $('#saveModal').modal('hide');
+
+                    swal.close();
+                    swal('Successful...', data.message, 'success');
+
+                    refreshTable();
                 }
             });
-        });
-
-        
-        $(document).on('click', '.save-btn', function(){
-
-            var id = $("#form-category-id").val();
-            $data = {"name": $("#cat_name").val(), "tags": $("#cat_tags").val()};
-
-            $.ajax({
-                method: "PUT",
-                url: "{{ url('content/categories/') }}/"+id,
-                data: JSON.stringify($data),
-                contentType: 'application/json',
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-                        $('#saveModal').modal('hide');
-                        refreshTable();
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
-                }
-            }).error(function (data) {
-                console.log("Edit AJAX Broke");
-            });
-
         });
 
         $(document).on('click', '.delete-btn',function() {
