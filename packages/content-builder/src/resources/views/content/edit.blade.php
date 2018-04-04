@@ -239,6 +239,7 @@
 @section('custom-scripts')
     <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
     <script src="https://use.fontawesome.com/5154cf88f4.js"></script>
+    <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
     <script>
         //Dialogue Insertion Point -->
 
@@ -324,6 +325,8 @@
             $("#cke_1_contents").height( (textEditHeight - ckTopHeight - ckBottomHeight - 77) + "px");
 
         });
+
+
 
     </script>
 @endsection
