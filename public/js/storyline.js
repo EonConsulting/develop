@@ -1105,13 +1105,13 @@ $(document).on('keyup', "#content-description", function(){
 CKEDITOR.instances.ltieditorv2inst.on('key', function(e) {
     var n = $(tree_id).jstree("get_selected");
     selected_node = $('#'+n).attr("id");
-    validate_content();
+    //validate_content();
     saved = false;
     check_save();
 });
 
 $(document).on('keyup', "#ltieditorv2inst", function(){
-    validate_content();
+    //validate_content();
     saved = false;
     check_save();
 });
