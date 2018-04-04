@@ -522,7 +522,6 @@ Storyline Student Single
 @section('custom-scripts')
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
-<script src="{{url('/js/autoload.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -994,11 +993,6 @@ var base_url = "{{{ url('') }}}";
         }
 
     }
-
-nanospell.ckeditor('ltieditorv2inst', {
-                dictionary: "en", // 24 free international dictionaries  
-                server: "php"      // can be php, asp, asp.net or java
-            });
 </script>
 
 @endsection
