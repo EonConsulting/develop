@@ -255,7 +255,7 @@
 
                 disableNativeSpellChecker: false,
                 scayt_autoStartup: true,
-                extraPlugins: 'sourcedialog,interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard,autosave',
+                extraPlugins: 'sourcedialog,interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
                 removePlugins: 'wsc,sourcearea',
                 allowedContent: true,
                 fullPage: false,
