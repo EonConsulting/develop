@@ -172,7 +172,7 @@
 $from = 0;
 $size = 12;
 
-function search(){
+function search($actionUrl){
 
     $term = $("#searchterm").val();
     
@@ -191,7 +191,10 @@ function search(){
     console.log("search called");
     console.log($data);
 
-    $actionUrl = "{{ url('/content/search') }}";
+    if( ! $actionUrl)
+    {
+        $actionUrl = "{{ url('/content/search') }}";
+    }
 
     $.ajax({
         method: "POST",
@@ -213,7 +216,7 @@ function search(){
             }
         }
     }).error(function (req, status, error) {
-        alert(error);
+        //alert(error);
     });
 
 }
@@ -232,14 +235,14 @@ $(document).ready(function () {
 
     search();
 
-    $(document).on("click", ".btn-prev-page", function(){
-        $from -= $size;
-        search();
+    $(document).on("click", ".btn-prev-page", function(e){
+        e.preventDefault();
+        search($(this).attr('href'));
     });
 
-    $(document).on("click", ".btn-next-page", function(){
-        $from += $size;
-        search();
+    $(document).on("click", ".btn-next-page", function(e){
+        e.preventDefault();
+        search($(this).attr('href'));
     });
 
     $(document).on("change", ".cat-btn", function(){

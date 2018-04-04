@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexAssets;
 use Illuminate\Support\Facades\Log;
+use EONConsulting\Core\Services\Elastic\Elastic;
 
 
 class ContentBuilderAssets extends Controller {
@@ -25,9 +26,17 @@ class ContentBuilderAssets extends Controller {
      */
     protected $alfresco;
 
-    public function __construct(ARC\AlfrescoRest $alfresco){
+    /**
+     * Elastic Client
+     *
+     * @var \EONConsulting\Core\Services\Elastic\Elastic
+     */
+    protected $elastic;
+
+    public function __construct(ARC\AlfrescoRest $alfresco, Elastic $elastic){
 
         $this->alfresco = $alfresco;
+        $this->elastic = $elastic;
         
         $this->path = url('uploads/');
 
@@ -84,39 +93,13 @@ class ContentBuilderAssets extends Controller {
     
     }
 
-    public function assetSearchToHTML(Request $request){
+
+    public function assetSearchToHTML(Request $request)
+    {
         $data = $request->json()->all();
-        
-        $from = $data['from'];
-        $size = $data['size'];
 
-        $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
-        
-        $fromNext = $from + $size;
-        $fromPrev = $from - $size;
-
-        $renderedResults = "";
-
-        foreach($results['results'] as $result){
-            $renderedResults = $renderedResults . view('eon.content-builder::assets.partials.result', ['item' => $result])->render();
-        }
-
-        $meta = $results['meta'];
-        $meta['fromNext'] = $fromNext;
-        $meta['fromPrev'] = $fromPrev;
-        $meta['size'] = $size;
-
-        $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
-
-        return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
-    }
-
-    function assetSearch($term,$categories = [], $from, $size){
-
-        $elasticsearch = new Elasticsearch;
-        $index = 'assets';
-
-        $cats = implode(',',$categories);
+        $term = $data['term'];
+        $cats = implode(',', $data['categories']);
 
         if($term === null && $cats === ''){
             $query = '{
@@ -131,7 +114,7 @@ class ContentBuilderAssets extends Controller {
                 "query": {
                     "bool": {
                         "must": [';
-            
+
             if($term !== null){
                 $first = false;
                 $query = $query . '
@@ -140,7 +123,7 @@ class ContentBuilderAssets extends Controller {
                         "query":    "*' . $term . '*",
                         "fields": [ "title", "description","content","tags" ]
                     }
-                }';    
+                }';
             }
 
             if($cats !== ""){
@@ -154,8 +137,7 @@ class ContentBuilderAssets extends Controller {
                         "match": {
                             "categories":  "*' . $cats . '*"
                         }
-                    }'; 
-
+                    }';
             }
 
             $query = $query . '
@@ -163,52 +145,35 @@ class ContentBuilderAssets extends Controller {
                         }
                     }
                 }';
-
         }
 
-        $success = false;
+        $meta = [
+            "searchterm" => $term,
+        ];
 
-        try {
-            $output = $elasticsearch->search($index, $query, $from, $size);
-            $success = true;
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            
+        $elastic_response = $this->elastic->index('assets')->body($query)->paginate(10);
+
+        $renderedPag = view('eon.content-builder::assets.partials.pagination', ['items' => $elastic_response])->render();
+
+        if($elastic_response->total() < 1)
+        {
+            return response()->json(['renderedResults' => '', 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
         }
-        
-        if($success){
-            $output = json_decode($output);
 
-            $hits = $output->hits->hits;
-            $total = $output->hits->total;
-    
-            $searchOutput = [
-                "meta" => [
-                    "total" => $total,
-                    "searchterm" => $term,
-                ],
-                "results" => []
-            ];
+        $items = $elastic_response->items();
 
-            $hits = collect($hits)->pluck('_id');
+        $assets = Asset::with('categories')->whereIn('id', array_pluck($items, '_id'))->get();
 
-            $searchOutput['results'] = $assets = Asset::with('categories')->whereIn('id', $hits->toArray())->get();
-    
-            /*foreach ($hits as $hit) {
-   
-                $assets = Asset::with('categories')->find((int)$hit->_id);
-                if(!empty($assets))
-                //$assets->categories = $assets->categories();                
-                $searchOutput['results'][] = $assets;
-                if(empty($assets))
-                $searchOutput;
-            }*/
-        } else {
-            $searchOutput = false;
+        $renderedResults = '';
+
+        foreach($assets as $asset)
+        {
+            $renderedResults = $renderedResults . view('eon.content-builder::assets.partials.result', ['asset' => $asset])->render();
         }
-        return $searchOutput;
 
+        return response()->json(['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
     }
+
 
     public function create(){
 
@@ -447,6 +412,7 @@ class ContentBuilderAssets extends Controller {
     }
 
     public function update(Request $request, $id){
+
         if ($request->isMethod('post')) {
             $assetFile = Asset::find($id);
             if ($request->hasFile('assetFile')){
@@ -471,9 +437,11 @@ class ContentBuilderAssets extends Controller {
             $file_mime = $assetFile->mime_type;
             $file_size = $assetFile->size;
             }
+
             $asset = Asset::find($id);
             $asset->title = $request->input('title');
             $asset->description = $request->input('description');
+            $asset->content = $request->input('content');
             $asset->tags = $request->input('tags');
             $asset->file_name = $file_path;
             $asset->mime_type = $file_mime;
