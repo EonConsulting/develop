@@ -5,6 +5,7 @@ namespace EONConsulting\ContentBuilder\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Category;
+use Validator;
 
 
 class ContentBuilderCategories extends Controller {
@@ -21,9 +22,7 @@ class ContentBuilderCategories extends Controller {
 
         $categories = Category::all();
 
-        //dd($categories);
-
-        return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::categories.categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
         
     }
 
@@ -63,25 +62,35 @@ class ContentBuilderCategories extends Controller {
         return 200;
 
     }
-
+    
+    /**
+     * 
+     * @param type $id
+     */
+     public function edit($id){
+        
+        $category = Category::find($id);
+        return view('eon.content-builder::categories.edit', ['category' => $category]);
+     }
     /**
      * @param Request $request
      * @param $category
      * @return int
      */
-    public function update(Request $request, $category){
+    public function update(Request $req){
 
-        $category = Category::find($category);
-
-        $data = $request->json()->all();
-
-        $category->name = $data['name'];
-        $category->tags = $data['tags'];
-
-        $category->save();
-
-        return 200;
-
+        $validator = Validator::make($req->all(), [
+                    'name' => 'required',
+        ]);
+        
+        if ($validator->passes()) {
+            $cat = Category::find((int)$req->id);
+            $cat->name = $req->name;
+            $cat->tags = $req->tags;
+            $cat->save();
+            return response()->json(['success'=>'Content category has been updated successfully.']);
+        }
+        return response()->json(['error' => $validator->errors()->all()]);        
     }
 
     /**
@@ -90,10 +99,11 @@ class ContentBuilderCategories extends Controller {
      */
     public function destroy($category_id){
 
-        Category::destroy($category_id);
-
-        return 200;
-
+       $Cat = Category::destroy($category_id);
+       if($Cat){
+         return redirect('content/categories')->with('msg', 'Category has been deleted successsfully.'); 
+       }
+       return redirect('content/categories')->with('error', 'An error occured, please try again.');
     }
 
 

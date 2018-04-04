@@ -22,7 +22,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
 
         //RESTful Routes
         Route::resource('/categories', 'ContentBuilderCategories');
-        Route::resource('/assets', 'ContentBuilderAssets');
+        Route::get('/categories/edit/{id}', 'ContentBuilderCategories@edit')->name('categories.edit');
+        Route::post('/categories/update', 'ContentBuilderCategories@update')->name('categories.update');
+        Route::get('/categories/delete/{id}', 'ContentBuilderCategories@destroy')->name('categories.delete');
+        Route::resource('/assets', 'ContentBuilderAssets');       
         Route::get('/assets/delete/{asset}', 'ContentBuilderAssets@delete')->name('assets.delete');
         Route::get('/assets/edit/{asset}', 'ContentBuilderAssets@edit')->name('assets.edit');
         Route::post('/assets/export', 'ContentBuilderAssets@export')->name('assets.export');

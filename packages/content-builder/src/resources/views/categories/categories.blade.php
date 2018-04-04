@@ -15,7 +15,11 @@
         <div class="row">
 
             <div class="col-md-8">
-
+                 @if (session('msg'))
+                    <div class="alert alert-success">
+                        {{ session('msg')}}
+                    </div>
+                @endif
                 <div class="dashboard-card shadow">
 
                     <div class="dashboard-card-heading">
@@ -93,32 +97,19 @@
 
             <!-- Modal content-->
             <div class="modal-content">
-
+                <form id="edit-cat-form">
                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Edit Category</h4>
                 </div>
-
-                    <div class="modal-body">
-                        <form id="edit-form">
-                            <input id="form-category-id" type="hidden" name="id" value="">
-
-                            <div class="form-group">
-                                <label for="description">Name</label>
-                                <input name="name" type="text" class="form-control" id="cat_name" placeholder="Name" value="">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="tags">Tags</label>
-                                <input name="tags" type="text" class="form-control" id="cat_tags" placeholder="Tags" value="">
-                            </div>
-                        </form>
+                    <div class="modal-body cat-info">                          
                     </div>
 
                     <div class="modal-footer">
                         <button class="btn btn-primary save-btn"><i class="fa fa-save"></i><span> Save</span></button>
                     </div>
                 
-
+                </form>
             </div>
 
         </div>
@@ -129,10 +120,9 @@
 @section('custom-scripts')
 
     <script>
-
-        
+           
         $( document ).ready(function() {
-            refreshTable();
+            refreshTable();           
         });
 
 
@@ -236,47 +226,57 @@
 
 
         });
-
-
         
         $(document).on('click', '.edit-btn', function() {
-
             console.log("Edit clicked");
-
-            var id = $(this).data("id"); //get category id from btn id attribute
-            $("#form-category-id").val(id); //change hidden input value to id above
-            //$("#edit-form").attr("action", "{{ url('content/categories/update') }}/"+id)
-
-
+            var id = $(this).data("id"); //get category id from btn id attribute          
             console.log("Edit " + id);
-
             $.ajax({
                 method: "GET",
-                url: "{{ url('content/categories/') }}/"+id,
+                url: "{{ url('/content/categories/edit') }}/"+id,
+                asyn: false,
+                beforeSend: function () {
+                    $('.cat-info').html("loading....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $(".cat-info").html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    
+                }
+            });
+        });
+        
+        $(document).on('submit', '#edit-cat-form', function(event) {
+            event.preventDefault();
+            $.ajax({
+                method: "POST",
+                url: "{{ url('/content/categories/update') }}",
+                data: $(this).serialize(),
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
-                statusCode: {
-                    200: function (data) { //success
-
-                        var json = JSON.parse(data);
-
-                        $("#cat_name").val(json["name"]);
-                        $("#cat_tags").val(json["tags"]);
-
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
+                beforeSend: function () {
+                    $('.save-btn').html("Updating....");
+                },
+                success: function (data, textStatus, jqXHR) {
+                        $('.save-btn').html("Save");
+                        $('div.alert').delay(8000).slideUp(300);
+                        if(data.success){
+                        $(".cat-msg").html("<div class='alert alert-success'>\n\
+                                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>\n\
+                                            <strong>Success!</strong> "+data.success+"<a href='{{ url('/content/categories') }}'>View Categories List</a></div>");
+                        }  
+                        if(data.error){
+                        $(".cat-msg").html("<div class='alert alert-danger'>\n\
+                                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>\n\
+                                            <strong>Warning!</strong> "+data.error+"</div>");
+                        }       
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    
                 }
-            }).error(function (data) {
-                console.log("Delete AJAX Broke");
             });
-
-
         });
 
         
@@ -311,39 +311,15 @@
 
         });
 
-
         $(document).on('click', '.delete-btn',function() {
             console.log("Delete clicked")            
-            var id = $(this).data("id")  //get category id from btn id attribute
-
+            var id = $(this).data("id");  //get category id from btn id attribute
             console.log(id);
-
-            $.ajax({
-                method: "DELETE",
-                url: "{{ url('content/categories/') }}/"+id,
-                headers: {
-                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-                },
-                statusCode: {
-                    200: function (data) { //success
-
-                        refreshTable();
-                        
-                    },
-                    400: function () { //bad request
-
-                    },
-                    500: function () { //server kakked
-
-                    }
-                }
-            }).error(function (data) {
-                console.log("Delete AJAX Broke");
-            });
+            if (confirm("Are you sure you want to delete this category?")) {
+            window.location.href = "{{ url('/content/categories/delete')}}/" + id;
+        }
+        return false;            
         });
-
-
-        //$(this).data("id") 
 
     </script>                  
 

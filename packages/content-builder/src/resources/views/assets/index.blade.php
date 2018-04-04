@@ -161,14 +161,15 @@ Assets
 
     <div class="assets flex-item">
 
-        <div class="search">
-            <div class="form-inline">
-
-                @if (session('msg'))
+               @if (session('msg'))
                     <div class="alert alert-success">
                         {{ session('msg')}}
                     </div>
                 @endif
+        <div class="search">
+            <div class="form-inline">
+
+               
 
                 <div class="form-group">
                     <input type="text" id="searchterm" class="form-control" name="search" placeholder="Enter a search term">
@@ -182,7 +183,7 @@ Assets
 
 
         <div class="results">
-
+             
             <div id="pagination-top">
 
             </div>
