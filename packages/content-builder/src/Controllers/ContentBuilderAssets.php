@@ -144,7 +144,7 @@ class ContentBuilderAssets extends Controller {
                             ]
                         }
                     }
-                }';
+                    }';
         }
 
         $meta = [
@@ -160,9 +160,12 @@ class ContentBuilderAssets extends Controller {
             return response()->json(['renderedResults' => '', 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
         }
 
-        $items = $elastic_response->items();
+        $items = collect($elastic_response->items());
 
-        $assets = Asset::with('categories')->whereIn('id', array_pluck($items, '_id'))->get();
+        $assets = Asset::with('categories')
+            ->whereIn('id', $items->pluck('_id'))
+            ->orderBy(\DB::raw('FIELD(`id`, '. $items->pluck('_id')->implode(',') .')'))
+            ->get();
 
         $renderedResults = '';
 
