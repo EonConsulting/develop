@@ -588,6 +588,20 @@ var base_url = "{{{ url('') }}}";
         
        $(".previewModal").on("click",function(){
           $("#previewModal").modal();
+            $.ajax({
+                   url: "{{ url('/content/preview/') }}"+"{{$courseId}}",
+                   type: "POST",
+                   data: {id: id, text: text},
+                   beforeSend: function () {
+                   $('.content-preview').text("Loading.....");
+                   },
+                   success: function (data, textStatus, jqXHR) {
+                   $(".content-preview").html(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                                     
+                  }
+           });
        }); 
     });
 

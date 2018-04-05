@@ -165,6 +165,10 @@ class ContentBuilderCore extends Controller {
         return view('eon.content-builder::content.view', ['content' => $content, 'breadcrumbs' => $breadcrumbs]);
 
     }
+    
+    public function preview($content_id){
+        $this->view($content_id);
+    }
 
     /**
      * @param $content_id
@@ -245,6 +249,7 @@ class ContentBuilderCore extends Controller {
         
 
         return view('eon.content-builder::content.new', [
+            'courseId'=>$content,
             'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,
