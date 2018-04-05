@@ -28,13 +28,18 @@ class AssetObserver
     }
 
     /*
-     * Fire when saving na Asset
+     * Fire when saving a Asset
      *
      * @param \EONConsulting\ContentBuilder\Models\Asset $asset
      * @return bool
      */
     public function saved(Asset $asset)
     {
+        if($asset->ingested == 0)
+        {
+            return true;
+        }
+
         if($asset->wasRecentlyCreated == true)
         {
             return true;
@@ -65,7 +70,7 @@ class AssetObserver
     }
 
     /*
-     * Fire when deleting na Asset
+     * Fire when deleting a Asset
      *
      * @param \EONConsulting\ContentBuilder\Models\Asset $asset
      * @return bool
@@ -99,7 +104,7 @@ class AssetObserver
             Log::debug('AssetObserver: ' . $message);
         }
 
-        Log::debug($e->getMessage());
+        Log::debug($exception->getMessage());
 
         return true;
     }
