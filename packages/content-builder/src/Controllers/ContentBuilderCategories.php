@@ -48,19 +48,16 @@ class ContentBuilderCategories extends Controller {
      * @param Request $request
      * @return int
      */
-    public function store(Request $request){
-
-        $data = $request->json()->all();
-
-        $category = new Category([
-            'name' => $data['name'],
-            'tags' => $data['tags']
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'tags' => 'required',
         ]);
 
-        $category->save();
+        $category = Category::create($data);
 
-        return 200;
-
+        return response()->json(['message' => 'Category created!'], 200);
     }
     
     /**
@@ -77,20 +74,22 @@ class ContentBuilderCategories extends Controller {
      * @param $category
      * @return int
      */
-    public function update(Request $req){
-
-        $validator = Validator::make($req->all(), [
-                    'name' => 'required',
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'tags' => 'required',
         ]);
-        
-        if ($validator->passes()) {
-            $cat = Category::find((int)$req->id);
-            $cat->name = $req->name;
-            $cat->tags = $req->tags;
-            $cat->save();
-            return response()->json(['success'=>'Content category has been updated successfully.']);
-        }
-        return response()->json(['error' => $validator->errors()->all()]);        
+
+        $category = Category::find($data['id']);
+
+        $category->name = $data['name'];
+        $category->tags = $data['tags'];
+
+        $category->save();
+
+        return response()->json(['message'=>'Content category has been updated successfully.'], 200);
     }
 
     /**
