@@ -14110,3 +14110,270 @@
 [2018-04-04 13:21:39] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
 [2018-04-04 13:21:42] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
 [2018-04-04 13:21:42] local.INFO: select * from `lk_content_categories`  
+[2018-04-04 22:10:11] local.INFO: select * from `users_lti_links` where `lti_user_id` = ? limit 1 ["292832126"] 
+[2018-04-04 22:10:11] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:10:12] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:10:12] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 22:10:12] local.DEBUG: Attempting an LTI Login....  
+[2018-04-04 22:10:12] local.DEBUG: Instructor  
+[2018-04-04 22:10:17] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:10:17] local.INFO: select * from `courses`  
+[2018-04-04 22:10:17] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:10:19] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:10:19] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 22:10:19] local.INFO: SELECT u.id, u.name
+                FROM users u
+                INNER JOIN integrate_course_users icu ON icu.user_id = u.id
+                WHERE icu.course_id = :course_id {"course_id":"14"} 
+[2018-04-04 22:10:21] local.INFO: select * from `summary_module_progression` where `course_id` = ? limit 1 ["14"] 
+[2018-04-04 22:10:22] local.INFO: select * from `summary_student_progression` where `course_id` = ? and `student_user_id` = ? limit 1 ["14","1"] 
+[2018-04-04 22:10:22] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:20:02] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:20:02] local.INFO: select * from `lk_content_categories`  
+[2018-04-05 08:20:02] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 08:20:06] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:20:06] local.INFO: select * from `lk_content_categories`  
+[2018-04-05 08:20:06] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 08:20:07] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:20:07] local.DEBUG: Get ALL content  
+[2018-04-05 08:20:07] local.ERROR: Class 'Elasticsearch\ClientBuilder' not found {"userId":1,"email":"inst@ischool.edu","exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Elasticsearch\\ClientBuilder' not found at C:\\wamp64\\www\\develop\\packages\\econtent-core\\src\\Services\\Elastic\\Elastic.php:82)
+[stacktrace]
+#0 C:\\wamp64\\www\\develop\\packages\\econtent-core\\src\\Services\\Elastic\\Elastic.php(147): EONConsulting\\Core\\Services\\Elastic\\Elastic->connection('default')
+#1 C:\\wamp64\\www\\develop\\packages\\content-builder\\src\\Controllers\\ContentBuilderCore.php(124): EONConsulting\\Core\\Services\\Elastic\\Elastic->__call('index', Array)
+#2 [internal function]: EONConsulting\\ContentBuilder\\Controllers\\ContentBuilderCore->contentSearchToHTML(Object(Illuminate\\Http\\Request))
+#3 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): call_user_func_array(Array, Array)
+#4 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('contentSearchTo...', Array)
+#5 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(EONConsulting\\ContentBuilder\\Controllers\\ContentBuilderCore), 'contentSearchTo...')
+#6 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(169): Illuminate\\Routing\\Route->runController()
+#7 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(658): Illuminate\\Routing\\Route->run()
+#8 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#10 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#11 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(43): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#13 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#14 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#15 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#16 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#34 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#35 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#36 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#37 C:\\wamp64\\www\\develop\\vendor\\barryvdh\\laravel-debugbar\\src\\Middleware\\InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 C:\\wamp64\\www\\develop\\vendor\\fideloper\\proxy\\src\\TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#47 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#50 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#57 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#58 C:\\wamp64\\www\\develop\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#59 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
+#60 {main}
+"} 
+[2018-04-05 08:20:15] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:20:15] local.ERROR: Class 'Elasticsearch\ClientBuilder' not found {"userId":1,"email":"inst@ischool.edu","exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Elasticsearch\\ClientBuilder' not found at C:\\wamp64\\www\\develop\\packages\\econtent-core\\src\\Services\\Elastic\\Elastic.php:82)
+[stacktrace]
+#0 C:\\wamp64\\www\\develop\\packages\\econtent-core\\src\\Services\\Elastic\\Elastic.php(147): EONConsulting\\Core\\Services\\Elastic\\Elastic->connection('default')
+#1 C:\\wamp64\\www\\develop\\packages\\content-builder\\src\\Controllers\\ContentBuilderCore.php(124): EONConsulting\\Core\\Services\\Elastic\\Elastic->__call('index', Array)
+#2 [internal function]: EONConsulting\\ContentBuilder\\Controllers\\ContentBuilderCore->contentSearchToHTML(Object(Illuminate\\Http\\Request))
+#3 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): call_user_func_array(Array, Array)
+#4 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(45): Illuminate\\Routing\\Controller->callAction('contentSearchTo...', Array)
+#5 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(212): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(EONConsulting\\ContentBuilder\\Controllers\\ContentBuilderCore), 'contentSearchTo...')
+#6 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(169): Illuminate\\Routing\\Route->runController()
+#7 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(658): Illuminate\\Routing\\Route->run()
+#8 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#9 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(41): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#10 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#11 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(43): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#13 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#14 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#15 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(67): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#16 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(63): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#25 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(59): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#31 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(660): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(635): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(601): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#34 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(590): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#35 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#36 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(30): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#37 C:\\wamp64\\www\\develop\\vendor\\barryvdh\\laravel-debugbar\\src\\Middleware\\InjectDebugbar.php(65): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#38 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Barryvdh\\Debugbar\\Middleware\\InjectDebugbar->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 C:\\wamp64\\www\\develop\\vendor\\fideloper\\proxy\\src\\TrustProxies.php(56): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#44 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(30): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#47 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#50 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php(46): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#53 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(149): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Pipeline.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(102): Illuminate\\Routing\\Pipeline->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(151): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#57 C:\\wamp64\\www\\develop\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(116): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#58 C:\\wamp64\\www\\develop\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#59 C:\\wamp64\\www\\develop\\server.php(21): require_once('C:\\\\wamp64\\\\www\\\\d...')
+#60 {main}
+"} 
+[2018-04-04 22:27:52] local.INFO: select * from `users_lti_links` where `lti_user_id` = ? limit 1 ["292832126"] 
+[2018-04-04 22:27:52] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:27:53] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:27:53] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 22:27:53] local.DEBUG: Attempting an LTI Login....  
+[2018-04-04 22:27:53] local.DEBUG: Instructor  
+[2018-04-04 22:27:55] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:27:56] local.INFO: select * from `courses`  
+[2018-04-04 22:27:56] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:27:57] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 22:27:57] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 22:27:57] local.INFO: SELECT u.id, u.name
+                FROM users u
+                INNER JOIN integrate_course_users icu ON icu.user_id = u.id
+                WHERE icu.course_id = :course_id {"course_id":"14"} 
+[2018-04-04 22:27:58] local.INFO: select * from `summary_module_progression` where `course_id` = ? limit 1 ["14"] 
+[2018-04-04 22:27:58] local.INFO: select * from `summary_student_progression` where `course_id` = ? and `student_user_id` = ? limit 1 ["14","1"] 
+[2018-04-04 22:27:58] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:28:05] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:28:05] local.INFO: select * from `lk_content_categories`  
+[2018-04-05 08:28:05] local.INFO: select * from `content`  
+[2018-04-05 08:28:05] local.INFO: select * from `assets`  
+[2018-04-05 08:28:05] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 08:28:08] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 08:28:08] local.INFO: select * from `lk_content_categories`  
+[2018-04-05 08:28:08] local.INFO: select * from `content`  
+[2018-04-05 08:28:08] local.INFO: select * from `assets`  
+[2018-04-05 08:28:08] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 23:03:55] local.INFO: select * from `users_lti_links` where `lti_user_id` = ? limit 1 ["292832126"] 
+[2018-04-04 23:03:55] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 23:03:55] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 23:03:55] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 23:03:55] local.DEBUG: Attempting an LTI Login....  
+[2018-04-04 23:03:55] local.DEBUG: Instructor  
+[2018-04-04 23:03:57] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 23:03:58] local.INFO: select * from `courses`  
+[2018-04-04 23:03:59] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 23:04:00] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-04 23:04:00] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-04 23:04:00] local.INFO: SELECT u.id, u.name
+                FROM users u
+                INNER JOIN integrate_course_users icu ON icu.user_id = u.id
+                WHERE icu.course_id = :course_id {"course_id":"14"} 
+[2018-04-04 23:04:01] local.INFO: select * from `summary_module_progression` where `course_id` = ? limit 1 ["14"] 
+[2018-04-04 23:04:01] local.INFO: select * from `summary_student_progression` where `course_id` = ? and `student_user_id` = ? limit 1 ["14","1"] 
+[2018-04-04 23:04:01] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:03] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:03] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:04:03] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:04:03] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:04:05] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:05] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:04:05] local.INFO: select * from `courses`  
+[2018-04-05 09:04:05] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:04:13] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:13] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:04:13] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:04:13] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:04:17] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:17] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:04:17] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:04:17] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:04:19] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:04:19] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:04:19] local.INFO: select * from `courses`  
+[2018-04-05 09:04:19] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:08:21] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:08:21] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:08:21] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:08:21] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:08:24] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:08:24] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:08:24] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:08:24] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:08:26] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:08:26] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:08:26] local.INFO: select * from `courses`  
+[2018-04-05 09:08:26] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:08:29] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:08:29] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:08:47] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:08:47] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:10:49] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:10:49] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:10:49] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:10:49] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:10:52] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:10:52] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:10:52] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:10:52] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:10:54] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:10:54] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:10:54] local.INFO: select * from `courses`  
+[2018-04-05 09:10:54] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:10:57] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:10:57] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:11:38] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:11:38] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:11:38] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:11:38] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:11:40] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:11:40] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:11:40] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-05 09:11:40] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:11:42] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:11:42] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:11:42] local.INFO: select * from `courses`  
+[2018-04-05 09:11:42] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-05 09:11:46] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-05 09:11:46] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-05 09:11:46] local.INFO: select * from `templates`  
+[2018-04-05 09:11:46] local.INFO: select * from `courses` where `courses`.`id` = ? limit 1 [14] 

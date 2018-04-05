@@ -315,9 +315,7 @@ Storyline Student Single
 
 <div class="tools" id="tools">
 
-    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
-
-
+    <span><a class="btn btn-default previewModal"><i class="fa fa-eye"></i> Preview</a></span>
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
     <span class="pull-right" id="save-status"></span>
@@ -564,7 +562,7 @@ var base_url = "{{{ url('') }}}";
     var saved = true;
     var content_id = "{{ $content_id }}";
 
-    $( document ).ready(function(){
+    $(document).ready(function(){
 
         $("#validation").hide();
 
@@ -587,6 +585,10 @@ var base_url = "{{{ url('') }}}";
         }
         
         check_save();
+        
+       $(".previewModal").on("click",function(){
+          $("#previewModal").modal();
+       }); 
     });
 
     window.onbeforeunload = function(evt) {

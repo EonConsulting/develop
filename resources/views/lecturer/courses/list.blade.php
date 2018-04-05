@@ -196,7 +196,7 @@ Course List
                         $(document).ready(function ($) {
                             var _token = $('#tok').val();
 
-                            $(".moduleId").click(function (event) {
+                            $(document).on("click",".moduleId",function (event) {
                                 event.preventDefault();
                                 var text = $(this).text();
                                 var id = $(this).attr('id');
