@@ -167,7 +167,9 @@ class ContentBuilderCore extends Controller {
     }
     
     public function preview($content_id){
-        $this->view($content_id);
+           $content = Content::find($content_id);
+           $content->tags = $this->get_tags($content);
+           return view('eon.content-builder::content.preview', ['content' => $content]);
     }
 
     /**
