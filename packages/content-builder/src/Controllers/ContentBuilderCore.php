@@ -9,11 +9,22 @@ use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexContent;
+use EONConsulting\Core\Services\Elastic\Elastic;
 
 class ContentBuilderCore extends Controller {
 
+    /**
+     * Elastic Client
+     *
+     * @var \EONConsulting\Core\Services\Elastic\Elastic
+     */
+    protected $elastic;
+
+    public function __construct(Elastic $elastic)
+    {
+        $this->elastic = $elastic;
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -33,48 +44,12 @@ class ContentBuilderCore extends Controller {
 
     }
 
-    public function contentSearchToHTML(Request $request){
+    public function contentSearchToHTML(Request $request)
+    {
         $data = $request->json()->all();
-        
-        $from = $data['from'];
-        $size = $data['size'];
 
-        $results = $this->contentSearch($data['term'], $data['categories'], $from, $size);
-
-        //dd($results);
-
-        $fromNext = $from + $size;
-        $fromPrev = $from - $size;
-
-        $renderedResults = "";
-
-        foreach($results['results'] as $result){
-            $renderedResults = $renderedResults . view('eon.content-builder::content.partials.result', ['item' => $result])->render();
-        }
-
-        $meta = $results['meta'];
-        $meta['fromNext'] = $fromNext;
-        $meta['fromPrev'] = $fromPrev;
-        $meta['size'] = $size;
-
-        $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
-
-        return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
-
-    }
-
-    function contentSearch($term, $categories = [], $from, $size){
-
-        $elasticsearch = new Elasticsearch;
-        $index = 'content';
-
-        //$cats = implode(',',$categories);
-
-        //dd($term);
-
-        /*Log::debug("Dump search inputs");
-        Log::debug($term);
-        Log::debug($categories);*/
+        $term = $data['term'];
+        $categories = $data['categories'];
 
         if($term === null && sizeof($categories) === 0){
 
@@ -99,13 +74,12 @@ class ContentBuilderCore extends Controller {
                     { "match": { "body": "'. $term .'" }},
                     { "match": { "tags": "'. $term .'" }}
                 ]';
-                
+
                 $first = false;
             }else{
                 $q_term = '';
             }
-            
-            
+
             //if a term is passed, build term portion of query
             if(sizeof($categories) !== 0){ //category only
 
@@ -124,9 +98,9 @@ class ContentBuilderCore extends Controller {
                         $q_cat .= ',';
                     }
                     $q_cat .= '{ "match": { "categories": "' . $category . '" }}';
-                    
+
                 }
-                
+
                 $q_cat .= ']';
 
             }else{
@@ -137,60 +111,41 @@ class ContentBuilderCore extends Controller {
                 "query": {
                     "bool": {
                         ' . $q_term .
-                        $q_cat .'
+                $q_cat .'
                     }
                 }
             }';
         }
 
-        Log::debug("Query String---------------------------------------------------");
-        Log::debug($query);
+        $meta = [
+            "searchterm" => $term,
+        ];
 
-        $success = false;
+        $elastic_response = $this->elastic->index('content')->body($query)->paginate(15);
 
-        try {
-            $output = $elasticsearch->search($index, $query, $from, $size);
-            $success = true;
-            Log::debug("Elastic search success---------------------------------------------------");
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            
+        $renderedPag = view('eon.content-builder::content.partials.pagination', ['items' => $elastic_response])->render();
+
+        if($elastic_response->total() < 1)
+        {
+            return response()->json(['renderedResults' => '', 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
         }
 
-        if($success){
-            $output = json_decode($output);
+        $items = collect($elastic_response->items());
 
-            $hits = $output->hits->hits;
-            $total = $output->hits->total;
-    
-            $searchOutput = [
-                "meta" => [
-                    "total" => $total,
-                    "searchterm" => $term,
-                ],
-                "results" => []
-            ];
-    
-            foreach ($hits as $hit) {
-    
-                //$content = Content::find($hit->_id);
-                //$content->tags = $this->get_tags($content);
-                //$content->categories = $content->categories();
+        $content_items = Content::with('categories')
+            ->whereIn('id', $items->pluck('_id'))
+            ->orderBy(\DB::raw('FIELD(`id`, '. $items->pluck('_id')->implode(',') .')'))
+            ->get();
 
-                //$hit->tags = explode(',',$hit->tags);
-    
-                $searchOutput['results'][] = $hit->_source;
-            }
-        } else {
-            $searchOutput = false;
+        $renderedResults = '';
+
+        foreach($content_items as $content)
+        {
+            $renderedResults = $renderedResults . view('eon.content-builder::content.partials.result', ['content' => $content])->render();
         }
 
-
-
-        return $searchOutput;
-
+        return response()->json(['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
     }
-
 
     /**
      * @param $content_id
@@ -212,6 +167,12 @@ class ContentBuilderCore extends Controller {
 
         return view('eon.content-builder::content.view', ['content' => $content, 'breadcrumbs' => $breadcrumbs]);
 
+    }
+    
+    public function preview($content_id){
+           $content = Content::find($content_id);
+           $content->tags = $this->get_tags($content);
+           return view('eon.content-builder::content.preview', ['content' => $content]);
     }
 
     /**
@@ -293,6 +254,7 @@ class ContentBuilderCore extends Controller {
         
 
         return view('eon.content-builder::content.new', [
+            'courseId'=>$content,
             'contents'  => $contents,
             'content_id' => $content_id,
             'categories' => $categories,

@@ -105,6 +105,18 @@ class AlfrescoRest {
     public function UpdateContent($node_id, $content) {
         $updated_node_id = null;
 
+        /*$params = [
+            'multipart' => [
+                'name' => 'somefile',
+                'contents' => $content, // can be binary, typically file contents
+                'filename' => 'anotherfile'
+            ],
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => config('alfresco.api-auth-header')
+            ]
+        ];*/
+        
         $params = [
             'body' => $content, // can be binary, typically file contents
             'headers' => [
@@ -155,7 +167,7 @@ class AlfrescoRest {
      * @param type $relativepath
      */
     function CreateNode($parent_node_id, $nodename, $nodetype, $relativepath) {
-        $new_node_id = null;
+        $new_node_response = null;
 
         if (empty($parent_node_id)) {
             $parent_node_id = config('alfresco.base-dir-node-id');
@@ -192,14 +204,28 @@ class AlfrescoRest {
 
             if ($jr && $jr->entry && $jr->entry->id) {
                 // this is the new node id of the created folder
-                $new_node_id = $jr->entry->id;
+                $new_node_response = [
+                    "id" => $jr->entry->id,
+                    "code" => $request->getStatusCode()
+                ];
             }
         } catch (\Exception $e) {
-            Log::debug($e->getMessage() . " URL: [{$request_url}]");
-            throw $e;
+            if ($e->getCode() === 409) // conflict with existing node
+            {
+                Log::debug("Conflict : 409 : Node exists [" . $e->getMessage() . "] URL: [{$request_url}]");
+                // new node id will return null and a file rename must happen
+                // this is so that versioning can occur naturally
+                $new_node_response = [
+                    "id" => null,
+                    "code" => 409
+                ];
+            } else {
+                Log::debug($e->getMessage() . " URL: [{$request_url}]");
+                throw $e;
+            }
         }
 
-        return $new_node_id;
+        return $new_node_response;
     }
 
 }

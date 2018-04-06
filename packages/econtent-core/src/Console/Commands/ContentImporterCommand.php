@@ -198,7 +198,7 @@ class ContentImporterCommand extends Command
                 $body = $html->removeElements()
                     ->storeAssets($page->get('link'))
                     ->fixMathJax()
-                    ->cleanFbnClasses()
+                    //->cleanFbnClasses()
                     ->getBody();
 
             } catch(\Exception $e)

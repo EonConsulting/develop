@@ -28,11 +28,11 @@ Create Asset
 
 
 @section('content')   
-<div>
-    @if($errors->any())
-    <h4>{{$errors - > first()}}</h4>
-    @endif
-</div>
+@if (session('msg'))
+    <div class="alert alert-success">
+        {{ session('msg') }}
+    </div>
+@endif
 <div class="asset-form">
     <form action="{{ route('asset.update', $assetId) }}" method="post" enctype='multipart/form-data'>
         {{ csrf_field() }}
@@ -116,6 +116,18 @@ Create Asset
 <script src="{{url('/js/plupload/plupload.full.min.js')}}"></script>
 
 <script>
+    
+$(document).ready(function () {
+    $('.cat-check input[type="checkbox"]').change(function () {
+        var mycheck = new Array();
+        $(".cat-check input[type='checkbox']:checked").each(function () {
+            if ($(this).is(':checked')) {
+                
+            }
+        });
+        alert(mycheck);
+    });
+});
 
 $("#submit").on("click", function () {
     save_asset();
@@ -131,10 +143,14 @@ var editor = {};
 $(function () {
 
     editor = CKEDITOR.replace('ltieditorv2inst', {
-        extraPlugins: 'interactivegraphs,ltieditorv1,ltieditorv2,html2PDF,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
-        allowedContent: true,
-        fullPage: false,
-        mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG'
+
+            disableNativeSpellChecker: false,
+            scayt_autoStartup: true,
+            extraPlugins: 'sourcedialog,interactivegraphs,taoclient,ltieditorv2,mathjax,dialog,xml,templates,widget,lineutils,widgetselection,clipboard',
+            removePlugins: 'wsc,sourcearea',
+            allowedContent: true,
+            fullPage: false,
+            mathJaxLib: '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG',
     }
     );
 
@@ -205,6 +221,8 @@ function save_asset() {
     });
 
 }
+
+
 
 </script>
 

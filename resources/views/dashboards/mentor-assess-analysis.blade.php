@@ -66,13 +66,13 @@ Mentor Dashboard
 
 <div class="container-fluid">
 
-    <div class="row">
+    <!-- div class="row">
         <div class="col-md-12">
             <div class="beta-notice">
                 Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
             </div>
         </div>
-    </div>
+    </div -->
     
     @push('hoisted-scripts')
     <!-- DO NOT MOVE !!!! Because of hoisting, these JS scripts need to load before the widgets -->

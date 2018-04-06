@@ -315,9 +315,7 @@ Storyline Student Single
 
 <div class="tools" id="tools">
 
-    <span><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</a></span>
-
-    
+    <span><a class="btn btn-default previewModal"><i class="fa fa-eye"></i> Preview</a></span>
 
     <span class="pull-right"><a class="btn btn-default" href="javascript:void();" data-toggle="modal" data-target="#saveModal"><i class="fa fa-save"></i> Save</a></span>
     <span class="pull-right" id="save-status"></span>
@@ -434,6 +432,7 @@ Storyline Student Single
         <div class="modal-content content-body">
 
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Preview Content</h4>
             </div>
 
@@ -522,7 +521,6 @@ Storyline Student Single
 @section('custom-scripts')
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
 <script src="{{url('/js/ckeditor-pages-common.js')}}"></script>
-<script src="{{url('/js/autoload.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_SVG"></script>
 
@@ -565,7 +563,7 @@ var base_url = "{{{ url('') }}}";
     var saved = true;
     var content_id = "{{ $content_id }}";
 
-    $( document ).ready(function(){
+    $(document).ready(function(){
 
         $("#validation").hide();
 
@@ -588,6 +586,24 @@ var base_url = "{{{ url('') }}}";
         }
         
         check_save();
+        
+       $(".previewModal").on("click",function(){
+          $("#previewModal").modal();
+            $.ajax({
+                   url: "{{ url('/content/preview/') }}"+"{{$courseId}}",
+                   type: "POST",
+                   data: {id: id, text: text},
+                   beforeSend: function () {
+                   $('.content-preview').text("Loading.....");
+                   },
+                   success: function (data, textStatus, jqXHR) {
+                   $(".content-preview").html(data);
+                   },
+                   error: function (jqXHR, textStatus, errorThrown) {
+                                     
+                  }
+           });
+       }); 
     });
 
     window.onbeforeunload = function(evt) {
@@ -946,7 +962,8 @@ var base_url = "{{{ url('') }}}";
 
     function save_content(){
 
-        var data = get_content_details();
+        //var data = get_content_details();
+        var form_data = get_content_details();
         
         if(validation() === true) {
 
@@ -955,8 +972,10 @@ var base_url = "{{{ url('') }}}";
             $.ajax({
                 method: "POST",
                 url: actionUrl,
-                contentType: 'json',
-                data: JSON.stringify(data),
+                data: form_data,
+
+                //contentType: 'json',
+                //data: JSON.stringify(data),
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 },
@@ -991,11 +1010,6 @@ var base_url = "{{{ url('') }}}";
         }
 
     }
-
-nanospell.ckeditor('ltieditorv2inst', {
-                dictionary: "en", // 24 free international dictionaries  
-                server: "php"      // can be php, asp, asp.net or java
-            });
 </script>
 
 @endsection

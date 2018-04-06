@@ -68,11 +68,11 @@ Administrator Dashboard
 
 @section('content')
 
-    <div id="beta" style="padding: 15px; margin-top: -15px;">
+    <!-- div id="beta" style="padding: 15px; margin-top: -15px;">
         <div class="beta-notice">
             Please note that this site is currently in development and is not complete. Certain features in this website are currently under construction, and they do not represent the final intended functionality. This site is available to allow you to have a look at progress, and to get an idea of where this site is headed.
         </div>
-    </div>
+    </div -->
 
     <iframe class="piwik-frame" id="piwik" src="https://dev.unisaonline.net/piwik/" width="100%"></iframe>
 

@@ -360,6 +360,7 @@ function populateContentForm(data) {
             $(cat_id).prop('checked', true);
         }
 
+        handleFailedPdf(data);
 
     } else {
         $("#content-id").val('');
@@ -373,6 +374,24 @@ function populateContentForm(data) {
     console.log("set saved: ");
     console.log(saved);
     check_save();
+
+}
+
+function handleFailedPdf(data)
+{
+    var faulty_file = data.faulty_file;
+
+    if(faulty_file == null)
+    {
+        $('#pdf-generation-alert').hide(true);
+        $('#pdf-generation-alert p.text-area').html('');
+        return;
+    }
+
+    $('#pdf-generation-alert').show(true);
+    $('#pdf-generation-alert p.text-area').html(faulty_file.message);
+
+    $("#pdf-generation-modal").find('.modal-body').html("<pre>" + faulty_file.exception + "</pre>");
 
 }
 
@@ -461,6 +480,8 @@ function save_content_to_item(){
 
                     saved = true;
                     check_save();
+
+                    handleFailedPdf(data);
 
                     $('#saveModal').modal('hide');
                 },
@@ -597,11 +618,15 @@ function importAsset(asset){
 
 //Form validation functions-----------------------------------------------------
 
-function validate_all(save = false){
+function validate_all(save){
+    save = save || false;
+
     validate_title_first(save);
 }
 
-function then_validate_others(save = false){
+function then_validate_others(save){
+    save = save || false;
+
     validate_description();
     validate_categories();
     validate_body();
@@ -613,7 +638,9 @@ function then_validate_others(save = false){
 }
 
 //check title is at least 4 characters long and unique
-function validate_title_first(save = false){
+function validate_title_first(save){
+
+    save = save || false;
 
     var element = $("#content-title");
     var title = element.val();
@@ -1078,13 +1105,13 @@ $(document).on('keyup', "#content-description", function(){
 CKEDITOR.instances.ltieditorv2inst.on('key', function(e) {
     var n = $(tree_id).jstree("get_selected");
     selected_node = $('#'+n).attr("id");
-    validate_content();
+    //validate_content();
     saved = false;
     check_save();
 });
 
 $(document).on('keyup', "#ltieditorv2inst", function(){
-    validate_content();
+    //validate_content();
     saved = false;
     check_save();
 });

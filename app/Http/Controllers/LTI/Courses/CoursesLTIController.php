@@ -41,11 +41,13 @@ class CoursesLTIController extends LTIBaseController
             return view('student.courses.list', ['courses' => [], 'paginate' => $elastic_response, 'breadcrumbs' => $breadcrumbs]);
         }
 
-        $items = $elastic_response->items();
+        $items = collect($elastic_response->items());
 
-        $courses = Course::whereIn('id', array_pluck($items, '_id'))->get();
+        $courses = Course::whereIn('id', $items->pluck('_id'))
+            ->orderBy(\DB::raw('FIELD(`id`, '. $items->pluck('_id')->implode(',') .')'))
+            ->get();
 
-        $courses = collect($items)->map(function ($item) use ($courses)
+        $courses = $items->map(function ($item) use ($courses)
         {
             $course = $courses->where('id', array_get($item, '_id'))->first();
 

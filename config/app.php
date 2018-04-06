@@ -228,7 +228,6 @@ return [
         \EONConsulting\Student\Progression\StudentProgressionServiceProvider::class,
         \EONConsulting\AnalyticsLogger\AnalyticsLoggerServiceProvider::class,
 
-        \EONConsulting\HtmlToPdf\HtmlToPdfServiceProvider::class,
         \EONConsulting\StudentNotes\StudentNotesServiceProvider::class,
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,

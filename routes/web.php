@@ -94,7 +94,7 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
         Route::post('/course-metadata/update', ['as' => 'course-metadata.update', 'uses' => 'CreateCourseController@updatemetadata']);
         Route::post('/store-metadata', ['as' => 'courses.storemetadata', 'uses' => 'CreateCourseController@storemetadata']);
         Route::get('/metadata-store/{id}', ['as' => 'metadata.list', 'uses' => 'CreateCourseController@metadatalist']);
-        Route::get('/view-metadata/{id}', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
+        Route::post('/view-metadata', ['as' => 'courses.viewmetadata', 'uses' => 'CreateCourseController@viewmetadata']);
         Route::post('/create', ['as' => 'courses.create', 'uses' => 'CreateCourseController@store']);
         Route::get('/create/metadata', ['as' => 'courses.create.metadata', 'uses' => 'CreateCourseController@fill_metadata_store']); 
         // Feed POst Route from Web Pack

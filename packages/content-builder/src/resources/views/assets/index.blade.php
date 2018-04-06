@@ -140,24 +140,20 @@ Assets
                         <a href="#" class="filterBtn btn btn-default">All Assets</a>
                     </div>
         -->
-        <div>
-            @if($errors->any())
-            <h4>{{$errors->first()}}</h4>
-            @endif
-        </div>
+
         <h1>Category</h1>
 
         <div class="form-group">
-            <?php foreach ($categories as $category): ?>
 
+            @foreach($categories as $category)
                 <div class="checkbox">
-                    <input id="radio<?php echo $category->id; ?>" name="categories" class="cat-btn" type="checkbox" value="<?php echo $category->name; ?>" ng-model="orderList">
-                    <label for="radio<?php echo $category->id; ?>">
-                        <?php echo $category->name; ?>
+                    <input id="radio{{ $category->id }}" name="categories" class="cat-btn" type="checkbox" value="{{ $category->name }}" ng-model="orderList">
+                    <label for="radio{{ $category->id }}">
+                        {{ $category->name }}
                     </label>
                 </div>
+            @endforeach
 
-            <?php endforeach; ?>
         </div> 
         <a href="#" id="clear-categories" class="btn btn-xs btn-default btn-clear">Clear</a> 
     </div>
@@ -165,8 +161,15 @@ Assets
 
     <div class="assets flex-item">
 
+               @if (session('msg'))
+                    <div class="alert alert-success">
+                        {{ session('msg')}}
+                    </div>
+                @endif
         <div class="search">
             <div class="form-inline">
+
+               
 
                 <div class="form-group">
                     <input type="text" id="searchterm" class="form-control" name="search" placeholder="Enter a search term">
@@ -180,7 +183,7 @@ Assets
 
 
         <div class="results">
-
+             
             <div id="pagination-top">
 
             </div>
@@ -312,7 +315,7 @@ Assets
     $from = 0;
     $size = 10;
 
-    function search() {
+    function search($actionUrl) {
 
         $term = $("#searchterm").val();
 
@@ -331,7 +334,10 @@ Assets
         console.log("search called");
         console.log($data);
 
-        $actionUrl = "{{ url('/content/assets/search') }}";
+        if( ! $actionUrl)
+        {
+            $actionUrl = "{{ url('/content/assets/search') }}";
+        }
 
         $.ajax({
             method: "POST",
@@ -373,14 +379,14 @@ Assets
 
         search();
 
-        $(document).on("click", ".btn-prev-page", function () {
-            $from -= 10;
-            search();
+        $(document).on("click", ".btn-prev-page", function (e) {
+            e.preventDefault();
+            search($(this).attr('href'));
         });
 
-        $(document).on("click", ".btn-next-page", function () {
-            $from += 10;
-            search();
+        $(document).on("click", ".btn-next-page", function (e) {
+            e.preventDefault();
+            search($(this).attr('href'));
         });
 
         $(document).on("change", ".cat-btn", function () {
@@ -533,6 +539,9 @@ Assets
                 200: function (data) { //success
                     swal('Success', 'Export successful', 'success');
                     $('#exportModal').modal('hide');
+                },
+                409: function (data) { //success
+                    swal('Error', 'Asset name already exists, use another name', 'error');
                 },
                 500: function () { //server kakked
                     swal('Error', 'Export failed', 'error');

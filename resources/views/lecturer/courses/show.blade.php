@@ -20,6 +20,7 @@
         </div>
         <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-info btn-sm">Storyline</a>
         <a href="{{ route('storyline2.preview', $course->id) }}" class="btn btn-success btn-sm">Preview</a>
+        <a href="#" data-id="{{$course->id}}"  data-toggle="modal" data-target="#course-exports" class="btn btn-default btn-sm course-exports">Exports</a>
         
     </td>
 </tr>

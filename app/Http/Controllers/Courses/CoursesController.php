@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Courses;
 
-use EONConsulting\Storyline2\Models\Course;
-//use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\CourseMetadata;
 use App\Models\MetadataStore;
 use EONConsulting\Storyline2\Models\Template;
-use EONConsulting\Storyline2\Transformers\TemplateTransformer;
-use Validator;
+use EONConsulting\Storyline2\Models\Course;
 
 class CoursesController extends Controller
 {
@@ -23,40 +20,37 @@ class CoursesController extends Controller
             'title' => 'Modules',
         ];
 
-        return view('lecturer.courses.list', ['courses' => $this->allCourses(), 'breadcrumbs' => $breadcrumbs]);
+        $courses = Course::with(['creator'])->orderBy('id', 'DESC')->get();
+
+        return view('lecturer.courses.list', ['courses' => $courses, 'breadcrumbs' => $breadcrumbs]);
     }
 
-    public function allCourses()
-    {
-        $courses = Course::with(['creator'])->orderBy('id', 'DESC')->get();
-        return $courses;
-    }
 
     public function show($title)
     {
-        if($title === 'my'){
-        $courseCreator = Course::where('creator_id', auth()->user()->id)->get();
+        if($title === 'my')
+        {
+            $courseCreator = Course::where('creator_id', auth()->user()->id)->with(['creator'])->get();
 
-        $breadcrumbs = [
-            'title' => 'My Modules'
-        ];
+            $breadcrumbs = [
+                'title' => 'My Modules'
+            ];
         
-        }else{
-        $courseCreator = Course::all();
+        } else {
+            $courseCreator = Course::with(['creator'])->get();
 
-        $breadcrumbs = [
-            'title' => 'All Modules'
-        ];
-        
+            $breadcrumbs = [
+                'title' => 'All Modules'
+            ];
         }
         
         return view('lecturer.courses.show', ['courses' => $courseCreator, 'breadcrumbs' => $breadcrumbs]);
     }
-    
+
     public function edit(Request $request)
     {
         $id = (int)$request->get('id');
-        if ($request->get('text') === 'Module') {
+        if ($request->get('text') === 'Edit Module') {
             $templates = Template::all();
             $data = Course::find($id);
             return view('lecturer.courses.edit', ['data' => $data, 'templates' => $templates]);
@@ -73,23 +67,33 @@ class CoursesController extends Controller
             return view('lecturer.courses.editmetadata', ['data' => $Metadata,'MetaId'=>$MetaId,'course'=>$id]);
         }
     }
-    
+
+    /**
+     * Update the course
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-                    'title' => 'required',
+        $data = $request->validate([
+            'id' => 'required',
+            'title' => 'required',
+            'description' => 'sometimes',
+            'tags' => 'sometimes',
+            'template' => 'sometimes'
         ]);
-        
-        $Course = Course::find((int)$request->get('id'));
-        if ($validator->passes()) {
-            $Course->title = $request->get('title');
-            $Course->description = $request->get('description');
-            $Course->tags = $request->get('tags');
-            $Course->creator_id = $request->get('creator_id');
-            $Course->template_id = $request->get('template');
-            $Course->save();
-            return response()->json(['success'=>'Module has been updated successfully.']);
-        }
-        return response()->json(['error' => $validator->errors()->all()]);
+
+        $Course = Course::update([
+            'id' => array_get($data, 'id')
+        ],[
+            'title' => array_get($data, 'title'),
+            'description' => array_get($data, 'description'),
+            'tags' => array_get($data, 'tags'),
+            'creator_id' => array_get($data, 'creator_id'),
+            'template_id' => array_get($data, 'template'),
+        ]);
+
+        return response()->json(['success'=>'Module has been updated successfully.'], 200);
     }
 }

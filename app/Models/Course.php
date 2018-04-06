@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MetadataType;
 
 class Course extends Model
 {
@@ -70,4 +71,5 @@ class Course extends Model
     {
         return $this->hasMany(CourseUser::class, 'course_id', 'id');
     }
+      
 }

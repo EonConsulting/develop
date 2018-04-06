@@ -5,6 +5,7 @@ namespace EONConsulting\ContentBuilder\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EONConsulting\ContentBuilder\Models\Category;
+use Validator;
 
 
 class ContentBuilderCategories extends Controller {
@@ -21,9 +22,7 @@ class ContentBuilderCategories extends Controller {
 
         $categories = Category::all();
 
-        //dd($categories);
-
-        return view('eon.content-builder::categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
+        return view('eon.content-builder::categories.categories', ['categories' => $categories, 'breadcrumbs' => $breadcrumbs]);
         
     }
 
@@ -49,39 +48,48 @@ class ContentBuilderCategories extends Controller {
      * @param Request $request
      * @return int
      */
-    public function store(Request $request){
-
-        $data = $request->json()->all();
-
-        $category = new Category([
-            'name' => $data['name'],
-            'tags' => $data['tags']
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'tags' => 'required',
         ]);
 
-        $category->save();
+        $category = Category::create($data);
 
-        return 200;
-
+        return response()->json(['message' => 'Category created!'], 200);
     }
-
+    
+    /**
+     * 
+     * @param type $id
+     */
+     public function edit($id){
+        
+        $category = Category::find($id);
+        return view('eon.content-builder::categories.edit', ['category' => $category]);
+     }
     /**
      * @param Request $request
      * @param $category
      * @return int
      */
-    public function update(Request $request, $category){
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'tags' => 'required',
+        ]);
 
-        $category = Category::find($category);
-
-        $data = $request->json()->all();
+        $category = Category::find($data['id']);
 
         $category->name = $data['name'];
         $category->tags = $data['tags'];
 
         $category->save();
 
-        return 200;
-
+        return response()->json(['message'=>'Content category has been updated successfully.'], 200);
     }
 
     /**
@@ -90,10 +98,11 @@ class ContentBuilderCategories extends Controller {
      */
     public function destroy($category_id){
 
-        Category::destroy($category_id);
-
-        return 200;
-
+       $Cat = Category::destroy($category_id);
+       if($Cat){
+         return redirect('content/categories')->with('msg', 'Category has been deleted successsfully.'); 
+       }
+       return redirect('content/categories')->with('error', 'An error occured, please try again.');
     }
 
 

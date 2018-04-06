@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexAssets;
 use Illuminate\Support\Facades\Log;
+use EONConsulting\Core\Services\Elastic\Elastic;
+
 
 class ContentBuilderAssets extends Controller {
 
@@ -24,9 +26,17 @@ class ContentBuilderAssets extends Controller {
      */
     protected $alfresco;
 
-    public function __construct(ARC\AlfrescoRest $alfresco){
+    /**
+     * Elastic Client
+     *
+     * @var \EONConsulting\Core\Services\Elastic\Elastic
+     */
+    protected $elastic;
+
+    public function __construct(ARC\AlfrescoRest $alfresco, Elastic $elastic){
 
         $this->alfresco = $alfresco;
+        $this->elastic = $elastic;
         
         $this->path = url('uploads/');
 
@@ -83,39 +93,13 @@ class ContentBuilderAssets extends Controller {
     
     }
 
-    public function assetSearchToHTML(Request $request){
+
+    public function assetSearchToHTML(Request $request)
+    {
         $data = $request->json()->all();
-        
-        $from = $data['from'];
-        $size = $data['size'];
 
-        $results = $this->assetSearch($data['term'], $data['categories'], $from, $size);
-        
-        $fromNext = $from + $size;
-        $fromPrev = $from - $size;
-
-        $renderedResults = "";
-
-        foreach($results['results'] as $result){
-            $renderedResults = $renderedResults . view('eon.content-builder::assets.partials.result', ['item' => $result])->render();
-        }
-
-        $meta = $results['meta'];
-        $meta['fromNext'] = $fromNext;
-        $meta['fromPrev'] = $fromPrev;
-        $meta['size'] = $size;
-
-        $renderedPag = view('eon.content-builder::content.partials.pagination', ['meta' => $meta])->render();
-
-        return ['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta];
-    }
-
-    function assetSearch($term,$categories = [], $from, $size){
-
-        $elasticsearch = new Elasticsearch;
-        $index = 'assets';
-
-        $cats = implode(',',$categories);
+        $term = $data['term'];
+        $cats = implode(',', $data['categories']);
 
         if($term === null && $cats === ''){
             $query = '{
@@ -130,7 +114,7 @@ class ContentBuilderAssets extends Controller {
                 "query": {
                     "bool": {
                         "must": [';
-            
+
             if($term !== null){
                 $first = false;
                 $query = $query . '
@@ -139,7 +123,7 @@ class ContentBuilderAssets extends Controller {
                         "query":    "*' . $term . '*",
                         "fields": [ "title", "description","content","tags" ]
                     }
-                }';    
+                }';
             }
 
             if($cats !== ""){
@@ -153,57 +137,46 @@ class ContentBuilderAssets extends Controller {
                         "match": {
                             "categories":  "*' . $cats . '*"
                         }
-                    }'; 
-
+                    }';
             }
 
             $query = $query . '
                             ]
                         }
                     }
-                }';
-
+                    }';
         }
 
-        $success = false;
+        $meta = [
+            "searchterm" => $term,
+        ];
 
-        try {
-            $output = $elasticsearch->search($index, $query, $from, $size);
-            $success = true;
-        } catch (\ErrorException $e) {
-            Log::error("Unable to perform search: " . $e->getMessage());
-            
+        $elastic_response = $this->elastic->index('assets')->body($query)->paginate(10);
+
+        $renderedPag = view('eon.content-builder::assets.partials.pagination', ['items' => $elastic_response])->render();
+
+        if($elastic_response->total() < 1)
+        {
+            return response()->json(['renderedResults' => '', 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
         }
-        
-        if($success){
-            $output = json_decode($output);
 
-            $hits = $output->hits->hits;
-            $total = $output->hits->total;
-    
-            $searchOutput = [
-                "meta" => [
-                    "total" => $total,
-                    "searchterm" => $term,
-                ],
-                "results" => []
-            ];
-    
-            foreach ($hits as $hit) {
-   
-                $assets = Asset::with('categories')->find((int)$hit->_id);
-                if(!empty($assets))
-                //$assets->categories = $assets->categories();                
-                $searchOutput['results'][] = $assets;
-                if(empty($assets))
-                $searchOutput;
-            }
-        } else {
-            $searchOutput = false;
+        $items = collect($elastic_response->items());
+
+        $assets = Asset::with('categories')
+            ->whereIn('id', $items->pluck('_id'))
+            ->orderBy(\DB::raw('FIELD(`id`, '. $items->pluck('_id')->implode(',') .')'))
+            ->get();
+
+        $renderedResults = '';
+
+        foreach($assets as $asset)
+        {
+            $renderedResults = $renderedResults . view('eon.content-builder::assets.partials.result', ['asset' => $asset])->render();
         }
-        return $searchOutput;
 
+        return response()->json(['renderedResults' => $renderedResults, 'renderedPag' => $renderedPag, 'searchMeta' => $meta], 200);
     }
+
 
     public function create(){
 
@@ -256,13 +229,22 @@ class ContentBuilderAssets extends Controller {
             // sync it to alfresco, overwriting existing
             // put this alfresco in a try catch so that we don't break anything
             try {
-                // MH : this is where we need to export the asset to
-                // alfresco
-                //$arc = new ARC\AlfrescoRest();
+                // MH : this is where we need to export the asset to alfresco
+                
+                // always create the folder
+                //$alfresco_folder = $this->alfresco->CreateFolder(null, $data['name'], $nodetype, $relativepath) 
+                
                 // now create an emtpy file and then upload its content
                 // an HTML file if content != null
                 if (!empty($asset->content)) {
-                    $html_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . ".html", "cm:cmobject", $data['folder']);
+                    $result = $this->alfresco->CreateFile(null, $data['name'] . ".html", "cm:content", $data['folder']);
+                    if ($result["code"] === 409)
+                    {
+                        return response('Conflict', 409);
+                    } else {
+                        $html_file_node_id = $result["id"];
+                    }
+                    
                     // upload its contents
                     // if content = NULL, check for file
                     // upload content as HTML and file as mime-type
@@ -271,7 +253,13 @@ class ContentBuilderAssets extends Controller {
 
                 if (!empty($asset->file_name)) {
                     $pathparts = pathinfo($asset->file_name);
-                    $mime_file_node_id = $this->alfresco->CreateFile(null, $data['name'] . '.' . $pathparts['extension'], "cm:cmobject", $data['folder']);
+                    $result = $this->alfresco->CreateFile(null, $data['name'] . '.' . $pathparts['extension'], "cm:content", $data['folder']);
+                    if ($result["code"] === 409)
+                    {
+                        return response('Conflict', 409);
+                    } else {
+                        $mime_file_node_id = $result["id"];
+                    }
                     // read file contents and update
                     if (Storage::disk('uploads')->exists($asset['file_name']))
                     {
@@ -427,8 +415,12 @@ class ContentBuilderAssets extends Controller {
     }
 
     public function update(Request $request, $id){
+
         if ($request->isMethod('post')) {
+            $assetFile = Asset::find($id);
             if ($request->hasFile('assetFile')){
+                 $assetFile = Asset::find($id);
+                 Storage::delete($assetFile->file_name);
                  $file = $request->file('assetFile');
                  $file_size = $file->getClientSize();
                  $file_mime = $file->getMimeType();
@@ -442,42 +434,27 @@ class ContentBuilderAssets extends Controller {
                     $file_path = $file->store($file->getMimeType(),'uploads');
                     break;
                    }
-                /**
-                * TODO: Figure out why this returns success but no file shows
-                * Might be authentication, although I set the folder to public for this test
-                */
-                $alfresco = new Alfresco;
-                try {
-                $output = $alfresco->upload(json_encode([
-                    'filedata' => $request->file('assetFile'),
-                    'filename' => $request->input('title'),
-                    'siteid' => 'unisa-e-content',
-                    'containerid' => 'documentLibrary ',
-                    'uploaddirectory' => 'Uploads'
-                ]));
-
-                Log::info("Performed upload, output: " . $output);
-            } catch (\ErrorException $e) {
-                Log::error("Unable to perform upload: " . $e->getMessage());
-            }
-
+               
             } else {
-            $file_path = null;
-            $file_mime = null;
-            $file_size = null;
+            $file_path = $assetFile->file_name;
+            $file_mime = $assetFile->mime_type;
+            $file_size = $assetFile->size;
             }
+
             $asset = Asset::find($id);
             $asset->title = $request->input('title');
             $asset->description = $request->input('description');
+            $asset->content = $request->input('content');
             $asset->tags = $request->input('tags');
             $asset->file_name = $file_path;
             $asset->mime_type = $file_mime;
             $asset->size = $file_size;
             $asset->creator_id = auth()->user()->id;
             $asset->save();
-            return Redirect::route('assets.index')->withErrors(['msg', 'Asset has been updated successfully']);
+            $asset->categories()->sync($request->input('categories'));
+            return Redirect('content/assets?from=0&size=20&searchterm=')->with('msg', 'Asset has been updated successfully');
         }else{
-           return Redirect::back()->withErrors(['msg', 'An error occured, please try again.']);
+           return Redirect::back()->withErrors('msg', 'An error occured, please try again.');
         }
     }
 

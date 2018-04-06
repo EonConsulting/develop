@@ -305,7 +305,7 @@
         </ul>
     </div>
 
-    <span class="pull-right"><a class="btn btn-default" href="javascript:void();" id="convert-html-to-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
+    <span class="pull-right"><a class="btn btn-default" href="#" id="d-pdf"><i class="fa fa-file-pdf-o"></i> Print PDF </a></span>
 </div>
 
 <div class="flex-container resizer">
@@ -433,6 +433,7 @@
     </div>
 @endsection
 
+@include('exports::student-storyline-pdf-download')
 
 @section('custom-scripts')
 <script src="{{ url("js/resizer/resizer.js") }}"> </script>
