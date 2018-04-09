@@ -461,7 +461,7 @@
                 200: function (data) { //success
                     if(data["found"] === true){
                         pupulateContent(data,button);                       
-                        logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
+                        //logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
                         $("#noContentMessage").modal("show");
                     }
