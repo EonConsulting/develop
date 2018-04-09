@@ -39,14 +39,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title" required>
+                        <input class="form-control" type="text" name="title" id="title" placeholder="Enter a title" value="{{ old('title') }}" required>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title">Tags (comma seperated)</label>
-                        <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags" required>
+                        <input class="form-control" type="text" name="tags" id="tags" placeholder="Enter tags" value="{{ old('tags') }}" required>
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" rows="2" name="description" id="description" required></textarea>
+                        <textarea class="form-control" rows="2" name="description" id="description" required>{{ old('description') }}</textarea>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="content">Content Block</label>
-                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="content" data-toggle="popover" data-placement="left" data-content=""></textarea>
+                        <textarea id="ltieditorv2inst" class="ckeditor cktextarea" name="content" data-toggle="popover" data-placement="left" data-content="">{{ old('content') }}</textarea>
                     </div>
                 </div>
 
