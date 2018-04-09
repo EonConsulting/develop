@@ -3,8 +3,6 @@
 namespace EONConsulting\ContentBuilder;
 
 use Illuminate\Support\ServiceProvider;
-use EONConsulting\ContentBuilder\Models\Asset;
-use EONConsulting\ContentBuilder\Observers\AssetObserver;
 
 class ContentBuilderServiceProvider extends ServiceProvider
 {
@@ -26,8 +24,6 @@ class ContentBuilderServiceProvider extends ServiceProvider
             __DIR__.'/assets' => base_path('public/vendor/content-builder'),
         ]);
 
-        $this->bootObservers();
-
     }
 
     /**
@@ -38,12 +34,6 @@ class ContentBuilderServiceProvider extends ServiceProvider
     public function register()
     {
         //
-    }
-
-
-    protected function bootObservers()
-    {
-        Asset::observe(AssetObserver::class);
     }
 
 }
