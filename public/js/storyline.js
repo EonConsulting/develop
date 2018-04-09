@@ -319,12 +319,17 @@ function import_content($content_id,$item_id,$action){
             200: function (data) { //success
                 $('#importModal').modal('hide');
 
+                $('div#saveModal input[class="cat_check"]').each(function(index)
+                {
+                    $(this).prop('checked', false);
+                });
+
                 if(debug) {
                     console.log("Content imported. Content id: " + data.id);
                     //console.log(data.id);
                 }
 
-                getContent(id);
+                getContent(data.id);
             },
             400: function () { //bad request
 
