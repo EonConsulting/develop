@@ -16,12 +16,11 @@
                 <a href="#" class="moduleId dropdown-link" type="button" id="{{$course->id}}"><i class="fa fa-pencil-square-o"></i> Module</a>
                 <a href="{{ route('metadata.list', $course->id) }}" class="metadataId dropdown-link" id="{{$course->id}}"><i class="fa fa-tags"></i> Metadata</a>
                 <a href="#" class="marksId dropdown-link" id="{{$course->id}}"><i class="fa fa-file-excel-o"></i> Export Marks</a>
+                <a href="#" class="course-exports dropdown-link" data-id="{{$course->id}}"  data-toggle="modal" data-target="#course-exports"><i class="fa fa-file-pdf-o"></i> Export Course</a>
             </div>
         </div>
         <a href="{{ route('storyline2.lecturer.edit', $course->id) }}" class="btn btn-info btn-sm">Storyline</a>
         <a href="{{ route('storyline2.preview', $course->id) }}" class="btn btn-success btn-sm">Preview</a>
-        <a href="#" data-id="{{$course->id}}"  data-toggle="modal" data-target="#course-exports" class="btn btn-default btn-sm course-exports">Exports</a>
-        
     </td>
 </tr>
 @endforeach
