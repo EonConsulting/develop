@@ -15,7 +15,6 @@
         <div class='result-card-footer'>
             <a href='{{ url('content/view/'.$content->id) }}' class='result-card-footer-leftbutton'><i class='fa fa-eye'></i></a>
             <a href='{{ url('content/update/'.$content->id) }}' class='result-card-footer-leftbutton'><i class='fa fa-pencil'></i></a>
-            <a href='#' class='result-card-footer-rightbutton'><i class='fa fa-trash'></i></a>
         </div>
     </div>
 </div>
