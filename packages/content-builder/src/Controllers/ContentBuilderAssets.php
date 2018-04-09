@@ -8,11 +8,11 @@ use EONConsulting\ContentBuilder\Models\Asset;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\Alfresco\Rest as ARC;
 use Illuminate\Support\Facades\Storage;
-use App\Tools\Elasticsearch\Elasticsearch;
 use App\Jobs\ElasticIndexAssets;
 use Illuminate\Support\Facades\Log;
 use EONConsulting\Core\Services\Elastic\Elastic;
-
+use EONConsulting\ContentBuilder\Jobs\AssetElasticUpdate;
+use EONConsulting\ContentBuilder\Jobs\AssetElasticDelete;
 
 class ContentBuilderAssets extends Controller {
 
@@ -200,6 +200,8 @@ class ContentBuilderAssets extends Controller {
 
         Asset::destroy($asset_id);
 
+        AssetElasticDelete::dispatch($asset_id);
+
         return redirect('content/assets?from=0&size=20&searchterm=');
     }
     
@@ -276,8 +278,17 @@ class ContentBuilderAssets extends Controller {
         }
     }
      
-    public function store(Request $request){
-        $data = $request->all();
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'sometimes',
+            'tags' => 'required',
+            'description' => 'required',
+            'content' => 'sometimes',
+            'assetFile' => 'sometimes',
+            'categories' => 'required',
+        ]);
+
         if ($request->hasFile('assetFile'))
         {
             $file = $request->file('assetFile');
@@ -314,14 +325,11 @@ class ContentBuilderAssets extends Controller {
         
         $asset->save();
 
-        $categories = $request->get('categories');
+        $categories = collect(array_get($data, 'categories'))->implode(',');
 
-        foreach($categories as $k => $category_id) {
-            $temp = Category::find($category_id);
-            $asset->categories()->save($temp);
-        }
+        $asset->categories()->sync($categories);
 
-        ElasticIndexAssets::dispatch();
+        AssetElasticUpdate::dispatch($asset);
 
         return redirect('content/assets?from=0&size=20&searchterm=');
 
@@ -414,16 +422,21 @@ class ContentBuilderAssets extends Controller {
 
     }
 
-    public function update(Request $request, $id){
-
-        if ($request->isMethod('post')) {
+    public function update(Request $request, $id)
+    {
+        if ($request->isMethod('post'))
+        {
             $assetFile = Asset::find($id);
-            if ($request->hasFile('assetFile')){
+
+            if ($request->hasFile('assetFile'))
+            {
+
                  $assetFile = Asset::find($id);
                  Storage::delete($assetFile->file_name);
                  $file = $request->file('assetFile');
                  $file_size = $file->getClientSize();
                  $file_mime = $file->getMimeType();
+
                  switch ($file_mime){
                  case 'audio/mpeg':
                  case 'application/octet-stream':
@@ -436,9 +449,10 @@ class ContentBuilderAssets extends Controller {
                    }
                
             } else {
-            $file_path = $assetFile->file_name;
-            $file_mime = $assetFile->mime_type;
-            $file_size = $assetFile->size;
+
+                $file_path = $assetFile->file_name;
+                $file_mime = $assetFile->mime_type;
+                $file_size = $assetFile->size;
             }
 
             $asset = Asset::find($id);
@@ -451,10 +465,14 @@ class ContentBuilderAssets extends Controller {
             $asset->size = $file_size;
             $asset->creator_id = auth()->user()->id;
             $asset->save();
+
             $asset->categories()->sync($request->input('categories'));
+
+            AssetElasticUpdate::dispatch($asset);
+
             return Redirect('content/assets?from=0&size=20&searchterm=')->with('msg', 'Asset has been updated successfully');
         }else{
-           return Redirect::back()->withErrors('msg', 'An error occured, please try again.');
+           return back()->withErrors('msg', 'An error occured, please try again.');
         }
     }
 

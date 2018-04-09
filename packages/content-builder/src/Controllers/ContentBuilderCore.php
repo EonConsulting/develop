@@ -9,8 +9,8 @@ use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Models\Asset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Jobs\ElasticIndexContent;
 use EONConsulting\Core\Services\Elastic\Elastic;
+use EONConsulting\ContentBuilder\Jobs\ContentElasicUpdate;
 
 class ContentBuilderCore extends Controller {
 
@@ -340,12 +340,12 @@ class ContentBuilderCore extends Controller {
             'tags' => array_get($data, 'tags'),
             'creator_id' => auth()->user()->id,
             'description' => array_get($data, 'description'),
-            'ingested' => 0,
+            //'ingested' => 0,
         ]);
 
         $content->categories()->sync(array_get($data, 'categories'));
 
-        ElasticIndexContent::dispatch();
+        ContentElasicUpdate::dispatch($content);
 
         return ['id' => $content->id];
     }
