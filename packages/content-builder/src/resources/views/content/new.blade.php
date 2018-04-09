@@ -590,9 +590,8 @@ var base_url = "{{{ url('') }}}";
        $(".previewModal").on("click",function(){
           $("#previewModal").modal();
             $.ajax({
-                   url: "{{ url('/content/preview/') }}"+"{{$courseId}}",
-                   type: "POST",
-                   data: {id: id, text: text},
+                   url: "{{ url('/content/preview') }}"+"/{{$courseId}}",
+                   type: "GET",
                    beforeSend: function () {
                    $('.content-preview').text("Loading.....");
                    },
