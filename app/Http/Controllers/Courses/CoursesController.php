@@ -9,6 +9,7 @@ use App\Models\CourseMetadata;
 use App\Models\MetadataStore;
 use EONConsulting\Storyline2\Models\Template;
 use EONConsulting\Storyline2\Models\Course;
+use EONConsulting\Storyline2\Jobs\CourseElasticUpdate;
 
 class CoursesController extends Controller
 {
@@ -84,15 +85,17 @@ class CoursesController extends Controller
             'template' => 'sometimes'
         ]);
 
-        $Course = Course::update([
-            'id' => array_get($data, 'id')
-        ],[
+        $course = Course::find(array_get($data, 'id'));
+
+        $course->update([
             'title' => array_get($data, 'title'),
             'description' => array_get($data, 'description'),
             'tags' => array_get($data, 'tags'),
-            'creator_id' => array_get($data, 'creator_id'),
+            'creator_id' => auth()->user()->id,
             'template_id' => array_get($data, 'template'),
         ]);
+
+        CourseElasticUpdate::dispatch($course);
 
         return response()->json(['success'=>'Module has been updated successfully.'], 200);
     }
