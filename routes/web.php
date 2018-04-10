@@ -111,7 +111,7 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
  */
 //
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
-Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => '/lti', 'namespace' => 'LTI'], function () {
     Route::group(['namespace' => 'Dashboards'], function () {
         Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
         Route::match(['get', 'post'], '/lecturer-course-analysis', ['as' => 'lti.dashboards.lecturer-course-analysis', 'uses' => 'DashboardLTIController@lecturer_course_analysis']);
