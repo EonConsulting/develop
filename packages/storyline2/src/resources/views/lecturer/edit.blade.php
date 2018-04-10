@@ -540,76 +540,6 @@ Storyline Student Single
 
     </div>
 </div>     
-    
-
-<div id="importModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Import Content</h4>
-            </div>
-
-            <div class="modal-body import-list">
-
-                <?php foreach($contents as $content): ?>
-
-                    <div class="content-entry shadow">
-                        <h3><?php echo $content->title; ?></h3>
-                        <p><?php echo $content->description; ?></p>
-
-                        <button class="content-link-btn content-action" data-action="link" data-content-id="<?php echo $content->id; ?>">Link</button>
-                        <button class="content-copy-btn content-action" data-action="copy" data-content-id="<?php echo $content->id; ?>">Copy</button>
-                    </div>
-
-
-                <?php endforeach; ?>
-
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-primary"><i class="fa fa-save"></i><span> Cancel</span></button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="assetsModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Import Asset</h4>
-            </div>
-
-            <div class="modal-body import-list">
-
-                <?php foreach($assets as $asset): ?>
-
-                <div class="content-entry shadow">
-                    <h3><?php echo $asset->title; ?></h3>
-                    <p><?php echo $asset->description; ?></p>
-
-                    <button class="content-copy-btn import-asset" data-asset-id="<?php echo $asset->id; ?>">Import</button>
-                </div>
-
-
-                <?php endforeach; ?>
-
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-save"></i><span> Cancel</span></button>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <div id="previewModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -691,6 +621,8 @@ Storyline Student Single
 @include('auditing::popup')
 @include('exports::storyline-export-problems')
 @include('exports::lecturer-storyline-pdf-download')
+@include('eon.content-builder::ajax-search.assets-modal')
+@include('eon.content-builder::ajax-search.content-modal')
 
 @section('custom-scripts')
 

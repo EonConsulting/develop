@@ -447,76 +447,11 @@ Storyline Student Single
 
     </div>
 </div>
-    
 
-<div id="importModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Import Content</h4>
-            </div>
-
-            <div class="modal-body import-list">
-
-                <?php foreach($contents as $content): ?>
-
-                    <div class="content-entry shadow">
-                        <h3><?php echo $content->title; ?></h3>
-                        <p><?php echo $content->description; ?></p>
-
-                        <button class="content-copy-btn content-action" data-content-id="<?php echo $content->id; ?>">Copy</button>
-                    </div>
-
-
-                <?php endforeach; ?>
-
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#importModal"><i class="fa fa-save"></i><span> Cancel</span></button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="assetsModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Import Asset</h4>
-            </div>
-
-            <div class="modal-body import-list">
-
-                <?php foreach($assets as $asset): ?>
-
-                <div class="content-entry shadow">
-                    <h3><?php echo $asset->title; ?></h3>
-                    <p><?php echo $asset->description; ?></p>
-
-                    <button class="content-copy-btn import-asset" data-asset-id="<?php echo $asset->id; ?>">Import</button>
-                </div>
-
-
-                <?php endforeach; ?>
-
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#assetsModal"><i class="fa fa-save"></i><span> Cancel</span></button>
-            </div>
-        </div>
-
-    </div>
-</div>
 @endsection
+
+@include('eon.content-builder::ajax-search.assets-modal')
+@include('eon.content-builder::ajax-search.content-modal', ['content_builder' => true])
 
 @section('custom-scripts')
 <script src="{{url('/vendor/ckeditorpluginv2/ckeditor/ckeditor.js')}}"></script>
@@ -569,16 +504,6 @@ var base_url = "{{{ url('') }}}";
 
         $("#btnsbmit").on("click", function(){
             validate_all(true);
-        });
-
-        $(".content-action").on("click", function(){
-            $cont_id = $(this).data("content-id");
-            getContent($cont_id);
-        });
-
-        $(".import-asset").on("click", function () {
-            $asset_id = $(this).data("asset-id");
-            importAsset($asset_id);
         });
 
         if(content_id !== "new"){
@@ -634,40 +559,7 @@ var base_url = "{{{ url('') }}}";
         }
     }
 
-    function importAsset(asset){
 
-        actionUrl = base_url + "/content/assets/" + asset;
-
-        $.ajax({
-            method: "GET",
-            url: actionUrl,
-            contentType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-            },
-            statusCode: {
-                200: function (data) { //success
-                    if(data['content'] !== null){
-                        CKEDITOR.instances['ltieditorv2inst'].insertHtml('<p>' + data['content'] + '</p>');
-                    }
-                    var html = data['html'];
-                    CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
-
-                    $('#assetsModal').modal('hide');
-
-                },
-                400: function () { //bad request
-
-                },
-                500: function () { //server kakked
-
-                }
-            }
-        }).error(function (req, status, error) {
-            alert(error);
-        });
-
-    }
 
 
     var valid = {
