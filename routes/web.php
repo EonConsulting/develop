@@ -111,9 +111,13 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
  */
 //
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
+
+Route::match(['get', 'post'], '/lti', ['as' => 'lti.dashboards', 'uses' => 'LTI\Dashboards\DashboardLTIController@index']);
+
+
 Route::group(['middleware' => ['auth'], 'prefix' => '/lti', 'namespace' => 'LTI'], function () {
     Route::group(['namespace' => 'Dashboards'], function () {
-        Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
+        //Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
         Route::match(['get', 'post'], '/lecturer-course-analysis', ['as' => 'lti.dashboards.lecturer-course-analysis', 'uses' => 'DashboardLTIController@lecturer_course_analysis']);
         Route::match(['get', 'post'], '/lecturer-stud-analysis', ['as' => 'lti.dashboards.lecturer-stud-analysis', 'uses' => 'DashboardLTIController@lecturer_stud_analysis']);
         Route::match(['get', 'post'], '/lecturer-assess-analysis', ['as' => 'lti.dashboards.lecturer-assess-analysis', 'uses' => 'DashboardLTIController@lecturer_assess_analysis']);
