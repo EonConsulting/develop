@@ -693,6 +693,11 @@ var base_url = "{{{ url('') }}}";
         console.log(course_data.body);
         editor.setData(course_data.body);
 
+        $('div#saveModal input[class="cat_check"]').each(function(index)
+        {
+            $(this).prop('checked', false);
+        });
+
         for (index = 0; index < course_data.categories.length; ++index) {
             cat_id = "#cat" + course_data.categories[index].id;
             console.log(cat_id);
