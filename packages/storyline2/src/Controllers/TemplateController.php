@@ -76,6 +76,7 @@ class TemplateController extends BaseController {
         $new_template = new Template([
             'name' => $data['name'],
             'styles' => $data['styles'],
+            'custom_css' => data['custom_css'],
             'creator_id' => auth()->user()->id
         ]);
 
@@ -97,6 +98,7 @@ class TemplateController extends BaseController {
 
         $template->name = $data['name'];
         $template->styles = $data['styles'];
+        $template->custom_css = $data['custom_css'];
 
         $template->save();
 

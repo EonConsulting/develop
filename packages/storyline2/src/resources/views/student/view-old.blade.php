@@ -455,7 +455,7 @@
             statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        pupulateContent(data,button);
+                        populateContent(data,button);
                     } else {
                         $("#noContentMessage").modal("show");
                     }
@@ -473,7 +473,7 @@
 
     }
 
-    function pupulateContent(data,button){
+    function populateContent(data,button){
 
         //highlight clicked button
         $(".menu-btn").removeClass('active-menu');

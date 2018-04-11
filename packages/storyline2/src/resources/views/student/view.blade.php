@@ -514,7 +514,7 @@
             statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        pupulateContent(data,button);                       
+                        populateContent(data,button);                       
                         logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
                         $("#noContentMessage").modal("show");
@@ -532,7 +532,7 @@
         });
     }
 
-    function pupulateContent(data, button){
+    function populateContent(data, button){
         //create breadcrumbs
         var breadcrumb = button.html();
 
@@ -628,7 +628,7 @@
                 $("#content_tree").html(data.items_html);
                 $("#dropdown-menu").html(data.drop_html);
                 
-                //pupulateContent(data, button);
+                //populateContent(data, button);
             },
             error: function (jqXHR, textStatus, errorThrown) {
             alert(errorThrown);

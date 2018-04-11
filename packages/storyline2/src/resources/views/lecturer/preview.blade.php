@@ -460,7 +460,7 @@
             statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        pupulateContent(data,button);                       
+                        populateContent(data,button);                       
                         //logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
                         $("#noContentMessage").modal("show");
@@ -478,7 +478,7 @@
         });
     }
 
-    function pupulateContent(data, button){
+    function populateContent(data, button){
         
 
         //create breadcrumbs
