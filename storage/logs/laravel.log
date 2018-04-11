@@ -14377,3 +14377,53 @@
 [2018-04-05 09:11:46] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
 [2018-04-05 09:11:46] local.INFO: select * from `templates`  
 [2018-04-05 09:11:46] local.INFO: select * from `courses` where `courses`.`id` = ? limit 1 [14] 
+[2018-04-11 02:38:10] local.INFO: select * from `users_lti_links` where `lti_user_id` = ? limit 1 ["292832126"] 
+[2018-04-11 02:38:10] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:11] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:11] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 02:38:11] local.DEBUG: Attempting an LTI Login....  
+[2018-04-11 02:38:11] local.DEBUG: Instructor  
+[2018-04-11 02:38:15] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:16] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:16] local.INFO: select * from `courses`  
+[2018-04-11 02:38:17] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:17] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 02:38:17] local.INFO: SELECT u.id, u.name
+                FROM users u
+                INNER JOIN integrate_course_users icu ON icu.user_id = u.id
+                WHERE icu.course_id = :course_id {"course_id":"14"} 
+[2018-04-11 02:38:18] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:18] local.INFO: select * from `summary_module_progression` where `course_id` = ? limit 1 ["14"] 
+[2018-04-11 02:38:18] local.INFO: select * from `summary_student_progression` where `course_id` = ? and `student_user_id` = ? limit 1 ["14","1"] 
+[2018-04-11 02:38:32] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:32] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 02:38:32] local.DEBUG: Attempting an LTI Login....  
+[2018-04-11 02:38:32] local.DEBUG: Instructor  
+[2018-04-11 02:38:34] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:34] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:34] local.INFO: select * from `courses`  
+[2018-04-11 02:38:35] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:35] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 02:38:35] local.INFO: SELECT u.id, u.name
+                FROM users u
+                INNER JOIN integrate_course_users icu ON icu.user_id = u.id
+                WHERE icu.course_id = :course_id {"course_id":"14"} 
+[2018-04-11 02:38:37] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 02:38:37] local.INFO: select * from `summary_module_progression` where `course_id` = ? limit 1 ["14"] 
+[2018-04-11 02:38:37] local.INFO: select * from `summary_student_progression` where `course_id` = ? and `student_user_id` = ? limit 1 ["14","1"] 
+[2018-04-11 12:38:46] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 12:38:46] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 12:38:46] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-11 12:38:46] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-11 12:38:48] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 12:38:48] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 12:38:48] local.INFO: select * from `courses`  
+[2018-04-11 12:38:48] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-11 12:40:35] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 12:40:35] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 12:40:35] local.INFO: select * from `courses` order by `id` desc  
+[2018-04-11 12:40:35] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
+[2018-04-11 12:40:38] local.INFO: select * from `users` where `id` = ? limit 1 [1] 
+[2018-04-11 12:40:38] local.INFO: select * from `users_lti_links` where `users_lti_links`.`user_id` = ? and `users_lti_links`.`user_id` is not null [1] 
+[2018-04-11 12:40:38] local.INFO: select * from `courses`  
+[2018-04-11 12:40:38] local.INFO: select * from `users` where `users`.`id` in (?) [1] 
