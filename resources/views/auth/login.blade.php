@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="container">
-        <div class="row" style="padding-bottom: 20px">
-            <div class="col-md-8 col-md-offset-2">
-                <img src="/img/unisa-logo.png" alt="unisa-logo" width="50%">
-            </div>
-        </div>
-        
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
