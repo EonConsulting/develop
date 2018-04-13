@@ -7,14 +7,14 @@ use App\Models\Storyline;
 use App\Models\StorylineItem;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use EONConsulting\Storyline\Nav\StorylineNav;
 use EONConsulting\Storyline\Core\StorylineCore;
 use EONConsulting\Storyline\Menu\StorylineMenu;
 use EONConsulting\Storyline\Breadcrumbs\StorylineBreadcrumbs;
 use EONConsulting\Storyline\TagCloud\StorylineTagCloud;
+use App\Http\Controllers\Controller;
 
-class CourseLectureItemLTIController extends LTIBaseController
+class CourseLectureItemLTIController extends Controller
 {
     public function index(Course $course, StorylineItem $storylineItem)
     {

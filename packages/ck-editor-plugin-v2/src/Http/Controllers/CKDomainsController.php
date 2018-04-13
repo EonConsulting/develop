@@ -19,12 +19,10 @@ use Illuminate\Http\Request;
 use EONConsulting\LaravelLTI\Classes\Domains;
 use Illuminate\Support\Facades\DB;
 use EONConsulting\CKEditorPluginV2\Http\Controllers\PartialMatch;
+use App\Http\Controllers\Controller;
 
-class CKDomainsController extends LTIBaseController {
-    /**
-     * @var bool
-     */
-    protected $hasLTI = false;
+class CKDomainsController extends Controller {
+
     /**
      * @return \Illuminate\Http\JsonResponse
      *

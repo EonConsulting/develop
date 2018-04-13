@@ -7,7 +7,7 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CourseLTIController extends LTIBaseController
+class CourseLTIController extends Controller
 {
     public function index(Course $course)
     {

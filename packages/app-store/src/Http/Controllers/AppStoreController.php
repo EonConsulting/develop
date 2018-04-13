@@ -15,10 +15,10 @@ use EONConsulting\LaravelLTI\Classes\Readers\ImportConfig;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use EONConsulting\LaravelLTI\Models\LTIContext;
 use EONConsulting\LaravelLTI\Models\LTIDomain;
+use App\Http\Controllers\Controller;
 
-class AppStoreController extends LTIBaseController {
+class AppStoreController extends Controller {
 
-    protected $hasLTI = false;
 
     function index() {
 

@@ -10,8 +10,9 @@ use App\Models\TimelineEvent;
 use App\Models\IntegrateTaoResults;
 use App\Models\SummaryStudentProgression;
 use App\Models\SummaryModuleProgression;
+use App\Http\Controllers\Controller;
 
-class DashboardDataController extends LTIBaseController {
+class DashboardDataController extends Controller {
 
     /**
      * 
@@ -37,11 +38,18 @@ class DashboardDataController extends LTIBaseController {
         // to find out which students belong to which courses
         // and which students belong to which mentors
         // different user lists for instructors and mentors
-        if (laravel_lti()->is_instructor(auth()->user())) {
+        if (auth()->user()->hasRole('Instructor')) {
+            $result = $users->GetUsersForCourse($course_id);
+        } else if (auth()->user()->hasRole('Mentor')) {
+            $result = $users->GetUsersForCourse($course_id, auth()->user()->id);
+        }
+
+
+        /*if (laravel_lti()->is_instructor(auth()->user())) {
             $result = $users->GetUsersForCourse($course_id);
         } else if (laravel_lti()->is_mentor(auth()->user())) {
             $result = $users->GetUsersForCourse($course_id, auth()->user()->id);
-        }
+        }*/
 
         return response()->json($result);
     }
@@ -214,10 +222,10 @@ class DashboardDataController extends LTIBaseController {
         $end = $request->input("end", date('Y-m-d'));
         $course_id = $request->input("course_id", 0);
         $user_id = auth()->user()->id;
-        $role = laravel_lti()->get_user_lti_type(auth()->user());
-            
+        $lti_role = optional(auth()->user())->lti_role;
+
         $timelines = new \EONConsulting\Core\Classes\Timelines();
-        $events = $timelines->findByFilters($start, $end, $course_id, $user_id, $role);
+        $events = $timelines->findByFilters($start, $end, $course_id, $user_id, $lti_role);
 
         return response()->json($events);
     }
@@ -231,10 +239,8 @@ class DashboardDataController extends LTIBaseController {
         if (is_array($request->all()))
         {
             $data = $request->all();
-            
-            // only lecturers can set is_global = 1
-            $role = laravel_lti()->get_user_lti_type(auth()->user());
-            $is_global = ($role == "Instructor") ? $data["is_global"] : 0;
+
+            $is_global = auth()->user()->hasRole('Instructor') ? $data["is_global"] : 0;
             
             if (!empty($data["id"]))
             {
@@ -296,7 +302,8 @@ class DashboardDataController extends LTIBaseController {
             $data = $request->all();
             
             // only lecturers can set is_global = 1
-            $role = laravel_lti()->get_user_lti_type(auth()->user());
+            $lti_role = optional(auth()->user())->lti_role;
+
             $id = $data["id"];
             
             // delete
