@@ -1,0 +1,377 @@
+/*  This is the old stylesheet that came from mirror
+    After the FBN courses were imported into e-content, much of the styling 
+    Had to be carried across in oddball ways - this is one of them
+    We kept this copy of the CSS that is stored in the database:templates table in custom_css
+*/
+@charset "utf-8";
+/* CSS Document */
+
+/* Main Body Class =======================================================================================================================================================*/
+body{ font-family:Computer Modern Serif; 	color:#000000; 	font-size:18px; line-height:1.5;}
+
+/* ==============C U S T O M  S T Y L E S=======================================================================================================================================*/
+.Heading2 { font-size:21px;  color:#000000;  font-weight:bold;  text-align: center;}
+.Heading3 {  font-size:21px;  color:#000000;  font-weight:bold;}
+
+.BodyText {  font-size:18px;  color:#000000;  line-height:1.5;}
+.Variable {  font-style: italic;  font-size:18px;  line-height:1.5;}
+
+.Bullet_List_1 {  font-style: italic;  font-size:18px;}
+.Bullet_List_2 {   font-size:18px;}
+
+.Emphasis_1 {  box-shadow: inset 0 -3px 0 #D1D0CE;}
+.Emphasis_2 {   text-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;}
+.Emphasis_3 {text-decoration-line: underline;   text-decoration-style: dashed;   text-decoration-color: gray;}
+
+.PalAa {  color:#4E7FBB;}
+.PalAb {  color:#BB8A4E;}
+.PalBa {  color:#1196b3;}
+.PalBb {  color:#9D18C2;}
+.PalBc {  color:#078446;}
+
+.PalCa {  color:#1196b3;}
+.PalCb {  color:#9D18C2;}
+.PalCc {  color:#078446;}
+.PalCd {  color:#4E7FBB;}
+
+.Image { text-align:center;  max-width: 100%;}
+.Video {  text-align:center;  max-width: 100%;}
+
+.Note_1_Block  {background-color:#A9D1DE; font-size:18px; color: #000000; padding:3px;}
+.Note_1_Inline {background-color:#A9D1DE; font-size:18px; color: #000000; padding:3px;}
+.Note_2_Block  {background-color:#FF9966; font-size:18px; color: #000000; padding:3px;}
+.Note_2_Inline {background-color:#FF9966; font-size:18px; color: #000000; padding:3px;}
+
+.Definition {
+  background-color:#B6BABA;
+  font-size:18px;
+  color: #000000;
+  padding:10px;
+  text-align:center;
+  border-radius:6px;
+  border: solid 1px #000000;
+  display:inline-block;
+}
+
+Math_Model_Size_1 {
+  width:600px;
+  height:400px;
+}
+
+Math_Model_Size_2 {
+  width:600px;
+  height:600px;
+}
+
+/* ==============T A B L E  S T Y L E S=======================================================================================================================================*/
+table.Table_Style1 {
+  width:100%;
+  padding:0px;
+  spacing:0px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table.Table_Style1 td.Table_Number
+{
+ text-align: right; 
+  border-right:hidden;
+  border-left:hidden;
+ }
+ 
+table.Table_Style1 td {
+  background-color: #FFFFFF;
+  border:1px solid #B6BABA;
+}
+
+table.Table_Style1 th {
+  background-color: #B6BABA;
+  border:1px solid #B6BABA;
+}
+
+table.Table_Style_Steps {
+   width:100%;
+  padding:0px;
+  spacing:0px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border:0px;
+}
+
+table.Table_Style_Steps td {
+  padding-left :15px;
+  text-align: left; 
+  vertical-align: middle;
+  border-bottom:1px dotted #B6BABA;
+  border-top:1px dotted #FFFFFF;
+  border-left:1px dotted #FFFFFF;
+  border-right:1px dotted #FFFFFF;
+ }
+
+table.Table_Style_Steps th {
+  padding-right :15px;
+  text-align: right; 
+  vertical-align: top;
+  border-top:1px dotted #FFFFFF;
+  border-left:1px dotted #FFFFFF;
+  border-right:2px solid #B6BABA;
+  border-bottom:1px dotted #B6BABA;
+  width:20%;
+  font-weight:bold;
+  font-size:18px;
+    color:#666668;
+}
+
+table.Table_Style_Steps p {
+  margin-top:0em;
+  margin-bottom:1em;
+}
+
+table.Table_Skeleton{
+  width:100%;
+  padding:0px;
+  spacing:0px;
+  border-spacing: 0;
+  /*border-collapse: collapse;*/
+  border:0px;
+  text-align:center;
+}
+
+/*table.Table_Skeleton td{
+  border:0px;
+}*/
+
+table.Table_Definition  {
+  width:70%;
+  padding:0px;
+  spacing:0px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border:0px;
+  text-align:center;
+}
+
+table.Table_Definition td {
+  border:0px;
+}
+
+/* W E B  E L E M E N T  T E M P L A T E  S T Y L E S (For Structural Elements)=========================================================================================================================================*/
+#containern{width:970px;	margin: 0 auto;}
+#headerContainer {background-color:#FFFFFF;	width:970px;height:162px;}
+#logo{background-image:url('../../templates/Student Portal Template/images/logo.png');background-repeat:no-repeat;background-position:center left;width:305px;height:162px;float:left;}
+#header{width:665px;height:162px;float:right;}
+#main{width:1209px;margin:0 auto;clear:both;font-size:14;}
+#course_code{float:right; width:77px; height:22px; text-align:center;margin-top: -19px;margin-right: -15px;font-size:12px; padding-top:3px;}
+#activity_content{width: 62%;border: 3px solid #dbdbdb;/*float: right;*/background: url('../../templates/Student Portal Template/images/course_code.png') no-repeat right top;line-height: 24px;overflow:auto;margin-bottom:30px;padding:15px;}
+#side_nav{width:340px;height:600px;float:left;}
+#side_nav_top{width:324px;height:18px;background:url('../../templates/Student Portal Template/images/side_nav_top.png');float:left; background-repeat:no-repeat;}
+#side_nav_middle{width:318.5px;border-left: 3px solid #0089d0;border-right: 3px solid #0089d0;float:left;line-height:24px;}
+#side_nav_bottom{background:url('../../templates/Student Portal Template/images/left_menu_bottom.png') no-repeat;	width:100%;	height:43px;float:left;}
+#content{width:964px;margin:0 auto;border:3px solid #dbdbdb;clear:both;overflow:auto;font-size:14;background:url('../../templates/Student Portal Template/images/course_code.png') no-repeat right top;padding-bottom:30px;}navigation{margin-left:90px;margin-right:90px;	}
+#footer{width:350px;position:fixed;	bottom:0;padding-bottom:20px;}
+
+/* W E B  E L E M E N T  T E M P L A T E  S T Y L E S (For Font Elements)=========================================================================================================================================*/
+li.truncate {
+  width: 95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color:#000000;
+  font-size:12px;
+  line-height:24px;
+}
+h1.header{
+	color: #002f67;
+	font-size: 24px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 80px;
+	padding-bottom: 58px;
+	text-align:right;
+	font-weight:normal;
+}
+span.frac { display: inline-block; font-size: 12px; text-align: center;}
+span.frac > sup { display: block; border-bottom: 1px solid; font: inherit; margin-top:5px;}
+span.frac > span { display: none;}
+span.frac > sub { display: block; font: inherit;}
+
+.blue_bar{
+	background-image:url('../../templates/Student Portal Template/images/menu_blue.png');
+	height:14px;	
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:16px;
+	color:#FFFFFF;
+	width:746px;
+	margin-bottom:2px;
+	float:right;
+}
+
+
+ol.menu li{background-image:url('../../templates/Student Portal Template/images/menu_grey.png');width:704px;height:14px;	padding-top:6px;padding-bottom:6px;margin-bottom:2px;float:right;list-style-position: inside;background-position: 0px;padding-left: 16px;font-size:12px;	margin-right:0px;}
+ol.menu li.unlock{color:#4e4e4e;}
+ol.menu li.lock{color:#747474;}
+ol.menu li.dbl_dig_unlock{color:#4e4e4e;}
+ol.menu li.dbl_dig_lock{color:#747474;}
+ol.menu li.dbl_dig_unlock:before{content:"";display:inline-block;margin-left:-70px;background-image:url('../../templates/Student Portal Template/images/lock_open.png');background-repeat:no-repeat; background-position:center;	height:15px;width:42px;position: absolute;}
+ol.menu li.dbl_dig_lock:before{content:"";display:inline-block;	margin-left:-78px;background-image:url('../../templates/Student Portal Template/images/lock.png');background-repeat:no-repeat; background-position:center;height:15px;width:42px;position: absolute;}
+ol.menu li.unlock:before{/*content:"";display:inline-block;margin-left:-70px;background-image:url(images/lock_open.png);background-repeat:no-repeat; background-position:center;	height:15px;width:42px;	position: absolute;*/}
+ol.menu li.lock:before{content:"";display:inline-block;margin-left:-70px;background-image:url('../../templates/Student Portal Template/images/lock.png');background-repeat:no-repeat; background-position:center;height:15px;width:42px;position: absolute;}
+
+ol.side_menu{width:200px;margin-left:20px;}
+ol.side_menu li{text-decoration:none;}
+ol.side_menu li a{text-decoration:none;color:#000000;}
+ol.side_menu li a{text-decoration:none;color:#000000;}
+ol.side_menu li.menu-expand{font-weight:normal !important;}
+ol.side_menu li.menu-parent{font-weight:bold !important;}
+ol.side_menu li.side_unlock{line-height:18px;}
+ol.side_menu li.side_unlock:before{ content:"";display:inline-block;margin-left:-75px;background-image:url('../../templates/Student Portal Template/images/lock_open.png');background-repeat:no-repeat; background-position:center;	padding-top:15px;height:15px;width:42px;position: absolute;}
+ol.side_menu li.side_unlock_subnav{font-weight:bold;}
+ol.side_menu li.side_unlock_subnav:before{content:"";display:inline-block;margin-left:-35px;background-image:url('../../templates/Student Portal Template/images/lock_open.png');	background-repeat:no-repeat;background-position:center;	padding-top:5px;height:15px;width:42px;	position: absolute;}
+
+ul.side_menu{width:200px;margin-left:10px; font-size: 16px;}
+ul.side_menu ul {padding-left: 10px;}
+ul.side_menu li{text-decoration:none;}
+ul.side_menu li a{text-decoration:none;color:#000000;}
+ul.side_menu li a{text-decoration:none;color:#000000;}
+ul.side_menu li.menu-expand{font-weight:normal !important;}
+ul.side_menu li.menu-parent{font-weight:bold !important;}
+ul.side_menu li.side_unlock{line-height:18px;}
+ul.side_menu li.side_unlock:before{ content:"";display:inline-block;margin-left:-75px;background-image:url('../../templates/Student Portal Template/images/lock_open.png');background-repeat:no-repeat; background-position:center; padding-top:15px;height:15px;width:42px;position: absolute;}
+ul.side_menu li.side_unlock_subnav{font-weight:bold;}
+ul.side_menu li.side_unlock_subnav:before{content:"";display:inline-block;margin-left:-35px;background-image:url('../../templates/Student Portal Template/images/lock_open.png'); background-repeat:no-repeat;background-position:center; padding-top:5px;height:15px;width:42px; position: absolute;}
+
+ul.subnav li.menu-sibling{font-weight:normal;width: 200px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+ul.subnav li{text-decoration:none;list-style-type:none; margin-left: 10px;}
+
+ol.subnav li.menu-sibling{font-weight:normal;width: 200px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+ol.subnav li{text-decoration:none;list-style-type:none;}
+
+ul.subnav{-webkit-padding-start:18px;}
+ul.subnav li a{	text-decoration:none;list-style-type:none;}
+
+.menu_default{color:#5F5F5F;text-decoration:none;}
+.menu-current{font-weight:bold;}
+.menu_current{font-weight:bold;color:#000000;text-decoration:none !important;}
+.menu-child{font-weight:normal;	width: 200px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.menu-sibling{font-weight:normal;}
+
+.progress_bar{float:right; margin-right:12px;}
+.content_padding{padding:15px;}
+.blue {color: #4f81bd;}
+.center_image {text-align: center;}
+.center{text-align:center;}
+mi {color:green;}
+.VarA{color="Blue";}
+	
+
+/*.xyvariable {
+  font-size: 18px;
+}
+.math_input{
+   width:40px;
+background-color: #A9D1DE;
+}
+.bluebox {
+  background-color: #A9D1DE; 
+  text-align: left;
+  padding: 3px;
+}
+.grey_block{
+  margin: 0 auto;
+  border-radius: 6px;
+  background-color: #B6BABA;
+  text-align: center;
+  padding: 10px;
+  border: solid;
+  border-width: 1px;
+  text-align: center;
+}*/
+
+/*===========J S X G R A P H  S P E C I F I C  S T Y L E S====================================================================================================================*/
+.MathFont {font-family:'Computer Modern Serif';font-size:16px; }
+.TextInput{background-color="White";font-family:'Computer Modern Serif'; font-size:16px;position:absolute;width:47px;height:20px;padding: 0px;margin: 0px; outline: block; border: 1px;vertical-align: top;border-style: dotted;}
+            
+/*===========C K E D I T O R  S P E C I F I C  S T Y L E S====================================================================================================================*/
+html{_overflow-y: scroll}
+img:-moz-broken{-moz-force-broken-image-icon : 1;width : 24px;height : 24px;}
+img, input, textarea{cursor: default;}
+
+.indent1 {  margin-left: 40px;}
+.indent2 {  margin-left: 80px;}
+.indent3 {  margin-left: 120px;}
+.indent4 {  margin-left: 160px;}
+.left {  text-align: left;}
+.right {  text-align: right;}
+.center {  text-align: center;}
+.justify {  text-align: justify;}
+.ibimage_left {  float: left;}
+.ibimage_right {  float: right;}
+
+.marker-red { color :#cc0000; }
+.marker-blue { color : #000099; }
+.Yellow { color : #ffff33; }
+.Lime { color : #339900; }
+td { white-space :normal; }
+.textarea {  font-family:  'Computer Modern Serif'; font-size:18px;}
+
+/*===================F O N T S============================================================*/
+
+/* Computer Modern Serif */
+@font-face {
+	font-family: 'Computer Modern Serif';src: url('Fonts/ComputerModern/cmunrm.eot');
+	src: url('Fonts/ComputerModern/cmunrm.eot?#iefix') format('embedded-opentype'),
+		 url('Fonts/ComputerModern/cmunrm.woff') format('woff'),
+		 url('Fonts/ComputerModern/cmunrm.ttf') format('truetype'),
+		 url('Fonts/ComputerModern/cmunrm.svg#cmunrm') format('svg');
+	font-weight: normal;font-style: normal;
+}
+@font-face {
+	font-family: 'Computer Modern Serif';src: url('Fonts/ComputerModern/cmunbx.eot');
+	src: url('Fonts/ComputerModern/cmunbx.eot?#iefix') format('embedded-opentype'),
+		 url('Fonts/ComputerModern/cmunbx.woff') format('woff'),
+		 url('Fonts/ComputerModern/cmunbx.ttf') format('truetype'),
+		 url('Fonts/ComputerModern/cmunbx.svg#cmunbx') format('svg');
+	font-weight: bold;font-style: normal;
+}
+@font-face {
+	font-family: 'Computer Modern Serif';src: url('Fonts/ComputerModern/cmunti.eot');
+	src: url('Fonts/ComputerModern/cmunti.eot?#iefix') format('embedded-opentype'),
+		 url('Fonts/ComputerModern/cmunti.woff') format('woff'),
+		 url('Fonts/ComputerModern/cmunti.ttf') format('truetype'),
+		 url('Fonts/ComputerModern/cmunti.svg#cmunti') format('svg');
+	font-weight: normal;font-style: italic;
+}
+@font-face {
+	font-family: 'Computer Modern Serif';src: url('Fonts/ComputerModern/cmunbi.eot');
+	src: url('Fonts/ComputerModern/cmunbi.eot?#iefix') format('embedded-opentype'),
+		 url('Fonts/ComputerModern/cmunbi.woff') format('woff'),
+		 url('Fonts/ComputerModern/cmunbi.ttf') format('truetype'),
+		 url('Fonts/ComputerModern/cmunbi.svg#cmunbi') format('svg');
+	font-weight: bold;font-style: italic;
+}
+
+.Definition {
+  background-color:#B6BABA;
+  font-size:18px;
+  color: #464646;
+  padding:10px;
+  text-align:center;
+  border-radius:6px;
+  border: solid 1px #464646;
+  display:inline-block;
+}
+
+.button{
+  padding: 20px;
+  text-decoration: none;
+  background: #c02940;
+  font-size: 22px;
+  text-align: center;
+  color: #FFFFFF !important;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  cursor:pointer;
+}

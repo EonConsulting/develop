@@ -5,8 +5,9 @@ namespace App\Http\Controllers\LTI\Courses;
 use App\Models\Course;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class CourseLectureLTIController extends LTIBaseController {
+class CourseLectureLTIController extends Controller {
 
     public function index(Course $course) {
         $data = storyline_core()->getIndex($course);

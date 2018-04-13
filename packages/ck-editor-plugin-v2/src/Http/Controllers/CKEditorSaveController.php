@@ -5,17 +5,15 @@ namespace EONConsulting\CKEditorPluginV2\Http\Controllers;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 /**
  * Created by PhpStorm.
  * User: Peace-N
  * Date: 3/15/2017
  * Time: 2:38 PM
  */
-class CKEditorSaveController extends LTIBaseController {
-    /**
-     * @var bool
-     */
-    protected $hasLTI = false;
+class CKEditorSaveController extends Controller {
+
     /**
      * @var Request
      */

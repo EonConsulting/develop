@@ -17,7 +17,8 @@ class TemplateTransformer extends TransformerAbstract
         return [
             'id' => $template['id'],
             'name' => $template['name'],
-            'css' => $this->json_to_css($template['styles'])
+            'css' => $this->json_to_css($template['styles']),
+            'custom_css' => $template['custom_css']
         ];
 
     }

@@ -19,17 +19,51 @@
  * Public Front Page
  * ---------------------------------------
  */
-Route::get('/', function () {
-//    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-    return view('welcome');
-});
+
+Route::redirect('/', 'login');
+
+
 
 /*
  * ---------------------------------------
  * Auth::routes();
  * ---------------------------------------
  */
-Auth::routes();
+
+Route::namespace('Auth')->group(function () {
+
+    Route::post('/login', [
+        'as' => 'login', 'uses' => 'LoginController@login'
+    ]);
+
+    Route::get('/login', [
+        'as' => 'login', 'uses' => 'LoginController@showLoginForm'
+    ]);
+
+    Route::post('/logout', [
+        'as' => 'logout', 'uses' => 'LoginController@logout'
+    ]);
+
+    Route::post('/password/email', [
+        'as' => 'password.email', 'uses' => 'ForgotPasswordController@sendResetLinkEmail'
+    ]);
+
+    Route::post('/password/reset', [
+        'as' => 'password.request', 'uses' => 'ResetPasswordController@reset'
+    ]);
+
+    Route::get('/password/reset', [
+        'as' => 'password.request', 'uses' => 'ForgotPasswordController@showLinkRequestForm'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'as' => 'password.reset', 'uses' => 'ResetPasswordController@showResetForm'
+    ]);
+});
+
+
+
+
 /*
  * ---------------------------------------
  * Builders : Page : Storyline
@@ -112,7 +146,17 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
 //
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
 
-Route::match(['get', 'post'], '/lti', ['as' => 'lti.dashboards', 'uses' => 'LTI\Dashboards\DashboardLTIController@index']);
+Route::get('/lti', ['middleware' => ['web', 'auth'],
+    'as' => 'lti.dashboards',
+    'uses' => 'LTI\Dashboards\DashboardLTIController@index'
+]);
+
+Route::post('/lti', ['middleware' => ['web'],
+    'as' => 'lti.dashboards',
+    'uses' => '\EONConsulting\LaravelLTI\Http\Controllers\DashboardLTIController@index'
+]);
+
+
 
 
 Route::group(['middleware' => ['auth'], 'prefix' => '/lti', 'namespace' => 'LTI'], function () {

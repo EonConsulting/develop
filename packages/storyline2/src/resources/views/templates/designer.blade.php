@@ -409,6 +409,19 @@
                     </div>
                 </div>
                 
+                <hr/>
+                
+                <div class="preview-item" data-element=".chain">
+                    <div class="preview-item-name">
+                        Custom CSS <small>(will be appended to styles)</small>
+                    </div>
+                    <div class="preview-item-preview shadow">
+                        <textarea style="width: 100%" rows="12" id="custom_css" name="custom_css">
+                        {{ $template['custom_css'] or '' }}
+                        </textarea>
+                    </div>
+                </div>
+                
             </div>
 
 
@@ -1257,14 +1270,15 @@
                 format: "hex"
             });
 
-
-            var edit_styles = '{{ $template['styles'] or ''}}';
+            // set the style values
+            var edit_styles = {!! $template['styles'] or '' !!};
             
-            if(edit_styles === ""){
+            if(edit_styles === null){
                 $styles = $default;
             }else{
-                edit_styles = edit_styles.replace(/&quot;/g, '\"')
-                $styles = JSON.parse(edit_styles);
+                //edit_styles = edit_styles.replace(/&quot;/g, '\"')
+                //$styles = JSON.parse(edit_styles);
+                $styles = edit_styles;
             }
             
             update_styles();
@@ -1570,7 +1584,8 @@
 
             var data = {
                 "name" : $('input[name=name]').val(),
-                "styles" : JSON.stringify($styles)
+                "styles" : JSON.stringify($styles),
+                "custom_css" : $("#custom_css").val()
             }
 
             console.log(data);
