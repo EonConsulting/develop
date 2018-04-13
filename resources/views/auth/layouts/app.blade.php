@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row" style="padding-top: 60px; padding-bottom: 20px">
             <div class="col-md-8 col-md-offset-2">
-                <img src="/img/unisa-logo.png" alt="unisa-logo" width="50%">
+                <img src="{{ url('img/unisa-logo.png') }}" alt="unisa-logo" width="50%">
             </div>
         </div>
     </div>
