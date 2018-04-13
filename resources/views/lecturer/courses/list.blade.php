@@ -291,7 +291,7 @@ Course List
                                 format: 'DD-MMM-YYYY'
                             });
 
-                            $(".marksId").click(function (event) {
+                            $(document).on("click",".marksId",function (event) {
                                 event.preventDefault();
                                 $(".courseId").val($(this).attr("id"));
                                 $("#csvModal").modal();
