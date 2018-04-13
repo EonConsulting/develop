@@ -307,6 +307,9 @@
     }
 
     {!! array_get($course, 'template.css', '') !!}
+    
+    /* inject any additional custom_css */
+    {!! array_get($course, 'template.custom_css', '') !!}
 
 </style>
 
