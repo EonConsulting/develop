@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
  * --------------------------------------
  * Home - Non LTI Routes
  * --------------------------------------
- */
+ *
 Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
     Route::group(['namespace' => 'Users'], function () {
@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
         Route::match(['get', 'post'], '/{course}/lectures/{storylineItem}', ['as' => 'home.courses.single.lectures.item', 'uses' => 'CourseLectureItemController@index']);
     });
 });
+*/
 
 
 
