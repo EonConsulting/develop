@@ -22,7 +22,10 @@ use phpDocumentor\GraphViz\Graph;
 class TestStencilController extends Controller
 {
 
-    protected $hasLTI = false;
+    public function __construct()
+    {
+        \Debugbar::disable();
+    }
 
     /**
      * @param GraphsDomainOBJ $graphsDomainOBJ

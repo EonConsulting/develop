@@ -286,6 +286,10 @@
     }
 
     {!! array_get($course, 'template.css', '') !!}
+    
+    /* inject any additional custom_css */
+    {!! array_get($course, 'template.custom_css', '') !!}
+    
 
 </style>
 
@@ -460,8 +464,8 @@
             statusCode: {
                 200: function (data) { //success
                     if(data["found"] === true){
-                        pupulateContent(data,button);                       
-                        logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
+                        populateContent(data,button);                       
+                        //logXAPITopicEvent('{{ $course->id }}', '{{ $storylineId }}', item_id);
                     } else {
                         $("#noContentMessage").modal("show");
                     }
@@ -478,7 +482,7 @@
         });
     }
 
-    function pupulateContent(data, button){
+    function populateContent(data, button){
         
 
         //create breadcrumbs

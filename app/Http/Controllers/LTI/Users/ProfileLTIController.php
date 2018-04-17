@@ -4,8 +4,9 @@ namespace App\Http\Controllers\LTI\Users;
 
 use App\Http\Requests\LTI\UpdateProfileRequest;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use App\Http\Controllers\Controller;
 
-class ProfileLTIController extends LTIBaseController
+class ProfileLTIController extends Controller
 {
     public function index()
     {

@@ -6,8 +6,9 @@ use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Core\Services\Elastic\Elastic;
+use App\Http\Controllers\Controller;
 
-class CoursesLTIController extends LTIBaseController
+class CoursesLTIController extends Controller
 {
 
     /**

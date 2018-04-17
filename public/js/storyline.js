@@ -319,12 +319,17 @@ function import_content($content_id,$item_id,$action){
             200: function (data) { //success
                 $('#importModal').modal('hide');
 
+                $('div#saveModal input[class="cat_check"]').each(function(index)
+                {
+                    $(this).prop('checked', false);
+                });
+
                 if(debug) {
                     console.log("Content imported. Content id: " + data.id);
                     //console.log(data.id);
                 }
 
-                getContent(id);
+                getContent(data.id);
             },
             400: function () { //bad request
 
@@ -569,49 +574,8 @@ function check_save(){
 
 //Asset functions
 
-function importAsset(asset){
 
-    actionUrl = base_url + "/content/assets/" + asset;
 
-    $.ajax({
-        method: "GET",
-        url: actionUrl,
-        contentType: 'json',
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
-        },
-        statusCode: {
-            200: function (data) { //success
-                
-                // we add the data-asset-id attribute <span> in here so we can identify mimetypes
-                // for analytics and also know which asset we inserted here
-                // we also have to construct the html string cause CKEditor is fucking stupid
-                var html ='<div style="display: inline-block;" data-asset-id=' + asset + '>';
-                
-                if(data['content'] !== null){
-                    html += data['content'];
-                }
-
-                html +=  data['html'];
-                html += '</div>';
-                
-                CKEDITOR.instances['ltieditorv2inst'].insertHtml(html);
-                
-                $('#assetsModal').modal('hide');
-
-            },
-            400: function () { //bad request
-
-            },
-            500: function () { //server kakked
-
-            }
-        }
-    }).error(function (req, status, error) {
-        alert(error);
-    });
-
-}
 
 
 
@@ -915,10 +879,9 @@ $(document).on("click", ".content-action", function(){
     import_content($content_id,$item_id,$action);
 });
 
-$(document).on("click", ".import-asset", function () {
-    $asset_id = $(this).data("asset-id");
-    importAsset($asset_id);
-});
+
+
+
 /*
 $(document).on("keyup", '#q', function () {
     $("#tree").jstree("open_all");

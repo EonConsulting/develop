@@ -32,7 +32,7 @@ class Course extends Model {
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'featured_image', 'tags', 'xml_file', 'creator_id'
+        'title', 'description', 'featured_image', 'tags', 'xml_file', 'creator_id', 'ingested'
     ];
 
     /**

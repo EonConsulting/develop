@@ -5,13 +5,121 @@ namespace App\Http\Controllers\LTI\Dashboards;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use App\Http\Controllers\Controller;
 
-class DashboardLTIController extends LTIBaseController
+class DashboardLTIController extends Controller
 {
-    protected $hasLTI = true;
+
 
     public function index()
     {
+
+        $lti_role = optional(auth()->user())->lti_role;
+
+        $data = array(
+            'page_title' => 'Dashboard', //make this the name if the page
+            'parent_title' => 'Instructor', //leave empty if none
+        );
+
+        switch ($lti_role) {
+            case "Administrator":
+                $breadcrumbs = [
+                    'title' => 'Administrator Dashboard'
+                ];
+                return view('dashboards.admin', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            case "Instructor":
+                $breadcrumbs = [
+                    'title' => 'Lecturer - Student Analysis Dashboard'
+                ];
+
+                return view('dashboards.lecturer-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            case "Learner":
+                $breadcrumbs = [
+                    'title' => 'Student Dashboard'
+                ];
+
+                return view('dashboards.student', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+
+            case "Mentor":
+                $breadcrumbs = [
+                    'title' => 'Mentor - Student Analysis Dashboard'
+                ];
+
+                return view('dashboards.mentor-stud-analysis', $data, ['breadcrumbs' => $breadcrumbs]);
+                break;
+            default:
+                echo "Your user roles are not recognized by eContent LTI";
+        }
+
+
+    }
+
+    public function lecturer_stud_analysis()
+    {
+        $breadcrumbs = [
+            'title' => 'Lecturer - Student Analysis Dashboard'
+        ];
+
+        return view('dashboards.lecturer-stud-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function lecturer_course_analysis()
+    {
+        $breadcrumbs = [
+            'title' => 'Lecturer - Course Analysis Dashboard'
+        ];
+
+        return view('dashboards.lecturer-course-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function lecturer_assess_analysis()
+    {
+        $breadcrumbs = [
+            'title' => 'Lecturer - Assessment Analysis Dashboard'
+        ];
+
+        return view('dashboards.lecturer-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function mentor_stud_analysis()
+    {
+        $breadcrumbs = [
+            'title' => 'Mentor - Student Analysis Dashboard'
+        ];
+
+        return view('dashboards.mentor-stud-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function mentor_assess_analysis()
+    {
+        $breadcrumbs = [
+            'title' => 'Mentor - Assessment Analysis Dashboard'
+        ];
+
+        return view('dashboards.mentor-assess-analysis', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+    public function planning()
+    {
+        $breadcrumbs = [
+            'title' => 'Planning'
+        ];
+
+        return view('dashboards.planning', array(), ['breadcrumbs' => $breadcrumbs]);
+    }
+
+
+
+
+
+    /*
+    public function index()
+    {
+
+
         //dd(auth()->user());
         //exit();
         $data = array(
@@ -136,4 +244,5 @@ class DashboardLTIController extends LTIBaseController
 
         return view('dashboards.planning', array(), ['breadcrumbs' => $breadcrumbs]);
     }
+    */
 }

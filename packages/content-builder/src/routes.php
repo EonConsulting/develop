@@ -33,7 +33,28 @@ Route::group(['middleware' => ['web'], 'prefix' => 'content', 'namespace' => 'EO
         
         //other JSON routes
         Route::post('/content-title-exists', "ContentBuilderCore@title_exists")->name('eon.contentbuilder.content.title.exists');
-    
+
+
+        Route::post('/search/asset', [
+            'as' => 'content-builder.asset-search.show',
+            'uses' => 'AssetSearchController@show'
+        ]);
+
+        Route::get('/search/asset', [
+            'as' => 'content-builder.asset-search.index',
+            'uses' => 'AssetSearchController@index'
+        ]);
+
+        Route::post('/search/content', [
+            'as' => 'content-builder.content-search.show',
+            'uses' => 'ContentSearchController@show'
+        ]);
+
+        Route::get('/search/content', [
+            'as' => 'content-builder.content-search.index',
+            'uses' => 'ContentSearchController@index'
+        ]);
+
     });
 
 });

@@ -2,7 +2,7 @@
 
 namespace EONConsulting\Student\Progression\Http\Controllers;
 
-use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use EONConsulting\Storyline2\Models\Course;
 use EONConsulting\Storyline2\Models\Storyline;
@@ -21,7 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
-class DefaultController extends LTIBaseController {
+class DefaultController extends Controller {
 
     /**
      * 

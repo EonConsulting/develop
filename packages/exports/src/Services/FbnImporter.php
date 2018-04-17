@@ -426,13 +426,13 @@ class FbnImporter
 
         } catch(\Exception $e)
         {
-            $this->error($e->getMessage());
+            \Log::debug($e->getMessage());
             return;
         }
 
         if($res->getStatusCode() != 200)
         {
-            $this->error('Unable to fetch content!');
+            \Log::debug('Unable to fetch content!');
             return;
         }
 

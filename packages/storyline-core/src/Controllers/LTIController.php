@@ -3,8 +3,9 @@ namespace EONConsulting\Storyline\Core\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use EONConsulting\Storyline\Core\Flow\XMLTaxonomy;
+use App\Http\Controllers\Controller;
 
-class LTIController extends LTIBaseController {
+class LTIController extends Controller {
 
     protected $taxonomy;
 

@@ -19,17 +19,51 @@
  * Public Front Page
  * ---------------------------------------
  */
-Route::get('/', function () {
-//    return laravel_lti()->launch('https://dev.unisaonline.net/mahara/auth/blti/login/login.php', 'unisa', '12345');
-    return view('welcome');
-});
+
+Route::redirect('/', 'login');
+
+
 
 /*
  * ---------------------------------------
  * Auth::routes();
  * ---------------------------------------
  */
-Auth::routes();
+
+Route::namespace('Auth')->group(function () {
+
+    Route::post('/login', [
+        'as' => 'login', 'uses' => 'LoginController@login'
+    ]);
+
+    Route::get('/login', [
+        'as' => 'login', 'uses' => 'LoginController@showLoginForm'
+    ]);
+
+    Route::post('/logout', [
+        'as' => 'logout', 'uses' => 'LoginController@logout'
+    ]);
+
+    Route::post('/password/email', [
+        'as' => 'password.email', 'uses' => 'ForgotPasswordController@sendResetLinkEmail'
+    ]);
+
+    Route::post('/password/reset', [
+        'as' => 'password.request', 'uses' => 'ResetPasswordController@reset'
+    ]);
+
+    Route::get('/password/reset', [
+        'as' => 'password.request', 'uses' => 'ForgotPasswordController@showLinkRequestForm'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'as' => 'password.reset', 'uses' => 'ResetPasswordController@showResetForm'
+    ]);
+});
+
+
+
+
 /*
  * ---------------------------------------
  * Builders : Page : Storyline
@@ -45,7 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
  * --------------------------------------
  * Home - Non LTI Routes
  * --------------------------------------
- */
+ *
 Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
     Route::match(['get', 'post'], '/', ['as' => 'home.dashboards', 'uses' => 'HomeController@index']);
     Route::group(['namespace' => 'Users'], function () {
@@ -61,6 +95,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/home'], function () {
         Route::match(['get', 'post'], '/{course}/lectures/{storylineItem}', ['as' => 'home.courses.single.lectures.item', 'uses' => 'CourseLectureItemController@index']);
     });
 });
+*/
 
 
 
@@ -111,9 +146,23 @@ Route::group(['middleware' => ['auth','instructor'], 'prefix' => '/lecturer'], f
  */
 //
 //Route::group(['prefix' => '/lti', 'middleware' => ['auth'], 'namespace' => 'LTI'], function() {
-Route::group(['prefix' => '/lti', 'namespace' => 'LTI'], function () {
+
+Route::get('/lti', ['middleware' => ['web', 'auth'],
+    'as' => 'lti.dashboards',
+    'uses' => 'LTI\Dashboards\DashboardLTIController@index'
+]);
+
+Route::post('/lti', ['middleware' => ['web'],
+    'as' => 'lti.dashboards',
+    'uses' => '\EONConsulting\LaravelLTI\Http\Controllers\DashboardLTIController@index'
+]);
+
+
+
+
+Route::group(['middleware' => ['auth'], 'prefix' => '/lti', 'namespace' => 'LTI'], function () {
     Route::group(['namespace' => 'Dashboards'], function () {
-        Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
+        //Route::match(['get', 'post'], '/', ['as' => 'lti.dashboards', 'uses' => 'DashboardLTIController@index']);
         Route::match(['get', 'post'], '/lecturer-course-analysis', ['as' => 'lti.dashboards.lecturer-course-analysis', 'uses' => 'DashboardLTIController@lecturer_course_analysis']);
         Route::match(['get', 'post'], '/lecturer-stud-analysis', ['as' => 'lti.dashboards.lecturer-stud-analysis', 'uses' => 'DashboardLTIController@lecturer_stud_analysis']);
         Route::match(['get', 'post'], '/lecturer-assess-analysis', ['as' => 'lti.dashboards.lecturer-assess-analysis', 'uses' => 'DashboardLTIController@lecturer_assess_analysis']);

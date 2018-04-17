@@ -17,10 +17,10 @@ use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\Category;
 use EONConsulting\ContentBuilder\Controllers\ContentBuilderCore as ContentBuilder;
 use App\Tools\Elasticsearch\Elasticsearch;
-use App\Jobs\ElasticIndexContent;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use EONConsulting\Exports\Jobs\SinglePdfExportJob;
+use EONConsulting\ContentBuilder\Jobs\ContentElasicUpdate;
 
 
 class Storyline2Core extends BaseController {
@@ -284,12 +284,8 @@ class Storyline2Core extends BaseController {
             $new_content->cloned_id = $content;
             $new_content->save();
 
-            foreach($this_content->categories as $k => $category)
-            {
-                $temp = Category::find($category->id);
-                $new_content->categories()->save($temp);
-            }
-    
+            $new_content->categories()->sync($this_content->categories);
+
             $storyline_item = StorylineItem::find($item);
             $storyline_item->content_id = $new_content->id;
             $storyline_item->save();
@@ -300,12 +296,11 @@ class Storyline2Core extends BaseController {
             $storyline_item->content_id = $content;
             $storyline_item->save();
 
-            $es = new ElasticIndexContent();
-            $es->fetchAndIndexContentbyID($content);
-
+            ContentElasicUpdate::dispatch($storyline_item->content);
         }
-        
+
         return response()->json($result);
+
 
     }
 
@@ -358,9 +353,7 @@ class Storyline2Core extends BaseController {
 
         $item->save();
 
-        $es = new ElasticIndexContent();
-
-        $es->fetchAndIndexContentbyID($content->id);
+        ContentElasicUpdate::dispatch($content);
 
         /*
          * Temp because the observers ain't working

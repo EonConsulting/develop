@@ -10,10 +10,10 @@ namespace EONConsulting\FileManager\Http\Controllers;
 
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
+use App\Http\Controllers\Controller;
 
-class EditorController extends LTIBaseController {
+class EditorController extends Controller {
 
-    protected $hasLTI = false;
 
     public function index() {
         $page = request()->get('p');

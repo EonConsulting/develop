@@ -11,10 +11,9 @@ namespace EONConsulting\FileManager\Http\Controllers;
 
 use EONConsulting\LaravelLTI\Http\Controllers\LTIBaseController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class FileManagerController extends LTIBaseController {
-
-    protected $hasLTI = false;
+class FileManagerController extends Controller {
 
     public function index() {
         return view('eon.filemanager::ckfinder');

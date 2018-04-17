@@ -22,7 +22,7 @@ class User extends Authenticatable implements Auditable, UserResolver
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'id', 'name', 'email', 'password'
     ];
 
     /**
@@ -31,6 +31,15 @@ class User extends Authenticatable implements Auditable, UserResolver
      * @var array
      */
     protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * Attributes to exclude from the Audit.
+     *
+     * @var array
+     */
+    protected $auditExclude = [
         'password', 'remember_token',
     ];
 
@@ -119,6 +128,17 @@ class User extends Authenticatable implements Auditable, UserResolver
     {
         $fullname = explode(" ", $this->name);
         return $fullname[1] ?? '';
+    }
+
+    /**
+     * Set the user's name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = title_case($value);
     }
 
     /**

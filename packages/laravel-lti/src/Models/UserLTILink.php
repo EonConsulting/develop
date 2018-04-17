@@ -41,4 +41,36 @@ class UserLTILink extends Model {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    /**
+     * Set the user's lis_person_name_family.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setLisPersonNameFamilyAttribute($value)
+    {
+        $this->attributes['lis_person_name_family'] = title_case($value);
+    }
+
+    /**
+     * Set the user's lis_person_name_full.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setLisPersonNameFullAttribute($value)
+    {
+        $this->attributes['lis_person_name_full'] = title_case($value);
+    }
+
+    /**
+     * Set the user's lis_person_name_given.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setLisPersonNameGivenAttribute($value)
+    {
+        $this->attributes['lis_person_name_given'] = title_case($value);
+    }
 }
