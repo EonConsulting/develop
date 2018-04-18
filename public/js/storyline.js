@@ -462,8 +462,6 @@ function save_content_to_item(){
 
     var form_data = get_content_details();
     var item_id = $("#item-id").attr('value');
-    
-    validate_all();
 
     if(validation() === true) {
 
@@ -585,7 +583,7 @@ function check_save(){
 function validate_all(save){
     save = save || false;
 
-    validate_title_first(save);
+    //validate_title_first(save);
 }
 
 function then_validate_others(save){

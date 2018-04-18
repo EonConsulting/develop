@@ -32,11 +32,11 @@ class DefaultController extends Controller {
         $client = new Client();
         $cert = base_path() . '/vendor/guzzlehttp/guzzle/src/cacert.pem';
         $text = $request->get('data');
-        $login = $client->request('POST', 'https://api.copyleaks.com/v1/account/login-api', [
+        $login = $client->request('POST', env('COPY_LEAKS_API', ''), [
             'verify' => false,
             'form_params' => [
-                'Email' => 'reggiesta.in@gmail.com',
-                'ApiKey' => 'D98A75CC-24DC-4136-ABA0-7B96985651CB'
+                'Email' => env('COPY_LEAKS_EMAIL', ''),
+                'ApiKey' => env('COPY_LEAKS_ApiKey', '')
             ]
         ]);
 
