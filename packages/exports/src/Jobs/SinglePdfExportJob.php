@@ -22,6 +22,9 @@ use Facades\ {
     EONConsulting\Core\Services\Pandoc
 };
 
+use EONConsulting\Exports\Filters\Filter;
+use EONConsulting\Exports\Filters\MathJaxFilter;
+
 class SinglePdfExportJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -87,7 +90,20 @@ class SinglePdfExportJob implements ShouldQueue
 
         $body = CourseExportHelper::removeJavaScript($body);
 
-        $html = view('exports::pdf.master')->withContent(urldecode($body))->render();
+        try {
+
+            $filter = new Filter(new MathJaxFilter($body));
+
+            $body = $filter->getContent();
+
+        } catch(\Exception $e)
+        {
+            if($e->getMessage() != 'No mathjax found in content!') {
+                Log::debug($e->getMessage());
+            }
+        }
+
+        $html = view('exports::pdf.master')->withContent($body)->render();
 
         $pandoc = Pandoc::setBasepath($this->getPath())->fromContent($html)->singlePdf()->generate();
 
