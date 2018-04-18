@@ -33,7 +33,6 @@ class eContentCoreServiceProvider extends ServiceProvider
     {
         $this->loadCommands();
         $this->bootCollectionMacro();
-        $this->loadViews('ecore');
         $this->registerRouteMacros();
         $this->publishConfigs();
 
