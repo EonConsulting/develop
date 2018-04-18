@@ -192,16 +192,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => '/lti', 'namespace' => 'LTI'
     });
 });
 
-/*
- * ----------------------------------------------------
- * Other Routes
- * ----------------------------------------------------
- */
-Route::get('/logout', function () {
-    Auth::logout();
-    Session::flush();
-    return Redirect::to('/home');
-});
+
 
 /*
  * ----------------------------------------------------
