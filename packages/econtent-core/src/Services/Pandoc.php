@@ -46,9 +46,13 @@ class Pandoc
      */
     protected $error_file = '';
 
-
-
-    public function fromContent($content)
+    /*
+     * Write to a file on disk to read from
+     *
+     * @param string $content
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function fromContent(string $content) : Pandoc
     {
         Storage::disk('storage')->put($this->getBasepath() . '/item.html', $content);
         return $this;
@@ -81,42 +85,79 @@ class Pandoc
             ->setErrorFile($this->getBasepath() . '/error.text');
     }
 
-
-
+    /*
+     * Set the engine to use to generate the output file
+     *
+     * @param string $engine
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
     public function pdfEngine($engine = 'xelatex')
     {
         return $this->setFlags('--pdf-engine=', $engine);
     }
 
-
-
-    public function inputFile($filename)
+    /**
+     * Set the input filename
+     *
+     * @param string $filename
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function inputFile(string $filename) : Pandoc
     {
         return $this->setInputFile($filename);
     }
 
-
-    public function outputFile($filename)
+    /*
+     * Set the output filename
+     *
+     * @param string $filename
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function outputFile(string $filename) : Pandoc
     {
         return $this->setFlags('--output=', $filename);
     }
 
-    public function css($file)
+    /*
+     * Set the css filename
+     *
+     * @param string $filename
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function css(string $file) : Pandoc
     {
         return $this->setFlags('--css=', $file);
     }
 
-    public function filter($filter)
+    /*
+     * Set the filter filename
+     *
+     * @param string $filename
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function filter(string $filter) : Pandoc
     {
-        return $this->setFlags('--css=', $file);
+        return $this->setFlags('--filter=', $file);
     }
 
-    public function dataDir($folder)
+    /*
+     * Set the data directory
+     *
+     * @param string $folder
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function dataDir(string $folder) : Pandoc
     {
         return $this->setFlags('--data-dir=', $folder);
     }
 
-    public function mathjax($package = null)
+    /*
+     * Enable Mathjax
+     *
+     * @param string $package
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function mathjax($package = null) : Pandoc
     {
         if(is_null($package))
         {
@@ -126,22 +167,46 @@ class Pandoc
         return $this->setFlags('--mathjax=', $package);
     }
 
-    public function from($extensions)
+    /*
+     * Set the from extensions
+     *
+     * @param string $extensions
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function from(string $extensions) : Pandoc
     {
         return $this->setFlags('--from=', $extensions);
     }
 
-    public function template($file = '')
+    /*
+     * Set the template filename
+     *
+     * @param string $filename
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function template(string $filename) : Pandoc
     {
-        return $this->setFlags('--template=', $file);
+        return $this->setFlags('--template=', $filename);
     }
 
-    public function toc($level = 2)
+    /*
+     * Set the amount of levels for the toc
+     *
+     * @param int $level
+     * @return \EONConsulting\Core\Services\Pandoc
+     */
+    public function toc(int $level = 2) : Pandoc
     {
         return $this->setFlags('--table-of-contents')
              ->setFlags('--toc-depth=', $level);
     }
 
+    /**
+     * Generate the File
+     *
+     * @return bool|void
+     * @throws \Exception
+     */
     public function generate()
     {
         $command = $this->buildCommand();
@@ -242,6 +307,8 @@ class Pandoc
     }
 
     /**
+     * Get the input filename
+     *
      * @return string
      */
     public function getInputFile(): string
@@ -250,6 +317,8 @@ class Pandoc
     }
 
     /**
+     * Set the input filename
+     *
      * @param string $input_file
      */
     public function setInputFile(string $input_file): Pandoc
@@ -259,6 +328,8 @@ class Pandoc
     }
 
     /**
+     * Get the location of Pandoc binary
+     *
      * @return string
      */
     public function getPandocBin(): string
@@ -267,6 +338,8 @@ class Pandoc
     }
 
     /**
+     * Set the location of Pandoc binary
+     *
      * @param string $pandoc_bin
      */
     public function setPandocBin(string $pandoc_bin): Pandoc
@@ -276,6 +349,8 @@ class Pandoc
     }
 
     /**
+     * Get the error filename
+     *
      * @return string
      */
     public function getErrorFile(): string
@@ -284,6 +359,8 @@ class Pandoc
     }
 
     /**
+     * Set the error filename
+     *
      * @param string $error_file
      */
     public function setErrorFile(string $error_file): Pandoc
@@ -293,6 +370,8 @@ class Pandoc
     }
 
     /**
+     * Get the output filename
+     *
      * @return string
      */
     public function getOutputFile(): string
@@ -301,6 +380,8 @@ class Pandoc
     }
 
     /**
+     * Set the output filename
+     *
      * @param string $output_file
      */
     public function setOutputFile(string $output_file): Pandoc
@@ -310,6 +391,8 @@ class Pandoc
     }
 
     /**
+     * Get the base path
+     *
      * @return string
      */
     public function getBasepath(): string
@@ -318,6 +401,8 @@ class Pandoc
     }
 
     /**
+     * Get the full filesystem base path
+     *
      * @return string
      */
     public function getFullBasepath(): string
@@ -326,7 +411,10 @@ class Pandoc
     }
 
     /**
+     * Delete folder if exist and create new one
+     *
      * @param string $basepath
+     * @return \EONConsulting\Core\Services\Pandoc
      */
     public function setBasepath(string $basepath): Pandoc
     {

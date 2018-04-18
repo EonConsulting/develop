@@ -2,16 +2,17 @@
 
 namespace EONConsulting\Core\Converters;
 
+use Dropbox\Exception;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use EONConsulting\Core\Helpers\HtmlToDom\HtmlHandler;
 use EONConsulting\Core\Converters\Components\Menu;
+use Illuminate\Support\Facades\Log;
 use Storage;
 use Zip;
 
-use Facades\ {
-    EONConsulting\Core\Converters\Components\Assets
-};
+use EONConsulting\Exports\Filters\Filter;
+use EONConsulting\Exports\Filters\AssetFilter;
 
 class CourseToHtml
 {
@@ -128,7 +129,10 @@ class CourseToHtml
             Storage::disk('storage')->deleteDirectory($this->getTempPath());
         }
 
-        Storage::disk('storage')->makeDirectory($this->getTempPath());
+        Storage::disk('storage')->makeDirectory($this->getTempPath('pages'));
+        Storage::disk('storage')->makeDirectory($this->getTempPath('assets/images'));
+        Storage::disk('storage')->makeDirectory($this->getTempPath('assets/videos'));
+        Storage::disk('storage')->makeDirectory($this->getTempPath('assets/other'));
     }
 
     /**
@@ -148,12 +152,14 @@ class CourseToHtml
 
         if( ! $html = HtmlHandler::strGetHtml($body))
         {
-            return compact('javascript','html');
+            return compact('javascript','body');
         }
+
+        $html = HtmlHandler::strGetHtml((string) $body);
 
         if( ! $html->find("script"))
         {
-            return compact('javascript','html');
+            return compact('javascript','body');
         }
 
         foreach($html->find("script") as $js)
@@ -166,7 +172,9 @@ class CourseToHtml
             }
         }
 
-        return compact('javascript','html');
+        $body = $html;
+
+        return compact('javascript','body');
     }
 
     /**
@@ -178,25 +186,37 @@ class CourseToHtml
      */
     public function createPages($item, $storyline_items)
     {
-        try {
 
-            $content = Assets::load($item->get('content'), $this->getTempPath(), $item->get('level'))->handle();
+        $content = $item->get('content');
 
-        } catch(\Exception $e) {
+        if($content)
+        {
+            try {
 
-            $content = $item->get('content');
+                $filter = new Filter(new AssetFilter($content, $this->getTempPath(), $item->get('level')));
+
+                $content = $filter->getContent();
+
+            } catch(\Exception $e)
+            {
+                if($e->getMessage() != 'No assets found in content!')
+                {
+                    Log::debug($e->getMessage());
+                }
+
+            }
         }
 
         $body_and_javascript = $this->moveJavascript($content);
 
-        $content = $body_and_javascript['html'];
+        $content = $body_and_javascript['body'];
         $javascript = $body_and_javascript['javascript'];
 
         $includes_path = $this->makeIncludePath($item->get('level'));
 
         $menu = Menu::make($storyline_items)->build($item);
 
-        $content = view('ecore::course-export', compact('content', 'includes_path', 'javascript', 'menu'))->render();
+        $content = view('exports::course-export', compact('content', 'includes_path', 'javascript', 'menu'))->render();
 
         $filepath = $this->getTempPath('pages/' . $item->get('path') . '/' . $item->get('filename'));
 
