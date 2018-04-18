@@ -2,6 +2,11 @@
 
 Route::middleware(['role:instructor'])->group(function () {
 
+    Route::get('/course/full-html-export/{course}', [
+        'as' => 'export.full-html-export',
+        'uses' => 'ExportCourseHtmlController@generate'
+    ]);
+
     Route::get('/course/full-pdf-export/{course}', [
         'as' => 'export.full-pdf-export',
         'uses' => 'ExportCoursePdfController@generate'
@@ -16,6 +21,15 @@ Route::middleware(['role:instructor|learner'])->group(function () {
         'uses'=>'DownloadSinglePdfController@show'
     ]);
 
+    Route::get('/course/html-download/{file}', [
+        'as'=>'export.course-html-download',
+        'uses'=>'DownloadCourseFileController@show'
+    ]);
+
+    Route::get('/course/pdf-download/{file}', [
+        'as'=>'export.course-pdf-download',
+        'uses'=>'DownloadCoursePdfController@show'
+    ]);
 });
 
 
