@@ -30,13 +30,11 @@ class WelcomePasswordReset extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $token = app('auth.password.broker')->createToken($notifiable);
-
         return (new MailMessage)
             ->from('dont-reply@unisaonline.net', 'Unisa Online')
             ->subject('Welcome to E-Content')
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url(config('app.url').route('password.reset', $token, false)))
+            ->action('Reset Password', route('password.request'))
             ->line('If you did not request a password reset, no further action is required.');
     }
 
