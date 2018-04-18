@@ -11,6 +11,8 @@
 
             <div class="modal-body">
 
+                <a href="#" class="btn btn-info" role="button" id="export1">Export Off-line Solution</a>
+
                 <a href="#" class="btn btn-info" role="button" id="export2">Export Course Item pdf's</a>
 
             </div>
@@ -48,6 +50,10 @@ function jsRoute(route, id)
         $(document).on("click", ".course-exports", function (e) {
 
             var item_id = $(this).data('id');
+
+            $('#course-exports a[id="export1"]').attr("href",
+                jsRoute('{{ route('export.full-html-export', 0) }}', item_id)
+            );
 
             $('#course-exports a[id="export2"]').attr("href",
                 jsRoute('{{ route('export.full-pdf-export', 0) }}', item_id)

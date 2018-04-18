@@ -113,6 +113,18 @@
                                 <i class="fa fa-eye"></i> View
                             </a>
                             @endif
+
+                            @if($course->zip_file)
+                                <a href="{{ route('export.course-html-download', $course->zip_file) }}" class="pull-right" role="button" style="margin-right: 20px;">
+                                    <i class="fa fa-eye"></i> Full Course Download
+                                </a>
+                            @endif
+
+                            @if($course->pdf_file)
+                                <a href="{{ route('export.course-pdf-download', $course->pdf_file) }}" class="pull-right" role="button" style="margin-right: 20px;">
+                                    <i class="fa fa-eye"></i> Full Course PDF
+                                </a>
+                            @endif
                         </h1>
 
                         <p>

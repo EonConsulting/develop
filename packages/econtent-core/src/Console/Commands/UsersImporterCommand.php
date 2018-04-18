@@ -114,8 +114,7 @@ class UsersImporterCommand extends Command
 
             // email user a forgotten password link
 
-            //$user->notify(new WelcomePasswordReset());
-
+            $user->notify(new WelcomePasswordReset());
         }
 
         $this->logErrors($failed_imports);

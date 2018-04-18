@@ -46,6 +46,7 @@ class CoursesLTIController extends Controller
 
         $courses = Course::whereIn('id', $items->pluck('_id'))
             ->orderBy(\DB::raw('FIELD(`id`, '. $items->pluck('_id')->implode(',') .')'))
+            ->with(['zip_exported_file','pdf_exported_file'])
             ->get();
 
         $courses = $items->map(function ($item) use ($courses)
@@ -58,6 +59,8 @@ class CoursesLTIController extends Controller
                 "description" =>  array_get($item, '_source.description'),
                 "tags" => array_get($item, '_source.tags'),
                 "has_sl" => $course ? true : false,
+                'zip_file' => optional($course)->zip_exported_file,
+                'pdf_file' => optional($course)->pdf_exported_file
             ];
         })->toArray();
 
