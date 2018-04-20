@@ -87,13 +87,16 @@ Course List
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Assessment Results Period</h4>
             </div>
-            <form id="m-res">
+            <form action="{{ route('export.tao-results-export') }}" method="post">
+                <input type='hidden' class="form-control courseId" name="course_id"/>
+                {{ csrf_field() }}
+
                 <div class="modal-body csv-loadig">  
                     <div class="m-res-info"></div>
                     <div class="form-group">
                         <div class="container">
                             <div class='col-md-3'>
-                                {{ csrf_field() }}
+
                                 <div class="form-group">
                                     <label for="dt_from">Start Date:</label>
                                     <div class='input-group date' id='dt_from'>
@@ -103,7 +106,7 @@ Course List
                                         </span>
                                     </div>
                                 </div>
-                                <input type='hidden' class="form-control courseId" name="course_id"/>
+
                             </div>
                             <div class='col-md-3'>
                                 <div class="form-group">
