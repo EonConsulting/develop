@@ -22,3 +22,17 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+
+$factory->define(\EONConsulting\Exports\Models\TaoResult::class, function (Faker\Generator $faker) {
+    return [
+        'lis_result_sourcedid' => EONConsulting\TaoClient\Services\UUID::make(),
+        'delivery_execution_id' => '',
+        'test_taker' => '',
+        'score' => $faker->randomFloat(2,0, 1),
+        'ingested' => '0',
+        'status' => '2',
+        'status_message' => 'API Response captured',
+    ];
+});
