@@ -31,6 +31,34 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{">
+
+                                <label for="g-recaptcha-response" class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">
+                                    <div class="g-recaptcha" data-sitekey="{{ env('NOCAPTCHA_SITEKEY') }}"></div>
+                                </div>
+
+                            </div>
+
+                            @if($errors->has('g-recaptcha-response'))
+                            <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                <label for="captcha" class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">
+
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+
+                                </div>
+
+                            </div>
+                            @endif
+
+
+
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
