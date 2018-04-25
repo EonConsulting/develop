@@ -300,6 +300,7 @@ Course List
                                 $("#csvModal").modal();
                             });
 
+                            {{--
                             $("#m-res").on("submit", function (event) {
                                 event.preventDefault();
                                 var data = $(this).serialize();
@@ -326,6 +327,7 @@ Course List
                                     }
                                 });
                                 });
+                                --}}
                             
                                  var url = '{{ route("courses.show",":title") }}';    
                                  url = url.replace(':title', 'all');
@@ -343,6 +345,7 @@ Course List
                                       
                                     }
                                 });
+
 
                             $('#radioBtn a').on('click', function () {
                                 var sel = $(this).data('title');
