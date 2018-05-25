@@ -159,7 +159,9 @@ Course List
                     <div class="form-group">
                         <label for="primary" class="btn btn-primary">Email <input type="checkbox" id="primary" class="badgebox" name="options[]" value="mail"><span class="badge">&check;</span></label>
                         <label for="info" class="btn btn-info">SMS <input type="checkbox" id="info" class="badgebox" name="options[]" value="nexmo"><span class="badge">&check;</span></label>
+                        {{-- Disabled as per ticket (Unisa E-ContentUES-17)
                         <label for="success" class="btn btn-success">In system notice <input type="checkbox" id="success" class="badgebox" name="options[]" value="database" checked><span class="badge">&check;</span></label>
+                        --}}
                     </div>
 
                     <div class="form-group">

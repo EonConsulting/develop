@@ -119,6 +119,9 @@ class CoursePdfExportJob implements ShouldQueue
 
         $pandoc = Pandoc::setBasepath($this->getPath())->fromContent($html)->multiplePages()->generate();
 
+        /*
+         * Disabled as per ticket (Unisa E-ContentUES-17)
+         *
         $notification = [
             'title' => 'Pdf Course Export',
             'message' => "Pdf course export finished for [" . $this->course->id . "] title: " . $this->course->title,
@@ -127,6 +130,7 @@ class CoursePdfExportJob implements ShouldQueue
         $this->user->notify(
             new JobNotification($notification)
         );
+        */
 
         $file_export = new FileExport([
             'filetype' => 'pdf',
@@ -145,6 +149,9 @@ class CoursePdfExportJob implements ShouldQueue
      */
     public function failed(Exception $exception)
     {
+        /*
+         * Disabled as per ticket (Unisa E-ContentUES-17)
+         *
         $notification = [
             'title' => 'Job Running Error',
             'message' => "Something went wrong running the pdf course export job.\n\n Unable to export course [" . $this->course->id . "] title: " . $this->course->title,
@@ -154,6 +161,7 @@ class CoursePdfExportJob implements ShouldQueue
         $this->user->notify(
             new JobNotification($notification)
         );
+        */
 
         $faulty_file = new FaultyFileExport([
             'filetype' => 'pdf',

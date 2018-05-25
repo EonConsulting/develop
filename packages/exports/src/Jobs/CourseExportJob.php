@@ -89,6 +89,9 @@ class CourseExportJob implements ShouldQueue
 
         CourseToHtml::createZipFile();
 
+        /*
+         * Disabled as per ticket (Unisa E-ContentUES-17)
+         *
         $notification = [
             'title' => 'Full Course Export',
             'message' => "Full course export finished for [" . $this->course->id . "] title: " . $this->course->title,
@@ -97,6 +100,7 @@ class CourseExportJob implements ShouldQueue
         $this->user->notify(
             new JobNotification($notification)
         );
+        */
 
         $file_export = new FileExport([
             'filetype' => 'zip',
@@ -117,6 +121,9 @@ class CourseExportJob implements ShouldQueue
     {
         CourseToHtml::cleanTmp();
 
+        /*
+         * Disabled as per ticket (Unisa E-ContentUES-17)
+         *
         $notification = [
             'title' => 'Job Running Error',
             'message' => "Something went wrong running the full course export job.\n\n Unable to export course [" . $this->course->id . "] title: " . $this->course->title,
@@ -126,6 +133,7 @@ class CourseExportJob implements ShouldQueue
         $this->user->notify(
             new JobNotification($notification)
         );
+        */
 
         $faulty_file = new FaultyFileExport([
             'filetype' => 'zip',
