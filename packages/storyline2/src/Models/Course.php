@@ -7,10 +7,11 @@ use EONConsulting\Storyline2\Models\Storyline;
 use App\Models\User;
 use EONConsulting\Exports\Models\Traits\Exportable;
 use EONConsulting\Storyline2\Models\Template;
+use App\Models\Traits\Lockable;
 
 class Course extends Model {
 
-    use Exportable;
+    use Exportable, Lockable;
 
     /**
      * The table associated with the model.
@@ -25,6 +26,15 @@ class Course extends Model {
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'content_lock'
+    ];
 
     /**
      * The attributes that are mass assignable.

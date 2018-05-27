@@ -3,6 +3,7 @@
 namespace EONConsulting\Storyline2;
 
 use Illuminate\Support\ServiceProvider;
+use EONConsulting\Storyline2\Middleware\ContentLocked as ContentLockedMiddleware;
 
 class Storyline2ServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,8 @@ class Storyline2ServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/assets' => base_path('public/vendor/storyline2'),
         ]);
+
+        $this->bootMiddleware();
     }
 
     /**
@@ -30,5 +33,10 @@ class Storyline2ServiceProvider extends ServiceProvider
     public function register()
     {
 
+    }
+
+    protected function bootMiddleware()
+    {
+        app('router')->aliasMiddleware('content_locked', ContentLockedMiddleware::class);
     }
 }
