@@ -28,15 +28,6 @@ class Course extends Model {
     protected $primaryKey = 'id';
 
     /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = [
-        'content_lock'
-    ];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
