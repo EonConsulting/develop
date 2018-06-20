@@ -232,7 +232,6 @@ return [
         \EONConsulting\TaoClient\TaoClientServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
         \EONConsulting\Auditing\AuditingServiceProvider::class,
-        \EONConsulting\Messages\MessagesServiceProvider::class,
         \EONConsulting\Notifications\NotificationServiceProvider::class,
         \EONConsulting\Exports\ExportServiceProvider::class,
         \EONConsulting\Core\eContentCoreServiceProvider::class,

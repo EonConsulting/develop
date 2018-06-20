@@ -87,13 +87,16 @@ Course List
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Assessment Results Period</h4>
             </div>
-            <form id="m-res">
+            <form action="{{ route('export.tao-results-export') }}" method="post">
+                <input type='hidden' class="form-control courseId" name="course_id"/>
+                {{ csrf_field() }}
+
                 <div class="modal-body csv-loadig">  
                     <div class="m-res-info"></div>
                     <div class="form-group">
                         <div class="container">
                             <div class='col-md-3'>
-                                {{ csrf_field() }}
+
                                 <div class="form-group">
                                     <label for="dt_from">Start Date:</label>
                                     <div class='input-group date' id='dt_from'>
@@ -103,7 +106,7 @@ Course List
                                         </span>
                                     </div>
                                 </div>
-                                <input type='hidden' class="form-control courseId" name="course_id"/>
+
                             </div>
                             <div class='col-md-3'>
                                 <div class="form-group">
@@ -156,7 +159,9 @@ Course List
                     <div class="form-group">
                         <label for="primary" class="btn btn-primary">Email <input type="checkbox" id="primary" class="badgebox" name="options[]" value="mail"><span class="badge">&check;</span></label>
                         <label for="info" class="btn btn-info">SMS <input type="checkbox" id="info" class="badgebox" name="options[]" value="nexmo"><span class="badge">&check;</span></label>
+                        {{-- Disabled as per ticket (Unisa E-ContentUES-17)
                         <label for="success" class="btn btn-success">In system notice <input type="checkbox" id="success" class="badgebox" name="options[]" value="database" checked><span class="badge">&check;</span></label>
+                        --}}
                     </div>
 
                     <div class="form-group">
@@ -297,6 +302,7 @@ Course List
                                 $("#csvModal").modal();
                             });
 
+                            {{--
                             $("#m-res").on("submit", function (event) {
                                 event.preventDefault();
                                 var data = $(this).serialize();
@@ -323,6 +329,7 @@ Course List
                                     }
                                 });
                                 });
+                                --}}
                             
                                  var url = '{{ route("courses.show",":title") }}';    
                                  url = url.replace(':title', 'all');
@@ -340,6 +347,7 @@ Course List
                                       
                                     }
                                 });
+
 
                             $('#radioBtn a').on('click', function () {
                                 var sel = $(this).data('title');

@@ -2,6 +2,21 @@
 
 Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 'EONConsulting\Storyline2\Controllers'], function() {
 
+
+
+    Route::get('/course/{course}/lock', ['middleware' => ['auth', 'role:instructor'],
+        'as' => 'storyline2.course.store',
+        'uses' => 'LockCourseController@store'
+    ]);
+
+    Route::get('/course/{course}/unlock', ['middleware' => ['auth', 'role:instructor'],
+        'as' => 'storyline2.course.destroy',
+        'uses' => 'LockCourseController@destroy'
+    ]);
+
+
+
+
     //Student Routes
     
     Route::group(['middleware' => ['auth','learner']], function() {
@@ -30,7 +45,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'storyline2', 'namespace' => 
 
 
         //Lecturer Routes
-        Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->name('storyline2.lecturer.edit');
+        Route::get('/edit/{course}', 'Storyline2ViewsBlade@edit')->middleware(['content_locked'])->name('storyline2.lecturer.edit');
 
 
         /**

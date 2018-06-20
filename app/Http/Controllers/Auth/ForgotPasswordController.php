@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use App\Rules\GoogleRecaptcha;
 
 class ForgotPasswordController extends Controller
 {
@@ -74,7 +75,15 @@ class ForgotPasswordController extends Controller
      */
     protected function validateEmail(Request $request)
     {
-        $this->validate($request, ['id' => 'required']);
+        $this->validate($request, [
+            'id' => 'required',
+            'g-recaptcha-response' => [
+                'required', new GoogleRecaptcha
+            ],
+        ], [
+            'id.required' => 'Student ID is required!',
+            'g-recaptcha-response.required' => 'Wrong captcha, please try again!'
+        ]);
     }
 
     /**

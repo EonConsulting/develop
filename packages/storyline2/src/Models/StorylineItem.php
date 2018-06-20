@@ -7,6 +7,7 @@ use Baum\Node;
 use EONConsulting\ContentBuilder\Models\Content;
 use EONConsulting\ContentBuilder\Models\StorylineItemType;
 use EONConsulting\Exports\Models\Traits\Exportable;
+use EONConsulting\Exports\Models\TaoResult;
 
 class StorylineItem extends Node {
     //Enable Nested Sets//
@@ -137,6 +138,31 @@ class StorylineItem extends Node {
     public function type()
     {
         return $this->hasOne(StorylineItemType::class, 'type');
+    }
+
+    /**
+     * Fetch tao results for this model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function tao_results()
+    {
+        return $this->hasMany(TaoResult::class, 'storyline_item_id', 'id');
+    }
+
+    /*
+     * Helper scope to get a storyline by searching for tao results between dates
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Carbon\Carbon $from_date
+     * * @param \Carbon\Carbon $to_date
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopebyTaoResults($query, $from_date, $to_date)
+    {
+        return $query->whereHas('tao_results', function ($query) use ($from_date, $to_date) {
+            $query->whereBetween('created_at', [$from_date, $to_date]);
+        })->with('tao_results');
     }
 
     /*

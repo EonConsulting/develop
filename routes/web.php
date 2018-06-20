@@ -21,7 +21,7 @@
  */
 
 Route::redirect('/', 'login');
-
+Route::redirect('/logout', 'login');
 
 
 /*
@@ -60,7 +60,6 @@ Route::namespace('Auth')->group(function () {
         'as' => 'password.reset', 'uses' => 'ResetPasswordController@showResetForm'
     ]);
 });
-
 
 
 

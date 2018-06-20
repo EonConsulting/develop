@@ -7,10 +7,11 @@ use EONConsulting\Storyline2\Models\Storyline;
 use App\Models\User;
 use EONConsulting\Exports\Models\Traits\Exportable;
 use EONConsulting\Storyline2\Models\Template;
+use App\Models\Traits\Lockable;
 
 class Course extends Model {
 
-    use Exportable;
+    use Exportable, Lockable;
 
     /**
      * The table associated with the model.

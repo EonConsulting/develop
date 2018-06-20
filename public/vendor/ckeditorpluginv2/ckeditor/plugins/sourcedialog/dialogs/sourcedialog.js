@@ -7,10 +7,10 @@ CKEDITOR.dialog.add( 'sourcedialog', function( editor ) {
 	var size = CKEDITOR.document.getWindow().getViewPaneSize();
 
 	// Make it maximum 800px wide, but still fully visible in the viewport.
-	var width = Math.min( size.width - 70, 800 );
+	var width = size.width / 1.1; // changed max size as per ticket (Unisa E-Content UES-13)
 
 	// Make it use 2/3 of the viewport height.
-	var height = size.height / 1.5;
+	var height = size.height / 1.2; // changed max size as per ticket (Unisa E-Content UES-13)
 
 	// Store old editor data to avoid unnecessary setData.
 	var oldData;
@@ -73,7 +73,7 @@ CKEDITOR.dialog.add( 'sourcedialog', function( editor ) {
 					'tab-size:4;' +
 					'text-align:left;',
 				'class': 'cke_source'
-			} ]
+            } ]
 		} ]
 	};
 } );

@@ -300,12 +300,14 @@
                 <span class="menu_collapse">Support</span>
             </a>
         </li>
+        {{-- Disabled as per ticket (Unisa E-ContentUES-17)
         <li>
             <a href="javascript:void();" id="messages-index">
                 <i class="fa fa-commenting-o left-menu-icon"></i>
                 <span class="menu_collapse">Messages</span>
             </a>
         </li>
+        --}}
         <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out left-menu-icon"></i>
@@ -384,5 +386,6 @@
 
     </div>
 </div>
-
+{{-- Disabled as per ticket (Unisa E-ContentUES-17)
 @include('messages::popup')
+--}}

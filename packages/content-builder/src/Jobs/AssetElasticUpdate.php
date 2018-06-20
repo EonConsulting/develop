@@ -70,6 +70,8 @@ class AssetElasticUpdate implements ShouldQueue
                     "categories" => $categories
                 ]);
 
+            Log::debug("AssetElasticUpdate: asset[{$this->asset->id}] was {$response->result}");
+
             return true;
 
         } catch(Exception $e)

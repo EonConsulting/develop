@@ -21,7 +21,7 @@ class CoursesController extends Controller
             'title' => 'Modules',
         ];
 
-        $courses = Course::with(['creator'])->orderBy('id', 'DESC')->get();
+        $courses = Course::with(['creator','content_lock'])->orderBy('id', 'DESC')->get();
 
         return view('lecturer.courses.list', ['courses' => $courses, 'breadcrumbs' => $breadcrumbs]);
     }
@@ -31,14 +31,14 @@ class CoursesController extends Controller
     {
         if($title === 'my')
         {
-            $courseCreator = Course::where('creator_id', auth()->user()->id)->with(['creator'])->get();
+            $courseCreator = Course::where('creator_id', auth()->user()->id)->with(['creator','with'])->get();
 
             $breadcrumbs = [
                 'title' => 'My Modules'
             ];
         
         } else {
-            $courseCreator = Course::with(['creator'])->get();
+            $courseCreator = Course::with(['creator','content_lock'])->get();
 
             $breadcrumbs = [
                 'title' => 'All Modules'
