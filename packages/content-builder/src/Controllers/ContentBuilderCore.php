@@ -49,79 +49,74 @@ class ContentBuilderCore extends Controller {
         $data = $request->json()->all();
 
         $term = $data['term'];
-        $categories = $data['categories'];
+        $cats = implode(',', $data['categories']);
 
-        if($term === null && sizeof($categories) === 0){
-
-            Log::debug("Get ALL content");
-
+        if($term === null && $cats === ''){
             $query = '{
                 "query": {
                      "match_all": {}
                  }
              }';
         }else{
-
             $first = true;
-
-            //if a term is passed, build term portion of query
-            if($term !== null){
-
-                $q_term = '
-                "should": [
-                    { "match": { "title": "'. $term .'" }},
-                    { "match": { "description": "'. $term .'" }},
-                    { "match": { "body": "'. $term .'" }},
-                    { "match": { "tags": "'. $term .'" }}
-                ]';
-
-                $first = false;
-            }else{
-                $q_term = '';
-            }
-
-            //if a term is passed, build term portion of query
-            if(sizeof($categories) !== 0){ //category only
-
-                $q_cat = '';
-                if(!$first){
-                    $q_cat .= ',';
-                }
-                $q_cat .= '"filter": [';
-
-                $first_cat = true;
-                foreach($categories as $category){
-
-                    if($first_cat){
-                        $first_cat = false;
-                    }else{
-                        $q_cat .= ',';
-                    }
-                    $q_cat .= '{ "match": { "categories": "' . $category . '" }}';
-
-                }
-
-                $q_cat .= ']';
-
-            }else{
-                $q_cat = '';
-            }
 
             $query = '{
                 "query": {
                     "bool": {
-                        ' . $q_term .
-                $q_cat .'
+                        "must": [';
+
+            if($term !== null){
+                $first = false;
+                $query = $query . '
+                {
+                    "query_string" : {
+                        "query":    "*' . $term . '*",
+                        "fields": [ "title", "description","content","tags" ]
                     }
+                }';
+            }
+
+            if($cats !== ""){
+
+                if(!$first){
+                    $query = $query . ',';
                 }
-            }';
+
+                $query = $query . '
+                    {
+                        "match": {
+                            "categories":  "*' . $cats . '*"
+                        }
+                    }';
+            }
+
+            $query = $query . '
+                            ]
+                        }
+                    }
+                    }';
         }
 
         $meta = [
             "searchterm" => $term,
         ];
 
-        $elastic_response = $this->elastic->index('content')->body($query)->paginate(15);
+        $elastic_response = $this->elastic->index('content')->body($query)->paginate(10);
+
+/*
+
+        $term = array_get($data, 'term');
+        $categories = array_get($data, 'categories', []);
+
+        $elastic_response = $this->elastic
+            ->index('content')
+            ->search("*{$term}*", function($search)
+            {
+                $search->boost(2)->fields([
+                    "title" => 2, "description" => 1, 'body' => 1, 'tags' => 1
+                ]);
+            })->search(implode(', ', $categories), 8)->paginate(15);
+*/
 
         $renderedPag = view('eon.content-builder::content.partials.pagination', ['items' => $elastic_response])->render();
 
